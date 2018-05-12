@@ -1,0 +1,46 @@
+{
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "spec": true,
+        "useBuiltIns": false,
+        "targets": {
+          "browsers": ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 9", "iOS >= 8", "Android >= 4"]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-es3-member-expression-literals",
+    "transform-es3-property-literals",
+    "transform-object-assign",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    [
+      "transform-runtime",
+      {
+        "polyfill": false
+      }
+    ],
+    [
+      "transform-react-jsx",
+      {
+        "pragma": "React.createElement"
+      }
+    ],
+    [
+      "import",
+      {
+        "style": true,
+        "libraryName": "antd"
+      }
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-react-remove-prop-types"]
+    }
+  }
+}
