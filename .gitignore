@@ -65,3 +65,6 @@ typings/
 
 # npm lock file
 package-lock.json
+
+# webpack build output
+Assets/dist/

@@ -1,11 +1,10 @@
 {
   "presets": [
-    "react",
     [
       "env",
       {
         "spec": true,
-        "useBuiltIns": "usage",
+        "useBuiltIns": false,
         "targets": {
           "browsers": ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 9", "iOS >= 8", "Android >= 4"]
         }
@@ -18,6 +17,14 @@
     "transform-object-assign",
     "transform-class-properties",
     "transform-object-rest-spread",
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true
+      }
+    ],
     [
       "transform-react-jsx",
       {
