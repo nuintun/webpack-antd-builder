@@ -1,10 +1,14 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-react",
       {
-        "spec": true,
-        "useBuiltIns": false,
+        "development": true
+      }
+    ],
+    [
+      "@babel/preset-env",
+      {
         "targets": {
           "browsers": ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 9", "iOS >= 8", "Android >= 4"]
         }
@@ -12,23 +16,15 @@
     ]
   ],
   "plugins": [
-    "transform-es3-member-expression-literals",
-    "transform-es3-property-literals",
-    "transform-object-assign",
-    "transform-class-properties",
-    "transform-object-rest-spread",
+    "@babel/plugin-transform-object-assign",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
     [
-      "transform-runtime",
+      "@babel/plugin-transform-runtime",
       {
         "helpers": false,
         "polyfill": false,
         "regenerator": true
-      }
-    ],
-    [
-      "transform-react-jsx",
-      {
-        "pragma": "React.createElement"
       }
     ],
     [
@@ -41,6 +37,14 @@
   ],
   "env": {
     "production": {
+      "presets": [
+        [
+          "@babel/preset-react",
+          {
+            "development": false
+          }
+        ]
+      ],
       "plugins": ["transform-react-remove-prop-types"]
     }
   }

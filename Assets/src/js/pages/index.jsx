@@ -60,7 +60,7 @@ const footer = () => 'Here is footer';
 const scroll = { y: 240 };
 const pagination = { position: 'bottom' };
 
-class Demo extends React.Component {
+class App extends React.Component {
   state = {
     bordered: false,
     loading: false,
@@ -171,4 +171,4 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
