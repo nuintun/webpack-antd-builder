@@ -15,6 +15,7 @@ const happyPackLoaders = require('./happypack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
 const WebpackGlobEntriesPlugin = require('webpack-glob-entries-plugin');
 const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -107,6 +108,7 @@ module.exports = {
   plugins: [
     watcher,
     ...happyPackLoaders,
+    new ProgressBarWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
     new FriendlyErrorsWebpackPlugin({
       onErrors: (severity, errors) => {
