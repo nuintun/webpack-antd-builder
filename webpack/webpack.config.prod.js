@@ -13,6 +13,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 configure.mode = 'production';
+configure.devtool = 'none';
 configure.output = {
   publicPath: '/Assets/dist/',
   filename: 'js/[chunkhash].js',

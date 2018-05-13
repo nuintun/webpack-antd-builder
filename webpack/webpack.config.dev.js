@@ -10,6 +10,7 @@ const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 configure.mode = 'development';
+configure.devtool = 'eval';
 configure.output = {
   publicPath: '/Assets/dist/',
   filename: 'js/[name].js',

@@ -170,16 +170,7 @@ module.exports = {
         test(filePath) {
           return /\.css$/i.test(filePath) && !/\.module\.css$/i.test(filePath);
         },
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          'postcss-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
         test: /\.module\.css$/i,
@@ -188,7 +179,6 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
               modules: true,
               localIdentName: '[local]___[hash:base64:5]'
             }
@@ -202,19 +192,13 @@ module.exports = {
         },
         use: [
           MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
+          'css-loader',
           'postcss-loader',
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true,
-              sourceMap: true,
-              modifyVars: theme
+              modifyVars: theme,
+              javascriptEnabled: true
             }
           }
         ]
@@ -226,17 +210,16 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
               modules: true,
               localIdentName: '[local]___[hash:base64:5]'
             }
           },
+          'postcss-loader',
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true,
-              sourceMap: true,
-              modifyVars: theme
+              modifyVars: theme,
+              javascriptEnabled: true
             }
           }
         ]
