@@ -68,9 +68,20 @@ module.exports = {
           test: module => {
             const name = module.nameForCondition();
 
-            return /[\\/]node_modules[\\/](react|react-dom)[\\/]/.test(name);
+            return /[\\/]node_modules[\\/]react(?:-dom)?[\\/]/i.test(name);
           },
           name: 'react',
+          chunks: 'all',
+          minSize: 102400,
+          minChunks: 1
+        },
+        antd: {
+          test: module => {
+            const name = module.nameForCondition();
+
+            return /[\\/]node_modules[\\/]antd[\\/]/i.test(name);
+          },
+          name: 'antd',
           chunks: 'all',
           minSize: 102400,
           minChunks: 1
@@ -79,7 +90,7 @@ module.exports = {
           test: module => {
             const name = module.nameForCondition();
 
-            return /[\\/]node_modules[\\/]/.test(name) && !/[\\/]node_modules[\\/](react|react-dom)[\\/]/.test(name);
+            return /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i.test(name);
           },
           name: 'vendors',
           chunks: 'all',

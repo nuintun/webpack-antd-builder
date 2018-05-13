@@ -9,6 +9,7 @@
     [
       "@babel/preset-env",
       {
+        "useBuiltIns": false,
         "targets": {
           "browsers": ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 9", "iOS >= 8", "Android >= 4"]
         }
@@ -22,9 +23,7 @@
     [
       "@babel/plugin-transform-runtime",
       {
-        "helpers": false,
-        "polyfill": false,
-        "regenerator": true
+        "polyfill": false
       }
     ],
     [
