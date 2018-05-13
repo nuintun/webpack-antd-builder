@@ -43,6 +43,7 @@ const columns = [
 ];
 
 const data = [];
+
 for (let i = 1; i <= 10; i++) {
   data.push({
     key: i,
@@ -110,6 +111,7 @@ class App extends React.Component {
 
   handlePaginationChange = e => {
     const { value } = e.target;
+
     this.setState({
       pagination: value === 'none' ? false : { position: value }
     });
@@ -117,6 +119,7 @@ class App extends React.Component {
 
   render() {
     const state = this.state;
+
     return (
       <div>
         <div className="components-table-demo-control-bar">
@@ -165,7 +168,7 @@ class App extends React.Component {
             </FormItem>
           </Form>
         </div>
-        <Table {...this.state} columns={columns} dataSource={data} />
+        <Table {...this.state} columns={columnss} dataSource={data} />
       </div>
     );
   }

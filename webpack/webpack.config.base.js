@@ -140,7 +140,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    noParse: [/moment.js/],
+    noParse: [/[\\/]node_modules[\\/](?:moment)[\\/]/i],
     rules: [
       {
         test: /\.(js|jsx)($|\?)/i,

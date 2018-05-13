@@ -1,11 +1,6 @@
 {
   "presets": [
-    [
-      "@babel/preset-react",
-      {
-        "development": true
-      }
-    ],
+    "@babel/preset-react",
     [
       "@babel/preset-env",
       {
@@ -36,14 +31,6 @@
   ],
   "env": {
     "production": {
-      "presets": [
-        [
-          "@babel/preset-react",
-          {
-            "development": false
-          }
-        ]
-      ],
       "plugins": ["transform-react-remove-prop-types"]
     }
   }
