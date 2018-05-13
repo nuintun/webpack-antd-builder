@@ -8,10 +8,10 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
-const theme = require('../theme');
 const webpack = require('webpack');
 const pkg = require('../package.json');
 const notifier = require('node-notifier');
+const happyPackLoaders = require('./happypack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -34,13 +34,17 @@ const watcher = new WebpackGlobEntriesPlugin('Assets/src/js/pages/**/*.jsx', {
     return entryName;
   }
 });
-const node = ['child_process', 'cluster', 'dgram', 'dns', 'fs', 'module', 'net', 'readline', 'repl', 'tls'].reduce(
-  (acc, name) => Object.assign({}, acc, { [name]: 'empty' }),
-  {}
-);
 
 module.exports = {
+  node: false,
+  cache: true,
   entry: watcher.entries(),
+  resolve: {
+    alias: {
+      '~': path.resolve('Assets/src')
+    },
+    extensions: ['.js', '.jsx']
+  },
   stats: {
     cached: false,
     cachedAssets: false,
@@ -102,6 +106,7 @@ module.exports = {
   },
   plugins: [
     watcher,
+    ...happyPackLoaders,
     new CaseSensitivePathsPlugin(),
     new FriendlyErrorsWebpackPlugin({
       onErrors: (severity, errors) => {
@@ -125,115 +130,52 @@ module.exports = {
     }),
     new WebpackManifestPlugin({
       publicPath: '/Assets/dist/',
-      filter: module => !module.isAsset
+      filter: module => !module.isAsset && !/\.(?:js|css)\.map$/.test(module.path)
     }),
     new CopyWebpackPlugin([
       { from: 'Assets/src/fonts/', to: 'fonts/', toType: 'dir' },
       { from: 'Assets/src/images/', to: 'images/', toType: 'dir' }
     ])
   ],
-  node,
-  resolve: {
-    alias: {
-      '~': path.resolve('Assets/src')
-    },
-    extensions: ['.js', '.jsx']
-  },
   module: {
     noParse: [/[\\/]node_modules[\\/](?:moment)[\\/]/i],
     rules: [
       {
         test: /\.(js|jsx)($|\?)/i,
         exclude: /[\\/]node_modules[\\/]/,
-        loader: 'babel-loader'
+        loader: 'happypack/loader?id=js'
       },
       {
         test: /\.(woff2?|ttf|eot)($|\?)/i,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          emitFile: false,
-          context: path.resolve('Assets/src'),
-          name: '[path][name].[ext]?[hash]'
-        }
+        loader: 'happypack/loader?id=font'
       },
       {
         test: /\.svg($|\?)/i,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          emitFile: false,
-          context: path.resolve('Assets/src'),
-          name: '[path][name].[ext]?[hash]'
-        }
+        loader: 'happypack/loader?id=svg'
       },
       {
         test: /\.(png|jpg|jpeg|gif)($|\?)/i,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          emitFile: false,
-          context: path.resolve('Assets/src'),
-          name: '[path][name].[ext]?[hash]'
-        }
+        loader: 'happypack/loader?id=image'
       },
       {
         test(filePath) {
           return /\.css$/i.test(filePath) && !/\.module\.css$/i.test(filePath);
         },
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+        use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=css']
       },
       {
         test: /\.module\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[local]___[hash:base64:5]'
-            }
-          },
-          'postcss-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=css-module']
       },
       {
         test(filePath) {
           return /\.less$/i.test(filePath) && !/\.module\.less$/i.test(filePath);
         },
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              modifyVars: theme,
-              javascriptEnabled: true
-            }
-          }
-        ]
+        use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=less']
       },
       {
         test: /\.module\.less$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[local]___[hash:base64:5]'
-            }
-          },
-          'postcss-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              modifyVars: theme,
-              javascriptEnabled: true
-            }
-          }
-        ]
+        use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=less-module']
       }
     ]
   }

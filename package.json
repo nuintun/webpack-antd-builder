@@ -6,16 +6,16 @@
     "node": ">=7.6.0"
   },
   "scripts": {
-    "start": "webpack --config webpack/webpack.config.dev.js",
-    "watch": "webpack --config webpack/webpack.config.dev.js --watch",
-    "build": "webpack --config webpack/webpack.config.prod.js"
+    "start": "webpack --config webpack/webpack.config.dev.js --progress",
+    "watch": "webpack --config webpack/webpack.config.dev.js --progress --watch",
+    "build": "webpack --config webpack/webpack.config.prod.js --progress"
   },
   "author": {
     "name": "nuintun",
     "email": "nuintun@qq.com"
   },
   "dependencies": {
-    "antd": "^3.5.1",
+    "antd": "^3.5.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "prop-types": "^15.6.1"
@@ -53,6 +53,7 @@
     "@nuintun/webpack-manifest-plugin": "^0.0.1",
     "optimize-css-assets-webpack-plugin": "4.0.1",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
-    "node-notifier": "^5.2.1"
+    "node-notifier": "^5.2.1",
+    "happypack": "^5.0.0"
   }
 }
