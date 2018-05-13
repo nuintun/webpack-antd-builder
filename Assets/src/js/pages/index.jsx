@@ -168,7 +168,7 @@ class App extends React.Component {
             </FormItem>
           </Form>
         </div>
-        <Table {...this.state} columns={columnss} dataSource={data} />
+        <Table {...this.state} columns={columns} dataSource={data} />
       </div>
     );
   }
