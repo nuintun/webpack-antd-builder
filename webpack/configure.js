@@ -1,5 +1,5 @@
 /**
- * @module paths
+ * @module configure
  * @author nuintun
  */
 

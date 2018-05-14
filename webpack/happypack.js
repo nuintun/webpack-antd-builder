@@ -6,12 +6,12 @@
 'use strict';
 
 const os = require('os');
-const paths = require('./paths');
 const theme = require('../theme');
 const HappyPack = require('happypack');
+const configure = require('./configure');
 
 const verbose = false;
-const context = paths.context;
+const context = configure.context;
 const threadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 module.exports = [

@@ -6,9 +6,9 @@
 'use strict';
 
 const path = require('path');
-const paths = require('./paths');
 const webpack = require('webpack');
 const pkg = require('../package.json');
+const configure = require('./configure');
 const notifier = require('node-notifier');
 const happyPackLoaders = require('./happypack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -19,12 +19,12 @@ const WebpackGlobEntriesPlugin = require('webpack-glob-entries-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-const watcher = new WebpackGlobEntriesPlugin(paths.entry, {
+const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
   resolveEntryName: (base, file) => {
     const extname = path.extname(file);
     const extnameLength = extname.length;
 
-    let entryName = path.relative(paths.entryBase, file);
+    let entryName = path.relative(configure.entryBase, file);
 
     if (extnameLength) {
       entryName = entryName.slice(0, -extnameLength);
@@ -39,11 +39,11 @@ module.exports = {
   cache: true,
   entry: watcher.entries(),
   output: {
-    path: paths.distPath,
-    publicPath: paths.publicPath
+    path: configure.distPath,
+    publicPath: configure.publicPath
   },
   resolve: {
-    alias: paths.alias,
+    alias: configure.alias,
     extensions: ['.js', '.jsx']
   },
   stats: {
@@ -126,11 +126,11 @@ module.exports = {
         }
       }
     }),
-    new CleanWebpackPlugin(paths.distPath, {
+    new CleanWebpackPlugin(configure.distPath, {
       verbose: false,
       root: process.cwd()
     }),
-    new CopyWebpackPlugin(paths.copyConfigure)
+    new CopyWebpackPlugin(configure.copyConfigure)
   ],
   module: {
     noParse: [/[\\/]moment[\\/]moment\.js/i],
