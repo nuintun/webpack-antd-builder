@@ -30,7 +30,7 @@ configure.optimization.minimizer = [
   ...(configure.optimization.minimizer || []),
   new UglifyJsPlugin({
     cache: true,
-    parallel: true,
+    parallel: false,
     sourceMap: false
   }),
   new OptimizeCSSAssetsPlugin()
