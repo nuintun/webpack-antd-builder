@@ -5,9 +5,8 @@
 
 'use strict';
 
-const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
+const paths = require('./paths');
 const webpack = require('webpack');
 const pkg = require('../package.json');
 const notifier = require('node-notifier');
@@ -17,16 +16,15 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
 const WebpackGlobEntriesPlugin = require('webpack-glob-entries-plugin');
-const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-const watcher = new WebpackGlobEntriesPlugin('Assets/src/js/pages/**/*.jsx', {
+const watcher = new WebpackGlobEntriesPlugin(paths.entry, {
   resolveEntryName: (base, file) => {
     const extname = path.extname(file);
     const extnameLength = extname.length;
 
-    let entryName = path.relative('Assets/src/js', file);
+    let entryName = path.relative(paths.entryBase, file);
 
     if (extnameLength) {
       entryName = entryName.slice(0, -extnameLength);
@@ -40,10 +38,12 @@ module.exports = {
   node: false,
   cache: true,
   entry: watcher.entries(),
+  output: {
+    path: paths.distPath,
+    publicPath: paths.publicPath
+  },
   resolve: {
-    alias: {
-      '~': path.resolve('Assets/src')
-    },
+    alias: paths.alias,
     extensions: ['.js', '.jsx']
   },
   stats: {
@@ -126,18 +126,11 @@ module.exports = {
         }
       }
     }),
-    new CleanWebpackPlugin('Assets/dist', {
+    new CleanWebpackPlugin(paths.distPath, {
       verbose: false,
       root: process.cwd()
     }),
-    new WebpackManifestPlugin({
-      publicPath: '/Assets/dist/',
-      filter: module => !module.isAsset && !/\.(?:js|css)\.map$/.test(module.path)
-    }),
-    new CopyWebpackPlugin([
-      { from: 'Assets/src/fonts/', to: 'fonts/', toType: 'dir' },
-      { from: 'Assets/src/images/', to: 'images/', toType: 'dir' }
-    ])
+    new CopyWebpackPlugin(paths.copyConfigure)
   ],
   module: {
     noParse: [/[\\/]moment[\\/]moment\.js/i],
