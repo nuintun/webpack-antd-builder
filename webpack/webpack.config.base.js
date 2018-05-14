@@ -140,7 +140,7 @@ module.exports = {
     ])
   ],
   module: {
-    noParse: [/[\\/]node_modules[\\/](?:moment)[\\/]/i],
+    noParse: [/[\\/]moment[\\/]moment\.js/i],
     rules: [
       {
         test: /\.(js|jsx)($|\?)/i,
