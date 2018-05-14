@@ -12,8 +12,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-configure.mode = 'production';
 configure.devtool = 'none';
+configure.mode = 'production';
 configure.output = Object.assign(configure.output || {}, {
   filename: 'js/[chunkhash].js',
   chunkFilename: 'js/[chunkhash].js'
@@ -21,7 +21,7 @@ configure.output = Object.assign(configure.output || {}, {
 configure.plugins = [
   ...(configure.plugins || []),
   new WebpackManifestPlugin({
-    filter: module => !module.isAsset && !/\.(?:js|css)\.map$/.test(module.path)
+    filter: module => !module.isAsset
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
   new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' })
