@@ -1,6 +1,8 @@
 /**
  * @module webpack.config.prod
+ * @listens MIT
  * @author nuintun
+ * @description Webpack production configure.
  */
 
 'use strict';

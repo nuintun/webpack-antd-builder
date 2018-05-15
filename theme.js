@@ -5,4 +5,6 @@
  * @description Antd theme configure.
  */
 
+'use strict';
+
 module.exports = {};

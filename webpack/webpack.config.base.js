@@ -1,6 +1,8 @@
 /**
  * @module webpack.config.base
+ * @listens MIT
  * @author nuintun
+ * @description Webpack base configure.
  */
 
 'use strict';
@@ -44,6 +46,7 @@ module.exports = {
   },
   resolve: {
     alias: configure.alias,
+    modules: configure.modules,
     extensions: ['.js', '.jsx']
   },
   stats: {
@@ -65,9 +68,9 @@ module.exports = {
     hints: false
   },
   optimization: {
-    occurrenceOrder: true,
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         react: {
           test: module => {
@@ -75,10 +78,7 @@ module.exports = {
 
             return /[\\/]node_modules[\\/]react(?:-dom)?[\\/]/i.test(name);
           },
-          name: 'react',
-          chunks: 'all',
-          minSize: 102400,
-          minChunks: 1
+          name: 'react'
         },
         antd: {
           test: module => {
@@ -86,10 +86,7 @@ module.exports = {
 
             return /[\\/]node_modules[\\/]antd[\\/]/i.test(name);
           },
-          name: 'antd',
-          chunks: 'all',
-          minSize: 102400,
-          minChunks: 1
+          name: 'antd'
         },
         vendors: {
           test: module => {
@@ -97,10 +94,7 @@ module.exports = {
 
             return /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i.test(name);
           },
-          name: 'vendors',
-          chunks: 'all',
-          minSize: 102400,
-          minChunks: 1
+          name: 'vendors'
         }
       }
     }

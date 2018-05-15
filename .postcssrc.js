@@ -1,3 +1,12 @@
+/**
+ * @module .postcssrc
+ * @listens MIT
+ * @author nuintun
+ * @description PostCSS configure.
+ */
+
+'use strict';
+
 const rucksack = require('rucksack-css');
 const autoprefixer = require('autoprefixer');
 

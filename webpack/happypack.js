@@ -1,6 +1,8 @@
 /**
  * @module happypack
+ * @listens MIT
  * @author nuintun
+ * @description HappyPack loaders
  */
 
 'use strict';
@@ -20,7 +22,14 @@ module.exports = [
     id: 'js',
     verbose,
     threadPool,
-    loaders: ['babel-loader']
+    loaders: [
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true
+        }
+      }
+    ]
   }),
   new HappyPack({
     id: 'css',

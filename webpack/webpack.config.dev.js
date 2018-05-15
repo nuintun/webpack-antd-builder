@@ -1,6 +1,8 @@
 /**
  * @module webpack.config.dev
+ * @listens MIT
  * @author nuintun
+ * @description Webpack development configure.
  */
 
 'use strict';

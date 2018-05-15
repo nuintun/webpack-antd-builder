@@ -1,6 +1,8 @@
 /**
  * @module configure
+ * @listens MIT
  * @author nuintun
+ * @description Paths configure.
  */
 
 'use strict';
@@ -20,6 +22,7 @@ module.exports = {
     '~fonts': path.resolve('Assets/src/fonts'),
     '~images': path.resolve('Assets/src/images')
   },
+  modules: [path.resolve('Assets/src'), path.resolve('node_modules')],
   copyConfigure: [
     { from: 'Assets/src/fonts/', to: 'fonts/', toType: 'dir' },
     { from: 'Assets/src/images/', to: 'images/', toType: 'dir' }
