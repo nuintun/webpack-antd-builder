@@ -12,14 +12,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const mode = 'production';
+
+process.env.NODE_ENV = mode;
+
+configure.mode = mode;
 configure.devtool = 'none';
-configure.mode = 'production';
 configure.output = Object.assign(configure.output || {}, {
   filename: 'js/[chunkhash].js',
   chunkFilename: 'js/[chunkhash].js'
 });
 configure.plugins = [
   ...(configure.plugins || []),
+  new webpack.EnvironmentPlugin({
+    DEBUG: false,
+    NODE_ENV: mode
+  }),
   new WebpackManifestPlugin({
     filter: module => !module.isAsset
   }),

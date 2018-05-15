@@ -10,14 +10,22 @@ const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
 
+const mode = 'development';
+
+process.env.NODE_ENV = mode;
+
+configure.mode = mode;
 configure.devtool = 'none';
-configure.mode = 'development';
 configure.output = Object.assign(configure.output || {}, {
   filename: 'js/[name].js',
   chunkFilename: 'js/[name].js'
 });
 configure.plugins = [
   ...(configure.plugins || []),
+  new webpack.EnvironmentPlugin({
+    DEBUG: true,
+    NODE_ENV: mode
+  }),
   new webpack.SourceMapDevToolPlugin({
     exclude: /[\\/](?:react|antd|vendors|runtime)\.(?:js|css)$/i
   }),
