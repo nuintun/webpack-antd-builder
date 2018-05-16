@@ -70,31 +70,46 @@ module.exports = {
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
-      chunks: 'all',
       cacheGroups: {
+        default: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2,
+          minSize: 30720,
+          reuseExistingChunk: true,
+          test: module => {
+            const name = module.nameForCondition();
+
+            return !/[\\/]node_modules[\\/]/.test(name);
+          }
+        },
         react: {
+          name: 'react',
+          chunks: 'all',
           test: module => {
             const name = module.nameForCondition();
 
             return /[\\/]node_modules[\\/]react(?:-dom)?[\\/]/i.test(name);
-          },
-          name: 'react'
+          }
         },
         antd: {
+          name: 'antd',
+          chunks: 'all',
           test: module => {
             const name = module.nameForCondition();
 
             return /[\\/]node_modules[\\/]antd[\\/]/i.test(name);
-          },
-          name: 'antd'
+          }
         },
         vendors: {
+          name: 'vendors',
+          chunks: 'all',
+          reuseExistingChunk: true,
           test: module => {
             const name = module.nameForCondition();
 
             return /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i.test(name);
-          },
-          name: 'vendors'
+          }
         }
       }
     }
