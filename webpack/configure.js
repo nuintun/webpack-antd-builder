@@ -11,8 +11,8 @@ const path = require('path');
 
 module.exports = {
   entry: 'Assets/src/js/pages/**/*.jsx',
-  entryBase: 'Assets/src/js',
-  publicPath: '/Assets/dist/',
+  entryBase: 'Assets/src/js/pages',
+  publicPath: '/Assets/dist',
   distPath: path.resolve('Assets/dist'),
   context: path.resolve('Assets/src'),
   alias: {

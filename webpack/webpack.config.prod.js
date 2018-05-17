@@ -17,6 +17,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const mode = 'production';
 
 process.env.NODE_ENV = mode;
+process.env.BABEL_ENV = mode;
 
 configure.mode = mode;
 configure.devtool = 'none';

@@ -37,8 +37,6 @@ const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
 });
 
 module.exports = {
-  node: false,
-  cache: true,
   entry: watcher.entries(),
   output: {
     path: configure.distPath,
@@ -48,6 +46,18 @@ module.exports = {
     alias: configure.alias,
     modules: configure.modules,
     extensions: ['.js', '.jsx']
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty',
+    repl: 'empty',
+    dgram: 'empty',
+    module: 'empty',
+    cluster: 'empty',
+    readline: 'empty',
+    child_process: 'empty'
   },
   stats: {
     cached: false,
@@ -70,46 +80,29 @@ module.exports = {
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
+      automaticNameDelimiter: '-',
       cacheGroups: {
         default: {
-          name: 'commons',
+          minSize: 0,
           chunks: 'initial',
-          minChunks: 2,
-          minSize: 30720,
-          reuseExistingChunk: true,
-          test: module => {
-            const name = module.nameForCondition();
-
-            return !/[\\/]node_modules[\\/]/.test(name);
-          }
+          name: require('./chunks-name'),
+          test: /[\\/]Assets[\\/]src[\\/]/i
         },
         react: {
           name: 'react',
-          chunks: 'all',
-          test: module => {
-            const name = module.nameForCondition();
-
-            return /[\\/]node_modules[\\/]react(?:-dom)?[\\/]/i.test(name);
-          }
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]react(?:-dom)?[\\/]/i
         },
         antd: {
           name: 'antd',
-          chunks: 'all',
-          test: module => {
-            const name = module.nameForCondition();
-
-            return /[\\/]node_modules[\\/]antd[\\/]/i.test(name);
-          }
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]antd[\\/]/i
         },
         vendors: {
           name: 'vendors',
-          chunks: 'all',
+          chunks: 'initial',
           reuseExistingChunk: true,
-          test: module => {
-            const name = module.nameForCondition();
-
-            return /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i.test(name);
-          }
+          test: /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i
         }
       }
     }
@@ -142,6 +135,7 @@ module.exports = {
     new CopyWebpackPlugin(configure.copyConfigure)
   ],
   module: {
+    strictExportPresence: true,
     noParse: [/[\\/]moment[\\/]moment\.js/i],
     rules: [
       {

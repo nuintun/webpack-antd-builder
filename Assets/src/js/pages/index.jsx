@@ -1,9 +1,13 @@
-import '~/css/pages/index.less';
+import '~css/pages/index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import request from '~js/libs/request';
 import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
+
 const FormItem = Form.Item;
+
+request();
 
 const columns = [
   {
