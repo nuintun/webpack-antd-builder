@@ -35,7 +35,7 @@ configure.plugins = [
   new webpack.SourceMapDevToolPlugin({
     exclude: /[\\/](?:react|antd|vendors|runtime)\.(?:js|css)$/i
   }),
-  new WebpackEntryManifestPlugin(),
+  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}`, chunks: true }),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' })
 ];
 configure.watchOptions = Object.assign(configure.watchOptions || {}, { ignored: 'node_modules/**/*' });
