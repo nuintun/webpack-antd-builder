@@ -13,7 +13,7 @@ const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
 
-const WebpackAssetManifestPlugin = require('webpack-asset-manifest-plugin');
+const WebpackEntryManifestPlugin = require('./test');
 
 const mode = 'development';
 
@@ -35,7 +35,7 @@ configure.plugins = [
   new webpack.SourceMapDevToolPlugin({
     exclude: /[\\/](?:react|antd|vendors|runtime)\.(?:js|css)$/i
   }),
-  new WebpackAssetManifestPlugin /* options */(),
+  new WebpackEntryManifestPlugin(),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' })
 ];
 configure.watchOptions = Object.assign(configure.watchOptions || {}, { ignored: 'node_modules/**/*' });
