@@ -80,13 +80,14 @@ module.exports = {
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
+      maxInitialRequests: 6,
       automaticNameDelimiter: '-',
       cacheGroups: {
         default: {
           minSize: 0,
           chunks: 'initial',
           name: require('./chunks-name'),
-          test: /[\\/]Assets[\\/]src[\\/]/i
+          test: module => !/[\\/]node_modules[\\/]/i.test(module.nameForCondition())
         },
         react: {
           name: 'react',

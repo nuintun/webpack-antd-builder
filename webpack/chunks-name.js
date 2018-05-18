@@ -1,7 +1,21 @@
+/**
+ * @module chunks-name
+ * @listens MIT
+ * @author nuintun
+ * @description Create chunks name.
+ */
+
+'use strict';
+
 const crypto = require('crypto');
 
 const cache = new Map();
 
+/**
+ * @function hashFilename
+ * @param {string} name
+ * @returns {string}
+ */
 const hashFilename = name => {
   return crypto
     .createHash('md4')
@@ -10,43 +24,35 @@ const hashFilename = name => {
     .slice(0, 8);
 };
 
+/**
+ * @function chunksName
+ * @param {Module} module
+ * @param {Chunk} chunks
+ * @param {string} cacheGroup
+ * @returns {string}
+ */
 module.exports = (module, chunks, cacheGroup) => {
-  console.log(module.nameForCondition());
-  chunks.forEach(chunk => {
-    console.log(chunk.name);
-  });
-  console.log('---------------------------------------------');
+  if (!cache.has(chunks)) {
+    cache.set(chunks, Object.create(null));
+  }
 
-  let cacheEntry = cache.get(chunks);
+  const cacheEntry = cache.get(chunks);
 
-  if (cacheEntry === undefined) {
-    cache.set(chunks, (cacheEntry = {}));
-  } else if (cacheGroup in cacheEntry) {
+  if (cacheGroup in cacheEntry) {
     return cacheEntry[cacheGroup];
   }
 
-  const names = chunks.map(chunk => chunk.debugId);
+  const names = chunks.map(chunk => chunk.name);
 
-  if (!names.every(Boolean)) {
-    return (cacheEntry[cacheGroup] = undefined);
+  if (names.every(Boolean)) {
+    names.sort();
+
+    let name = names.join('&');
+
+    name = 'chunk-' + hashFilename(name);
+
+    cacheEntry[cacheGroup] = name;
+
+    return name;
   }
-
-  names.sort();
-
-  let name = names.join('&');
-
-  // Filenames and paths can't be too long otherwise an
-  // ENAMETOOLONG error is raised. If the generated name if too
-  // long, it is truncated and a hash is appended. The limit has
-  // been set to 100 to prevent `[name].[chunkhash].[ext]` from
-  // generating a 256+ character string.
-  // if (name.length > 100) {
-  //   name = name.slice(0, 100) + '&' + hashFilename(name);
-  // }
-
-  name = hashFilename(name);
-
-  cacheEntry[cacheGroup] = name;
-
-  return name;
 };
