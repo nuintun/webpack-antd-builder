@@ -3,6 +3,7 @@
  * @listens MIT
  * @author nuintun
  * @description Webpack production configure.
+ * @see https://github.com/facebook/create-react-app/blob/next/packages/react-scripts/config/webpack.config.prod.js
  */
 
 'use strict';
@@ -20,6 +21,7 @@ process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
 
 configure.mode = mode;
+configure.bail = true;
 configure.devtool = 'none';
 configure.output = Object.assign(configure.output || {}, {
   filename: 'js/[chunkhash].js',

@@ -18,7 +18,10 @@
     "antd": "^3.5.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "object-assign": "^4.1.1",
+    "@nuintun/fetch": "^0.2.0",
+    "@nuintun/promise": "^0.2.0"
   },
   "devDependencies": {
     "babel-loader": "next",
@@ -51,7 +54,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "mini-css-extract-plugin": "^0.4.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack-glob-entries-plugin": "^0.2.2",
+    "webpack-glob-entries-plugin": "^0.3.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "@nuintun/webpack-manifest-plugin": "^0.0.1",

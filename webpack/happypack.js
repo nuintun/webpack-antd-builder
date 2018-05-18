@@ -26,6 +26,7 @@ module.exports = [
       {
         loader: 'babel-loader',
         options: {
+          highlightCode: true,
           cacheDirectory: true
         }
       }

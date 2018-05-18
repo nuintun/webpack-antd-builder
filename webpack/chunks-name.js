@@ -3,6 +3,7 @@
  * @listens MIT
  * @author nuintun
  * @description Create chunks name.
+ * @see https://github.com/webpack/webpack/blob/master/lib/optimize/SplitChunksPlugin.js
  */
 
 'use strict';

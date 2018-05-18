@@ -21,8 +21,10 @@ const WebpackGlobEntriesPlugin = require('webpack-glob-entries-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
+const polyfills = require.resolve('./polyfills');
+
 const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
-  resolveEntryName: (base, file) => {
+  mapEntryName: file => {
     const extname = path.extname(file);
     const extnameLength = extname.length;
 
@@ -33,6 +35,9 @@ const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
     }
 
     return entryName;
+  },
+  mapEntry: file => {
+    return [polyfills, file];
   }
 });
 
@@ -84,10 +89,21 @@ module.exports = {
       automaticNameDelimiter: '-',
       cacheGroups: {
         default: {
-          minSize: 0,
+          minSize: 30720,
           chunks: 'initial',
+          reuseExistingChunk: true,
           name: require('./chunks-name'),
-          test: module => !/[\\/]node_modules[\\/]/i.test(module.nameForCondition())
+          test: module => {
+            const test = /[\\/]node_modules[\\/]/i;
+
+            if (module.nameForCondition && !test.test(module.nameForCondition())) return true;
+
+            for (const chunk of module.chunksIterable) {
+              if (chunk.name && !test.test(chunk.name)) return true;
+            }
+
+            return false;
+          }
         },
         react: {
           name: 'react',
@@ -102,7 +118,6 @@ module.exports = {
         vendors: {
           name: 'vendors',
           chunks: 'initial',
-          reuseExistingChunk: true,
           test: /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i
         }
       }
@@ -137,7 +152,7 @@ module.exports = {
   ],
   module: {
     strictExportPresence: true,
-    noParse: [/[\\/]moment[\\/]moment\.js/i],
+    noParse: [/[\\/]moment[\\/]moment\.js/i, /[\\/]@nuintun[\\/](?:fetch|promise)[\\/]/i],
     rules: [
       {
         test: /\.(js|jsx)($|\?)/i,
