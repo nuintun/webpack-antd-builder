@@ -61,7 +61,7 @@ module.exports = [
         options: {
           modules: true,
           sourceMap: development,
-          localIdentName: '[local]___[hash:base64:5]'
+          localIdentName: '[local]--[hash:base64:5]'
         }
       },
       {
@@ -109,7 +109,7 @@ module.exports = [
         options: {
           modules: true,
           sourceMap: development,
-          localIdentName: '[local]___[hash:base64:5]'
+          localIdentName: '[local]--[hash:base64:5]'
         }
       },
       {
@@ -138,8 +138,7 @@ module.exports = [
         options: {
           context,
           limit: 8192,
-          emitFile: false,
-          name: '[path][name].[ext]?[hash]'
+          name: '[path][name]-[hash:8].[ext]'
         }
       }
     ]
@@ -154,8 +153,7 @@ module.exports = [
         options: {
           context,
           limit: 8192,
-          emitFile: false,
-          name: '[path][name].[ext]?[hash]'
+          name: '[path][name]-[hash:8].[ext]'
         }
       }
     ]
@@ -170,8 +168,7 @@ module.exports = [
         options: {
           context,
           limit: 8192,
-          emitFile: false,
-          name: '[path][name].[ext]?[hash]'
+          name: '[path][name]-[hash:8].[ext]'
         }
       }
     ]

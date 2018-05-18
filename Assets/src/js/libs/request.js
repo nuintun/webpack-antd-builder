@@ -1,1 +1,3 @@
-export default function request() {}
+export default function request() {
+  console.log('request js');
+}

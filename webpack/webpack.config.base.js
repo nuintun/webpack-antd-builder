@@ -13,7 +13,6 @@ const pkg = require('../package.json');
 const configure = require('./configure');
 const notifier = require('node-notifier');
 const happyPackLoaders = require('./happypack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
@@ -40,6 +39,10 @@ const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
     return [polyfills, file];
   }
 });
+
+// When file-loader is ok, remove this.
+// https://github.com/amireh/happypack/issues/233
+const context = configure.context;
 
 module.exports = {
   entry: watcher.entries(),
@@ -92,7 +95,7 @@ module.exports = {
           minSize: 30720,
           chunks: 'initial',
           reuseExistingChunk: true,
-          name: require('./chunks-name'),
+          name: require('./chunks.name'),
           test: module => {
             const test = /[\\/]node_modules[\\/]/i;
 
@@ -147,8 +150,7 @@ module.exports = {
     new CleanWebpackPlugin(configure.distPath, {
       verbose: false,
       root: process.cwd()
-    }),
-    new CopyWebpackPlugin(configure.copyConfigure)
+    })
   ],
   module: {
     strictExportPresence: true,
@@ -161,15 +163,48 @@ module.exports = {
       },
       {
         test: /\.(woff2?|ttf|eot)($|\?)/i,
-        loader: 'happypack/loader?id=font'
+        // https://github.com/amireh/happypack/issues/233
+        // loader: 'happypack/loader?id=font'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              context,
+              limit: 8192,
+              name: '[path][name]-[hash:8].[ext]'
+            }
+          }
+        ]
       },
       {
         test: /\.svg($|\?)/i,
-        loader: 'happypack/loader?id=svg'
+        // https://github.com/amireh/happypack/issues/233
+        // loader: 'happypack/loader?id=svg'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              context,
+              limit: 8192,
+              name: '[path][name]-[hash:8].[ext]'
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|jpeg|gif)($|\?)/i,
-        loader: 'happypack/loader?id=image'
+        // https://github.com/amireh/happypack/issues/233
+        // loader: 'happypack/loader?id=image'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              context,
+              limit: 8192,
+              name: '[path][name]-[hash:8].[ext]'
+            }
+          }
+        ]
       },
       {
         test(filePath) {

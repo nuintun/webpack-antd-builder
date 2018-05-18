@@ -3,11 +3,14 @@ import '~css/pages/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import request from '~js/libs/request';
+import success from '~images/success.png';
 import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
 
 const FormItem = Form.Item;
 
 request();
+
+import('~js/libs/lazy').then(({ default: lazy }) => lazy());
 
 const columns = [
   {
@@ -15,7 +18,12 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     width: 150,
-    render: text => <a href="javascript:;">{text}</a>
+    render: text => (
+      <a href="javascript:;">
+        {text}
+        <img src={success} style={{ width: 16, marginLeft: 3 }} />
+      </a>
+    )
   },
   {
     title: 'Age',
@@ -31,10 +39,10 @@ const columns = [
   {
     title: 'Action',
     key: 'action',
-    width: 360,
+    width: 400,
     render: (text, record) => (
       <span>
-        <a href="javascript:;">Action 一 {record.name}</a>
+        <a href="javascript:;">Action - {record.name}</a>
         <Divider type="vertical" />
         <a href="javascript:;">Delete</a>
         <Divider type="vertical" />
