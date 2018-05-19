@@ -12,7 +12,7 @@ const webpack = require('webpack');
 const configure = require('./webpack.config.base');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
+const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const mode = 'production';
@@ -33,11 +33,9 @@ configure.plugins = [
     DEBUG: false,
     NODE_ENV: mode
   }),
-  new WebpackManifestPlugin({
-    filter: module => !module.isAsset
-  }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-  new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' })
+  new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' }),
+  new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) })
 ];
 configure.optimization.minimizer = [
   ...(configure.optimization.minimizer || []),

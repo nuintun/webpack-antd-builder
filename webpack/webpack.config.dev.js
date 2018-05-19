@@ -11,9 +11,7 @@
 const webpack = require('webpack');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackManifestPlugin = require('@nuintun/webpack-manifest-plugin');
-
-const WebpackEntryManifestPlugin = require('./test');
+const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 
 const mode = 'development';
 
@@ -35,8 +33,8 @@ configure.plugins = [
   new webpack.SourceMapDevToolPlugin({
     exclude: /[\\/](?:react|antd|vendors|runtime)\.(?:js|css)$/i
   }),
-  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}`, chunks: true }),
-  new MiniCssExtractPlugin({ filename: 'css/[name].css' })
+  new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
+  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
 ];
 configure.watchOptions = Object.assign(configure.watchOptions || {}, { ignored: 'node_modules/**/*' });
 

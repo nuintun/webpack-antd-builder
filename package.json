@@ -55,10 +55,9 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack-glob-entries-plugin": "^0.3.0",
     "progress-bar-webpack-plugin": "^1.11.0",
+    "webpack-entry-manifest-plugin": "^0.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "@nuintun/webpack-manifest-plugin": "^0.0.1",
     "optimize-css-assets-webpack-plugin": "4.0.1",
-    "webpack-asset-manifest-plugin": "^1.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "node-notifier": "^5.2.1"
   }
