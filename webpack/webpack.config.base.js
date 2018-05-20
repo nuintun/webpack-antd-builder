@@ -110,7 +110,7 @@ module.exports = {
         react: {
           name: 'react',
           chunks: 'initial',
-          test: /[\\/]node_modules[\\/]react(?:-dom)?[\\/]/i
+          test: /[\\/]node_modules[\\/]react(-dom)?[\\/]/i
         },
         antd: {
           name: 'antd',
@@ -120,7 +120,7 @@ module.exports = {
         vendors: {
           name: 'vendors',
           chunks: 'initial',
-          test: /[\\/]node_modules[\\/](?!(?:antd|react(?:-dom)?)[\\/])/i
+          test: /[\\/]node_modules[\\/](?!(antd|react(-dom)?)[\\/])/i
         }
       }
     }
