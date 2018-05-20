@@ -51,7 +51,8 @@ module.exports = {
   resolve: {
     alias: configure.alias,
     modules: configure.modules,
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    mainFields: ['jsnext:main', 'browser', 'loader', 'main']
   },
   node: {
     fs: 'empty',
