@@ -22,5 +22,6 @@ module.exports = {
     '~fonts': path.resolve('Assets/src/fonts'),
     '~images': path.resolve('Assets/src/images')
   },
-  modules: [path.resolve('Assets/src'), path.resolve('node_modules')]
+  modules: [path.resolve('Assets/src'), path.resolve('node_modules')],
+  noParse: [/[\\/]moment[\\/]moment\.js/i, /[\\/]@nuintun[\\/](?:fetch|promise)[\\/]/i]
 };

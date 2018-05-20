@@ -153,7 +153,7 @@ module.exports = {
   ],
   module: {
     strictExportPresence: true,
-    noParse: [/[\\/]moment[\\/]moment\.js/i, /[\\/]@nuintun[\\/](?:fetch|promise)[\\/]/i],
+    noParse: configure.noParse,
     rules: [
       {
         test: /\.(js|jsx)($|\?)/i,
