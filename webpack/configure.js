@@ -11,10 +11,10 @@ const path = require('path');
 
 module.exports = {
   entry: 'Assets/src/js/pages/**/*.jsx',
-  entryBase: 'Assets/src/js/pages',
+  entryBasePath: 'Assets/src/js/pages',
   publicPath: '/Assets/dist/',
-  distPath: path.resolve('Assets/dist'),
   context: path.resolve('Assets/src'),
+  outputPath: path.resolve('Assets/dist'),
   alias: {
     '~': path.resolve('Assets/src'),
     '~js': path.resolve('Assets/src/js'),

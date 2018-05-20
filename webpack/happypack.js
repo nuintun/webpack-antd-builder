@@ -13,7 +13,6 @@ const HappyPack = require('happypack');
 const configure = require('./configure');
 
 const verbose = false;
-const context = configure.context;
 const development = process.env.NODE_ENV !== 'production';
 const threadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
@@ -136,7 +135,6 @@ module.exports = [
       {
         loader: 'url-loader',
         options: {
-          context,
           limit: 8192,
           name: '[path][name]-[hash:8].[ext]'
         }
@@ -151,7 +149,6 @@ module.exports = [
       {
         loader: 'url-loader',
         options: {
-          context,
           limit: 8192,
           name: '[path][name]-[hash:8].[ext]'
         }
@@ -166,7 +163,6 @@ module.exports = [
       {
         loader: 'url-loader',
         options: {
-          context,
           limit: 8192,
           name: '[path][name]-[hash:8].[ext]'
         }

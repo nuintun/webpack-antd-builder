@@ -30,6 +30,7 @@ configure.plugins = [
     DEBUG: true,
     NODE_ENV: mode
   }),
+  new webpack.NamedModulesPlugin(),
   new webpack.SourceMapDevToolPlugin({
     exclude: /[\\/](?:react|antd|vendors|runtime)\.(?:js|css)$/i
   }),

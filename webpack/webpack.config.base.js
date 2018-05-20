@@ -27,7 +27,7 @@ const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
     const extname = path.extname(file);
     const extnameLength = extname.length;
 
-    let entryName = path.relative(configure.entryBase, file);
+    let entryName = path.relative(configure.entryBasePath, file);
 
     if (extnameLength) {
       entryName = entryName.slice(0, -extnameLength);
@@ -40,14 +40,12 @@ const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
   }
 });
 
-// When file-loader is ok, remove this.
-// https://github.com/amireh/happypack/issues/233
-const context = configure.context;
-
 module.exports = {
   entry: watcher.entries(),
+  context: configure.context,
   output: {
-    path: configure.distPath,
+    pathinfo: false,
+    path: configure.outputPath,
     publicPath: configure.publicPath
   },
   resolve: {
@@ -147,7 +145,7 @@ module.exports = {
         }
       }
     }),
-    new CleanWebpackPlugin(configure.distPath, {
+    new CleanWebpackPlugin(configure.outputPath, {
       verbose: false,
       root: process.cwd()
     })
@@ -169,7 +167,6 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              context,
               limit: 8192,
               name: '[path][name]-[hash:8].[ext]'
             }
@@ -184,7 +181,6 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              context,
               limit: 8192,
               name: '[path][name]-[hash:8].[ext]'
             }
@@ -199,7 +195,6 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              context,
               limit: 8192,
               name: '[path][name]-[hash:8].[ext]'
             }
