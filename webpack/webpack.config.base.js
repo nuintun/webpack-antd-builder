@@ -52,7 +52,7 @@ module.exports = {
     alias: configure.alias,
     modules: configure.modules,
     extensions: ['.js', '.jsx'],
-    mainFields: ['jsnext:main', 'browser', 'loader', 'main']
+    mainFields: ['browser', 'loader', 'main']
   },
   node: {
     fs: 'empty',
