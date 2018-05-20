@@ -52,7 +52,7 @@ module.exports = {
     alias: configure.alias,
     modules: configure.modules,
     extensions: ['.js', '.jsx'],
-    mainFields: ['browser', 'loader', 'main']
+    mainFields: ['browser', 'main']
   },
   node: {
     fs: 'empty',
