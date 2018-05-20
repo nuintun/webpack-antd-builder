@@ -20,8 +20,8 @@
     "react-dom": "^16.3.2",
     "prop-types": "^15.6.1",
     "object-assign": "^4.1.1",
-    "@nuintun/fetch": "^0.2.0",
-    "@nuintun/promise": "^0.2.0"
+    "@nuintun/fetch": "^0.2.1",
+    "@nuintun/promise": "^0.2.1"
   },
   "devDependencies": {
     "babel-loader": "next",

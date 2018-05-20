@@ -602,13 +602,13 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.0.2.tgz#d056b68999769728a1cff8d643bc59eb6f0be436"
 
-"@nuintun/fetch@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@nuintun/fetch/-/fetch-0.2.0.tgz#75e43db758af0a7d0d8d44935bede1c3b350d0fd"
+"@nuintun/fetch@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@nuintun/fetch/-/fetch-0.2.1.tgz#9ecbfa54d70b14c9e45a7ff28c23cf25f79d4c7a"
 
-"@nuintun/promise@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@nuintun/promise/-/promise-0.2.0.tgz#b4baca7339e588985564cd6402bea391e39fa77b"
+"@nuintun/promise@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@nuintun/promise/-/promise-0.2.1.tgz#14234c0d6e25fda32371392901d9ae4fa68c539c"
 
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
@@ -5602,8 +5602,8 @@ rc-input-number@~4.0.0:
     rmc-feedback "^2.0.0"
 
 rc-menu@^7.0.2, rc-menu@~7.0.2:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-7.0.3.tgz#8761aaeef5297e84e573f1920783f8ed1f3cb7dc"
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-7.0.4.tgz#17282540934e16ce5d80b41477b610d5337e5a55"
   dependencies:
     babel-runtime "6.x"
     classnames "2.x"
