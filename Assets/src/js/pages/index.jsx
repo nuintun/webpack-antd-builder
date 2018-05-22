@@ -2,15 +2,16 @@ import '~css/pages/index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import request from '~js/libs/request';
+import request from '~js/utils/request';
 import success from '~images/success.png';
+import TableProvider from '~js/components/TableProvider';
 import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
 
 const FormItem = Form.Item;
 
 request();
 
-import('~js/libs/lazy').then(({ default: lazy }) => lazy());
+import('~js/utils/lazy').then(({ default: lazy }) => lazy());
 
 const columns = [
   {
@@ -53,18 +54,6 @@ const columns = [
     )
   }
 ];
-
-const data = [];
-
-for (let i = 1; i <= 10; i++) {
-  data.push({
-    key: i,
-    name: 'John Brown',
-    age: `${i}2`,
-    address: `New York No. ${i} Lake Park`,
-    description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`
-  });
-}
 
 const expandedRowRender = record => <p>{record.description}</p>;
 const title = () => 'Here is title';
@@ -180,7 +169,9 @@ class App extends React.Component {
             </FormItem>
           </Form>
         </div>
-        <Table {...this.state} columns={columns} dataSource={data} />
+        <TableProvider source="/Mocks/index.json" onLoad={load => console.log(!load)}>
+          {payload => <Table {...this.state} columns={columns} dataSource={payload.Data} />}
+        </TableProvider>
       </div>
     );
   }

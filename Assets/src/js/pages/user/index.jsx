@@ -2,7 +2,7 @@ import '~css/pages/user/index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import request from '~js/libs/request';
+import request from '~js/utils/request';
 import { Switch, Icon } from 'antd';
 
 request();
