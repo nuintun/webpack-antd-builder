@@ -44,7 +44,9 @@ configure.optimization.minimizer = [
     parallel: true,
     sourceMap: false
   }),
-  new OptimizeCSSAssetsPlugin()
+  new OptimizeCSSAssetsPlugin({
+    cssProcessorOptions: { reduceIdents: false }
+  })
 ];
 
 module.exports = configure;
