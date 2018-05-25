@@ -457,9 +457,15 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.48"
     "@babel/plugin-syntax-jsx" "7.0.0-beta.48"
 
-"@babel/plugin-transform-regenerator@7.0.0-beta.48", "@babel/plugin-transform-regenerator@^7.0.0-beta.48":
+"@babel/plugin-transform-regenerator@7.0.0-beta.48":
   version "7.0.0-beta.48"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.0.0-beta.48.tgz#a5ca16f6f4876d75063ae4df471f2671a416ec11"
+  dependencies:
+    regenerator-transform "^0.12.3"
+
+"@babel/plugin-transform-regenerator@^7.0.0-beta.49":
+  version "7.0.0-beta.49"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.0.0-beta.49.tgz#d4ed7967033f4f5b49363c203503899b8357cae2"
   dependencies:
     regenerator-transform "^0.12.3"
 
