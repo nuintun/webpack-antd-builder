@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import request from '~js/utils/request';
 import success from '~images/success.png';
-import TableProvider from '~js/components/TableProvider';
 import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
 
 const FormItem = Form.Item;
