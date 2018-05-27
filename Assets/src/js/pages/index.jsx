@@ -21,7 +21,7 @@ const columns = [
     render: text => (
       <a href="javascript:;">
         {text}
-        <img src={success} style={{ width: 16, marginLeft: 3 }} />
+        <img src={success} style={{ width: 16, height: 16, marginLeft: 3 }} />
       </a>
     )
   },
