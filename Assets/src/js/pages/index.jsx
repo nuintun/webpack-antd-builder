@@ -73,7 +73,8 @@ class App extends React.Component {
     showHeader,
     footer,
     rowSelection: {},
-    scroll: undefined
+    scroll: undefined,
+    dataSource: []
   };
 
   handleToggle = prop => {
@@ -117,6 +118,28 @@ class App extends React.Component {
       pagination: value === 'none' ? false : { position: value }
     });
   };
+
+  componentDidMount() {
+    this.setState({
+      loading: true
+    });
+
+    fetch('/Mocks/index.json')
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          loading: false,
+          dataSource: json.Payload.Data
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false
+        });
+
+        console.log(error);
+      });
+  }
 
   render() {
     const state = this.state;
@@ -169,9 +192,7 @@ class App extends React.Component {
             </FormItem>
           </Form>
         </div>
-        <TableProvider source="/Mocks/index.json" onLoad={load => console.log(!load)}>
-          {payload => <Table {...this.state} columns={columns} dataSource={payload.Data} />}
-        </TableProvider>
+        <Table {...this.state} columns={columns} />
       </div>
     );
   }
