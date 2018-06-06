@@ -44,7 +44,7 @@
     "happypack": "^5.0.0",
     "url-loader": "^1.0.1",
     "less-loader": "^4.1.0",
-    "webpack-cli": "^3.0.2",
+    "webpack-cli": "^3.0.3",
     "file-loader": "^1.1.11",
     "rucksack-css": "^1.0.2",
     "css-loader": "^0.28.11",
