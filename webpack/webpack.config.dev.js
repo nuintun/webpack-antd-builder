@@ -29,7 +29,7 @@ configure.plugins = [
   new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
   new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` }),
-  new webpack.SourceMapDevToolPlugin({ columns: false, exclude: /[\\/](runtime|react|antd)\.(js|css)$/i })
+  new webpack.SourceMapDevToolPlugin({ exclude: /[\\/](runtime|react|antd|fetch|vendor-[^\\/]+)\.(js|css)$/i })
 ];
 configure.watchOptions = Object.assign(configure.watchOptions || {}, { ignored: 'node_modules/**/*' });
 

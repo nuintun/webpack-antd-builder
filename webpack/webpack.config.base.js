@@ -11,6 +11,7 @@ const path = require('path');
 const webpack = require('webpack');
 const pkg = require('../package.json');
 const configure = require('./configure');
+const getChunksName = require('./chunks');
 const notifier = require('node-notifier');
 const happyPackLoaders = require('./happypack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -86,24 +87,26 @@ module.exports = {
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
-      maxInitialRequests: 5,
+      maxInitialRequests: 4,
       automaticNameDelimiter: '&',
       cacheGroups: {
         default: {
           minSize: 30720,
           chunks: 'initial',
           reuseExistingChunk: true,
-          name: require('./chunks.name'),
+          name: getChunksName('chunk'),
           test: module => {
-            const test = /[\\/]node_modules[\\/](antd|react(-dom)?)[\\/]/i;
+            const test = /[\\/]node_modules[\\/]/i;
 
-            if (module.nameForCondition && !test.test(module.nameForCondition())) return true;
-
-            for (const chunk of module.chunksIterable) {
-              if (chunk.name && !test.test(chunk.name)) return true;
+            if (module.nameForCondition && test.test(module.nameForCondition())) {
+              return false;
             }
 
-            return false;
+            for (const chunk of module.chunksIterable) {
+              if (chunk.name && test.test(chunk.name)) return false;
+            }
+
+            return true;
           }
         },
         react: {
@@ -117,6 +120,13 @@ module.exports = {
           chunks: 'all',
           enforce: true,
           test: /[\\/]node_modules[\\/]antd[\\/]/i
+        },
+        vendors: {
+          enforce: true,
+          chunks: 'initial',
+          reuseExistingChunk: true,
+          name: getChunksName('vendor'),
+          test: /[\\/]node_modules[\\/](?!(antd|react(-dom)?)[\\/])/i
         }
       }
     }
