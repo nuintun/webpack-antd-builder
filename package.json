@@ -39,7 +39,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
     "less": "^3.0.4",
-    "webpack": "^4.11.0",
+    "webpack": "^4.11.1",
     "postcss": "^6.0.22",
     "happypack": "^5.0.0",
     "url-loader": "^1.0.1",
