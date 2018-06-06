@@ -86,8 +86,8 @@ module.exports = {
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
-      maxInitialRequests: 6,
-      automaticNameDelimiter: '-',
+      maxInitialRequests: 5,
+      automaticNameDelimiter: '&',
       cacheGroups: {
         default: {
           minSize: 30720,
@@ -95,7 +95,7 @@ module.exports = {
           reuseExistingChunk: true,
           name: require('./chunks.name'),
           test: module => {
-            const test = /[\\/]node_modules[\\/]/i;
+            const test = /[\\/]node_modules[\\/](antd|react(-dom)?)[\\/]/i;
 
             if (module.nameForCondition && !test.test(module.nameForCondition())) return true;
 
@@ -108,18 +108,15 @@ module.exports = {
         },
         react: {
           name: 'react',
-          chunks: 'initial',
+          chunks: 'all',
+          enforce: true,
           test: /[\\/]node_modules[\\/]react(-dom)?[\\/]/i
         },
         antd: {
           name: 'antd',
-          chunks: 'initial',
+          chunks: 'all',
+          enforce: true,
           test: /[\\/]node_modules[\\/]antd[\\/]/i
-        },
-        vendors: {
-          name: 'vendors',
-          chunks: 'initial',
-          test: /[\\/]node_modules[\\/](?!(antd|react(-dom)?)[\\/])/i
         }
       }
     }
@@ -156,8 +153,8 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)($|\?)/i,
-        exclude: /[\\/]node_modules[\\/]/,
-        loader: 'happypack/loader?id=js'
+        loader: 'happypack/loader?id=js',
+        exclude: /[\\/]node_modules[\\/]/
       },
       {
         test: /\.(woff2?|ttf|eot)($|\?)/i,

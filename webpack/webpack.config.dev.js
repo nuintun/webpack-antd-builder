@@ -26,15 +26,10 @@ configure.output = Object.assign(configure.output || {}, {
 });
 configure.plugins = [
   ...(configure.plugins || []),
-  new webpack.EnvironmentPlugin({
-    DEBUG: true,
-    NODE_ENV: mode
-  }),
-  new webpack.SourceMapDevToolPlugin({
-    exclude: /[\\/](?:react|antd|vendors|runtime)\.(?:js|css)$/i
-  }),
+  new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
-  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
+  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` }),
+  new webpack.SourceMapDevToolPlugin({ columns: false, exclude: /[\\/](runtime|react|antd)\.(js|css)$/i })
 ];
 configure.watchOptions = Object.assign(configure.watchOptions || {}, { ignored: 'node_modules/**/*' });
 

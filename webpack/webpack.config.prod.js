@@ -29,24 +29,15 @@ configure.output = Object.assign(configure.output || {}, {
 });
 configure.plugins = [
   ...(configure.plugins || []),
-  new webpack.EnvironmentPlugin({
-    DEBUG: false,
-    NODE_ENV: mode
-  }),
+  new webpack.EnvironmentPlugin({ DEBUG: false, NODE_ENV: mode }),
   new webpack.optimize.ModuleConcatenationPlugin(),
   new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' }),
   new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) })
 ];
 configure.optimization.minimizer = [
   ...(configure.optimization.minimizer || []),
-  new UglifyJsPlugin({
-    cache: true,
-    parallel: true,
-    sourceMap: false
-  }),
-  new OptimizeCSSAssetsPlugin({
-    cssProcessorOptions: { reduceIdents: false }
-  })
+  new UglifyJsPlugin({ cache: true, parallel: true, sourceMap: false }),
+  new OptimizeCSSAssetsPlugin({ cssProcessorOptions: { reduceIdents: false } })
 ];
 
 module.exports = configure;
