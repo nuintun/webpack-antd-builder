@@ -87,12 +87,12 @@ module.exports = {
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
+      chunks: 'all',
       maxInitialRequests: 4,
       automaticNameDelimiter: '&',
       cacheGroups: {
         default: {
           minSize: 30720,
-          chunks: 'initial',
           reuseExistingChunk: true,
           name: getChunksName('chunk'),
           test: module => {
@@ -111,19 +111,16 @@ module.exports = {
         },
         react: {
           name: 'react',
-          chunks: 'all',
           enforce: true,
           test: /[\\/]node_modules[\\/]react(-dom)?[\\/]/i
         },
         antd: {
           name: 'antd',
-          chunks: 'all',
           enforce: true,
           test: /[\\/]node_modules[\\/]antd[\\/]/i
         },
         vendors: {
           enforce: true,
-          chunks: 'initial',
           reuseExistingChunk: true,
           name: getChunksName('vendor'),
           test: /[\\/]node_modules[\\/](?!(antd|react(-dom)?)[\\/])/i
