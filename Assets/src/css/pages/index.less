@@ -1,14 +1,32 @@
+@import (reference) "~antd/lib/style/mixins/index.less";
+@import (reference) "~antd/lib/button/style/mixin.less";
 @import "~css/common.less";
 
-body {
-  background-size: 100% 100%;
-  background: url(~images/hero-cityscape.svg);
+.button-variant(@color; @background; @focus: 7; @active: 0) {
+  .button-color(@color; @background; @background);
+  &:hover,
+  &:focus {
+    .button-color(@color; ~`colorPalette("@{background}", @{focus})`; ~`colorPalette("@{background}", @{focus})`);
+  }
+
+  &:active,
+  &.active {
+    .button-color(@color; ~`colorPalette("@{background}", @{active})`; ~`colorPalette("@{background}", @{active})`);
+  }
+
+  .button-disabled();
 }
 
-.ant-form-item-label label {
-  color: #fff;
+.ant-btn {
+  &-blue {
+    .button-variant(#fff, #00aaee, 5, 7);
+  }
+
+  &-blue&-clicked:after {
+    border-color: #00aaee;
+  }
 }
 
-table {
-  background: #fff;
+.components-table-demo-control-bar {
+  padding: 10px 20px;
 }

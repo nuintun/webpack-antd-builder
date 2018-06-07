@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import request from '~js/utils/request';
 import success from '~images/success.png';
-import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
+import { Table, Icon, Switch, Radio, Form, Divider, Button } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -145,6 +145,13 @@ class App extends React.Component {
 
     return (
       <div>
+        <br />
+        <br />
+        <Button type="blue" style={{ marginLeft: 36 }}>
+          搜索
+        </Button>
+        <br />
+        <br />
         <div className="components-table-demo-control-bar">
           <Form layout="inline">
             <FormItem label="Bordered">
