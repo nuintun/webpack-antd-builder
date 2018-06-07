@@ -31,6 +31,7 @@ configure.plugins = [
   ...(configure.plugins || []),
   new webpack.EnvironmentPlugin({ DEBUG: false, NODE_ENV: mode }),
   new webpack.optimize.ModuleConcatenationPlugin(),
+  new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 256 * 1024 }),
   new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' }),
   new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) })
 ];
