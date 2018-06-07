@@ -88,7 +88,6 @@ module.exports = {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
       chunks: 'all',
-      maxInitialRequests: 4,
       automaticNameDelimiter: '&',
       cacheGroups: {
         default: {
