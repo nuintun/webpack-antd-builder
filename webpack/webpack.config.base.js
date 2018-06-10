@@ -157,53 +157,36 @@ module.exports = {
     strictExportPresence: true,
     noParse: configure.noParse,
     rules: [
+      // The loader for js
       {
         test: /\.(js|jsx)($|\?)/i,
         loader: 'happypack/loader?id=js',
         exclude: /[\\/]node_modules[\\/]/
       },
+      // The loader for css
       {
         test: /(?!\.module)\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=css']
       },
+      // The loader for css module
       {
         test: /\.module\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=css-module']
       },
+      // The loader for less
       {
         test: /(?!\.module)\.less$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=less']
       },
+      // The loader for less module
       {
         test: /\.module\.less$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=less-module']
       },
+      // The loader for assets
       {
-        test: /\.(woff2?|ttf|eot)($|\?)/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' }
-          }
-        ]
-      },
-      {
-        test: /\.svg($|\?)/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif)($|\?)/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' }
-          }
-        ]
+        test: /\.(png|jpg|jpeg|gif|svg|woff2?|ttf|eot)($|\?)/i,
+        use: [{ loader: 'url-loader', options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' } }]
       }
     ]
   }
