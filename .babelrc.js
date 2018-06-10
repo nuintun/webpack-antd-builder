@@ -23,6 +23,7 @@ module.exports = {
   plugins: [
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-destructuring',
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
     ['@babel/plugin-transform-regenerator', { async: false }],
@@ -31,7 +32,8 @@ module.exports = {
   ],
   env: {
     development: {
-      presets: [['@babel/preset-react', { development: true, useBuiltIns: true }]]
+      presets: [['@babel/preset-react', { development: true, useBuiltIns: true }]],
+      plugins: ['react-hot-loader/babel']
     },
     production: {
       presets: [['@babel/preset-react', { useBuiltIns: true }]],
