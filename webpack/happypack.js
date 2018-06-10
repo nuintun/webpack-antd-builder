@@ -10,10 +10,10 @@
 const os = require('os');
 const theme = require('../theme');
 const HappyPack = require('happypack');
-const configure = require('./configure');
 
 const verbose = false;
-const development = process.env.NODE_ENV !== 'production';
+const localIdentName = '[local]--[hash:base64:5]';
+const sourceMap = process.env.NODE_ENV !== 'production';
 const threadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 module.exports = [
@@ -21,33 +21,15 @@ module.exports = [
     id: 'js',
     verbose,
     threadPool,
-    loaders: [
-      {
-        loader: 'babel-loader',
-        options: {
-          highlightCode: true,
-          cacheDirectory: true
-        }
-      }
-    ]
+    loaders: [{ loader: 'babel-loader', options: { highlightCode: true, cacheDirectory: true } }]
   }),
   new HappyPack({
     id: 'css',
     verbose,
     threadPool,
     loaders: [
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: development
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: development
-        }
-      }
+      { loader: 'css-loader', options: { sourceMap, importLoaders: 1 } },
+      { loader: 'postcss-loader', options: { sourceMap } }
     ]
   }),
   new HappyPack({
@@ -55,20 +37,8 @@ module.exports = [
     verbose,
     threadPool,
     loaders: [
-      {
-        loader: 'css-loader',
-        options: {
-          modules: true,
-          sourceMap: development,
-          localIdentName: '[local]--[hash:base64:5]'
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: development
-        }
-      }
+      { loader: 'css-loader', options: { modules: true, sourceMap, localIdentName, importLoaders: 1 } },
+      { loader: 'postcss-loader', options: { sourceMap } }
     ]
   }),
   new HappyPack({
@@ -76,26 +46,9 @@ module.exports = [
     verbose,
     threadPool,
     loaders: [
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: development
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: development
-        }
-      },
-      {
-        loader: 'less-loader',
-        options: {
-          modifyVars: theme,
-          sourceMap: development,
-          javascriptEnabled: true
-        }
-      }
+      { loader: 'css-loader', options: { sourceMap, importLoaders: 2 } },
+      { loader: 'postcss-loader', options: { sourceMap } },
+      { loader: 'less-loader', options: { modifyVars: theme, sourceMap, javascriptEnabled: true } }
     ]
   }),
   new HappyPack({
@@ -103,70 +56,9 @@ module.exports = [
     verbose,
     threadPool,
     loaders: [
-      {
-        loader: 'css-loader',
-        options: {
-          modules: true,
-          sourceMap: development,
-          localIdentName: '[local]--[hash:base64:5]'
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: development
-        }
-      },
-      {
-        loader: 'less-loader',
-        options: {
-          modifyVars: theme,
-          sourceMap: development,
-          javascriptEnabled: true
-        }
-      }
-    ]
-  }),
-  new HappyPack({
-    id: 'font',
-    verbose,
-    threadPool,
-    loaders: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: '[path][name]-[hash:8].[ext]'
-        }
-      }
-    ]
-  }),
-  new HappyPack({
-    id: 'svg',
-    verbose,
-    threadPool,
-    loaders: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: '[path][name]-[hash:8].[ext]'
-        }
-      }
-    ]
-  }),
-  new HappyPack({
-    id: 'image',
-    verbose,
-    threadPool,
-    loaders: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: '[path][name]-[hash:8].[ext]'
-        }
-      }
+      { loader: 'css-loader', options: { modules: true, sourceMap, localIdentName, importLoaders: 2 } },
+      { loader: 'postcss-loader', options: { sourceMap } },
+      { loader: 'less-loader', options: { modifyVars: theme, sourceMap, javascriptEnabled: true } }
     ]
   })
 ];

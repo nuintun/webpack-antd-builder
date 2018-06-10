@@ -163,51 +163,7 @@ module.exports = {
         exclude: /[\\/]node_modules[\\/]/
       },
       {
-        test: /\.(woff2?|ttf|eot)($|\?)/i,
-        // https://github.com/amireh/happypack/issues/233
-        // loader: 'happypack/loader?id=font'
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[path][name]-[hash:8].[ext]'
-            }
-          }
-        ]
-      },
-      {
-        test: /\.svg($|\?)/i,
-        // https://github.com/amireh/happypack/issues/233
-        // loader: 'happypack/loader?id=svg'
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[path][name]-[hash:8].[ext]'
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif)($|\?)/i,
-        // https://github.com/amireh/happypack/issues/233
-        // loader: 'happypack/loader?id=image'
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[path][name]-[hash:8].[ext]'
-            }
-          }
-        ]
-      },
-      {
-        test(filePath) {
-          return /\.css$/i.test(filePath) && !/\.module\.css$/i.test(filePath);
-        },
+        test: /(?!\.module)\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=css']
       },
       {
@@ -215,14 +171,39 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=css-module']
       },
       {
-        test(filePath) {
-          return /\.less$/i.test(filePath) && !/\.module\.less$/i.test(filePath);
-        },
+        test: /(?!\.module)\.less$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=less']
       },
       {
         test: /\.module\.less$/i,
         use: [MiniCssExtractPlugin.loader, 'happypack/loader?id=less-module']
+      },
+      {
+        test: /\.(woff2?|ttf|eot)($|\?)/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' }
+          }
+        ]
+      },
+      {
+        test: /\.svg($|\?)/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)($|\?)/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' }
+          }
+        ]
       }
     ]
   }

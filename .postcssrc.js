@@ -10,10 +10,10 @@
 const rucksack = require('rucksack-css');
 const autoprefixer = require('autoprefixer');
 
-const development = process.env.NODE_ENV !== 'production';
+const sourceMap = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  sourceMap: development,
+  sourceMap,
   plugins: [
     rucksack(),
     autoprefixer({
