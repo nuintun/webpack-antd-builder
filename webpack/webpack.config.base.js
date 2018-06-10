@@ -54,36 +54,9 @@ module.exports = {
     modules: configure.modules,
     extensions: ['.js', '.jsx']
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    dns: 'empty',
-    repl: 'empty',
-    dgram: 'empty',
-    module: 'empty',
-    cluster: 'empty',
-    readline: 'empty',
-    child_process: 'empty'
-  },
-  stats: {
-    cached: false,
-    cachedAssets: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-    chunkOrigins: false,
-    entrypoints: false,
-    modules: false,
-    moduleTrace: false,
-    publicPath: false,
-    reasons: false,
-    source: false,
-    timings: false
-  },
-  performance: {
-    hints: false
-  },
+  node: configure.node,
+  stats: configure.stats,
+  performance: configure.performance,
   optimization: {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
