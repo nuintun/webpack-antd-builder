@@ -11,7 +11,7 @@
 // Rejection tracking prevents a common issue where React gets into an
 // inconsistent state due to an error, but it gets swallowed by a Promise,
 // and the user has no idea what causes React's erratic future behavior.
-require('@nuintun/promise');
+import '@nuintun/promise';
 
 // fetch() polyfill for making API calls.
-require('@nuintun/fetch');
+import '@nuintun/fetch';
