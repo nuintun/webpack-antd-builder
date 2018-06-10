@@ -11,35 +11,17 @@ const path = require('path');
 const webpack = require('webpack');
 const pkg = require('../package.json');
 const configure = require('./configure');
-const getChunksName = require('./chunks');
+const globEntry = require('./lib/entry');
 const notifier = require('node-notifier');
-const happyPackLoaders = require('./happypack');
+const getChunksName = require('./lib/chunks');
+const happyPackLoaders = require('./lib/happypack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
-const WebpackGlobEntriesPlugin = require('webpack-glob-entries-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-const polyfills = require.resolve('./polyfills');
-
-const watcher = new WebpackGlobEntriesPlugin(configure.entry, {
-  mapEntryName: file => {
-    const extname = path.extname(file);
-    const extnameLength = extname.length;
-
-    let entryName = path.relative(configure.entryBasePath, file);
-
-    if (extnameLength) {
-      entryName = entryName.slice(0, -extnameLength);
-    }
-
-    return entryName;
-  },
-  mapEntry: file => {
-    return [polyfills, file];
-  }
-});
+const watcher = globEntry(configure.entry, configure.entryBasePath);
 
 module.exports = {
   entry: watcher.entries(),

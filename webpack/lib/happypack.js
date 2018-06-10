@@ -8,7 +8,7 @@
 'use strict';
 
 const os = require('os');
-const theme = require('../theme');
+const theme = require('../../theme');
 const HappyPack = require('happypack');
 
 const verbose = false;
