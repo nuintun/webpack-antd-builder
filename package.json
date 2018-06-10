@@ -20,7 +20,6 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "prop-types": "^15.6.1",
-    "object-assign": "^4.1.1",
     "@nuintun/fetch": "^0.2.1",
     "@nuintun/promise": "^0.2.1"
   },
