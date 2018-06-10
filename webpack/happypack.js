@@ -28,7 +28,7 @@ module.exports = [
     verbose,
     threadPool,
     loaders: [
-      { loader: 'css-loader', options: { sourceMap, importLoaders: 1 } },
+      { loader: 'css-loader', options: { modules: false, sourceMap, importLoaders: 1 } },
       { loader: 'postcss-loader', options: { sourceMap } }
     ]
   }),
@@ -46,7 +46,7 @@ module.exports = [
     verbose,
     threadPool,
     loaders: [
-      { loader: 'css-loader', options: { sourceMap, importLoaders: 2 } },
+      { loader: 'css-loader', options: { modules: false, sourceMap, importLoaders: 2 } },
       { loader: 'postcss-loader', options: { sourceMap } },
       { loader: 'less-loader', options: { modifyVars: theme, sourceMap, javascriptEnabled: true } }
     ]
