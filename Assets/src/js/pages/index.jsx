@@ -148,7 +148,7 @@ class App extends React.Component {
         <br />
         <br />
         <Button type="blue" style={{ marginLeft: 36 }}>
-          搜索aa
+          搜索
         </Button>
         <br />
         <br />

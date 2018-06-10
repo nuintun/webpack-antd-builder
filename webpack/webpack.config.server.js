@@ -9,22 +9,21 @@
 'use strict';
 
 const webpack = require('webpack');
+const getPort = require('./lib/port');
 const loaders = require('./lib/loaders');
 const globEntry = require('./lib/entry');
 const getLocalExternalIP = require('./lib/ip');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
-const { entry, stats, entryBasePath, publicPath, outputPath } = require('./configure');
+const { entry, entryBasePath, publicPath, outputPath } = require('./configure');
 
-const port = 9000;
 const mode = 'development';
 const ip = getLocalExternalIP();
-const devServerPublicPath = `http://${ip}:${port}${publicPath}`;
-const watcher = globEntry(entry, entryBasePath, [
-  `webpack-dev-server/client?http://0.0.0.0:${port}`,
-  'webpack/hot/only-dev-server'
-]);
+const port = getPort(process.argv[4]);
+const origin = `http://${ip}:${port}`;
+const devServerPublicPath = origin + publicPath;
+const watcher = globEntry(entry, entryBasePath, [`webpack-dev-server/client?${origin}`, 'webpack/hot/only-dev-server']);
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
@@ -52,12 +51,12 @@ configure.plugins = [
 configure.module.rules = loaders(true);
 configure.devServer = {
   port,
-  stats,
   hot: true,
+  quiet: true,
   inline: true,
-  quiet: false,
+  overlay: true,
   compress: true,
-  overlay: false,
+  public: origin,
   host: '0.0.0.0',
   clientLogLevel: 'none',
   watchContentBase: true,
