@@ -12,7 +12,6 @@ const pkg = require('../package.json');
 const configure = require('./configure');
 const notifier = require('node-notifier');
 const getChunksName = require('./lib/chunks');
-const happyPackLoaders = require('./lib/happypack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -77,7 +76,6 @@ module.exports = {
     }
   },
   plugins: [
-    ...happyPackLoaders,
     new ProgressBarWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
     new FriendlyErrorsWebpackPlugin({

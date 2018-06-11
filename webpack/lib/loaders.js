@@ -7,7 +7,11 @@
 
 'use strict';
 
+const theme = require('../../theme');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const localIdentName = '[local]--[hash:base64:5]';
+const sourceMap = process.env.NODE_ENV !== 'production';
 
 module.exports = hot => {
   const cssHotLoaders = hot ? ['css-hot-loader'] : [];
@@ -16,28 +20,50 @@ module.exports = hot => {
     // The loader for js
     {
       test: /\.(js|jsx)($|\?)/i,
-      loader: 'happypack/loader?id=js',
-      exclude: /[\\/]node_modules[\\/]/
+      exclude: /[\\/]node_modules[\\/]/,
+      use: [{ loader: 'babel-loader', options: { highlightCode: true, cacheDirectory: true } }]
     },
     // The loader for css
     {
       test: file => /\.css$/i.test(file) && !/\.module\.css$/i.test(file),
-      use: [...cssHotLoaders, MiniCssExtractPlugin.loader, 'happypack/loader?id=css']
+      use: [
+        ...cssHotLoaders,
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader', options: { sourceMap, importLoaders: 1 } },
+        { loader: 'postcss-loader', options: { sourceMap } }
+      ]
     },
     // The loader for css module
     {
       test: /\.module\.css$/i,
-      use: [...cssHotLoaders, MiniCssExtractPlugin.loader, 'happypack/loader?id=css-module']
+      use: [
+        ...cssHotLoaders,
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader', options: { modules: true, sourceMap, localIdentName, importLoaders: 1 } },
+        { loader: 'postcss-loader', options: { sourceMap } }
+      ]
     },
     // The loader for less
     {
       test: file => /\.less$/i.test(file) && !/\.module\.less$/i.test(file),
-      use: [...cssHotLoaders, MiniCssExtractPlugin.loader, 'happypack/loader?id=less']
+      use: [
+        ...cssHotLoaders,
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader', options: { sourceMap, importLoaders: 2 } },
+        { loader: 'postcss-loader', options: { sourceMap } },
+        { loader: 'less-loader', options: { modifyVars: theme, sourceMap, javascriptEnabled: true } }
+      ]
     },
     // The loader for less module
     {
       test: /\.module\.less$/i,
-      use: [...cssHotLoaders, MiniCssExtractPlugin.loader, 'happypack/loader?id=less-module']
+      use: [
+        ...cssHotLoaders,
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader', options: { modules: true, sourceMap, localIdentName, importLoaders: 2 } },
+        { loader: 'postcss-loader', options: { sourceMap } },
+        { loader: 'less-loader', options: { modifyVars: theme, sourceMap, javascriptEnabled: true } }
+      ]
     },
     // The loader for assets
     {
