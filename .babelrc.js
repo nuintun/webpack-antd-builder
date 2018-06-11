@@ -24,11 +24,11 @@ module.exports = {
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-destructuring',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-transform-regenerator', { async: false }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-    ['@babel/plugin-transform-regenerator', { async: false }],
-    ['@babel/plugin-transform-runtime', { helpers: false, polyfill: false, regenerator: true }],
-    ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }]
+    ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }],
+    ['@babel/plugin-transform-runtime', { helpers: false, polyfill: false, regenerator: true }]
   ],
   env: {
     development: {
