@@ -20,7 +20,7 @@ const { entry, entryBasePath, publicPath, outputPath } = require('./configure');
 
 const mode = 'development';
 const ip = getLocalExternalIP();
-const port = getPort(process.argv[5]);
+const port = getPort(process.argv);
 const origin = `http://${ip}:${port}`;
 const devServerPublicPath = origin + publicPath;
 const watcher = globEntry(entry, entryBasePath, [`webpack-dev-server/client?${origin}`, 'webpack/hot/only-dev-server']);

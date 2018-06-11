@@ -7,18 +7,22 @@
 
 'use strict';
 
+const PORT_RE = /(-p|--port)=(\d+)/;
+
 /**
  * @function getPort
- * @param portArgv
+ * @param {Array} argv
  * @return {number}
  */
-module.exports = portArgv => {
-  const portMatched = /(-p|--port)=(\d+)/.exec(portArgv);
+module.exports = argv => {
+  const portArgvs = argv.filter(argv => PORT_RE.test(argv));
 
-  if (!portArgv) {
+  if (!portArgvs.length) {
     throw new ReferenceError('Webpack dev server port is required');
   }
 
+  const portArgv = portArgvs.pop();
+  const portMatched = PORT_RE.exec(portArgv);
   const port = portMatched[2] >>> 0;
 
   if (!port || port !== port || port > 0xffff) {
