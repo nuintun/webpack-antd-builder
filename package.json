@@ -1,6 +1,6 @@
 {
   "name": "webpack-antd-builder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A webpack antd build configure tools.",
   "engines": {
     "node": ">=7.6.0"
