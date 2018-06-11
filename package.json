@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack --config=webpack/webpack.config.dev.js",
     "build": "webpack --config=webpack/webpack.config.prod.js",
-    "server": "webpack-dev-server --config=webpack/webpack.config.server.js --inline=true"
+    "server": "webpack-dev-server --config=webpack/webpack.config.server.js --inline --hot"
   },
   "author": {
     "name": "nuintun",

@@ -41,9 +41,6 @@ configure.plugins = [
   watcher,
   ...configure.plugins,
   new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
-  new webpack.NamedChunksPlugin(),
-  new webpack.NamedModulesPlugin(),
-  new webpack.HotModuleReplacementPlugin(),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
   new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
   new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
