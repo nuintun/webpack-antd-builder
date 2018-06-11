@@ -60,8 +60,8 @@ configure.devServer = {
   contentBase: outputPath,
   publicPath: devServerPublicPath,
   historyApiFallback: { disableDotRule: true },
-  headers: { 'Access-Control-Allow-Origin': '*' },
-  watchOptions: { ignored: 'node_modules/**/*', aggregateTimeout: 300 }
+  watchOptions: { ignored: 'node_modules/**/*' },
+  headers: { 'Access-Control-Allow-Origin': '*' }
 };
 
 module.exports = configure;
