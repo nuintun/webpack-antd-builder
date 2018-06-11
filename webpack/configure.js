@@ -54,5 +54,5 @@ module.exports = {
   },
   modules: [path.resolve('Assets/src'), path.resolve('node_modules')],
   sourceMapExclude: /[\\/](runtime|react|antd|vendor-[^\\/]+)\.(js|css)$/i,
-  noParse: [/[\\/]node_modules[\\/]moment[\\/]/i, /[\\/]node_modules[\\/]@nuintun[\\/](fetch|promise)[\\/]/i]
+  noParse: [/[\\/]node_modules[\\/]moment[\\/]moment\.js/i, /[\\/]node_modules[\\/]@nuintun[\\/](fetch|promise)[\\/]/i]
 };
