@@ -21,7 +21,7 @@ module.exports = hot => {
     },
     // The loader for css
     {
-      test: /(?!\.module)\.css$/i,
+      test: file => /\.css$/i.test(file) && !/\.module\.css$/i.test(file),
       use: [...cssHotLoaders, MiniCssExtractPlugin.loader, 'happypack/loader?id=css']
     },
     // The loader for css module
@@ -31,7 +31,7 @@ module.exports = hot => {
     },
     // The loader for less
     {
-      test: /(?!\.module)\.less$/i,
+      test: file => /\.less$/i.test(file) && !/\.module\.less$/i.test(file),
       use: [...cssHotLoaders, MiniCssExtractPlugin.loader, 'happypack/loader?id=less']
     },
     // The loader for less module
