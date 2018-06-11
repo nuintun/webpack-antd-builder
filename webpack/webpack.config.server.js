@@ -16,7 +16,7 @@ const getLocalExternalIP = require('./lib/ip');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
-const { entry, entryBasePath, publicPath, outputPath } = require('./configure');
+const { entry, entryBasePath, publicPath, outputPath, sourceMapExclude } = require('./configure');
 
 const mode = 'development';
 const ip = getLocalExternalIP();
@@ -45,8 +45,8 @@ configure.plugins = [
   new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
-  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` }),
-  new webpack.SourceMapDevToolPlugin({ exclude: /[\\/](runtime|react|antd|vendor-[^\\/]+)\.(js|css)$/i })
+  new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
+  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
 ];
 configure.module.rules = loaders(true);
 configure.devServer = {

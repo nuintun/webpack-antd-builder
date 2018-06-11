@@ -12,8 +12,8 @@ const webpack = require('webpack');
 const loaders = require('./lib/loaders');
 const globEntry = require('./lib/entry');
 const configure = require('./webpack.config.base');
-const { entry, entryBasePath } = require('./configure');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { entry, entryBasePath, sourceMapExclude } = require('./configure');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 
 const mode = 'development';
@@ -34,8 +34,8 @@ configure.plugins = [
   ...configure.plugins,
   new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
   new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
-  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` }),
-  new webpack.SourceMapDevToolPlugin({ exclude: /[\\/](runtime|react|antd|vendor-[^\\/]+)\.(js|css)$/i })
+  new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
+  new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
 ];
 configure.module.rules = loaders();
 
