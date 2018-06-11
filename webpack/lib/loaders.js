@@ -41,7 +41,7 @@ module.exports = hot => {
     },
     // The loader for assets
     {
-      test: /\.(png|jpg|jpeg|gif|svg|woff2?|ttf|eot)$/i,
+      test: /\.(png|jpe?g|gif|svg|woff2?|ttf|eot)$/i,
       use: [{ loader: 'url-loader', options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' } }]
     }
   ];
