@@ -43,7 +43,7 @@
     "postcss": "^6.0.22",
     "url-loader": "^1.0.1",
     "less-loader": "^4.1.0",
-    "webpack-cli": "^3.0.3",
+    "webpack-cli": "^3.0.4",
     "file-loader": "^1.1.11",
     "rucksack-css": "^1.0.2",
     "css-loader": "^0.28.11",
