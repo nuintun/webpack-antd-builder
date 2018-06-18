@@ -37,7 +37,7 @@ Object.keys(manifest).forEach(page => {
 
   const output = `public/${page}.html`;
 
-  fs.outputFile(output, html, () => {
+  fs.outputFile(output, html.trim(), () => {
     console.log(`Build ${output} success!`);
   });
 });
