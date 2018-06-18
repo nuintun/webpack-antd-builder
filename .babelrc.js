@@ -28,8 +28,7 @@ module.exports = {
   ],
   env: {
     development: {
-      presets: [['@babel/preset-react', { development: true, useBuiltIns: true }]],
-      plugins: ['react-hot-loader/babel']
+      presets: [['@babel/preset-react', { development: true, useBuiltIns: true }]]
     },
     production: {
       presets: [['@babel/preset-react', { useBuiltIns: true }]],
