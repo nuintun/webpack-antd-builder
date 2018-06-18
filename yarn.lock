@@ -5601,9 +5601,9 @@ webpack-dev-middleware@^3.0.0:
     url-join "^4.0.0"
     webpack-log "^1.0.1"
 
-webpack-entry-manifest-plugin@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/webpack-entry-manifest-plugin/-/webpack-entry-manifest-plugin-0.2.0.tgz#9a7049631f56d5a9da9d21e09c6bc68291684549"
+webpack-entry-manifest-plugin@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/webpack-entry-manifest-plugin/-/webpack-entry-manifest-plugin-0.3.1.tgz#eb6248fb91eaa3282b0e16e0308086bcee7b0592"
   dependencies:
     fs-extra "^6.0.1"
 

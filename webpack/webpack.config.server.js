@@ -51,7 +51,10 @@ const server = app.listen(() => {
     new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
     new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
     new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
-    new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
+    new WebpackEntryManifestPlugin({
+      filter: file => !/[^\\/]+\.hot-update\.js/i.test(file),
+      map: (file, chunk) => `${file}?v=${chunk.hash}`
+    })
   ];
   configure.module.rules = loaders(true);
 
