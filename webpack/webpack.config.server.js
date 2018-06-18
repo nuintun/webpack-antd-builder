@@ -65,6 +65,7 @@ const server = app.listen(() => {
   koaWebpack({
     compiler,
     hotClient: {
+      host: ip,
       logLevel: 'silent'
     },
     devMiddleware: {
