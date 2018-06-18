@@ -6,9 +6,9 @@
     "node": ">=7.6.0"
   },
   "scripts": {
+    "server": "node webpack/webpack.config.server.js",
     "start": "webpack --config=webpack/webpack.config.dev.js",
-    "build": "webpack --config=webpack/webpack.config.prod.js",
-    "server": "webpack-dev-server --config=webpack/webpack.config.server.js --inline --hot"
+    "build": "webpack --config=webpack/webpack.config.prod.js"
   },
   "author": {
     "name": "nuintun",
@@ -36,21 +36,23 @@
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.51",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.51",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
+    "koa": "^2.5.1",
     "less": "^3.0.4",
     "webpack": "^4.12.0",
     "postcss": "^6.0.22",
     "url-loader": "^1.0.1",
+    "koa-webpack": "^5.0.2",
     "less-loader": "^4.1.0",
-    "webpack-cli": "^3.0.7",
+    "webpack-cli": "^3.0.8",
     "file-loader": "^1.1.11",
     "rucksack-css": "^1.0.2",
     "css-loader": "^0.28.11",
-    "style-loader": "^0.21.0",
+    "koa-compress": "^3.0.0",
     "autoprefixer": "^8.6.2",
+    "style-loader": "^0.21.0",
     "postcss-loader": "^2.1.5",
     "css-hot-loader": "^1.3.9",
     "react-hot-loader": "^4.3.3",
-    "webpack-dev-server": "^3.1.4",
     "clean-webpack-plugin": "^0.1.19",
     "mini-css-extract-plugin": "^0.4.0",
     "uglifyjs-webpack-plugin": "^1.2.5",

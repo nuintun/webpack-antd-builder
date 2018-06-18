@@ -67,4 +67,5 @@ typings/
 package-lock.json
 
 # webpack build output
+public/
 Assets/dist/
