@@ -19,7 +19,7 @@ const getLocalExternalIP = require('./lib/ip');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
-const { entry, entryBasePath, publicPath, outputPath, sourceMapExclude } = require('./configure');
+const { entry, entryBasePath, publicPath, sourceMapExclude } = require('./configure');
 
 const app = new koa();
 const mode = 'development';
