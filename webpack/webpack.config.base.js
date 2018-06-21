@@ -102,5 +102,5 @@ module.exports = {
     strictExportPresence: true,
     noParse: configure.noParse
   },
-  watchOptions: { ignored: 'node_modules/**/*' }
+  watchOptions: { ignored: /[\\/]node_modules[\\/]/i }
 };
