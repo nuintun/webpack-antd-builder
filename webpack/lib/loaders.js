@@ -8,6 +8,7 @@
 'use strict';
 
 const theme = require('../../theme');
+const { context } = require('../configure');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const localIdentName = '[local]--[hash:base64:5]';
@@ -68,7 +69,7 @@ module.exports = hot => {
     // The loader for assets
     {
       test: /\.(png|jpe?g|gif|svg|woff2?|ttf|eot)$/i,
-      use: [{ loader: 'url-loader', options: { limit: 8192, name: '[path][name]-[hash:8].[ext]' } }]
+      use: [{ loader: 'url-loader', options: { limit: 8192, context, name: '[path][name]-[hash:8].[ext]' } }]
     }
   ];
 };

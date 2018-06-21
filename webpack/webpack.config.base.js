@@ -18,7 +18,6 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 module.exports = {
-  context: configure.context,
   output: {
     pathinfo: false,
     path: configure.outputPath,
