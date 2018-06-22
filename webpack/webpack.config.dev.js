@@ -13,7 +13,7 @@ const loaders = require('./lib/loaders');
 const globEntry = require('./lib/entry');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { entry, entryBasePath, sourceMapExclude } = require('./configure');
+const { entry, entryBasePath, sourceMapExclude, watchOptions } = require('./configure');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 
 const mode = 'development';
@@ -38,5 +38,6 @@ configure.plugins = [
   new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` })
 ];
 configure.module.rules = loaders();
+configure.watchOptions = watchOptions;
 
 module.exports = configure;
