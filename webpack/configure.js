@@ -53,6 +53,7 @@ module.exports = {
     hints: false
   },
   modules: [path.resolve('Assets/src'), path.resolve('node_modules')],
+  recordsPath: path.resolve('node_modules/.cache/webpack/records.json'),
   sourceMapExclude: /[\\/](runtime|react|antd|vendor-[^\\/]+)\.(js|css)$/i,
   watchOptions: { ignored: /[\\/]node_modules[\\/]/i, aggregateTimeout: 300 },
   noParse: [/[\\/]node_modules[\\/]moment[\\/]moment\.js/i, /[\\/]node_modules[\\/]@nuintun[\\/](fetch|promise)[\\/]/i]

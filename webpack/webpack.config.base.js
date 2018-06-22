@@ -30,8 +30,10 @@ module.exports = {
   },
   node: configure.node,
   stats: configure.stats,
+  recordsPath: configure.recordsPath,
   performance: configure.performance,
   optimization: {
+    occurrenceOrder: true,
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
       chunks: 'all',
