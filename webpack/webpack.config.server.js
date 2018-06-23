@@ -64,7 +64,7 @@ const server = app.listen(() => {
       map: (file, chunk) => `${file}?v=${chunk.hash}`
     }),
     new HardSourceWebpackPlugin({ configHash, info: { mode: 'none', level: 'warn' } }),
-    new HardSourceWebpackPlugin.ExcludeModulePlugin([{ test: /[\\/]webpack-hot-client[\\/]client[\\/]/ }])
+    new HardSourceWebpackPlugin.ExcludeModulePlugin([{ test: /[\\/]webpack-hot-client[\\/]client[\\/]/i }])
   ];
   configure.module.rules = loaders(true);
 
