@@ -8,7 +8,9 @@
 
 'use strict';
 
+const fs = require('fs');
 const koa = require('koa');
+const crypto = require('crypto');
 const webpack = require('webpack');
 const pkg = require('../package.json');
 const loaders = require('./lib/loaders');
@@ -18,11 +20,17 @@ const koaCompress = require('koa-compress');
 const getLocalExternalIP = require('./lib/ip');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 const { entry, entryBasePath, publicPath, sourceMapExclude, watchOptions } = require('./configure');
 
+const md5 = crypto.createHash('md5');
+
+md5.update(fs.readFileSync(require.resolve('./webpack.config.server')));
+
 const app = new koa();
 const mode = 'development';
+const configHash = md5.digest('hex');
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
@@ -54,7 +62,9 @@ const server = app.listen(() => {
     new WebpackEntryManifestPlugin({
       filter: file => !/[^\\/]+\.hot-update\.js/i.test(file),
       map: (file, chunk) => `${file}?v=${chunk.hash}`
-    })
+    }),
+    new HardSourceWebpackPlugin({ configHash, info: { mode: 'none', level: 'warn' } }),
+    new HardSourceWebpackPlugin.ExcludeModulePlugin([{ test: /[\\/]webpack-hot-client[\\/]client[\\/]/ }])
   ];
   configure.module.rules = loaders(true);
 

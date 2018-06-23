@@ -15,6 +15,7 @@ const configure = require('./webpack.config.base');
 const { entry, entryBasePath } = require('./configure');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -39,7 +40,8 @@ configure.plugins = [
   new webpack.optimize.ModuleConcatenationPlugin(),
   new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 256 * 1024 }),
   new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' }),
-  new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) })
+  new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) }),
+  new HardSourceWebpackPlugin({ info: { mode: 'none', level: 'warn' } })
 ];
 configure.module.rules = loaders();
 configure.optimization.minimizer = [
