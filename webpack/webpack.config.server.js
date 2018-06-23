@@ -60,8 +60,8 @@ const server = app.listen(() => {
     new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
     new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
     new WebpackEntryManifestPlugin({
-      filter: file => !/[^\\/]+\.hot-update\.js/i.test(file),
-      map: (file, chunk) => `${file}?v=${chunk.hash}`
+      map: (file, chunk) => `${file}?v=${chunk.hash}`,
+      filter: file => !/[^\\/]+\.hot-update\.js/i.test(file)
     }),
     new HardSourceWebpackPlugin({ configHash, info: { mode: 'none', level: 'warn' } }),
     new HardSourceWebpackPlugin.ExcludeModulePlugin([{ test: /[\\/]webpack-hot-client[\\/]client[\\/]/i }])
