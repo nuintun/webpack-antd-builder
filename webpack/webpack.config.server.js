@@ -24,7 +24,7 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 const { entry, entryBasePath, publicPath, sourceMapExclude, watchOptions } = require('./configure');
 
-const md5 = crypto.createHash('md5');
+const md5 = crypto.createHash('sha256');
 
 md5.update(fs.readFileSync(require.resolve('./webpack.config.server')));
 
