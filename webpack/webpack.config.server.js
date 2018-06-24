@@ -8,9 +8,7 @@
 
 'use strict';
 
-const fs = require('fs');
 const koa = require('koa');
-const crypto = require('crypto');
 const webpack = require('webpack');
 const pkg = require('../package.json');
 const loaders = require('./lib/loaders');
@@ -18,19 +16,16 @@ const globEntry = require('./lib/entry');
 const koaWebpack = require('koa-webpack');
 const koaCompress = require('koa-compress');
 const getLocalExternalIP = require('./lib/ip');
+const { getConfigHash } = require('./lib/utils');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 const { entry, entryBasePath, publicPath, sourceMapExclude, watchOptions } = require('./configure');
 
-const md5 = crypto.createHash('sha256');
-
-md5.update(fs.readFileSync(require.resolve('./webpack.config.server')));
-
 const app = new koa();
 const mode = 'development';
-const configHash = md5.digest('hex');
+const configHash = getConfigHash(require.resolve('./webpack.config.server.js'));
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;

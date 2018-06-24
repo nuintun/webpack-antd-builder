@@ -11,6 +11,7 @@
 const webpack = require('webpack');
 const loaders = require('./lib/loaders');
 const globEntry = require('./lib/entry');
+const { getConfigHash } = require('./lib/utils');
 const configure = require('./webpack.config.base');
 const { entry, entryBasePath } = require('./configure');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -21,6 +22,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const mode = 'production';
 const watcher = globEntry(entry, entryBasePath);
+const configHash = getConfigHash(require.resolve('./webpack.config.prod.js'));
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
@@ -41,7 +43,7 @@ configure.plugins = [
   new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 256 * 1024 }),
   new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' }),
   new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) }),
-  new HardSourceWebpackPlugin({ info: { mode: 'none', level: 'warn' } })
+  new HardSourceWebpackPlugin({ configHash, info: { mode: 'none', level: 'warn' } })
 ];
 configure.module.rules = loaders();
 configure.optimization.minimizer = [

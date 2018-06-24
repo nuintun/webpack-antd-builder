@@ -11,6 +11,7 @@
 const webpack = require('webpack');
 const loaders = require('./lib/loaders');
 const globEntry = require('./lib/entry');
+const { getConfigHash } = require('./lib/utils');
 const configure = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
@@ -19,6 +20,7 @@ const { entry, entryBasePath, sourceMapExclude, watchOptions } = require('./conf
 
 const mode = 'development';
 const watcher = globEntry(entry, entryBasePath);
+const configHash = getConfigHash(require.resolve('./webpack.config.dev.js'));
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
@@ -37,7 +39,7 @@ configure.plugins = [
   new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
   new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
   new WebpackEntryManifestPlugin({ map: (file, chunk) => `${file}?v=${chunk.hash}` }),
-  new HardSourceWebpackPlugin({ info: { mode: 'none', level: 'warn' } })
+  new HardSourceWebpackPlugin({ configHash, info: { mode: 'none', level: 'warn' } })
 ];
 configure.module.rules = loaders();
 configure.watchOptions = watchOptions;
