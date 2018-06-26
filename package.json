@@ -55,7 +55,7 @@
     "css-hot-loader": "^1.3.9",
     "clean-webpack-plugin": "^0.1.19",
     "mini-css-extract-plugin": "^0.4.0",
-    "uglifyjs-webpack-plugin": "^1.2.6",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "hard-source-webpack-plugin": "^0.9.0",
     "webpack-glob-entries-plugin": "^0.3.0",
     "progress-bar-webpack-plugin": "^1.11.0",
