@@ -48,7 +48,7 @@
     "rucksack-css": "^1.0.2",
     "css-loader": "^0.28.11",
     "koa-compress": "^3.0.0",
-    "autoprefixer": "^8.6.4",
+    "autoprefixer": "^8.6.5",
     "node-notifier": "^5.2.1",
     "style-loader": "^0.21.0",
     "postcss-loader": "^2.1.5",
