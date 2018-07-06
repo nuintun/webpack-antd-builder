@@ -14,10 +14,19 @@ const crypto = require('crypto');
  * @param {string} configPath
  */
 module.exports.getConfigHash = function(configPath) {
+  const configs = [
+    './ip.js',
+    './entry.js',
+    './utils.js',
+    './chunks.js',
+    './loaders.js',
+    '../configure.js',
+    '../webpack.config.base.js'
+  ];
   const sha256 = crypto.createHash('sha256');
-  const baseConfigPath = require.resolve('../webpack.config.base.js');
 
-  sha256.update(fs.readFileSync(baseConfigPath));
+  configs.forEach(config => sha256.update(fs.readFileSync(require.resolve(config))));
+
   sha256.update(fs.readFileSync(configPath));
 
   return sha256.digest('hex');
