@@ -2430,9 +2430,9 @@ har-validator@~5.0.3:
     ajv "^5.1.0"
     har-schema "^2.0.0"
 
-hard-source-webpack-plugin@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.10.1.tgz#039c1e947bddf13d957c3e9803b68f5f02f12d2a"
+hard-source-webpack-plugin@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.11.0.tgz#85ea42590a74302b43de24b27d8a3ed1a7e1ab22"
   dependencies:
     chalk "^2.4.1"
     find-cache-dir "^2.0.0"
