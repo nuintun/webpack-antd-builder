@@ -46,7 +46,7 @@
     "webpack-cli": "^3.0.8",
     "file-loader": "^1.1.11",
     "rucksack-css": "^1.0.2",
-    "css-loader": "^0.28.11",
+    "css-loader": "^1.0.0",
     "koa-compress": "^3.0.0",
     "autoprefixer": "^8.6.5",
     "node-notifier": "^5.2.1",
