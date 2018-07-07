@@ -40,7 +40,10 @@ module.exports = hot => {
       use: [
         ...cssHotLoaders,
         MiniCssExtractPlugin.loader,
-        { loader: 'css-loader', options: { modules: true, sourceMap, localIdentName, importLoaders: 1 } },
+        {
+          loader: 'css-loader',
+          options: { modules: true, camelCase: true, sourceMap, localIdentName, importLoaders: 1 }
+        },
         { loader: 'postcss-loader', options: { sourceMap } }
       ]
     },
@@ -61,7 +64,10 @@ module.exports = hot => {
       use: [
         ...cssHotLoaders,
         MiniCssExtractPlugin.loader,
-        { loader: 'css-loader', options: { modules: true, sourceMap, localIdentName, importLoaders: 2 } },
+        {
+          loader: 'css-loader',
+          options: { modules: true, camelCase: true, sourceMap, localIdentName, importLoaders: 2 }
+        },
         { loader: 'postcss-loader', options: { sourceMap } },
         { loader: 'less-loader', options: { modifyVars: theme, sourceMap, javascriptEnabled: true } }
       ]
