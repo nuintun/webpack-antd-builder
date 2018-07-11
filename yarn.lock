@@ -135,6 +135,10 @@
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.52.tgz#2f058c5f7c3a5fe4bc219036b2e78e11bddeb7ad"
 
+"@babel/helper-plugin-utils@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.53.tgz#d64458636ffc258b42714a9dd93aeb6f8b8cf3ed"
+
 "@babel/helper-regex@7.0.0-beta.52":
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.52.tgz#4ad8c7720497afbcd8f897c8a1b2ad03ebcd3061"
@@ -222,12 +226,12 @@
     "@babel/helper-replace-supers" "7.0.0-beta.52"
     "@babel/plugin-syntax-class-properties" "7.0.0-beta.52"
 
-"@babel/plugin-proposal-decorators@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.0.0-beta.52.tgz#7188142ecb3ab678d26ee610d12ae33488911225"
+"@babel/plugin-proposal-decorators@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.0.0-beta.53.tgz#8e828d370af316ed74a21890cbdb7d02e6d532fa"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.52"
-    "@babel/plugin-syntax-decorators" "7.0.0-beta.52"
+    "@babel/helper-plugin-utils" "7.0.0-beta.53"
+    "@babel/plugin-syntax-decorators" "7.0.0-beta.53"
 
 "@babel/plugin-proposal-object-rest-spread@7.0.0-beta.52", "@babel/plugin-proposal-object-rest-spread@^7.0.0-beta.52":
   version "7.0.0-beta.52"
@@ -263,11 +267,11 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
-"@babel/plugin-syntax-decorators@7.0.0-beta.52":
-  version "7.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.0.0-beta.52.tgz#22731b89c84395b971f2d572e7a4d5d10ff5c867"
+"@babel/plugin-syntax-decorators@7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.0.0-beta.53.tgz#d01d703189a1722d711bad457aaac78cf09d04c6"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.52"
+    "@babel/helper-plugin-utils" "7.0.0-beta.53"
 
 "@babel/plugin-syntax-dynamic-import@7.0.0-beta.52":
   version "7.0.0-beta.52"
