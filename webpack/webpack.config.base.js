@@ -33,7 +33,6 @@ module.exports = {
   recordsPath: configure.recordsPath,
   performance: configure.performance,
   optimization: {
-    occurrenceOrder: true,
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
       chunks: 'all',
