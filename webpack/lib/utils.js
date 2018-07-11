@@ -21,6 +21,8 @@ module.exports.getConfigHash = function(configPath) {
     './chunks.js',
     './loaders.js',
     '../configure.js',
+    '../../.babelrc.js',
+    '../../.postcssrc.js',
     '../webpack.config.base.js'
   ];
   const sha256 = crypto.createHash('sha256');

@@ -14,7 +14,7 @@ module.exports = {
       {
         loose: true,
         modules: false,
-        targets: { browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 9', 'iOS >= 8', 'Android >= 4'] }
+        targets: { browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 10', 'iOS >= 8', 'Android >= 4'] }
       }
     ]
   ],
