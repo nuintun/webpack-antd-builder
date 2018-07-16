@@ -135,6 +135,10 @@
   version "7.0.0-beta.53"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.53.tgz#d64458636ffc258b42714a9dd93aeb6f8b8cf3ed"
 
+"@babel/helper-plugin-utils@7.0.0-beta.54":
+  version "7.0.0-beta.54"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.54.tgz#61d2a9a0f9a3e31838a458debb9eebd7bdd249b4"
+
 "@babel/helper-regex@7.0.0-beta.53":
   version "7.0.0-beta.53"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.53.tgz#6e9d2197b562779e225565946ae9a85c215b225e"
@@ -269,11 +273,11 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.53"
 
-"@babel/plugin-syntax-dynamic-import@7.0.0-beta.53":
-  version "7.0.0-beta.53"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.0.0-beta.53.tgz#b3e940f87ee87aaf14391b171c63476fd01af323"
+"@babel/plugin-syntax-dynamic-import@7.0.0-beta.54":
+  version "7.0.0-beta.54"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.0.0-beta.54.tgz#c962627f4e1a15da6d0842306d421e7b1e52f587"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.53"
+    "@babel/helper-plugin-utils" "7.0.0-beta.54"
 
 "@babel/plugin-syntax-jsx@7.0.0-beta.53":
   version "7.0.0-beta.53"
