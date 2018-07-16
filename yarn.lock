@@ -3566,8 +3566,8 @@ miller-rabin@^4.0.0:
     brorand "^1.0.1"
 
 "mime-db@>= 1.34.0 < 2":
-  version "1.34.0"
-  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.34.0.tgz#452d0ecff5c30346a6dc1e64b1eaee0d3719ff9a"
+  version "1.35.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.35.0.tgz#0569d657466491283709663ad379a99b90d9ab47"
 
 mime-db@~1.33.0:
   version "1.33.0"
@@ -4754,8 +4754,8 @@ rc-checkbox@~2.1.5:
     rc-util "^4.0.4"
 
 rc-collapse@~1.9.0:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/rc-collapse/-/rc-collapse-1.9.2.tgz#baa88a724ebbf444ad1f7776fe912f2f894e4099"
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/rc-collapse/-/rc-collapse-1.9.3.tgz#d9741db06a823353e1fd1aec3ba4c0f9d8af4b26"
   dependencies:
     classnames "2.x"
     css-animation "1.x"
@@ -4844,8 +4844,8 @@ rc-input-number@~4.0.0:
     rmc-feedback "^2.0.0"
 
 rc-menu@^7.0.2, rc-menu@~7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-7.2.2.tgz#51fcf34facbdb52c4f6ed0df01e442b5c2ab473f"
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-7.2.4.tgz#37b6f041ef9dc14fd2c2e617743afce93f29dd4a"
   dependencies:
     babel-runtime "6.x"
     classnames "2.x"
