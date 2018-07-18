@@ -43,7 +43,7 @@
     "url-loader": "^1.0.1",
     "koa-webpack": "^5.1.0",
     "less-loader": "^4.1.0",
-    "webpack-cli": "^3.0.8",
+    "webpack-cli": "^3.1.0",
     "file-loader": "^1.1.11",
     "rucksack-css": "^1.0.2",
     "css-loader": "^1.0.0",
