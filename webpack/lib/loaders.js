@@ -11,7 +11,7 @@ const theme = require('../../theme');
 const { context } = require('../configure');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const localIdentName = '[local]-[hash:base64:6]';
+const localIdentName = '[local]--[hash:base64:6]';
 const sourceMap = process.env.NODE_ENV !== 'production';
 
 module.exports = hot => {
