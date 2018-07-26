@@ -37,6 +37,7 @@ module.exports = hot => {
     // The loader for css module
     {
       test: /\.module\.css$/i,
+      exclude: /[\\/]node_modules[\\/]/,
       use: [
         ...cssHotLoaders,
         MiniCssExtractPlugin.loader,
@@ -61,6 +62,7 @@ module.exports = hot => {
     // The loader for less module
     {
       test: /\.module\.less$/i,
+      exclude: /[\\/]node_modules[\\/]/,
       use: [
         ...cssHotLoaders,
         MiniCssExtractPlugin.loader,
