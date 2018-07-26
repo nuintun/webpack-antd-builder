@@ -1693,9 +1693,9 @@ css-declaration-sorter@^3.0.0:
     postcss "^6.0.0"
     timsort "^0.3.0"
 
-css-hot-loader@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/css-hot-loader/-/css-hot-loader-1.4.0.tgz#170e8b4bf0708a9f5cfc289e8ee0c268ab9a41bb"
+css-hot-loader@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/css-hot-loader/-/css-hot-loader-1.4.1.tgz#d6d4425aa7f65744f1bb60a70e6f7673dd660546"
   dependencies:
     loader-utils "^1.1.0"
     lodash "^4.17.5"
