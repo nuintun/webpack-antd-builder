@@ -21,6 +21,7 @@ module.exports.getConfigHash = function(configPath) {
     './chunks.js',
     './loaders.js',
     '../configure.js',
+    '../../.theme.js',
     '../../.babelrc.js',
     '../../.postcssrc.js',
     '../webpack.config.base.js'
