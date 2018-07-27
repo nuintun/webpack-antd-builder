@@ -608,13 +608,13 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@nuintun/fetch@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@nuintun/fetch/-/fetch-0.2.1.tgz#9ecbfa54d70b14c9e45a7ff28c23cf25f79d4c7a"
+"@nuintun/fetch@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@nuintun/fetch/-/fetch-0.2.2.tgz#c3324c03a4add87c9e2142d9a6473d55701b945b"
 
-"@nuintun/promise@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@nuintun/promise/-/promise-0.2.1.tgz#14234c0d6e25fda32371392901d9ae4fa68c539c"
+"@nuintun/promise@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@nuintun/promise/-/promise-0.2.2.tgz#b39bd35238b4212414af9df172fa01f85e2c7287"
 
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
