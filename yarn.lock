@@ -608,9 +608,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@nuintun/fetch@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@nuintun/fetch/-/fetch-0.2.1.tgz#9ecbfa54d70b14c9e45a7ff28c23cf25f79d4c7a"
+"@nuintun/fetch@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@nuintun/fetch/-/fetch-0.2.2.tgz#c3324c03a4add87c9e2142d9a6473d55701b945b"
 
 "@nuintun/promise@^0.2.1":
   version "0.2.1"
