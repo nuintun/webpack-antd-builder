@@ -51,6 +51,7 @@ const server = app.listen(() => {
   configure.plugins = [
     watcher,
     ...configure.plugins,
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
     new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
     new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
@@ -71,7 +72,8 @@ const server = app.listen(() => {
     compiler,
     hotClient: {
       host: ip,
-      logLevel: 'silent'
+      logLevel: 'silent',
+      autoConfigure: false
     },
     devMiddleware: {
       logLevel: 'silent',
