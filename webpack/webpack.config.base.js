@@ -30,7 +30,6 @@ module.exports = {
   },
   node: configure.node,
   stats: configure.stats,
-  recordsPath: configure.recordsPath,
   performance: configure.performance,
   optimization: {
     runtimeChunk: { name: 'runtime' },

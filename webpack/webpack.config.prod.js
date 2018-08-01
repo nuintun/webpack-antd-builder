@@ -13,9 +13,9 @@ const loaders = require('./lib/loaders');
 const globEntry = require('./lib/entry');
 const { getConfigHash } = require('./lib/utils');
 const configure = require('./webpack.config.base');
-const { entry, entryBasePath } = require('./configure');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { entry, entryBasePath, recordsPath } = require('./configure');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const WebpackEntryManifestPlugin = require('webpack-entry-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -31,6 +31,7 @@ configure.mode = mode;
 configure.bail = true;
 configure.devtool = 'none';
 configure.entry = watcher.entries();
+configure.recordsPath = recordsPath;
 configure.output = Object.assign(configure.output, {
   filename: 'js/[chunkhash].js',
   chunkFilename: 'js/[chunkhash].js'
