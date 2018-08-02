@@ -39,11 +39,11 @@ configure.output = Object.assign(configure.output, {
 configure.plugins = [
   watcher,
   ...configure.plugins,
-  new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.EnvironmentPlugin({ DEBUG: false, NODE_ENV: mode }),
+  new webpack.optimize.AggressiveMergingPlugin(),
+  new webpack.optimize.OccurrenceOrderPlugin(true),
   new webpack.optimize.ModuleConcatenationPlugin(),
+  new webpack.EnvironmentPlugin({ DEBUG: false, NODE_ENV: mode }),
   new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css' }),
-  new webpack.optimize.AggressiveMergingPlugin({ minSizeReduce: 1 }),
   new WebpackEntryManifestPlugin({ serialize: manifest => JSON.stringify(manifest) }),
   new HardSourceWebpackPlugin({ configHash, info: { mode: 'none', level: 'warn' } })
 ];
