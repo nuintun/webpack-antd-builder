@@ -24,7 +24,7 @@ module.exports = {
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
     ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }],
-    ['@babel/plugin-transform-runtime', { polyfill: false, regenerator: true }]
+    ['@babel/plugin-transform-runtime', { regenerator: true }]
   ],
   env: {
     development: {
