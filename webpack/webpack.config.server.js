@@ -52,8 +52,8 @@ const server = app.listen(() => {
     watcher,
     ...configure.plugins,
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
     new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
+    new webpack.EnvironmentPlugin({ DEBUG: true, NODE_ENV: mode }),
     new webpack.SourceMapDevToolPlugin({ exclude: sourceMapExclude }),
     new WebpackEntryManifestPlugin({
       map: (file, chunk) => `${file}?v=${chunk.hash}`,
