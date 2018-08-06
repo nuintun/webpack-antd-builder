@@ -21,10 +21,10 @@ module.exports = {
   plugins: [
     '@babel/plugin-syntax-dynamic-import',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-transform-runtime', { regenerator: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-    ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }],
-    ['@babel/plugin-transform-runtime', { regenerator: true }]
+    ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }]
   ],
   env: {
     development: {
