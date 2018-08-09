@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "babel-loader": "next",
-    "@babel/core": "^7.0.0-beta.56",
+    "@babel/core": "^7.0.0-rc.0",
     "babel-plugin-import": "^1.8.0",
     "@babel/runtime": "^7.0.0-beta.56",
     "@babel/preset-env": "^7.0.0-beta.56",
