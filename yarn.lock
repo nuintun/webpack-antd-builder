@@ -134,6 +134,10 @@
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-rc.1.tgz#3e277eae59818e7d4caf4174f58a7a00d441336e"
 
+"@babel/helper-plugin-utils@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0.tgz#bbb3fbee98661c569034237cc03967ba99b4f250"
+
 "@babel/helper-regex@7.0.0-rc.1":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-rc.1.tgz#591bf828846d91fea8c93d1bf3030bd99dbd94ce"
@@ -228,12 +232,19 @@
     "@babel/helper-plugin-utils" "7.0.0-rc.1"
     "@babel/plugin-syntax-decorators" "7.0.0-rc.1"
 
-"@babel/plugin-proposal-object-rest-spread@7.0.0-rc.1", "@babel/plugin-proposal-object-rest-spread@^7.0.0-rc.1":
+"@babel/plugin-proposal-object-rest-spread@7.0.0-rc.1":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.0.0-rc.1.tgz#bc7ce898a48831fd733b251fd5ae46f986c905d8"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-rc.1"
     "@babel/plugin-syntax-object-rest-spread" "7.0.0-rc.1"
+
+"@babel/plugin-proposal-object-rest-spread@^7.5.4":
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.5.4.tgz#250de35d867ce8260a31b1fdac6c4fc1baa99331"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/plugin-syntax-object-rest-spread" "^7.2.0"
 
 "@babel/plugin-proposal-optional-catch-binding@7.0.0-rc.1":
   version "7.0.0-rc.1"
@@ -285,6 +296,12 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0-rc.1.tgz#42032fd87fb3b18f5686a0ab957d7f6f0db26618"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-rc.1"
+
+"@babel/plugin-syntax-object-rest-spread@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.2.0.tgz#3b7a3e733510c57e820b9142a6579ac8b0dfad2e"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
 
 "@babel/plugin-syntax-optional-catch-binding@7.0.0-rc.1":
   version "7.0.0-rc.1"
