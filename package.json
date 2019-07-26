@@ -39,7 +39,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.14",
     "koa": "^2.5.2",
     "less": "^3.8.1",
-    "webpack": "^4.16.5",
+    "webpack": "^4.38.0",
     "postcss": "^7.0.2",
     "url-loader": "^1.0.1",
     "koa-webpack": "^5.1.0",
