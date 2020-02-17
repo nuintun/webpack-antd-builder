@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.8.1",
+    "antd": "^3.26.11",
     "react": "^16.4.2",
     "immutable": "^3.8.2",
     "react-dom": "^16.4.2",
