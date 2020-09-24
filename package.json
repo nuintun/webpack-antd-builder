@@ -18,10 +18,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.8.1",
-    "react": "^16.4.2",
+    "antd": "^3.16.4",
+    "react": "^16.5.0",
     "immutable": "^3.8.2",
-    "react-dom": "^16.4.2",
+    "react-dom": "^16.5.0",
     "prop-types": "^15.6.2",
     "@nuintun/fetch": "^0.2.2",
     "@nuintun/promise": "^0.2.2",
