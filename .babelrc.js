@@ -7,32 +7,20 @@
 
 'use strict';
 
+const browsers = require('./package.json').browserslist;
+
+const development = process.env.BABEL_ENV !== 'production';
+
 module.exports = {
   presets: [
-    [
-      '@babel/preset-env',
-      {
-        loose: true,
-        modules: false,
-        targets: { browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 10', 'iOS >= 8', 'Android >= 4'] }
-      }
-    ]
+    ['@babel/preset-env', { bugfixes: true, corejs: 3, useBuiltIns: 'usage', targets: { browsers } }],
+    ['@babel/preset-react', { runtime: 'automatic', useBuiltIns: true, development }],
+    ['@babel/preset-typescript', { allowDeclareFields: true }]
   ],
   plugins: [
-    '@babel/plugin-syntax-dynamic-import',
+    ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }],
+    ['@babel/plugin-transform-runtime', { useESModules: true }],
     ['@babel/plugin-proposal-decorators', { legacy: true }],
-    ['@babel/plugin-transform-runtime', { regenerator: true }],
-    ['@babel/plugin-proposal-class-properties', { loose: true }],
-    ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-    ['import', { style: true, libraryName: 'antd', libraryDirectory: 'es' }]
-  ],
-  env: {
-    development: {
-      presets: [['@babel/preset-react', { development: true, useBuiltIns: true }]]
-    },
-    production: {
-      presets: [['@babel/preset-react', { useBuiltIns: true }]],
-      plugins: [['transform-react-remove-prop-types', { removeImport: true }]]
-    }
-  }
+    ['@babel/plugin-proposal-class-properties', { loose: true }]
+  ]
 };

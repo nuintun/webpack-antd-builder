@@ -1,0 +1,198 @@
+/**
+ * @module getRouter
+ * @description 通过初始路由配置获取标准路由，菜单，面包屑数据
+ */
+
+import React from 'react';
+
+import isURL from './isURL';
+
+type Icon = string | React.ReactElement;
+
+export interface Route {
+  key?: React.Key;
+  icon?: Icon;
+  name: string;
+  path: string;
+  href?: string;
+  exact?: boolean;
+  strict?: boolean;
+  children?: Route[];
+  sensitive?: boolean;
+  hideInMenu?: boolean;
+  hideInBreadcrumb?: boolean;
+  hideChildrenInMenu?: boolean;
+  component?: React.ComponentType<any>;
+  [key: string]: any;
+}
+
+interface RouteNode extends Route {
+  href: string;
+}
+
+export interface RouteItem {
+  key: React.Key;
+  name: string;
+  path: string;
+  exact: boolean;
+  strict: boolean;
+  sensitive: boolean;
+  component: React.ComponentType<any>;
+  [key: string]: any;
+}
+
+export interface BreadcrumbItem {
+  key: React.Key;
+  icon?: Icon;
+  name: string;
+  path: string;
+  href?: string;
+  [key: string]: any;
+}
+
+export interface MenuItem {
+  key: React.Key;
+  icon?: Icon;
+  name: string;
+  path: string;
+  children?: MenuItem[];
+  [key: string]: any;
+}
+
+export interface Router {
+  menus: MenuItem[];
+  routes: RouteItem[];
+  breadcrumbs: { [path: string]: BreadcrumbItem };
+}
+
+type Callback = (route: RouteNode, referrer?: RouteNode) => void;
+
+/**
+ * @function isAbsolute
+ * @param {string} url
+ * @returns {boolean}
+ */
+function isAbsolute(url: string): boolean {
+  return /^\//.test(url) || isURL(url);
+}
+
+/**
+ * @function normalizeURL
+ * @param {string} path
+ * @param {string} type
+ * @param {Route} [referrer]
+ * @returns {string}
+ */
+function normalizeURL(path: string, type: string, referrer?: Route): string {
+  if (__DEV__ && !path) {
+    throw new RangeError(`route path can't be empty`);
+  }
+
+  if (!referrer || isAbsolute(path)) return path;
+
+  const sep = /\/$/.test(referrer[type]) ? '' : '/';
+
+  return `${referrer[type]}${sep}${path}`;
+}
+
+/**
+ * @function walkRouter
+ * @param {Route} route
+ * @param {callback} callback
+ * @param {RouteNode} [referrer]
+ */
+function walkRouter(route: Route, callback: Callback, referrer?: RouteNode): void {
+  const path = normalizeURL(route.path, 'path', referrer);
+  const href = route.href ? normalizeURL(route.href, 'href', referrer) : path;
+  const routeNode = { ...route, path, href };
+
+  callback(routeNode, referrer);
+
+  const { children } = route;
+
+  if (children) {
+    children.map(item => walkRouter(item, callback, routeNode));
+  }
+}
+
+type MenusMap = { [path: string]: MenuItem[] };
+
+type Breadcrumbs = { [path: string]: BreadcrumbItem };
+
+/**
+ * @function getRouter
+ * @description 获取路由
+ * @param {object} router
+ * @returns {Router}
+ */
+export default function getRouter(router: Route[]): Router {
+  const menus: MenuItem[] = [];
+  const routes: RouteItem[] = [];
+  const breadcrumbs: Breadcrumbs = {};
+
+  router.forEach(route => {
+    const root = '';
+    const menusMap: MenusMap = { [root]: [] };
+
+    walkRouter(route, (route, referrer) => {
+      const {
+        name,
+        icon,
+        path,
+        href,
+        exact,
+        strict,
+        children,
+        component,
+        sensitive,
+        hideInMenu,
+        hideInBreadcrumb,
+        hideChildrenInMenu,
+        ...rest
+      } = route;
+      const key = href.toLowerCase();
+      const hasComponent = !!component;
+      const hasChildren = !!children?.length;
+
+      if (component) {
+        routes.push({
+          key,
+          name,
+          path,
+          component,
+          exact: exact !== false,
+          strict: strict !== false,
+          sensitive: sensitive === true,
+          ...rest
+        });
+      }
+
+      if (hasComponent || hasChildren) {
+        const refer = referrer ? referrer.path : root;
+        const menu: MenuItem = { key, name, path, href, icon, ...rest };
+
+        if (hasChildren && !hideChildrenInMenu) {
+          menusMap[path] = menu.children = hideInMenu ? menusMap[refer] : [];
+        }
+
+        if (!hideInMenu && menusMap[refer]) {
+          menusMap[refer].push(menu);
+        }
+      }
+
+      if (!hideInBreadcrumb) {
+        const breadcrumb: BreadcrumbItem = { key, name, path, icon, ...rest };
+
+        if (hasComponent) {
+          breadcrumb.href = href;
+        }
+
+        breadcrumbs[path] = breadcrumb;
+      }
+    });
+
+    menus.push(...menusMap[root]);
+  });
+
+  return { routes, menus, breadcrumbs };
+}

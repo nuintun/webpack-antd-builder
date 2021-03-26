@@ -15,8 +15,7 @@ module.exports = {
   sourceMap,
   plugins: [
     autoprefixer({
-      flexbox: 'no-2009',
-      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 10', 'iOS >= 8', 'Android >= 4']
+      flexbox: 'no-2009'
     })
   ]
 };

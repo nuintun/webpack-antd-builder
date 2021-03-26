@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "ESNext"
+    ],
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "~js/*": [
+        "Assets/js/*"
+      ],
+      "~css/*": [
+        "Assets/css/*"
+      ],
+      "~images/*": [
+        "Assets/images/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
