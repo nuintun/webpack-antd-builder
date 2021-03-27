@@ -39,12 +39,11 @@ export default function createSharedState<S>(
       }
     }, []);
 
-    useEffect(
-      () => () => {
+    useEffect(() => {
+      return () => {
         store.setters = store.setters.filter(setter => setter !== setState);
-      },
-      []
-    );
+      };
+    }, []);
 
     return [state, store.setState];
   };

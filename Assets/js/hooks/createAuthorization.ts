@@ -1,13 +1,11 @@
 import { createContext, useContext } from 'react';
 
-export type Interceptor = <A, T>(authority: A, type: T) => boolean;
-
 export default function createAuthorization<A, T>(
-  interceptor: Interceptor
+  interceptor: (authority: A, type: T) => boolean
 ): [useAuthorized: (type: T) => boolean, Provider: React.Provider<A>] {
   const context = createContext((null as unknown) as A);
 
-  const useAuthorized = (type: T) => {
+  const useAuthorized = (type: T): boolean => {
     const authority = useContext(context);
 
     return interceptor(authority, type);

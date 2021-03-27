@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { message } from 'antd';
 import useRequest from './useRequest';
-import useMountedState from './useMountedState';
 import usePersistCallback from './usePersistCallback';
 import { Options as RequestOptions, RequestError } from '~js/utils/request';
 
@@ -14,18 +13,17 @@ export interface Options extends RequestOptions {
 export default function usePrefetch<R>(
   url: string,
   options: Options = {}
-): [loading: boolean, response: R | undefined, refresh: () => Promise<void>] {
+): [fetching: boolean, response: R | undefined, refresh: () => Promise<void>] {
   const { delay, onError, ...requestOptions } = options;
 
-  const isMounted = useMountedState();
-  const [loading, request] = useRequest(delay);
+  const [fetching, request] = useRequest(delay);
   const [response, setResponse] = useState<R>();
 
   const refresh = usePersistCallback(async () => {
     try {
       const response = await request<R>(url, requestOptions);
 
-      isMounted() && setResponse(response);
+      setResponse(response);
     } catch (error) {
       if (onError) {
         onError && onError(error);
@@ -39,5 +37,5 @@ export default function usePrefetch<R>(
     refresh();
   }, []);
 
-  return [loading, response, refresh];
+  return [fetching, response, refresh];
 }

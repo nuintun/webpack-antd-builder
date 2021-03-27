@@ -1,6 +1,6 @@
 import React, { createContext, createElement, useContext, useMemo, useReducer } from 'react';
 
-import useMountedState from './useMountedState';
+import useIsMounted from './useIsMounted';
 
 type ReducerProvider = React.FunctionComponent<{}>;
 
@@ -26,7 +26,7 @@ export default function createReducerContext<R extends React.Reducer<any, any>>(
   };
 
   const ReducerProvider: ReducerProvider = ({ children }) => {
-    const isMounted = useMountedState();
+    const isMounted = useIsMounted();
     const [state, dispatch] = useReducer(reducer, initialState);
     const value = useMemo<InternalContext<R>>(() => [isMounted, [state, dispatch]], [state]);
 

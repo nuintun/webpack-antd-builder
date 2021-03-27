@@ -19,8 +19,8 @@ function showTotal(total: number): string {
 }
 
 const normalizePagingOptions = memoizeOne(
-  (pageSize: number, opitons?: Options): PagingOptions => {
-    const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons || {};
+  (pageSize: number, opitons: Options = {}): PagingOptions => {
+    const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons;
 
     if (__DEV__) {
       if (!pageSizeOptions.includes(pageSize)) {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import useMountedState from './useMountedState';
+import useIsMounted from './useIsMounted';
 import usePersistCallback from './usePersistCallback';
 
 interface Socket<M> {
@@ -34,7 +34,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
     reconnectInterval = 3000
   } = options;
 
-  const isMounted = useMountedState();
+  const isMounted = useIsMounted();
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<NodeJS.Timeout>();
@@ -168,7 +168,9 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   }, [url, manual]);
 
   // 卸载时断开
-  useEffect(() => () => disconnect(), []);
+  useEffect(() => {
+    return () => disconnect();
+  }, []);
 
   return { send, connect, message, disconnect, readyState };
 }

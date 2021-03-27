@@ -1,24 +1,24 @@
 import { useMemo, useState } from 'react';
 
 import { isBrowser } from '~js/utils/utils';
-import useMountedState from './useMountedState';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
-export default function useMedia(query: string, onChange?: (matched: boolean) => void, defaultState: boolean = false): boolean {
+export default function useMedia(
+  query: string,
+  onChange?: (matched: boolean) => void,
+  initialState: boolean | (() => boolean) = false
+): boolean {
   const mql = useMemo(() => (isBrowser ? window.matchMedia(query) : null), [query]);
-  const [matched, setState] = useState(mql ? mql.matches : defaultState);
-  const isMounted = useMountedState();
+  const [matched, setState] = useState(mql ? mql.matches : initialState);
 
   useIsomorphicLayoutEffect(() => {
     if (mql) {
       const onMediaChange = () => {
-        if (isMounted()) {
-          const matched = mql.matches;
+        const matched = mql.matches;
 
-          setState(matched);
+        setState(matched);
 
-          onChange && onChange(matched);
-        }
+        onChange && onChange(matched);
       };
 
       mql.addEventListener('change', onMediaChange);

@@ -14,10 +14,10 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
 export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {}
-): [loading: boolean, onSubmit: (values: V) => void] {
+): [submitting: boolean, onSubmit: (values: V) => void] {
   const { delay, onError, method = 'POST', transform, onSuccess, onComplete, ...requestOptions } = options;
 
-  const [loading, request] = useRequest(delay);
+  const [submitting, request] = useRequest(delay);
 
   const onSubmit = usePersistCallback(async (values: V) => {
     const body = transform ? transform(values) : values;
@@ -33,5 +33,5 @@ export default function useSubmit<V, R>(
     }
   });
 
-  return [loading, onSubmit];
+  return [submitting, onSubmit];
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import usePrevious from './usePrevious';
+import useIsMounted from './useIsMounted';
 import { isFunction } from '~js/utils/utils';
-import useMountedState from './useMountedState';
 import useUpdateEffect from './useUpdateEffect';
 import usePersistCallback from './usePersistCallback';
 
@@ -34,7 +34,7 @@ export default function useControllableValue<V>(
   const value: V = props[valuePropName];
   const isControlled = valuePropName in props;
 
-  const isMounted = useMountedState();
+  const isMounted = useIsMounted();
   const prevValue = usePrevious(value);
 
   const [state, setState] = useState<V | undefined>(() => {
