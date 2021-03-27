@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
+import useSafeState from './useSafeState';
 import { isFunction } from '~js/utils/utils';
 
 export default function createSharedState<S>(): () => [
@@ -23,7 +24,7 @@ export default function createSharedState<S>(
 
   return () => {
     const initializedRef = useRef(false);
-    const [state, setState] = useState(sharedState);
+    const [state, setState] = useSafeState(sharedState);
 
     if (!initializedRef.current) {
       dispatches.add(setState);
