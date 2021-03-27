@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 type SetState<S> = React.Dispatch<React.SetStateAction<S>>;
 
@@ -20,11 +19,14 @@ export default function createSharedState<S>(
   };
 
   return () => {
+    const initializedRef = useRef(false);
     const [state, setState] = useState(sharedState);
 
-    useIsomorphicLayoutEffect(() => {
+    if (!initializedRef.current) {
       dispatches.add(setState);
-    }, []);
+
+      initializedRef.current = true;
+    }
 
     useEffect(() => {
       return () => {
