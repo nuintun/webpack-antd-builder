@@ -21,9 +21,7 @@ export default function usePrefetch<R>(
 
   const refresh = usePersistCallback(async () => {
     try {
-      const response = await request<R>(url, requestOptions);
-
-      setResponse(response);
+      setResponse(await request<R>(url, requestOptions));
     } catch (error) {
       if (onError) {
         onError && onError(error);
