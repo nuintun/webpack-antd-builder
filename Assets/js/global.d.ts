@@ -59,6 +59,8 @@ declare module '*.svg' {
 declare const __DEV__: boolean;
 declare const __APP_TITLE__: string;
 
+declare type Timeout = NodeJS.Timeout;
+
 declare function clearTimeout(timeoutId?: NodeJS.Timeout): void;
 
 /**

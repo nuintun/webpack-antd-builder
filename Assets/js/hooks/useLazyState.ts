@@ -7,7 +7,7 @@ export default function useLazyState<S>(
   initialState: S | (() => S),
   delay: number = 128
 ): [state: S, setLazyState: (value: React.SetStateAction<S>, immediate?: boolean) => void] {
-  const timer = useRef<NodeJS.Timeout>();
+  const timer = useRef<Timeout>();
   const [state, setState] = useSafeState(initialState);
 
   const setLazyState = usePersistCallback((value: React.SetStateAction<S>, immediate?: boolean): void => {
