@@ -12,8 +12,9 @@ export default function createSharedState<S>(
 export default function createSharedState<S>(
   initialState?: S | (() => S)
 ): () => [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
-  let dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
   let sharedState = isFunction(initialState) ? initialState() : (initialState as S);
+
+  const dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
 
   const dispatchState = (value: React.SetStateAction<S>): void => {
     sharedState = isFunction(value) ? value(sharedState) : value;
