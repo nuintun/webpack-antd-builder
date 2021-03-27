@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
@@ -15,7 +15,7 @@ export default function createSharedState<S>(
   let dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
   let sharedState = isFunction(initialState) ? initialState() : (initialState as S);
 
-  const setSharedState = (value: React.SetStateAction<S>): void => {
+  const dispatchState = (value: React.SetStateAction<S>): void => {
     sharedState = isFunction(value) ? value(sharedState) : value;
 
     dispatches.forEach(dispatch => dispatch(sharedState));
@@ -30,6 +30,10 @@ export default function createSharedState<S>(
 
       initializedRef.current = true;
     }
+
+    const setSharedState = useCallback((value: React.SetStateAction<S>): void => {
+      dispatches.has(setState) && dispatchState(value);
+    }, []);
 
     useEffect(() => {
       return () => {
