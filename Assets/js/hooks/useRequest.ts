@@ -21,8 +21,9 @@ export default function useRequest(delay?: number): [requesting: boolean, reques
       return new Promise<R>(async (resolve, reject) => {
         setRequesting(true);
 
+        const headers = { ...mime.json, ...options.headers };
+
         try {
-          const headers = { ...mime.json, ...options.headers };
           const payload = await request<R>(input, { onUnauthorized, ...options, headers });
 
           isMounted() && resolve(payload);
