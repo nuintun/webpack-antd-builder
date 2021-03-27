@@ -33,12 +33,14 @@ export default function createSharedState<S>(
     }
 
     const setSharedState = useCallback((value: React.SetStateAction<S>): void => {
-      dispatches.has(setState) && dispatchState(value);
+      initializedRef.current && dispatchState(value);
     }, []);
 
     useEffect(() => {
       return () => {
         dispatches.delete(setState);
+
+        initializedRef.current = false;
       };
     }, []);
 
