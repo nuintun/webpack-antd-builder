@@ -11,7 +11,7 @@ interface Store<S> {
 
 type Setter<S> = React.Dispatch<React.SetStateAction<S>>;
 
-export default function createSharedState<S = undefined>(): () => [state: S | undefined, setState: Setter<S | undefined>];
+export default function createSharedState<S>(): () => [state: S | undefined, setState: Setter<S | undefined>];
 export default function createSharedState<S>(initialState: S | (() => S)): () => [state: S, setState: Setter<S>];
 export default function createSharedState<S>(
   initialState?: S | (() => S)
