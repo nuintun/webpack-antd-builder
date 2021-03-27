@@ -34,8 +34,10 @@ export default function createSharedState<S>(
     const [state, setState] = useState(store.state);
 
     useIsomorphicLayoutEffect(() => {
-      if (!store.setters.includes(setState)) {
-        store.setters.push(setState);
+      const { setters } = store;
+
+      if (!setters.includes(setState)) {
+        setters.push(setState);
       }
     }, []);
 
