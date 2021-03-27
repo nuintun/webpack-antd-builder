@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-import useIsMounted from './useIsMounted';
 import usePersistCallback from './usePersistCallback';
 
 interface Socket<M> {
@@ -34,7 +33,6 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
     reconnectInterval = 3000
   } = options;
 
-  const isMounted = useIsMounted();
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<NodeJS.Timeout>();
@@ -68,49 +66,45 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
       const getReadyState = () => ws.readyState || WebSocket.CLOSED;
 
       ws.onopen = event => {
-        if (isMounted()) {
-          reconnectTimesRef.current = 0;
+        reconnectTimesRef.current = 0;
 
-          onOpen && onOpen(event);
+        onOpen && onOpen(event);
 
-          setReadyState(getReadyState());
+        setReadyState(getReadyState());
 
-          const messages = sendQueueRef.current;
+        const messages = sendQueueRef.current;
 
-          if (messages.length) {
-            sendQueueRef.current = [];
+        if (messages.length) {
+          sendQueueRef.current = [];
 
-            messages.forEach(send);
-          }
+          messages.forEach(send);
         }
       };
 
       ws.onmessage = (message: MessageEvent<M>) => {
-        if (isMounted()) {
-          onMessage && onMessage(message);
+        onMessage && onMessage(message);
 
-          setMessage(message);
-        }
+        setMessage(message);
       };
 
       ws.onerror = event => {
-        if (isMounted()) {
-          onError && onError(event);
+        onError && onError(event);
 
-          setReadyState(getReadyState());
-        }
+        setReadyState(getReadyState());
       };
 
       ws.onclose = event => {
-        if (isMounted()) {
-          sendQueueRef.current = [];
+        ws.onopen = null;
+        ws.onmessage = null;
+        ws.onerror = null;
+        ws.onclose = null;
+        sendQueueRef.current = [];
 
-          onClose && onClose(event);
+        onClose && onClose(event);
 
-          setReadyState(getReadyState());
+        setReadyState(getReadyState());
 
-          !event.wasClean && reconnect();
-        }
+        !event.wasClean && reconnect();
       };
 
       websocketRef.current = ws;
