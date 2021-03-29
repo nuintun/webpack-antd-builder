@@ -12,7 +12,9 @@ export default function createSharedState<S>(
 export default function createSharedState<S>(
   initialState?: S | (() => S)
 ): () => [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
-  let sharedState = isFunction(initialState) ? initialState() : (initialState as S);
+  let sharedState: S;
+
+  let initialized = false;
 
   const dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
 
@@ -22,9 +24,19 @@ export default function createSharedState<S>(
     dispatches.forEach(dispatch => dispatch(sharedState));
   };
 
+  const getInitialState = (): S => {
+    if (initialized) return sharedState;
+
+    initialized = true;
+
+    sharedState = isFunction(initialState) ? initialState() : (initialState as S);
+
+    return sharedState;
+  };
+
   return () => {
     const initializedRef = useRef(false);
-    const [state, setState] = useState(sharedState);
+    const [state, setState] = useState(getInitialState);
 
     if (!initializedRef.current) {
       dispatches.add(setState);
