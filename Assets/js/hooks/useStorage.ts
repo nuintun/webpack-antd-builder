@@ -1,16 +1,50 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useMemo } from 'react';
 
-import storage from '~js/utils/storage';
-import usePersistCallback from './usePersistCallback';
+import { isFunction } from '~js/utils/utils';
+import createStorage from '~js/utils/storage';
 
-export default function useStorage<V>(key: string): [set: (value: V) => void, get: () => V | null] {
-  const cache = useRef<V | null>(storage.get<V>(key));
+export interface Options<V> {
+  session?: boolean;
+  defaultValue?: V | (() => V);
+  serializer?: (value: V) => string;
+  deserializer?: (value: string) => V;
+}
 
-  const set = usePersistCallback(value => {
-    storage.set<V>(key, (cache.current = value));
-  });
+const { sessionStorage, localStorage } = globalThis;
 
-  const get = useCallback(() => cache.current, []);
+export default function useStorage<V>(
+  key: string,
+  options: Options<V> & { defaultValue?: V | (() => V) }
+): [set: (value: V) => void, get: () => V, remove: () => void];
+export default function useStorage<V>(
+  key: string,
+  options?: Options<V>
+): [set: (value: V) => void, get: () => V | null, remove: () => void];
+export default function useStorage<V>(
+  key: string,
+  { session, serializer, deserializer, defaultValue }: Options<V> = {}
+): [set: (value: V) => void, get: () => V | null, remove: () => void] {
+  const storage = useMemo(() => {
+    const storage = session ? sessionStorage : localStorage;
 
-  return [set, get];
+    return createStorage<V>(storage, serializer, deserializer);
+  }, []);
+
+  const set = useCallback((value: V) => {
+    storage.set(key, value);
+  }, []);
+
+  const get = useCallback(() => {
+    if (storage.has(key)) return storage.get(key);
+
+    if (defaultValue == null) return null;
+
+    return isFunction(defaultValue) ? defaultValue() : defaultValue;
+  }, []);
+
+  const remove = useCallback(() => {
+    storage.remove(key);
+  }, []);
+
+  return [set, get, remove];
 }
