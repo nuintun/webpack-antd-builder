@@ -5,17 +5,23 @@ import { isFunction } from '~js/utils/utils';
 export function createReduxState<S, A>(
   reducer: (state: S, action: A) => S | PromiseLike<S>,
   initialState: S | (() => S)
-): () => [state: S, dispatch: (action: A) => void] {
+): () => [state: S, dispatch: (action: A) => Promise<void>] {
   let sharedState: S;
 
   let initialized = false;
 
   const dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
 
-  const dispatchAction = async (action: A): Promise<void> => {
-    sharedState = await reducer(sharedState, action);
+  const dispatchAction = async (action: A, initializedRef: React.MutableRefObject<boolean>): Promise<void> => {
+    if (initializedRef.current) {
+      const nextState = await reducer(sharedState, action);
 
-    dispatches.forEach(dispatch => dispatch(sharedState));
+      if (initializedRef.current) {
+        sharedState = nextState;
+
+        dispatches.forEach(dispatch => dispatch(sharedState));
+      }
+    }
   };
 
   const getInitialState = (): S => {
@@ -38,8 +44,8 @@ export function createReduxState<S, A>(
       initializedRef.current = true;
     }
 
-    const dispatch = useCallback((action: A): void => {
-      initializedRef.current && dispatchAction(action);
+    const dispatch = useCallback((action: A): Promise<void> => {
+      return dispatchAction(action, initializedRef);
     }, []);
 
     useEffect(() => {
