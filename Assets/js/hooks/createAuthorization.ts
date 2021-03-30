@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 export default function createAuthorization<A, T>(
   interceptor: (authority: A, type: T) => boolean
