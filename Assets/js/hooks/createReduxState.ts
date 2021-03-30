@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
-export function createReduxState<S, A>(
+export default function createReduxState<S, A>(
   reducer: (state: S, action: A) => S | PromiseLike<S>,
   initialState: S | (() => S)
 ): () => [state: S, dispatch: (action: A) => Promise<void>] {
