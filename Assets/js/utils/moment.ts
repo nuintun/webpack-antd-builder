@@ -1,3 +1,7 @@
+/**
+ * @module moment
+ */
+
 import dayjs from './dayjs';
 import { isString } from './utils';
 import weekday from 'dayjs/plugin/weekday';

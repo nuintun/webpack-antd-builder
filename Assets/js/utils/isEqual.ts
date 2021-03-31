@@ -1,3 +1,7 @@
+/**
+ * @module isEqual
+ */
+
 const keyList = Object.keys;
 const isArray = Array.isArray;
 const hasProp = Object.prototype.hasOwnProperty;
