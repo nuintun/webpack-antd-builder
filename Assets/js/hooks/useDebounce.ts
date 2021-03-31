@@ -8,7 +8,7 @@ import { debounce } from 'throttle-debounce';
 import usePersistCallback from './usePersistCallback';
 
 /**
- * @function
+ * @function useDebounce
  * @description 【Hook】去抖函数
  * @param callback 目标回调函数
  * @param delay 延迟的时间
