@@ -69,6 +69,16 @@ declare function clearTimeout(timeoutId?: NodeJS.Timeout): void;
 declare type ValueOf<T> = T extends any[] ? T[number] : T[keyof T];
 
 /**
+ * @description 将对象指定键的值设置为可选
+ */
+declare type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+/**
+ * @description 将对象指定键的值设置为必选
+ */
+declare type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
+/**
  * @description 获取组件的 props
  */
 declare type GetComponentProps<C> = C extends React.ComponentType<infer P> ? P : never;

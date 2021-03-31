@@ -1,3 +1,7 @@
+/**
+ * @module usePagingOptions
+ */
+
 import memoizeOne from 'memoize-one';
 import { PaginationProps } from 'antd';
 import usePersistCallback from './usePersistCallback';
@@ -40,6 +44,11 @@ const normalizePagingOptions = memoizeOne(
   }
 );
 
+/**
+ * @function usePagingOptions
+ * @description 【Hook】分页处理
+ * @param opitons 分页配置
+ */
 export default function usePagingOptions(opitons?: Options): ResolvePagingOptions {
   const resolvePagingOptions: ResolvePagingOptions = usePersistCallback(pageSize => {
     return normalizePagingOptions(pageSize, opitons);

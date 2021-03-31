@@ -1,8 +1,18 @@
+/**
+ * @module useLazyState
+ */
+
 import React, { useRef } from 'react';
 
 import useSafeState from './useSafeState';
 import usePersistCallback from './usePersistCallback';
 
+/**
+ * @function useLazyState
+ * @description 【Hook】使用延时状态，小于指定实际时不会更新状态
+ * @param initialState 默认状态
+ * @param delay 延迟时间
+ */
 export default function useLazyState<S>(
   initialState: S | (() => S),
   delay: number = 128

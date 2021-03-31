@@ -1,3 +1,7 @@
+/**
+ * @module useRequest
+ */
+
 import { useCallback } from 'react';
 
 import * as mime from '~js/utils/mime';
@@ -7,6 +11,11 @@ import { useHistory } from 'react-router-dom';
 import request, { Options } from '~js/utils/request';
 import usePersistCallback from './usePersistCallback';
 
+/**
+ * @function useRequest
+ * @description 【Hook】请求操作
+ * @param delay 加载状态延迟时间
+ */
 export default function useRequest(delay?: number): [requesting: boolean, request: typeof request] {
   const history = useHistory();
   const isMounted = useIsMounted();

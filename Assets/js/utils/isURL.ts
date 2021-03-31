@@ -6,8 +6,7 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(
 
 /**
  * @function isURL
- * @description 是否为 URL
- * @param {string} path
- * @returns {boolean}
+ * @description 检查路径是否为 URL
+ * @param path 路径
  */
 export default (path: string): boolean => reg.test(path);

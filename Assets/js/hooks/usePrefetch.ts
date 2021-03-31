@@ -1,3 +1,7 @@
+/**
+ * @module usePrefetch
+ */
+
 import { useEffect, useState } from 'react';
 
 import { message } from 'antd';
@@ -10,6 +14,12 @@ export interface Options extends RequestOptions {
   onError?: (error: RequestError) => void;
 }
 
+/**
+ * @function usePrefetch
+ * @description 【Hook】预加载
+ * @param url 请求地址
+ * @param options 请求配置
+ */
 export default function usePrefetch<R>(
   url: string,
   options: Options = {}

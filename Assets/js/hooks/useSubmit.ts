@@ -1,3 +1,7 @@
+/**
+ * @module useSubmit
+ */
+
 import { message } from 'antd';
 import useRequest from './useRequest';
 import usePersistCallback from './usePersistCallback';
@@ -11,6 +15,12 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
   onError?: (error: RequestError, values: V) => void;
 }
 
+/**
+ * @function useSubmit
+ * @description 【Hook】提交操作
+ * @param url 提交地址
+ * @param options 请求配置
+ */
 export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {}

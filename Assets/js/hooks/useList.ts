@@ -1,3 +1,7 @@
+/**
+ * @module useList
+ */
+
 import { useCallback } from 'react';
 
 import { PaginationProps } from 'antd';
@@ -8,6 +12,12 @@ type OnChange = NonNullable<PaginationProps['onChange']>;
 
 export type { Options };
 
+/**
+ * @function useList
+ * @description 【Hook】列表操作
+ * @param url 请求地址
+ * @param options 请求配置
+ */
 export default function useList<I, E extends object = {}>(
   url: string,
   options?: Options

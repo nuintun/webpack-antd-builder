@@ -1,3 +1,7 @@
+/**
+ * @module useTitle
+ */
+
 import { useEffect, useRef } from 'react';
 
 import { isBrowser } from '~js/utils/utils';
@@ -10,6 +14,12 @@ export interface Options {
 
 const defaultFormat = (title: string, defaultTitle: string): string => (title ? `${defaultTitle} - ${title}` : defaultTitle);
 
+/**
+ * @function useTitle
+ * @description 【Hook】更改页面标题
+ * @param title 页面标题
+ * @param options 配置参数
+ */
 export default function useTitle(title?: string, options: Options = {}) {
   const titleRef = useRef(isBrowser ? document.title : '');
   const { defaultTitle = __APP_TITLE__, format = defaultFormat, restoreOnUnmount = false } = options;

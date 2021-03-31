@@ -1,3 +1,7 @@
+/**
+ * @module useTable
+ */
+
 import { useCallback, useMemo, useRef } from 'react';
 
 import usePagingRequest, {
@@ -40,6 +44,12 @@ interface Refs<I, E> extends PagingRequestRefs<I, E> {
 
 export type { Options };
 
+/**
+ * @function useTable
+ * @description 【Hook】 表格操作
+ * @param url 请求地址
+ * @param options 请求配置
+ */
 export default function useTable<I, E extends object = {}>(
   url: string,
   options?: Options

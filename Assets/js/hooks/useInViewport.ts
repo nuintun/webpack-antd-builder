@@ -1,3 +1,7 @@
+/**
+ * @module useInViewport
+ */
+
 import React, { useEffect, useState } from 'react';
 
 import { isBrowser, isFunction } from '~js/utils/utils';
@@ -32,9 +36,15 @@ function isInViewPort(element: HTMLElement | null): boolean {
   return false;
 }
 
-export default function useInViewport(target: Target, defaultState: boolean = false): boolean {
+/**
+ * @function useInViewport
+ * @description 【Hook】监听指定元素是否可见
+ * @param target 监听元素
+ * @param defaultVisible 默认是否可见
+ */
+export default function useInViewport(target: Target, defaultVisible: boolean = false): boolean {
   const [inViewPort, setInViewport] = useState<boolean>(() => {
-    if (!isBrowser) return defaultState;
+    if (!isBrowser) return defaultVisible;
 
     const element = getTargetElement(target);
 

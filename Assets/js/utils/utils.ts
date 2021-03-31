@@ -4,7 +4,6 @@
 
 import dayjs from './dayjs';
 import { Dayjs, OpUnitType } from 'dayjs';
-import { debounce as originDebounce } from 'throttle-debounce';
 
 const { toString } = Object.prototype;
 
@@ -17,8 +16,7 @@ export const isBrowser = typeof window !== 'undefined' && window.document;
 /**
  * @function isString
  * @description 是否为字符串
- * @param {any} value
- * @returns {boolean}
+ * @param value 需要验证的值
  */
 export function isString(value: any): value is string {
   return toString.call(value) === '[object String]';
@@ -27,8 +25,7 @@ export function isString(value: any): value is string {
 /**
  * @function isFunction
  * @description 是否为函数
- * @param {any} value
- * @returns {boolean}
+ * @param value 需要验证的值
  */
 export function isFunction(value: any): value is Function {
   return typeof value === 'function';
@@ -37,9 +34,8 @@ export function isFunction(value: any): value is Function {
 /**
  * @function formatThousands
  * @description 格式化数字
- * @param {number} number
- * @param {number} precision
- * @returns {string}
+ * @param number 需要格式话的数字
+ * @param precision 小数位保留个数
  */
 export function formatThousands(number: number | string | undefined = 0, precision: number = 2): string {
   number = Number(number);
@@ -63,52 +59,16 @@ export function formatThousands(number: number | string | undefined = 0, precisi
 /**
  * @function createMarkup
  * @description 生成 React HTML 字符串
- * @param {string} html
- * @returns {object}
+ * @param html HTML 字符串
  */
 export function createMarkup(html: string): { __html: string } {
   return { __html: html };
 }
 
-// type DebounceDecorator = <T>(
-//   target: Object,
-//   propertyKey: string | symbol,
-//   descriptor: TypedPropertyDescriptor<T> & { initializer?: () => any }
-// ) => (TypedPropertyDescriptor<T> & { initializer?: () => any }) | void;
-
-/**
- * @function debounce
- * @description debounce 修饰器
- * @param {number} delay
- * @param {boolean} atBegin
- * @returns {function}
- */
-export function debounce(delay: number, atBegin: boolean = false): MethodDecorator {
-  return function debounce(_target, propertyKey, descriptor) {
-    const { writable, enumerable, configurable } = descriptor;
-
-    return {
-      enumerable,
-      configurable,
-      get: function () {
-        // Attach this function to the instance (not the class)
-        Object.defineProperty(this, propertyKey, {
-          writable,
-          enumerable,
-          configurable,
-          value: originDebounce(delay, atBegin, descriptor.value as any)
-        });
-
-        return this[propertyKey];
-      }
-    };
-  };
-}
-
 /**
  * @function urlToPaths
  * @description 将 URL 拆分成路径列表
- * @param {string} url
+ * @param url URL 地址
  */
 export function urlToPaths(url: string): string[] {
   if (url === '/') {
@@ -123,8 +83,8 @@ export function urlToPaths(url: string): string[] {
 /**
  * @function getLastRangeDate
  * @description 获取今天向前指定偏移的时间区间
- * @param {number} value
- * @param {OpUnitType} [unit]
+ * @param value 偏移值
+ * @param [unit] 偏移单位
  */
 export function getLastRangeDate(value: number, unit: OpUnitType = 'day'): Dayjs[] {
   const today = dayjs();

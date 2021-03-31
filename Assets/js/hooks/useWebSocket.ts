@@ -1,3 +1,7 @@
+/**
+ * @module useWebSocket
+ */
+
 import { useEffect, useRef, useState } from 'react';
 
 import usePersistCallback from './usePersistCallback';
@@ -21,6 +25,12 @@ export interface Options<M> {
   onMessage?: (event: MessageEvent<M>) => void;
 }
 
+/**
+ * @function useWebSocket
+ * @description 【Hook】长连接 WebSocket 操作
+ * @param url 链接地址
+ * @param options 配置参数
+ */
 export default function useWebSocket<M>(url: string, options: Options<M> = {}): Socket<M> {
   const {
     onOpen,

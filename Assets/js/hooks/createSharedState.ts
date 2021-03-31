@@ -1,11 +1,24 @@
+/**
+ * @module createSharedState
+ */
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
+/**
+ * @function createSharedState
+ * @description 【Hook】生成共享状态
+ */
 export default function createSharedState<S>(): () => [
   state: S | undefined,
   setState: React.Dispatch<React.SetStateAction<S | undefined>>
 ];
+/**
+ * @function createSharedState
+ * @description 【Hook】生成共享状态
+ * @param initialState 初始状态
+ */
 export default function createSharedState<S>(
   initialState: S | (() => S)
 ): () => [state: S, setState: React.Dispatch<React.SetStateAction<S>>];

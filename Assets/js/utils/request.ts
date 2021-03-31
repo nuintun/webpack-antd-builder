@@ -38,8 +38,7 @@ const STATUS_TEXT: { [code: number]: string } = {
 
 /**
  * @function getStatusMessage
- * @param code
- * @returns {string}
+ * @param code HTTP 状态码
  */
 function getStatusMessage(code: number): string {
   return STATUS_TEXT[code] || `其它错误：${code}`;
@@ -47,8 +46,7 @@ function getStatusMessage(code: number): string {
 
 /**
  * @function jsonType
- * @param {string} type
- * @returns {boolean}
+ * @param type 返回类型
  */
 function jsonType(type: string | null): boolean {
   return !!type && /^application\/json(?:;|$)/i.test(type);
@@ -56,8 +54,7 @@ function jsonType(type: string | null): boolean {
 
 /**
  * @function urlencodedType
- * @param {string} type
- * @returns {boolean}
+ * @param type 发送类型
  */
 function urlencodedType(type: string | null): boolean {
   return !!type && /^application\/x-www-form-urlencoded(?:;|$)/i.test(type);
@@ -65,10 +62,9 @@ function urlencodedType(type: string | null): boolean {
 
 /**
  * @function jsonParser
- * @param {Response} response
- * @param {boolean} notify
- * @param {funtion} auth
- * @returns {Promise<any>}
+ * @param response 响应对象
+ * @param notify 是否显示通知
+ * @param onUnauthorized 需要鉴权回调
  */
 function jsonParser<R>(response: Response, notify: boolean, onUnauthorized?: () => void): Promise<R> {
   return response.json().then(
@@ -139,7 +135,6 @@ function serializeQuery(values: Query, search: URLSearchParams = new URLSearchPa
  * @function bodySerializer
  * @param {any} body
  * @param {boolean} jsonType
- * @returns {string|null|never}
  */
 function bodySerializer(body: any, jsonType?: boolean): string | null | never {
   if (body) {
@@ -156,7 +151,6 @@ function bodySerializer(body: any, jsonType?: boolean): string | null | never {
  * @description Ajax 数据请求
  * @param {string} url
  * @param {Options} [init]
- * @returns {Promise<R>}
  */
 export default function request<R>(url: string, init: Options = {}): Promise<R> {
   const input = new URL(url, location.href);

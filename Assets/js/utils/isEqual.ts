@@ -9,9 +9,8 @@ const hasProp = Object.prototype.hasOwnProperty;
 /**
  * @function isEqual
  * @description 深度比较两个值是否相等
- * @param {any} a
- * @param {any} b
- * @returns {boolean}
+ * @param a 值 1
+ * @param b 值 2
  */
 export default function isEqual(a: any, b: any): boolean {
   if (a === b) return true;

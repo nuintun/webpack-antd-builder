@@ -1,7 +1,17 @@
+/**
+ * @module createReduxState
+ */
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
+/**
+ * @function createReduxState
+ * @description 【Hook】生成类 Redux 状态，支持异步
+ * @param reducer 状态生成器
+ * @param initialState 初始状态
+ */
 export default function createReduxState<S, A>(
   reducer: (state: S, action: A) => S | PromiseLike<S>,
   initialState: S | (() => S)

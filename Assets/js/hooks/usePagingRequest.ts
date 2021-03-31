@@ -1,3 +1,7 @@
+/**
+ * @module usePagingRequest
+ */
+
 import React, { useMemo, useRef, useState } from 'react';
 
 import useRequest from './useRequest';
@@ -51,6 +55,11 @@ export function hasQuery<Q>(query: Q | false): query is Q {
 
 const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
+/**
+ * @function usePagingRequest
+ * @description 【Hook】分页请求
+ * @param url 请求地址
+ */
 export default function usePagingRequest<I, E extends object = {}>(
   url: string
 ): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {

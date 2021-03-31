@@ -1,3 +1,7 @@
+/**
+ * @module useStorage
+ */
+
 import { useCallback, useMemo } from 'react';
 
 import { isFunction } from '~js/utils/utils';
@@ -12,10 +16,22 @@ export interface Options<V> {
 
 const { sessionStorage, localStorage } = globalThis;
 
+/**
+ * @function useStorage
+ * @description 【Hook】本地缓存操作
+ * @param key 缓存名称
+ * @param options 缓存配置
+ */
 export default function useStorage<V>(
   key: string,
-  options: Options<V> & { defaultValue?: V | (() => V) }
+  options: RequiredBy<Options<V>, 'defaultValue'>
 ): [set: (value: V) => void, get: () => V, remove: () => void];
+/**
+ * @function useStorage
+ * @description 【Hook】使用本地缓存
+ * @param key 缓存名称
+ * @param [options] 缓存配置
+ */
 export default function useStorage<V>(
   key: string,
   options?: Options<V>

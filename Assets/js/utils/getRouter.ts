@@ -69,41 +69,38 @@ type Callback = (route: RouteNode, referrer?: RouteNode) => void;
 
 /**
  * @function isAbsolute
- * @param {string} url
- * @returns {boolean}
+ * @param path 路径
  */
-function isAbsolute(url: string): boolean {
-  return /^\//.test(url) || isURL(url);
+function isAbsolute(path: string): boolean {
+  return /^\//.test(path) || isURL(path);
 }
 
 /**
  * @function normalizeURL
- * @param {string} path
- * @param {string} type
- * @param {Route} [referrer]
- * @returns {string}
+ * @param path 路径
+ * @param base 来源路径
  */
-function normalizeURL(path: string, type: string, referrer?: Route): string {
+function normalizeURL(path: string, base?: string): string {
   if (__DEV__ && !path) {
     throw new RangeError(`route path can't be empty`);
   }
 
-  if (!referrer || isAbsolute(path)) return path;
+  if (!base || isAbsolute(path)) return path;
 
-  const sep = /\/$/.test(referrer[type]) ? '' : '/';
+  const sep = /\/$/.test(base) ? '' : '/';
 
-  return `${referrer[type]}${sep}${path}`;
+  return `${base}${sep}${path}`;
 }
 
 /**
  * @function walkRouter
- * @param {Route} route
- * @param {callback} callback
- * @param {RouteNode} [referrer]
+ * @param route 路由
+ * @param callback 回调
+ * @param [referrer] 来源路由
  */
 function walkRouter(route: Route, callback: Callback, referrer?: RouteNode): void {
-  const path = normalizeURL(route.path, 'path', referrer);
-  const href = route.href ? normalizeURL(route.href, 'href', referrer) : path;
+  const path = normalizeURL(route.path, referrer?.path);
+  const href = route.href ? normalizeURL(route.href, referrer?.href) : path;
   const routeNode = { ...route, path, href };
 
   callback(routeNode, referrer);
@@ -122,8 +119,7 @@ type Breadcrumbs = { [path: string]: BreadcrumbItem };
 /**
  * @function getRouter
  * @description 获取路由
- * @param {object} router
- * @returns {Router}
+ * @param router 路由
  */
 export default function getRouter(router: Route[]): Router {
   const menus: MenuItem[] = [];

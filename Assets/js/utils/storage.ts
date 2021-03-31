@@ -14,7 +14,6 @@ export interface IStorage<V> {
  * @param {Storage} storage
  * @param {Function} serializer
  * @param {Function} deserializer
- * @returns {IStorage}
  */
 export default function createStorage<V>(
   storage: Storage,
@@ -25,8 +24,7 @@ export default function createStorage<V>(
     /**
      * @method has
      * @description 是否存在指定缓冲
-     * @param {string} key
-     * @returns {boolean}
+     * @param key 缓存名称
      */
     has(key: string): boolean {
       return storage.hasOwnProperty(key);
@@ -34,8 +32,8 @@ export default function createStorage<V>(
     /**
      * @method set
      * @description 设置缓存
-     * @param {string} key
-     * @param {any} value
+     * @param key 缓存名称
+     * @param value 缓存值
      */
     set(key: string, value: V): void {
       storage.setItem(key, serializer(value));
@@ -43,8 +41,7 @@ export default function createStorage<V>(
     /**
      * @method get
      * @description 读取指定缓存
-     * @param {string} key
-     * @returns {any}
+     * @param key 缓存名称
      */
     get(key: string): V | null {
       const value = storage.getItem(key);
@@ -62,7 +59,7 @@ export default function createStorage<V>(
     /**
      * @method remove
      * @description 删除指定缓存
-     * @param {string} key
+     * @param key 缓存名称
      */
     remove(key: string): void {
       storage.removeItem(key);
