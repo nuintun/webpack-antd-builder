@@ -71,12 +71,12 @@ declare type ValueOf<T> = T extends any[] ? T[number] : T[keyof T];
 /**
  * @description 将对象指定键的值设置为可选
  */
-declare type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+declare type PartialBy<T, K extends keyof T> = T & Partial<Pick<T, K>>;
 
 /**
  * @description 将对象指定键的值设置为必选
  */
-declare type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+declare type RequiredBy<T, K extends keyof T> = T & Required<Pick<T, K>>;
 
 /**
  * @description 获取组件的 props
