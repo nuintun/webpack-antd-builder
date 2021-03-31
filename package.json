@@ -28,6 +28,7 @@
     "delay": "100ms",
     "watch": [
       "webpack/**/*",
+      "wwwroot/favicon.ico",
       "Assets/css/theme.less"
     ]
   },
