@@ -10,9 +10,9 @@ import { useCallback, useRef } from 'react';
  * @param callback 回调函数
  */
 export default function usePersistCallback<C extends (...args: any[]) => any>(callback: C): C {
-  const ref = useRef(callback);
+  const callbackRef = useRef(callback);
 
-  ref.current = callback;
+  callbackRef.current = callback;
 
-  return useCallback(((...args) => ref.current(...args)) as C, []);
+  return useCallback(((...args) => callbackRef.current(...args)) as C, []);
 }

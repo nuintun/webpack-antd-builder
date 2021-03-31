@@ -9,14 +9,14 @@ import { useCallback, useEffect, useRef } from 'react';
  * @description 【Hook】检查组件是否已经挂载
  */
 export default function useIsMounted(): () => boolean {
-  const mountedRef = useRef(false);
-  const isMounted = useCallback(() => mountedRef.current, []);
+  const isMountedRef = useRef(false);
+  const isMounted = useCallback(() => isMountedRef.current, []);
 
   useEffect(() => {
-    mountedRef.current = true;
+    isMountedRef.current = true;
 
     return () => {
-      mountedRef.current = false;
+      isMountedRef.current = false;
     };
   }, []);
 

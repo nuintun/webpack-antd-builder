@@ -18,11 +18,11 @@ export default function usePrevious<V>(value: V): V | undefined;
  */
 export default function usePrevious<V>(value: V, initialValue: V): V;
 export default function usePrevious<V>(value: V, initialValue?: V): V | undefined {
-  const ref = useRef(initialValue as V);
+  const valueRef = useRef(initialValue as V);
 
   useEffect(() => {
-    ref.current = value;
+    valueRef.current = value;
   });
 
-  return ref.current;
+  return valueRef.current;
 }

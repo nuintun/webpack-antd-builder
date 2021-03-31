@@ -13,11 +13,11 @@ import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
  * @param deps 回调依赖
  */
 export default function useUpdateLayoutEffect(effect: React.EffectCallback, deps?: React.DependencyList): void {
-  const isMounted = useRef(false);
+  const isMountedRef = useRef(false);
 
   useIsomorphicLayoutEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
     } else {
       return effect();
     }
