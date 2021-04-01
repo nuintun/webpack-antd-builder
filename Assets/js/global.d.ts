@@ -86,12 +86,12 @@ declare type KnownKeys<T> = {
 /**
  * @description 获取对象的值类型
  */
-declare type Values<T> = T extends any[] ? T[number] : T[keyof T];
+declare type Values<T> = T extends { [K in keyof T]: infer U } ? U : never;
 
 /**
  * @description 获取对象非索引签名的值类型
  */
-declare type KnownValues<T> = T extends any[] ? T[number] : T[KnownKeys<T>];
+declare type KnownValues<T> = T extends { [K in KnownKeys<T>]: infer U } ? U : never;
 
 /**
  * @description 从非索引签名中忽略指定属性
