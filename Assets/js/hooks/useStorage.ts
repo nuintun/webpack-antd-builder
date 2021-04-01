@@ -24,7 +24,7 @@ const { sessionStorage, localStorage } = globalThis;
  */
 export default function useStorage<V>(
   key: string,
-  options: RequiredBy<Options<V>, 'defaultValue'>
+  options: PartRequired<Options<V>, 'defaultValue'>
 ): [set: (value: V) => void, get: () => V, remove: () => void];
 /**
  * @function useStorage

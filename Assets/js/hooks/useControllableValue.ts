@@ -29,7 +29,7 @@ export interface Options<V> {
  */
 export default function useControllableValue<V>(
   props: Props,
-  options: RequiredBy<Options<V>, 'defaultValue'>
+  options: PartRequired<Options<V>, 'defaultValue'>
 ): [value: V, setValue: (value: React.SetStateAction<V>) => void];
 /**
  * @function useControllableValue
