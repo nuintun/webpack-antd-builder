@@ -96,7 +96,7 @@ function normalizeURL(path: string, base?: string): string {
  * @function walkRouter
  * @param route 路由
  * @param callback 回调
- * @param [referrer] 来源路由
+ * @param referrer 来源路由
  */
 function walkRouter(route: Route, callback: Callback, referrer?: RouteNode): void {
   const path = normalizeURL(route.path, referrer?.path);

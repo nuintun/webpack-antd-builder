@@ -16,7 +16,7 @@ import usePersistCallback from './usePersistCallback';
  */
 export default function useDebounce<C extends (...args: any[]) => any>(
   callback: C,
-  delay: number = 120,
+  delay: number,
   atBegin: boolean = false
 ): debounce<C> {
   const fn = usePersistCallback(callback);

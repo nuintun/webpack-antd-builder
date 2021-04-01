@@ -84,7 +84,7 @@ export function urlToPaths(url: string): string[] {
  * @function getLastRangeDate
  * @description 获取今天向前指定偏移的时间区间
  * @param value 偏移值
- * @param [unit] 偏移单位
+ * @param unit 偏移单位
  */
 export function getLastRangeDate(value: number, unit: OpUnitType = 'day'): Dayjs[] {
   const today = dayjs();

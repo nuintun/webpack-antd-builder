@@ -30,7 +30,7 @@ export default function useStorage<V>(
  * @function useStorage
  * @description 【Hook】使用本地缓存
  * @param key 缓存名称
- * @param [options] 缓存配置
+ * @param options 缓存配置
  */
 export default function useStorage<V>(
   key: string,

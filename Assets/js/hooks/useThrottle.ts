@@ -17,7 +17,7 @@ import usePersistCallback from './usePersistCallback';
  */
 export default function useThrottle<C extends (...args: any[]) => any>(
   callback: C,
-  delay: number = 120,
+  delay: number,
   noTrailing: boolean = false,
   debounceMode: boolean = false
 ): throttle<C> {

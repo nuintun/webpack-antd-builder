@@ -35,7 +35,7 @@ export default function useControllableValue<V>(
  * @function useControllableValue
  * @description 【Hook】生成同时支持受控和非受控状态的值
  * @param props 组件 Props
- * @param [options] 配置选项
+ * @param options 配置选项
  */
 export default function useControllableValue<V>(
   props: Props,
