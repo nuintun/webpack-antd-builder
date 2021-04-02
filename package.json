@@ -18,10 +18,7 @@
   },
   "license": "MIT",
   "browserslist": [
-    "> 1%",
-    "ie >= 11",
-    "Firefox ESR",
-    "last 2 versions"
+    "defaults"
   ],
   "nodemonConfig": {
     "quiet": true,
