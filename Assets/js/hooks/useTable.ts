@@ -131,3 +131,23 @@ export default function useTable<I, E extends object = {}>(
 
   return [{ loading, onChange, dataSource, pagination, size: 'middle' }, fetch, refs];
 }
+
+/**
+ * @function useTransform
+ * @description 表格组件数据源转换
+ * @param props 表格组件参数
+ * @param transform 转换函数
+ */
+export function useTransform<S, I>(
+  props: DefaultTableProps<S>,
+  transform: (dataSource: readonly S[]) => I[]
+): DefaultTableProps<I> {
+  const { dataSource } = props;
+
+  return useMemo(() => {
+    return ({
+      ...props,
+      dataSource: transform(dataSource)
+    } as unknown) as DefaultTableProps<I>;
+  }, [dataSource]);
+}
