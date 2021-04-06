@@ -89,5 +89,5 @@ export function urlToPaths(url: string): string[] {
 export function getLastRangeDate(value: number, unit: OpUnitType = 'day'): Dayjs[] {
   const today = dayjs();
 
-  return [today.subtract(Math.max(0, value - 1), unit), today];
+  return [today.subtract(Math.max(0, /^d(ay)?$/.test(unit) ? value - 1 : value), unit), today];
 }

@@ -80,6 +80,16 @@ export default function usePagingRequest<I, E extends object = {}>(
         ...options.pagination
       };
 
+      if (__DEV__) {
+        if (pagination.page < 1 || !Number.isInteger(pagination.page)) {
+          throw new RangeError('page must be an integer of no less than 1');
+        }
+
+        if (pagination.pageSize < 1 || !Number.isInteger(pagination.pageSize)) {
+          throw new RangeError('page size must be an integer of no less than 1');
+        }
+      }
+
       query.page = pagination.page;
       query.pageSize = pagination.pageSize;
 
@@ -106,7 +116,7 @@ export default function usePagingRequest<I, E extends object = {}>(
     if (hasPagination) {
       const { total = 0 } = response;
       const { page: current, pageSize } = paginationRef.current as Pagination;
-      const page = Math.min(current, Math.ceil(total / Math.max(1, pageSize)));
+      const page = Math.max(1, Math.min(current, Math.ceil(total / pageSize)));
 
       if (page !== current) {
         setRef(paginationRef, { page, pageSize });
