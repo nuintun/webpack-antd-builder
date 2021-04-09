@@ -1,0 +1,104 @@
+@import (reference) "~antd/es/style/themes/default.less";
+
+@smart-menu-prefix-cls: ui-smart-menu;
+
+.@{smart-menu-prefix-cls} {
+  user-select: none;
+
+  &-sider {
+    overflow: hidden;
+
+    .ant-menu-root {
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      height: calc(100% - @layout-header-height);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &.ant-menu-inline {
+        .ant-menu-item,
+        .ant-menu-submenu-title {
+          padding: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &-drawer {
+    padding: 0;
+    height: 100vh;
+
+    .ant-drawer-content {
+      .ant-drawer-body {
+        padding: 0;
+        display: flex;
+        overflow: hidden;
+        flex-direction: row;
+      }
+    }
+  }
+
+  &-header {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    white-space: nowrap;
+    word-break: keep-all;
+    justify-items: center;
+    height: @layout-header-height;
+    background: @layout-sider-background-light;
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
+  }
+
+  &-title {
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      font-size: @menu-icon-size;
+      line-height: @menu-icon-size;
+      margin-right: @menu-icon-margin-right;
+
+      > img {
+        height: @menu-icon-size;
+      }
+    }
+  }
+
+  &.ant-menu-inline-collapsed {
+    width: 100%;
+
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+      padding: 0;
+    }
+
+    .@{smart-menu-prefix-cls}-title {
+      justify-content: center;
+
+      .@{smart-menu-prefix-cls}-icon {
+        font-size: @menu-icon-size;
+        line-height: @menu-icon-size;
+      }
+    }
+  }
+
+  &-light {
+    .@{smart-menu-prefix-cls}-header {
+      background: @layout-sider-background-light;
+      border-bottom: @border-width-base @border-style-base @border-color-split;
+    }
+  }
+
+  &-dark {
+    .@{smart-menu-prefix-cls}-header {
+      border-bottom: none;
+      background: @layout-sider-background;
+    }
+  }
+}

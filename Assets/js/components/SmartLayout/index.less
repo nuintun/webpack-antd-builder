@@ -1,0 +1,60 @@
+@import (reference) "~antd/es/style/themes/default.less";
+
+@layout-prefix-cls: ui-smart-layout;
+
+@layout-trigger-size: 21px;
+@layout-header-padding-left: 0;
+@layout-header-padding-right: 12px;
+@layout-header-background-light: #fff;
+@layout-trigger-hover-color: @primary-color;
+@layout-trigger-hover-color-light: @primary-color;
+
+.@{layout-prefix-cls} {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  &-header {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-items: center;
+    height: @layout-header-height;
+    background: @layout-header-background-light;
+    transition: all 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
+    padding: 0 @layout-header-padding-right 0 @layout-header-padding-left;
+    border-bottom: @border-width-base @border-style-base @border-color-split;
+  }
+
+  &-content {
+    overflow: auto;
+    background: #f2f5f7;
+    -webkit-overflow-scrolling: touch;
+    height: calc(100vh - @layout-header-height);
+  }
+
+  &-sider-trigger {
+    cursor: pointer;
+    font-size: @layout-trigger-size;
+    color: @layout-trigger-color-light;
+
+    &:hover {
+      color: @layout-trigger-hover-color-light;
+    }
+  }
+
+  &-dark {
+    .@{layout-prefix-cls}-header {
+      border-bottom: none;
+      background: @layout-header-background;
+    }
+
+    .@{layout-prefix-cls}-sider-trigger {
+      color: @layout-trigger-color;
+
+      &:hover {
+        color: @layout-trigger-hover-color;
+      }
+    }
+  }
+}
