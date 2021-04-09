@@ -2,7 +2,7 @@
  * @module utils
  */
 
-import { Duration, sub as subDate } from 'date-fns';
+import dayjs, { Dayjs, OpUnitType } from 'dayjs';
 
 const { toString } = Object.prototype;
 
@@ -85,8 +85,8 @@ export function urlToPaths(url: string): string[] {
  * @param value 偏移值
  * @param unit 偏移单位
  */
-export function getLastRangeDate(duration: Duration): [start: Date, end: Date] {
-  const today = new Date();
+export function getLastRangeDate(value: number, unit: OpUnitType = 'day'): [start: Dayjs, end: Dayjs] {
+  const today = dayjs();
 
-  return [subDate(today, duration), today];
+  return [today.subtract(Math.max(0, /^d(ay)?$/.test(unit) ? value - 1 : value), unit), today];
 }

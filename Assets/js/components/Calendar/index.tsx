@@ -1,8 +1,11 @@
 import 'antd/es/calendar/style';
 
-import generateCalendar from 'antd/es/calendar/generateCalendar';
-import dateFnsGenerateConfig from 'rc-picker/es/generate/dateFns';
+import 'dayjs/locale/zh-cn';
 
-const Calendar = generateCalendar<Date>(dateFnsGenerateConfig);
+import { Dayjs } from 'dayjs';
+import dayjsGenerateConfig from 'rc-picker/es/generate/dayjs';
+import generateCalendar from 'antd/es/calendar/generateCalendar';
+
+const Calendar = generateCalendar<Dayjs>(dayjsGenerateConfig);
 
 export default Calendar;
