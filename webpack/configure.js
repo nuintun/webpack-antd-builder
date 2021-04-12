@@ -17,7 +17,6 @@ const moment = path.resolve('Assets/js/utils/moment.ts');
 module.exports = {
   title: 'Antd',
   publicPath: '/public/',
-  context: path.resolve('Assets'),
   outputPath: path.resolve('wwwroot/public'),
   entryHTML: path.resolve('wwwroot/app.html'),
   theme: path.resolve('Assets/css/theme.less'),

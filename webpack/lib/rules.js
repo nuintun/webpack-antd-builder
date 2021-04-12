@@ -9,7 +9,7 @@
 
 const fs = require('fs');
 const less2js = require('./less2js');
-const { context, theme } = require('../configure');
+const { theme } = require('../configure');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
@@ -106,7 +106,7 @@ module.exports = async mode => {
           use: [
             {
               loader: 'file-loader',
-              options: { context, esModule: true, name: '[path][name]-[hash:8].[ext]' }
+              options: { esModule: true, name: '[path][name]-[hash:8].[ext]' }
             }
           ]
         },
@@ -123,7 +123,7 @@ module.exports = async mode => {
             },
             {
               loader: 'url-loader',
-              options: { limit: 8192, context, esModule: true, name: '[path][name]-[hash:8].[ext]' }
+              options: { limit: 8192, esModule: true, name: '[path][name]-[hash:8].[ext]' }
             }
           ]
         },
@@ -132,7 +132,7 @@ module.exports = async mode => {
           use: [
             {
               loader: 'url-loader',
-              options: { limit: 8192, context, esModule: true, name: '[path][name]-[hash:8].[ext]' }
+              options: { limit: 8192, esModule: true, name: '[path][name]-[hash:8].[ext]' }
             }
           ]
         }
