@@ -18,7 +18,7 @@ export interface TimeRangePickerProps extends Omit<RangePickerTimeProps<Dayjs>, 
 }
 
 const RangePicker = React.forwardRef<any, TimeRangePickerProps>(({ popupClassName, ...restProps }, ref) => (
-  <InternalRangePicker {...restProps} dropdownClassName={popupClassName} ref={ref} picker="time" />
+  <InternalRangePicker {...restProps} ref={ref} picker="time" dropdownClassName={popupClassName} />
 ));
 
 export interface TimePickerProps extends Omit<PickerTimeProps<Dayjs>, 'picker'> {
