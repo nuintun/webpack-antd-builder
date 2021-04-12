@@ -1,19 +1,19 @@
 import React, { memo } from 'react';
 
-import { format as formatDate, parseJSON as parseDate } from 'date-fns';
+import dayjs, { ConfigType } from 'dayjs';
 
 type HTMLSpanElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 
 export type DateViewerProps = HTMLSpanElementProps & {
   format?: string;
-  value: string | number | Date;
+  value: ConfigType;
   placeholder?: React.ReactNode;
 };
 
 export default memo(function DateViewer({
   value,
   placeholder = '无',
-  format = 'yyyy-MM-dd HH:mm:ss',
+  format = 'YYYY-MM-DD HH:mm:ss',
   ...restProps
 }: DateViewerProps): React.ReactElement | null {
   if (value == null) {
@@ -24,7 +24,5 @@ export default memo(function DateViewer({
     return null;
   }
 
-  const date = parseDate(value);
-
-  return <span {...restProps}>{formatDate(date, format)}</span>;
+  return <span {...restProps}>{dayjs(value).format(format)}</span>;
 });
