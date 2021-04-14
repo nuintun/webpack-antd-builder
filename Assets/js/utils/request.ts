@@ -6,7 +6,7 @@
 import 'whatwg-fetch';
 import { message } from 'antd';
 
-type Query = { [key: string]: any; [key: number]: any };
+type Query = Record<string | number, any>;
 
 export interface Options extends Omit<RequestInit, 'body'> {
   body?: any;

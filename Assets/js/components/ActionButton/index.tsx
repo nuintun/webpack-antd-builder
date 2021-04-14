@@ -7,36 +7,46 @@ import usePersistCallback from '~js/hooks/usePersistCallback';
 import { Button, ButtonProps, message, Popconfirm, PopconfirmProps } from 'antd';
 
 export interface ActionButtonProps<T> extends Omit<ButtonProps, 'loading' | 'onClick' | 'onError'> {
-  body?: any;
   delay?: number;
   action: string;
   method?: string;
+  notify?: boolean;
+  body?: Options['body'];
   onComplete?: () => void;
+  query?: Options['query'];
   onSuccess?: (response: T) => void;
+  confirmIcon?: PopconfirmProps['icon'];
+  confirmTitle?: PopconfirmProps['title'];
   onError?: (error: RequestError) => void;
-  requestInit?: Omit<Options, 'body' | 'method'>;
-  confirm?: Omit<PopconfirmProps, 'disabled' | 'onConfirm'>;
+  requestInit?: Omit<Options, 'query' | 'body' | 'method' | 'notify'>;
+  confirmInit?: Omit<PopconfirmProps, 'icon' | 'title' | 'disabled' | 'onConfirm'>;
 }
+
+const DEFAULT_CONFIRM_ICON = <QuestionCircleOutlined style={{ color: '#f00' }} />;
 
 export default memo(function ActionButton<T>({
   body,
+  query,
   delay,
   action,
-  confirm,
+  notify,
   onError,
   disabled,
   children,
   onSuccess,
   onComplete,
   requestInit,
+  confirmInit,
+  confirmTitle,
   method = 'PUT',
+  confirmIcon = DEFAULT_CONFIRM_ICON,
   ...restProps
 }: ActionButtonProps<T>): React.ReactElement {
   const [loading, fetch] = useRequest(delay);
 
   const onAction = usePersistCallback(async () => {
     try {
-      const response = await fetch<T>(action, { ...requestInit, method, body });
+      const response = await fetch<T>(action, { ...requestInit, method, body, query, notify });
 
       onSuccess && onSuccess(response);
       onComplete && onComplete();
@@ -46,11 +56,16 @@ export default memo(function ActionButton<T>({
     }
   });
 
-  if (confirm) {
-    const icon = <QuestionCircleOutlined style={{ color: '#f00' }} />;
-
+  if (confirmTitle) {
     return (
-      <Popconfirm icon={icon} placement="topRight" {...confirm} disabled={disabled || loading} onConfirm={onAction}>
+      <Popconfirm
+        placement="topRight"
+        {...confirmInit}
+        icon={confirmIcon}
+        title={confirmTitle}
+        onConfirm={onAction}
+        disabled={disabled || loading}
+      >
         <Button {...restProps} disabled={disabled} loading={loading}>
           {children}
         </Button>
