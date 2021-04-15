@@ -5,7 +5,7 @@ import { isString } from '~js/utils/utils';
 import useSubmit, { Options } from '~js/hooks/useSubmit';
 import { Button, ConfigProvider, Drawer, DrawerProps, Form, FormInstance, FormProps, Space } from 'antd';
 
-type SubmitPicked = 'query' | 'method' | 'transform' | 'onSuccess' | 'onError' | 'onComplete';
+type SubmitPicked = 'query' | 'method' | 'notify' | 'transform' | 'onSuccess' | 'onError' | 'onComplete';
 type FormPicked = 'name' | 'size' | 'colon' | 'layout' | 'preserve' | 'labelAlign' | 'requiredMark' | 'initialValues';
 type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterVisibleChange';
 
@@ -45,6 +45,7 @@ function FormDrawer<V, R>({
   query,
   action,
   method,
+  notify,
   onOpen,
   onClose,
   trigger,
@@ -70,24 +71,21 @@ function FormDrawer<V, R>({
   const isBrokenWidth = useMedia(`(max-width: ${isString(width) ? width : `${width}px`})`);
   const isBrokenHeight = useMedia(`(max-height: ${isString(height) ? height : `${height}px`})`);
 
-  const submitOptions = useMemo(
-    () => ({
-      ...requestInit,
-      onComplete,
-      onSuccess(response: R, values: V) {
-        setVisible(false);
+  const [submitting, onSubmit] = useSubmit<V, R>(action, {
+    ...requestInit,
+    query,
+    method,
+    notify,
+    onError,
+    transform,
+    onComplete,
+    onSuccess(response: R, values: V) {
+      setVisible(false);
 
-        onSuccess && onSuccess(response, values);
-        onClose && onClose();
-      },
-      transform,
-      onError,
-      method,
-      query
-    }),
-    [query, method, transform, onSuccess, onError, onComplete, requestInit]
-  );
-  const [submitting, onSubmit] = useSubmit<V, R>(action, submitOptions);
+      onSuccess && onSuccess(response, values);
+      onClose && onClose();
+    }
+  });
 
   const onCloseHandler = useCallback(() => {
     !submitting && setVisible(false);
