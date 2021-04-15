@@ -5,7 +5,7 @@ import { isString } from '~js/utils/utils';
 import useSubmit, { Options } from '~js/hooks/useSubmit';
 import { Button, ConfigProvider, Drawer, DrawerProps, Form, FormInstance, FormProps, Space } from 'antd';
 
-type SubmitPicked = 'query' | 'method' | 'notify' | 'transform' | 'onSuccess' | 'onError' | 'onComplete';
+type SubmitPicked = 'query' | 'method' | 'notify' | 'transform' | 'onError' | 'onSuccess' | 'onComplete';
 type FormPicked = 'name' | 'size' | 'colon' | 'layout' | 'preserve' | 'labelAlign' | 'requiredMark' | 'initialValues';
 type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterVisibleChange';
 
