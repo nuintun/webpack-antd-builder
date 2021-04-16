@@ -1405,9 +1405,9 @@
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
 "@types/node@*":
-  version "14.14.39"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.39.tgz#9ef394d4eb52953d2890e4839393c309aa25d2d1"
-  integrity sha512-Qipn7rfTxGEDqZiezH+wxqWYR8vcXq5LRpZrETD19Gs4o8LbklbmqotSUsMU+s5G3PJwMRDfNEYoxrcBwIxOuw==
+  version "14.14.41"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.41.tgz#d0b939d94c1d7bd53d04824af45f1139b8c45615"
+  integrity sha512-dueRKfaJL4RTtSa7bWeTK1M+VH+Gns73oCgzvYfHZywRCoPSd8EkXBL0mZ9unPTveBn+D9phZBaxuzpwjWkW0g==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -3622,10 +3622,10 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
-less-loader@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-8.1.0.tgz#8276adc16bf6576dd80b71563685a2cfe93b0a50"
-  integrity sha512-IE73O5LY5WHA71EDwszM2PIEGDF30xz45GplpRhYuxMXhAvXoMudu/ItjllNR/ht7XLh5N7JegzRg11HYu+xxg==
+less-loader@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-8.1.1.tgz#ababe912580457ad00a4318146aac5b53e023f42"
+  integrity sha512-K93jJU7fi3n6rxVvzp8Cb88Uy9tcQKfHlkoezHwKILXhlNYiRQl4yowLIkQqmBXOH/5I8yoKiYeIf781HGkW9g==
   dependencies:
     klona "^2.0.4"
 
