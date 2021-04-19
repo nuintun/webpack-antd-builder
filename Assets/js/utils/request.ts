@@ -45,19 +45,19 @@ function getStatusMessage(code: number): string {
 }
 
 /**
- * @function jsonType
- * @param type 返回类型
+ * @function isJsonType
+ * @param type 内容类型
  */
-function jsonType(type: string | null): boolean {
-  return !!type && /^application\/json(?:;|$)/i.test(type);
+function isJsonType(type: string | null): boolean {
+  return !!type && /^application\/json;|$/i.test(type);
 }
 
 /**
- * @function urlencodedType
- * @param type 发送类型
+ * @function isUrlencodedType
+ * @param type 内容类型
  */
-function urlencodedType(type: string | null): boolean {
-  return !!type && /^application\/x-www-form-urlencoded(?:;|$)/i.test(type);
+function isUrlencodedType(type: string | null): boolean {
+  return !!type && /^application\/x-www-form-urlencoded;|$/i.test(type);
 }
 
 /**
@@ -181,9 +181,9 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
       const contentType = headers.get('Content-Type');
 
       // 检测传送数据方式
-      if (urlencodedType(contentType)) {
+      if (isUrlencodedType(contentType)) {
         options.body = bodySerializer(options.body);
-      } else if (jsonType(contentType)) {
+      } else if (isJsonType(contentType)) {
         options.body = bodySerializer(options.body, true);
       }
     }
@@ -195,7 +195,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
       switch (response.status) {
         case 200:
           // 根据类型解析返回结果
-          return jsonType(response.headers.get('Content-Type'))
+          return isJsonType(response.headers.get('Content-Type'))
             ? jsonParser<R>(response, notify, onUnauthorized)
             : ((response.text() as unknown) as Promise<R>);
         case 401:
