@@ -25,8 +25,8 @@ export interface RequestError extends Error {
   code: number;
 }
 
-const STATUS_TEXT: { [code: number]: string } = {
-  0: '请求失败',
+const STATUS_TEXT: Record<number, string> = {
+  200: '操作成功',
   401: '未经授权',
   403: '无权操作',
   404: '接口未找到',
@@ -37,10 +37,10 @@ const STATUS_TEXT: { [code: number]: string } = {
 };
 
 /**
- * @function getStatusMessage
+ * @function resloveMessage
  * @param code HTTP 状态码
  */
-function getStatusMessage(code: number): string {
+function resloveMessage(code: number): string {
   return STATUS_TEXT[code] || `其它错误：${code}`;
 }
 
@@ -49,7 +49,7 @@ function getStatusMessage(code: number): string {
  * @param type 内容类型
  */
 function isJsonType(type: string | null): boolean {
-  return !!type && /^application\/json;|$/i.test(type);
+  return !!type && /^application\/json(;|$)/i.test(type);
 }
 
 /**
@@ -57,45 +57,23 @@ function isJsonType(type: string | null): boolean {
  * @param type 内容类型
  */
 function isUrlencodedType(type: string | null): boolean {
-  return !!type && /^application\/x-www-form-urlencoded;|$/i.test(type);
+  return !!type && /^application\/x-www-form-urlencoded(;|$)/i.test(type);
 }
 
 /**
- * @function jsonParser
- * @param response 响应对象
- * @param notify 是否显示通知
- * @param onUnauthorized 需要鉴权回调
+ * @function parseResponse
+ * @param response 响应内容
  */
-function jsonParser<R>(response: Response, notify: boolean, onUnauthorized?: () => void): Promise<R> {
-  return response.json().then(
-    (json: RequestResult<R>): R => {
-      const { code, msg, payload } = json;
+async function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
+  if (isJsonType(response.headers.get('Content-Type'))) {
+    const { code, msg, payload } = (await response.json()) as RequestResult<R>;
 
-      switch (code) {
-        case 200:
-          notify && message.success(msg);
+    return { code, msg: msg || resloveMessage(code), payload };
+  }
 
-          // 操作成功
-          return payload;
-        case 401:
-          // 需要登录认证
-          onUnauthorized && onUnauthorized();
-        default:
-          // 其它错误，403 等
-          const error = new Error(msg || getStatusMessage(code)) as RequestError;
+  const payload = ((await response.text()) as unknown) as R;
 
-          error.code = code;
-
-          throw error;
-      }
-    },
-    (error: RequestError): never => {
-      error.code = response.status;
-      error.message = '数据解析失败，请检查数据返回格式';
-
-      throw error;
-    }
-  );
+  return { code: response.status, msg: resloveMessage(response.status), payload };
 }
 
 /**
@@ -134,11 +112,11 @@ function serializeQuery(values: Query, search: URLSearchParams = new URLSearchPa
 /**
  * @function bodySerializer
  * @param {any} body
- * @param {boolean} jsonType
+ * @param {boolean} useJson
  */
-function bodySerializer(body: any, jsonType?: boolean): string | null | never {
+function bodySerializer(body: any, useJson?: boolean): string | null | never {
   if (body) {
-    if (jsonType) return JSON.stringify(body);
+    if (useJson) return JSON.stringify(body);
 
     return serializeQuery(body).toString();
   }
@@ -192,28 +170,40 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   // 发送请求
   return fetch(input.href, options).then(
     (response: Response): Promise<R> => {
-      switch (response.status) {
-        case 200:
-          // 根据类型解析返回结果
-          return isJsonType(response.headers.get('Content-Type'))
-            ? jsonParser<R>(response, notify, onUnauthorized)
-            : ((response.text() as unknown) as Promise<R>);
-        case 401:
-          // 需要登录认证
-          onUnauthorized && onUnauthorized();
-        default:
-          // 其它错误，403，404，500 等
-          const { status }: Response = response;
-          const error = new Error(getStatusMessage(status)) as RequestError;
+      return parseResponse<R>(response).then(
+        ({ code, msg, payload }) => {
+          const { status } = response;
 
-          error.code = status;
+          if (status === 200 && code === 200) {
+            notify && message.success(msg);
+
+            // 操作成功
+            return payload;
+          }
+
+          if (status === 401 || code === 401) {
+            // 需要登录认证
+            onUnauthorized && onUnauthorized();
+          }
+
+          // 其它错误，403 等
+          const error = new Error(msg) as RequestError;
+
+          error.code = code;
 
           throw error;
-      }
+        },
+        (error: RequestError): never => {
+          error.code = response.status;
+          error.message = '无法解析响应数据';
+
+          throw error;
+        }
+      );
     },
     (error: RequestError): never => {
       error.code = 0;
-      error.message = getStatusMessage(error.code);
+      error.message = '请求失败';
 
       throw error;
     }
