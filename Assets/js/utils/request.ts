@@ -110,11 +110,11 @@ function serializeQuery(values: Query, search: URLSearchParams = new URLSearchPa
 }
 
 /**
- * @function bodySerializer
+ * @function serializeBody
  * @param {any} body
  * @param {boolean} useJson
  */
-function bodySerializer(body: any, useJson?: boolean): string | null | never {
+function serializeBody(body: any, useJson?: boolean): string | null | never {
   if (body) {
     if (useJson) return JSON.stringify(body);
 
@@ -154,15 +154,15 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
     if (!headers.has('Content-Type')) {
       headers.set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
-      options.body = bodySerializer(options.body);
+      options.body = serializeBody(options.body);
     } else {
       const contentType = headers.get('Content-Type');
 
       // 检测传送数据方式
       if (isUrlencodedType(contentType)) {
-        options.body = bodySerializer(options.body);
+        options.body = serializeBody(options.body);
       } else if (isJsonType(contentType)) {
-        options.body = bodySerializer(options.body, true);
+        options.body = serializeBody(options.body, true);
       }
     }
   }
