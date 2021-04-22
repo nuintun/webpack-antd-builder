@@ -119,7 +119,7 @@ module.exports = async mode => {
             },
             {
               loader: '@svgr/webpack',
-              options: { babel: false, memo: true, icon: true, namedExport: 'Component' }
+              options: { babel: false, memo: true, namedExport: 'Component' }
             },
             {
               loader: 'url-loader',
