@@ -120,6 +120,7 @@ async function resolveEntry(entry, options) {
 
   app.use(
     devMiddleware(compiler, {
+      index: false,
       writeToDisk: file => file === entryHTML,
       headers: {
         'Access-Control-Allow-Origin': '*',
