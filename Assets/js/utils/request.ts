@@ -12,6 +12,7 @@ export interface Options extends Omit<RequestInit, 'body'> {
   body?: any;
   query?: Query;
   notify?: boolean;
+  baseURL?: string;
   onUnauthorized?: () => void;
 }
 
@@ -141,12 +142,13 @@ function serializeBody(body: any, useJson?: boolean): string | null | never {
  * @param {Options} [init]
  */
 export default function request<R>(url: string, init: Options = {}): Promise<R> {
-  const input = new URL(url, location.href);
-  const { query, notify = false, onUnauthorized, ...options } = init;
+  const { query, notify = false, baseURL = location.href, onUnauthorized, ...options } = init;
 
   options.cache = options.cache || 'no-cache';
   options.headers = new Headers(options.headers || {});
   options.credentials = options.credentials || 'include';
+
+  const input = new URL(url, baseURL);
 
   // 查询参数
   query && serializeQuery(query, input.searchParams);
