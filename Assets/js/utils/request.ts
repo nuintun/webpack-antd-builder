@@ -41,7 +41,7 @@ const STATUS_TEXT: Record<number, string> = {
  * @param code HTTP 状态码
  */
 function resloveMessage(code: number): string {
-  return STATUS_TEXT[code] || `其它错误：${code}`;
+  return STATUS_TEXT[code] || `操作失败：${code}`;
 }
 
 /**
@@ -61,6 +61,14 @@ function isUrlencodedType(type: string | null): boolean {
 }
 
 /**
+ * @function isStatusOk
+ * @param status HTTP 状态码
+ */
+function isStatusOk(status: number): boolean {
+  return status >= 200 && status < 300;
+}
+
+/**
  * @function parseResponse
  * @param response 响应内容
  */
@@ -71,9 +79,11 @@ async function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
     return { code, msg: msg || resloveMessage(code), payload };
   }
 
+  const { status } = response;
+  const code = isStatusOk(status) ? 200 : status;
   const payload = ((await response.text()) as unknown) as R;
 
-  return { code: response.status, msg: resloveMessage(response.status), payload };
+  return { code, msg: resloveMessage(code), payload };
 }
 
 /**
@@ -174,7 +184,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
         ({ code, msg, payload }) => {
           const { status } = response;
 
-          if (status === 200 && code === 200) {
+          if (isStatusOk(status) && code === 200) {
             notify && message.success(msg);
 
             // 操作成功
