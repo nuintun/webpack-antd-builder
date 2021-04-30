@@ -11,9 +11,9 @@ export interface IStorage<V> {
 
 /**
  * @function createStorage
- * @param {Storage} storage
- * @param {Function} serializer
- * @param {Function} deserializer
+ * @param storage 存储容器
+ * @param serializer 序列化函数
+ * @param deserializer 反序列化函数
  */
 export default function createStorage<V>(
   storage: Storage,

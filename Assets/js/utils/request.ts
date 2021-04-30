@@ -90,9 +90,9 @@ async function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
 /**
  * @function appendField
  * @description 新增参数
- * @param {URLSearchParams} search
- * @param {string} key
- * @param {string} value
+ * @param search URLSearchParams 对象
+ * @param key 参数名
+ * @param value 参数值
  */
 function appendField(search: URLSearchParams, key: string, value: string): void {
   value != null && search.append(key, value);
@@ -101,8 +101,8 @@ function appendField(search: URLSearchParams, key: string, value: string): void 
 /**
  * @function serializeQuery
  * @description 序列化参数
- * @param {Query} values
- * @param {URLSearchParams} [search]
+ * @param values 需要序列化的参数
+ * @param search URLSearchParams 对象
  */
 function serializeQuery(values: Query, search: URLSearchParams = new URLSearchParams()): URLSearchParams {
   Object.keys(values).forEach(key => {
@@ -122,8 +122,8 @@ function serializeQuery(values: Query, search: URLSearchParams = new URLSearchPa
 
 /**
  * @function serializeBody
- * @param {any} body
- * @param {boolean} useJson
+ * @param body 消息体
+ * @param useJson 是否使用 JSON 格式
  */
 function serializeBody(body: any, useJson?: boolean): string | null | never {
   if (body) {
@@ -138,8 +138,8 @@ function serializeBody(body: any, useJson?: boolean): string | null | never {
 /**
  * @function request
  * @description Ajax 数据请求
- * @param {string} url
- * @param {Options} [init]
+ * @param url 请求地址
+ * @param init 请求配置
  */
 export default function request<R>(url: string, init: Options = {}): Promise<R> {
   const { query, notify = false, baseURL = location.href, onUnauthorized, ...options } = init;
