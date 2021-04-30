@@ -23,7 +23,6 @@ module.exports = {
   plugins: [
     ['import', imports],
     ['@babel/plugin-transform-runtime', { corejs: false }],
-    ['@babel/plugin-proposal-decorators', { legacy: true }],
-    ['@babel/plugin-proposal-class-properties', { loose: true }]
+    ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: false }]
   ]
 };
