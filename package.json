@@ -43,7 +43,7 @@
     "koa": "^2.5.2",
     "less": "^3.8.1",
     "webpack": "^4.16.5",
-    "postcss": "^7.0.2",
+    "postcss": "^8.2.10",
     "url-loader": "^1.0.1",
     "koa-webpack": "^5.1.0",
     "less-loader": "^4.1.0",
