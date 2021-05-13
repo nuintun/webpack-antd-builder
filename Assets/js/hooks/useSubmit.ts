@@ -36,11 +36,11 @@ export default function useSubmit<V, R>(
       const response = await request<R>(url, { ...requestOptions, method, body });
 
       onSuccess && onSuccess(response, values);
-      onComplete && onComplete(values);
     } catch (error) {
       onError ? onError(error, values) : message.error(error.message);
-      onComplete && onComplete(values);
     }
+
+    onComplete && onComplete(values);
   });
 
   return [submitting, onSubmit];

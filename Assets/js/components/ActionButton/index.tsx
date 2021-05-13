@@ -49,11 +49,11 @@ export default memo(function ActionButton<T>({
       const response = await fetch<T>(action, { ...requestInit, method, body, query, notify });
 
       onSuccess && onSuccess(response);
-      onComplete && onComplete();
     } catch (error) {
       onError ? onError(error) : message.error(error.message);
-      onComplete && onComplete();
     }
+
+    onComplete && onComplete();
   });
 
   if (confirmTitle) {
