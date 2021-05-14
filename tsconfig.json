@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "jsx": "preserve",
     "target": "ESNext",
     "module": "ESNext",
@@ -14,13 +15,13 @@
     "experimentalDecorators": true,
     "paths": {
       "~js/*": [
-        "./Assets/js/*"
+        "Assets/js/*"
       ],
       "~css/*": [
-        "./Assets/css/*"
+        "Assets/css/*"
       ],
       "~images/*": [
-        "./Assets/images/*"
+        "Assets/images/*"
       ]
     }
   },
