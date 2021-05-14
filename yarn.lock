@@ -1449,10 +1449,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
-"@types/react-dom@^17.0.4":
-  version "17.0.4"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.4.tgz#d65159a847aca2a0fc87a7544a2f8fece8754d04"
-  integrity sha512-Wb6rlnPJfqbhpkvYN39y1NM/pOGGPzzIRquu0RdUMvTwgXNvASFO7pdtrtvyxGTQNb9wzBaQxXAWDdEqegZw2A==
+"@types/react-dom@^17.0.5":
+  version "17.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.5.tgz#df44eed5b8d9e0b13bb0cd38e0ea6572a1231227"
+  integrity sha512-ikqukEhH4H9gr4iJCmQVNzTB307kROe3XFfHAOTxOXPOw7lAoEXnM5KWTkzeANGL5Ce6ABfiMl/zJBYNi7ObmQ==
   dependencies:
     "@types/react" "*"
 
@@ -2905,9 +2905,9 @@ find-up@^4.0.0:
     path-exists "^4.0.0"
 
 fraction.js@^4.0.13:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.0.13.tgz#3c1c315fa16b35c85fffa95725a36fa729c69dfe"
-  integrity sha512-E1fz2Xs9ltlUp+qbiyx9wmt2n9dRzPsS11Jtdb8D2o+cC7wr9xkkKsVKJuBX0ST+LVS+LhLO+SbLJNtfWcJvXA==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.1.0.tgz#229ec1cedc8c3c7e5d2d20688ba64f0a43af5830"
+  integrity sha512-o9lSKpK0TDqDwTL24Hxqi6I99s942l6TYkfl6WvGWgLOIFz/YonSGKfiSeMadoiNvTfqnfOa9mjb5SGVbBK9/w==
 
 fresh@~0.5.2:
   version "0.5.2"
@@ -3614,10 +3614,10 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
-less-loader@^8.1.1:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-8.1.1.tgz#ababe912580457ad00a4318146aac5b53e023f42"
-  integrity sha512-K93jJU7fi3n6rxVvzp8Cb88Uy9tcQKfHlkoezHwKILXhlNYiRQl4yowLIkQqmBXOH/5I8yoKiYeIf781HGkW9g==
+less-loader@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-9.0.0.tgz#71a0b530174bddf89bb11a5019dd725f54df4791"
+  integrity sha512-bPen1xeGTZuYFFobcdz9kMUVgSSSDZQJtyhawtCtcz1QboQOwhkI7uCwp5UO+IZpO+LJS1W73YwxsufbBT6SBQ==
   dependencies:
     klona "^2.0.4"
 
