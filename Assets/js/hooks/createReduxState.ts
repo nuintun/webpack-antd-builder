@@ -39,7 +39,7 @@ export default function createReduxState<S, A>(
 
     initialized = true;
 
-    sharedState = isFunction(initialState) ? initialState() : (initialState as S);
+    sharedState = isFunction(initialState) ? initialState() : initialState;
 
     return sharedState;
   };
