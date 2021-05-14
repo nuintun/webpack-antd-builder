@@ -25,24 +25,24 @@ export default function createSharedState<S>(
 export default function createSharedState<S>(
   initialState?: S | (() => S)
 ): () => [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
-  let sharedState: S;
+  let sharedState: S | undefined;
 
   let initialized = false;
 
-  const dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
+  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
 
-  const dispatchState = (value: React.SetStateAction<S>): void => {
+  const dispatchState = (value: React.SetStateAction<S | undefined>): void => {
     sharedState = isFunction(value) ? value(sharedState) : value;
 
     dispatches.forEach(dispatch => dispatch(sharedState));
   };
 
-  const getInitialState = (): S => {
+  const getInitialState = (): S | undefined => {
     if (initialized) return sharedState;
 
     initialized = true;
 
-    sharedState = isFunction(initialState) ? initialState() : (initialState as S);
+    sharedState = isFunction(initialState) ? initialState() : initialState;
 
     return sharedState;
   };
@@ -57,7 +57,7 @@ export default function createSharedState<S>(
       initializedRef.current = true;
     }
 
-    const setSharedState = useCallback((value: React.SetStateAction<S>): void => {
+    const setSharedState = useCallback((value: React.SetStateAction<S | undefined>): void => {
       initializedRef.current && dispatchState(value);
     }, []);
 

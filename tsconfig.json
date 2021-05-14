@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "strict": true,
+    "noEmit": true,
     "jsx": "preserve",
     "target": "ESNext",
     "module": "ESNext",
     "noImplicitAny": true,
     "noUnusedLocals": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "moduleResolution": "Node",
     "noUnusedParameters": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "~js/*": [
         "Assets/js/*"

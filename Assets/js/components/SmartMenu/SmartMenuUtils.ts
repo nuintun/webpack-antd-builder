@@ -60,7 +60,7 @@ const isMenuKey: IsMenuKey = memoizeOne((key, flatMenuData) => {
  */
 function uniqueKeys(keys: string[]): string[] {
   const result: string[] = [];
-  const cached: { [key: string]: boolean } = {};
+  const cached: Record<string, boolean> = {};
 
   for (const key of keys) {
     if (!cached[key]) {

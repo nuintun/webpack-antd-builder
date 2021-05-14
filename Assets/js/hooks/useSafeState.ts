@@ -26,9 +26,9 @@ export default function useSafeState<S>(
   initialState?: S | (() => S)
 ): [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
   const isMounted = useIsMounted();
-  const [state, setState] = useState(initialState as S);
+  const [state, setState] = useState(initialState);
 
-  const setSafeState = useCallback((value: React.SetStateAction<S>): void => {
+  const setSafeState = useCallback((value: React.SetStateAction<S | undefined>): void => {
     isMounted() && setState(value);
   }, []);
 

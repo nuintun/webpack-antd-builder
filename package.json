@@ -7,7 +7,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "lint": "tsc --noEmit",
+    "lint": "tsc",
     "dev": "node webpack/bin/webpack.config.dev.js",
     "prod": "node webpack/bin/webpack.config.prod.js",
     "watch": "nodemon webpack/bin/webpack.config.server.js"

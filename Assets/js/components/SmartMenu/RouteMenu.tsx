@@ -100,7 +100,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
   const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
 
-  const onOpenChangeHander: OpenEventHandler = usePersistCallback((nextOpenKeys: string[]): void => {
+  const onOpenChangeHander = usePersistCallback(((nextOpenKeys: string[]): void => {
     setOpenKeys(nextOpenKeys);
 
     if (!collapsed) {
@@ -108,7 +108,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
     }
 
     onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeysRef.current);
-  });
+  }) as OpenEventHandler);
 
   useEffect(() => {
     if (

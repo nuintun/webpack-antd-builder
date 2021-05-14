@@ -12,7 +12,9 @@ export interface Options {
   format?: (title: string | undefined, defaultTitle: string) => string;
 }
 
-const defaultFormat = (title: string, defaultTitle: string): string => (title ? `${defaultTitle} - ${title}` : defaultTitle);
+const defaultFormat = (title: string | undefined, defaultTitle: string): string => {
+  return title ? `${defaultTitle} - ${title}` : defaultTitle;
+};
 
 /**
  * @function useTitle
