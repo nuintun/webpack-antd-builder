@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
-    "antd": "^4.15.5",
+    "antd": "^4.15.6",
     "bizcharts": "^4.1.10",
     "classnames": "^2.3.1",
     "core-js": "^3.12.1",
@@ -56,7 +56,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@svgr/webpack": "^5.5.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
-    "@types/react": "^17.0.5",
+    "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.1.7",
     "@types/throttle-debounce": "^2.1.0",
