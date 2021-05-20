@@ -1,6 +1,6 @@
 /**
  * @module request
- * @description 站点异步请求函数
+ * @description Ajax 请求封装
  */
 
 import 'whatwg-fetch';
@@ -82,7 +82,7 @@ async function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
 
   const { status } = response;
   const code = isStatusOk(status) ? 200 : status;
-  const payload = ((await response.text()) as unknown) as R;
+  const payload = (await response.text()) as unknown as R;
 
   return { code, msg: resloveMessage(code), payload };
 }

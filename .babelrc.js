@@ -1,8 +1,6 @@
 /**
  * @module .babelrc
- * @listens MIT
- * @author nuintun
- * @description Babel configure.
+ * @description Babel 配置
  */
 
 'use strict';

@@ -1,8 +1,6 @@
 /**
  * @module .postcssrc
- * @listens MIT
- * @author nuintun
- * @description PostCSS configure.
+ * @description PostCSS 配置
  */
 
 'use strict';
