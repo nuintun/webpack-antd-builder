@@ -12,7 +12,6 @@ const path = require('path');
 const js = path.resolve('Assets/js');
 const css = path.resolve('Assets/css');
 const images = path.resolve('Assets/images');
-const moment = path.resolve('Assets/js/utils/moment.ts');
 
 module.exports = {
   title: 'Antd',
@@ -22,5 +21,5 @@ module.exports = {
   theme: path.resolve('Assets/css/theme.less'),
   favicon: path.resolve('wwwroot/favicon.ico'),
   entry: [path.resolve('Assets/js/pages/App.tsx')],
-  alias: { moment, '~js': js, '~css': css, '~images': images }
+  alias: { '~js': js, '~css': css, '~images': images }
 };
