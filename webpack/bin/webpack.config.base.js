@@ -67,7 +67,7 @@ module.exports = {
       title: configure.title,
       favicon: configure.favicon,
       filename: configure.entryHTML,
-      template: require.resolve('./index.ejs')
+      template: require.resolve('../template/index.ejs')
     }),
     new webpack.DefinePlugin({ __APP_TITLE__: JSON.stringify(configure.title) })
   ],
