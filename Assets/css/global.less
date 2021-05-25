@@ -1,0 +1,165 @@
+@import (reference) "~antd/es/style/themes/default.less";
+
+p,
+ul,
+ol,
+div {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  border: 0;
+  user-select: none;
+}
+
+a {
+  &:link,
+  &:visited,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+table {
+  white-space: nowrap;
+}
+
+// 设置内联, 减少浮动带来的 BUG
+.fn-left,
+.fn-right {
+  display: inline;
+}
+
+.fn-left {
+  float: left;
+}
+
+.fn-right {
+  float: right;
+}
+
+// 清理浮动
+.fn-clear:after {
+  height: 0;
+  content: "";
+  clear: both;
+  font-size: 0;
+  display: block;
+  visibility: hidden;
+}
+
+// for IE6 IE7
+.fn-clear {
+  zoom: 1;
+}
+
+:focus {
+  outline: 0;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  .ui-align-center,
+  a.ui-align-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-dropdown-menu {
+    &.ant-dropdown-menu-dark {
+      .anticon {
+        color: inherit;
+      }
+
+      &.ant-dropdown-menu-submenu {
+        background: transparent;
+      }
+
+      .ant-dropdown-menu-submenu-selected {
+        .ant-dropdown-menu-submenu-title {
+          color: @text-color-inverse;
+        }
+      }
+    }
+  }
+}
+
+.ui-unsupported {
+  width: 100%;
+  color: #f00;
+  cursor: default;
+  line-height: 30px;
+  text-align: center;
+  background: #fff1a8;
+  border-bottom: 1px solid #f0c36d;
+}
+
+.ui-page-profile {
+  margin: 16px;
+  padding: 24px;
+  background: #fff;
+
+  .ui-search-profile {
+    & + .ui-search-button {
+      margin: 10px 0 24px;
+    }
+
+    .ant-form-item {
+      padding-bottom: 14px;
+    }
+
+    .ant-form-item-label {
+      padding-bottom: 0;
+    }
+  }
+
+  .ui-table {
+    margin-top: 10px;
+  }
+}
+
+.ant-table {
+  border-top: 1px solid @table-border-color;
+
+  &.ant-table-bordered {
+    border-top: none;
+  }
+
+  .ant-table-content {
+    overflow-x: auto;
+  }
+}
+
+.ui-tabs {
+  .ant-tabs-nav-wrap {
+    padding: 0 16px;
+    background: #fff;
+
+    .ant-tabs-tab {
+      font-size: 18px;
+      margin-right: 0;
+      padding: 12px 16px;
+    }
+  }
+
+  .ui-page-profile {
+    margin: 0 16px 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ui-page-profile {
+    margin: 16px 0;
+  }
+}

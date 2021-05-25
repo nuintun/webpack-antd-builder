@@ -4,7 +4,6 @@ import { Menu, MenuProps } from 'antd';
 import { isString } from '~js/utils/utils';
 import { MenuItem } from '~js/utils/getRouter';
 import usePrevious from '~js/hooks/usePrevious';
-import { OpenEventHandler } from 'rc-menu/es/interface';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import usePersistCallback from '~js/hooks/usePersistCallback';
 import { getExpandKeysFromRouteMath, getFlatMenuData, mergeKeys, prefixUI } from './SmartMenuUtils';
@@ -100,15 +99,17 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
   const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
 
-  const onOpenChangeHander = usePersistCallback(((nextOpenKeys: string[]): void => {
-    setOpenKeys(nextOpenKeys);
+  const onOpenChangeHander = usePersistCallback((nextOpenKeys: React.Key[]): void => {
+    const keys = nextOpenKeys.map(key => key.toString());
+
+    setOpenKeys(keys);
 
     if (!collapsed) {
-      cachedOpenKeysRef.current = nextOpenKeys;
+      cachedOpenKeysRef.current = keys;
     }
 
-    onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeysRef.current);
-  }) as OpenEventHandler);
+    onOpenChange && onOpenChange(keys, cachedOpenKeysRef.current);
+  });
 
   useEffect(() => {
     if (
