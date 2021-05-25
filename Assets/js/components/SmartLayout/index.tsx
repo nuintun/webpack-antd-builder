@@ -60,7 +60,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
     setCollapsed(collapsed => {
       collapsed = !collapsed;
 
-      !isMobile && !isBroken && setCollapsedStore(collapsed);
+      setCollapsedStore(collapsed);
 
       return collapsed;
     })

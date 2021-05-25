@@ -30,8 +30,7 @@ type GetFlatMenuData = (menuData: MenuItem[]) => MenuItem[];
  * @function getFlatMenuData
  * @description 扁平化菜单路由
  * @example [{ path: string }, { path: string }] => [path, path2]
- * @param {MenuItem[]} menuData
- * @returns {string[]}
+ * @param menuData 菜单数据
  */
 export const getFlatMenuData: GetFlatMenuData = memoizeOne(menuData => {
   return walkMenuData(menuData, []);
@@ -42,9 +41,8 @@ type IsMenuKey = (key: string, flatMenuData: MenuItem[]) => boolean;
 /**
  * @function isMenuKey
  * @description 指定标识为否为菜单标识
- * @param {string} key
- * @param {MenuItem[]} flatMenuData
- * @returns {boolean}
+ * @param key 菜单标识
+ * @param flatMenuData 菜单数据
  */
 const isMenuKey: IsMenuKey = memoizeOne((key, flatMenuData) => {
   if (!key) return false;
@@ -55,8 +53,7 @@ const isMenuKey: IsMenuKey = memoizeOne((key, flatMenuData) => {
 /**
  * @function filterKeys
  * @description 菜单标识去重
- * @param {string[]} keys
- * @returns {string[]}
+ * @param keys 菜单标识
  */
 function uniqueKeys(keys: string[]): string[] {
   const result: string[] = [];
@@ -78,10 +75,9 @@ type MergeKeys = (prevkeys: string[], nextKeys: string[], flatMenuData: MenuItem
 /**
  * @function filterKeys
  * @description 过滤菜单标识
- * @param {string[]} prevKeys
- * @param {string[]} nextKeys
- * @param {MenuItem[]} flatMenuData
- * @returns {string[]}
+ * @param prevKeys 更新前菜单标识
+ * @param nextKeys 更新后菜单标识
+ * @param flatMenuData
  */
 export const mergeKeys: MergeKeys = memoizeOne((prevKeys, nextKeys, flatMenuData) =>
   uniqueKeys([...prevKeys.filter(key => isMenuKey(key, flatMenuData)), ...nextKeys])
@@ -97,9 +93,8 @@ type GetExpandKeysFromRouteMath = (path: string | undefined, flatMenuData: MenuI
 /**
  * @function getExpandKeysFromRouteMath
  * @description 通过当前路由获取菜单展开项标识列表
- * @param {string|undefined} path
- * @param {MenuItem[]} flatMenuPaths
- * @returns {MenuKeys}
+ * @param path 路由路径
+ * @param flatMenuPaths 菜单路径列表
  */
 export const getExpandKeysFromRouteMath: GetExpandKeysFromRouteMath = memoizeOne((path, flatMenuData) => {
   const openKeys: string[] = [];
