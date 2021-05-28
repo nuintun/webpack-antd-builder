@@ -2,7 +2,7 @@
  * @module global
  */
 
-import React from 'react';
+/// <reference types="react" />
 
 declare module '*.png' {
   const src: string;
