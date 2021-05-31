@@ -4,7 +4,7 @@
  */
 
 import { isFunction } from '~js/utils/utils';
-import { Dispatch, useEffect, useReducer, useRef } from 'react';
+import { Dispatch, useEffect, useMemo, useReducer } from 'react';
 
 type ContextUpdate<C> = (context: C) => C;
 
@@ -53,16 +53,6 @@ function debug(message: string, ...data: any[]) {
     // Console.log clearly accepts parameters other than string, but TypeScript is complaining, so...
     debug(`%cuseStateMachine %c${message}`, 'color: #888;', 'color: default;', ...data);
   }
-}
-
-function useConstant<E>(init: () => E): E {
-  const ref = useRef<E | null>(null);
-
-  if (ref.current === null) {
-    ref.current = init();
-  }
-
-  return ref.current;
 }
 
 function getState<C, S extends string, E extends string>(
@@ -149,9 +139,9 @@ export default function useStateMachine<C, S extends string, E extends string>(
   options: MachineOptions<C, S, E>,
   context?: C
 ): UseStateMachine<C | undefined, S, E> {
-  const initialState = useConstant<State<C, S, E>>(() => getState(context as C, options, options.initial));
+  const reducer = useMemo(() => getReducer<C, S, E>(options), []);
 
-  const reducer = useConstant(() => getReducer<C, S, E>(options));
+  const initialState = useMemo(() => getState(context as C, options, options.initial), []);
 
   const [machine, dispatch] = useReducer(reducer, initialState);
 
@@ -159,7 +149,7 @@ export default function useStateMachine<C, S extends string, E extends string>(
   const update: Dispatch<ContextUpdate<C>> = updater => dispatch({ type: 'Update', updater });
 
   // The public dispatch/send function exposed to the user
-  const send: Dispatch<E> = useConstant(() => next => dispatch({ type: 'Transition', next }));
+  const send: Dispatch<E> = useMemo(() => next => dispatch({ type: 'Transition', next }), []);
 
   useEffect(() => {
     const exit = options.states[machine.value]?.effect?.(send, update);
