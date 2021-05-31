@@ -3,7 +3,7 @@
  * @see https://github.com/cassiozen/useStateMachine
  */
 
-import { isFunction } from '~js/utils/utils';
+import { isFunction, isString } from '~js/utils/utils';
 import { Dispatch, useEffect, useMemo, useReducer } from 'react';
 
 type ContextUpdate<C> = (context: C) => C;
@@ -99,10 +99,11 @@ function getReducer<C, S extends string, E extends string>(config: MachineOption
 
       let target: S;
 
-      if (typeof nextState === 'string') {
+      if (isString(nextState)) {
         target = nextState;
       } else {
         target = nextState.target;
+
         // If there are guards, invoke them and return early if the transition is denied
         if (nextState.guard && !nextState.guard(state.context)) {
           if (config.verbose) {
