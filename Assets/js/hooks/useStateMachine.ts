@@ -158,7 +158,7 @@ export default function useStateMachine<C, S extends string, E extends string>(
 
       if (isFunction(exit)) return () => exit(send, update);
     },
-    // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes.
+    // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes
     [machine.value]
   );
 
