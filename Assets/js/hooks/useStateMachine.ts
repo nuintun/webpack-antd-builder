@@ -6,47 +6,47 @@
 import { isFunction } from '~js/utils/utils';
 import { Dispatch, useEffect, useReducer, useRef } from 'react';
 
-type ContextUpdate<Context> = (context: Context) => Context;
+type ContextUpdate<C> = (context: C) => C;
 
-type Transition<Context, S extends string> = S | { target: S; guard?: (context: Context) => boolean };
+type Transition<C, S extends string> = S | { target: S; guard?: (context: C) => boolean };
 
-interface MachineStateOptions<Context, S extends string, T extends string> {
+interface MachineStateOptions<C, S extends string, E extends string> {
   on?: {
-    [key in T]?: Transition<Context, S>;
+    [key in E]?: Transition<C, S>;
   };
   effect?: (
-    send: Dispatch<T>,
-    assign: Dispatch<ContextUpdate<Context>>
-  ) => void | ((send: Dispatch<T>, assign: Dispatch<ContextUpdate<Context>>) => void);
+    send: Dispatch<E>,
+    assign: Dispatch<ContextUpdate<C>>
+  ) => void | ((send: Dispatch<E>, assign: Dispatch<ContextUpdate<C>>) => void);
 }
 
-interface MachineOptions<Context, S extends string, T extends string> {
+interface MachineOptions<C, S extends string, E extends string> {
   initial: S;
   verbose?: boolean;
   states: {
-    [key in S]: MachineStateOptions<Context, S, T>;
+    [key in S]: MachineStateOptions<C, S, E>;
   };
 }
 
-interface State<Context, S extends string, T extends string> {
+interface State<C, S extends string, E extends string> {
   value: S;
-  nextEvents: T[];
-  context: Context;
+  nextEvents: E[];
+  context: C;
 }
 
-interface UpdateEvent<Context> {
+interface UpdateEvent<C> {
   type: 'Update';
-  updater: (context: Context) => Context;
+  updater: (context: C) => C;
 }
 
-interface TransitionEvent<T extends string> {
+interface TransitionEvent<E extends string> {
   type: 'Transition';
-  next: T;
+  next: E;
 }
 
-type Event<Context, T extends string> = UpdateEvent<Context> | TransitionEvent<T>;
+type Event<C, E extends string> = UpdateEvent<C> | TransitionEvent<E>;
 
-type UseStateMachine<Context, S extends string, T extends string> = [state: State<Context, S, T>, send: Dispatch<T>];
+type UseStateMachine<C, S extends string, E extends string> = [state: State<C, S, E>, send: Dispatch<E>];
 
 function debug(message: string, ...data: any[]) {
   if (process.env.NODE_ENV === 'development') {
@@ -55,8 +55,8 @@ function debug(message: string, ...data: any[]) {
   }
 }
 
-function useConstant<T>(init: () => T): T {
-  const ref = useRef<T | null>(null);
+function useConstant<E>(init: () => E): E {
+  const ref = useRef<E | null>(null);
 
   if (ref.current === null) {
     ref.current = init();
@@ -65,28 +65,28 @@ function useConstant<T>(init: () => T): T {
   return ref.current;
 }
 
-function getState<Context, S extends string, T extends string>(
-  context: Context,
-  config: MachineOptions<Context, S, T>,
+function getState<C, S extends string, E extends string>(
+  context: C,
+  config: MachineOptions<C, S, E>,
   value: S
-): State<Context, S, T> {
+): State<C, S, E> {
   const on = config.states[value].on;
 
   return {
     value,
     context,
-    nextEvents: on ? (Object.keys(on) as T[]) : []
+    nextEvents: on ? (Object.keys(on) as E[]) : []
   };
 }
 
-function getReducer<Context, S extends string, T extends string>(config: MachineOptions<Context, S, T>) {
-  return function reducer(state: State<Context, S, T>, event: Event<Context, T>): State<Context, S, T> {
+function getReducer<C, S extends string, E extends string>(config: MachineOptions<C, S, E>) {
+  return function reducer(state: State<C, S, E>, event: Event<C, E>): State<C, S, E> {
     if (event.type === 'Update') {
       // Internal action to update context
       const nextContext = event.updater(state.context);
 
       if (config.verbose) {
-        debug('Context update from %o to %o', state.context, nextContext);
+        debug('C update from %o to %o', state.context, nextContext);
       }
 
       return {
@@ -96,7 +96,7 @@ function getReducer<Context, S extends string, T extends string>(config: Machine
       };
     } else {
       const currentState = config.states[state.value];
-      const nextState: Transition<Context, S> | undefined = currentState.on?.[event.next];
+      const nextState: Transition<C, S> | undefined = currentState.on?.[event.next];
 
       // If there is no defined next state, return early
       if (!nextState) {
@@ -138,28 +138,28 @@ function getReducer<Context, S extends string, T extends string>(config: Machine
  * @param options 状态机配置
  * @param context 状态机初始上下文
  */
-export default function useStateMachine<Context, S extends string, T extends string>(
-  options: MachineOptions<Context, S, T>
-): UseStateMachine<undefined, S, T>;
-export default function useStateMachine<Context, S extends string, T extends string>(
-  options: MachineOptions<Context, S, T>,
-  context: Context
-): UseStateMachine<Context, S, T>;
-export default function useStateMachine<Context, S extends string, T extends string>(
-  options: MachineOptions<Context, S, T>,
-  context?: Context
-): UseStateMachine<Context | undefined, S, T> {
-  const initialState = useConstant<State<Context, S, T>>(() => getState(context as Context, options, options.initial));
+export default function useStateMachine<C, S extends string, E extends string>(
+  options: MachineOptions<C, S, E>
+): UseStateMachine<undefined, S, E>;
+export default function useStateMachine<C, S extends string, E extends string>(
+  options: MachineOptions<C, S, E>,
+  context: C
+): UseStateMachine<C, S, E>;
+export default function useStateMachine<C, S extends string, E extends string>(
+  options: MachineOptions<C, S, E>,
+  context?: C
+): UseStateMachine<C | undefined, S, E> {
+  const initialState = useConstant<State<C, S, E>>(() => getState(context as C, options, options.initial));
 
-  const reducer = useConstant(() => getReducer<Context, S, T>(options));
+  const reducer = useConstant(() => getReducer<C, S, E>(options));
 
   const [machine, dispatch] = useReducer(reducer, initialState);
 
   // The updater function sends an internal event to the reducer to trigger the actual update
-  const update: Dispatch<ContextUpdate<Context>> = updater => dispatch({ type: 'Update', updater });
+  const update: Dispatch<ContextUpdate<C>> = updater => dispatch({ type: 'Update', updater });
 
   // The public dispatch/send function exposed to the user
-  const send: Dispatch<T> = useConstant(() => next => dispatch({ type: 'Transition', next }));
+  const send: Dispatch<E> = useConstant(() => next => dispatch({ type: 'Transition', next }));
 
   useEffect(() => {
     const exit = options.states[machine.value]?.effect?.(send, update);
