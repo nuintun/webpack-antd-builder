@@ -30,8 +30,8 @@ interface MachineOptions<C, S extends string, E extends string> {
 
 interface State<C, S extends string, E extends string> {
   value: S;
-  nextEvents: E[];
   context: C;
+  nextEvents: E[];
 }
 
 interface UpdateEvent<C> {
