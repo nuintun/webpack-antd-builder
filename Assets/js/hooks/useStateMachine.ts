@@ -144,7 +144,7 @@ export default function useStateMachine<C, S extends string, E extends string>(
 
   const initialState = useMemo(() => getState(context as C, options, options.initial), []);
 
-  const [machine, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   // The updater function sends an internal event to the reducer to trigger the actual update
   const update: Dispatch<ContextUpdate<C>> = updater => dispatch({ type: 'Update', updater });
@@ -154,13 +154,13 @@ export default function useStateMachine<C, S extends string, E extends string>(
 
   useEffect(
     () => {
-      const exit = options.states[machine.value]?.effect?.(send, update);
+      const exit = options.states[state.value]?.effect?.(send, update);
 
       if (isFunction(exit)) return () => exit(send, update);
     },
     // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes
-    [machine.value]
+    [state.value]
   );
 
-  return [machine, send];
+  return [state, send];
 }
