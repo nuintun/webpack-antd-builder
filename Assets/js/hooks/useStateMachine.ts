@@ -152,12 +152,15 @@ export default function useStateMachine<C, S extends string, E extends string>(
   // The public dispatch/send function exposed to the user
   const send: Dispatch<E> = useMemo(() => next => dispatch({ type: 'Transition', next }), []);
 
-  useEffect(() => {
-    const exit = options.states[machine.value]?.effect?.(send, update);
+  useEffect(
+    () => {
+      const exit = options.states[machine.value]?.effect?.(send, update);
 
-    return isFunction(exit) ? () => exit(send, update) : undefined;
+      if (isFunction(exit)) return () => exit(send, update);
+    },
     // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes.
-  }, [machine.value]);
+    [machine.value]
+  );
 
   return [machine, send];
 }
