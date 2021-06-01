@@ -3,8 +3,9 @@
  * @see https://github.com/cassiozen/useStateMachine
  */
 
-import { isFunction, isString } from '~js/utils/utils';
 import { Dispatch, useEffect, useMemo, useReducer } from 'react';
+
+import { isFunction, isString } from '~js/utils/utils';
 
 type ContextUpdate<C> = (context: C) => C;
 
