@@ -123,6 +123,8 @@ function getReducer<C, S extends string, E extends string>(config: MachineOption
   };
 }
 
+// TODO 当前 typescript 定义不完美，等 typescript 支持可选泛型后需进行优化
+
 /**
  * @function useStateMachine
  * @description 【Hook】状态机
