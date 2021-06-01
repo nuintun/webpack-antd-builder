@@ -32,11 +32,11 @@ export default function useStorage<V>(
  * @param key 缓存名称
  * @param options 缓存配置
  */
-export default function useStorage<V>(
+export default function useStorage<V = null>(
   key: string,
-  options?: Options<V>
+  options?: Omit<Options<V>, 'defaultValue'>
 ): [set: (value: V) => void, get: () => V | null, remove: () => void];
-export default function useStorage<V>(
+export default function useStorage<V = null>(
   key: string,
   { session, serializer, deserializer, defaultValue }: Options<V> = {}
 ): [set: (value: V) => void, get: () => V | null, remove: () => void] {

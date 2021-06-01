@@ -10,7 +10,7 @@ import { isFunction } from '~js/utils/utils';
  * @function createSharedState
  * @description 【Hook】生成共享状态
  */
-export default function createSharedState<S>(): () => [
+export default function createSharedState<S = undefined>(): () => [
   state: S | undefined,
   setState: React.Dispatch<React.SetStateAction<S | undefined>>
 ];
@@ -22,7 +22,7 @@ export default function createSharedState<S>(): () => [
 export default function createSharedState<S>(
   initialState: S | (() => S)
 ): () => [state: S, setState: React.Dispatch<React.SetStateAction<S>>];
-export default function createSharedState<S>(
+export default function createSharedState<S = undefined>(
   initialState?: S | (() => S)
 ): () => [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
   let sharedState: S | undefined;
@@ -72,3 +72,5 @@ export default function createSharedState<S>(
     return [state, setSharedState];
   };
 }
+
+const x = createSharedState({ name: 'aa' });

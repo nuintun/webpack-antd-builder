@@ -37,11 +37,11 @@ export default function useControllableValue<V>(
  * @param props 组件 Props
  * @param options 配置选项
  */
-export default function useControllableValue<V>(
+export default function useControllableValue<V = undefined>(
   props: Props,
-  options?: Options<V>
+  options?: Omit<Options<V>, 'defaultValue'>
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void];
-export default function useControllableValue<V>(
+export default function useControllableValue<V = undefined>(
   props: Props = {},
   options: Options<V> = {}
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void] {
