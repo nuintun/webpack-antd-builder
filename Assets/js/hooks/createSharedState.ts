@@ -72,5 +72,3 @@ export default function createSharedState<S = undefined>(
     return [state, setSharedState];
   };
 }
-
-const x = createSharedState({ name: 'aa' });
