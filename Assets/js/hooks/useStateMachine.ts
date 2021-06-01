@@ -127,11 +127,16 @@ function getReducer<C, S extends string, E extends string>(config: MachineOption
  * @function useStateMachine
  * @description 【Hook】状态机
  * @param options 状态机配置
- * @param context 状态机初始上下文
  */
 export default function useStateMachine<S extends string, E extends string>(
   options: MachineOptions<undefined, S, E>
 ): UseStateMachine<undefined, S, E>;
+/**
+ * @function useStateMachine
+ * @description 【Hook】状态机
+ * @param options 状态机配置
+ * @param context 状态机初始上下文
+ */
 export default function useStateMachine<C, S extends string, E extends string>(
   options: MachineOptions<C, S, E>,
   context: C
