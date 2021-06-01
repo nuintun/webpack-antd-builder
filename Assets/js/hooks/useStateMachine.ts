@@ -128,9 +128,9 @@ function getReducer<C, S extends string, E extends string>(config: MachineOption
  * @description 【Hook】状态机
  * @param options 状态机配置
  */
-export default function useStateMachine<S extends string, E extends string>(
-  options: MachineOptions<undefined, S, E>
-): UseStateMachine<undefined, S, E>;
+export default function useStateMachine<C, S extends string, E extends string>(
+  options: MachineOptions<C | undefined, S, E>
+): UseStateMachine<C | undefined, S, E>;
 /**
  * @function useStateMachine
  * @description 【Hook】状态机
@@ -142,17 +142,17 @@ export default function useStateMachine<C, S extends string, E extends string>(
   context: C
 ): UseStateMachine<C, S, E>;
 export default function useStateMachine<C, S extends string, E extends string>(
-  options: MachineOptions<C, S, E>,
+  options: MachineOptions<C | undefined, S, E>,
   context?: C
 ): UseStateMachine<C | undefined, S, E> {
-  const reducer = useMemo(() => getReducer<C, S, E>(options), []);
+  const reducer = useMemo(() => getReducer<C | undefined, S, E>(options), []);
 
   const initialState = useMemo(() => getState(context as C, options, options.initial), []);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // The updater function sends an internal event to the reducer to trigger the actual update
-  const update: Dispatch<ContextUpdate<C>> = updater => dispatch({ type: 'Update', updater });
+  const update: Dispatch<ContextUpdate<C | undefined>> = updater => dispatch({ type: 'Update', updater });
 
   // The public dispatch/send function exposed to the user
   const send: Dispatch<E> = useMemo(() => next => dispatch({ type: 'Transition', next }), []);
