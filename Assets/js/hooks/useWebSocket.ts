@@ -10,7 +10,7 @@ interface Socket<M> {
   readyState: number;
   connect: () => void;
   send: WebSocket['send'];
-  message?: MessageEvent<M>;
+  message: MessageEvent<M | null>;
   disconnect: (code?: number, reason?: string) => void;
 }
 
@@ -23,6 +23,10 @@ export interface Options<M> {
   onError?: (event: Event) => void;
   onClose?: (event: CloseEvent) => void;
   onMessage?: (event: MessageEvent<M>) => void;
+}
+
+function initialMessage(url: string): MessageEvent<null> {
+  return new MessageEvent('message', { origin: new URL(url).origin });
 }
 
 /**
@@ -46,9 +50,9 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<NodeJS.Timeout>();
-  const [message, setMessage] = useState<MessageEvent<M>>();
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);
   const sendQueueRef = useRef<(string | ArrayBufferLike | Blob | ArrayBufferView)[]>([]);
+  const [message, setMessage] = useState<MessageEvent<M | null>>(() => initialMessage(url));
 
   /**
    * @description 重连
