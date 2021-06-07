@@ -2,7 +2,7 @@
  * @module useWebSocket
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import usePersistCallback from './usePersistCallback';
 
@@ -50,6 +50,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<NodeJS.Timeout>();
+  const onUnload = useCallback(() => websocketRef.current?.close(), []);
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);
   const sendQueueRef = useRef<(string | ArrayBufferLike | Blob | ArrayBufferView)[]>([]);
   const [message, setMessage] = useState<MessageEvent<M | null>>(() => initialMessage(url));
@@ -177,7 +178,13 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
 
   // 卸载时断开
   useEffect(() => {
-    return () => disconnect();
+    window.addEventListener('unload', onUnload, false);
+
+    return () => {
+      window.removeEventListener('unload', onUnload, false);
+
+      disconnect();
+    };
   }, []);
 
   return { send, connect, message, disconnect, readyState };
