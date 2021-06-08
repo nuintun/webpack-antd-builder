@@ -50,8 +50,8 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<NodeJS.Timeout>();
-  const onUnload = useCallback(() => websocketRef.current?.close(), []);
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);
+  const onUnload = useCallback(() => websocketRef.current?.close(1000), []);
   const sendQueueRef = useRef<(string | ArrayBufferLike | Blob | ArrayBufferView)[]>([]);
   const [message, setMessage] = useState<MessageEvent<M | null>>(() => initialMessage(url));
 
@@ -73,7 +73,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   const connectWebSocket = usePersistCallback(() => {
     clearTimeout(reconnectTimerRef.current);
 
-    websocketRef.current?.close();
+    websocketRef.current?.close(1000);
 
     const connect = () => {
       const ws = new WebSocket(url, protocols);
@@ -162,19 +162,17 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
    * @description 断开连接
    */
   const disconnect = usePersistCallback((code?: number, reason?: string) => {
-    const ws = websocketRef.current;
-
     clearTimeout(reconnectTimerRef.current);
 
     reconnectTimesRef.current = reconnectLimit;
 
-    ws && ws.readyState !== WebSocket.CLOSED && ws.close(code, reason);
+    websocketRef.current?.close(code, reason);
   });
 
   // 初始时连接
   useEffect(() => {
     !manual && connect();
-  }, [url, manual]);
+  }, [url, protocols, manual]);
 
   // 卸载时断开
   useEffect(() => {
