@@ -62,9 +62,9 @@
     tslib "^2.0.3"
 
 "@antv/component@*", "@antv/component@^0.8.7":
-  version "0.8.12"
-  resolved "https://registry.yarnpkg.com/@antv/component/-/component-0.8.12.tgz#67338c25a295865ee3289a68a7b81eb9e2a751da"
-  integrity sha512-B02/NVwy9k+OJvAy0Ns6nbZgSlFrD0qRbTCI20t6H2qHEZfbiASKa/1TJXCNTcLNTmWfCEsyL2dpZR9MW0rx9g==
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/@antv/component/-/component-0.8.13.tgz#7fa57ec01ff4fd8048979d6daa84bd53ee7167a8"
+  integrity sha512-VCCVQUA9/Scxlrc8N8VDY/hTCvpQwoHmSqgu15viYpyDMx8lBuzrWOdBy2IbHMbjrPFwMw7wOCmAGQL76yeFQA==
   dependencies:
     "@antv/dom-util" "~2.0.1"
     "@antv/g-base" "0.5.6"
@@ -1436,9 +1436,9 @@
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
 "@types/node@*":
-  version "15.12.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.1.tgz#9b60797dee1895383a725f828a869c86c6caa5c2"
-  integrity sha512-zyxJM8I1c9q5sRMtVF+zdd13Jt6RU4r4qfhTd7lQubyThvLfx6yYekWSQjGCGV2Tkecgxnlpl/DNlb6Hg+dmEw==
+  version "15.12.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.2.tgz#1f2b42c4be7156ff4a6f914b2fb03d05fa84e38d"
+  integrity sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1472,9 +1472,9 @@
     "@types/react-router" "*"
 
 "@types/react-router@*":
-  version "5.1.14"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.14.tgz#e0442f4eb4c446541ad7435d44a97f8fe6df40da"
-  integrity sha512-LAJpqYUaCTMT2anZheoidiIymt8MuX286zoVFPM3DVb23aQBH0mAkFvzpd4LKqiolV8bBtZWT5Qp7hClCNDENw==
+  version "5.1.15"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.15.tgz#c1069e0da4617fd315e381b56b18b89490e14e2a"
+  integrity sha512-z3UlMG/x91SFEVmmvykk9FLTliDvfdIUky4k2rCfXWQ0NKbrP8o9BTCaCTPuYsB8gDkUnUmkcA2vYlm2DR+HAA==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -1713,10 +1713,10 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.16.1:
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-4.16.1.tgz#7e6bcd24a8b7afb0e0c96239bc3a986ef3958167"
-  integrity sha512-v7KfUYvEAiqfTECKC4/VkpRPB/4RRxZLR3b2kKCYEtcj4nEHvsOKfO5CDbWVtSUmCehxOXNR2lV+UNy06KHBnA==
+antd@^4.16.2:
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-4.16.2.tgz#23b6ee8822c9ec21d9fe11b89246d49414878c48"
+  integrity sha512-8aRrhzVz0Z32PptW9syq0eQqjc9wfJn3nxgVqqxGNH5BkFr1LRiqM0wJ6FNiYc6XVbpnqP20z5gufYFHC7BHqw==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.6.2"
@@ -3895,9 +3895,9 @@ no-case@^3.0.4:
     tslib "^2.0.3"
 
 node-releases@^1.1.71:
-  version "1.1.72"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.72.tgz#14802ab6b1039a79a0c7d662b610a5bbd76eacbe"
-  integrity sha512-LLUo+PpH3dU6XizX3iVoubUNheF/owjXCZZ5yACDxNnPtgFuludV1ZL3ayK1kVep42Rmm0+R9/Y60NQbZ2bifw==
+  version "1.1.73"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.73.tgz#dd4e81ddd5277ff846b80b52bb40c49edf7a7b20"
+  integrity sha512-uW7fodD6pyW2FZNZnp/Z3hvWKeEW1Y8R1+1CnErE8cXFXzl5blBOoVB41CvMer6P6Q0S5FXDwcHgFd1Wj0U9zg==
 
 nodemon@^2.0.7:
   version "2.0.7"
@@ -4629,9 +4629,9 @@ rc-mentions@~1.6.1:
     rc-util "^5.0.1"
 
 rc-menu@^9.0.0, rc-menu@~9.0.9:
-  version "9.0.10"
-  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-9.0.10.tgz#59fde6442c138dc60693fbe02ea50c33c8164f38"
-  integrity sha512-wb7fZZ3f5KBqr7v3q8U1DB5K4SEm31KLPe/aANyrHajVJjQpiiGTMLF7ZB7vyqjC4QJq0SJewB4FkumT2U86fw==
+  version "9.0.11"
+  resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-9.0.11.tgz#5c6c994a3df70f1e69ec7996ceb5067b2c335d45"
+  integrity sha512-lwE6Zrs3ZpK9XKuk8+AOsQI3QXQFybzANvTNU2DIZQuqi53aEJIzNtibfq9j68DosKhKcxV++GcK9K6pL9Ku8A==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
@@ -4824,9 +4824,9 @@ rc-tree@^4.0.0, rc-tree@~4.1.0:
     rc-virtual-list "^3.0.1"
 
 rc-trigger@^5.0.0, rc-trigger@^5.0.4, rc-trigger@^5.1.2, rc-trigger@^5.2.1:
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-5.2.8.tgz#27c8291c24518b8f11d76c848f5424e0c429e94a"
-  integrity sha512-Tn84oGmvNBLXI+ptpzxyJx4ArKTduuB6l74ShDLhDaJaF9f5JAMizfx31L30ELVIzRr3Ze4sekG7rzwPGwVOdw==
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-5.2.9.tgz#795a787d2b038347dcde27b89a4a5cec8fc40f3e"
+  integrity sha512-0Bxsh2Xe+etejMn73am+jZBcOpsueAZiEKLiGoDfA0fvm/JHLNOiiww3zJ0qgyPOTmbYxhsxFcGOZu+VcbaZhQ==
   dependencies:
     "@babel/runtime" "^7.11.2"
     classnames "^2.2.6"
