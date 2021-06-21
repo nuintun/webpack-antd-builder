@@ -22,6 +22,7 @@ export interface Options<M> {
   onOpen?: (event: Event) => void;
   onError?: (event: Event) => void;
   onClose?: (event: CloseEvent) => void;
+  onReconnect?: (count: number) => void;
   onMessage?: (event: MessageEvent<M>) => void;
 }
 
@@ -42,6 +43,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
     onClose,
     onMessage,
     protocols,
+    onReconnect,
     manual = false,
     reconnectLimit = 3,
     reconnectInterval = 3000
@@ -65,7 +67,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
       reconnectTimerRef.current = setTimeout(() => {
         connectWebSocket();
 
-        reconnectTimesRef.current++;
+        onReconnect && onReconnect(++reconnectTimesRef.current);
       }, reconnectInterval);
     }
   });
@@ -161,7 +163,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   /**
    * @description 断开连接
    */
-  const disconnect = usePersistCallback((code?: number, reason?: string) => {
+  const disconnect = usePersistCallback((code: number = 1000, reason?: string) => {
     clearTimeout(reconnectTimerRef.current);
 
     reconnectTimesRef.current = reconnectLimit;
