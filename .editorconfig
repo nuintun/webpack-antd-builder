@@ -1,7 +1,7 @@
 # http://editorconfig.org
 root = true
 
-[*.{js,jsx,ts,tsx,html,css,less,sass}]
+[*.{js,jsx,ts,tsx,json,html,css,less,sass}]
 indent_size = 2
 charset = utf-8
 end_of_line = lf
@@ -13,14 +13,6 @@ trim_trailing_whitespace = true
 [*.py]
 indent_size = 4
 max_line_length = 80
-
-# The svg files contain newlines inconsistently
-[*.svg]
-insert_final_newline = false
-
-# The json files contain newlines inconsistently
-[*.json]
-insert_final_newline = false
 
 # Minified JavaScript files shouldn't be changed
 [*.min.js]
