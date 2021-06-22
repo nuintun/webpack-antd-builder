@@ -1,4 +1,5 @@
 # Ignore files
-*.json
 *.min.js
 *.min.css
+*.min.svg
+package.json

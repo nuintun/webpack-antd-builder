@@ -10,20 +10,11 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# SVG files
-[*.svg]
+# NPM package files
+[package.json]
 insert_final_newline = false
 
-# JSON files
-[*.json]
-insert_final_newline = false
-
-# Minified JavaScript files
-[*.min.js]
-indent_style = false
-insert_final_newline = false
-
-# Minified CSS files
-[*.min.css]
+# Minified files
+[*.min.{js,css,svg}]
 indent_style = false
 insert_final_newline = false
