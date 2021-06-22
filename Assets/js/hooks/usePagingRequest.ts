@@ -99,10 +99,7 @@ export default function usePagingRequest<I, E extends object = {}>(
     }
 
     try {
-      setRef(
-        payloadRef,
-        await request<Response<I, E>>(url, { query })
-      );
+      setRef(payloadRef, await request<Response<I, E>>(url, { query }));
     } catch (error) {
       setDataSource([]);
 

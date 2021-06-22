@@ -25,25 +25,23 @@ export default function useRequest(delay?: number): [requesting: boolean, reques
     history.push('/login');
   }, [history]);
 
-  const sendRequest = usePersistCallback(
-    <R>(input: string, options: Options = {}): Promise<R> => {
-      return new Promise<R>(async (resolve, reject) => {
-        setRequesting(true);
+  const sendRequest = usePersistCallback(<R>(input: string, options: Options = {}): Promise<R> => {
+    return new Promise<R>(async (resolve, reject) => {
+      setRequesting(true);
 
-        const headers = { ...mime.json, ...options.headers };
+      const headers = { ...mime.json, ...options.headers };
 
-        try {
-          const payload = await request<R>(input, { onUnauthorized, ...options, headers });
+      try {
+        const payload = await request<R>(input, { onUnauthorized, ...options, headers });
 
-          isMounted() && resolve(payload);
-        } catch (error) {
-          isMounted() && reject(error);
-        }
+        isMounted() && resolve(payload);
+      } catch (error) {
+        isMounted() && reject(error);
+      }
 
-        setRequesting(false, true);
-      });
-    }
-  );
+      setRequesting(false, true);
+    });
+  });
 
   return [requesting, sendRequest];
 }

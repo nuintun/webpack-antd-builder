@@ -22,27 +22,25 @@ function showTotal(total: number): string {
   return `共 ${total} 条`;
 }
 
-const normalizePagingOptions = memoizeOne(
-  (pageSize: number, opitons: Options = {}): PagingOptions => {
-    const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons;
+const normalizePagingOptions = memoizeOne((pageSize: number, opitons: Options = {}): PagingOptions => {
+  const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons;
 
-    if (__DEV__) {
-      if (!pageSizeOptions.includes(pageSize)) {
-        console.error(new ReferenceError(`page size ${pageSize} not in options [${pageSizeOptions.join(', ')}]`));
-      }
+  if (__DEV__) {
+    if (!pageSizeOptions.includes(pageSize)) {
+      console.error(new ReferenceError(`page size ${pageSize} not in options [${pageSizeOptions.join(', ')}]`));
     }
-
-    return {
-      showTotal,
-      size: 'default',
-      responsive: true,
-      showSizeChanger: true,
-      showQuickJumper: true,
-      ...opitons,
-      pageSizeOptions: pageSizeOptions.map(item => item.toString())
-    };
   }
-);
+
+  return {
+    showTotal,
+    size: 'default',
+    responsive: true,
+    showSizeChanger: true,
+    showQuickJumper: true,
+    ...opitons,
+    pageSizeOptions: pageSizeOptions.map(item => item.toString())
+  };
+});
 
 /**
  * @function usePagingOptions

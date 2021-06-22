@@ -145,9 +145,9 @@ export function useTransform<S, I>(
   const { dataSource } = props;
 
   return useMemo(() => {
-    return ({
+    return {
       ...props,
       dataSource: transform(dataSource)
-    } as unknown) as DefaultTableProps<I>;
+    } as unknown as DefaultTableProps<I>;
   }, [dataSource]);
 }
