@@ -1,3 +1,4 @@
 # Ignore files
+*.json
 *.min.js
 *.min.css
