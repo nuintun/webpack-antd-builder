@@ -51,8 +51,7 @@ type UseStateMachine<C, S extends string, E extends string> = [state: State<C, S
 
 function debug(message: string, ...data: any[]) {
   if (__DEV__) {
-    // Console.log clearly accepts parameters other than string, but TypeScript is complaining, so...
-    debug(`%cuseStateMachine %c${message}`, 'color: #888;', 'color: default;', ...data);
+    console.log(`%cuseStateMachine %c${message}`, 'color: #888;', 'color: default;', ...data);
   }
 }
 
