@@ -50,7 +50,7 @@ type Event<C, E extends string> = UpdateEvent<C> | TransitionEvent<E>;
 type UseStateMachine<C, S extends string, E extends string> = [state: State<C, S, E>, send: Dispatch<E>];
 
 function debug(message: string, ...data: any[]) {
-  if (process.env.NODE_ENV === 'development') {
+  if (__DEV__) {
     // Console.log clearly accepts parameters other than string, but TypeScript is complaining, so...
     debug(`%cuseStateMachine %c${message}`, 'color: #888;', 'color: default;', ...data);
   }
@@ -77,7 +77,7 @@ function getReducer<C, S extends string, E extends string>(config: MachineOption
       const nextContext = event.updater(state.context);
 
       if (config.verbose) {
-        debug('C update from %o to %o', state.context, nextContext);
+        debug('Context update from %o to %o', state.context, nextContext);
       }
 
       return {
