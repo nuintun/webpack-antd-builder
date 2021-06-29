@@ -1708,10 +1708,10 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.16.5:
-  version "4.16.5"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-4.16.5.tgz#6105bd848fb2e468e0d1d3ec024c82d2516587ef"
-  integrity sha512-HOPqJWdncFsviMisff7KUM77wwmIlSCfS6J0LAs3D/VP7pRCqo1YQLkdBJ77wxRjS60rwe8KDDayulohiTSoBQ==
+antd@^4.16.6:
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-4.16.6.tgz#5f79fa103bbd8be30fac74142ef1bbf8bc872491"
+  integrity sha512-E7T+GClZPGjPUfmiuTbQK4+OfvsQ/Ksi5C71Bm4dwz1wlbJ4CqfxhIlpBypod9fe8mCI+bVAjtBoUpR1q/6Sow==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.6.2"
@@ -1748,7 +1748,7 @@ antd@^4.16.5:
     rc-tabs "~11.9.1"
     rc-textarea "~0.3.0"
     rc-tooltip "~5.1.1"
-    rc-tree "~4.1.0"
+    rc-tree "~4.2.1"
     rc-tree-select "~4.3.0"
     rc-trigger "^5.2.1"
     rc-upload "~4.3.0"
@@ -2018,9 +2018,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001230:
-  version "1.0.30001240"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001240.tgz#ec15d125b590602c8731545c5351ff054ad2d52f"
-  integrity sha512-nb8mDzfMdxBDN7ZKx8chWafAdBp5DAAlpWvNyUGe5tcDWd838zpzDN3Rah9cjCqhfOKkrvx40G2SDtP0qiWX/w==
+  version "1.0.30001241"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001241.tgz#cd3fae47eb3d7691692b406568d7a3e5b23c7598"
+  integrity sha512-1uoSZ1Pq1VpH0WerIMqwptXHNNGfdl7d1cJUFs80CwQ/lVzdhTvsFZCeNFslze7AjsQnb4C85tzclPa1VShbeQ==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -4798,21 +4798,10 @@ rc-tree-select@~4.3.0:
     rc-tree "^4.0.0"
     rc-util "^5.0.5"
 
-rc-tree@^4.0.0:
+rc-tree@^4.0.0, rc-tree@~4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-4.2.1.tgz#85f4ebe7b2e76b07c48ada06ce3d028efd824ba1"
   integrity sha512-uBIJ2/CMsR3I53W14WjyX+m3AY54qG7AuqlVr0jqIBWxiRtnOkKCCBpYLuUIxbqjJ9+QvNtHyxjwxHG0v/zD5g==
-  dependencies:
-    "@babel/runtime" "^7.10.1"
-    classnames "2.x"
-    rc-motion "^2.0.1"
-    rc-util "^5.0.0"
-    rc-virtual-list "^3.0.1"
-
-rc-tree@~4.1.0:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-4.1.5.tgz#734ab1bfe835e78791be41442ca0e571147ab6fa"
-  integrity sha512-q2vjcmnBDylGZ9/ZW4F9oZMKMJdbFWC7um+DAQhZG1nqyg1iwoowbBggUDUaUOEryJP+08bpliEAYnzJXbI5xQ==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
