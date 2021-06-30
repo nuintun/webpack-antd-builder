@@ -12,6 +12,7 @@ const mode = 'development';
 
 process.env.NODE_ENV = mode;
 
+const fs = require('fs');
 const Koa = require('koa');
 const webpack = require('webpack');
 const resolveIp = require('../lib/ip');
@@ -107,6 +108,7 @@ async function resolveEntry(entry, options) {
 
   const app = new Koa();
   const compiler = webpack(configure);
+  const logger = compiler.getInfrastructureLogger('webpack-dev-middleware');
 
   app.use(koaCompress());
 
@@ -117,16 +119,25 @@ async function resolveEntry(entry, options) {
     })
   );
 
-  app.use(
-    devMiddleware(compiler, {
-      index: false,
-      writeToDisk: file => file === entryHTML,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true
-      }
-    })
-  );
+  const devServer = devMiddleware(compiler, {
+    index: false,
+    writeToDisk: file => file === entryHTML,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true
+    }
+  });
+
+  devServer.waitUntilValid(() => {
+    logger.info(`server run at: \u001B[36m${devServerHost}\u001B[0m`);
+  });
+
+  app.use(devServer);
+
+  app.use(async ctx => {
+    ctx.type = 'text/html; charset=utf-8';
+    ctx.body = fs.createReadStream(entryHTML);
+  });
 
   app.on('error', error => {
     !httpError(error) && console.error(error);
