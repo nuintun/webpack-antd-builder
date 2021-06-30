@@ -8,21 +8,33 @@
 
 'use strict';
 
-const webpack = require('webpack');
-const resolveRules = require('../lib/rules');
-const { entryHTML } = require('../configure');
-const configure = require('./webpack.config.base');
-const TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
 const mode = 'production';
 
 process.env.NODE_ENV = mode;
-process.env.BABEL_ENV = mode;
+
+const path = require('path');
+const webpack = require('webpack');
+const resolveRules = require('../lib/rules');
+const configure = require('./webpack.config.base');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 (async () => {
+  const css = {
+    ignoreOrder: true,
+    filename: 'css/[chunkhash].css',
+    chunkFilename: 'css/[chunkhash].css'
+  };
+
+  const analyzer = {
+    generateStatsFile: true,
+    analyzerMode: 'disabled',
+    statsOptions: { source: false },
+    statsFilename: path.resolve('node_modules/.cache/webpack-analyzer/report.json')
+  };
+
   configure.mode = mode;
   configure.devtool = false;
   configure.output = {
@@ -33,9 +45,8 @@ process.env.BABEL_ENV = mode;
   configure.plugins = [
     ...configure.plugins,
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.DefinePlugin({ __DEV__: mode !== 'production' }),
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', entryHTML] }),
-    new MiniCssExtractPlugin({ filename: 'css/[chunkhash].css', chunkFilename: 'css/[chunkhash].css', ignoreOrder: true })
+    new BundleAnalyzerPlugin(analyzer),
+    new MiniCssExtractPlugin(css)
   ];
   configure.module.rules = await resolveRules(mode);
   configure.optimization.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];

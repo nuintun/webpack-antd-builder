@@ -8,6 +8,10 @@
 
 'use strict';
 
+const mode = 'development';
+
+process.env.NODE_ENV = mode;
+
 const Koa = require('koa');
 const webpack = require('webpack');
 const resolveIp = require('../lib/ip');
@@ -21,11 +25,7 @@ const hotMiddleware = require('../middleware/hot');
 const { publicPath, entryHTML } = require('../configure');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const mode = 'development';
 const { toString } = Object.prototype;
-
-process.env.NODE_ENV = mode;
-process.env.BABEL_ENV = mode;
 
 function isTypeof(value, type) {
   return toString.call(value).toLowerCase() === `[object ${type.toLowerCase()}]`;
@@ -84,12 +84,11 @@ async function resolveEntry(entry, options) {
   const port = await resolvePort();
   const devServerHost = `http://${ip}:${port}`;
   const devServerPublicPath = devServerHost + publicPath;
+  const entry = await resolveEntry(configure.entry, { path: `${devServerHost}/webpack-hmr` });
+  const css = { ignoreOrder: true, filename: 'css/[name].css', chunkFilename: 'css/chunk-[id].css' };
 
   configure.mode = mode;
-  configure.devtool = 'eval-cheap-module-source-map';
-  configure.entry = await resolveEntry(configure.entry, {
-    path: `${devServerHost}/webpack-hmr`
-  });
+  configure.entry = entry;
   configure.output = {
     ...configure.output,
     filename: 'js/[name].js',
@@ -98,12 +97,12 @@ async function resolveEntry(entry, options) {
   };
   configure.plugins = [
     ...configure.plugins,
-    new webpack.SourceMapDevToolPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({ __DEV__: mode !== 'production' }),
-    new MiniCssExtractPlugin({ filename: 'css/[name].css', chunkFilename: 'css/chunk-[id].css', ignoreOrder: true })
+    new webpack.SourceMapDevToolPlugin(),
+    new MiniCssExtractPlugin(css)
   ];
   configure.module.rules = await resolveRules(mode);
+  configure.devtool = 'eval-cheap-module-source-map';
   configure.cache.name = `${configure.name}-${configure.mode}-server`;
 
   const app = new Koa();

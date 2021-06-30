@@ -7,11 +7,38 @@
 
 'use strict';
 
+const mode = process.env.NODE_ENV;
+
+process.env.BABEL_ENV = mode;
+
 const webpack = require('webpack');
 const pkg = require('../../package.json');
 const configure = require('../configure');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+
+const progress = {
+  percentBy: 'entries'
+};
+
+const env = {
+  __DEV__: mode !== 'production',
+  __APP_TITLE__: JSON.stringify(configure.title)
+};
+
+const clean = {
+  cleanOnceBeforeBuildPatterns: ['**/*', configure.entryHTML]
+};
+
+const html = {
+  xhtml: true,
+  minify: true,
+  title: configure.title,
+  favicon: configure.favicon,
+  filename: configure.entryHTML,
+  template: require.resolve('../template/index.ejs')
+};
 
 module.exports = {
   name: pkg.name,
@@ -58,18 +85,10 @@ module.exports = {
   },
   plugins: [
     new CaseSensitivePathsPlugin(),
-    new webpack.ProgressPlugin({
-      percentBy: 'entries'
-    }),
-    new HtmlWebpackPlugin({
-      xhtml: true,
-      minify: true,
-      title: configure.title,
-      favicon: configure.favicon,
-      filename: configure.entryHTML,
-      template: require.resolve('../template/index.ejs')
-    }),
-    new webpack.DefinePlugin({ __APP_TITLE__: JSON.stringify(configure.title) })
+    new webpack.ProgressPlugin(progress),
+    new CleanWebpackPlugin(clean),
+    new webpack.DefinePlugin(env),
+    new HtmlWebpackPlugin(html)
   ],
   module: {
     strictExportPresence: true,
