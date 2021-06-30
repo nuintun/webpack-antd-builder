@@ -29,6 +29,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
   };
 
   const analyzer = {
+    logLevel: 'warn',
     generateStatsFile: true,
     analyzerMode: 'disabled',
     statsOptions: { source: false },
