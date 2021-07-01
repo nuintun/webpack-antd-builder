@@ -25,7 +25,7 @@ function resolveEnvironment(env) {
   const output = {};
   const entries = Object.entries(env);
 
-  for (const [key, value] in entries) {
+  for (const [key, value] of entries) {
     output[key] = JSON.stringify(value);
   }
 

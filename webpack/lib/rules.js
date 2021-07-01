@@ -105,6 +105,7 @@ module.exports = async mode => {
         // The loader for assets
         {
           test: /\.(mp3|ogg|wav|mp4|flv|webm)$/i,
+          type: 'javascript/auto',
           use: [
             {
               loader: 'file-loader',
@@ -114,6 +115,7 @@ module.exports = async mode => {
         },
         {
           test: /\.svg$/i,
+          type: 'javascript/auto',
           use: [
             {
               loader: 'babel-loader',
@@ -131,6 +133,7 @@ module.exports = async mode => {
         },
         {
           test: /\.(png|gif|bmp|ico|jpe?g|woff2?|ttf|eot)$/i,
+          type: 'javascript/auto',
           use: [
             {
               loader: 'url-loader',
