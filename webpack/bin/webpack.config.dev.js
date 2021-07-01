@@ -11,26 +11,19 @@
 const mode = 'development';
 
 process.env.NODE_ENV = mode;
+process.env.BABEL_ENV = mode;
 
 const webpack = require('webpack');
-const resolveRules = require('../lib/rules');
 const { watchOptions } = require('../configure');
-const configure = require('./webpack.config.base');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const resolveConfigure = require('./webpack.config.base');
 
 (async () => {
-  const css = {
-    ignoreOrder: true,
-    filename: 'css/[name].css',
-    chunkFilename: 'css/chunk-[id].css'
-  };
+  const configure = await resolveConfigure(mode);
 
-  configure.mode = mode;
   configure.watchOptions = watchOptions;
-  configure.module.rules = await resolveRules(mode);
   configure.devtool = 'eval-cheap-module-source-map';
-  configure.output = { ...configure.output, filename: 'js/[name].js', chunkFilename: 'js/[name].js' };
-  configure.plugins = [...configure.plugins, new webpack.SourceMapDevToolPlugin(), new MiniCssExtractPlugin(css)];
+
+  configure.plugins.push(new webpack.SourceMapDevToolPlugin());
 
   const compiler = webpack(configure);
 

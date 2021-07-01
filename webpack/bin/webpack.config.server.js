@@ -11,6 +11,7 @@
 const mode = 'development';
 
 process.env.NODE_ENV = mode;
+process.env.BABEL_ENV = mode;
 
 const fs = require('fs');
 const Koa = require('koa');
@@ -19,12 +20,10 @@ const resolveIp = require('../lib/ip');
 const querystring = require('querystring');
 const koaCompress = require('koa-compress');
 const findPorts = require('find-free-ports');
-const resolveRules = require('../lib/rules');
-const configure = require('./webpack.config.base');
 const devMiddleware = require('../middleware/dev');
 const hotMiddleware = require('../middleware/hot');
+const resolveConfigure = require('./webpack.config.base');
 const { publicPath, entryHTML } = require('../configure');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { toString } = Object.prototype;
 
@@ -84,27 +83,16 @@ async function resolveEntry(entry, options) {
   const ip = await resolveIp();
   const port = await resolvePort();
   const devServerHost = `http://${ip}:${port}`;
+  const configure = await resolveConfigure(mode);
   const devServerPublicPath = devServerHost + publicPath;
   const entry = await resolveEntry(configure.entry, { path: `${devServerHost}/webpack-hmr` });
-  const css = { ignoreOrder: true, filename: 'css/[name].css', chunkFilename: 'css/chunk-[id].css' };
 
-  configure.mode = mode;
   configure.entry = entry;
-  configure.output = {
-    ...configure.output,
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[name].js',
-    publicPath: devServerPublicPath
-  };
-  configure.plugins = [
-    ...configure.plugins,
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.SourceMapDevToolPlugin(),
-    new MiniCssExtractPlugin(css)
-  ];
-  configure.module.rules = await resolveRules(mode);
+  configure.output.publicPath = devServerPublicPath;
   configure.devtool = 'eval-cheap-module-source-map';
   configure.cache.name = `${configure.name}-${configure.mode}-server`;
+
+  configure.plugins.push(new webpack.SourceMapDevToolPlugin(), new webpack.HotModuleReplacementPlugin());
 
   const app = new Koa();
   const compiler = webpack(configure);
