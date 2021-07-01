@@ -14,6 +14,10 @@ trim_trailing_whitespace = true
 [package.json]
 insert_final_newline = false
 
+# VSCode setting files
+[.vscode/**/*.json]
+insert_final_newline = false
+
 # Minified files
 [*.min.{js,css,svg}]
 indent_style = false
