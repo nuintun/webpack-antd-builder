@@ -1479,10 +1479,10 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.11":
-  version "17.0.11"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.11.tgz#67fcd0ddbf5a0b083a0f94e926c7d63f3b836451"
-  integrity sha512-yFRQbD+whVonItSk7ZzP/L+gPTJVBkL/7shLEF+i9GC/1cV3JmUxEQz6+9ylhUpWSDuqo1N9qEvqS6vTj4USUA==
+"@types/react@*", "@types/react@^17.0.12":
+  version "17.0.12"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.12.tgz#e9a1add2abc4eb90ec7b1676a6e8567b147ab954"
+  integrity sha512-F0Kcg/W9Zakf9GnYQzM67QjeTlbBcE8UPOck3pjiW0K4vqXvmfm5UErg+83nkK4VIi8IixaA2gqYgI42UTq0TQ==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2486,12 +2486,12 @@ d3-timer@^1.0.9:
   resolved "https://registry.yarnpkg.com/d3-timer/-/d3-timer-1.0.10.tgz#dfe76b8a91748831b13b6d9c793ffbd508dd9de5"
   integrity sha512-B1JDm0XDaQC+uvo4DT79H0XmBskgS3l6Ve+1SBCfxgmtIb1AVrPIoqd+nPSv+loMX8szQ0sVUhGngL7D5QPiXw==
 
-date-fns@^2.15.0:
+date-fns@2.x:
   version "2.22.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.1.tgz#1e5af959831ebb1d82992bf67b765052d8f0efc4"
   integrity sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==
 
-dayjs@^1.10.5:
+dayjs@1.x, dayjs@^1.10.5:
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
   integrity sha512-BUFis41ikLz+65iH6LHQCDm4YPMj5r1YFLdupPIyM4SGcXMmtiLQ7U37i+hGS8urIuqe7I/ou3IS1jVc4nbN4g==
@@ -4700,13 +4700,14 @@ rc-pagination@~3.1.6:
     classnames "^2.2.1"
 
 rc-picker@~2.5.10:
-  version "2.5.13"
-  resolved "https://registry.yarnpkg.com/rc-picker/-/rc-picker-2.5.13.tgz#a2f352ebe5e067d72ffd53cc2074f8dcacbbcc7d"
-  integrity sha512-FbEK5tKB5RVO/Pw3DHwYdL338oVH8TdfDU69fXjeStVeiaqDHf+VgpwI5qXo5vJltmmlNcM2oAbLPq7iIKDFRw==
+  version "2.5.14"
+  resolved "https://registry.yarnpkg.com/rc-picker/-/rc-picker-2.5.14.tgz#dfa919f7f7cc72496df45cb1cad9c82ad2fc019b"
+  integrity sha512-+tGDsrZQxwv1pLKYulaYqmTIXOdOCj2Lcl1mAt5C7Z6WYvWYYi9VF/tVgOznN7tMFUj65qgT+pue6RjRluVk1g==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.1"
-    date-fns "^2.15.0"
+    date-fns "2.x"
+    dayjs "1.x"
     moment "^2.24.0"
     rc-trigger "^5.0.4"
     rc-util "^5.4.0"

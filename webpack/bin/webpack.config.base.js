@@ -17,6 +17,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 /**
+ * @function resolveEnvironment
+ * @param {object} env
+ * @returns {object}
+ */
+function resolveEnvironment(env) {
+  const output = {};
+  const entries = Object.entries(env);
+
+  for (const [key, value] in entries) {
+    output[key] = JSON.stringify(value);
+  }
+
+  return output;
+}
+
+/**
  * @function resolveConfigure
  * @param {string} mode
  * @returns {object}
@@ -28,10 +44,10 @@ module.exports = async mode => {
 
   const isDevelopment = mode !== 'production';
 
-  const env = {
+  const env = resolveEnvironment({
     __DEV__: isDevelopment,
-    __APP_TITLE__: JSON.stringify(configure.title)
-  };
+    __APP_TITLE__: configure.title
+  });
 
   const clean = {
     cleanOnceBeforeBuildPatterns: ['**/*', configure.entryHTML]
