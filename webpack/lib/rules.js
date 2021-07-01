@@ -35,7 +35,7 @@ module.exports = async mode => {
   const themeVars = await parseTheme(theme);
   const isDevelopment = mode !== 'production';
   const cssIdentName = isDevelopment ? '[local]-[hash:8]' : '[hash:8]';
-  const assetModuleFilename = `[path]${isDevelopment ? '[name].[ext]' : '[hash:8].[ext]'}`;
+  const assetModuleFilename = `[path]${isDevelopment ? '[name].[ext]' : '[hash].[ext]'}`;
   const cssModulesOptions = { auto: true, localIdentName: cssIdentName, exportLocalsConvention: 'camelCaseOnly' };
 
   return [
