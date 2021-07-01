@@ -43,6 +43,7 @@ const html = {
 module.exports = {
   name: pkg.name,
   entry: configure.entry,
+  context: configure.context,
   output: {
     pathinfo: false,
     path: configure.outputPath,

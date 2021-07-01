@@ -34,7 +34,9 @@ function parseTheme(path) {
 module.exports = async mode => {
   const themeVars = await parseTheme(theme);
   const isDevelopment = mode !== 'production';
-  const localIdentName = isDevelopment ? '[local]-[hash:base64:6]' : '[hash:base64:6]';
+  const cssIdentName = isDevelopment ? '[local]-[hash:8]' : '[hash:8]';
+  const assetModuleFilename = `[path]${isDevelopment ? '[name].[ext]' : '[hash:8].[ext]'}`;
+  const cssModulesOptions = { auto: true, localIdentName: cssIdentName, exportLocalsConvention: 'camelCaseOnly' };
 
   return [
     {
@@ -65,7 +67,7 @@ module.exports = async mode => {
               options: {
                 esModule: true,
                 importLoaders: 1,
-                modules: { auto: true, localIdentName, exportLocalsConvention: 'camelCaseOnly' }
+                modules: cssModulesOptions
               }
             },
             {
@@ -88,7 +90,7 @@ module.exports = async mode => {
               options: {
                 esModule: true,
                 importLoaders: 2,
-                modules: { auto: true, localIdentName, exportLocalsConvention: 'camelCaseOnly' }
+                modules: cssModulesOptions
               }
             },
             {
@@ -106,7 +108,7 @@ module.exports = async mode => {
           use: [
             {
               loader: 'file-loader',
-              options: { esModule: true, name: '[path][name]-[hash:8].[ext]' }
+              options: { esModule: true, name: assetModuleFilename }
             }
           ]
         },
@@ -123,7 +125,7 @@ module.exports = async mode => {
             },
             {
               loader: 'url-loader',
-              options: { limit: 8192, esModule: true, name: '[path][name]-[hash:8].[ext]' }
+              options: { limit: 8192, esModule: true, name: assetModuleFilename }
             }
           ]
         },
@@ -132,7 +134,7 @@ module.exports = async mode => {
           use: [
             {
               loader: 'url-loader',
-              options: { limit: 8192, esModule: true, name: '[path][name]-[hash:8].[ext]' }
+              options: { limit: 8192, esModule: true, name: assetModuleFilename }
             }
           ]
         }
