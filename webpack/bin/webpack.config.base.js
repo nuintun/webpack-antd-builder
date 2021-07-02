@@ -91,7 +91,8 @@ module.exports = async mode => {
       chunks: false,
       children: false,
       entrypoints: false,
-      runtimeModules: false
+      runtimeModules: false,
+      dependentModules: false
     },
     performance: {
       hints: false
