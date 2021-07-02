@@ -2,8 +2,6 @@
  * @module global
  */
 
-/// <reference types="react" />
-
 declare module '*.png' {
   const src: string;
 
