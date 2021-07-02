@@ -88,7 +88,10 @@ module.exports = async mode => {
     },
     stats: {
       colors: true,
-      entrypoints: false
+      chunks: false,
+      children: false,
+      entrypoints: false,
+      runtimeModules: false
     },
     performance: {
       hints: false
