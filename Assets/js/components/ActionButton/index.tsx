@@ -25,7 +25,7 @@ export interface ActionButtonProps<T>
 
 const DEFAULT_CONFIRM_ICON = <QuestionCircleOutlined style={{ color: '#f00' }} />;
 
-export default memo(function ActionButton<T>({
+function ActionButton<T>({
   delay,
   action,
   notify,
@@ -82,4 +82,6 @@ export default memo(function ActionButton<T>({
       {children}
     </Button>
   );
-});
+}
+
+export default memo(ActionButton) as typeof ActionButton;
