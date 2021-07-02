@@ -12,7 +12,7 @@ const os = require('os');
 /**
  * @function resolveIp
  * @param {string} family
- * @returns {string}
+ * @returns {Promise<string>}
  */
 module.exports = async (family = 'IPv4') => {
   const networkInterfaces = os.networkInterfaces();

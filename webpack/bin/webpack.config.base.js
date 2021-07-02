@@ -35,7 +35,7 @@ function resolveEnvironment(env) {
 /**
  * @function resolveConfigure
  * @param {string} mode
- * @returns {object}
+ * @returns {Promise<object>}
  */
 module.exports = async mode => {
   const progress = {
@@ -77,7 +77,8 @@ module.exports = async mode => {
       path: configure.outputPath,
       publicPath: configure.publicPath,
       filename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
-      chunkFilename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`
+      chunkFilename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
+      assetModuleFilename: `[path][${isDevelopment ? 'name' : 'contenthash'}][ext]`
     },
     cache: {
       type: 'filesystem',

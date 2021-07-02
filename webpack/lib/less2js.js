@@ -12,16 +12,16 @@ const { parse, contexts } = require('less');
 
 /**
  * @function less2js
- * @param {string} source
+ * @param {string} code
  * @param {object} options
- * @returns {object}
+ * @returns {Promise<object>}
  */
-module.exports = (source = '', options = {}) => {
+module.exports = (code = '', options = {}) => {
   return new Promise((resolve, reject) => {
     const { config, serialize } = options;
     const hasSerialize = typeof serialize === 'function';
 
-    parse(source, config, (error, root, _imports, config) => {
+    parse(code, config, (error, root, _imports, config) => {
       if (error) return reject(error);
 
       const { rules } = root.eval(new contexts.Eval(config));

@@ -16,14 +16,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
  * @function parseTheme
  * @description 解析主题文件
  * @param {string} path
- * @returns {object}
+ * @returns {Promise<object>}
  */
 function parseTheme(path) {
-  try {
-    return less2js(fs.readFileSync(path, 'utf8'));
-  } catch {
-    return {};
-  }
+  return new Promise(resolve => {
+    fs.readFile(path, { encoding: 'utf-8' }, (error, code) => {
+      resolve(error ? {} : less2js(code));
+    });
+  });
 }
 
 /**
@@ -35,7 +35,6 @@ module.exports = async mode => {
   const themeVars = await parseTheme(theme);
   const isDevelopment = mode !== 'production';
   const cssIdentName = isDevelopment ? '[local]-[hash:8]' : '[hash:8]';
-  const assetModuleFilename = `[path]${isDevelopment ? '[name].[ext]' : '[hash].[ext]'}`;
   const cssModulesOptions = { auto: true, localIdentName: cssIdentName, exportLocalsConvention: 'camelCaseOnly' };
 
   return [
@@ -104,42 +103,32 @@ module.exports = async mode => {
         },
         // The loader for assets
         {
-          test: /\.(mp3|ogg|wav|mp4|flv|webm)$/i,
-          type: 'javascript/auto',
-          use: [
-            {
-              loader: 'file-loader',
-              options: { esModule: true, name: assetModuleFilename }
-            }
-          ]
+          type: 'asset/resource',
+          test: /\.(mp3|ogg|wav|mp4|flv|webm)$/i
         },
         {
           test: /\.svg$/i,
-          type: 'javascript/auto',
-          use: [
+          oneOf: [
             {
-              loader: 'babel-loader',
-              options: { highlightCode: true, cacheDirectory: true }
+              dependency: { not: ['url'] },
+              use: [
+                {
+                  loader: '@svgr/webpack',
+                  options: { memo: true, namedExport: 'Component' }
+                },
+                {
+                  loader: require.resolve('../loader/url')
+                }
+              ]
             },
             {
-              loader: '@svgr/webpack',
-              options: { babel: false, memo: true, namedExport: 'Component' }
-            },
-            {
-              loader: 'url-loader',
-              options: { limit: 8192, esModule: true, name: assetModuleFilename }
+              type: 'asset/resource'
             }
           ]
         },
         {
-          test: /\.(png|gif|bmp|ico|jpe?g|woff2?|ttf|eot)$/i,
-          type: 'javascript/auto',
-          use: [
-            {
-              loader: 'url-loader',
-              options: { limit: 8192, esModule: true, name: assetModuleFilename }
-            }
-          ]
+          type: 'asset/resource',
+          test: /\.(png|gif|bmp|ico|jpe?g|woff2?|ttf|eot)$/i
         }
       ]
     }
