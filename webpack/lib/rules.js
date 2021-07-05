@@ -110,14 +110,11 @@ module.exports = async mode => {
           test: /\.svg$/i,
           oneOf: [
             {
-              dependency: { not: ['url'] },
+              resourceQuery: /\?svgr$/,
               use: [
                 {
                   loader: '@svgr/webpack',
-                  options: { memo: true, namedExport: 'Component' }
-                },
-                {
-                  loader: require.resolve('../loader/url')
+                  options: { memo: true }
                 }
               ]
             },

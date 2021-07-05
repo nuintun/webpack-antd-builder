@@ -3,39 +3,39 @@
  */
 
 declare module '*.png' {
-  const src: string;
+  const content: string;
 
-  export default src;
+  export default content;
 }
 
 declare module '*.gif' {
-  const src: string;
+  const content: string;
 
-  export default src;
+  export default content;
 }
 
 declare module '*.bmp' {
-  const src: string;
+  const content: string;
 
-  export default src;
+  export default content;
 }
 
 declare module '*.ico' {
-  const src: string;
+  const content: string;
 
-  export default src;
+  export default content;
 }
 
 declare module '*.jpg' {
-  const src: string;
+  const content: string;
 
-  export default src;
+  export default content;
 }
 
 declare module '*.jpeg' {
-  const src: string;
+  const content: string;
 
-  export default src;
+  export default content;
 }
 
 declare module '*.css' {
@@ -50,14 +50,16 @@ declare module '*.less' {
   export default content;
 }
 
-declare type SVGComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-
 declare module '*.svg' {
-  const src: string;
-  const Component: SVGComponent;
+  const content: string;
 
-  export default src;
-  export { Component };
+  export default content;
+}
+
+declare module '*.svg?svgr' {
+  const content: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+  export default content;
 }
 
 declare const __DEV__: boolean;
