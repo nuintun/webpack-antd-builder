@@ -110,6 +110,7 @@ module.exports = async mode => {
           test: /\.svg$/i,
           oneOf: [
             {
+              issuer: /\.[jt]sx?$/i,
               resourceQuery: /\?svgr$/,
               use: [
                 {
