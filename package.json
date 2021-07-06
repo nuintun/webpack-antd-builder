@@ -37,7 +37,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.16.6",
-    "bizcharts": "^4.1.10",
+    "bizcharts": "^4.1.11",
     "classnames": "^2.3.1",
     "core-js": "^3.15.2",
     "dayjs": "^1.10.5",
