@@ -17,7 +17,7 @@ module.exports = (compiler, options) => {
   const devMiddleware = async (ctx, next) => {
     ctx.remove('Content-Type');
 
-    return await middleware(
+    await middleware(
       ctx.req,
       {
         locals: ctx.state,

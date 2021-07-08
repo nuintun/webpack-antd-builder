@@ -29,7 +29,7 @@ module.exports = (compiler, options) => {
       ctx.set(headers);
     };
 
-    return await middleware(ctx.req, { locals, writeHead, write, end }, next);
+    await middleware(ctx.req, { locals, writeHead, write, end }, next);
   };
 
   for (const [prop, value] of Object.entries(middleware)) {
