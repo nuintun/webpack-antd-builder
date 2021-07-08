@@ -29,10 +29,12 @@ module.exports = (compiler, options) => {
       ctx.set(headers);
     };
 
-    await middleware(ctx.req, { locals, writeHead, write, end }, next);
+    return await middleware(ctx.req, { locals, writeHead, write, end }, next);
   };
 
-  Object.keys(middleware).forEach(key => (hotMiddleware[key] = middleware[key]));
+  for (const [prop, value] of Object.entries(middleware)) {
+    hotMiddleware[prop] = value;
+  }
 
   return hotMiddleware;
 };

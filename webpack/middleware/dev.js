@@ -17,8 +17,8 @@ module.exports = (compiler, options) => {
   const devMiddleware = async (ctx, next) => {
     ctx.remove('Content-Type');
 
-    await middleware(
-      ctx.request,
+    return await middleware(
+      ctx.req,
       {
         locals: ctx.state,
         status(statusCode) {
@@ -38,7 +38,9 @@ module.exports = (compiler, options) => {
     );
   };
 
-  Object.keys(middleware).forEach(key => (devMiddleware[key] = middleware[key]));
+  for (const [prop, value] of Object.entries(middleware)) {
+    devMiddleware[prop] = value;
+  }
 
   return devMiddleware;
 };
