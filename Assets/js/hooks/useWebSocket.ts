@@ -2,8 +2,9 @@
  * @module useWebSocket
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import useIsMounted from './useIsMounted';
 import usePersistCallback from './usePersistCallback';
 
 interface Socket<M> {
@@ -24,6 +25,15 @@ export interface Options<M> {
   onClose?: (event: CloseEvent) => void;
   onMessage?: (event: MessageEvent<M>) => void;
   onReconnect?: (reconnectTimes: number, reconnectLimit: number) => void;
+}
+
+function removeWsEvents(ws: WebSocket) {
+  if (ws) {
+    ws.onopen = null;
+    ws.onmessage = null;
+    ws.onerror = null;
+    ws.onclose = null;
+  }
 }
 
 function initialMessage(url: string): MessageEvent<null> {
@@ -49,11 +59,11 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
     reconnectInterval = 3000
   } = options;
 
+  const isMounted = useIsMounted();
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<NodeJS.Timeout>();
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);
-  const onUnload = useCallback(() => websocketRef.current?.close(1000), []);
   const sendQueueRef = useRef<(string | ArrayBufferLike | Blob | ArrayBufferView)[]>([]);
   const [message, setMessage] = useState<MessageEvent<M | null>>(() => initialMessage(url));
 
@@ -87,7 +97,7 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
 
         onOpen && onOpen(event);
 
-        setReadyState(getReadyState());
+        isMounted() && setReadyState(getReadyState());
 
         const messages = sendQueueRef.current;
 
@@ -101,25 +111,23 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
       ws.onmessage = (message: MessageEvent<M>) => {
         onMessage && onMessage(message);
 
-        setMessage(message);
+        isMounted() && setMessage(message);
       };
 
       ws.onerror = event => {
         onError && onError(event);
 
-        setReadyState(getReadyState());
+        isMounted() && setReadyState(getReadyState());
       };
 
       ws.onclose = event => {
-        ws.onopen = null;
-        ws.onmessage = null;
-        ws.onerror = null;
-        ws.onclose = null;
+        removeWsEvents(ws);
+
         sendQueueRef.current = [];
 
         onClose && onClose(event);
 
-        setReadyState(getReadyState());
+        isMounted() && setReadyState(getReadyState());
 
         !event.wasClean && reconnect();
       };
@@ -171,21 +179,14 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
     websocketRef.current?.close(code, reason);
   });
 
-  // 初始时连接
+  // 初始时连接，卸载时断连
   useEffect(() => {
     !manual && connect();
-  }, [url, protocols, manual]);
-
-  // 卸载时断开
-  useEffect(() => {
-    window.addEventListener('unload', onUnload, false);
 
     return () => {
-      window.removeEventListener('unload', onUnload, false);
-
       disconnect();
     };
-  }, []);
+  }, [url, protocols, manual]);
 
   return { send, connect, message, disconnect, readyState };
 }
