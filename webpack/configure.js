@@ -22,5 +22,5 @@ module.exports = {
   theme: path.resolve('Assets/css/theme.less'),
   favicon: path.resolve('wwwroot/favicon.ico'),
   entry: [path.resolve('Assets/js/pages/App.tsx')],
-  alias: { '~js': js, '~css': css, '~images': images }
+  alias: { js, css, images, '~js': js, '~css': css, '~images': images }
 };

@@ -20,10 +20,9 @@ const resolveIp = require('../lib/ip');
 const querystring = require('querystring');
 const koaCompress = require('koa-compress');
 const findPorts = require('find-free-ports');
-const devMiddleware = require('../middleware/dev');
-const hotMiddleware = require('../middleware/hot');
 const resolveConfigure = require('./webpack.config.base');
 const { publicPath, entryHTML } = require('../configure');
+const devMiddleware = require('webpack-dev-server-middleware');
 
 const { toString } = Object.prototype;
 
@@ -43,7 +42,7 @@ function httpError(error) {
 
 function injectHotEntry(entry, options) {
   const params = { reload: true, quiet: true, noInfo: true, ...options };
-  const hotEntry = `webpack-hot-middleware/client?${querystring.stringify(params)}`;
+  const hotEntry = `webpack-dev-server-middleware/client?${querystring.stringify(params)}`;
 
   if (Array.isArray(entry)) {
     return [hotEntry, ...entry];
@@ -85,27 +84,20 @@ async function resolveEntry(entry, options) {
   const devServerHost = `http://${ip}:${port}`;
   const configure = await resolveConfigure(mode);
   const devServerPublicPath = devServerHost + publicPath;
-  const entry = await resolveEntry(configure.entry, { path: `${devServerHost}/webpack-hmr` });
+  const entry = await resolveEntry(configure.entry, { host: `${ip}:${port}` });
 
   configure.entry = entry;
   configure.output.publicPath = devServerPublicPath;
   configure.devtool = 'eval-cheap-module-source-map';
   configure.cache.name = `${configure.name}-${configure.mode}-server`;
 
-  configure.plugins.push(new webpack.SourceMapDevToolPlugin(), new webpack.HotModuleReplacementPlugin());
+  configure.plugins.push(new webpack.SourceMapDevToolPlugin());
 
   const app = new Koa();
   const compiler = webpack(configure);
   const logger = compiler.getInfrastructureLogger('webpack-dev-middleware');
 
   app.use(koaCompress());
-
-  app.use(
-    hotMiddleware(compiler, {
-      log: false,
-      path: '/webpack-hmr'
-    })
-  );
 
   const devServer = devMiddleware(compiler, {
     index: false,
@@ -114,10 +106,6 @@ async function resolveEntry(entry, options) {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     }
-  });
-
-  devServer.waitUntilValid(() => {
-    logger.info(`server run at: \u001B[36m${devServerHost}\u001B[0m`);
   });
 
   app.use(devServer);
@@ -131,5 +119,9 @@ async function resolveEntry(entry, options) {
     !httpError(error) && console.error(error);
   });
 
-  app.listen(port);
+  app.listen(port, () => {
+    devServer.waitUntilValid(() => {
+      logger.info(`server run at: \u001B[36m${devServerHost}\u001B[0m`);
+    });
+  });
 })();
