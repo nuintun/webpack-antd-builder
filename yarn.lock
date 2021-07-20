@@ -5712,10 +5712,10 @@ webpack-dev-middleware@^5.0.0:
     range-parser "^1.2.1"
     schema-utils "^3.0.0"
 
-webpack-dev-server-middleware@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.2.1.tgz#1e9d839cd5bddffa013af816cdd4bc6744ba18e7"
-  integrity sha512-J4pvD1AwHkb4QiXX6srY625gYgL9zwtuR9TwXurrhbj7Is6dUTrrhok+RXKJvzvlHqgMQmq5r9aHyFPzp7MIOg==
+webpack-dev-server-middleware@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.3.0.tgz#84ff5407119e5014726ae7b2515c3775fcaab40a"
+  integrity sha512-RgTflmSDo2GRT7U1spqStrNuDIGVoJul5ykS7M7YKjArz6TxxJHfRLDZ3bWm62Gg5iFcRnRtwlwuAeo+Kd1Phw==
   dependencies:
     ansi-regex "^6.0.0"
     bufferutil "^4.0.3"
