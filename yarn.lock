@@ -62,9 +62,9 @@
     tslib "^2.0.3"
 
 "@antv/component@*", "@antv/component@^0.8.7":
-  version "0.8.14"
-  resolved "https://registry.yarnpkg.com/@antv/component/-/component-0.8.14.tgz#c6b65b84e94302f4ac49fd763fe8f723e0acb31f"
-  integrity sha512-ROuwQyA9Ux/7vkf+anzcTnGTX0zrEWT8h1oIukUCE+PiIFi0Q5GreEALGXFZ9snAVe07SdkNC7Ki/lT/4aIHiA==
+  version "0.8.15"
+  resolved "https://registry.yarnpkg.com/@antv/component/-/component-0.8.15.tgz#d8ec332138a6d8777a2fcfe032eaffcfb1e6d4ab"
+  integrity sha512-+TAkmeI/pmu6x1QiMi7jjyq7F4ETfskovKKhHEGHQ4aXTyELcG6Ei36QQb0NYhDQaxZXbokzSswruZ5khU2zsw==
   dependencies:
     "@antv/dom-util" "~2.0.1"
     "@antv/g-base" "0.5.6"
@@ -5712,10 +5712,10 @@ webpack-dev-middleware@^5.0.0:
     range-parser "^1.2.1"
     schema-utils "^3.0.0"
 
-webpack-dev-server-middleware@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.2.0.tgz#7408aee68467303d9dbf787af3d609c31e885ea7"
-  integrity sha512-mAv4GbiErGvJ4HMWRWSuLHpnxDG/xtWET6yVftMeZBZ0sqrJjhA1shNNSOk/lGh+TwE+Y2e6AxV01766mQewCw==
+webpack-dev-server-middleware@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.2.1.tgz#1e9d839cd5bddffa013af816cdd4bc6744ba18e7"
+  integrity sha512-J4pvD1AwHkb4QiXX6srY625gYgL9zwtuR9TwXurrhbj7Is6dUTrrhok+RXKJvzvlHqgMQmq5r9aHyFPzp7MIOg==
   dependencies:
     ansi-regex "^6.0.0"
     bufferutil "^4.0.3"
