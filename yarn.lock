@@ -2486,9 +2486,9 @@ d3-timer@^1.0.9:
   integrity sha512-B1JDm0XDaQC+uvo4DT79H0XmBskgS3l6Ve+1SBCfxgmtIb1AVrPIoqd+nPSv+loMX8szQ0sVUhGngL7D5QPiXw==
 
 date-fns@2.x:
-  version "2.22.1"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.22.1.tgz#1e5af959831ebb1d82992bf67b765052d8f0efc4"
-  integrity sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==
+  version "2.23.0"
+  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.23.0.tgz#4e886c941659af0cf7b30fafdd1eaa37e88788a9"
+  integrity sha512-5ycpauovVyAk0kXNZz6ZoB9AYMZB4DObse7P3BPWmyEjXNORTI8EJ6X0uaSAq4sCHzM1uajzrkr6HnsLQpxGXA==
 
 dayjs@1.x, dayjs@^1.10.6:
   version "1.10.6"
@@ -5718,16 +5718,15 @@ webpack-dev-middleware@^5.0.0:
     range-parser "^1.2.1"
     schema-utils "^3.0.0"
 
-webpack-dev-server-middleware@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.5.0.tgz#bf78a9f09111c9223d48837bfd802d019d42f6ea"
-  integrity sha512-kSQwk/pUXNa9+wdhkhcc3D/GZugrCYkG26HjlmtkWgDNvBy/jYI20swObr//nxc4eqpymTo+nmcFWlV2wscn0A==
+webpack-dev-server-middleware@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.6.0.tgz#dbaea2317994bebb5006d2419644b1d20da15ca8"
+  integrity sha512-Gs4BqzAARjGBo/XX6JcJ7My1tbLLyc4U3vthvC1pvhGltGRs3tK9uuzQ/NJ0WVhD2r75bFwspV4cLgCmTxWp4g==
   dependencies:
     ansi-regex "^6.0.0"
     bufferutil "^4.0.3"
     core-js "^3.15.2"
     koa-compose "^4.1.0"
-    memoize-one "^5.2.1"
     utf-8-validate "^5.0.5"
     webpack-dev-middleware "^5.0.0"
     ws "^7.5.3"
