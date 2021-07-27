@@ -33,8 +33,8 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
-jspm_packages/
+node_modules
+jspm_packages
 
 # Optional npm cache directory
 .npm
@@ -69,27 +69,44 @@ jspm_packages/
 # Appveyor configuration
 appveyor.yml
 
-# Tests directories
-test
-tests
+# Typescript configuration
+tsconfig.json
 
 # Npm configuration
 .npmrc
 
-# Vscode configuration
+# Github
+.github
+
+# Github pages
+_config.yml
+
+# VSCode configuration
 .vscode
 
 # Yarn lock file
 yarn.lock
 
-# npm lock file
+# Yarn configure file
+.yarnrc
+
+# Npm lock file
 package-lock.json
 
-# Typescript configuration
-tsconfig.json
+# Development directories
+src
+tools
 
-# Github
-.github/
+# Tests directories
+test
+tests
 
-# Github pages
-_config.yml
+# Editor config
+.editorconfig
+
+# Prettier files
+.prettierrc
+.prettierignore
+
+# Rollup files
+rollup.config.js
