@@ -26,7 +26,7 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# node-waf configuration
+# Node-waf configuration
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
@@ -54,15 +54,15 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# Dotenv environment variables file
 .env
 
-# next.js build output
+# Next.js build output
 .next
 
-# npm lock file
+# Npm lock file
 package-lock.json
 
-# build file
+# Build file
 es5/
 esnext/
