@@ -2879,10 +2879,10 @@ find-cache-dir@^3.3.1:
     make-dir "^3.0.2"
     pkg-dir "^4.1.0"
 
-find-free-ports@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/find-free-ports/-/find-free-ports-2.0.3.tgz#14072bb2fddf00612c91a7a71625d44b45c97d71"
-  integrity sha512-r8R4ieGTixDMDMHBit0WabrWDc/XeK35kyt8Fp6FToXEDqe1iVujqQlTTlrV5VN0Nor1ydH+vsvB0vTl7VgifA==
+find-free-ports@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/find-free-ports/-/find-free-ports-3.0.0.tgz#8cb33bc27065cbf2f53282eea6cb0587bb7e61d8"
+  integrity sha512-C9XrjG5O1EWPHSjY/hzJaUAoyUQ+KhmiYn0zHohOpScSeWr5TqJu613iIvzI4DnIKpdcBZZ5B4ifiUA10Y2HuA==
 
 find-up@^4.0.0:
   version "4.1.0"
