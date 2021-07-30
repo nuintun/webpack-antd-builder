@@ -19,7 +19,7 @@ const webpack = require('webpack');
 const resolveIp = require('../lib/ip');
 const querystring = require('querystring');
 const koaCompress = require('koa-compress');
-const findPorts = require('find-free-ports');
+const { findFreePorts } = require('find-free-ports');
 const resolveConfigure = require('./webpack.config.base');
 const { publicPath, entryHTML } = require('../configure');
 const devMiddleware = require('webpack-dev-server-middleware');
@@ -31,7 +31,7 @@ function isTypeof(value, type) {
 }
 
 async function resolvePort(startPort = 8000, endPort = 9000) {
-  const [port] = await findPorts(1, { startPort, endPort });
+  const [port] = await findFreePorts(1, { startPort, endPort });
 
   return port;
 }
