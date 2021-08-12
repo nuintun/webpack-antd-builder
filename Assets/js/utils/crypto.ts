@@ -12,7 +12,7 @@ const { fromCharCode } = String;
 
 function safeAtob(text: string): string {
   try {
-    return atob(text);
+    return window.atob(text);
   } catch {
     return '';
   }
