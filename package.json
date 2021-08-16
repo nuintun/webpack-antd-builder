@@ -58,7 +58,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@svgr/webpack": "^5.5.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
-    "@types/react": "^17.0.17",
+    "@types/react": "^17.0.18",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
     "@types/throttle-debounce": "^2.1.0",
