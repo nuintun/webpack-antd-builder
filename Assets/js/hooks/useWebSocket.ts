@@ -77,7 +77,9 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
       reconnectTimerRef.current = setTimeout(() => {
         connectWebSocket();
 
-        onReconnect && onReconnect(++reconnectTimesRef.current, reconnectLimit);
+        const reconnectTimes = reconnectTimesRef.current++;
+
+        onReconnect && onReconnect(reconnectTimes, reconnectLimit);
       }, reconnectInterval);
     }
   });
