@@ -14,7 +14,7 @@ export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
   pageSizeOptions?: number[];
 }
 
-export type ResolvePagingOptions = (pageSize: number) => PagingOptions;
+export type GetPagingOptions = (pageSize: number) => PagingOptions;
 
 const DEFAULT_PAGE_SIZE_OPTIONS = [20, 30, 50, 80];
 
@@ -47,10 +47,10 @@ const normalizePagingOptions = memoizeOne((pageSize: number, opitons: Options = 
  * @description 【Hook】分页处理
  * @param opitons 分页配置
  */
-export default function usePagingOptions(opitons?: Options): ResolvePagingOptions {
-  const resolvePagingOptions: ResolvePagingOptions = usePersistCallback(pageSize => {
+export default function usePagingOptions(opitons?: Options): GetPagingOptions {
+  const getPagingOptions: GetPagingOptions = usePersistCallback(pageSize => {
     return normalizePagingOptions(pageSize, opitons);
   });
 
-  return resolvePagingOptions;
+  return getPagingOptions;
 }

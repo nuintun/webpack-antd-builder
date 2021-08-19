@@ -28,7 +28,7 @@ export default function useList<I, E extends object = {}>(
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ] {
-  const resolvePagingOptions = usePagingOptions(options);
+  const getPagingOptions = usePagingOptions(options);
   const [loading, dataSource, fetch, refs] = usePagingRequest<I, E>(url);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
@@ -49,7 +49,7 @@ export default function useList<I, E extends object = {}>(
       onChange,
       current: page,
       onShowSizeChange: onChange,
-      ...resolvePagingOptions(pageSize)
+      ...getPagingOptions(pageSize)
     };
   }
 

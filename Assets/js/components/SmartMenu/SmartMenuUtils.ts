@@ -5,49 +5,48 @@ import { MenuItem } from '~js/utils/getRouter';
 export const prefixUI = 'ui-smart-menu';
 
 /**
- * @function walkMenuData
- * @param {MenuItem[]} menuData
- * @param {FlatMenuData} flatMenus
- * @returns {FlatMenuData}
+ * @function walkMenus
+ * @param menus 原始菜单数据
+ * @param flatMenus 扁平化菜单数据
  */
-function walkMenuData(menuData: MenuItem[], flatMenuData: MenuItem[]): MenuItem[] {
-  for (const menu of menuData) {
-    flatMenuData.push(menu);
+function walkMenus(menus: MenuItem[], flatMenus: MenuItem[]): MenuItem[] {
+  for (const menu of menus) {
+    flatMenus.push(menu);
 
     const { children } = menu;
 
     if (children) {
-      walkMenuData(children, flatMenuData);
+      walkMenus(children, flatMenus);
     }
   }
 
-  return flatMenuData;
+  return flatMenus;
 }
 
-type GetFlatMenuData = (menuData: MenuItem[]) => MenuItem[];
+type GetFlatMenus = (menus: MenuItem[]) => MenuItem[];
 
 /**
- * @function getFlatMenuData
+ * @function getFlatMenus
  * @description 扁平化菜单路由
  * @example [{ path: string }, { path: string }] => [path, path2]
- * @param menuData 菜单数据
+ * @param menus 菜单数据
  */
-export const getFlatMenuData: GetFlatMenuData = memoizeOne(menuData => {
-  return walkMenuData(menuData, []);
+export const getFlatMenus: GetFlatMenus = memoizeOne(menus => {
+  return walkMenus(menus, []);
 });
 
-type IsMenuKey = (key: string, flatMenuData: MenuItem[]) => boolean;
+type IsMenuKey = (key: string, flatMenus: MenuItem[]) => boolean;
 
 /**
  * @function isMenuKey
  * @description 指定标识为否为菜单标识
  * @param key 菜单标识
- * @param flatMenuData 菜单数据
+ * @param flatMenus 菜单数据
  */
-const isMenuKey: IsMenuKey = memoizeOne((key, flatMenuData) => {
+const isMenuKey: IsMenuKey = memoizeOne((key, flatMenus) => {
   if (!key) return false;
 
-  return flatMenuData.some((menu: MenuItem) => key === menu.key);
+  return flatMenus.some((menu: MenuItem) => key === menu.key);
 });
 
 /**
@@ -70,17 +69,17 @@ function uniqueKeys(keys: string[]): string[] {
   return result;
 }
 
-type MergeKeys = (prevkeys: string[], nextKeys: string[], flatMenuData: MenuItem[]) => string[];
+type MergeKeys = (prevkeys: string[], nextKeys: string[], flatMenus: MenuItem[]) => string[];
 
 /**
  * @function filterKeys
  * @description 过滤菜单标识
  * @param prevKeys 更新前菜单标识
  * @param nextKeys 更新后菜单标识
- * @param flatMenuData
+ * @param flatMenus 扁平化菜单数据
  */
-export const mergeKeys: MergeKeys = memoizeOne((prevKeys, nextKeys, flatMenuData) =>
-  uniqueKeys([...prevKeys.filter(key => isMenuKey(key, flatMenuData)), ...nextKeys])
+export const mergeKeys: MergeKeys = memoizeOne((prevKeys, nextKeys, flatMenus) =>
+  uniqueKeys([...prevKeys.filter(key => isMenuKey(key, flatMenus)), ...nextKeys])
 );
 
 export interface ExpandKeys {
@@ -88,15 +87,15 @@ export interface ExpandKeys {
   selectedKeys: string[];
 }
 
-type GetExpandKeysFromRouteMath = (path: string | undefined, flatMenuData: MenuItem[]) => ExpandKeys;
+type GetExpandKeysFromPath = (route: string | undefined, flatMenus: MenuItem[]) => ExpandKeys;
 
 /**
- * @function getExpandKeysFromRouteMath
+ * @function getExpandKeysFromPath
  * @description 通过当前路由获取菜单展开项标识列表
  * @param path 路由路径
  * @param flatMenuPaths 菜单路径列表
  */
-export const getExpandKeysFromRouteMath: GetExpandKeysFromRouteMath = memoizeOne((path, flatMenuData) => {
+export const getExpandKeysFromPath: GetExpandKeysFromPath = memoizeOne((path, flatMenus) => {
   const openKeys: string[] = [];
   const selectedKeys: string[] = [];
 
@@ -104,7 +103,7 @@ export const getExpandKeysFromRouteMath: GetExpandKeysFromRouteMath = memoizeOne
     const paths = urlToPaths(path.toLowerCase());
 
     for (const path of paths) {
-      for (const menu of flatMenuData) {
+      for (const menu of flatMenus) {
         if (path === menu.path) {
           if (menu.children) {
             openKeys.push(menu.key.toString());

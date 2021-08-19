@@ -6,7 +6,7 @@ import { MenuItem } from '~js/utils/getRouter';
 import usePrevious from '~js/hooks/usePrevious';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import usePersistCallback from '~js/hooks/usePersistCallback';
-import { getExpandKeysFromRouteMath, getFlatMenuData, mergeKeys, prefixUI } from './SmartMenuUtils';
+import { getExpandKeysFromPath, getFlatMenus, mergeKeys, prefixUI } from './SmartMenuUtils';
 
 const { Fragment } = React;
 const { SubMenu, Item } = Menu;
@@ -25,8 +25,8 @@ type OmitProps =
   | 'defaultSelectedKeys';
 
 export interface RouteMenuProps extends RouteComponentProps, Omit<MenuProps, OmitProps> {
+  menus: MenuItem[];
   collapsed?: boolean;
-  menuData: MenuItem[];
   icon?: string | React.ReactElement;
   menuItemRender?: (menu: MenuItem) => React.ReactNode;
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
@@ -87,12 +87,12 @@ function subMenuRender(menu: MenuItem, props: RouteMenuProps): React.ReactElemen
   return itemRender(menu, props);
 }
 
-function menuRender(menuData: MenuItem[], props: RouteMenuProps): React.ReactElement[] {
-  return menuData.map(menu => subMenuRender(menu, props));
+function menuRender(menus: MenuItem[], props: RouteMenuProps): React.ReactElement[] {
+  return menus.map(menu => subMenuRender(menu, props));
 }
 
 export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
-  const { match, history, location, menuData, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
+  const { match, menus, history, location, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
 
   const prevProps = usePrevious<RouteMenuProps>(props);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -114,16 +114,16 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   useEffect(() => {
     if (
       !prevProps ||
-      menuData !== prevProps.menuData ||
+      menus !== prevProps.menus ||
       collapsed !== prevProps.collapsed ||
       location.pathname !== prevProps.location.pathname
     ) {
-      const flatMenuData = getFlatMenuData(menuData);
+      const flatMenus = getFlatMenus(menus);
       const cachedOpenKeys = cachedOpenKeysRef.current;
-      const defaultKeys = getExpandKeysFromRouteMath(match.path, flatMenuData);
+      const defaultKeys = getExpandKeysFromPath(match.path, flatMenus);
 
       if (!collapsed) {
-        const nextOpenKeys = mergeKeys(cachedOpenKeys, defaultKeys.openKeys, flatMenuData);
+        const nextOpenKeys = mergeKeys(cachedOpenKeys, defaultKeys.openKeys, flatMenus);
 
         setOpenKeys(nextOpenKeys);
 
@@ -140,7 +140,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
 
       setSelectedKeys(defaultKeys.selectedKeys);
     }
-  }, [location, collapsed, menuData, prevProps, onOpenChange]);
+  }, [location, collapsed, menus, prevProps, onOpenChange]);
 
   return (
     <Menu
@@ -152,7 +152,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
     >
-      {menuRender(menuData, props)}
+      {menuRender(menus, props)}
     </Menu>
   );
 });

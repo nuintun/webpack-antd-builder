@@ -16,7 +16,7 @@ const { Header, Content } = Layout;
 const mobileQuery = '(max-width: 480px)';
 const brokenQuery = '(max-width: 992px)';
 
-type PickProps = 'theme' | 'match' | 'history' | 'location' | 'menuData' | 'collapsedWidth';
+type PickProps = 'theme' | 'menus' | 'match' | 'history' | 'location' | 'collapsedWidth';
 
 export interface SmartLayoutProps extends Pick<SmartMenuMenuProps, PickProps> {
   roles?: any;
@@ -32,14 +32,14 @@ const triggerClassName = `${prefixUI}-sider-trigger`;
 
 export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactElement {
   const {
-    theme = 'dark',
     match,
+    menus,
     history,
     children,
     location,
-    menuData,
     siderWith,
     breadcrumbs,
+    theme = 'dark',
     collapsedWidth,
     leftHeaderRender,
     rightHeaderRender
@@ -83,10 +83,10 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
       <SmartMenu
         theme={theme}
         match={match}
+        menus={menus}
         width={siderWith}
         history={history}
         isMobile={isMobile}
-        menuData={menuData}
         location={location}
         collapsed={collapsed}
         onCollapse={onCollapse}

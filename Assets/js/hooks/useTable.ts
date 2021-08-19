@@ -57,7 +57,7 @@ export default function useTable<I, E extends object = {}>(
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
-  const resolvePagingOptions = usePagingOptions(options);
+  const getPagingOptions = usePagingOptions(options);
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E>(url);
 
   const fetch = usePersistCallback((options: RequestOptions = {}) => {
@@ -105,7 +105,7 @@ export default function useTable<I, E extends object = {}>(
       total,
       pageSize,
       current: page,
-      ...resolvePagingOptions(pageSize)
+      ...getPagingOptions(pageSize)
     };
   }
 
