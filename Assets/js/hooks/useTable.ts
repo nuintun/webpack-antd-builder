@@ -2,7 +2,7 @@
  * @module useTable
  */
 
-import { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 
 import usePagingRequest, {
   getAndUpdateRef,
@@ -19,9 +19,11 @@ import usePagingOptions, { Options } from './usePagingOptions';
 
 type Filter = Search;
 
+type SorterField = React.Key | React.Key[];
+
 interface Sorter {
-  orderBy: string | number;
-  orderType: 'ascend' | 'descend';
+  orderBy: (string | number)[];
+  orderType: ('ascend' | 'descend')[];
 }
 
 interface RequestOptions extends PagingRequestOptions {
@@ -43,6 +45,10 @@ interface Refs<I, E> extends PagingRequestRefs<I, E> {
 }
 
 export type { Options };
+
+function serializeField(filed: SorterField): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : filed;
+}
 
 /**
  * @function useTable
@@ -78,15 +84,23 @@ export default function useTable<I, E extends object = {}>(
         case 'paginate':
           return await fetch({ pagination: { page: pagination.current, pageSize: pagination.pageSize } });
         case 'sort':
-          if (Array.isArray(sorter) || Array.isArray(sorter.field)) {
-            throw new Error('multiple sorter not support');
+          const orderBy: Sorter['orderBy'] = [];
+          const orderType: Sorter['orderType'] = [];
+
+          sorter = Array.isArray(sorter) ? sorter : [sorter];
+
+          for (const { columnKey, field, order } of sorter) {
+            if (order) {
+              if (columnKey || field) {
+                orderBy.push(columnKey || serializeField(field as SorterField));
+                orderType.push(order);
+              } else {
+                throw new Error('table column missing sort field');
+              }
+            }
           }
 
-          if (!sorter.order) return await fetch({ sorter: false });
-
-          const orderBy = sorter.columnKey || (sorter.field as string | number) || '';
-
-          return await fetch({ sorter: { orderBy, orderType: sorter.order } });
+          return await fetch({ sorter: { orderBy, orderType } });
       }
     } catch (error) {
       message.error(error.message);
