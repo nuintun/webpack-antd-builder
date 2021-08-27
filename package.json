@@ -35,7 +35,7 @@
     "react-reconciler": "^0.26.2"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.6.3",
+    "@ant-design/icons": "^4.6.4",
     "antd": "^4.16.13",
     "bizcharts": "^4.1.11",
     "classnames": "^2.3.1",
