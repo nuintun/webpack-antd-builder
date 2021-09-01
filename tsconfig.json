@@ -8,15 +8,14 @@
     "module": "ESNext",
     "target": "ESNext",
     "skipLibCheck": true,
-    "noImplicitAny": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "strictNullChecks": true,
     "resolveJsonModule": true,
     "moduleResolution": "Node",
     "noUnusedParameters": true,
     "experimentalDecorators": true,
+    "useUnknownInCatchVariables": false,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "~js/*": [
