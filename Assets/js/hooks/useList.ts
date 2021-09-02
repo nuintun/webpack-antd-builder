@@ -5,12 +5,15 @@
 import { useCallback } from 'react';
 
 import { PaginationProps } from 'antd';
-import usePagingOptions, { Options } from './usePagingOptions';
+import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 import usePagingRequest, { hasQuery, Options as RequestOptions, Refs, Response } from './usePagingRequest';
 
 type OnChange = NonNullable<PaginationProps['onChange']>;
 
-export type { Options };
+export interface Options<I, T = I> {
+  pagination?: PagingOptions;
+  transform?: (items: I[]) => T[];
+}
 
 /**
  * @function useList
@@ -18,18 +21,18 @@ export type { Options };
  * @param url 请求地址
  * @param options 请求配置
  */
-export default function useList<I, E extends object = {}>(
+export default function useList<I, E extends object = {}, T = I>(
   url: string,
-  options?: Options
+  options: Options<I, T> = {}
 ): [
   loading: boolean,
-  dataSource: I[],
+  dataSource: T[],
   fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ] {
-  const getPagingOptions = usePagingOptions(options);
-  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E>(url);
+  const getPagingOptions = usePagingOptions(options.pagination);
+  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(url, options.transform);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
     fetch({ pagination: { page, pageSize } });

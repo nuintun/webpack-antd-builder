@@ -60,13 +60,14 @@ const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
  * @description 【Hook】分页请求
  * @param url 请求地址
  */
-export default function usePagingRequest<I, E extends object = {}>(
-  url: string
-): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+export default function usePagingRequest<I, E extends object = {}, T = I>(
+  url: string,
+  transform: (items: I[]) => T[] = items => items as unknown as T[]
+): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const [loading, request] = useRequest();
-  const payloadRef = useRef<Response<I, E>>({});
+  const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
-  const [dataSource, setDataSource] = useState<I[]>([]);
+  const [dataSource, setDataSource] = useState<T[]>([]);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
 
   const fetch = usePersistCallback(async (options: Options = {}) => {
@@ -99,14 +100,14 @@ export default function usePagingRequest<I, E extends object = {}>(
     }
 
     try {
-      setRef(payloadRef, await request<Response<I, E>>(url, { query }));
+      setRef(responseRef, await request<Response<I, E>>(url, { query }));
     } catch (error) {
       setDataSource([]);
 
       throw error;
     }
 
-    const response = payloadRef.current;
+    const response = responseRef.current;
     const { items }: Response<I, E> = response;
     const dataSource = Array.isArray(items) ? items : [];
 
@@ -120,18 +121,18 @@ export default function usePagingRequest<I, E extends object = {}>(
       }
     }
 
-    setDataSource(dataSource);
+    setDataSource(transform(dataSource));
 
-    return payloadRef.current;
+    return responseRef.current;
   });
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {
-      get response() {
-        return payloadRef.current;
-      },
       get search() {
         return searchRef.current;
+      },
+      get response() {
+        return responseRef.current;
       },
       get pagination() {
         return paginationRef.current;

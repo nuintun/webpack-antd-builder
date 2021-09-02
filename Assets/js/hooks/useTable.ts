@@ -15,7 +15,7 @@ import usePagingRequest, {
 } from './usePagingRequest';
 import { message, TableProps } from 'antd';
 import usePersistCallback from './usePersistCallback';
-import usePagingOptions, { Options } from './usePagingOptions';
+import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 type Filter = Search;
 
@@ -44,10 +44,13 @@ interface Refs<I, E> extends PagingRequestRefs<I, E> {
   readonly sorter: Sorter | false;
 }
 
-export type { Options };
-
 function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
+}
+
+export interface Options<I, T = I> {
+  pagination?: PagingOptions;
+  transform?: (items: I[]) => T[];
 }
 
 /**
@@ -56,15 +59,15 @@ function serializeField(filed: SorterField): React.Key {
  * @param url 请求地址
  * @param options 请求配置
  */
-export default function useTable<I, E extends object = {}>(
+export default function useTable<I, E extends object = {}, T = I>(
   url: string,
-  options?: Options
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+  options: Options<I, T> = {}
+): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
-  const getPagingOptions = usePagingOptions(options);
-  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E>(url);
+  const getPagingOptions = usePagingOptions(options.pagination);
+  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, options.transform);
 
   const fetch = usePersistCallback((options: RequestOptions = {}) => {
     const search: Query = {
@@ -76,7 +79,7 @@ export default function useTable<I, E extends object = {}>(
     return request({ search, pagination: options.pagination });
   });
 
-  const onChange = useCallback<OnChange<I>>(async (pagination, filter, sorter, { action }) => {
+  const onChange = useCallback<OnChange<T>>(async (pagination, filter, sorter, { action }) => {
     try {
       switch (action) {
         case 'filter':
@@ -109,7 +112,7 @@ export default function useTable<I, E extends object = {}>(
 
   const originRefsPagination = originRefs.pagination;
 
-  let pagination: Pagination<I> = false;
+  let pagination: Pagination<T> = false;
 
   if (hasQuery(originRefsPagination)) {
     const { total = 0 } = originRefs.response;
@@ -144,24 +147,4 @@ export default function useTable<I, E extends object = {}>(
   }, []);
 
   return [{ loading, onChange, dataSource, pagination, size: 'middle' }, fetch, refs];
-}
-
-/**
- * @function useTransform
- * @description 表格组件数据源转换
- * @param props 表格组件参数
- * @param transform 转换函数
- */
-export function useTransform<S, I>(
-  props: DefaultTableProps<S>,
-  transform: (dataSource: readonly S[]) => I[]
-): DefaultTableProps<I> {
-  const { dataSource } = props;
-
-  return useMemo(() => {
-    return {
-      ...props,
-      dataSource: transform(dataSource)
-    } as unknown as DefaultTableProps<I>;
-  }, [dataSource]);
 }
