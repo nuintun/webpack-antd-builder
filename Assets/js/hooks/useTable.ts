@@ -5,13 +5,13 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 
 import usePagingRequest, {
-  getAndUpdateRef,
   hasQuery,
   Options as PagingRequestOptions,
   Query as PagingRequestQuery,
   Refs as PagingRequestRefs,
   Response,
-  Search
+  Search,
+  updateRef
 } from './usePagingRequest';
 import { message, TableProps } from 'antd';
 import usePersistCallback from './usePersistCallback';
@@ -20,6 +20,14 @@ import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 type Filter = Search;
 
 type SorterField = React.Key | React.Key[];
+
+type Pagination<I> = TableProps<I>['pagination'];
+
+type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
+
+type Query = Filter & Partial<Sorter> & PagingRequestQuery;
+
+type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
 
 interface Sorter {
   orderBy: (string | number)[];
@@ -31,26 +39,18 @@ interface RequestOptions extends PagingRequestOptions {
   sorter?: Sorter | false;
 }
 
-type Pagination<I> = TableProps<I>['pagination'];
-
-type Query = Filter & Partial<Sorter> & PagingRequestQuery;
-
-type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
-
-type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
-
 interface Refs<I, E> extends PagingRequestRefs<I, E> {
   readonly filter: Filter | false;
   readonly sorter: Sorter | false;
 }
 
-function serializeField(filed: SorterField): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : filed;
-}
-
 export interface Options<I, T = I> {
   pagination?: PagingOptions;
   transform?: (items: I[]) => T[];
+}
+
+function serializeField(filed: SorterField): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
 /**
@@ -71,9 +71,9 @@ export default function useTable<I, E extends object = {}, T = I>(
 
   const fetch = usePersistCallback((options: RequestOptions = {}) => {
     const search: Query = {
-      ...getAndUpdateRef(searchRef, options.search),
-      ...getAndUpdateRef(filterRef, options.filter),
-      ...getAndUpdateRef(sorterRef, options.sorter)
+      ...updateRef(searchRef, options.search),
+      ...updateRef(filterRef, options.filter),
+      ...updateRef(sorterRef, options.sorter)
     };
 
     return request({ search, pagination: options.pagination });

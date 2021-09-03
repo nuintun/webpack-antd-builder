@@ -45,7 +45,7 @@ export function setRef<R extends React.MutableRefObject<any>, V extends RefValue
   return (ref.current = current);
 }
 
-export function getAndUpdateRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, value: V | undefined): V {
+export function updateRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, value: V | undefined): V {
   return setRef(ref, value ?? ref.current);
 }
 
@@ -72,7 +72,7 @@ export default function usePagingRequest<I, E extends object = {}, T = I>(
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
 
   const fetch = usePersistCallback(async (options: Options = {}) => {
-    const query: Query = getAndUpdateRef(searchRef, options.search) || {};
+    const query: Query = updateRef(searchRef, options.search) || {};
     const hasPagination = hasQuery(options.pagination ?? paginationRef.current);
 
     if (hasPagination) {
