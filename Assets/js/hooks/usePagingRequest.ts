@@ -59,6 +59,7 @@ const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
  * @function usePagingRequest
  * @description 【Hook】分页请求
  * @param url 请求地址
+ * @param transform 数据转换函数
  */
 export default function usePagingRequest<I, E extends object = {}, T = I>(
   url: string,
