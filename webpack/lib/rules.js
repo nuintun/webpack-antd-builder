@@ -111,7 +111,7 @@ module.exports = async mode => {
           oneOf: [
             {
               issuer: /\.[jt]sx?$/i,
-              resourceQuery: /\?svgr$/,
+              resourceQuery: /^\?svgr$/,
               use: [
                 {
                   loader: '@svgr/webpack',
