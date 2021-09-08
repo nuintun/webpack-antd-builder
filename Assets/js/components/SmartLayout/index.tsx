@@ -46,21 +46,25 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
   } = props;
 
   const contentRef = useRef(null);
-  const isMobile = useMedia(mobileQuery);
-  const [setCollapsedStore, getCollapsedStore] = useStorage<boolean>('collapsed');
 
-  const onBrokenChange = useCallback(collapsed => {
-    !getCollapsedStore() && setCollapsed(collapsed);
+  const onMobileChange = useCallback(isMobile => {
+    isMobile && setCollapsed(isMobile);
   }, []);
 
+  const onBrokenChange = useCallback(isBroken => {
+    !readCollapsed() && setCollapsed(isBroken);
+  }, []);
+
+  const isMobile = useMedia(mobileQuery, onMobileChange);
   const isBroken = useMedia(brokenQuery, onBrokenChange);
-  const [collapsed, setCollapsed] = useState(() => isBroken || isMobile || !!getCollapsedStore());
+  const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
+  const [collapsed, setCollapsed] = useState(() => isBroken || isMobile || !!readCollapsed());
 
   const onTriggerClick = usePersistCallback(() =>
     setCollapsed(collapsed => {
       collapsed = !collapsed;
 
-      setCollapsedStore(collapsed);
+      writeCollapsed(collapsed);
 
       return collapsed;
     })
