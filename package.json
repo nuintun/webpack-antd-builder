@@ -12,7 +12,7 @@
     "dev": "node webpack/bin/webpack.config.dev.js",
     "prod": "node webpack/bin/webpack.config.prod.js",
     "watch": "nodemon webpack/bin/webpack.config.server.js",
-    "report": "webpack-bundle-analyzer --port auto node_modules/.cache/webpack-analyzer/report.json wwwroot/public"
+    "report": "node webpack/bin/webpack.config.prod.js --report"
   },
   "author": {
     "name": "nuintun",

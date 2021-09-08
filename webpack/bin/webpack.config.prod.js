@@ -13,7 +13,6 @@ const mode = 'production';
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
 
-const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const resolveConfigure = require('./webpack.config.base');
@@ -23,18 +22,16 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 (async () => {
   const configure = await resolveConfigure(mode);
 
-  const analyzer = {
-    logLevel: 'warn',
-    generateStatsFile: true,
-    analyzerMode: 'disabled',
-    statsOptions: { source: false },
-    statsFilename: path.resolve('node_modules/.cache/webpack-analyzer/report.json')
-  };
-
   configure.devtool = false;
+
+  configure.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
+
   configure.optimization.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];
 
-  configure.plugins.push(new webpack.optimize.AggressiveMergingPlugin(), new BundleAnalyzerPlugin(analyzer));
+  // 开启 webpack-bundle-analyzer 分析工具
+  if (process.argv[2] === '--report') {
+    configure.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', analyzerPort: 'auto' }));
+  }
 
   const compiler = webpack(configure);
 
