@@ -5,9 +5,9 @@ import React, { memo, useRef } from 'react';
 import { Drawer } from 'antd';
 import { prefixUI } from './SmartMenuUtils';
 import usePersistCallback from '~js/hooks/usePersistCallback';
-import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps } from './SiderMenu';
+import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenuProps } from './SiderMenu';
 
-export type { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenuMenuProps };
+export type { HeaderRender, HeaderRenderProps, SmartMenuProps };
 
 export default memo(function SmartMenu({
   isMobile,
@@ -17,7 +17,7 @@ export default memo(function SmartMenu({
   onOpenChange,
   defaultOpenKeys = [],
   ...restProps
-}: SiderMenuProps): React.ReactElement {
+}: SmartMenuProps): React.ReactElement {
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys);
 
   const onClose = usePersistCallback((): void => {

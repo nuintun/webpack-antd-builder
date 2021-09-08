@@ -42,7 +42,7 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | nu
       );
     }
 
-    return React.cloneElement(icon as React.ReactElement, { className: iconClassName });
+    return React.cloneElement(icon, { className: iconClassName });
   }
 
   return null;

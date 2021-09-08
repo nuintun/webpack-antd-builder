@@ -10,7 +10,7 @@ import SmartBreadcrumb from '~js/components/SmartBreadcrumb';
 import usePersistCallback from '~js/hooks/usePersistCallback';
 import SuspenseFallBack from '~js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import SmartMenu, { HeaderRender, SmartMenuMenuProps } from '~js/components/SmartMenu';
+import SmartMenu, { HeaderRender, SmartMenuProps } from '~js/components/SmartMenu';
 
 const { Header, Content } = Layout;
 const mobileQuery = '(max-width: 480px)';
@@ -18,7 +18,7 @@ const brokenQuery = '(max-width: 992px)';
 
 type PickProps = 'theme' | 'menus' | 'match' | 'history' | 'location' | 'collapsedWidth';
 
-export interface SmartLayoutProps extends Pick<SmartMenuMenuProps, PickProps> {
+export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
   roles?: any;
   siderWith?: number;
   children?: React.ReactNode;

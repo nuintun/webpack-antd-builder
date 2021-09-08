@@ -52,15 +52,7 @@ export default memo(function SiderMenu({
       className={classNames(`${prefixUI}-sider`, `${prefixUI}-${theme}`, className)}
     >
       {headerRender && (
-        <div className={`${prefixUI}-header`}>
-          {headerRender({
-            width: width as number,
-            theme: theme as MenuTheme,
-            isMobile: isMobile as boolean,
-            collapsed: collapsed as boolean,
-            collapsedWidth: collapsedWidth as number
-          })}
-        </div>
+        <div className={`${prefixUI}-header`}>{headerRender({ width, theme, isMobile, collapsed, collapsedWidth })}</div>
       )}
       <RouteMenu {...restProps} theme={theme} collapsed={collapsed} className={prefixUI} />
     </Sider>
