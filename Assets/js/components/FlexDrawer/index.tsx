@@ -22,7 +22,7 @@ export default memo(function FlexDrawer({
   const isBrokenHeight = useMedia(`(max-height: ${isString(height) ? height : `${height}px`})`);
 
   return (
-    <Drawer {...restProps} width={isBrokenWidth ? '100vw' : width} height={isBrokenHeight ? '100vh' : height}>
+    <Drawer {...restProps} width={isBrokenWidth ? '100%' : width} height={isBrokenHeight ? '100%' : height}>
       <div ref={container} style={containerStyle}>
         <ConfigProvider getPopupContainer={getContainer} getTargetContainer={getContainer}>
           {children}
