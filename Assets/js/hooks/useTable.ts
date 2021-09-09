@@ -110,9 +110,9 @@ export default function useTable<I, E extends object = {}, T = I>(
     }
   }, []);
 
-  const originRefsPagination = originRefs.pagination;
-
   let pagination: Pagination<T> = false;
+
+  const originRefsPagination = originRefs.pagination;
 
   if (hasQuery(originRefsPagination)) {
     const { total = 0 } = originRefs.response;

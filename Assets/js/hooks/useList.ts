@@ -8,6 +8,8 @@ import { PaginationProps } from 'antd';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 import usePagingRequest, { hasQuery, Options as RequestOptions, Refs, Response } from './usePagingRequest';
 
+type Pagination = PaginationProps | false;
+
 type OnChange = NonNullable<PaginationProps['onChange']>;
 
 export interface Options<I, T = I> {
@@ -38,9 +40,9 @@ export default function useList<I, E extends object = {}, T = I>(
     fetch({ pagination: { page, pageSize } });
   }, []);
 
-  const refsPagination = refs.pagination;
+  let pagination: Pagination = false;
 
-  let pagination: PaginationProps | false = false;
+  const refsPagination = refs.pagination;
 
   if (hasQuery(refsPagination)) {
     const { total = 0 } = refs.response;
