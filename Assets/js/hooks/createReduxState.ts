@@ -10,17 +10,29 @@ import { isFunction } from '~js/utils/utils';
  * @function createReduxState
  * @description 【Hook】生成类 Redux 状态，支持异步
  * @param reducer 状态生成器
+ */
+export default function createReduxState<S, A>(
+  reducer: (state: S | undefined, action: A) => S | PromiseLike<S>
+): () => [state: S | undefined, dispatch: (action: A) => Promise<void>];
+/**
+ * @function createReduxState
+ * @description 【Hook】生成类 Redux 状态，支持异步
+ * @param reducer 状态生成器
  * @param initialState 初始状态
  */
 export default function createReduxState<S, A>(
   reducer: (state: S, action: A) => S | PromiseLike<S>,
   initialState: S | (() => S)
-): () => [state: S, dispatch: (action: A) => Promise<void>] {
-  let sharedState: S;
-
+): () => [state: S, dispatch: (action: A) => Promise<void>];
+export default function createReduxState<S, A>(
+  reducer: (state: S | undefined, action: A) => S | PromiseLike<S>,
+  initialState?: S | (() => S)
+): () => [state: S | undefined, dispatch: (action: A) => Promise<void>] {
   let initialized = false;
 
-  const dispatches = new Set<React.Dispatch<React.SetStateAction<S>>>();
+  let sharedState: S | undefined;
+
+  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
 
   const dispatchAction = async (action: A, initializedRef: React.MutableRefObject<boolean>): Promise<void> => {
     if (initializedRef.current) {
@@ -34,7 +46,7 @@ export default function createReduxState<S, A>(
     }
   };
 
-  const getInitialState = (): S => {
+  const getInitialState = (): S | undefined => {
     if (initialized) return sharedState;
 
     initialized = true;
