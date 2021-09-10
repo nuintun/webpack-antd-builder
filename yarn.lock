@@ -2273,7 +2273,7 @@ core-js-compat@^3.14.0, core-js-compat@^3.16.0:
     browserslist "^4.17.0"
     semver "7.0.0"
 
-core-js@^3.17.2, core-js@^3.17.3:
+core-js@^3.17.3:
   version "3.17.3"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.17.3.tgz#8e8bd20e91df9951e903cabe91f9af4a0895bc1e"
   integrity sha512-lyvajs+wd8N1hXfzob1LdOCCHFU4bGMbqqmLn1Q4QlCpDqWPpGf+p0nj+LNrvDDG33j0hZXw2nsvvVpHysxyNw==
@@ -5669,7 +5669,7 @@ webpack-bundle-analyzer@^4.4.2:
     sirv "^1.0.7"
     ws "^7.3.1"
 
-webpack-dev-middleware@^5.0.0:
+webpack-dev-middleware@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/webpack-dev-middleware/-/webpack-dev-middleware-5.1.0.tgz#90a645b077e85f661c5bb967dc32adc3eceb5cfd"
   integrity sha512-oT660AR1gOnU/NTdUQi3EiGR0iXG7CFxmKsj3ylWCBA2khJ8LFHK+sKv3BZEsC11gl1eChsltRhzUq7nWj7XIQ==
@@ -5680,17 +5680,17 @@ webpack-dev-middleware@^5.0.0:
     range-parser "^1.2.1"
     schema-utils "^3.1.0"
 
-webpack-dev-server-middleware@^0.6.7:
-  version "0.6.7"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.6.7.tgz#c7e98c159fd75281b9f9379299718442830ec672"
-  integrity sha512-y27Nn1pB0+rVGyAp3CkW06KTHQlhBg6XYMI0NrPNJkPUCgypWbgSSwQoZmJKVkPYCPSVJiD2Ya3eaKJp8X57Tg==
+webpack-dev-server-middleware@^0.6.8:
+  version "0.6.8"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.6.8.tgz#c8540c881c940830e7ce9615b5b21681dbd34d44"
+  integrity sha512-ChJQq5oouA9kPH+dEQOID/fQlVmOlyPkPp4NPjor5MP2W+Qy+vh2EgCV73gXRnRVH1P7LnK+B+7r/+jzs9GkJg==
   dependencies:
     ansi-regex "^6.0.0"
     bufferutil "^4.0.3"
-    core-js "^3.17.2"
+    core-js "^3.17.3"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.5"
-    webpack-dev-middleware "^5.0.0"
+    webpack-dev-middleware "^5.1.0"
     ws "^8.2.2"
 
 webpack-sources@^3.2.0:
