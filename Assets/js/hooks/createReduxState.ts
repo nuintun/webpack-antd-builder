@@ -6,14 +6,18 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
+type Dispatch<A> = (action: A) => Promise<void>;
+
+type Reducer<S, A> = (state: S, action: A) => S | PromiseLike<S>;
+
 /**
  * @function createReduxState
  * @description 【Hook】生成类 Redux 状态，支持异步
  * @param reducer 状态生成器
  */
 export default function createReduxState<S, A>(
-  reducer: (state: S | undefined, action: A) => S | PromiseLike<S>
-): () => [state: S | undefined, dispatch: (action: A) => Promise<void>];
+  reducer: Reducer<S | undefined, A>
+): () => [state: S | undefined, dispatch: Dispatch<A>];
 /**
  * @function createReduxState
  * @description 【Hook】生成类 Redux 状态，支持异步
@@ -21,13 +25,13 @@ export default function createReduxState<S, A>(
  * @param initialState 初始状态
  */
 export default function createReduxState<S, A>(
-  reducer: (state: S, action: A) => S | PromiseLike<S>,
+  reducer: Reducer<S, A>,
   initialState: S | (() => S)
-): () => [state: S, dispatch: (action: A) => Promise<void>];
+): () => [state: S, dispatch: Dispatch<A>];
 export default function createReduxState<S, A>(
-  reducer: (state: S | undefined, action: A) => S | PromiseLike<S>,
+  reducer: Reducer<S | undefined, A>,
   initialState?: S | (() => S)
-): () => [state: S | undefined, dispatch: (action: A) => Promise<void>] {
+): () => [state: S | undefined, dispatch: Dispatch<A>] {
   let initialized = false;
 
   let sharedState: S | undefined;
