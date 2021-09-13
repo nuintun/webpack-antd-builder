@@ -105,17 +105,19 @@ function appendField(search: URLSearchParams, key: string, value: string): void 
  * @param search URLSearchParams 对象
  */
 function serializeQuery(values: Query, search: URLSearchParams = new URLSearchParams()): URLSearchParams {
-  Object.keys(values).forEach(key => {
+  const keys = Object.keys(values);
+
+  for (const key of keys) {
     const value = values[key];
 
     if (Array.isArray(value)) {
-      value.forEach(value => {
-        appendField(search, key, value);
-      });
+      for (const item of value) {
+        appendField(search, key, item);
+      }
     } else {
       appendField(search, key, value);
     }
-  });
+  }
 
   return search;
 }

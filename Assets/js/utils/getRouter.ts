@@ -126,7 +126,7 @@ export default function getRouter(router: Route[]): Router {
   const routes: RouteItem[] = [];
   const breadcrumbs: Breadcrumbs = {};
 
-  router.forEach(route => {
+  for (const route of router) {
     const root = '';
     const menusMap: MenusMap = { [root]: [] };
 
@@ -188,7 +188,7 @@ export default function getRouter(router: Route[]): Router {
     });
 
     menus.push(...menusMap[root]);
-  });
+  }
 
   return { routes, menus, breadcrumbs };
 }

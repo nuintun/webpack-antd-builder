@@ -41,7 +41,9 @@ export default function createReduxState<S, A>(
       if (initializedRef.current) {
         sharedState = nextState;
 
-        dispatches.forEach(dispatch => dispatch(sharedState));
+        for (const dispatch of dispatches) {
+          dispatch(sharedState);
+        }
       }
     }
   };

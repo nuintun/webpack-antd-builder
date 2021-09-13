@@ -106,7 +106,9 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
         if (messages.length) {
           sendQueueRef.current = [];
 
-          messages.forEach(send);
+          for (const message of messages) {
+            send(message);
+          }
         }
       };
 
