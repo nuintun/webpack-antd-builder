@@ -6,18 +6,32 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
-type Dispatch<A> = React.Dispatch<A>;
-
-type Reducer<S, A> = React.Reducer<S, A>;
-
+/**
+ * @function createReduxState
+ * @description 【Hook】生成类 Redux 状态
+ * @param reducer 状态生成器
+ */
+export default function createReduxState<S>(
+  reducer: React.ReducerWithoutAction<S | undefined>
+): () => [state: S | undefined, dispatch: React.DispatchWithoutAction];
 /**
  * @function createReduxState
  * @description 【Hook】生成类 Redux 状态
  * @param reducer 状态生成器
  */
 export default function createReduxState<S, A>(
-  reducer: Reducer<S | undefined, A>
-): () => [state: S | undefined, dispatch: Dispatch<A>];
+  reducer: React.Reducer<S | undefined, A>
+): () => [state: S | undefined, dispatch: React.Dispatch<A>];
+/**
+ * @function createReduxState
+ * @description 【Hook】生成类 Redux 状态
+ * @param reducer 状态生成器
+ * @param initialState 初始状态
+ */
+export default function createReduxState<S>(
+  reducer: React.ReducerWithoutAction<S>,
+  initialState: S | (() => S)
+): () => [state: S, dispatch: React.DispatchWithoutAction];
 /**
  * @function createReduxState
  * @description 【Hook】生成类 Redux 状态
@@ -25,13 +39,13 @@ export default function createReduxState<S, A>(
  * @param initialState 初始状态
  */
 export default function createReduxState<S, A>(
-  reducer: Reducer<S, A>,
+  reducer: React.Reducer<S, A>,
   initialState: S | (() => S)
-): () => [state: S, dispatch: Dispatch<A>];
+): () => [state: S, dispatch: React.Dispatch<A>];
 export default function createReduxState<S, A>(
-  reducer: Reducer<S | undefined, A>,
+  reducer: React.Reducer<S | undefined, A>,
   initialState?: S | (() => S)
-): () => [state: S | undefined, dispatch: Dispatch<A>] {
+): () => [state: S | undefined, dispatch: React.Dispatch<A>] {
   let initialized = false;
 
   let sharedState: S | undefined;
@@ -58,7 +72,7 @@ export default function createReduxState<S, A>(
       initializedRef.current = true;
     }
 
-    const dispatch = useCallback<Dispatch<A>>(action => {
+    const dispatch = useCallback<React.Dispatch<A>>(action => {
       if (initializedRef.current) {
         sharedState = reducer(sharedState, action);
 
