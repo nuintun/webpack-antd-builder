@@ -6,13 +6,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { isFunction } from '~js/utils/utils';
 
-type Dispatch<A> = (action: A) => Promise<void>;
+type Dispatch<A> = React.Dispatch<A>;
 
-type Reducer<S, A> = (state: S, action: A) => S | PromiseLike<S>;
+type Reducer<S, A> = React.Reducer<S, A>;
 
 /**
  * @function createReduxState
- * @description 【Hook】生成类 Redux 状态，支持异步
+ * @description 【Hook】生成类 Redux 状态
  * @param reducer 状态生成器
  */
 export default function createReduxState<S, A>(
@@ -20,7 +20,7 @@ export default function createReduxState<S, A>(
 ): () => [state: S | undefined, dispatch: Dispatch<A>];
 /**
  * @function createReduxState
- * @description 【Hook】生成类 Redux 状态，支持异步
+ * @description 【Hook】生成类 Redux 状态
  * @param reducer 状态生成器
  * @param initialState 初始状态
  */
@@ -36,22 +36,6 @@ export default function createReduxState<S, A>(
 
   let sharedState: S | undefined;
 
-  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
-
-  const dispatchAction = async (action: A, initializedRef: React.MutableRefObject<boolean>): Promise<void> => {
-    if (initializedRef.current) {
-      const nextState = await reducer(sharedState, action);
-
-      if (initializedRef.current) {
-        sharedState = nextState;
-
-        for (const dispatch of dispatches) {
-          dispatch(sharedState);
-        }
-      }
-    }
-  };
-
   const getInitialState = (): S | undefined => {
     if (initialized) return sharedState;
 
@@ -61,6 +45,8 @@ export default function createReduxState<S, A>(
 
     return sharedState;
   };
+
+  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
 
   return () => {
     const initializedRef = useRef(false);
@@ -72,8 +58,14 @@ export default function createReduxState<S, A>(
       initializedRef.current = true;
     }
 
-    const dispatch = useCallback((action: A): Promise<void> => {
-      return dispatchAction(action, initializedRef);
+    const dispatch = useCallback<Dispatch<A>>(action => {
+      if (initializedRef.current) {
+        sharedState = reducer(sharedState, action);
+
+        for (const dispatch of dispatches) {
+          dispatch(sharedState);
+        }
+      }
     }, []);
 
     useEffect(() => {
