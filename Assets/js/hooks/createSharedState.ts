@@ -29,16 +29,6 @@ export default function createSharedState<S = undefined>(
 
   let initialized = false;
 
-  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
-
-  const dispatchState = (value: React.SetStateAction<S | undefined>): void => {
-    sharedState = isFunction(value) ? value(sharedState) : value;
-
-    for (const dispatch of dispatches) {
-      dispatch(sharedState);
-    }
-  };
-
   const getInitialState = (): S | undefined => {
     if (initialized) return sharedState;
 
@@ -48,6 +38,8 @@ export default function createSharedState<S = undefined>(
 
     return sharedState;
   };
+
+  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
 
   return () => {
     const initializedRef = useRef(false);
@@ -60,7 +52,13 @@ export default function createSharedState<S = undefined>(
     }
 
     const setSharedState = useCallback((value: React.SetStateAction<S | undefined>): void => {
-      initializedRef.current && dispatchState(value);
+      if (initializedRef.current) {
+        sharedState = isFunction(value) ? value(sharedState) : value;
+
+        for (const dispatch of dispatches) {
+          dispatch(sharedState);
+        }
+      }
     }, []);
 
     useEffect(() => {
