@@ -7,10 +7,12 @@ import React from 'react';
 
 import isURL from './isURL';
 
+type Key = React.Key;
+
 type Icon = string | React.ReactElement;
 
 export interface Route {
-  key?: React.Key;
+  key?: Key;
   icon?: Icon;
   name: string;
   path: string;
@@ -31,7 +33,7 @@ interface RouteNode extends Route {
 }
 
 export interface RouteItem {
-  key: React.Key;
+  key: Key;
   name: string;
   path: string;
   exact: boolean;
@@ -42,7 +44,7 @@ export interface RouteItem {
 }
 
 export interface BreadcrumbItem {
-  key: React.Key;
+  key: Key;
   icon?: Icon;
   name: string;
   path: string;
@@ -51,7 +53,7 @@ export interface BreadcrumbItem {
 }
 
 export interface MenuItem {
-  key: React.Key;
+  key: Key;
   icon?: Icon;
   name: string;
   path: string;
