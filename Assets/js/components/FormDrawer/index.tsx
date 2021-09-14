@@ -16,8 +16,8 @@ export interface FormDrawerProps<V, R>
   autoReset?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
-  children?: React.ReactNode;
   form?: FormInstance<V>;
+  children?: React.ReactNode;
   trigger: React.ReactElement;
   requestInit?: Omit<Options<V, R>, SubmitPicked>;
   footer?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
