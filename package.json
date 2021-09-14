@@ -60,7 +60,7 @@
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
-    "@types/react-router-dom": "^5.1.8",
+    "@types/react-router-dom": "^5.1.9",
     "@types/throttle-debounce": "^2.1.0",
     "@types/webpack-env": "^1.16.2",
     "autoprefixer": "^10.3.4",
