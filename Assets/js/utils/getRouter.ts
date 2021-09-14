@@ -103,14 +103,17 @@ function normalizeURL(path: string, base?: string): string {
 function walkRouter(route: Route, callback: Callback, referrer?: RouteNode): void {
   const path = normalizeURL(route.path, referrer?.path);
   const href = route.href ? normalizeURL(route.href, referrer?.href) : path;
-  const routeNode = { ...route, path, href };
+
+  const routeNode: RouteNode = { ...route, path, href };
 
   callback(routeNode, referrer);
 
   const { children } = route;
 
   if (children) {
-    children.map(item => walkRouter(item, callback, routeNode));
+    for (const route of children) {
+      walkRouter(route, callback, routeNode);
+    }
   }
 }
 
