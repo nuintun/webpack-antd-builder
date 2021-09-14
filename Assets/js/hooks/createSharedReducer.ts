@@ -50,7 +50,7 @@ export default function createSharedReducer<S, A>(
 
   let sharedState: S | undefined;
 
-  const getInitialState = (): S | undefined => {
+  const getInitialState = () => {
     if (initialized) return sharedState;
 
     initialized = true;
@@ -58,6 +58,14 @@ export default function createSharedReducer<S, A>(
     sharedState = isFunction(initialState) ? initialState() : initialState;
 
     return sharedState;
+  };
+
+  const dispatchActions = (action: A) => {
+    sharedState = reducer(sharedState, action);
+
+    for (const dispatch of dispatches) {
+      dispatch(sharedState);
+    }
   };
 
   const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
@@ -73,13 +81,7 @@ export default function createSharedReducer<S, A>(
     }
 
     const dispatch = useCallback<React.Dispatch<A>>(action => {
-      if (initializedRef.current) {
-        sharedState = reducer(sharedState, action);
-
-        for (const dispatch of dispatches) {
-          dispatch(sharedState);
-        }
-      }
+      initializedRef.current && dispatchActions(action);
     }, []);
 
     useEffect(() => {
