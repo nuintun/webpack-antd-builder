@@ -50,7 +50,7 @@ export default function createSharedReducer<S, A>(
 
   let sharedState: S | undefined;
 
-  const getInitialState = () => {
+  const getInitialState = (): S | undefined => {
     if (initialized) return sharedState;
 
     initialized = true;
@@ -60,7 +60,7 @@ export default function createSharedReducer<S, A>(
     return sharedState;
   };
 
-  const dispatchActions = (action: A) => {
+  const dispatchActions = (action: A): void => {
     sharedState = reducer(sharedState, action);
 
     for (const dispatch of dispatches) {

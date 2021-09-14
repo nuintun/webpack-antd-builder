@@ -29,7 +29,7 @@ export default function createSharedState<S = undefined>(
 
   let sharedState: S | undefined;
 
-  const getInitialState = () => {
+  const getInitialState = (): S | undefined => {
     if (initialized) return sharedState;
 
     initialized = true;
@@ -39,7 +39,7 @@ export default function createSharedState<S = undefined>(
     return sharedState;
   };
 
-  const dispatchActions = (value: React.SetStateAction<S | undefined>) => {
+  const dispatchActions = (value: React.SetStateAction<S | undefined>): void => {
     sharedState = isFunction(value) ? value(sharedState) : value;
 
     for (const dispatch of dispatches) {
