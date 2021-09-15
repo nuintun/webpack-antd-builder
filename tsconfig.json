@@ -4,6 +4,7 @@
     "noEmit": true,
     "strict": true,
     "allowJs": true,
+    "newLine": "lf",
     "jsx": "preserve",
     "module": "ESNext",
     "target": "ESNext",
