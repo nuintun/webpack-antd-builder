@@ -11,7 +11,7 @@ interface Socket<M> {
   readyState: number;
   connect: () => void;
   send: WebSocket['send'];
-  message: MessageEvent<M | null>;
+  message: MessageEvent<M> | undefined;
   disconnect: (code?: number, reason?: string) => void;
 }
 
@@ -36,17 +36,13 @@ function removeWsEvents(ws: WebSocket) {
   }
 }
 
-function initialMessage(url: string): MessageEvent<null> {
-  return new MessageEvent('message', { origin: new URL(url).origin });
-}
-
 /**
  * @function useWebSocket
  * @description 【Hook】长连接 WebSocket 操作
  * @param url 链接地址
  * @param options 配置参数
  */
-export default function useWebSocket<M>(url: string, options: Options<M> = {}): Socket<M> {
+export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url: string, options: Options<M> = {}): Socket<M> {
   const {
     onOpen,
     onError,
@@ -62,10 +58,10 @@ export default function useWebSocket<M>(url: string, options: Options<M> = {}): 
   const isMounted = useIsMounted();
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
-  const reconnectTimerRef = useRef<NodeJS.Timeout>();
+  const reconnectTimerRef = useRef<Timeout>();
+  const [message, setMessage] = useState<MessageEvent<M>>();
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);
   const sendQueueRef = useRef<(string | ArrayBufferLike | Blob | ArrayBufferView)[]>([]);
-  const [message, setMessage] = useState<MessageEvent<M | null>>(() => initialMessage(url));
 
   /**
    * @description 重连
