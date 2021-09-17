@@ -14,23 +14,19 @@ export type Middleware<C> = (context: C, next: Next) => Promise<void> | void;
  * @param middlewares 中间件数组
  */
 export default function compose<C>(middlewares: Middleware<C>[]): Compose<C> {
-  return context => {
-    let current = -1;
+  const dispatch = async (index: number, current: { index: number }, context: C): Promise<void> => {
+    if (index <= current.index) {
+      throw new Error('next() called multiple times');
+    }
 
-    const dispatch = async (index: number): Promise<void> => {
-      if (index <= current) {
-        throw new Error('next() called multiple times');
-      }
+    current.index = index;
 
-      current = index;
+    if (index < middlewares.length) {
+      const middleware = middlewares[index];
 
-      if (index < middlewares.length) {
-        const middleware = middlewares[index];
-
-        return middleware(context, () => dispatch(index + 1));
-      }
-    };
-
-    return dispatch(0);
+      return middleware(context, () => dispatch(index + 1, current, context));
+    }
   };
+
+  return context => dispatch(0, { index: -1 }, context);
 }
