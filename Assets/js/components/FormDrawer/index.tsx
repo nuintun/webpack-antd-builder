@@ -108,14 +108,14 @@ function FormDrawer<V, R>({
       {triggerNode}
       <FlexDrawer
         title={title}
+        width={width}
+        height={height}
         visible={visible}
         placement={placement}
         onClose={onCloseHandler}
         forceRender={forceRender}
         destroyOnClose={destroyOnClose}
         afterVisibleChange={afterVisibleChange}
-        width={width}
-        height={height}
         footer={visible && footer(submitting, wrapForm, onCloseHandler)}
       >
         <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit}>
