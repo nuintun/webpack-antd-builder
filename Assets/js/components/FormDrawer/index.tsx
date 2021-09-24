@@ -116,10 +116,10 @@ function FormDrawer<V, R>({
         forceRender={forceRender}
         destroyOnClose={destroyOnClose}
         afterVisibleChange={afterVisibleChange}
-        footer={visible && footer(submitting, wrapForm, onCloseHandler)}
+        footer={footer(submitting, wrapForm, onCloseHandler)}
       >
         <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit}>
-          {visible && children}
+          {children}
         </Form>
       </FlexDrawer>
     </>
