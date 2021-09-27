@@ -227,9 +227,9 @@
     tslib "^1.10.0"
 
 "@antv/path-util@^2.0.3", "@antv/path-util@~2.0.5", "@antv/path-util@~2.0.7":
-  version "2.0.13"
-  resolved "https://registry.npmjs.org/@antv/path-util/-/path-util-2.0.13.tgz#82990afe017ccdf871cbd6fd0e5261a79d49fb8c"
-  integrity sha512-JRCL1YUDUMQcG5d0TBW0dHzcIFhjwcDyaptMivT+Llesbhs7CEw+8sPVMmdBUQFK1P3K8NlzVceC0wOX4NJelA==
+  version "2.0.14"
+  resolved "https://registry.npmjs.org/@antv/path-util/-/path-util-2.0.14.tgz#cf37ee20af84ae31c0356fab24b870aa4ccc32e4"
+  integrity sha512-v88p0hxbGx2c5MoIlSxVOMOuHn6xbYKVDT7Mj6sND7nrqcVVIMJ52jTiqNLIcKMh0cikKhqJ2Wi2nISzBk3Nvw==
   dependencies:
     "@antv/util" "^2.0.9"
     tslib "^2.0.3"
@@ -1937,7 +1937,7 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browserslist@^4.0.0, browserslist@^4.14.5, browserslist@^4.16.0, browserslist@^4.16.6, browserslist@^4.17.0, browserslist@^4.17.1:
+browserslist@^4.0.0, browserslist@^4.14.5, browserslist@^4.16.0, browserslist@^4.16.6, browserslist@^4.17.1:
   version "4.17.1"
   resolved "https://registry.npmjs.org/browserslist/-/browserslist-4.17.1.tgz#a98d104f54af441290b7d592626dd541fa642eb9"
   integrity sha512-aLD0ZMDSnF4lUt4ZDNgqi5BUn9BZ7YdQdI/cYlILrhdSSZJLU9aNZoD5/NBmM4SK34APB2e83MOsRt1EnkuyaQ==
@@ -2156,9 +2156,9 @@ colord@^2.0.1, colord@^2.6:
   integrity sha512-kNkVV4KFta3TYQv0bzs4xNwLaeag261pxgzGQSh4cQ1rEhYjcTJfFRP0SDlbhLONg0eSoLzrDd79PosjbltufA==
 
 colorette@^2.0.10:
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.11.tgz#3b4cf8407edb24dd54fdbfd350f5ed252abbc64a"
-  integrity sha512-ZqwF8QRKzkhpr6aOvqzsZgtdOh+ItZBrbHDJ3pEAOoLr79oVSRxviVKDHVvrBmUhK5NcGRT9RATQknOan52UXQ==
+  version "2.0.12"
+  resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.12.tgz#7938ab254e7bb1bba29b0fd1b4cc168889ca4d74"
+  integrity sha512-lHID0PU+NtFzeNCwTL6JzUKdb6kDpyEjrwTD1H0cDZswTbsjLh2wTV2Eo2sNZLc0oSg0a5W1AI4Nj7bX4iIdjA==
 
 commander@^2.20.0:
   version "2.20.3"
@@ -2256,17 +2256,17 @@ copy-to-clipboard@^3.2.0:
     toggle-selection "^1.0.6"
 
 core-js-compat@^3.16.0, core-js-compat@^3.16.2:
-  version "3.18.0"
-  resolved "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.18.0.tgz#fb360652201e8ac8da812718c008cd0482ed9b42"
-  integrity sha512-tRVjOJu4PxdXjRMEgbP7lqWy1TWJu9a01oBkn8d+dNrhgmBwdTkzhHZpVJnEmhISLdoJI1lX08rcBcHi3TZIWg==
+  version "3.18.1"
+  resolved "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.18.1.tgz#01942a0877caf9c6e5007c027183cf0bdae6a191"
+  integrity sha512-XJMYx58zo4W0kLPmIingVZA10+7TuKrMLPt83+EzDmxFJQUMcTVVmQ+n5JP4r6Z14qSzhQBRi3NSWoeVyKKXUg==
   dependencies:
-    browserslist "^4.17.0"
+    browserslist "^4.17.1"
     semver "7.0.0"
 
-core-js@^3.18.0:
-  version "3.18.0"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.18.0.tgz#9af3f4a6df9ba3428a3fb1b171f1503b3f40cc49"
-  integrity sha512-WJeQqq6jOYgVgg4NrXKL0KLQhi0CT4ZOCvFL+3CQ5o7I6J8HkT5wd53EadMfqTDp1so/MT1J+w2ujhWcCJtN7w==
+core-js@^3.18.1:
+  version "3.18.1"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.18.1.tgz#289d4be2ce0085d40fc1244c0b1a54c00454622f"
+  integrity sha512-vJlUi/7YdlCZeL6fXvWNaLUPh/id12WXj3MbkMw5uOyF0PfWPBNOCNbs53YqgrvtujLNlt9JQpruyIKkUZ+PKA==
 
 cosmiconfig@^7.0.0:
   version "7.0.1"
@@ -3297,9 +3297,9 @@ is-generator-function@^1.0.7:
     has-tostringtag "^1.0.0"
 
 is-glob@^4.0.1, is-glob@~4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
-  integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/is-glob/-/is-glob-4.0.2.tgz#859fc2e731e58c902f99fcabccb75a7dd07d29d8"
+  integrity sha512-ZZTOjRcDjuAAAv2cTBQP/lL59ZTArx77+7UzHdWW/XB1mrfp7DEaVpKmZ0XIzx+M7AxfhKcqV+nMetUQmFifwg==
   dependencies:
     is-extglob "^2.1.1"
 
@@ -3829,9 +3829,9 @@ nanocolors@^0.1.0, nanocolors@^0.1.12, nanocolors@^0.1.5:
   integrity sha512-2nMHqg1x5PU+unxX7PGY7AuYxl2qDx7PSrTRjizr8sxdd3l/3hBuWWaki62qmtYm2U5i4Z5E7GbjlyDFhs9/EQ==
 
 nanocolors@^0.2.2, nanocolors@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.npmjs.org/nanocolors/-/nanocolors-0.2.8.tgz#ea9190bb9a6834df3a53b2cf2dc52f5de76b84fd"
-  integrity sha512-lFtwopLYUwJ/w+VcBib+Ti1J+USzc/m2XN9LCCl/AhibkzYlXk6FHeqkJqBWRd70RpjArGWYZQjwa6UgwYycBA==
+  version "0.2.10"
+  resolved "https://registry.npmjs.org/nanocolors/-/nanocolors-0.2.10.tgz#a712df4d3c1bf12d9b4fb8b5aa61b5ba31337503"
+  integrity sha512-i+EDWGsJClQwR/bhLIG/CObZZwaYaS5qt+yjxZbfV+77QiNHNzE9nj4d9Ut1TGZ0R0eSwPcQWzReASzXuw/7oA==
 
 nanoid@^3.1.25:
   version "3.1.28"
@@ -5584,7 +5584,7 @@ url-parse-lax@^3.0.0:
   dependencies:
     prepend-http "^2.0.0"
 
-utf-8-validate@^5.0.5:
+utf-8-validate@^5.0.6:
   version "5.0.6"
   resolved "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.6.tgz#e1b3e0a5cc8648a3b44c1799fbb170d1aaaffe80"
   integrity sha512-hoY0gOf9EkCw+nimK21FVKHUIG1BMqSiRwxB/q3A9yKZOrOI99PP77BxmarDqWz6rG3vVYiBWfhG8z2Tl+7fZA==
@@ -5667,16 +5667,16 @@ webpack-dev-middleware@^5.2.1:
     range-parser "^1.2.1"
     schema-utils "^3.1.0"
 
-webpack-dev-server-middleware@^0.6.12:
-  version "0.6.12"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.6.12.tgz#96e421c06cbf7c763ab7a0bd4eedf875c7e0b732"
-  integrity sha512-d3I1Oj674nGTWBjLl8eSRM4oszsWO14v6Tl2qBcuixtX6mmHk83zVefxTFANkmPtC2jWNUneC8OS+2BiH63WFA==
+webpack-dev-server-middleware@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.0.tgz#7f1c362fb67f93a5da433d39bc199886b9306404"
+  integrity sha512-Yw11VllQjp5cyiglnEYgxrMX9ysTxnfx08oktGf/zFbYc4cP2ZgdzbiJ5HeI9BQG5/USOdYujGytvSAi9AMvfg==
   dependencies:
     ansi-regex "^6.0.1"
     bufferutil "^4.0.4"
-    core-js "^3.18.0"
+    core-js "^3.18.1"
     koa-compose "^4.1.0"
-    utf-8-validate "^5.0.5"
+    utf-8-validate "^5.0.6"
     webpack-dev-middleware "^5.2.1"
     ws "^8.2.2"
 
