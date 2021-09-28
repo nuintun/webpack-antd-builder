@@ -2,7 +2,7 @@
  * @module ip
  * @listens MIT
  * @author nuintun
- * @description Get local external ip.
+ * @description Get local external ip
  */
 
 'use strict';

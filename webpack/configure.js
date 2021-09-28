@@ -2,7 +2,7 @@
  * @module configure
  * @listens MIT
  * @author nuintun
- * @description Paths configure.
+ * @description Webpack project configure
  */
 
 'use strict';

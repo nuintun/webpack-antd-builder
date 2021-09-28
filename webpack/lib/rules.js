@@ -2,7 +2,7 @@
  * @module rules
  * @listens MIT
  * @author nuintun
- * @description Get webpack rules.
+ * @description Get webpack rules
  */
 
 'use strict';

@@ -2,8 +2,8 @@
  * @module webpack.config.prod
  * @listens MIT
  * @author nuintun
- * @description Webpack production configure.
- * @see https://github.com/facebook/create-react-app/blob/next/packages/react-scripts/config/webpack.config.prod.js
+ * @description Webpack production configure
+ * @see https://github.com/facebook/create-react-app
  */
 
 'use strict';

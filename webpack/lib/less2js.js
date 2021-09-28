@@ -3,7 +3,7 @@
  * @listens MIT
  * @author nuintun
  * @see https://github.com/paulmorar/cast-less-vars-to-json
- * @description Cast less variables into JSON key-value pairs.
+ * @description Cast less variables into JSON key-value pairs
  */
 
 'use strict';

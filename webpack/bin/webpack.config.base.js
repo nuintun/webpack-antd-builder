@@ -2,7 +2,7 @@
  * @module webpack.config.base
  * @listens MIT
  * @author nuintun
- * @description Webpack base configure.
+ * @description Webpack base configure
  */
 
 'use strict';
