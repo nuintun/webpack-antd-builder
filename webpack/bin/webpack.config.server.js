@@ -17,7 +17,7 @@ const fs = require('fs');
 const Koa = require('koa');
 const webpack = require('webpack');
 const resolveIp = require('../lib/ip');
-const querystring = require('querystring');
+const { URLSearchParams } = require('url');
 const koaCompress = require('koa-compress');
 const { findFreePorts } = require('find-free-ports');
 const resolveConfigure = require('./webpack.config.base');
@@ -41,8 +41,8 @@ function httpError(error) {
 }
 
 function injectHotEntry(entry, options) {
-  const params = { reload: true, quiet: true, noInfo: true, ...options };
-  const hotEntry = `webpack-dev-server-middleware/client?${querystring.stringify(params)}`;
+  const params = new URLSearchParams(options);
+  const hotEntry = `webpack-dev-server-middleware/client?${params}`;
 
   if (Array.isArray(entry)) {
     return [hotEntry, ...entry];
