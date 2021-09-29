@@ -45,7 +45,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
     rightHeaderRender
   } = props;
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const onMobileChange = useCallback(isMobile => {
     isMobile && setCollapsed(isMobile);
