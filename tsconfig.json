@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "noEmit": true,
     "strict": true,
+    "pretty": true,
     "allowJs": true,
     "newLine": "lf",
     "jsx": "preserve",
