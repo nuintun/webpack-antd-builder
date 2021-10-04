@@ -63,7 +63,7 @@
     "@types/react-router-dom": "^5.3.0",
     "@types/throttle-debounce": "^2.1.0",
     "@types/webpack-env": "^1.16.2",
-    "autoprefixer": "^10.3.6",
+    "autoprefixer": "^10.3.7",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
