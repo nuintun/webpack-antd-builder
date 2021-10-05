@@ -39,7 +39,7 @@
     "antd": "^4.16.13",
     "bizcharts": "^4.1.12",
     "classnames": "^2.3.1",
-    "core-js": "^3.18.1",
+    "core-js": "^3.18.2",
     "dayjs": "^1.10.7",
     "memoize-one": "^5.2.1",
     "rc-virtual-list": "^3.4.1",
