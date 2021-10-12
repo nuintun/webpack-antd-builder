@@ -28,7 +28,7 @@ export interface Options<V> {
  */
 export default function useControllableValue<V>(
   props: Props
-): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void];
+): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void];
 /**
  * @function useControllableValue
  * @description 【Hook】生成同时支持受控和非受控状态的值
@@ -38,21 +38,20 @@ export default function useControllableValue<V>(
 export default function useControllableValue<V>(
   props: Props,
   options: Options<V>
-): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void];
+): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void];
 export default function useControllableValue<V>(
   props: Props,
   options: Options<V> = {}
-): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void] {
+): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void] {
   const { defaultValue, defaultValuePropName = 'defaultValue', valuePropName = 'value', trigger = 'onChange' } = options;
 
   const value: V = props[valuePropName];
-  const isControlled = valuePropName in props;
 
   const isMounted = useIsMounted();
   const prevValue = usePrevious(value);
 
   const [state, setState] = useState<V | undefined>(() => {
-    if (isControlled) return value;
+    if (valuePropName in props) return value;
 
     if (defaultValuePropName in props) {
       return props[defaultValuePropName];
@@ -61,19 +60,19 @@ export default function useControllableValue<V>(
     return defaultValue;
   });
 
-  const setValue = usePersistCallback((value: React.SetStateAction<V | undefined>) => {
+  const setValue = usePersistCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {
       const setStateAction = (prevState: V | undefined): V | undefined => {
         const nextState = isFunction(value) ? value(prevState) : value;
 
         if (nextState !== prevState && props[trigger]) {
-          props[trigger](nextState);
+          props[trigger](nextState, ...args);
         }
 
         return nextState;
       };
 
-      if (isControlled) {
+      if (valuePropName in props) {
         setStateAction(prevValue);
       } else {
         setState(setStateAction);
@@ -82,10 +81,10 @@ export default function useControllableValue<V>(
   });
 
   useUpdateEffect(() => {
-    if (isControlled) {
+    if (valuePropName in props) {
       setState(value);
     }
-  }, [isControlled, value]);
+  }, [value, valuePropName]);
 
   return [state, setValue];
 }
