@@ -25,24 +25,22 @@ export interface Options<V> {
  * @function useControllableValue
  * @description 【Hook】生成同时支持受控和非受控状态的值
  * @param props 组件 Props
- * @param options 配置选项
  */
 export default function useControllableValue<V>(
-  props: Props,
-  options: PartRequired<Options<V>, 'defaultValue'>
-): [value: V, setValue: (value: React.SetStateAction<V>) => void];
+  props: Props
+): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void];
 /**
  * @function useControllableValue
  * @description 【Hook】生成同时支持受控和非受控状态的值
  * @param props 组件 Props
  * @param options 配置选项
  */
-export default function useControllableValue<V = undefined>(
+export default function useControllableValue<V>(
   props: Props,
-  options?: Omit<Options<V>, 'defaultValue'>
+  options: Options<V>
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void];
-export default function useControllableValue<V = undefined>(
-  props: Props = {},
+export default function useControllableValue<V>(
+  props: Props,
   options: Options<V> = {}
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>) => void] {
   const { defaultValue, defaultValuePropName = 'defaultValue', valuePropName = 'value', trigger = 'onChange' } = options;
