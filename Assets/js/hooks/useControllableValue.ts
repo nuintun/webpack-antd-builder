@@ -65,8 +65,12 @@ export default function useControllableValue<V>(
       const setStateAction = (prevState: V | undefined): V | undefined => {
         const nextState = isFunction(value) ? value(prevState) : value;
 
-        if (nextState !== prevState && props[trigger]) {
-          props[trigger](nextState, ...args);
+        if (nextState !== prevState) {
+          if (isFunction(props[trigger])) {
+            props[trigger](nextState, ...args);
+          } else if (__DEV__) {
+            console.error(new ReferenceError(`props.${trigger} of controllable value must be a function`));
+          }
         }
 
         return nextState;
@@ -81,7 +85,7 @@ export default function useControllableValue<V>(
   });
 
   useUpdateEffect(() => {
-    if (valuePropName in props) {
+    if (prevValue !== value && valuePropName in props) {
       setState(value);
     }
   }, [value, valuePropName]);

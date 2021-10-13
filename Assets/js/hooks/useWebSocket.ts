@@ -139,9 +139,11 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
       connect();
     } catch (error) {
       // 初始化 WebSocket 失败
-      onError && onError(new Event('error'));
-
-      __DEV__ && !onError && console.error(error);
+      if (onError) {
+        onError(new Event('error'));
+      } else if (__DEV__) {
+        console.error(error);
+      }
     }
   });
 
