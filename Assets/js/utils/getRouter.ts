@@ -11,7 +11,7 @@ type Key = React.Key;
 
 type Icon = string | React.ReactElement;
 
-export interface Route {
+export type Route<T = {}> = T & {
   key?: Key;
   icon?: Icon;
   name: string;
@@ -19,20 +19,17 @@ export interface Route {
   href?: string;
   exact?: boolean;
   strict?: boolean;
-  children?: Route[];
   sensitive?: boolean;
   hideInMenu?: boolean;
+  children?: Route<T>[];
   hideInBreadcrumb?: boolean;
   hideChildrenInMenu?: boolean;
   component?: React.ComponentType<any>;
-  [key: string]: any;
-}
+};
 
-interface RouteNode extends Route {
-  href: string;
-}
+type RouteNode<T = {}> = Route<T> & { href: string };
 
-export interface RouteItem {
+export type RouteItem<T = {}> = T & {
   key: Key;
   name: string;
   path: string;
@@ -40,34 +37,32 @@ export interface RouteItem {
   strict: boolean;
   sensitive: boolean;
   component: React.ComponentType<any>;
-  [key: string]: any;
-}
+};
 
-export interface BreadcrumbItem {
+export type MenuItem<T = {}> = T & {
   key: Key;
   icon?: Icon;
   name: string;
   path: string;
   href?: string;
-  [key: string]: any;
-}
+  children?: MenuItem<T>[];
+};
 
-export interface MenuItem {
+export type BreadcrumbItem<T = {}> = T & {
   key: Key;
   icon?: Icon;
   name: string;
   path: string;
-  children?: MenuItem[];
-  [key: string]: any;
+  href?: string;
+};
+
+export interface Router<T = {}> {
+  menus: MenuItem<T>[];
+  routes: RouteItem<T>[];
+  breadcrumbs: { [path: string]: BreadcrumbItem<T> };
 }
 
-export interface Router {
-  menus: MenuItem[];
-  routes: RouteItem[];
-  breadcrumbs: { [path: string]: BreadcrumbItem };
-}
-
-type Callback = (route: RouteNode, referrer?: RouteNode) => void;
+type Callback<T = {}> = (route: RouteNode<T>, referrer?: RouteNode<T>) => void;
 
 /**
  * @function isAbsolute
@@ -100,11 +95,11 @@ function normalizeURL(path: string, base?: string): string {
  * @param callback 回调
  * @param referrer 来源路由
  */
-function walkRouter(route: Route, callback: Callback, referrer?: RouteNode): void {
+function walkRouter<T = {}>(route: Route<T>, callback: Callback<T>, referrer?: RouteNode<T>): void {
   const path = normalizeURL(route.path, referrer?.path);
   const href = route.href ? normalizeURL(route.href, referrer?.href) : path;
 
-  const routeNode: RouteNode = { ...route, path, href };
+  const routeNode: RouteNode<T> = { ...route, path, href };
 
   callback(routeNode, referrer);
 
@@ -117,25 +112,25 @@ function walkRouter(route: Route, callback: Callback, referrer?: RouteNode): voi
   }
 }
 
-type MenusMap = { [path: string]: MenuItem[] };
+type MenusMap<T = {}> = { [path: string]: MenuItem<T>[] };
 
-type Breadcrumbs = { [path: string]: BreadcrumbItem };
+type Breadcrumbs<T = {}> = { [path: string]: BreadcrumbItem<T> };
 
 /**
  * @function getRouter
  * @description 获取路由
  * @param router 路由
  */
-export default function getRouter(router: Route[]): Router {
-  const menus: MenuItem[] = [];
-  const routes: RouteItem[] = [];
-  const breadcrumbs: Breadcrumbs = {};
+export default function getRouter<T = {}>(router: Route<T>[]): Router<T> {
+  const menus: MenuItem<T>[] = [];
+  const routes: RouteItem<T>[] = [];
+  const breadcrumbs: Breadcrumbs<T> = {};
 
   for (const route of router) {
     const root = '';
-    const menusMap: MenusMap = { [root]: [] };
+    const menusMap: MenusMap<T> = { [root]: [] };
 
-    walkRouter(route, (route, referrer) => {
+    walkRouter<T>(route, (route, referrer) => {
       const {
         name,
         icon,
@@ -165,12 +160,12 @@ export default function getRouter(router: Route[]): Router {
           strict: strict !== false,
           sensitive: sensitive === true,
           ...rest
-        });
+        } as RouteItem<T>);
       }
 
       if (hasComponent || hasChildren) {
         const refer = referrer ? referrer.path : root;
-        const menu: MenuItem = { key, name, path, href, icon, ...rest };
+        const menu = { key, name, path, href, icon, ...rest } as MenuItem<T>;
 
         if (hasChildren && !hideChildrenInMenu) {
           menusMap[path] = menu.children = hideInMenu ? menusMap[refer] : [];
@@ -182,7 +177,7 @@ export default function getRouter(router: Route[]): Router {
       }
 
       if (!hideInBreadcrumb) {
-        const breadcrumb: BreadcrumbItem = { key, name, path, icon, ...rest };
+        const breadcrumb = { key, name, path, icon, ...rest } as BreadcrumbItem<T>;
 
         if (hasComponent) {
           breadcrumb.href = href;
