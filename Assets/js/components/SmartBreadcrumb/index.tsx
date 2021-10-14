@@ -6,8 +6,8 @@ import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
 import memoizeOne from 'memoize-one';
 import { isString, urlToPaths } from '~js/utils/utils';
-import { BreadcrumbItem as Item } from '~js/utils/router';
 import { Link, RouteComponentProps } from 'react-router-dom';
+import { BreadcrumbItem as Item } from '~js/utils/parseRouter';
 
 type Match = RouteComponentProps['match'];
 type Location = RouteComponentProps['location'];

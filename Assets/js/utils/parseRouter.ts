@@ -92,12 +92,12 @@ function normalizeURL(path: string, base?: string): string {
 }
 
 /**
- * @function walkRouter
+ * @function recursive
  * @param route 路由
  * @param callback 回调
  * @param referrer 来源路由
  */
-function walkRouter<T>(route: Route<T>, callback: Callback<T>, referrer?: RouteNode<T>): void {
+function recursive<T>(route: Route<T>, callback: Callback<T>, referrer?: RouteNode<T>): void {
   const path = normalizeURL(route.path, referrer?.path);
   const href = route.href ? normalizeURL(route.href, referrer?.href) : path;
 
@@ -109,7 +109,7 @@ function walkRouter<T>(route: Route<T>, callback: Callback<T>, referrer?: RouteN
 
   if (children) {
     for (const route of children) {
-      walkRouter(route, callback, routeNode);
+      recursive(route, callback, routeNode);
     }
   }
 }
@@ -119,11 +119,11 @@ type MenusMap<T> = { [path: string]: MenuItem<T>[] };
 type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
 
 /**
- * @function parse
+ * @function parseRouter
  * @description 解析路由配置
  * @param router 路由
  */
-export default function parse<T>(router: Route<T>[]): Router<T> {
+export default function parseRouter<T>(router: Route<T>[]): Router<T> {
   const menus: MenuItem<T>[] = [];
   const routes: RouteItem<T>[] = [];
   const breadcrumbs: Breadcrumbs<T> = {};
@@ -132,7 +132,7 @@ export default function parse<T>(router: Route<T>[]): Router<T> {
     const root = '';
     const menusMap: MenusMap<T> = { [root]: [] };
 
-    walkRouter(route, (route, referrer) => {
+    recursive(route, (route, referrer) => {
       const {
         name,
         icon,

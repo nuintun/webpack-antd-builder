@@ -2,8 +2,8 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 
 import { Menu, MenuProps } from 'antd';
 import { isString } from '~js/utils/utils';
-import { MenuItem } from '~js/utils/router';
 import usePrevious from '~js/hooks/usePrevious';
+import { MenuItem } from '~js/utils/parseRouter';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import usePersistCallback from '~js/hooks/usePersistCallback';
 import { getExpandKeysFromPath, getFlatMenus, mergeKeys, prefixUI } from './SmartMenuUtils';

@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one';
-import { MenuItem } from '~js/utils/router';
 import { urlToPaths } from '~js/utils/utils';
+import { MenuItem } from '~js/utils/parseRouter';
 
 export const prefixUI = 'ui-smart-menu';
 
