@@ -1,6 +1,6 @@
 /**
- * @module getRouter
- * @description 通过初始路由配置获取标准路由，菜单，面包屑数据
+ * @module router
+ * @description 解析路由配置文件为标准路由，菜单，面包屑数据
  */
 
 import React from 'react';
@@ -11,7 +11,7 @@ type Key = React.Key;
 
 type Icon = string | React.ReactElement;
 
-export type Route<T = {}> = T & {
+export type Route<T> = T & {
   key?: Key;
   icon?: Icon;
   name: string;
@@ -25,11 +25,12 @@ export type Route<T = {}> = T & {
   hideInBreadcrumb?: boolean;
   hideChildrenInMenu?: boolean;
   component?: React.ComponentType<any>;
+  target?: React.HTMLAttributeAnchorTarget;
 };
 
-type RouteNode<T = {}> = Route<T> & { href: string };
+type RouteNode<T> = Route<T> & { href: string };
 
-export type RouteItem<T = {}> = T & {
+export type RouteItem<T> = T & {
   key: Key;
   name: string;
   path: string;
@@ -39,16 +40,17 @@ export type RouteItem<T = {}> = T & {
   component: React.ComponentType<any>;
 };
 
-export type MenuItem<T = {}> = T & {
+export type MenuItem<T> = T & {
   key: Key;
   icon?: Icon;
   name: string;
   path: string;
-  href?: string;
+  href: string;
   children?: MenuItem<T>[];
+  target?: React.HTMLAttributeAnchorTarget;
 };
 
-export type BreadcrumbItem<T = {}> = T & {
+export type BreadcrumbItem<T> = T & {
   key: Key;
   icon?: Icon;
   name: string;
@@ -56,13 +58,13 @@ export type BreadcrumbItem<T = {}> = T & {
   href?: string;
 };
 
-export interface Router<T = {}> {
+export interface Router<T> {
   menus: MenuItem<T>[];
   routes: RouteItem<T>[];
   breadcrumbs: { [path: string]: BreadcrumbItem<T> };
 }
 
-type Callback<T = {}> = (route: RouteNode<T>, referrer?: RouteNode<T>) => void;
+type Callback<T> = (route: RouteNode<T>, referrer?: RouteNode<T>) => void;
 
 /**
  * @function isAbsolute
@@ -95,7 +97,7 @@ function normalizeURL(path: string, base?: string): string {
  * @param callback 回调
  * @param referrer 来源路由
  */
-function walkRouter<T = {}>(route: Route<T>, callback: Callback<T>, referrer?: RouteNode<T>): void {
+function walkRouter<T>(route: Route<T>, callback: Callback<T>, referrer?: RouteNode<T>): void {
   const path = normalizeURL(route.path, referrer?.path);
   const href = route.href ? normalizeURL(route.href, referrer?.href) : path;
 
@@ -112,16 +114,16 @@ function walkRouter<T = {}>(route: Route<T>, callback: Callback<T>, referrer?: R
   }
 }
 
-type MenusMap<T = {}> = { [path: string]: MenuItem<T>[] };
+type MenusMap<T> = { [path: string]: MenuItem<T>[] };
 
-type Breadcrumbs<T = {}> = { [path: string]: BreadcrumbItem<T> };
+type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
 
 /**
- * @function getRouter
- * @description 获取路由
+ * @function parse
+ * @description 解析路由配置
  * @param router 路由
  */
-export default function getRouter<T = {}>(router: Route<T>[]): Router<T> {
+export default function parse<T>(router: Route<T>[]): Router<T> {
   const menus: MenuItem<T>[] = [];
   const routes: RouteItem<T>[] = [];
   const breadcrumbs: Breadcrumbs<T> = {};
@@ -130,7 +132,7 @@ export default function getRouter<T = {}>(router: Route<T>[]): Router<T> {
     const root = '';
     const menusMap: MenusMap<T> = { [root]: [] };
 
-    walkRouter<T>(route, (route, referrer) => {
+    walkRouter(route, (route, referrer) => {
       const {
         name,
         icon,

@@ -9,7 +9,7 @@ import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenu
 
 export type { HeaderRender, HeaderRenderProps, SmartMenuProps };
 
-export default memo(function SmartMenu({
+function SmartMenu<T>({
   isMobile,
   collapsed,
   onCollapse,
@@ -17,7 +17,7 @@ export default memo(function SmartMenu({
   onOpenChange,
   defaultOpenKeys = [],
   ...restProps
-}: SmartMenuProps): React.ReactElement {
+}: SmartMenuProps<T>): React.ReactElement {
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys);
 
   const onClose = usePersistCallback((): void => {
@@ -66,4 +66,6 @@ export default memo(function SmartMenu({
       defaultOpenKeys={cachedOpenKeysRef.current}
     />
   );
-});
+}
+
+export default memo(SmartMenu) as typeof SmartMenu;

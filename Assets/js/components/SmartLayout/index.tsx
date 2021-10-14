@@ -5,7 +5,7 @@ import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 import useMedia from '~js/hooks/useMedia';
 import useStorage from '~js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
-import { BreadcrumbItem } from '~js/utils/getRouter';
+import { BreadcrumbItem } from '~js/utils/router';
 import SmartBreadcrumb from '~js/components/SmartBreadcrumb';
 import usePersistCallback from '~js/hooks/usePersistCallback';
 import SuspenseFallBack from '~js/components/SuspenseFallBack';
@@ -18,19 +18,19 @@ const brokenQuery = '(max-width: 992px)';
 
 type PickProps = 'theme' | 'menus' | 'match' | 'history' | 'location' | 'collapsedWidth';
 
-export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
+export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> {
   roles?: any;
   siderWith?: number;
   children?: React.ReactNode;
   leftHeaderRender?: HeaderRender;
   rightHeaderRender?: HeaderRender;
-  breadcrumbs: { [path: string]: BreadcrumbItem };
+  breadcrumbs: { [path: string]: BreadcrumbItem<T> };
 }
 
 const prefixUI = 'ui-smart-layout';
 const triggerClassName = `${prefixUI}-sider-trigger`;
 
-export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactElement {
+function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
   const {
     match,
     menus,
@@ -133,4 +133,6 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
       </Layout>
     </Layout>
   );
-});
+}
+
+export default memo(SmartLayout) as typeof SmartLayout;

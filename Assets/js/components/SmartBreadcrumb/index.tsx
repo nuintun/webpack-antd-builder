@@ -6,20 +6,20 @@ import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
 import memoizeOne from 'memoize-one';
 import { isString, urlToPaths } from '~js/utils/utils';
-import { BreadcrumbItem as Item } from '~js/utils/getRouter';
+import { BreadcrumbItem as Item } from '~js/utils/router';
 import { Link, RouteComponentProps } from 'react-router-dom';
 
 type Match = RouteComponentProps['match'];
 type Location = RouteComponentProps['location'];
 
-type Breadcrumbs = { [path: string]: Item };
-type BreadcrumbItem = Item & { current: boolean };
+type Breadcrumbs<T> = { [path: string]: Item<T> };
+type BreadcrumbItem<T> = Item<T> & { current: boolean };
 
-export interface SmartBreadcrumbProps extends RouteComponentProps {
-  breadcrumbs: Breadcrumbs;
+export interface SmartBreadcrumbProps<T> extends RouteComponentProps {
+  breadcrumbs: Breadcrumbs<T>;
 }
 
-function iconRender(icon?: string | React.ReactElement): React.ReactElement | null {
+function iconRender(icon?: string | React.ReactElement): React.ReactElement | undefined {
   if (icon) {
     if (isString(icon)) {
       return (
@@ -31,14 +31,16 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | nu
 
     return icon;
   }
-
-  return null;
 }
 
-const getBreadcrumbItems = memoizeOne((match: Match, location: Location, breadcrumbs: Breadcrumbs): BreadcrumbItem[] => {
+const getBreadcrumbItems = memoizeOne(function <T>(
+  match: Match,
+  location: Location,
+  breadcrumbs: Breadcrumbs<T>
+): BreadcrumbItem<T>[] {
   const { pathname } = location;
   const unique: { [path: string]: true } = {};
-  const breadcrumbItems: BreadcrumbItem[] = [];
+  const breadcrumbItems: BreadcrumbItem<T>[] = [];
   const paths = ['/', ...urlToPaths(match.path.toLowerCase()), pathname];
 
   for (const path of paths) {
@@ -54,7 +56,7 @@ const getBreadcrumbItems = memoizeOne((match: Match, location: Location, breadcr
           ...breadcrumbItem,
           icon: iconRender(icon),
           current: pathname === path || pathname === href
-        } as BreadcrumbItem);
+        });
       }
     }
   }
@@ -62,7 +64,7 @@ const getBreadcrumbItems = memoizeOne((match: Match, location: Location, breadcr
   return breadcrumbItems;
 });
 
-export default memo(function SmartBreadcrumb({ match, location, breadcrumbs }: SmartBreadcrumbProps): React.ReactElement {
+function SmartBreadcrumb<T>({ match, location, breadcrumbs }: SmartBreadcrumbProps<T>): React.ReactElement {
   const breadcrumbItems = getBreadcrumbItems(match, location, breadcrumbs);
 
   return (
@@ -84,4 +86,6 @@ export default memo(function SmartBreadcrumb({ match, location, breadcrumbs }: S
       ))}
     </Breadcrumb>
   );
-});
+}
+
+export default memo(SmartBreadcrumb) as typeof SmartBreadcrumb;

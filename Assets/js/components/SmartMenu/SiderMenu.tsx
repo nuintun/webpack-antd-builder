@@ -18,14 +18,14 @@ export interface HeaderRenderProps {
 
 export type HeaderRender = (props: HeaderRenderProps) => React.ReactNode;
 
-export interface SiderMenuProps extends RouteMenuProps, Pick<SiderProps, 'trigger' | 'onCollapse'> {
+export interface SiderMenuProps<T> extends RouteMenuProps<T>, Pick<SiderProps, 'trigger' | 'onCollapse'> {
   width?: number;
   isMobile?: boolean;
   collapsedWidth?: number;
   headerRender?: HeaderRender;
 }
 
-export default memo(function SiderMenu({
+function SiderMenu<T>({
   title,
   style,
   className,
@@ -38,7 +38,7 @@ export default memo(function SiderMenu({
   collapsed = false,
   collapsedWidth = 64,
   ...restProps
-}: SiderMenuProps): React.ReactElement {
+}: SiderMenuProps<T>): React.ReactElement {
   return (
     <Sider
       collapsible
@@ -57,4 +57,6 @@ export default memo(function SiderMenu({
       <RouteMenu {...restProps} theme={theme} collapsed={collapsed} className={prefixUI} />
     </Sider>
   );
-});
+}
+
+export default memo(SiderMenu) as typeof SiderMenu;

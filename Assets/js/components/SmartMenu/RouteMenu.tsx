@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 
 import { Menu, MenuProps } from 'antd';
 import { isString } from '~js/utils/utils';
-import { MenuItem } from '~js/utils/getRouter';
+import { MenuItem } from '~js/utils/router';
 import usePrevious from '~js/hooks/usePrevious';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import usePersistCallback from '~js/hooks/usePersistCallback';
@@ -24,15 +24,15 @@ type OmitProps =
   | 'onOpenChange'
   | 'defaultSelectedKeys';
 
-export interface RouteMenuProps extends RouteComponentProps, Omit<MenuProps, OmitProps> {
-  menus: MenuItem[];
+export interface RouteMenuProps<T> extends RouteComponentProps, Omit<MenuProps, OmitProps> {
   collapsed?: boolean;
+  menus: MenuItem<T>[];
   icon?: string | React.ReactElement;
-  menuItemRender?: (menu: MenuItem) => React.ReactNode;
+  menuItemRender?: (menu: MenuItem<T>) => React.ReactNode;
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
 }
 
-function iconRender(icon?: string | React.ReactElement): React.ReactElement | null {
+function iconRender(icon?: string | React.ReactElement): React.ReactElement | undefined {
   if (icon) {
     if (isString(icon)) {
       return (
@@ -44,11 +44,9 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | nu
 
     return React.cloneElement(icon, { className: iconClassName });
   }
-
-  return null;
 }
 
-function titleRender({ name, icon }: MenuItem, hasWrapper: boolean = false): React.ReactElement {
+function titleRender<T>({ name, icon }: MenuItem<T>, hasWrapper: boolean = false): React.ReactElement {
   const Wrapper = hasWrapper ? 'span' : Fragment;
   const props = Wrapper === Fragment ? {} : { className: titleClassName };
 
@@ -60,7 +58,7 @@ function titleRender({ name, icon }: MenuItem, hasWrapper: boolean = false): Rea
   );
 }
 
-function itemRender(menu: MenuItem, { location, menuItemRender }: RouteMenuProps): React.ReactElement {
+function itemRender<T>(menu: MenuItem<T>, { location, menuItemRender }: RouteMenuProps<T>): React.ReactElement {
   const { key, name, href, target } = menu;
   const replace = href === `${location.pathname}${location.search}${location.hash}`;
 
@@ -73,7 +71,7 @@ function itemRender(menu: MenuItem, { location, menuItemRender }: RouteMenuProps
   );
 }
 
-function subMenuRender(menu: MenuItem, props: RouteMenuProps): React.ReactElement {
+function subMenuRender<T>(menu: MenuItem<T>, props: RouteMenuProps<T>): React.ReactElement {
   const { key, children } = menu;
 
   if (children && children.length) {
@@ -87,14 +85,14 @@ function subMenuRender(menu: MenuItem, props: RouteMenuProps): React.ReactElemen
   return itemRender(menu, props);
 }
 
-function menuRender(menus: MenuItem[], props: RouteMenuProps): React.ReactElement[] {
+function menuRender<T>(menus: MenuItem<T>[], props: RouteMenuProps<T>): React.ReactElement[] {
   return menus.map(menu => subMenuRender(menu, props));
 }
 
-export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
+function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   const { match, menus, history, location, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
 
-  const prevProps = usePrevious<RouteMenuProps>(props);
+  const prevProps = usePrevious<RouteMenuProps<T>>(props);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
   const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
@@ -155,4 +153,6 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       {menuRender(menus, props)}
     </Menu>
   );
-});
+}
+
+export default memo(RouteMenu) as typeof RouteMenu;

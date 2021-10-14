@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one';
+import { MenuItem } from '~js/utils/router';
 import { urlToPaths } from '~js/utils/utils';
-import { MenuItem } from '~js/utils/getRouter';
 
 export const prefixUI = 'ui-smart-menu';
 
@@ -9,7 +9,7 @@ export const prefixUI = 'ui-smart-menu';
  * @param menus 原始菜单数据
  * @param flatMenus 扁平化菜单数据
  */
-function walkMenus(menus: MenuItem[], flatMenus: MenuItem[]): MenuItem[] {
+function walkMenus<T>(menus: MenuItem<T>[], flatMenus: MenuItem<T>[]): MenuItem<T>[] {
   for (const menu of menus) {
     flatMenus.push(menu);
 
@@ -23,19 +23,15 @@ function walkMenus(menus: MenuItem[], flatMenus: MenuItem[]): MenuItem[] {
   return flatMenus;
 }
 
-type GetFlatMenus = (menus: MenuItem[]) => MenuItem[];
-
 /**
  * @function getFlatMenus
  * @description 扁平化菜单路由
  * @example [{ path: string }, { path: string }] => [path, path2]
  * @param menus 菜单数据
  */
-export const getFlatMenus: GetFlatMenus = memoizeOne(menus => {
+export const getFlatMenus = memoizeOne(function <T>(menus: MenuItem<T>[]): MenuItem<T>[] {
   return walkMenus(menus, []);
 });
-
-type IsMenuKey = (key: string, flatMenus: MenuItem[]) => boolean;
 
 /**
  * @function isMenuKey
@@ -43,10 +39,10 @@ type IsMenuKey = (key: string, flatMenus: MenuItem[]) => boolean;
  * @param key 菜单标识
  * @param flatMenus 菜单数据
  */
-const isMenuKey: IsMenuKey = memoizeOne((key, flatMenus) => {
+const isMenuKey = memoizeOne(function <T>(key: string, flatMenus: MenuItem<T>[]): boolean {
   if (!key) return false;
 
-  return flatMenus.some((menu: MenuItem) => key === menu.key);
+  return flatMenus.some(menu => key === menu.key);
 });
 
 /**
@@ -69,8 +65,6 @@ function uniqueKeys(keys: string[]): string[] {
   return result;
 }
 
-type MergeKeys = (prevkeys: string[], nextKeys: string[], flatMenus: MenuItem[]) => string[];
-
 /**
  * @function filterKeys
  * @description 过滤菜单标识
@@ -78,16 +72,14 @@ type MergeKeys = (prevkeys: string[], nextKeys: string[], flatMenus: MenuItem[])
  * @param nextKeys 更新后菜单标识
  * @param flatMenus 扁平化菜单数据
  */
-export const mergeKeys: MergeKeys = memoizeOne((prevKeys, nextKeys, flatMenus) =>
-  uniqueKeys([...prevKeys.filter(key => isMenuKey(key, flatMenus)), ...nextKeys])
-);
+export const mergeKeys = memoizeOne(function <T>(prevKeys: string[], nextKeys: string[], flatMenus: MenuItem<T>[]): string[] {
+  return uniqueKeys([...prevKeys.filter(key => isMenuKey(key, flatMenus)), ...nextKeys]);
+});
 
 export interface ExpandKeys {
   openKeys: string[];
   selectedKeys: string[];
 }
-
-type GetExpandKeysFromPath = (route: string | undefined, flatMenus: MenuItem[]) => ExpandKeys;
 
 /**
  * @function getExpandKeysFromPath
@@ -95,7 +87,7 @@ type GetExpandKeysFromPath = (route: string | undefined, flatMenus: MenuItem[]) 
  * @param path 路由路径
  * @param flatMenuPaths 菜单路径列表
  */
-export const getExpandKeysFromPath: GetExpandKeysFromPath = memoizeOne((path, flatMenus) => {
+export const getExpandKeysFromPath = memoizeOne(function <T>(path: string | undefined, flatMenus: MenuItem<T>[]): ExpandKeys {
   const openKeys: string[] = [];
   const selectedKeys: string[] = [];
 
