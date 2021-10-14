@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 
+import { isFunction } from '~js/utils/utils';
 import useRequest from '~js/hooks/useRequest';
 import { Options, RequestError } from '~js/utils/request';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import usePersistCallback from '~js/hooks/usePersistCallback';
 import { Button, ButtonProps, message, Popconfirm, PopconfirmProps } from 'antd';
-import { isFunction } from '~js/utils/utils';
 
 export interface ActionButtonProps<T>
   extends Pick<Options, 'method' | 'notify'>,
