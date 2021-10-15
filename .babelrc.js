@@ -16,7 +16,7 @@ module.exports = {
   presets: [
     ['@babel/preset-env', { bugfixes: true, corejs, useBuiltIns: 'usage', targets }],
     ['@babel/preset-react', { runtime: 'automatic', development }],
-    ['@babel/preset-typescript', { allowDeclareFields: true }]
+    ['@babel/preset-typescript', { optimizeConstEnums: true }]
   ],
   plugins: [
     ['import', imports],
