@@ -246,9 +246,9 @@
     tslib "^2.0.3"
 
 "@antv/scale@^0.3.7", "@antv/scale@~0.3.1":
-  version "0.3.13"
-  resolved "https://registry.npmjs.org/@antv/scale/-/scale-0.3.13.tgz#f12bbccd8b46dcef410624fa7883181d8424ef73"
-  integrity sha512-2SPhhERTOGk3wi5+DiIDsqJrJHVT+v4MTqzqHdKxlTMP++KsI3BhvLZhl2uNS4v486dM+YxjRacpFwEXCOa+GA==
+  version "0.3.14"
+  resolved "https://registry.npmjs.org/@antv/scale/-/scale-0.3.14.tgz#0718f8651368e5c98db5612065132a8c8bbcde48"
+  integrity sha512-G19Mh9VYPX/Z5PXKJrORIYCjrA+Fmko6ZB4HN6Y8K0T9FeKaSJq+idIe7AUJhIIXDCrFk4LzW+t908NsORqxPg==
   dependencies:
     "@antv/util" "~2.0.3"
     fecha "~4.2.0"
@@ -2188,9 +2188,9 @@ color-name@~1.1.4:
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
 colord@^2.0.1, colord@^2.6:
-  version "2.8.0"
-  resolved "https://registry.npmjs.org/colord/-/colord-2.8.0.tgz#64fb7aa03de7652b5a39eee50271a104c2783b12"
-  integrity sha512-kNkVV4KFta3TYQv0bzs4xNwLaeag261pxgzGQSh4cQ1rEhYjcTJfFRP0SDlbhLONg0eSoLzrDd79PosjbltufA==
+  version "2.9.0"
+  resolved "https://registry.npmjs.org/colord/-/colord-2.9.0.tgz#35925baaae248170ea1b492deb1cc235d71b546e"
+  integrity sha512-D8guC3WXLzW892WdoQD+RhIRlfeQSZnTEOq+KxX6fak9ijrHt30oKF9L7jQovCA13pSIJJVFVEYzp4Y4f4k+Yg==
 
 colorette@^2.0.10:
   version "2.0.16"
@@ -2681,9 +2681,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.867:
-  version "1.3.871"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.871.tgz#6e87365fd72037a6c898fb46050ad4be3ac9ef62"
-  integrity sha512-qcLvDUPf8DSIMWarHT2ptgcqrYg62n3vPA7vhrOF24d8UNzbUBaHu2CySiENR3nEDzYgaN60071t0F6KLYMQ7Q==
+  version "1.3.872"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.872.tgz#2311a82f344d828bab6904818adc4afb57b35369"
+  integrity sha512-qG96atLFY0agKyEETiBFNhpRLSXGSXOBuhXWpbkYqrLKKASpRyRBUtfkn0ZjIf/yXfA7FA4nScVOMpXSHFlUCQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -3641,10 +3641,10 @@ lazy-cache@^1.0.3:
   resolved "https://registry.npmjs.org/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
   integrity sha1-odePw6UEdMuAhF07O24dpJpEbo4=
 
-less-loader@^10.1.0:
-  version "10.1.0"
-  resolved "https://registry.npmjs.org/less-loader/-/less-loader-10.1.0.tgz#4379bdff409d1eef36c4cb50611b8944a27659b2"
-  integrity sha512-Xz5e/YLoLmdWFu7XzzA6LVX8a2+6onDz5LJb8oLWAkOnIZ5Hjcpe+nf+Sta6UgEoIMfzWVrR3XlIVfPeZDb10A==
+less-loader@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.npmjs.org/less-loader/-/less-loader-10.2.0.tgz#97286d8797dc3dc05b1d16b0ecec5f968bdd4e32"
+  integrity sha512-AV5KHWvCezW27GT90WATaDnfXBv99llDbtaj4bshq6DvAihMdNjaPDcUMa6EXKLRF+P2opFenJp89BXg91XLYg==
   dependencies:
     klona "^2.0.4"
 

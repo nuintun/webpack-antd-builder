@@ -75,7 +75,7 @@
     "koa": "^2.13.3",
     "koa-compress": "^5.1.0",
     "less": "^4.1.2",
-    "less-loader": "^10.1.0",
+    "less-loader": "^10.2.0",
     "mini-css-extract-plugin": "^2.4.2",
     "nodemon": "^2.0.13",
     "postcss": "^8.3.9",
