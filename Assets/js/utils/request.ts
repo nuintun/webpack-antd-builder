@@ -6,7 +6,10 @@
 import 'whatwg-fetch';
 import { message } from 'antd';
 
-type Query = Record<string | number, any>;
+export interface Query {
+  [name: string]: any;
+  [name: number]: any;
+}
 
 export interface Options extends Omit<RequestInit, 'body'> {
   body?: any;
@@ -16,7 +19,7 @@ export interface Options extends Omit<RequestInit, 'body'> {
   onUnauthorized?: () => void;
 }
 
-interface RequestResult<R> {
+export interface RequestResult<R> {
   code: number;
   msg: string;
   payload: R;

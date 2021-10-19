@@ -6,6 +6,7 @@ import React, { useMemo, useRef, useState } from 'react';
 
 import useRequest from './useRequest';
 import usePersistCallback from './usePersistCallback';
+import { Options as RequestOptions } from '~js/utils/request';
 
 export interface Search {
   [name: string]: any;
@@ -17,7 +18,7 @@ export interface Pagination {
   pageSize: number;
 }
 
-export interface Options {
+export interface Options extends Omit<RequestOptions, 'body' | 'query' | 'method'> {
   search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }
@@ -71,37 +72,37 @@ export default function usePagingRequest<I, E extends object = {}, T = I>(
   const [dataSource, setDataSource] = useState<T[]>([]);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
 
-  const fetch = usePersistCallback(async (options: Options = {}) => {
-    const query: Query = updateRef(searchRef, options.search) || {};
-    const hasPagination = hasQuery(options.pagination ?? paginationRef.current);
+  const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
+    const query: Query = { ...updateRef(searchRef, { ...search }) };
+    const hasPagination = hasQuery(pagination ?? paginationRef.current);
 
     if (hasPagination) {
-      const pagination: Pagination = {
+      const { page, pageSize }: Pagination = {
         ...DEFAULT_PAGINATION,
         ...paginationRef.current,
-        ...options.pagination
+        ...pagination
       };
 
       if (__DEV__) {
-        if (pagination.page < 1 || !Number.isInteger(pagination.page)) {
+        if (page < 1 || !Number.isInteger(page)) {
           throw new RangeError('page must be an integer of no less than 1');
         }
 
-        if (pagination.pageSize < 1 || !Number.isInteger(pagination.pageSize)) {
+        if (pageSize < 1 || !Number.isInteger(pageSize)) {
           throw new RangeError('page size must be an integer of no less than 1');
         }
       }
 
-      query.page = pagination.page;
-      query.pageSize = pagination.pageSize;
+      query.page = page;
+      query.pageSize = pageSize;
 
-      setRef(paginationRef, pagination);
+      setRef(paginationRef, { page, pageSize });
     } else {
       setRef(paginationRef, false);
     }
 
     try {
-      setRef(responseRef, await request<Response<I, E>>(url, { query }));
+      setRef(responseRef, await request<Response<I, E>>(url, { ...options, query }));
     } catch (error) {
       setDataSource([]);
 
