@@ -212,7 +212,10 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
         },
         (error: RequestError): never => {
           error.code = response.status;
-          error.message = '无法解析响应数据';
+
+          if (!__DEV__) {
+            error.message = '解析响应失败';
+          }
 
           throw error;
         }
@@ -220,7 +223,10 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
     },
     (error: RequestError): never => {
       error.code = 0;
-      error.message = '请求失败';
+
+      if (!__DEV__) {
+        error.message = '发送请求失败';
+      }
 
       throw error;
     }
