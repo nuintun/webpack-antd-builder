@@ -47,18 +47,21 @@
     transition: all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   }
 
-  .ant-menu-title-content {
-    .@{smart-menu-prefix-cls}-title {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
+  .ant-menu-item,
+  .ant-menu-submenu {
+    .ant-menu-title-content {
+      .@{smart-menu-prefix-cls}-title {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
 
-      .@{smart-menu-prefix-cls}-icon {
-        line-height: 0;
-        font-size: @menu-icon-size;
+        .@{smart-menu-prefix-cls}-icon {
+          line-height: 0;
+          font-size: @menu-icon-size;
 
-        > img {
-          height: @menu-icon-size;
+          > img {
+            height: @menu-icon-size;
+          }
         }
       }
     }
