@@ -25,7 +25,7 @@ export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {}
 ): [submitting: boolean, onSubmit: (values: V) => void] {
-  const { delay, query, onError, method = 'POST', transform, onSuccess, onComplete, ...restOptions } = options;
+  const { delay, onError, method = 'POST', transform, onSuccess, onComplete, ...restOptions } = options;
 
   const [submitting, request] = useRequest(delay);
 
@@ -34,7 +34,7 @@ export default function useSubmit<V, R>(
     const params = transform ? transform(values) : values;
 
     if (/^GET|HEAD$/i.test(method)) {
-      options.query = { ...query, ...params };
+      options.query = { ...restOptions.query, ...params };
     } else {
       options.body = params;
     }

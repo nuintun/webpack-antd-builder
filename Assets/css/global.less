@@ -27,10 +27,6 @@ a {
   }
 }
 
-table {
-  white-space: nowrap;
-}
-
 // 设置内联, 减少浮动带来的 BUG
 .fn-left,
 .fn-right {
@@ -104,6 +100,22 @@ body {
   border-bottom: 1px solid #f0c36d;
 }
 
+.ui-table {
+  border-top: 1px solid @table-border-color;
+
+  &.ant-table-bordered {
+    border-top: none;
+  }
+
+  .ant-table-content {
+    overflow-x: auto;
+
+    table {
+      white-space: nowrap;
+    }
+  }
+}
+
 .ui-page-profile {
   margin: 16px;
   padding: 24px;
@@ -125,18 +137,6 @@ body {
 
   .ui-table {
     margin-top: 10px;
-  }
-}
-
-.ant-table {
-  border-top: 1px solid @table-border-color;
-
-  &.ant-table-bordered {
-    border-top: none;
-  }
-
-  .ant-table-content {
-    overflow-x: auto;
   }
 }
 
