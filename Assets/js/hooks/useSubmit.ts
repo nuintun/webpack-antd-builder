@@ -30,10 +30,10 @@ export default function useSubmit<V, R>(
   const [submitting, request] = useRequest(delay);
 
   const onSubmit = usePersistCallback(async (values: V) => {
-    const options: RequestOptions = restOptions;
     const params = transform ? transform(values) : values;
+    const options: RequestOptions = { ...restOptions, method };
 
-    if (/^GET|HEAD$/i.test(method)) {
+    if (/^(?:GET|HEAD)$/i.test(method)) {
       options.query = { ...restOptions.query, ...params };
     } else {
       options.body = params;
