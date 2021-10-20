@@ -74,6 +74,7 @@ module.exports = async mode => {
     entry: configure.entry,
     context: configure.context,
     output: {
+      hashFunction: 'xxhash64',
       path: configure.outputPath,
       publicPath: configure.publicPath,
       filename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
