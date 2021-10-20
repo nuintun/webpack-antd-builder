@@ -76,7 +76,7 @@ export default function useTable<I, E extends object = {}, T = I>(
       ...updateRef(sorterRef, options.sorter)
     };
 
-    return request({ search, pagination: options.pagination });
+    return request({ ...options, search, pagination: options.pagination });
   });
 
   const onChange = useCallback<OnChange<T>>(async (pagination, filter, sorter, { action }) => {

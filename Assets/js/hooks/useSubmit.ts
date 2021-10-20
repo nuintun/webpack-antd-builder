@@ -25,22 +25,22 @@ export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {}
 ): [submitting: boolean, onSubmit: (values: V) => void] {
-  const { delay, onError, method = 'POST', transform, onSuccess, onComplete, ...restOptions } = options;
+  const { delay, onError, method = 'POST', transform, onSuccess, onComplete } = options;
 
   const [submitting, request] = useRequest(delay);
 
   const onSubmit = usePersistCallback(async (values: V) => {
     const params = transform ? transform(values) : values;
-    const options: RequestOptions = { ...restOptions, method };
+    const requestOptions: RequestOptions = { ...options, method };
 
     if (/^(?:GET|HEAD)$/i.test(method)) {
-      options.query = { ...restOptions.query, ...params };
+      requestOptions.query = { ...requestOptions.query, ...params };
     } else {
-      options.body = params;
+      requestOptions.body = params;
     }
 
     try {
-      const response = await request<R>(url, options);
+      const response = await request<R>(url, requestOptions);
 
       onSuccess && onSuccess(response, values);
     } catch (error) {
