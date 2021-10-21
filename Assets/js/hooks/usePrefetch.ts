@@ -2,16 +2,20 @@
  * @module usePrefetch
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { message } from 'antd';
 import useRequest from './useRequest';
-import usePersistCallback from './usePersistCallback';
-import { Options as RequestOptions, RequestError } from '~js/utils/request';
+import { Options as RequestOptions } from '~js/utils/request';
+import useResponse, { Options as ResponseOptions, TransformOptions as TransformResponseOptions } from './useResponse';
 
-export interface Options extends RequestOptions {
+type Refresh = (options?: RequestOptions) => void;
+
+export interface Options extends RequestOptions, ResponseOptions {
   delay?: number;
-  onError?: (error: RequestError) => void;
+}
+
+export interface TransformOptions<R, T> extends TransformResponseOptions<R, T> {
+  delay?: number;
 }
 
 /**
@@ -22,24 +26,25 @@ export interface Options extends RequestOptions {
  */
 export default function usePrefetch<R>(
   url: string,
-  options: Options = {}
-): [fetching: boolean, response: R | undefined, refresh: () => Promise<void>] {
-  const { delay, onError, ...requestOptions } = options;
-
+  options?: Options
+): [fetching: boolean, response: R | undefined, refresh: Refresh];
+/**
+ * @function usePrefetch
+ * @description [hook] 预加载
+ * @param url 请求地址
+ * @param options 请求配置
+ */
+export default function usePrefetch<R, T>(
+  url: string,
+  options: TransformOptions<R, T>
+): [fetching: boolean, response: T | undefined, refresh: Refresh];
+export default function usePrefetch<R, T>(
+  url: string,
+  options: Options | TransformOptions<R, T> = {}
+): [fetching: boolean, response: R | T | undefined, refresh: Refresh] {
+  const { delay } = options;
   const [fetching, request] = useRequest(delay);
-  const [response, setResponse] = useState<R>();
-
-  const refresh = usePersistCallback(async () => {
-    try {
-      setResponse(await request<R>(url, requestOptions));
-    } catch (error) {
-      if (onError) {
-        onError && onError(error);
-      } else {
-        message.error(error.message);
-      }
-    }
-  });
+  const [response, refresh] = useResponse<R, T>(url, request, options as TransformOptions<R, T>);
 
   useEffect(() => {
     refresh();

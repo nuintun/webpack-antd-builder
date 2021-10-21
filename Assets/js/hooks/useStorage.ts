@@ -7,14 +7,17 @@ import { useCallback, useMemo } from 'react';
 import { isFunction } from '~js/utils/utils';
 import createStorage from '~js/utils/storage';
 
+const { sessionStorage, localStorage } = globalThis;
+
 export interface Options<V> {
   session?: boolean;
-  defaultValue?: V | (() => V);
   serializer?: (value: V) => string;
   deserializer?: (value: string) => V;
 }
 
-const { sessionStorage, localStorage } = globalThis;
+export interface DefaultValueOptions<V> extends Options<V> {
+  defaultValue?: V | (() => V);
+}
 
 /**
  * @function useStorage
@@ -24,7 +27,7 @@ const { sessionStorage, localStorage } = globalThis;
  */
 export default function useStorage<V>(
   key: string,
-  options: PartRequired<Options<V>, 'defaultValue'>
+  options: DefaultValueOptions<V>
 ): [set: (value: V) => void, get: () => V, remove: () => void];
 /**
  * @function useStorage
@@ -34,12 +37,14 @@ export default function useStorage<V>(
  */
 export default function useStorage<V = null>(
   key: string,
-  options?: Omit<Options<V>, 'defaultValue'>
+  options?: Options<V>
 ): [set: (value: V) => void, get: () => V | null, remove: () => void];
 export default function useStorage<V = null>(
   key: string,
-  { session, serializer, deserializer, defaultValue }: Options<V> = {}
+  options: Options<V> | DefaultValueOptions<V> = {}
 ): [set: (value: V) => void, get: () => V | null, remove: () => void] {
+  const { session, serializer, deserializer, defaultValue } = options as DefaultValueOptions<V>;
+
   const storage = useMemo(() => {
     const storage = session ? sessionStorage : localStorage;
 

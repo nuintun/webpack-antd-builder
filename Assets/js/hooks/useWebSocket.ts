@@ -15,6 +15,15 @@ interface Socket<M> {
   disconnect: (code?: number, reason?: string) => void;
 }
 
+function removeWsEvents(ws: WebSocket) {
+  if (ws) {
+    ws.onopen = null;
+    ws.onmessage = null;
+    ws.onerror = null;
+    ws.onclose = null;
+  }
+}
+
 export interface Options<M> {
   manual?: boolean;
   reconnectLimit?: number;
@@ -25,15 +34,6 @@ export interface Options<M> {
   onClose?: (event: CloseEvent) => void;
   onMessage?: (event: MessageEvent<M>) => void;
   onReconnect?: (reconnectTimes: number, reconnectLimit: number) => void;
-}
-
-function removeWsEvents(ws: WebSocket) {
-  if (ws) {
-    ws.onopen = null;
-    ws.onmessage = null;
-    ws.onerror = null;
-    ws.onclose = null;
-  }
 }
 
 /**

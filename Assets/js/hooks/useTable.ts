@@ -44,13 +44,13 @@ interface Refs<I, E> extends PagingRequestRefs<I, E> {
   readonly sorter: Sorter | false;
 }
 
+function serializeField(filed: SorterField): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : filed;
+}
+
 export interface Options<I, T = I> {
   pagination?: PagingOptions;
   transform?: (items: I[]) => T[];
-}
-
-function serializeField(filed: SorterField): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
 /**

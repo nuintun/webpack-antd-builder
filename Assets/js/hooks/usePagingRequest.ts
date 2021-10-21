@@ -8,6 +8,21 @@ import useRequest from './useRequest';
 import usePersistCallback from './usePersistCallback';
 import { Options as RequestOptions } from '~js/utils/request';
 
+type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
+
+interface BaseResponse<I> {
+  // 数据项
+  readonly items?: I[];
+  // 数据总条数
+  readonly total?: number;
+}
+
+const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
+
+export type Query = Search & Partial<Pagination>;
+
+export type Response<I, E> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
+
 export interface Search {
   [name: string]: any;
   [name: number]: any;
@@ -23,24 +38,11 @@ export interface Options extends Omit<RequestOptions, 'body' | 'query' | 'method
   pagination?: Partial<Pagination> | false;
 }
 
-export type Query = Search & Partial<Pagination>;
-
 export interface Refs<I, E> {
   readonly search: Search | false;
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
 }
-
-interface BaseResponse<I> {
-  // 数据项
-  readonly items?: I[];
-  // 数据总条数
-  readonly total?: number;
-}
-
-export type Response<I, E> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
-
-type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
 
 export function setRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, current: V): V {
   return (ref.current = current);
@@ -53,8 +55,6 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
 export function hasQuery<Q>(query: Q | false): query is Q {
   return query !== false;
 }
-
-const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
 /**
  * @function usePagingRequest

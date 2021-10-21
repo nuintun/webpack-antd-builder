@@ -6,15 +6,15 @@ import { useEffect, useRef } from 'react';
 
 import { isBrowser } from '~js/utils/utils';
 
+const defaultFormat = (title: string | undefined, defaultTitle: string): string => {
+  return title ? `${defaultTitle} - ${title}` : defaultTitle;
+};
+
 export interface Options {
   defaultTitle?: string;
   restoreOnUnmount?: boolean;
   format?: (title: string | undefined, defaultTitle: string) => string;
 }
-
-const defaultFormat = (title: string | undefined, defaultTitle: string): string => {
-  return title ? `${defaultTitle} - ${title}` : defaultTitle;
-};
 
 /**
  * @function useTitle
