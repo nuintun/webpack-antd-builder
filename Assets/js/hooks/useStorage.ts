@@ -18,7 +18,7 @@ const { sessionStorage, localStorage } = globalThis;
 
 /**
  * @function useStorage
- * @description 【Hook】本地缓存操作
+ * @description [hook] 本地缓存操作
  * @param key 缓存名称
  * @param options 缓存配置
  */
@@ -28,7 +28,7 @@ export default function useStorage<V>(
 ): [set: (value: V) => void, get: () => V, remove: () => void];
 /**
  * @function useStorage
- * @description 【Hook】使用本地缓存
+ * @description [hook] 使用本地缓存
  * @param key 缓存名称
  * @param options 缓存配置
  */

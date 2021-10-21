@@ -9,7 +9,7 @@ import usePersistCallback from './usePersistCallback';
 
 /**
  * @function useThrottle
- * @description 【Hook】节流函数
+ * @description [hook] 节流函数
  * @param callback 目标回调函数
  * @param delay 延迟的时间
  * @param noTrailing 是否执行尾调用

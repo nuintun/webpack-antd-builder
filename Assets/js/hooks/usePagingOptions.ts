@@ -44,7 +44,7 @@ const normalizePagingOptions = memoizeOne((pageSize: number, opitons: Options = 
 
 /**
  * @function usePagingOptions
- * @description 【Hook】分页处理
+ * @description [hook] 分页处理
  * @param opitons 分页配置
  */
 export default function usePagingOptions(opitons?: Options): GetPagingOptions {

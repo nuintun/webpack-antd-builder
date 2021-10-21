@@ -19,7 +19,7 @@ export interface Options<I, T = I> {
 
 /**
  * @function useList
- * @description 【Hook】列表操作
+ * @description [hook] 列表操作
  * @param url 请求地址
  * @param options 请求配置
  */

@@ -13,7 +13,7 @@ import usePersistCallback from './usePersistCallback';
 
 /**
  * @function useRequest
- * @description 【Hook】请求操作
+ * @description [hook] 请求操作
  * @param delay 加载状态延迟时间
  */
 export default function useRequest(delay?: number): [requesting: boolean, request: typeof request] {

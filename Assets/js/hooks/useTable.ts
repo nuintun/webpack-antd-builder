@@ -55,7 +55,7 @@ function serializeField(filed: SorterField): React.Key {
 
 /**
  * @function useTable
- * @description 【Hook】 表格操作
+ * @description [hook]  表格操作
  * @param url 请求地址
  * @param options 请求配置
  */

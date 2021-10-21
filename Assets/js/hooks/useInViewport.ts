@@ -38,7 +38,7 @@ function isInViewPort(element: HTMLElement | null): boolean {
 
 /**
  * @function useInViewport
- * @description 【Hook】监听指定元素是否可见
+ * @description [hook] 监听指定元素是否可见
  * @param target 监听元素
  * @param defaultVisible 默认是否可见
  */

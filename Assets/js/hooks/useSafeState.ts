@@ -8,7 +8,7 @@ import useIsMounted from './useIsMounted';
 
 /**
  * @function useSafeState
- * @description 【Hook】使用安全状态
+ * @description [hook] 使用安全状态
  */
 export default function useSafeState<S = undefined>(): [
   state: S | undefined,
@@ -16,7 +16,7 @@ export default function useSafeState<S = undefined>(): [
 ];
 /**
  * @function useSafeState
- * @description 【Hook】使用安全状态
+ * @description [hook] 使用安全状态
  * @param initialState 初始状态
  */
 export default function useSafeState<S>(

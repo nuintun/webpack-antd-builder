@@ -23,7 +23,7 @@ export interface Options<V> {
 
 /**
  * @function useControllableValue
- * @description 【Hook】生成同时支持受控和非受控状态的值
+ * @description [hook] 生成同时支持受控和非受控状态的值
  * @param props 组件 Props
  */
 export default function useControllableValue<V>(
@@ -31,7 +31,7 @@ export default function useControllableValue<V>(
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void];
 /**
  * @function useControllableValue
- * @description 【Hook】生成同时支持受控和非受控状态的值
+ * @description [hook] 生成同时支持受控和非受控状态的值
  * @param props 组件 Props
  * @param options 配置选项
  */

@@ -8,7 +8,7 @@ import { isFunction } from '~js/utils/utils';
 
 /**
  * @function createSharedReducer
- * @description 【Hook】生成共享 Reducer
+ * @description [hook] 生成共享 Reducer
  * @param reducer 状态生成器
  */
 export default function createSharedReducer<S>(
@@ -16,7 +16,7 @@ export default function createSharedReducer<S>(
 ): () => [state: S | undefined, dispatch: React.DispatchWithoutAction];
 /**
  * @function createSharedReducer
- * @description 【Hook】生成共享 Reducer
+ * @description [hook] 生成共享 Reducer
  * @param reducer 状态生成器
  */
 export default function createSharedReducer<S, A>(
@@ -24,7 +24,7 @@ export default function createSharedReducer<S, A>(
 ): () => [state: S | undefined, dispatch: React.Dispatch<A>];
 /**
  * @function createSharedReducer
- * @description 【Hook】生成共享 Reducer
+ * @description [hook] 生成共享 Reducer
  * @param reducer 状态生成器
  * @param initialState 初始状态
  */
@@ -34,7 +34,7 @@ export default function createSharedReducer<S>(
 ): () => [state: S, dispatch: React.DispatchWithoutAction];
 /**
  * @function createSharedReducer
- * @description 【Hook】生成共享 Reducer
+ * @description [hook] 生成共享 Reducer
  * @param reducer 状态生成器
  * @param initialState 初始状态
  */

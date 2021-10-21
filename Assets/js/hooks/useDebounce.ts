@@ -9,7 +9,7 @@ import usePersistCallback from './usePersistCallback';
 
 /**
  * @function useDebounce
- * @description 【Hook】去抖函数
+ * @description [hook] 去抖函数
  * @param callback 目标回调函数
  * @param delay 延迟的时间
  * @param atBegin 是否前置调用

@@ -6,7 +6,7 @@ import React, { createContext, useContext } from 'react';
 
 /**
  * @function createAuthorization
- * @description 【Hook】权限验证
+ * @description [hook] 权限验证
  * @param interceptor 权限验证拦截器
  */
 export default function createAuthorization<A, T>(

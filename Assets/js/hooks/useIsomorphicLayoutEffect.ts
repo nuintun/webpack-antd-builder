@@ -8,7 +8,7 @@ import { isBrowser } from '~js/utils/utils';
 
 /**
  * @function useIsomorphicLayoutEffect
- * @description 【Hook】使用同构 useLayoutEffect，防止 SSR 模式报错
+ * @description [hook] 使用同构 useLayoutEffect，防止 SSR 模式报错
  */
 const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 

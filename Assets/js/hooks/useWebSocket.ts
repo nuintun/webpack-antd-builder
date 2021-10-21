@@ -38,7 +38,7 @@ function removeWsEvents(ws: WebSocket) {
 
 /**
  * @function useWebSocket
- * @description 【Hook】长连接 WebSocket 操作
+ * @description [hook] 长连接 WebSocket 操作
  * @param url 链接地址
  * @param options 配置参数
  */

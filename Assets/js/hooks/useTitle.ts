@@ -18,7 +18,7 @@ const defaultFormat = (title: string | undefined, defaultTitle: string): string 
 
 /**
  * @function useTitle
- * @description 【Hook】更改页面标题
+ * @description [hook] 更改页面标题
  * @param title 页面标题
  * @param options 配置参数
  */

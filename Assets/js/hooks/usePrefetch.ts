@@ -16,7 +16,7 @@ export interface Options extends RequestOptions {
 
 /**
  * @function usePrefetch
- * @description 【Hook】预加载
+ * @description [hook] 预加载
  * @param url 请求地址
  * @param options 请求配置
  */

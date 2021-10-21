@@ -8,7 +8,7 @@ import { isFunction } from '~js/utils/utils';
 
 /**
  * @function createSharedState
- * @description 【Hook】生成共享状态
+ * @description [hook] 生成共享状态
  */
 export default function createSharedState<S = undefined>(): () => [
   state: S | undefined,
@@ -16,7 +16,7 @@ export default function createSharedState<S = undefined>(): () => [
 ];
 /**
  * @function createSharedState
- * @description 【Hook】生成共享状态
+ * @description [hook] 生成共享状态
  * @param initialState 初始状态
  */
 export default function createSharedState<S>(

@@ -17,7 +17,7 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
 
 /**
  * @function useSubmit
- * @description 【Hook】提交操作
+ * @description [hook] 提交操作
  * @param url 提交地址
  * @param options 请求配置
  */
