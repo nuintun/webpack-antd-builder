@@ -2,6 +2,8 @@
  * @module useRequest
  */
 
+import { useRef } from 'react';
+
 import { History } from 'history';
 import * as mime from '~js/utils/mime';
 import useIsMounted from './useIsMounted';
@@ -9,7 +11,6 @@ import useLazyState from './useLazyState';
 import { useHistory } from 'react-router-dom';
 import usePersistCallback from './usePersistCallback';
 import request, { Options as RequestOptions } from '~js/utils/request';
-import { useRef } from 'react';
 
 /**
  * @function onUnauthorizedHandler
