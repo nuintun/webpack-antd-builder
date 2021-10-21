@@ -5,19 +5,26 @@
 import { useCallback } from 'react';
 
 import { PaginationProps } from 'antd';
+import usePagingRequest, {
+  hasQuery,
+  Options as RequestOptions,
+  Pagination as RequestPagination,
+  Refs,
+  Response,
+  TransformOptions as RequestTransformOptions
+} from './usePagingRequest';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
-import usePagingRequest, { hasQuery, Options as RequestOptions, Refs, Response } from './usePagingRequest';
 
 type Pagination = PaginationProps | false;
 
 type OnChange = NonNullable<PaginationProps['onChange']>;
 
-export interface Options {
-  pagination?: PagingOptions;
+export interface Options extends Omit<RequestOptions, 'search' | 'pagination'> {
+  pagination?: (PagingOptions & Partial<RequestPagination>) | false;
 }
 
-export interface TransformOptions<I, T> extends Options {
-  transform: (items: I[]) => T[];
+export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, T>, 'search' | 'pagination'> {
+  pagination?: (PagingOptions & Partial<RequestPagination>) | false;
 }
 
 /**
@@ -62,9 +69,8 @@ export default function useList<I, E, T>(
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ] {
-  const { transform } = options as TransformOptions<I, T>;
-  const getPagingOptions = usePagingOptions(options.pagination);
-  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(url, transform);
+  const resolvePagingOptions = usePagingOptions(options.pagination);
+  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(url, options as TransformOptions<I, T>);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
     fetch({ pagination: { page, pageSize } });
@@ -84,7 +90,7 @@ export default function useList<I, E, T>(
       onChange,
       current: page,
       onShowSizeChange: onChange,
-      ...getPagingOptions(pageSize)
+      ...resolvePagingOptions(pageSize)
     };
   }
 

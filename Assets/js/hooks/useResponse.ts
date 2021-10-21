@@ -8,7 +8,7 @@ import { message } from 'antd';
 import usePersistCallback from './usePersistCallback';
 import { Options as RequestOptions, RequestError } from '~js/utils/request';
 
-type Fetch = (options?: RequestOptions) => void;
+type Fetch = (options?: RequestOptions) => Promise<void>;
 
 type Request = <R>(url: string, options?: RequestOptions) => Promise<R>;
 
@@ -21,7 +21,7 @@ function onErrorHandler(error: RequestError) {
   message.error(error.message);
 }
 
-export interface Options {
+export interface Options extends RequestOptions {
   onError?: (error: RequestError) => void;
 }
 
@@ -45,7 +45,7 @@ export default function useResponse<R>(
  * @description [hook]
  * @param url 请求地址
  * @param fetch 发送请求工厂函数
- * @param transform 请求结果转换函数
+ * @param options 请求结果转换函数
  */
 export default function useResponse<R, T>(
   url: string,
@@ -58,10 +58,10 @@ export default function useResponse<R, T>(
   options: Options | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch] {
   const [response, setResponse] = useState<R | T>();
-  const { transform, onError = onErrorHandler } = options as TransformOptions<R, T>;
+  const { transform, onError = onErrorHandler, ...restOptions } = options as TransformOptions<R, T>;
 
   const fetch = usePersistCallback<Fetch>(options => {
-    request<R>(url, options)
+    return request<R>(url, { ...restOptions, ...options })
       .then(response => {
         setResponse(transform ? transform(response) : response);
       })

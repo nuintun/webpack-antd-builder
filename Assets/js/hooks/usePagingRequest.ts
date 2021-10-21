@@ -38,10 +38,18 @@ export interface Options extends Omit<RequestOptions, 'body' | 'query' | 'method
   pagination?: Partial<Pagination> | false;
 }
 
+export interface TransformOptions<I, T> extends Options {
+  transform: (items: I[]) => T[];
+}
+
 export interface Refs<I, E> {
   readonly search: Search | false;
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
+}
+
+export function hasQuery<Q>(query: Q | false): query is Q {
+  return query !== false;
 }
 
 export function setRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, current: V): V {
@@ -52,32 +60,36 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
   return setRef(ref, value ?? ref.current);
 }
 
-export function hasQuery<Q>(query: Q | false): query is Q {
-  return query !== false;
-}
-
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
  * @param url 请求地址
- * @param transform 数据转换函数
+ * @param options 请求配置
  */
 export default function usePagingRequest<I, E>(
-  url: string
+  url: string,
+  options?: Options
 ): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
+/**
+ * @function usePagingRequest
+ * @description [hook] 分页请求
+ * @param url 请求地址
+ * @param options
+ */
 export default function usePagingRequest<I, E, T>(
   url: string,
-  transform: (items: I[]) => T[]
+  options: TransformOptions<I, T>
 ): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
-  transform?: (items: I[]) => T[]
+  options: Options | TransformOptions<I, T> = {}
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const [loading, request] = useRequest();
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
+  const { transform, ...restOptions } = options as TransformOptions<I, T>;
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
     const query: Query = { ...updateRef(searchRef, { ...search }) };
@@ -109,7 +121,7 @@ export default function usePagingRequest<I, E, T>(
     }
 
     try {
-      setRef(responseRef, await request<Response<I, E>>(url, { ...options, query }));
+      setRef(responseRef, await request<Response<I, E>>(url, { ...restOptions, ...options, query }));
     } catch (error) {
       setDataSource([]);
 

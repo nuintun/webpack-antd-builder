@@ -4,16 +4,18 @@
 
 import React, { useCallback, useMemo, useRef } from 'react';
 
+import { message, TableProps } from 'antd';
 import usePagingRequest, {
   hasQuery,
-  Options as PagingRequestOptions,
-  Query as PagingRequestQuery,
-  Refs as PagingRequestRefs,
+  Options as RequestOptions,
+  Pagination as RequestPagination,
+  Query as RequestQuery,
+  Refs as RequestRefs,
   Response,
   Search,
+  TransformOptions as RequestTransformOptions,
   updateRef
 } from './usePagingRequest';
-import { message, TableProps } from 'antd';
 import usePersistCallback from './usePersistCallback';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
@@ -25,7 +27,7 @@ type Pagination<I> = TableProps<I>['pagination'];
 
 type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
 
-type Query = Filter & Partial<Sorter> & PagingRequestQuery;
+type Query = Filter & Partial<Sorter> & RequestQuery;
 
 type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
 
@@ -34,12 +36,7 @@ interface Sorter {
   orderType: ('ascend' | 'descend')[];
 }
 
-interface RequestOptions extends PagingRequestOptions {
-  filter?: Filter | false;
-  sorter?: Sorter | false;
-}
-
-interface Refs<I, E> extends PagingRequestRefs<I, E> {
+interface Refs<I, E> extends RequestRefs<I, E> {
   readonly filter: Filter | false;
   readonly sorter: Sorter | false;
 }
@@ -48,53 +45,58 @@ function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
-export interface Options {
-  pagination?: PagingOptions;
+interface FetchOptions extends Omit<RequestOptions, 'transform'> {
+  filter?: Filter | false;
+  sorter?: Sorter | false;
 }
 
-export interface TransformOptions<I, T> extends Options {
-  transform: (items: I[]) => T[];
+export interface Options extends Omit<RequestOptions, 'search' | 'pagination'> {
+  pagination?: (PagingOptions & Partial<RequestPagination>) | false;
+}
+
+export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, T>, 'search' | 'pagination'> {
+  pagination?: (PagingOptions & Partial<RequestPagination>) | false;
 }
 
 /**
  * @function useTable
- * @description [hook]  表格操作
+ * @description [hook] 表格操作
  * @param url 请求地址
  * @param options 请求配置
  */
 export default function useTable<I, E>(
   url: string,
   options?: Options
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [props: DefaultTableProps<I>, fetch: (options?: FetchOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 /**
  * @function useTable
- * @description [hook]  表格操作
+ * @description [hook] 表格操作
  * @param url 请求地址
  * @param options 请求配置
  */
 export default function useTable<I, E, T>(
   url: string,
   options: TransformOptions<I, T>
-): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [props: DefaultTableProps<T>, fetch: (options?: FetchOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {}
-): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+): [props: DefaultTableProps<I | T>, fetch: (options?: FetchOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
-  const { transform } = options as TransformOptions<I, T>;
-  const getPagingOptions = usePagingOptions(options.pagination);
-  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, transform);
+  const resolvePagingOptions = usePagingOptions(options.pagination);
+  const { transform, ...restOptions } = options as TransformOptions<I, T>;
+  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, options as TransformOptions<I, T>);
 
-  const fetch = usePersistCallback((options: RequestOptions = {}) => {
+  const fetch = usePersistCallback((options: FetchOptions = {}) => {
     const search: Query = {
       ...updateRef(searchRef, options.search),
       ...updateRef(filterRef, options.filter),
       ...updateRef(sorterRef, options.sorter)
     };
 
-    return request({ ...options, search, pagination: options.pagination });
+    return request({ ...restOptions, ...options, search, pagination: options.pagination });
   });
 
   const onChange = useCallback<OnChange<I | T>>(async (pagination, filter, sorter, { action }) => {
@@ -140,7 +142,7 @@ export default function useTable<I, E, T>(
       total,
       pageSize,
       current: page,
-      ...getPagingOptions(pageSize)
+      ...resolvePagingOptions(pageSize)
     };
   }
 
