@@ -9,6 +9,7 @@ import useLazyState from './useLazyState';
 import { useHistory } from 'react-router-dom';
 import usePersistCallback from './usePersistCallback';
 import request, { Options as RequestOptions } from '~js/utils/request';
+import { useRef } from 'react';
 
 /**
  * @function onUnauthorizedHandler
@@ -32,6 +33,7 @@ export default function useRequest<S>(
   delay?: number,
   onUnauthorized: (history: History<S>) => void = onUnauthorizedHandler
 ): [fetching: boolean, fetch: <R>(input: string, options?: Options<S>) => Promise<R>] {
+  const retainRef = useRef(0);
   const history = useHistory<S>();
   const isMounted = useIsMounted();
   const [fetching, setFetching] = useLazyState(false, delay);
@@ -39,6 +41,8 @@ export default function useRequest<S>(
   const fetch = usePersistCallback(<R>(input: string, options: Options<S> = {}): Promise<R> => {
     return new Promise<R>(async (resolve, reject) => {
       setFetching(true);
+
+      ++retainRef.current;
 
       const onUnauthorizedHandler = () => {
         if (options.onUnauthorized) {
@@ -62,7 +66,9 @@ export default function useRequest<S>(
         isMounted() && reject(error);
       }
 
-      setFetching(false, true);
+      if (--retainRef.current <= 0) {
+        setFetching(false, true);
+      }
     });
   });
 
