@@ -10,7 +10,7 @@ import useResponse, { Options as ResponseOptions, TransformOptions as TransformR
 
 type Refetch = (options?: RequestOptions) => Promise<void>;
 
-export interface Options extends RequestOptions, ResponseOptions {
+export interface Options extends ResponseOptions {
   delay?: number;
 }
 
