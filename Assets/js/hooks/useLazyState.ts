@@ -16,16 +16,12 @@ import usePersistCallback from './usePersistCallback';
 export default function useLazyState<S>(
   initialState: S | (() => S),
   delay: number = 128
-): [state: S, setLazyState: (value: React.SetStateAction<S>, immediate?: boolean) => void, clearLazyState: () => void] {
+): [state: S, setLazyState: (value: React.SetStateAction<S>, immediate?: boolean) => void] {
   const timerRef = useRef<Timeout>();
   const [state, setState] = useSafeState(initialState);
 
-  const clearLazyState = useCallback(() => {
-    clearTimeout(timerRef.current);
-  }, []);
-
   const setLazyState = usePersistCallback((value: React.SetStateAction<S>, immediate?: boolean): void => {
-    clearLazyState();
+    clearTimeout(timerRef.current);
 
     if (immediate || delay <= 0) {
       setState(value);
@@ -36,5 +32,5 @@ export default function useLazyState<S>(
     }
   });
 
-  return [state, setLazyState, clearLazyState];
+  return [state, setLazyState];
 }

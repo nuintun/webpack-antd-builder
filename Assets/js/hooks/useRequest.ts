@@ -34,7 +34,7 @@ export default function useRequest<S>(
 ): [fetching: boolean, fetch: <R>(input: string, options?: Options<S>) => Promise<R>] {
   const history = useHistory<S>();
   const isMounted = useIsMounted();
-  const [fetching, setFetching, clearFetching] = useLazyState(false, delay);
+  const [fetching, setFetching] = useLazyState(false, delay);
 
   const fetch = usePersistCallback(<R>(input: string, options: Options<S> = {}): Promise<R> => {
     return new Promise<R>(async (resolve, reject) => {
@@ -62,11 +62,7 @@ export default function useRequest<S>(
         isMounted() && reject(error);
       }
 
-      if (!fetching) {
-        clearFetching();
-      } else {
-        setFetching(false, true);
-      }
+      setFetching(false, true);
     });
   });
 
