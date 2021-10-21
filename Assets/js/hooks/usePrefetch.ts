@@ -42,8 +42,7 @@ export default function usePrefetch<R, T>(
   url: string,
   options: Options | TransformOptions<R, T> = {}
 ): [fetching: boolean, response: R | T | undefined, refetch: Refetch] {
-  const { delay } = options;
-  const [fetching, request] = useRequest(delay);
+  const [fetching, request] = useRequest(options.delay, options);
   const [response, refetch] = useResponse<R, T>(url, request, options as TransformOptions<R, T>);
 
   useEffect(() => {

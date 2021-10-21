@@ -7,7 +7,7 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import { message, TableProps } from 'antd';
 import usePagingRequest, {
   hasQuery,
-  Options as RequestOptions,
+  Options as PagingRequestOptions,
   Pagination as RequestPagination,
   Query as RequestQuery,
   Refs as RequestRefs,
@@ -25,9 +25,9 @@ type SorterField = React.Key | React.Key[];
 
 type Pagination<I> = TableProps<I>['pagination'];
 
-type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
-
 type Query = Filter & Partial<Sorter> & RequestQuery;
+
+type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
 
 type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
 
@@ -45,12 +45,12 @@ function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
-interface FetchOptions extends Omit<RequestOptions, 'transform'> {
+interface RequestOptions extends Omit<PagingRequestOptions, 'transform'> {
   filter?: Filter | false;
   sorter?: Sorter | false;
 }
 
-export interface Options extends Omit<RequestOptions, 'search' | 'pagination'> {
+export interface Options extends Omit<PagingRequestOptions, 'search' | 'pagination'> {
   pagination?: (PagingOptions & Partial<RequestPagination>) | false;
 }
 
@@ -67,7 +67,7 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
 export default function useTable<I, E>(
   url: string,
   options?: Options
-): [props: DefaultTableProps<I>, fetch: (options?: FetchOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -77,11 +77,11 @@ export default function useTable<I, E>(
 export default function useTable<I, E, T>(
   url: string,
   options: TransformOptions<I, T>
-): [props: DefaultTableProps<T>, fetch: (options?: FetchOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {}
-): [props: DefaultTableProps<I | T>, fetch: (options?: FetchOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
@@ -89,7 +89,7 @@ export default function useTable<I, E, T>(
   const { transform, ...restOptions } = options as TransformOptions<I, T>;
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, options as TransformOptions<I, T>);
 
-  const fetch = usePersistCallback((options: FetchOptions = {}) => {
+  const fetch = usePersistCallback((options: RequestOptions = {}) => {
     const search: Query = {
       ...updateRef(searchRef, options.search),
       ...updateRef(filterRef, options.filter),

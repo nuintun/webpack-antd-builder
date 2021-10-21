@@ -32,8 +32,9 @@ export interface Options<S> extends Omit<RequestOptions, 'onUnauthorized'> {
  */
 export default function useRequest<S>(
   delay?: number,
-  onUnauthorized: (history: History<S>) => void = onUnauthorizedHandler
+  optinos: Options<S> = {}
 ): [fetching: boolean, fetch: <R>(input: string, options?: Options<S>) => Promise<R>] {
+  const defaults = optinos;
   const retainRef = useRef(0);
   const history = useHistory<S>();
   const isMounted = useIsMounted();
@@ -45,24 +46,22 @@ export default function useRequest<S>(
 
       ++retainRef.current;
 
-      const onUnauthorizedHandler = () => {
+      const onUnauthorized = () => {
         if (options.onUnauthorized) {
           options.onUnauthorized(history);
+        } else if (defaults.onUnauthorized) {
+          defaults.onUnauthorized(history);
         } else {
-          onUnauthorized(history);
+          onUnauthorizedHandler(history);
         }
       };
 
       const headers = { ...mime.json, ...options.headers };
 
       try {
-        const payload = await request<R>(input, {
-          ...options,
-          headers,
-          onUnauthorized: onUnauthorizedHandler
-        });
+        const response = await request<R>(input, { ...defaults, ...options, headers, onUnauthorized });
 
-        isMounted() && resolve(payload);
+        isMounted() && resolve(response);
       } catch (error) {
         isMounted() && reject(error);
       }

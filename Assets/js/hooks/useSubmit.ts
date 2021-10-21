@@ -25,9 +25,9 @@ export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {}
 ): [submitting: boolean, onSubmit: (values: V) => void] {
-  const { delay, onError, method = 'POST', transform, onSuccess, onComplete } = options;
+  const { onError, method = 'POST', transform, onSuccess, onComplete } = options;
 
-  const [submitting, request] = useRequest(delay);
+  const [submitting, request] = useRequest(options.delay, options);
 
   const onSubmit = usePersistCallback(async (values: V) => {
     const params = transform ? transform(values) : values;

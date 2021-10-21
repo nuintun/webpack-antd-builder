@@ -34,11 +34,13 @@ export interface Pagination {
 }
 
 export interface Options extends Omit<RequestOptions, 'body' | 'query' | 'method'> {
+  delay?: number;
   search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }
 
 export interface TransformOptions<I, T> extends Options {
+  delay?: number;
   transform: (items: I[]) => T[];
 }
 
@@ -84,12 +86,12 @@ export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {}
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
-  const [loading, request] = useRequest();
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
+  const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
+  const [loading, request] = useRequest(options.delay, options);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
-  const { transform, ...restOptions } = options as TransformOptions<I, T>;
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
     const query: Query = { ...updateRef(searchRef, { ...search }) };
@@ -121,7 +123,7 @@ export default function usePagingRequest<I, E, T>(
     }
 
     try {
-      setRef(responseRef, await request<Response<I, E>>(url, { ...restOptions, ...options, query }));
+      setRef(responseRef, await request<Response<I, E>>(url, { ...options, query }));
     } catch (error) {
       setDataSource([]);
 
