@@ -62,14 +62,21 @@ export function hasQuery<Q>(query: Q | false): query is Q {
  * @param url 请求地址
  * @param transform 数据转换函数
  */
-export default function usePagingRequest<I, E extends object = {}, T = I>(
+export default function usePagingRequest<I, E>(
+  url: string
+): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
+export default function usePagingRequest<I, E, T>(
   url: string,
-  transform: (items: I[]) => T[] = items => items as unknown as T[]
-): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+  transform: (items: I[]) => T[]
+): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
+export default function usePagingRequest<I, E, T>(
+  url: string,
+  transform?: (items: I[]) => T[]
+): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const [loading, request] = useRequest();
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
-  const [dataSource, setDataSource] = useState<T[]>([]);
+  const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
@@ -123,7 +130,7 @@ export default function usePagingRequest<I, E extends object = {}, T = I>(
       }
     }
 
-    setDataSource(transform(dataSource));
+    setDataSource(transform ? transform(dataSource) : dataSource);
 
     return responseRef.current;
   });

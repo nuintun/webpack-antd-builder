@@ -12,9 +12,12 @@ type Pagination = PaginationProps | false;
 
 type OnChange = NonNullable<PaginationProps['onChange']>;
 
-export interface Options<I, T = I> {
+export interface Options {
   pagination?: PagingOptions;
-  transform?: (items: I[]) => T[];
+}
+
+export interface TransformOptions<I, T> extends Options {
+  transform: (items: I[]) => T[];
 }
 
 /**
@@ -23,18 +26,45 @@ export interface Options<I, T = I> {
  * @param url 请求地址
  * @param options 请求配置
  */
-export default function useList<I, E extends object = {}, T = I>(
+export default function useList<I, E>(
   url: string,
-  options: Options<I, T> = {}
+  options?: Options
+): [
+  loading: boolean,
+  dataSource: I[],
+  fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
+  pagination: PaginationProps | false,
+  refs: Refs<I, E>
+];
+/**
+ * @function useList
+ * @description [hook] 列表操作
+ * @param url 请求地址
+ * @param options 请求配置
+ */
+export default function useList<I, E, T>(
+  url: string,
+  options: TransformOptions<I, T>
 ): [
   loading: boolean,
   dataSource: T[],
   fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
   pagination: PaginationProps | false,
   refs: Refs<I, E>
+];
+export default function useList<I, E, T>(
+  url: string,
+  options: Options | TransformOptions<I, T> = {}
+): [
+  loading: boolean,
+  dataSource: I[] | T[],
+  fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
+  pagination: PaginationProps | false,
+  refs: Refs<I, E>
 ] {
+  const { transform } = options as TransformOptions<I, T>;
   const getPagingOptions = usePagingOptions(options.pagination);
-  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(url, options.transform);
+  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(url, transform);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
     fetch({ pagination: { page, pageSize } });

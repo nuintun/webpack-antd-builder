@@ -48,9 +48,12 @@ function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
-export interface Options<I, T = I> {
+export interface Options {
   pagination?: PagingOptions;
-  transform?: (items: I[]) => T[];
+}
+
+export interface TransformOptions<I, T> extends Options {
+  transform: (items: I[]) => T[];
 }
 
 /**
@@ -59,15 +62,30 @@ export interface Options<I, T = I> {
  * @param url 请求地址
  * @param options 请求配置
  */
-export default function useTable<I, E extends object = {}, T = I>(
+export default function useTable<I, E>(
   url: string,
-  options: Options<I, T> = {}
-): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+  options?: Options
+): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+/**
+ * @function useTable
+ * @description [hook]  表格操作
+ * @param url 请求地址
+ * @param options 请求配置
+ */
+export default function useTable<I, E, T>(
+  url: string,
+  options: TransformOptions<I, T>
+): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+export default function useTable<I, E, T>(
+  url: string,
+  options: Options | TransformOptions<I, T> = {}
+): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
+  const { transform } = options as TransformOptions<I, T>;
   const getPagingOptions = usePagingOptions(options.pagination);
-  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, options.transform);
+  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, transform);
 
   const fetch = usePersistCallback((options: RequestOptions = {}) => {
     const search: Query = {
@@ -79,7 +97,7 @@ export default function useTable<I, E extends object = {}, T = I>(
     return request({ ...options, search, pagination: options.pagination });
   });
 
-  const onChange = useCallback<OnChange<T>>(async (pagination, filter, sorter, { action }) => {
+  const onChange = useCallback<OnChange<I | T>>(async (pagination, filter, sorter, { action }) => {
     try {
       switch (action) {
         case 'filter':
