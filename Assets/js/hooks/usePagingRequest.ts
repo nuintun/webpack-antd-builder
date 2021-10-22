@@ -21,7 +21,7 @@ const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
 export type Query = Search & Partial<Pagination>;
 
-export type Response<I, E> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
+export type Response<I, E = {}> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
 
 export interface Search {
   [name: string]: any;
@@ -44,7 +44,7 @@ export interface TransformOptions<I, T> extends Options {
   transform: (items: I[]) => T[];
 }
 
-export interface Refs<I, E> {
+export interface Refs<I, E = {}> {
   readonly search: Search | false;
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
@@ -62,6 +62,16 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
   return setRef(ref, value ?? ref.current);
 }
 
+/**
+ * @function usePagingRequest
+ * @description [hook] 分页请求
+ * @param url 请求地址
+ * @param options 请求配置
+ */
+export default function usePagingRequest<I>(
+  url: string,
+  options?: Options
+): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I>>, refs: Refs<I>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求

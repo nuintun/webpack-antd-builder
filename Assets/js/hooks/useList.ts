@@ -33,6 +33,22 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  * @param url 请求地址
  * @param options 请求配置
  */
+export default function useList<I>(
+  url: string,
+  options?: Options
+): [
+  loading: boolean,
+  dataSource: I[],
+  fetch: (options?: RequestOptions) => Promise<Response<I>>,
+  pagination: PaginationProps | false,
+  refs: Refs<I>
+];
+/**
+ * @function useList
+ * @description [hook] 列表操作
+ * @param url 请求地址
+ * @param options 请求配置
+ */
 export default function useList<I, E = {}>(
   url: string,
   options?: Options

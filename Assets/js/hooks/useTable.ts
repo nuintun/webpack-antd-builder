@@ -36,7 +36,7 @@ interface Sorter {
   orderType: ('ascend' | 'descend')[];
 }
 
-interface Refs<I, E> extends RequestRefs<I, E> {
+interface Refs<I, E = {}> extends RequestRefs<I, E> {
   readonly filter: Filter | false;
   readonly sorter: Sorter | false;
 }
@@ -58,6 +58,16 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
   pagination?: (PagingOptions & Partial<RequestPagination>) | false;
 }
 
+/**
+ * @function useTable
+ * @description [hook] 表格操作
+ * @param url 请求地址
+ * @param options 请求配置
+ */
+export default function useTable<I>(
+  url: string,
+  options?: Options
+): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I>>, refs: Refs<I>];
 /**
  * @function useTable
  * @description [hook] 表格操作
