@@ -9,7 +9,7 @@ import { Options as RequestOptions, RequestError } from '~js/utils/request';
 
 export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
   delay?: number;
-  transform?: (values: V) => any;
+  normalize?: (values: V) => any;
   onComplete?: (values: V) => void;
   onSuccess?: (response: R, values: V) => void;
   onError?: (error: RequestError, values: V) => void;
@@ -25,12 +25,12 @@ export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {}
 ): [submitting: boolean, onSubmit: (values: V) => void] {
-  const { onError, method = 'POST', transform, onSuccess, onComplete } = options;
+  const { onError, method = 'POST', normalize, onSuccess, onComplete } = options;
 
   const [submitting, request] = useRequest(options.delay, options);
 
   const onSubmit = usePersistCallback(async (values: V) => {
-    const params = transform ? transform(values) : values;
+    const params = normalize ? normalize(values) : values;
     const requestOptions: RequestOptions = { ...options, method };
 
     if (/^(?:GET|HEAD)$/i.test(method)) {

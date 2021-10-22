@@ -4,7 +4,7 @@ import useSubmit, { Options } from '~js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '~js/components/FlexDrawer';
 
-type SubmitPicked = 'query' | 'method' | 'notify' | 'transform' | 'onError' | 'onSuccess' | 'onComplete';
+type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
 type FormPicked = 'name' | 'size' | 'colon' | 'layout' | 'preserve' | 'labelAlign' | 'requiredMark' | 'initialValues';
 type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterVisibleChange';
 
@@ -51,7 +51,7 @@ function FormDrawer<V, R>({
   onError,
   children,
   placement,
-  transform,
+  normalize,
   onSuccess,
   onComplete,
   requestInit,
@@ -71,7 +71,7 @@ function FormDrawer<V, R>({
     method,
     notify,
     onError,
-    transform,
+    normalize,
     onComplete,
     onSuccess(response: R, values: V) {
       setVisible(false);
