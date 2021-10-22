@@ -64,7 +64,7 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  * @param url 请求地址
  * @param options 请求配置
  */
-export default function useTable<I, E>(
+export default function useTable<I, E = {}>(
   url: string,
   options?: Options
 ): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];

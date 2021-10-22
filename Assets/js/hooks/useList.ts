@@ -33,7 +33,7 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  * @param url 请求地址
  * @param options 请求配置
  */
-export default function useList<I, E>(
+export default function useList<I, E = {}>(
   url: string,
   options?: Options
 ): [
