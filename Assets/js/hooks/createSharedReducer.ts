@@ -47,7 +47,6 @@ export default function createSharedReducer<S, A>(
   initialState?: S | (() => S)
 ): () => [state: S | undefined, dispatch: React.Dispatch<A>] {
   let initialized = false;
-
   let sharedState: S | undefined;
 
   const getInitialState = (): S | undefined => {

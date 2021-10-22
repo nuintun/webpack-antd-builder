@@ -2,7 +2,7 @@
  * @module useResponse
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { message } from 'antd';
 import usePersistCallback from './usePersistCallback';
@@ -22,6 +22,7 @@ function onErrorHandler(error: RequestError) {
 }
 
 export interface Options extends RequestOptions {
+  prefetch?: boolean;
   onError?: (error: RequestError) => void;
 }
 
@@ -58,15 +59,20 @@ export default function useResponse<R, T>(
   options: Options | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch] {
   const [response, setResponse] = useState<R | T>();
-  const { transform, onError = onErrorHandler, ...restOptions } = options as TransformOptions<R, T>;
+  const defaults = options as TransformOptions<R, T>;
+  const { prefetch, transform, onError = onErrorHandler } = defaults;
 
   const fetch = usePersistCallback<Fetch>(options => {
-    return request<R>(url, { ...restOptions, ...options })
+    return request<R>(url, { ...defaults, ...options })
       .then(response => {
         setResponse(transform ? transform(response) : response);
       })
       .catch(onError);
   });
+
+  useEffect(() => {
+    prefetch && fetch();
+  }, []);
 
   return [response, fetch];
 }

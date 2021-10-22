@@ -2,19 +2,17 @@
  * @module usePrefetch
  */
 
-import { useEffect } from 'react';
-
 import useRequest from './useRequest';
 import { Options as RequestOptions } from '~js/utils/request';
 import useResponse, { Options as ResponseOptions, TransformOptions as TransformResponseOptions } from './useResponse';
 
 type Refetch = (options?: RequestOptions) => Promise<void>;
 
-export interface Options extends ResponseOptions {
+export interface Options extends Omit<ResponseOptions, 'prefetch'> {
   delay?: number;
 }
 
-export interface TransformOptions<R, T> extends TransformResponseOptions<R, T> {
+export interface TransformOptions<R, T> extends Omit<TransformResponseOptions<R, T>, 'prefetch'> {
   delay?: number;
 }
 
@@ -43,11 +41,7 @@ export default function usePrefetch<R, T>(
   options: Options | TransformOptions<R, T> = {}
 ): [fetching: boolean, response: R | T | undefined, refetch: Refetch] {
   const [fetching, request] = useRequest(options.delay, options);
-  const [response, refetch] = useResponse<R, T>(url, request, options as TransformOptions<R, T>);
-
-  useEffect(() => {
-    refetch();
-  }, []);
+  const [response, refetch] = useResponse<R, T>(url, request, { ...(options as TransformOptions<R, T>), prefetch: true });
 
   return [fetching, response, refetch];
 }

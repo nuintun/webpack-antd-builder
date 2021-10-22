@@ -5,6 +5,7 @@
 import React, { useRef } from 'react';
 
 import useSafeState from './useSafeState';
+import { isFunction } from '~js/utils/utils';
 import usePersistCallback from './usePersistCallback';
 
 /**
@@ -23,12 +24,16 @@ export default function useLazyState<S>(
   const setLazyState = usePersistCallback((value: React.SetStateAction<S>, immediate?: boolean): void => {
     clearTimeout(timerRef.current);
 
-    if (immediate || delay <= 0) {
-      setState(value);
-    } else {
-      timerRef.current = setTimeout(() => {
-        setState(value);
-      }, delay);
+    const nextState = isFunction(value) ? value(state) : value;
+
+    if (nextState !== state) {
+      if (immediate || delay <= 0) {
+        setState(nextState);
+      } else {
+        timerRef.current = setTimeout(() => {
+          setState(nextState);
+        }, delay);
+      }
     }
   });
 

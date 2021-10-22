@@ -26,7 +26,6 @@ export default function createSharedState<S = undefined>(
   initialState?: S | (() => S)
 ): () => [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
   let initialized = false;
-
   let sharedState: S | undefined;
 
   const getInitialState = (): S | undefined => {
