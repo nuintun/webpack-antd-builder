@@ -29,7 +29,8 @@ export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
 /**
  * @function useRequest
  * @description [hook] 请求操作
- * @param delay 加载状态延迟时间
+ * @param initialFetchingState 初始加载状态
+ * @param optinos 请求配置
  */
 export default function useRequest(
   initialFetchingState: boolean | (() => boolean) = true,

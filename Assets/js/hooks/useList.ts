@@ -32,6 +32,7 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  * @description [hook] 列表操作
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useList<I>(
   url: string,
@@ -49,6 +50,7 @@ export default function useList<I>(
  * @description [hook] 列表操作
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useList<I, E>(
   url: string,
@@ -66,6 +68,7 @@ export default function useList<I, E>(
  * @description [hook] 列表操作
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useList<I, E, T>(
   url: string,

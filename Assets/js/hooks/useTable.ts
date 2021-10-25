@@ -63,6 +63,7 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  * @description [hook] 表格操作
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useTable<I>(
   url: string,
@@ -74,6 +75,7 @@ export default function useTable<I>(
  * @description [hook] 表格操作
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useTable<I, E>(
   url: string,
@@ -85,6 +87,7 @@ export default function useTable<I, E>(
  * @description [hook] 表格操作
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useTable<I, E, T>(
   url: string,

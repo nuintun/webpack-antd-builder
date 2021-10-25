@@ -16,12 +16,26 @@ import usePersistCallback from './usePersistCallback';
  */
 export default function useLazyState<S>(
   initialState: S | (() => S),
+  delay?: number
+): [state: S, setLazyState: (value: React.SetStateAction<S>, immediate?: boolean) => void];
+/**
+ * @function useLazyState
+ * @description [hook] 使用延时状态，小于指定实际时不会更新状态
+ * @param initialState 默认状态
+ * @param delay 延迟时间
+ */
+export default function useLazyState<S = undefined>(
+  initialState?: S | (() => S),
+  delay?: number
+): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void];
+export default function useLazyState<S = undefined>(
+  initialState?: S | (() => S),
   delay: number = 128
-): [state: S, setLazyState: (value: React.SetStateAction<S>, immediate?: boolean) => void] {
+): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void] {
   const timerRef = useRef<Timeout>();
   const [state, setState] = useSafeState(initialState);
 
-  const setLazyState = usePersistCallback((value: React.SetStateAction<S>, immediate?: boolean): void => {
+  const setLazyState = usePersistCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
     clearTimeout(timerRef.current);
 
     const nextState = isFunction(value) ? value(state) : value;
