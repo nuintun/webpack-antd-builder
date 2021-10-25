@@ -40,7 +40,7 @@ export default function usePrefetch<R, T>(
   url: string,
   options: Options | TransformOptions<R, T> = {}
 ): [fetching: boolean, response: R | T | undefined, refetch: Refetch] {
-  const [fetching, request] = useRequest(options.delay, options);
+  const [fetching, request] = useRequest(options.delay, options, true);
   const [response, refetch] = useResponse<R, T>(url, request, { ...(options as TransformOptions<R, T>), prefetch: true });
 
   return [fetching, response, refetch];

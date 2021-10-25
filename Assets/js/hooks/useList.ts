@@ -35,7 +35,8 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  */
 export default function useList<I>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean
 ): [
   loading: boolean,
   dataSource: I[],
@@ -51,7 +52,8 @@ export default function useList<I>(
  */
 export default function useList<I, E>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean
 ): [
   loading: boolean,
   dataSource: I[],
@@ -67,7 +69,8 @@ export default function useList<I, E>(
  */
 export default function useList<I, E, T>(
   url: string,
-  options: TransformOptions<I, T>
+  options: TransformOptions<I, T>,
+  initialLoadingState?: boolean
 ): [
   loading: boolean,
   dataSource: T[],
@@ -77,7 +80,8 @@ export default function useList<I, E, T>(
 ];
 export default function useList<I, E, T>(
   url: string,
-  options: Options | TransformOptions<I, T> = {}
+  options: Options | TransformOptions<I, T> = {},
+  initialLoadingState?: boolean
 ): [
   loading: boolean,
   dataSource: I[] | T[],
@@ -86,7 +90,11 @@ export default function useList<I, E, T>(
   refs: Refs<I, E>
 ] {
   const resolvePagingOptions = usePagingOptions(options.pagination);
-  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(url, options as TransformOptions<I, T>);
+  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(
+    url,
+    options as TransformOptions<I, T>,
+    initialLoadingState
+  );
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
     fetch({ pagination: { page, pageSize } });

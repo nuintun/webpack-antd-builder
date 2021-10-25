@@ -5,8 +5,9 @@
 import { useEffect, useState } from 'react';
 
 import { message } from 'antd';
+import { RequestError } from '~js/utils/request';
 import usePersistCallback from './usePersistCallback';
-import { Options as RequestOptions, RequestError } from '~js/utils/request';
+import { Options as RequestOptions } from './useRequest';
 
 type Fetch = (options?: RequestOptions) => Promise<void>;
 

@@ -21,8 +21,8 @@ function onUnauthorizedHandler(history: History<any>): void {
   history.push('/login');
 }
 
-export interface Options<S> extends Omit<RequestOptions, 'onUnauthorized'> {
-  onUnauthorized?: (history: History<S>) => void;
+export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
+  onUnauthorized?: (history: History<any>) => void;
 }
 
 /**
@@ -30,17 +30,18 @@ export interface Options<S> extends Omit<RequestOptions, 'onUnauthorized'> {
  * @description [hook] 请求操作
  * @param delay 加载状态延迟时间
  */
-export default function useRequest<S>(
+export default function useRequest(
   delay?: number,
-  optinos: Options<S> = {}
-): [fetching: boolean, fetch: <R>(input: string, options?: Options<S>) => Promise<R>] {
+  optinos: Options = {},
+  initialFetchingState: boolean = false
+): [fetching: boolean, fetch: <R>(input: string, options?: Options) => Promise<R>] {
   const defaults = optinos;
   const retainRef = useRef(0);
-  const history = useHistory<S>();
   const isMounted = useIsMounted();
-  const [fetching, setFetching] = useLazyState(false, delay);
+  const history = useHistory<any>();
+  const [fetching, setFetching] = useLazyState(initialFetchingState, delay);
 
-  const fetch = usePersistCallback(<R>(input: string, options: Options<S> = {}): Promise<R> => {
+  const fetch = usePersistCallback(<R>(input: string, options: Options = {}): Promise<R> => {
     return new Promise<R>(async (resolve, reject) => {
       setFetching(true);
 

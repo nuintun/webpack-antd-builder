@@ -23,11 +23,12 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
  */
 export default function useSubmit<V, R>(
   url: string,
-  options: Options<V, R> = {}
+  options: Options<V, R> = {},
+  initialSubmittingState?: boolean
 ): [submitting: boolean, onSubmit: (values: V) => void] {
   const { onError, method = 'POST', normalize, onSuccess, onComplete } = options;
 
-  const [submitting, request] = useRequest(options.delay, options);
+  const [submitting, request] = useRequest(options.delay, options, initialSubmittingState);
 
   const onSubmit = usePersistCallback(async (values: V) => {
     const params = normalize ? normalize(values) : values;

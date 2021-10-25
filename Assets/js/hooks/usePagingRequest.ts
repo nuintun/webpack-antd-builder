@@ -70,7 +70,8 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
  */
 export default function usePagingRequest<I>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean
 ): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I>>, refs: Refs<I>];
 /**
  * @function usePagingRequest
@@ -80,7 +81,8 @@ export default function usePagingRequest<I>(
  */
 export default function usePagingRequest<I, E>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean
 ): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
@@ -90,18 +92,20 @@ export default function usePagingRequest<I, E>(
  */
 export default function usePagingRequest<I, E, T>(
   url: string,
-  options: TransformOptions<I, T>
+  options: TransformOptions<I, T>,
+  initialLoadingState?: boolean
 ): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
-  options: Options | TransformOptions<I, T> = {}
+  options: Options | TransformOptions<I, T> = {},
+  initialLoadingState: boolean = true
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
   const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
-  const [loading, request] = useRequest(options.delay, options);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
+  const [loading, request] = useRequest(options.delay, options, initialLoadingState);
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
     const query: Query = { ...updateRef(searchRef, { ...search }) };

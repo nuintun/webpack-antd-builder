@@ -66,7 +66,8 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
  */
 export default function useTable<I>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean
 ): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I>>, refs: Refs<I>];
 /**
  * @function useTable
@@ -76,7 +77,8 @@ export default function useTable<I>(
  */
 export default function useTable<I, E>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean
 ): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 /**
  * @function useTable
@@ -86,18 +88,24 @@ export default function useTable<I, E>(
  */
 export default function useTable<I, E, T>(
   url: string,
-  options: TransformOptions<I, T>
+  options: TransformOptions<I, T>,
+  initialLoadingState?: boolean
 ): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
-  options: Options | TransformOptions<I, T> = {}
+  options: Options | TransformOptions<I, T> = {},
+  initialLoadingState?: boolean
 ): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
   const resolvePagingOptions = usePagingOptions(options.pagination);
   const { transform, ...restOptions } = options as TransformOptions<I, T>;
-  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(url, options as TransformOptions<I, T>);
+  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
+    url,
+    options as TransformOptions<I, T>,
+    initialLoadingState
+  );
 
   const fetch = usePersistCallback((options: RequestOptions = {}) => {
     const search: Query = {
