@@ -43,7 +43,7 @@ function ActionButton<T>({
   confirmIcon = DEFAULT_CONFIRM_ICON,
   ...restProps
 }: ActionButtonProps<T>): React.ReactElement {
-  const [loading, fetch] = useRequest(delay);
+  const [loading, fetch] = useRequest(false, { delay });
 
   const onAction = usePersistCallback(async () => {
     const body = isFunction(initBody) ? initBody() : initBody;

@@ -4,9 +4,8 @@
 
 import React, { useMemo, useRef, useState } from 'react';
 
-import useRequest from './useRequest';
 import usePersistCallback from './usePersistCallback';
-import { Options as RequestOptions } from '~js/utils/request';
+import useRequest, { Options as RequestOptions } from './useRequest';
 
 type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
 
@@ -34,13 +33,11 @@ export interface Pagination {
 }
 
 export interface Options extends Omit<RequestOptions, 'body' | 'query' | 'method'> {
-  delay?: number;
   search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }
 
 export interface TransformOptions<I, T> extends Options {
-  delay?: number;
   transform: (items: I[]) => T[];
 }
 
@@ -82,7 +79,7 @@ export default function usePagingRequest<I>(
 export default function usePagingRequest<I, E>(
   url: string,
   options?: Options,
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
@@ -93,19 +90,19 @@ export default function usePagingRequest<I, E>(
 export default function usePagingRequest<I, E, T>(
   url: string,
   options: TransformOptions<I, T>,
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {},
-  initialLoadingState: boolean = true
+  initialLoadingState: boolean | (() => boolean) = true
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
   const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
+  const [loading, request] = useRequest(initialLoadingState, options);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
-  const [loading, request] = useRequest(options.delay, options, initialLoadingState);
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
     const query: Query = { ...updateRef(searchRef, { ...search }) };

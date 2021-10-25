@@ -36,7 +36,7 @@ export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, 
 export default function useList<I>(
   url: string,
   options?: Options,
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,
   dataSource: I[],
@@ -53,7 +53,7 @@ export default function useList<I>(
 export default function useList<I, E>(
   url: string,
   options?: Options,
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,
   dataSource: I[],
@@ -70,7 +70,7 @@ export default function useList<I, E>(
 export default function useList<I, E, T>(
   url: string,
   options: TransformOptions<I, T>,
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,
   dataSource: T[],
@@ -81,7 +81,7 @@ export default function useList<I, E, T>(
 export default function useList<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {},
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,
   dataSource: I[] | T[],

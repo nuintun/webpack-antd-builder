@@ -22,6 +22,7 @@ function onUnauthorizedHandler(history: History<any>): void {
 }
 
 export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
+  delay?: number;
   onUnauthorized?: (history: History<any>) => void;
 }
 
@@ -31,15 +32,14 @@ export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
  * @param delay 加载状态延迟时间
  */
 export default function useRequest(
-  delay?: number,
-  optinos: Options = {},
-  initialFetchingState: boolean = false
+  initialFetchingState: boolean | (() => boolean) = false,
+  optinos: Options = {}
 ): [fetching: boolean, fetch: <R>(input: string, options?: Options) => Promise<R>] {
   const defaults = optinos;
   const retainRef = useRef(0);
   const isMounted = useIsMounted();
   const history = useHistory<any>();
-  const [fetching, setFetching] = useLazyState(initialFetchingState, delay);
+  const [fetching, setFetching] = useLazyState(initialFetchingState, optinos.delay);
 
   const fetch = usePersistCallback(<R>(input: string, options: Options = {}): Promise<R> => {
     return new Promise<R>(async (resolve, reject) => {
