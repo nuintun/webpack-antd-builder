@@ -43,14 +43,14 @@ function ActionButton<T>({
   confirmIcon = DEFAULT_CONFIRM_ICON,
   ...restProps
 }: ActionButtonProps<T>): React.ReactElement {
-  const [loading, fetch] = useRequest(false, { delay });
+  const [loading, request] = useRequest(false, { delay });
 
   const onAction = usePersistCallback(async () => {
     const body = isFunction(initBody) ? initBody() : initBody;
     const query = isFunction(initQuery) ? initQuery() : initQuery;
 
     try {
-      const response = await fetch<T>(action, { ...requestInit, method, body, query, notify });
+      const response = await request<T>(action, { ...requestInit, method, body, query, notify });
 
       onSuccess && onSuccess(response);
     } catch (error) {
