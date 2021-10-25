@@ -23,7 +23,7 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
 export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {},
-  initialSubmittingState?: boolean | (() => boolean)
+  initialSubmittingState: boolean | (() => boolean) = false
 ): [submitting: boolean, onSubmit: (values: V) => void] {
   const { onError, method = 'POST', normalize, onSuccess, onComplete } = options;
 

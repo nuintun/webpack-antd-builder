@@ -95,7 +95,7 @@ export default function usePagingRequest<I, E, T>(
 export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {},
-  initialLoadingState: boolean | (() => boolean) = true
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);

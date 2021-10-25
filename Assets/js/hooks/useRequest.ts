@@ -32,7 +32,7 @@ export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
  * @param delay 加载状态延迟时间
  */
 export default function useRequest(
-  initialFetchingState: boolean | (() => boolean) = false,
+  initialFetchingState: boolean | (() => boolean) = true,
   optinos: Options = {}
 ): [fetching: boolean, fetch: <R>(input: string, options?: Options) => Promise<R>] {
   const defaults = optinos;
