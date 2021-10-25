@@ -19,16 +19,16 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
  * @description [hook] 提交操作
  * @param url 提交地址
  * @param options 请求配置
- * @param initialSubmittingState 初始提交状态
+ * @param initialLoadingState 初始加载状态
  */
 export default function useSubmit<V, R>(
   url: string,
   options: Options<V, R> = {},
-  initialSubmittingState: boolean | (() => boolean) = false
-): [submitting: boolean, onSubmit: (values: V) => void] {
+  initialLoadingState: boolean | (() => boolean) = false
+): [loading: boolean, onSubmit: (values: V) => void] {
   const { onError, method = 'POST', normalize, onSuccess, onComplete } = options;
 
-  const [submitting, request] = useRequest(initialSubmittingState, options);
+  const [loading, request] = useRequest(initialLoadingState, options);
 
   const onSubmit = usePersistCallback(async (values: V) => {
     const params = normalize ? normalize(values) : values;
@@ -51,5 +51,5 @@ export default function useSubmit<V, R>(
     onComplete && onComplete(values);
   });
 
-  return [submitting, onSubmit];
+  return [loading, onSubmit];
 }
