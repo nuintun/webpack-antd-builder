@@ -38,7 +38,7 @@ export default function usePrefetch<R, T>(
 export default function usePrefetch<R, T>(
   url: string,
   options: Options | TransformOptions<R, T> = {},
-  initialLoadingState?: boolean | (() => boolean)
+  initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, response: R | T | undefined, refetch: Refetch] {
   const [loading, request] = useRequest(options, initialLoadingState);
   const [response, refetch] = useResponse<R, T>(url, request, {
