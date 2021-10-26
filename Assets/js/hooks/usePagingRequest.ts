@@ -115,7 +115,8 @@ export default function usePagingRequest<I, E, T>(
   const paginationRef = useRef<Pagination | false>(pagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
+  const fetch = usePersistCallback(async (options: Options = {}) => {
+    const { search, pagination } = options;
     const query: Query = { ...updateRef(searchRef, { ...search }) };
     const hasPagination = hasQuery(pagination ?? paginationRef.current);
 
