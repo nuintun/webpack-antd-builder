@@ -100,12 +100,20 @@ export default function usePagingRequest<I, E, T>(
   options: Options | TransformOptions<I, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+  const pagination = useMemo(() => {
+    const { pagination } = options;
+
+    if (pagination === false) return pagination as false;
+
+    return { ...DEFAULT_PAGINATION, ...pagination };
+  }, []);
+
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
   const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
+  const paginationRef = useRef<Pagination | false>(pagination);
   const [loading, request] = useRequest(options, initialLoadingState);
-  const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {
     const query: Query = { ...updateRef(searchRef, { ...search }) };
