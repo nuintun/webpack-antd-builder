@@ -61,6 +61,7 @@ export default function useResponse<R, T>(
 ): [response: R | T | undefined, fetch: Fetch] {
   const [response, setResponse] = useState<R | T>();
   const defaults = options as TransformOptions<R, T>;
+
   const { prefetch, transform, onError = onErrorHandler } = defaults;
 
   const fetch = usePersistCallback<Fetch>(options => {

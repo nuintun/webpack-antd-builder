@@ -28,7 +28,7 @@ export default function useSubmit<V, R>(
 ): [loading: boolean, onSubmit: (values: V) => void] {
   const { onError, method = 'POST', normalize, onSuccess, onComplete } = options;
 
-  const [loading, request] = useRequest(initialLoadingState, options);
+  const [loading, request] = useRequest(options, initialLoadingState);
 
   const onSubmit = usePersistCallback(async (values: V) => {
     const params = normalize ? normalize(values) : values;

@@ -104,7 +104,7 @@ export default function usePagingRequest<I, E, T>(
   const searchRef = useRef<Search | false>(false);
   const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
-  const [loading, request] = useRequest(initialLoadingState, options);
+  const [loading, request] = useRequest(options, initialLoadingState);
   const paginationRef = useRef<Pagination | false>(DEFAULT_PAGINATION);
 
   const fetch = usePersistCallback(async ({ search, pagination, ...options }: Options = {}) => {

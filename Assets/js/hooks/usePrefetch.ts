@@ -16,26 +16,31 @@ export interface TransformOptions<R, T> extends Omit<TransformResponseOptions<R,
  * @description [hook] 预加载
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function usePrefetch<R>(
   url: string,
-  options?: Options
+  options?: Options,
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, response: R | undefined, refetch: Refetch];
 /**
  * @function usePrefetch
  * @description [hook] 预加载
  * @param url 请求地址
  * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function usePrefetch<R, T>(
   url: string,
-  options: TransformOptions<R, T>
+  options: TransformOptions<R, T>,
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, response: T | undefined, refetch: Refetch];
 export default function usePrefetch<R, T>(
   url: string,
-  options: Options | TransformOptions<R, T> = {}
+  options: Options | TransformOptions<R, T> = {},
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, response: R | T | undefined, refetch: Refetch] {
-  const [loading, request] = useRequest(true, options);
+  const [loading, request] = useRequest(options, initialLoadingState);
   const [response, refetch] = useResponse<R, T>(url, request, {
     ...(options as TransformOptions<R, T>),
     prefetch: true

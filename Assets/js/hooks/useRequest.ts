@@ -29,14 +29,15 @@ export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
 /**
  * @function useRequest
  * @description [hook] 请求操作
- * @param initialLoadingState 初始加载状态
  * @param optinos 请求配置
+ * @param initialLoadingState 初始加载状态
  */
 export default function useRequest(
-  initialLoadingState: boolean | (() => boolean) = true,
-  optinos: Options = {}
+  optinos: Options = {},
+  initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(input: string, options?: Options) => Promise<R>] {
   const defaults = optinos;
+
   const retainRef = useRef(0);
   const isMounted = useIsMounted();
   const history = useHistory<any>();
