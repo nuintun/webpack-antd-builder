@@ -10,7 +10,7 @@ import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
 import { useHistory } from 'react-router-dom';
 import usePersistCallback from './usePersistCallback';
-import sendRequest, { Options as RequestOptions } from '~js/utils/request';
+import fetch, { Options as RequestOptions } from '~js/utils/request';
 
 /**
  * @function onUnauthorizedHandler
@@ -61,7 +61,7 @@ export default function useRequest(
       const headers = { ...mime.json, ...options.headers };
 
       try {
-        const response = await sendRequest<R>(input, { ...defaults, ...options, headers, onUnauthorized });
+        const response = await fetch<R>(input, { ...defaults, ...options, headers, onUnauthorized });
 
         isMounted() && resolve(response);
       } catch (error) {
