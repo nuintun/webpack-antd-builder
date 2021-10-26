@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import useSubmit, { Options } from '~js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
@@ -77,14 +77,11 @@ function FormDrawer<V, R>({
       setVisible(false);
 
       onSuccess && onSuccess(response, values);
-      onClose && onClose();
     }
   });
 
   const onCloseHandler = useCallback(() => {
     !submitting && setVisible(false);
-
-    onClose && onClose();
   }, []);
 
   const triggerNode = useMemo(() => {
@@ -97,11 +94,17 @@ function FormDrawer<V, R>({
         wrapForm.resetFields();
 
         setVisible(true);
-
-        onOpen && onOpen();
       }
     });
   }, [trigger]);
+
+  useEffect(() => {
+    if (visible) {
+      onOpen && onOpen();
+    } else {
+      onClose && onClose();
+    }
+  }, [visible]);
 
   return (
     <>
