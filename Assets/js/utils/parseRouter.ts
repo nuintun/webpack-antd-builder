@@ -6,6 +6,7 @@
 import React from 'react';
 
 import isURL from './isURL';
+import { preorderTrees } from './tree';
 
 type Key = React.Key;
 
@@ -27,8 +28,6 @@ export type Route<T> = T & {
   component?: React.ComponentType<any>;
   target?: React.HTMLAttributeAnchorTarget;
 };
-
-type RouteNode<T> = Route<T> & { href: string };
 
 export type RouteItem<T> = T & {
   key: Key;
@@ -64,8 +63,6 @@ export interface Router<T> {
   breadcrumbs: { [path: string]: BreadcrumbItem<T> };
 }
 
-type Callback<T> = (route: RouteNode<T>, referrer?: RouteNode<T>) => void;
-
 /**
  * @function isAbsolute
  * @param path 路径
@@ -91,29 +88,6 @@ function normalizeURL(path: string, base?: string): string {
   return `${base}${sep}${path}`;
 }
 
-/**
- * @function recursive
- * @param route 路由
- * @param callback 回调
- * @param referrer 来源路由
- */
-function recursive<T>(route: Route<T>, callback: Callback<T>, referrer?: RouteNode<T>): void {
-  const path = normalizeURL(route.path, referrer?.path);
-  const href = route.href ? normalizeURL(route.href, referrer?.href) : path;
-
-  const routeNode: RouteNode<T> = { ...route, path, href };
-
-  callback(routeNode, referrer);
-
-  const { children } = route;
-
-  if (children) {
-    for (const route of children) {
-      recursive(route, callback, routeNode);
-    }
-  }
-}
-
 type MenusMap<T> = { [path: string]: MenuItem<T>[] };
 
 type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
@@ -124,15 +98,43 @@ type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
  * @param router 路由
  */
 export default function parseRouter<T>(router: Route<T>[]): Router<T> {
+  const root: string = '';
   const menus: MenuItem<T>[] = [];
   const routes: RouteItem<T>[] = [];
   const breadcrumbs: Breadcrumbs<T> = {};
 
-  for (const route of router) {
-    const root = '';
-    const menusMap: MenusMap<T> = { [root]: [] };
+  // 菜单映射表
+  let menusMap: MenusMap<T>;
 
-    recursive(route, (route, referrer) => {
+  // 树列表前序深度遍历
+  preorderTrees(
+    router.map(node => {
+      const href = node.href || node.path;
+
+      return { ...node, href };
+    }),
+    parentNode => {
+      const { children } = parentNode;
+
+      if (children) {
+        return children.map(node => {
+          const { href: nodeHref } = node;
+          const path = normalizeURL(node.path, parentNode.path);
+          const href = nodeHref ? normalizeURL(nodeHref, parentNode.href) : path;
+
+          return { ...node, path, href };
+        });
+      }
+    },
+    (node, parentNode) => {
+      if (!parentNode) {
+        if (menusMap) {
+          menus.push(...menusMap[root]);
+        }
+
+        menusMap = Object.create({ [root]: [] });
+      }
+
       const {
         name,
         icon,
@@ -147,11 +149,12 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         hideInBreadcrumb,
         hideChildrenInMenu,
         ...rest
-      } = route;
+      } = node;
       const key = href.toLowerCase();
       const hasComponent = !!component;
-      const hasChildren = !!children?.length;
+      const hasChildren = children && children.length > 0;
 
+      // 处理路由
       if (component) {
         routes.push({
           key,
@@ -165,8 +168,9 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         } as RouteItem<T>);
       }
 
+      // 处理菜单
       if (hasComponent || hasChildren) {
-        const refer = referrer ? referrer.path : root;
+        const refer = parentNode ? parentNode.path : root;
         const menu = { key, name, path, href, icon, ...rest } as MenuItem<T>;
 
         if (hasChildren && !hideChildrenInMenu) {
@@ -178,6 +182,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         }
       }
 
+      // 处理面包屑
       if (!hideInBreadcrumb) {
         const breadcrumb = { key, name, path, icon, ...rest } as BreadcrumbItem<T>;
 
@@ -187,10 +192,8 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
 
         breadcrumbs[path] = breadcrumb;
       }
-    });
-
-    menus.push(...menusMap[root]);
-  }
+    }
+  );
 
   return { routes, menus, breadcrumbs };
 }
