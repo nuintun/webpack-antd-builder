@@ -1,10 +1,9 @@
 import './index.less';
 
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
-import memoizeOne from 'memoize-one';
 import { isString, urlToPaths } from '~js/utils/utils';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BreadcrumbItem as Item } from '~js/utils/parseRouter';
@@ -33,15 +32,13 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | un
   }
 }
 
-const getBreadcrumbItems = memoizeOne(function <T>(
-  match: Match,
-  location: Location,
-  breadcrumbs: Breadcrumbs<T>
-): BreadcrumbItem<T>[] {
-  const { pathname } = location;
+function getBreadcrumbItems<T>(route: string, pathname: string, breadcrumbs: Breadcrumbs<T>): BreadcrumbItem<T>[] {
+  route = route.toLowerCase();
+  pathname = pathname.toLowerCase();
+
   const unique: { [path: string]: true } = {};
   const breadcrumbItems: BreadcrumbItem<T>[] = [];
-  const paths = ['/', ...urlToPaths(match.path.toLowerCase()), pathname];
+  const paths = ['/', ...urlToPaths(route), pathname];
 
   for (const path of paths) {
     if (!unique[path]) {
@@ -62,10 +59,12 @@ const getBreadcrumbItems = memoizeOne(function <T>(
   }
 
   return breadcrumbItems;
-});
+}
 
 function SmartBreadcrumb<T>({ match, location, breadcrumbs }: SmartBreadcrumbProps<T>): React.ReactElement {
-  const breadcrumbItems = getBreadcrumbItems(match, location, breadcrumbs);
+  const breadcrumbItems = useMemo(() => {
+    return getBreadcrumbItems(match.path, location.pathname, breadcrumbs);
+  }, [match.path, location.pathname, breadcrumbs]);
 
   return (
     <Breadcrumb className="ui-breadcrumb">

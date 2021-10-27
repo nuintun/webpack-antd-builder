@@ -1,12 +1,13 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { isString } from '~js/utils/utils';
 import usePrevious from '~js/hooks/usePrevious';
 import { MenuItem } from '~js/utils/parseRouter';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import usePersistCallback from '~js/hooks/usePersistCallback';
-import { getExpandKeysFromPath, getFlatMenus, mergeKeys, prefixUI } from './SmartMenuUtils';
+import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
 
 const { Fragment } = React;
 const { SubMenu, Item } = Menu;
@@ -95,7 +96,20 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   const prevProps = usePrevious<RouteMenuProps<T>>(props);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
+  const items = useMemo(() => menuRender(menus, props), [menus, props]);
   const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
+
+  const memoizeFlattenMenus = useCallback<typeof flattenMenus>(menus => {
+    return (memoizeOne(flattenMenus) as typeof flattenMenus)(menus);
+  }, []);
+
+  const memoizeGetExpandKeys = useCallback<typeof getExpandKeys>((path, flatMenus) => {
+    return (memoizeOne(getExpandKeys) as typeof getExpandKeys)(path, flatMenus);
+  }, []);
+
+  const memoizeMergeKeys = useCallback<typeof mergeKeys>((prevKeys, nextKeys, flatMenus) => {
+    return (memoizeOne(mergeKeys) as typeof mergeKeys)(prevKeys, nextKeys, flatMenus);
+  }, []);
 
   const onOpenChangeHander = usePersistCallback((nextOpenKeys: React.Key[]): void => {
     const keys = nextOpenKeys.map(key => key.toString());
@@ -116,12 +130,12 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
       collapsed !== prevProps.collapsed ||
       location.pathname !== prevProps.location.pathname
     ) {
-      const flatMenus = getFlatMenus(menus);
+      const flatMenus = memoizeFlattenMenus(menus);
       const cachedOpenKeys = cachedOpenKeysRef.current;
-      const defaultKeys = getExpandKeysFromPath(match.path, flatMenus);
+      const defaultKeys = memoizeGetExpandKeys(match.path, flatMenus);
 
       if (!collapsed) {
-        const nextOpenKeys = mergeKeys(cachedOpenKeys, defaultKeys.openKeys, flatMenus);
+        const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys, flatMenus);
 
         setOpenKeys(nextOpenKeys);
 
@@ -150,7 +164,7 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
     >
-      {menuRender(menus, props)}
+      {items}
     </Menu>
   );
 }

@@ -127,14 +127,15 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       }
     },
     (node, parentNode) => {
-      if (!parentNode) {
-        if (menusMap) {
-          menus.push(...menusMap[root]);
-        }
+      // 当前节点是否为根节点
+      const isRoot = parentNode == null;
 
-        menusMap = Object.create({ [root]: [] });
+      // 当前节点为根节点时初始化菜单映射表
+      if (isRoot) {
+        menusMap = { [root]: [] };
       }
 
+      // 当前节点数据操作
       const {
         name,
         icon,
@@ -191,6 +192,11 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         }
 
         breadcrumbs[path] = breadcrumb;
+      }
+
+      // 当前节点为根节点时保存菜单映射表
+      if (isRoot) {
+        menus.push(...menusMap[root]);
       }
     }
   );

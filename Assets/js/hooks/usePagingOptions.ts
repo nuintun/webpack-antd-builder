@@ -2,6 +2,8 @@
  * @module usePagingOptions
  */
 
+import { useCallback } from 'react';
+
 import memoizeOne from 'memoize-one';
 import { PaginationProps } from 'antd';
 import usePersistCallback from './usePersistCallback';
@@ -14,7 +16,7 @@ function showTotal(total: number): string {
   return `共 ${total} 条`;
 }
 
-const normalizePagingOptions = memoizeOne((pageSize: number, opitons?: Options | false): PagingOptions | undefined => {
+function normalizePagingOptions(pageSize: number, opitons?: Options | false): PagingOptions | undefined {
   if (opitons !== false) {
     const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons || {};
 
@@ -34,7 +36,7 @@ const normalizePagingOptions = memoizeOne((pageSize: number, opitons?: Options |
       pageSizeOptions: pageSizeOptions.map(item => item.toString())
     };
   }
-});
+}
 
 export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
   pageSizeOptions?: number[];
@@ -46,7 +48,11 @@ export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
  * @param opitons 分页配置
  */
 export default function usePagingOptions(opitons?: Options | false): (pageSize: number) => PagingOptions | undefined {
+  const memoizeNormalizePagingOptions = useCallback<typeof normalizePagingOptions>((pageSize, opitons) => {
+    return memoizeOne(normalizePagingOptions)(pageSize, opitons);
+  }, []);
+
   return usePersistCallback((pageSize: number): PagingOptions | undefined => {
-    return normalizePagingOptions(pageSize, opitons);
+    return memoizeNormalizePagingOptions(pageSize, opitons);
   });
 }
