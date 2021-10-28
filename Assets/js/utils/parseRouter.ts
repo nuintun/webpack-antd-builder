@@ -128,7 +128,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
     },
     (node, parentNode) => {
       // 当前节点是否为根节点
-      const isRoot = parentNode == null;
+      const isRoot = parentNode === undefined;
 
       // 当前节点为根节点时初始化菜单映射表
       if (isRoot) {

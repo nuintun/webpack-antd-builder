@@ -19,7 +19,7 @@ export function preorderTrees<T>(trees: T[], resolve: Resolve<T>, callback: Call
 
   let current: Iterator<T, T> | undefined = trees.values();
 
-  while (current) {
+  while (current !== undefined) {
     const { done, value: node } = current.next();
 
     if (done) {
