@@ -63,6 +63,10 @@ export interface Router<T> {
   breadcrumbs: { [path: string]: BreadcrumbItem<T> };
 }
 
+export type MenusMap<T> = { [path: string]: MenuItem<T>[] };
+
+export type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
+
 /**
  * @function isAbsolute
  * @param path 路径
@@ -87,10 +91,6 @@ function normalizeURL(path: string, base?: string): string {
 
   return `${base}${sep}${path}`;
 }
-
-type MenusMap<T> = { [path: string]: MenuItem<T>[] };
-
-type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
 
 /**
  * @function parseRouter
@@ -178,8 +178,12 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
           menusMap[path] = menu.children = hideInMenu ? menusMap[refer] : [];
         }
 
-        if (!hideInMenu && menusMap[refer]) {
-          menusMap[refer].push(menu);
+        if (!hideInMenu) {
+          const parentNodeChildren = menusMap[refer];
+
+          if (parentNodeChildren) {
+            parentNodeChildren.push(menu);
+          }
         }
       }
 
