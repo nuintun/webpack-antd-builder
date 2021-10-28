@@ -13,14 +13,14 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import SmartMenu, { HeaderRender, SmartMenuProps } from '~js/components/SmartMenu';
 
 const { Header, Content } = Layout;
-const mobileQuery = '(max-width: 480px)';
-const brokenQuery = '(max-width: 992px)';
 
 type PickProps = 'theme' | 'menus' | 'match' | 'history' | 'location' | 'collapsedWidth';
 
 export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> {
   roles?: any;
   siderWith?: number;
+  mobileQuery?: string;
+  brokenQuery?: string;
   children?: React.ReactNode;
   leftHeaderRender?: HeaderRender;
   rightHeaderRender?: HeaderRender;
@@ -42,7 +42,9 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
     theme = 'dark',
     collapsedWidth,
     leftHeaderRender,
-    rightHeaderRender
+    rightHeaderRender,
+    mobileQuery = '(max-width: 576px)',
+    brokenQuery = '(max-width: 992px)'
   } = props;
 
   const contentRef = useRef<HTMLDivElement>(null);
