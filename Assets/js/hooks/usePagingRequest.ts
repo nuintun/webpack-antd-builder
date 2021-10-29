@@ -2,9 +2,11 @@
  * @module usePagingRequest
  */
 
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
-import usePersistCallback from './usePersistCallback';
+import { message } from 'antd';
+import usePersistRef from './usePersistRef';
+import { RequestError } from '~js/utils/request';
 import useRequest, { Options as UseRequestOptions } from './useRequest';
 
 interface BaseResponse<I> {
@@ -31,6 +33,7 @@ export interface Pagination {
 }
 
 export interface Options extends Omit<UseRequestOptions, 'body' | 'method'> {
+  onError?: (error: RequestError) => void;
   pagination?: Partial<Pagination> | false;
 }
 
@@ -73,7 +76,7 @@ export default function usePagingRequest<I>(
   url: string,
   options?: Options,
   initialLoadingState?: boolean
-): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<Response<I>>, refs: Refs<I>];
+): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -85,7 +88,7 @@ export default function usePagingRequest<I, E>(
   url: string,
   options?: Options,
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -97,14 +100,12 @@ export default function usePagingRequest<I, E, T>(
   url: string,
   options: TransformOptions<I, T>,
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: T[], fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [loading: boolean, dataSource: T[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, dataSource: I[] | T[], fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
-  const { query: initQuery } = options;
-
+): [loading: boolean, dataSource: I[] | T[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>] {
   const initPagination = useMemo(() => {
     const { pagination } = options;
 
@@ -113,6 +114,7 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
+  const initOptionsRef = usePersistRef(options);
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
   const { transform } = options as TransformOptions<I, T>;
@@ -120,8 +122,9 @@ export default function usePagingRequest<I, E, T>(
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const fetch = usePersistCallback(async (options: RequestOptions = {}) => {
+  const fetch = useCallback(async (options: RequestOptions = {}) => {
     const { search, pagination } = options;
+    const { query: initQuery } = initOptionsRef.current;
     const hasPagination = hasQuery(pagination ?? paginationRef.current);
     const query: Query = { ...initQuery, ...updateRef(searchRef, { ...search }) };
 
@@ -151,32 +154,37 @@ export default function usePagingRequest<I, E, T>(
       setRef(paginationRef, false);
     }
 
-    try {
-      setRef(responseRef, await request<Response<I, E>>(url, { ...options, query }));
-    } catch (error) {
-      setDataSource([]);
+    return request<Response<I, E>>(url, { ...options, query }).then(
+      response => {
+        const { items }: Response<I, E> = response;
+        const dataSource = Array.isArray(items) ? items : [];
 
-      throw error;
-    }
+        if (hasPagination) {
+          const { total = 0 } = response;
+          const { page: current, pageSize } = paginationRef.current as Pagination;
+          const page = Math.max(1, Math.min(current, Math.ceil(total / pageSize)));
 
-    const response = responseRef.current;
-    const { items }: Response<I, E> = response;
-    const dataSource = Array.isArray(items) ? items : [];
+          if (page !== current) {
+            setRef(paginationRef, { page, pageSize });
+          }
+        }
 
-    if (hasPagination) {
-      const { total = 0 } = response;
-      const { page: current, pageSize } = paginationRef.current as Pagination;
-      const page = Math.max(1, Math.min(current, Math.ceil(total / pageSize)));
+        setRef(responseRef, response);
+        setDataSource(transform ? transform(dataSource) : dataSource);
+      },
+      error => {
+        const { onError } = initOptionsRef.current;
 
-      if (page !== current) {
-        setRef(paginationRef, { page, pageSize });
+        setDataSource([]);
+
+        if (onError) {
+          onError(error);
+        } else {
+          message.error(error.message);
+        }
       }
-    }
-
-    setDataSource(transform ? transform(dataSource) : dataSource);
-
-    return responseRef.current;
-  });
+    );
+  }, []);
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {

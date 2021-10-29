@@ -11,7 +11,6 @@ import usePagingRequest, {
   Pagination as UseRequestPagination,
   Refs,
   RequestOptions as UseRequestInit,
-  Response,
   TransformOptions as UseRequestTransformOptions
 } from './usePagingRequest';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
@@ -46,7 +45,7 @@ export default function useList<I>(
 ): [
   loading: boolean,
   dataSource: I[],
-  fetch: (options?: RequestOptions) => Promise<Response<I>>,
+  fetch: (options?: RequestOptions) => Promise<void>,
   pagination: PaginationProps | false,
   refs: Refs<I>
 ];
@@ -64,7 +63,7 @@ export default function useList<I, E>(
 ): [
   loading: boolean,
   dataSource: I[],
-  fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
+  fetch: (options?: RequestOptions) => Promise<void>,
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ];
@@ -82,7 +81,7 @@ export default function useList<I, E, T>(
 ): [
   loading: boolean,
   dataSource: T[],
-  fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
+  fetch: (options?: RequestOptions) => Promise<void>,
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ];
@@ -93,7 +92,7 @@ export default function useList<I, E, T>(
 ): [
   loading: boolean,
   dataSource: I[] | T[],
-  fetch: (options?: RequestOptions) => Promise<Response<I, E>>,
+  fetch: (options?: RequestOptions) => Promise<void>,
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ] {
@@ -128,7 +127,3 @@ export default function useList<I, E, T>(
 
   return [loading, dataSource, fetch, pagination, refs];
 }
-
-const [, , a] = useList('', { pagination: false });
-
-a({});

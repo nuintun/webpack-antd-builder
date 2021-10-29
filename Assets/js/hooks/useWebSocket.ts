@@ -2,10 +2,10 @@
  * @module useWebSocket
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useIsMounted from './useIsMounted';
-import usePersistCallback from './usePersistCallback';
+import usePersistRef from './usePersistRef';
 
 interface Socket<M> {
   readyState: number;
@@ -43,21 +43,12 @@ export interface Options<M> {
  * @param options 配置参数
  */
 export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url: string, options: Options<M> = {}): Socket<M> {
-  const {
-    onOpen,
-    onError,
-    onClose,
-    onMessage,
-    protocols,
-    onReconnect,
-    manual = false,
-    reconnectLimit = 3,
-    reconnectInterval = 3000
-  } = options;
+  const { protocols, manual = false } = options;
 
   const isMounted = useIsMounted();
   const reconnectTimesRef = useRef(0);
   const websocketRef = useRef<WebSocket>();
+  const optionsRef = usePersistRef(options);
   const reconnectTimerRef = useRef<Timeout>();
   const [message, setMessage] = useState<MessageEvent<M>>();
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);
@@ -66,31 +57,40 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
   /**
    * @description 重连
    */
-  const reconnect = usePersistCallback(() => {
+  const reconnect = useCallback(() => {
+    const options = optionsRef.current;
+    const { reconnectLimit = 3 } = options;
+
     if (reconnectTimesRef.current < reconnectLimit && websocketRef.current?.readyState !== WebSocket.OPEN) {
       clearTimeout(reconnectTimerRef.current);
+
+      const { reconnectInterval = 3000 } = options;
 
       reconnectTimerRef.current = setTimeout(() => {
         connectWebSocket();
 
+        const { onReconnect } = optionsRef.current;
         const reconnectTimes = reconnectTimesRef.current++;
 
         onReconnect && onReconnect(reconnectTimes, reconnectLimit);
       }, reconnectInterval);
     }
-  });
+  }, []);
 
-  const connectWebSocket = usePersistCallback(() => {
+  const connectWebSocket = useCallback(() => {
     clearTimeout(reconnectTimerRef.current);
 
     websocketRef.current?.close(1000);
 
     const connect = () => {
-      const ws = new WebSocket(url, protocols);
+      const { protocols } = optionsRef.current;
 
+      const ws = new WebSocket(url, protocols);
       const getReadyState = () => ws.readyState || WebSocket.CLOSED;
 
       ws.onopen = event => {
+        const { onOpen } = optionsRef.current;
+
         reconnectTimesRef.current = 0;
 
         onOpen && onOpen(event);
@@ -109,18 +109,28 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
       };
 
       ws.onmessage = (message: MessageEvent<M>) => {
+        const { onMessage } = optionsRef.current;
+
         onMessage && onMessage(message);
 
         isMounted() && setMessage(message);
       };
 
       ws.onerror = event => {
-        onError && onError(event);
+        const { onError } = optionsRef.current;
+
+        if (onError) {
+          onError(event);
+        } else {
+          console.error(event);
+        }
 
         isMounted() && setReadyState(getReadyState());
       };
 
       ws.onclose = event => {
+        const { onClose } = optionsRef.current;
+
         removeWsEvents(ws);
 
         sendQueueRef.current = [];
@@ -138,6 +148,8 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
     try {
       connect();
     } catch (error) {
+      const { onError } = optionsRef.current;
+
       // 初始化 WebSocket 失败
       if (onError) {
         onError(new Event('error'));
@@ -145,13 +157,13 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
         console.error(error);
       }
     }
-  });
+  }, []);
 
   /**
    * @description 发送消息
    * @param message
    */
-  const send: WebSocket['send'] = usePersistCallback(message => {
+  const send: WebSocket['send'] = useCallback(message => {
     const ws = websocketRef.current;
 
     if (ws && ws.readyState === WebSocket.OPEN) {
@@ -159,27 +171,29 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
     } else {
       sendQueueRef.current.push(message);
     }
-  });
+  }, []);
 
   /**
    * @description 手动连接
    */
-  const connect = usePersistCallback(() => {
+  const connect = useCallback(() => {
     reconnectTimesRef.current = 0;
 
     connectWebSocket();
-  });
+  }, []);
 
   /**
    * @description 断开连接
    */
-  const disconnect = usePersistCallback((code: number = 1000, reason?: string) => {
+  const disconnect = useCallback((code: number = 1000, reason?: string) => {
+    const { reconnectLimit = 3 } = optionsRef.current;
+
     clearTimeout(reconnectTimerRef.current);
 
     reconnectTimesRef.current = reconnectLimit;
 
     websocketRef.current?.close(code, reason);
-  });
+  }, []);
 
   // 初始时连接，卸载时断连
   useEffect(() => {

@@ -2,9 +2,11 @@
  * @module useSubmit
  */
 
+import { useCallback } from 'react';
+
 import { message } from 'antd';
+import usePersistRef from './usePersistRef';
 import { RequestError } from '~js/utils/request';
-import usePersistCallback from './usePersistCallback';
 import useRequest, { Options as RequestOptions } from './useRequest';
 
 export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
@@ -26,11 +28,12 @@ export default function useSubmit<V, R>(
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
-  const { onError, method = 'POST', normalize, onSuccess, onComplete } = options;
-
+  const optionsRef = usePersistRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const onSubmit = usePersistCallback(async (values: V) => {
+  const onSubmit = useCallback((values: V) => {
+    const options = optionsRef.current;
+    const { method = 'POST', normalize } = options;
     const params = normalize ? normalize(values) : values;
     const requestOptions: RequestOptions = { ...options, method };
 
@@ -40,16 +43,29 @@ export default function useSubmit<V, R>(
       requestOptions.body = params;
     }
 
-    try {
-      const response = await request<R>(url, requestOptions);
+    return request<R>(url, requestOptions)
+      .then(
+        response => {
+          const { onSuccess } = optionsRef.current;
 
-      onSuccess && onSuccess(response, values);
-    } catch (error) {
-      onError ? onError(error, values) : message.error(error.message);
-    }
+          onSuccess && onSuccess(response, values);
+        },
+        error => {
+          const { onError } = optionsRef.current;
 
-    onComplete && onComplete(values);
-  });
+          if (onError) {
+            onError(error, values);
+          } else {
+            message.error(error.message);
+          }
+        }
+      )
+      .finally(() => {
+        const { onComplete } = optionsRef.current;
+
+        onComplete && onComplete(values);
+      });
+  }, []);
 
   return [loading, onSubmit];
 }

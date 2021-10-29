@@ -2,13 +2,13 @@
  * @module useControllableValue
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import usePrevious from './usePrevious';
 import useIsMounted from './useIsMounted';
+import usePersistRef from './usePersistRef';
 import { isFunction } from '~js/utils/utils';
 import useUpdateEffect from './useUpdateEffect';
-import usePersistCallback from './usePersistCallback';
 
 export interface Props {
   [prop: string]: any;
@@ -37,6 +37,7 @@ export default function useControllableValue<V = undefined>(
 
   const isMounted = useIsMounted();
   const prevValue = usePrevious(value);
+  const propsRef = usePersistRef(props);
 
   const [state, setState] = useState<V | undefined>(() => {
     if (valuePropName in props) return value;
@@ -48,8 +49,10 @@ export default function useControllableValue<V = undefined>(
     return defaultValue;
   });
 
-  const setValue = usePersistCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
+  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {
+      const props = propsRef.current;
+
       const setStateAction = (prevState: V | undefined): V | undefined => {
         const nextState = isFunction(value) ? value(prevState) : value;
 
@@ -66,7 +69,7 @@ export default function useControllableValue<V = undefined>(
         setState(setStateAction);
       }
     }
-  });
+  }, []);
 
   useUpdateEffect(() => {
     if (prevValue !== value && valuePropName in props) {

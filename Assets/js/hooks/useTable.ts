@@ -4,7 +4,7 @@
 
 import React, { useCallback, useMemo, useRef } from 'react';
 
-import { message, TableProps } from 'antd';
+import { TableProps } from 'antd';
 import usePagingRequest, {
   hasQuery,
   Options as UseRequestOptions,
@@ -12,12 +12,11 @@ import usePagingRequest, {
   Query as RequestQuery,
   Refs as RequestRefs,
   RequestOptions as UseRequestInit,
-  Response,
   Search,
   TransformOptions as UseRequestTransformOptions,
   updateRef
 } from './usePagingRequest';
-import usePersistCallback from './usePersistCallback';
+import usePersistRef from './usePersistRef';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 type Filter = Search;
@@ -71,7 +70,7 @@ export default function useTable<I>(
   url: string,
   options?: Options,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I>>, refs: Refs<I>];
+): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -83,7 +82,7 @@ export default function useTable<I, E>(
   url: string,
   options?: Options,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -95,61 +94,57 @@ export default function useTable<I, E, T>(
   url: string,
   options: TransformOptions<I, T>,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {},
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
   const resolvePagingOptions = usePagingOptions(options.pagination);
-  const { transform, ...restOptions } = options as TransformOptions<I, T>;
+  const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
     url,
     options as TransformOptions<I, T>,
     initialLoadingState
   );
 
-  const fetch = usePersistCallback((options: RequestOptions = {}) => {
+  const fetch = useCallback((options: RequestOptions = {}) => {
     const search: Query = {
       ...updateRef(searchRef, options.search),
       ...updateRef(filterRef, options.filter),
       ...updateRef(sorterRef, options.sorter)
     };
 
-    return request({ ...restOptions, ...options, search, pagination: options.pagination });
-  });
+    return request({ ...initOptionsRef.current, ...options, search });
+  }, []);
 
-  const onChange = useCallback<OnChange<I | T>>(async (pagination, filter, sorter, { action }) => {
-    try {
-      switch (action) {
-        case 'filter':
-          return await fetch({ filter });
-        case 'paginate':
-          return await fetch({ pagination: { page: pagination.current, pageSize: pagination.pageSize } });
-        case 'sort':
-          const orderBy: Sorter['orderBy'] = [];
-          const orderType: Sorter['orderType'] = [];
+  const onChange = useCallback<OnChange<I | T>>((pagination, filter, sorter, { action }) => {
+    switch (action) {
+      case 'filter':
+        return fetch({ filter });
+      case 'paginate':
+        return fetch({ pagination: { page: pagination.current, pageSize: pagination.pageSize } });
+      case 'sort':
+        const orderBy: Sorter['orderBy'] = [];
+        const orderType: Sorter['orderType'] = [];
 
-          sorter = Array.isArray(sorter) ? sorter : [sorter];
+        sorter = Array.isArray(sorter) ? sorter : [sorter];
 
-          for (const { columnKey, field, order } of sorter) {
-            if (order) {
-              if (columnKey || field) {
-                orderBy.push(columnKey || serializeField(field as SorterField));
-                orderType.push(order);
-              } else {
-                throw new Error('table column missing sort field');
-              }
+        for (const { columnKey, field, order } of sorter) {
+          if (order) {
+            if (columnKey || field) {
+              orderBy.push(columnKey || serializeField(field as SorterField));
+              orderType.push(order);
+            } else {
+              throw new Error('table column missing sort field');
             }
           }
+        }
 
-          return await fetch({ sorter: { orderBy, orderType } });
-      }
-    } catch (error) {
-      message.error(error.message);
+        return fetch({ sorter: { orderBy, orderType } });
     }
   }, []);
 

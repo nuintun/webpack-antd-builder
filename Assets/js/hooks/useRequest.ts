@@ -2,14 +2,14 @@
  * @module useRequest
  */
 
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { History } from 'history';
 import * as mime from '~js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
+import usePersistRef from './usePersistRef';
 import { useHistory } from 'react-router-dom';
-import usePersistCallback from './usePersistCallback';
 import fetch, { Options as RequestOptions } from '~js/utils/request';
 
 /**
@@ -36,24 +36,38 @@ export default function useRequest(
   optinos: Options = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(input: string, options?: Options) => Promise<R>] {
-  const defaults = optinos;
-
   const retainRef = useRef(0);
   const isMounted = useIsMounted();
   const history = useHistory<any>();
+  const initOptionsRef = usePersistRef(optinos);
   const [loading, setLoading] = useLazyState(initialLoadingState, optinos.delay);
 
-  const request = usePersistCallback(<R>(input: string, options: Options = {}): Promise<R> => {
-    return new Promise<R>(async (resolve, reject) => {
-      setLoading(true);
+  // 显示加载状态
+  const showLoading = useCallback(() => {
+    setLoading(true);
 
-      ++retainRef.current;
+    ++retainRef.current;
+  }, []);
+
+  // 隐藏加载状态
+  const hideLoading = useCallback(() => {
+    if (--retainRef.current <= 0) {
+      setLoading(false, true);
+    }
+  }, []);
+
+  // 请求函数
+  const request = useCallback(<R>(input: string, options: Options = {}): Promise<R> => {
+    return new Promise<R>((resolve, reject) => {
+      showLoading();
+
+      const initOptions = initOptionsRef.current;
 
       const onUnauthorized = () => {
         if (options.onUnauthorized) {
           options.onUnauthorized(history);
-        } else if (defaults.onUnauthorized) {
-          defaults.onUnauthorized(history);
+        } else if (initOptions.onUnauthorized) {
+          initOptions.onUnauthorized(history);
         } else {
           onUnauthorizedHandler(history);
         }
@@ -61,19 +75,20 @@ export default function useRequest(
 
       const headers = { ...mime.json, ...options.headers };
 
-      try {
-        const response = await fetch<R>(input, { ...defaults, ...options, headers, onUnauthorized });
+      return fetch<R>(input, { ...initOptions, ...options, headers, onUnauthorized }).then(
+        response => {
+          hideLoading();
 
-        isMounted() && resolve(response);
-      } catch (error) {
-        isMounted() && reject(error);
-      }
+          isMounted() && resolve(response);
+        },
+        error => {
+          hideLoading();
 
-      if (--retainRef.current <= 0) {
-        setLoading(false, true);
-      }
+          isMounted() && reject(error);
+        }
+      );
     });
-  });
+  }, []);
 
   return [loading, request];
 }

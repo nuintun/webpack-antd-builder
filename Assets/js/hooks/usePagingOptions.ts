@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 
 import memoizeOne from 'memoize-one';
 import { PaginationProps } from 'antd';
-import usePersistCallback from './usePersistCallback';
+import usePersistRef from './usePersistRef';
 
 type PagingOptions = Omit<PaginationProps, 'total' | 'current' | 'pageSize' | 'defaultCurrent' | 'defaultPageSize'>;
 
@@ -48,11 +48,13 @@ export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
  * @param opitons 分页配置
  */
 export default function usePagingOptions(opitons?: Options | false): (pageSize: number) => PagingOptions | undefined {
+  const optionsRef = usePersistRef(opitons);
+
   const memoizeNormalizePagingOptions = useCallback<typeof normalizePagingOptions>((pageSize, opitons) => {
     return memoizeOne(normalizePagingOptions)(pageSize, opitons);
   }, []);
 
-  return usePersistCallback((pageSize: number): PagingOptions | undefined => {
-    return memoizeNormalizePagingOptions(pageSize, opitons);
-  });
+  return useCallback((pageSize: number): PagingOptions | undefined => {
+    return memoizeNormalizePagingOptions(pageSize, optionsRef.current);
+  }, []);
 }

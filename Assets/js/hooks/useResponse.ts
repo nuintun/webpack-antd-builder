@@ -2,25 +2,16 @@
  * @module useResponse
  */
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { message } from 'antd';
+import usePersistRef from './usePersistRef';
 import { RequestError } from '~js/utils/request';
-import usePersistCallback from './usePersistCallback';
 import { Options as RequestOptions } from './useRequest';
 
 type Fetch = (options?: RequestOptions) => Promise<void>;
 
 type Request = <R>(url: string, options?: RequestOptions) => Promise<R>;
-
-/**
- * @function onErrorHandler
- * @description 默认请求出错回调
- * @param error 请求错误对象
- */
-function onErrorHandler(error: RequestError) {
-  message.error(error.message);
-}
 
 export interface Options extends RequestOptions {
   prefetch?: boolean;
@@ -60,20 +51,28 @@ export default function useResponse<R, T>(
   options: Options | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch] {
   const [response, setResponse] = useState<R | T>();
-  const defaults = options as TransformOptions<R, T>;
+  const initOptionsRef = usePersistRef(options as TransformOptions<R, T>);
 
-  const { prefetch, transform, onError = onErrorHandler } = defaults;
-
-  const fetch = usePersistCallback<Fetch>(options => {
-    return request<R>(url, { ...defaults, ...options })
+  const fetch = useCallback<Fetch>(options => {
+    return request<R>(url, { ...initOptionsRef.current, ...options })
       .then(response => {
+        const { transform } = initOptionsRef.current;
+
         setResponse(transform ? transform(response) : response);
       })
-      .catch(onError);
-  });
+      .catch(error => {
+        const { onError } = initOptionsRef.current;
+
+        if (onError) {
+          onError(error);
+        } else {
+          message.error(error.message);
+        }
+      });
+  }, []);
 
   useEffect(() => {
-    prefetch && fetch();
+    initOptionsRef.current.prefetch && fetch();
   }, []);
 
   return [response, fetch];

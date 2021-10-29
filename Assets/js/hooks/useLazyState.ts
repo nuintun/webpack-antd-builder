@@ -2,11 +2,11 @@
  * @module useLazyState
  */
 
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 import useSafeState from './useSafeState';
+import usePersistRef from './usePersistRef';
 import { isFunction } from '~js/utils/utils';
-import usePersistCallback from './usePersistCallback';
 
 /**
  * @function useLazyState
@@ -33,14 +33,17 @@ export default function useLazyState<S = undefined>(
   delay: number = 128
 ): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void] {
   const timerRef = useRef<Timeout>();
+  const delayRef = usePersistRef(delay);
   const [state, setState] = useSafeState(initialState);
 
-  const setLazyState = usePersistCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
+  const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
     clearTimeout(timerRef.current);
 
     const nextState = isFunction(value) ? value(state) : value;
 
     if (nextState !== state) {
+      const delay = delayRef.current;
+
       if (immediate || delay <= 0) {
         setState(nextState);
       } else {
@@ -49,7 +52,7 @@ export default function useLazyState<S = undefined>(
         }, delay);
       }
     }
-  });
+  }, []);
 
   return [state, setLazyState];
 }
