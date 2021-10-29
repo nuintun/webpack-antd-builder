@@ -1,36 +1,35 @@
 import './index.less';
 
-import React, { memo, useRef } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
 
 import { Drawer } from 'antd';
 import { prefixUI } from './SmartMenuUtils';
-import usePersistCallback from '~js/hooks/usePersistCallback';
+import usePersistRef from '~js/hooks/usePersistRef';
 import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenuProps } from './SiderMenu';
 
 export type { HeaderRender, HeaderRenderProps, SmartMenuProps };
 
-function SmartMenu<T>({
-  isMobile,
-  collapsed,
-  onCollapse,
-  width = 256,
-  onOpenChange,
-  defaultOpenKeys = [],
-  ...restProps
-}: SmartMenuProps<T>): React.ReactElement {
+function SmartMenu<T>(props: SmartMenuProps<T>): React.ReactElement {
+  const { isMobile, collapsed, onCollapse, width = 256, onOpenChange, defaultOpenKeys = [], ...restProps } = props;
+
+  const propsRef = usePersistRef(props);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys);
 
-  const onClose = usePersistCallback((): void => {
-    onCollapse && onCollapse(true, 'clickTrigger');
-  });
+  const onClose = useCallback((): void => {
+    const { onCollapse } = propsRef.current;
 
-  const onOpenChangeHander = usePersistCallback((openKeys: string[], cachedOpenKeys: string[]) => {
+    onCollapse && onCollapse(true, 'clickTrigger');
+  }, []);
+
+  const onOpenChangeHander = useCallback((openKeys: string[], cachedOpenKeys: string[]) => {
+    const { collapsed, onOpenChange } = propsRef.current;
+
     if (!collapsed) {
       cachedOpenKeysRef.current = cachedOpenKeys;
     }
 
     onOpenChange && onOpenChange(openKeys, cachedOpenKeys);
-  });
+  }, []);
 
   if (isMobile) {
     return (

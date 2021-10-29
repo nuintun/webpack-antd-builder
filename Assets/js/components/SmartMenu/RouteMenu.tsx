@@ -5,8 +5,8 @@ import { Menu, MenuProps } from 'antd';
 import { isString } from '~js/utils/utils';
 import usePrevious from '~js/hooks/usePrevious';
 import { MenuItem } from '~js/utils/parseRouter';
+import usePersistRef from '~js/hooks/usePersistRef';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import usePersistCallback from '~js/hooks/usePersistCallback';
 import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
 
 const { Fragment } = React;
@@ -93,6 +93,7 @@ function menuRender<T>(menus: MenuItem<T>[], props: RouteMenuProps<T>): React.Re
 function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   const { match, menus, history, location, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
 
+  const propsRef = usePersistRef(props);
   const prevProps = usePrevious<RouteMenuProps<T>>(props);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
@@ -111,8 +112,9 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
     return (memoizeOne(mergeKeys) as typeof mergeKeys)(prevKeys, nextKeys, flatMenus);
   }, []);
 
-  const onOpenChangeHander = usePersistCallback((nextOpenKeys: React.Key[]): void => {
+  const onOpenChangeHander = useCallback((nextOpenKeys: React.Key[]): void => {
     const keys = nextOpenKeys.map(key => key.toString());
+    const { onOpenChange, collapsed = false } = propsRef.current;
 
     setOpenKeys(keys);
 
@@ -121,9 +123,11 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
     }
 
     onOpenChange && onOpenChange(keys, cachedOpenKeysRef.current);
-  });
+  }, []);
 
   useEffect(() => {
+    const { match, menus, location, onOpenChange, collapsed = false } = propsRef.current;
+
     if (
       !prevProps ||
       menus !== prevProps.menus ||

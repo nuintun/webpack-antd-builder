@@ -8,9 +8,6 @@ import { isString, urlToPaths } from '~js/utils/utils';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BreadcrumbItem as Item } from '~js/utils/parseRouter';
 
-type Match = RouteComponentProps['match'];
-type Location = RouteComponentProps['location'];
-
 type Breadcrumbs<T> = { [path: string]: Item<T> };
 type BreadcrumbItem<T> = Item<T> & { current: boolean };
 
