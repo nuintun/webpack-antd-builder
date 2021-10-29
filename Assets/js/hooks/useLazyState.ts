@@ -39,18 +39,15 @@ export default function useLazyState<S = undefined>(
   const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
     clearTimeout(timerRef.current);
 
+    const delay = delayRef.current;
     const nextState = isFunction(value) ? value(state) : value;
 
-    if (nextState !== state) {
-      const delay = delayRef.current;
-
-      if (immediate || delay <= 0) {
+    if (immediate || delay <= 0) {
+      setState(nextState);
+    } else {
+      timerRef.current = setTimeout(() => {
         setState(nextState);
-      } else {
-        timerRef.current = setTimeout(() => {
-          setState(nextState);
-        }, delay);
-      }
+      }, delay);
     }
   }, []);
 

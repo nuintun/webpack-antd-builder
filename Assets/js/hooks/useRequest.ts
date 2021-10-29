@@ -42,24 +42,11 @@ export default function useRequest(
   const initOptionsRef = usePersistRef(optinos);
   const [loading, setLoading] = useLazyState(initialLoadingState, optinos.delay);
 
-  // 显示加载状态
-  const showLoading = useCallback(() => {
-    setLoading(true);
-
-    ++retainRef.current;
-  }, []);
-
-  // 隐藏加载状态
-  const hideLoading = useCallback(() => {
-    if (--retainRef.current <= 0) {
-      setLoading(false, true);
-    }
-  }, []);
-
-  // 请求函数
   const request = useCallback(<R>(input: string, options: Options = {}): Promise<R> => {
     return new Promise<R>((resolve, reject) => {
-      showLoading();
+      setLoading(true);
+
+      ++retainRef.current;
 
       const initOptions = initOptionsRef.current;
 
@@ -75,18 +62,20 @@ export default function useRequest(
 
       const headers = { ...mime.json, ...options.headers };
 
-      return fetch<R>(input, { ...initOptions, ...options, headers, onUnauthorized }).then(
-        response => {
-          hideLoading();
-
-          isMounted() && resolve(response);
-        },
-        error => {
-          hideLoading();
-
-          isMounted() && reject(error);
-        }
-      );
+      return fetch<R>(input, { ...initOptions, ...options, headers, onUnauthorized })
+        .then(
+          response => {
+            isMounted() && resolve(response);
+          },
+          error => {
+            isMounted() && reject(error);
+          }
+        )
+        .finally(() => {
+          if (--retainRef.current <= 0) {
+            setLoading(false, true);
+          }
+        });
     });
   }, []);
 

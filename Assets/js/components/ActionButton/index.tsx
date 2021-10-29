@@ -45,19 +45,26 @@ function ActionButton<T>({
 }: ActionButtonProps<T>): React.ReactElement {
   const [loading, request] = useRequest({ delay }, false);
 
-  const onAction = usePersistCallback(async () => {
+  const onAction = usePersistCallback(() => {
     const body = isFunction(initBody) ? initBody() : initBody;
     const query = isFunction(initQuery) ? initQuery() : initQuery;
 
-    try {
-      const response = await request<T>(action, { ...requestInit, method, body, query, notify });
-
-      onSuccess && onSuccess(response);
-    } catch (error) {
-      onError ? onError(error) : message.error(error.message);
-    }
-
-    onComplete && onComplete();
+    request<T>(action, { ...requestInit, method, body, query, notify })
+      .then(
+        response => {
+          onSuccess && onSuccess(response);
+        },
+        error => {
+          if (onError) {
+            onError(error);
+          } else {
+            message.error(error.message);
+          }
+        }
+      )
+      .finally(() => {
+        onComplete && onComplete();
+      });
   });
 
   if (confirmTitle) {

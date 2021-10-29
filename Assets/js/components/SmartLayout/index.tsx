@@ -7,7 +7,6 @@ import useStorage from '~js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
 import { BreadcrumbItem } from '~js/utils/parseRouter';
 import SmartBreadcrumb from '~js/components/SmartBreadcrumb';
-import usePersistCallback from '~js/hooks/usePersistCallback';
 import SuspenseFallBack from '~js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import SmartMenu, { HeaderRender, SmartMenuProps } from '~js/components/SmartMenu';
@@ -62,15 +61,15 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
   const [collapsed, setCollapsed] = useState(() => isBroken || isMobile || !!readCollapsed());
 
-  const onTriggerClick = usePersistCallback(() =>
+  const onTriggerClick = useCallback(() => {
     setCollapsed(collapsed => {
       collapsed = !collapsed;
 
       writeCollapsed(collapsed);
 
       return collapsed;
-    })
-  );
+    });
+  }, []);
 
   const onCollapse = useCallback((collapsed: boolean) => {
     setCollapsed(collapsed);
