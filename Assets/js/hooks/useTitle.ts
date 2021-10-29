@@ -6,9 +6,14 @@ import { useEffect, useRef } from 'react';
 
 import { isBrowser } from '~js/utils/utils';
 
-const defaultFormat = (title: string | undefined, defaultTitle: string): string => {
+/**
+ * @function defaultFormat
+ * @param title 标题
+ * @param defaultTitle 默认标题
+ */
+function defaultFormat(title: string | undefined, defaultTitle: string): string {
   return title ? `${defaultTitle} - ${title}` : defaultTitle;
-};
+}
 
 export interface Options {
   defaultTitle?: string;

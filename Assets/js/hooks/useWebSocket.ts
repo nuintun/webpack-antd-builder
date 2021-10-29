@@ -15,6 +15,10 @@ interface Socket<M> {
   disconnect: (code?: number, reason?: string) => void;
 }
 
+/**
+ * @function removeWsEvents
+ * @param ws WebSocket 实例
+ */
 function removeWsEvents(ws: WebSocket) {
   if (ws) {
     ws.onopen = null;

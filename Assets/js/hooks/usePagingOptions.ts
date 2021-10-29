@@ -12,10 +12,19 @@ type PagingOptions = Omit<PaginationProps, 'total' | 'current' | 'pageSize' | 'd
 
 const DEFAULT_PAGE_SIZE_OPTIONS = [20, 30, 50, 80];
 
+/**
+ * @function showTotal
+ * @param total 总条数
+ */
 function showTotal(total: number): string {
   return `共 ${total} 条`;
 }
 
+/**
+ * @function normalizePagingOptions
+ * @param pageSize 页大小
+ * @param opitons 分页配置
+ */
 function normalizePagingOptions(pageSize: number, opitons?: Options | false): PagingOptions | undefined {
   if (opitons !== false) {
     const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons || {};

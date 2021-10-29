@@ -53,16 +53,30 @@ export interface Refs<I, E = {}> {
 
 export const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
+/**
+ * @function hasQuery
+ * @param query 参数配置
+ */
 export function hasQuery<Q>(query: Q | false): query is Q {
   return query !== false;
 }
 
+/**
+ * @function setRef
+ * @param ref 引用对象
+ * @param current 引用值
+ */
 export function setRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, current: V): V {
   return (ref.current = current);
 }
 
-export function updateRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, value: V | undefined): V {
-  return setRef(ref, value ?? ref.current);
+/**
+ * @function updateRef
+ * @param ref 引用对象
+ * @param current 引用值
+ */
+export function updateRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, current: V | undefined): V {
+  return setRef(ref, current ?? ref.current);
 }
 
 /**
