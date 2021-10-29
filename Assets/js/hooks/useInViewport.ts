@@ -8,6 +8,10 @@ import { isBrowser, isFunction } from '~js/utils/utils';
 
 type InternalTarget<E> = E | null | (() => E | null) | React.MutableRefObject<E | null>;
 
+/**
+ * @function getTargetElement
+ * @param target 目标元素
+ */
 function getTargetElement(target: Target): HTMLElement | null {
   if (!target) return null;
 
@@ -18,6 +22,10 @@ function getTargetElement(target: Target): HTMLElement | null {
   return target;
 }
 
+/**
+ * @function isInViewPort
+ * @param element HTML 元素
+ */
 function isInViewPort(element: HTMLElement | null): boolean {
   if (!element) return false;
 

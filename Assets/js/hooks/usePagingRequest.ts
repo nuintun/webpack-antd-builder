@@ -114,13 +114,12 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
-  const initOptionsRef = usePersistRef(options);
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
-  const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
+  const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
 
   const fetch = useCallback((options: RequestOptions = {}) => {
     const { search, pagination } = options;
@@ -157,6 +156,7 @@ export default function usePagingRequest<I, E, T>(
     return request<Response<I, E>>(url, { ...options, query }).then(
       response => {
         const { items }: Response<I, E> = response;
+        const { transform } = initOptionsRef.current;
         const dataSource = Array.isArray(items) ? items : [];
 
         if (hasPagination) {

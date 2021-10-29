@@ -4,7 +4,6 @@
 
 import React, { useCallback, useState } from 'react';
 
-import usePrevious from './usePrevious';
 import useIsMounted from './useIsMounted';
 import usePersistRef from './usePersistRef';
 import { isFunction } from '~js/utils/utils';
@@ -22,6 +21,70 @@ export interface Options<V> {
 }
 
 /**
+ * @function getValuePropName
+ * @param options 配置选项
+ */
+function getValuePropName<V>(options: Options<V>): string {
+  const { valuePropName = 'value' } = options;
+
+  return valuePropName;
+}
+
+/**
+ * @function getDefaultValuePropName
+ * @param options 配置选项
+ */
+function getDefaultValuePropName<V>(options: Options<V>): string {
+  const { defaultValuePropName = 'defaultValue' } = options;
+
+  return defaultValuePropName;
+}
+
+/**
+ * @function isControlled
+ * @param props 组件 Props
+ * @param options 配置选项
+ */
+function isControlled<V>(props: Props, options: Options<V>): boolean {
+  const valuePropName = getValuePropName(options);
+
+  return valuePropName in props;
+}
+
+/**
+ * @function isUncontrolled
+ * @param props 组件 Props
+ * @param options 配置选项
+ */
+function isUncontrolled<V>(props: Props, options: Options<V>): boolean {
+  const defaultValuePropName = getDefaultValuePropName(options);
+
+  return defaultValuePropName in props;
+}
+
+/**
+ * @function getValue
+ * @param props 组件 Props
+ * @param options 配置选项
+ */
+function getValue<V>(props: Props, options: Options<V>): V {
+  const valuePropName = getValuePropName(options);
+
+  return props[valuePropName];
+}
+
+/**
+ * @function getDefaultValue
+ * @param props 组件 Props
+ * @param options 配置选项
+ */
+function getDefaultValue<V>(props: Props, options: Options<V>): V {
+  const defaultValuePropName = getDefaultValuePropName(options);
+
+  return props[defaultValuePropName];
+}
+
+/**
  * @function useControllableValue
  * @description [hook] 生成同时支持受控和非受控状态的值
  * @param props 组件 Props
@@ -31,29 +94,29 @@ export default function useControllableValue<V = undefined>(
   props: Props,
   options: Options<V> = {}
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void] {
-  const { defaultValue, defaultValuePropName = 'defaultValue', valuePropName = 'value', trigger = 'onChange' } = options;
-
-  const value: V = props[valuePropName];
-
   const isMounted = useIsMounted();
-  const prevValue = usePrevious(value);
   const propsRef = usePersistRef(props);
-
-  const [state, setState] = useState<V | undefined>(() => {
-    if (valuePropName in props) return value;
-
-    if (defaultValuePropName in props) {
-      return props[defaultValuePropName];
+  const optionsRef = usePersistRef(options);
+  const [value, setValueState] = useState<V | undefined>(() => {
+    if (isControlled(props, options)) {
+      return getValue(props, options);
     }
 
-    return defaultValue;
+    if (isUncontrolled(props, options)) {
+      return getDefaultValue(props, options);
+    }
+
+    return options.defaultValue;
   });
+
+  const prevValueRef = usePersistRef(value);
 
   const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {
       const props = propsRef.current;
 
       const setStateAction = (prevState: V | undefined): V | undefined => {
+        const { trigger = 'onChange' } = props;
         const nextState = isFunction(value) ? value(prevState) : value;
 
         if (nextState !== prevState && isFunction(props[trigger])) {
@@ -63,19 +126,22 @@ export default function useControllableValue<V = undefined>(
         return nextState;
       };
 
-      if (valuePropName in props) {
-        setStateAction(prevValue);
+      if (isControlled(props, optionsRef.current)) {
+        setStateAction(prevValueRef.current);
       } else {
-        setState(setStateAction);
+        setValueState(setStateAction);
       }
     }
   }, []);
 
   useUpdateEffect(() => {
-    if (prevValue !== value && valuePropName in props) {
-      setState(value);
-    }
-  }, [value, valuePropName]);
+    const prevValue = prevValueRef.current;
+    const nextValue = getValue(props, options);
 
-  return [state, setValue];
+    if (nextValue !== prevValue) {
+      setValueState(nextValue);
+    }
+  }, [isControlled(props, options)]);
+
+  return [value, setValue];
 }
