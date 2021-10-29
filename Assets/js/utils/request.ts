@@ -76,18 +76,19 @@ function isStatusOk(status: number): boolean {
  * @function parseResponse
  * @param response 响应内容
  */
-async function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
+function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   if (isJsonType(response.headers.get('Content-Type'))) {
-    const { code, msg, payload } = (await response.json()) as RequestResult<R>;
-
-    return { code, msg: msg || resloveMessage(code), payload };
+    return response.json().then(({ code, msg, payload }) => {
+      return { code, msg: msg || resloveMessage(code), payload };
+    });
   }
 
   const { status } = response;
   const code = isStatusOk(status) ? 200 : status;
-  const payload = (await response.text()) as unknown as R;
 
-  return { code, msg: resloveMessage(code), payload };
+  return response.text().then((payload: any) => {
+    return { code, msg: resloveMessage(code), payload: payload };
+  });
 }
 
 /**
