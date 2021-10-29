@@ -7,13 +7,14 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import { message, TableProps } from 'antd';
 import usePagingRequest, {
   hasQuery,
-  Options as PagingRequestOptions,
-  Pagination as RequestPagination,
+  Options as UseRequestOptions,
+  Pagination as UseRequestPagination,
   Query as RequestQuery,
   Refs as RequestRefs,
+  RequestOptions as UseRequestInit,
   Response,
   Search,
-  TransformOptions as RequestTransformOptions,
+  TransformOptions as UseRequestTransformOptions,
   updateRef
 } from './usePagingRequest';
 import usePersistCallback from './usePersistCallback';
@@ -23,11 +24,11 @@ type Filter = Search;
 
 type SorterField = React.Key | React.Key[];
 
-type Pagination<I> = TableProps<I>['pagination'];
-
 type Query = Filter & Partial<Sorter> & RequestQuery;
 
 type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
+
+type Pagination = (PagingOptions & Partial<UseRequestPagination>) | false;
 
 type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
 
@@ -45,17 +46,18 @@ function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
-interface RequestOptions extends Omit<PagingRequestOptions, 'transform'> {
+export interface Options extends UseRequestOptions {
+  pagination?: Pagination;
+}
+
+export interface TransformOptions<I, T> extends UseRequestTransformOptions<I, T> {
+  pagination?: Pagination;
+}
+
+export interface RequestOptions extends UseRequestInit {
   filter?: Filter | false;
   sorter?: Sorter | false;
-}
-
-export interface Options extends Omit<PagingRequestOptions, 'search' | 'pagination'> {
-  pagination?: (PagingOptions & Partial<RequestPagination>) | false;
-}
-
-export interface TransformOptions<I, T> extends Omit<RequestTransformOptions<I, T>, 'search' | 'pagination'> {
-  pagination?: (PagingOptions & Partial<RequestPagination>) | false;
+  pagination?: Pagination;
 }
 
 /**
@@ -151,7 +153,7 @@ export default function useTable<I, E, T>(
     }
   }, []);
 
-  let pagination: Pagination<T> = false;
+  let pagination: TableProps<T>['pagination'] = false;
 
   const originRefsPagination = originRefs.pagination;
 

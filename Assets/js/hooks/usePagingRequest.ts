@@ -5,9 +5,7 @@
 import React, { useMemo, useRef, useState } from 'react';
 
 import usePersistCallback from './usePersistCallback';
-import useRequest, { Options as RequestOptions } from './useRequest';
-
-type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
+import useRequest, { Options as UseRequestOptions } from './useRequest';
 
 interface BaseResponse<I> {
   // 数据项
@@ -16,7 +14,7 @@ interface BaseResponse<I> {
   readonly total?: number;
 }
 
-const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
+type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
 
 export type Query = Search & Partial<Pagination>;
 
@@ -32,8 +30,7 @@ export interface Pagination {
   pageSize: number;
 }
 
-export interface Options extends Omit<RequestOptions, 'body' | 'query' | 'method'> {
-  search?: Search | false;
+export interface Options extends Omit<UseRequestOptions, 'body' | 'method'> {
   pagination?: Partial<Pagination> | false;
 }
 
@@ -41,11 +38,17 @@ export interface TransformOptions<I, T> extends Options {
   transform: (items: I[]) => T[];
 }
 
+export interface RequestOptions extends Omit<Options, 'query'> {
+  search?: Search | false;
+}
+
 export interface Refs<I, E = {}> {
   readonly search: Search | false;
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
 }
+
+export const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
 export function hasQuery<Q>(query: Q | false): query is Q {
   return query !== false;
@@ -70,7 +73,7 @@ export default function usePagingRequest<I>(
   url: string,
   options?: Options,
   initialLoadingState?: boolean
-): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I>>, refs: Refs<I>];
+): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<Response<I>>, refs: Refs<I>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -82,7 +85,7 @@ export default function usePagingRequest<I, E>(
   url: string,
   options?: Options,
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: I[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -94,13 +97,15 @@ export default function usePagingRequest<I, E, T>(
   url: string,
   options: TransformOptions<I, T>,
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>];
+): [loading: boolean, dataSource: T[], fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options | TransformOptions<I, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, dataSource: I[] | T[], fetch: (options?: Options) => Promise<Response<I, E>>, refs: Refs<I, E>] {
-  const pagination = useMemo(() => {
+): [loading: boolean, dataSource: I[] | T[], fetch: (options?: RequestOptions) => Promise<Response<I, E>>, refs: Refs<I, E>] {
+  const { query: initQuery } = options;
+
+  const initPagination = useMemo(() => {
     const { pagination } = options;
 
     if (pagination === false) return pagination as false;
@@ -112,17 +117,18 @@ export default function usePagingRequest<I, E, T>(
   const searchRef = useRef<Search | false>(false);
   const { transform } = options as TransformOptions<I, T>;
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
-  const paginationRef = useRef<Pagination | false>(pagination);
+  const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const fetch = usePersistCallback(async (options: Options = {}) => {
+  const fetch = usePersistCallback(async (options: RequestOptions = {}) => {
     const { search, pagination } = options;
-    const query: Query = { ...updateRef(searchRef, { ...search }) };
     const hasPagination = hasQuery(pagination ?? paginationRef.current);
+    const query: Query = { ...initQuery, ...updateRef(searchRef, { ...search }) };
 
     if (hasPagination) {
       const { page, pageSize }: Pagination = {
         ...DEFAULT_PAGINATION,
+        ...initPagination,
         ...paginationRef.current,
         ...pagination
       };
