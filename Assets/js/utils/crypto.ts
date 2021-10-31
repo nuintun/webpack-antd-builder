@@ -78,7 +78,7 @@ export function encrypt(text: string): string {
   result += toByteString(checkCode);
   result += encryptText;
 
-  return btoa(result);
+  return window.btoa(result);
 }
 
 /**
