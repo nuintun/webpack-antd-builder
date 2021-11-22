@@ -134,14 +134,15 @@ export default function useControllableValue<V = undefined>(
     }
   }, []);
 
+  const nextValue = getValue(props, options);
+
   useUpdateEffect(() => {
     const prevValue = prevValueRef.current;
-    const nextValue = getValue(props, options);
 
     if (nextValue !== prevValue) {
       setValueState(nextValue);
     }
-  }, [isControlled(props, options)]);
+  }, [isControlled(props, options), nextValue]);
 
   return [value, setValue];
 }
