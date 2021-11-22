@@ -20,10 +20,11 @@ export interface FormDrawerProps<V, R>
   children?: React.ReactNode;
   trigger: React.ReactElement;
   requestInit?: Omit<Options<V, R>, SubmitPicked>;
+  extra?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
   footer?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
 }
 
-function defaultFooter<V>(submitting: boolean, form: FormInstance<V>, onClose: () => void): React.ReactNode {
+function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: () => void): React.ReactNode {
   return (
     <Space className="fn-right">
       <Button htmlType="reset" onClick={onClose}>
@@ -46,6 +47,7 @@ function FormDrawer<V, R>({
   notify,
   onOpen,
   height,
+  footer,
   onClose,
   trigger,
   onError,
@@ -59,7 +61,7 @@ function FormDrawer<V, R>({
   destroyOnClose,
   afterVisibleChange,
   layout = 'vertical',
-  footer = defaultFooter,
+  extra = defaultExtra,
   ...restProps
 }: FormDrawerProps<V, R>): React.ReactElement {
   const [wrapForm] = Form.useForm<V>(form);
@@ -113,13 +115,14 @@ function FormDrawer<V, R>({
         title={title}
         width={width}
         height={height}
+        footer={footer}
         visible={visible}
         placement={placement}
         onClose={onCloseHandler}
         forceRender={forceRender}
         destroyOnClose={destroyOnClose}
         afterVisibleChange={afterVisibleChange}
-        footer={footer(submitting, wrapForm, onCloseHandler)}
+        extra={extra(submitting, wrapForm, onCloseHandler)}
       >
         <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit}>
           {children}
