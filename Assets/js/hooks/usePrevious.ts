@@ -2,7 +2,7 @@
  * @module usePrevious
  */
 
-import usePreviousRef from './usePreviousRef';
+import { useEffect, useRef } from 'react';
 
 /**
  * @function usePrevious
@@ -18,5 +18,11 @@ export default function usePrevious<V>(value: V): V | undefined;
  */
 export default function usePrevious<V>(value: V, initialValue: V): V;
 export default function usePrevious<V>(value: V, initialValue?: V): V | undefined {
-  return usePreviousRef(value, initialValue).current;
+  const valueRef = useRef(initialValue);
+
+  useEffect(() => {
+    valueRef.current = value;
+  });
+
+  return valueRef.current;
 }
