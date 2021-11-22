@@ -3,9 +3,9 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { isString } from '~js/utils/utils';
-import usePrevious from '~js/hooks/usePrevious';
 import { MenuItem } from '~js/utils/parseRouter';
 import usePersistRef from '~js/hooks/usePersistRef';
+import usePreviousRef from '~js/hooks/usePreviousRef';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
 
@@ -93,8 +93,8 @@ function menuRender<T>(menus: MenuItem<T>[], props: RouteMenuProps<T>): React.Re
 function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   const { match, menus, history, location, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
 
-  const propsRef = usePersistRef(props);
-  const prevProps = usePrevious<RouteMenuProps<T>>(props);
+  const propsRef = usePersistRef<RouteMenuProps<T>>(props);
+  const prevPropsRef = usePreviousRef<RouteMenuProps<T>>(props);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
   const items = useMemo(() => menuRender(menus, props), [menus, props]);
@@ -126,6 +126,7 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   }, []);
 
   useEffect(() => {
+    const prevProps = prevPropsRef.current;
     const { match, menus, location, onOpenChange, collapsed = false } = propsRef.current;
 
     if (
@@ -156,7 +157,7 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
 
       setSelectedKeys(defaultKeys.selectedKeys);
     }
-  }, [location, collapsed, menus, prevProps, onOpenChange]);
+  }, [location, collapsed, menus, onOpenChange]);
 
   return (
     <Menu
