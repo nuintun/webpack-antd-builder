@@ -1,4 +1,4 @@
-import { urlToPaths } from '~js/utils/utils';
+import { pathToPaths } from '~js/utils/utils';
 import { preorderTrees } from '~js/utils/tree';
 import { MenuItem } from '~js/utils/parseRouter';
 
@@ -81,7 +81,7 @@ export function getExpandKeys<T>(path: string | undefined, flatMenus: MenuItem<T
   const selectedKeys: string[] = [];
 
   if (path) {
-    const paths = urlToPaths(path.toLowerCase());
+    const paths = pathToPaths(path.toLowerCase());
 
     for (const path of paths) {
       for (const menu of flatMenus) {

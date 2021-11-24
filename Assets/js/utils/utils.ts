@@ -65,18 +65,35 @@ export function createMarkup(html: string): { __html: string } {
 }
 
 /**
- * @function urlToPaths
- * @description 将 URL 拆分成路径列表
- * @param url URL 地址
+ * @function pathToPaths
+ * @description 将路径拆分为层级路径数组
+ * @param path 需要拆分路径
  */
-export function urlToPaths(url: string): string[] {
-  if (url === '/') {
-    return ['/'];
+export function pathToPaths(path: string): string[] {
+  const pattern = /[^/]+/g;
+  const isAbsolute = /^\//.test(path);
+  const paths: string[] = isAbsolute ? ['/'] : [];
+
+  while (true) {
+    const match = pattern.exec(path);
+
+    if (!match) break;
+
+    const [segment] = match;
+    const parent = paths[paths.length - 1];
+
+    if (parent) {
+      if (parent === '/') {
+        paths.push(`/${segment}`);
+      } else {
+        paths.push(`${parent}/${segment}`);
+      }
+    } else {
+      paths.push(isAbsolute ? `/${segment}` : segment);
+    }
   }
 
-  const paths = url.split('/').filter(path => path);
-
-  return paths.map((_path, index) => `/${paths.slice(0, index + 1).join('/')}`);
+  return paths;
 }
 
 /**
