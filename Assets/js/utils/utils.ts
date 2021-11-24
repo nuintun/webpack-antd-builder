@@ -79,18 +79,22 @@ export function pathToPaths(path: string): string[] {
 
     if (!match) break;
 
+    let current: string;
+
     const [segment] = match;
     const parent = paths[paths.length - 1];
 
     if (parent) {
-      if (parent === '/') {
-        paths.push(`/${segment}`);
+      if (parent !== '/') {
+        current = `${parent}/${segment}`;
       } else {
-        paths.push(`${parent}/${segment}`);
+        current = `/${segment}`;
       }
     } else {
-      paths.push(isAbsolute ? `/${segment}` : segment);
+      current = isAbsolute ? `/${segment}` : segment;
     }
+
+    paths.push(current);
   }
 
   return paths;
