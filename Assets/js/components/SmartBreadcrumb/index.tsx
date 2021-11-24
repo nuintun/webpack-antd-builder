@@ -4,7 +4,7 @@ import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
-import { isString, urlToPaths } from '~js/utils/utils';
+import { isString, pathToPaths } from '~js/utils/utils';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BreadcrumbItem as Item } from '~js/utils/parseRouter';
 
@@ -34,8 +34,8 @@ function getBreadcrumbItems<T>(route: string, pathname: string, breadcrumbs: Bre
   pathname = pathname.toLowerCase();
 
   const unique: { [path: string]: true } = {};
+  const paths = [...pathToPaths(route), pathname];
   const breadcrumbItems: BreadcrumbItem<T>[] = [];
-  const paths = ['/', ...urlToPaths(route), pathname];
 
   for (const path of paths) {
     if (!unique[path]) {
