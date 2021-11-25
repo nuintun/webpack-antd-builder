@@ -13,8 +13,9 @@ const mode = 'development';
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
 
-const fs = require('fs');
 const Koa = require('koa');
+const path = require('path');
+const memfs = require('memfs');
 const webpack = require('webpack');
 const resolveIp = require('../lib/ip');
 const { URLSearchParams } = require('url');
@@ -25,6 +26,15 @@ const { publicPath, entryHTML } = require('../configure');
 const devMiddleware = require('webpack-dev-server-middleware');
 
 const { toString } = Object.prototype;
+
+function createMemfs() {
+  const volume = new memfs.Volume();
+  const fs = memfs.createFsFromVolume(volume);
+
+  fs.join = path.join.bind(path);
+
+  return fs;
+}
 
 function isTypeof(value, type) {
   return toString.call(value).toLowerCase() === `[object ${type.toLowerCase()}]`;
@@ -79,6 +89,7 @@ async function resolveEntry(entry, options) {
 }
 
 (async () => {
+  const fs = createMemfs();
   const ip = await resolveIp();
   const port = await resolvePort();
   const devServerHost = `http://${ip}:${port}`;
@@ -101,7 +112,7 @@ async function resolveEntry(entry, options) {
 
   const devServer = devMiddleware(compiler, {
     index: false,
-    writeToDisk: file => file === entryHTML,
+    outputFileSystem: fs,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
