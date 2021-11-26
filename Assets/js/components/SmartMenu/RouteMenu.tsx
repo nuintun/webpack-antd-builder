@@ -59,7 +59,7 @@ function titleRender<T>({ name, icon }: MenuItem<T>, hasWrapper: boolean = false
   );
 }
 
-function itemRender<T>(menu: MenuItem<T>, { location, menuItemRender }: RouteMenuProps<T>): React.ReactElement {
+function menuItemRender<T>(menu: MenuItem<T>, { location, menuItemRender }: RouteMenuProps<T>): React.ReactElement {
   const { key, name, href, target } = menu;
   const replace = href === `${location.pathname}${location.search}${location.hash}`;
 
@@ -72,7 +72,7 @@ function itemRender<T>(menu: MenuItem<T>, { location, menuItemRender }: RouteMen
   );
 }
 
-function subMenuRender<T>(menu: MenuItem<T>, props: RouteMenuProps<T>): React.ReactElement {
+function subMenuItemRender<T>(menu: MenuItem<T>, props: RouteMenuProps<T>): React.ReactElement {
   const { key, children } = menu;
 
   if (children && children.length) {
@@ -83,11 +83,11 @@ function subMenuRender<T>(menu: MenuItem<T>, props: RouteMenuProps<T>): React.Re
     );
   }
 
-  return itemRender(menu, props);
+  return menuItemRender(menu, props);
 }
 
 function menuRender<T>(menus: MenuItem<T>[], props: RouteMenuProps<T>): React.ReactElement[] {
-  return menus.map(menu => subMenuRender(menu, props));
+  return menus.map(menu => subMenuItemRender(menu, props));
 }
 
 function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
