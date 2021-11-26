@@ -71,33 +71,25 @@ export function createMarkup(html: string): { __html: string } {
  */
 export function pathToPaths(path: string): string[] {
   const pattern = /[^/]+/g;
-  const isAbsolute = /^\//.test(path);
-  const paths: string[] = isAbsolute ? ['/'] : [];
+  const paths: string[] = [];
+  const isAbsolute = path[0] === '/';
 
   while (true) {
     const match = pattern.exec(path);
 
-    if (!match) break;
-
-    let current: string;
+    if (match === null) break;
 
     const [segment] = match;
-    const parent = paths[paths.length - 1];
+    const { length } = paths;
 
-    if (parent) {
-      if (parent !== '/') {
-        current = `${parent}/${segment}`;
-      } else {
-        current = `/${segment}`;
-      }
+    if (length > 0) {
+      paths.push(`${paths[length - 1]}/${segment}`);
     } else {
-      current = isAbsolute ? `/${segment}` : segment;
+      paths.push(isAbsolute ? `/${segment}` : segment);
     }
-
-    paths.push(current);
   }
 
-  return paths;
+  return isAbsolute && paths.length === 0 ? ['/'] : paths;
 }
 
 /**

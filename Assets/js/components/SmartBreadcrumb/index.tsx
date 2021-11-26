@@ -34,8 +34,8 @@ function getBreadcrumbItems<T>(route: string, pathname: string, breadcrumbs: Bre
   pathname = pathname.toLowerCase();
 
   const unique: { [path: string]: true } = {};
-  const paths = [...pathToPaths(route), pathname];
   const breadcrumbItems: BreadcrumbItem<T>[] = [];
+  const paths = ['/', ...pathToPaths(route), pathname];
 
   for (const path of paths) {
     if (!unique[path]) {
