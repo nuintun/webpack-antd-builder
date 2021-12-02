@@ -13,12 +13,14 @@ type Fetch = (options?: RequestOptions) => Promise<void>;
 
 type Request = <R>(url: string, options?: RequestOptions) => Promise<R>;
 
-export interface Options extends RequestOptions {
+export interface Options<R> extends RequestOptions {
   prefetch?: boolean;
+  onSuccess?: (response: R) => void;
   onError?: (error: RequestError) => void;
+  onComplete?: () => void;
 }
 
-export interface TransformOptions<R, T> extends Options {
+export interface TransformOptions<R, T> extends Options<R> {
   transform: (response: R) => T;
 }
 
@@ -31,7 +33,7 @@ export interface TransformOptions<R, T> extends Options {
 export default function useResponse<R>(
   url: string,
   request: Request,
-  options?: Options
+  options?: Options<R>
 ): [response: R | undefined, fetch: Fetch];
 /**
  * @function useResponse
@@ -48,27 +50,34 @@ export default function useResponse<R, T>(
 export default function useResponse<R, T>(
   url: string,
   request: Request,
-  options: Options | TransformOptions<R, T> = {}
+  options: Options<R> | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch] {
   const [response, setResponse] = useState<R | T>();
   const initOptionsRef = usePersistRef(options as TransformOptions<R, T>);
 
   const fetch = useCallback<Fetch>(options => {
-    return request<R>(url, { ...initOptionsRef.current, ...options })
-      .then(response => {
-        const { transform } = initOptionsRef.current;
+    const initOptions = initOptionsRef.current;
 
-        setResponse(transform ? transform(response) : response);
-      })
-      .catch(error => {
-        const { onError } = initOptionsRef.current;
+    return request<R>(url, { ...initOptions, ...options })
+      .then(
+        response => {
+          const { transform, onSuccess } = initOptionsRef.current;
 
-        if (onError) {
-          onError(error);
-        } else {
-          message.error(error.message);
+          onSuccess && onSuccess(response);
+
+          setResponse(transform ? transform(response) : response);
+        },
+        error => {
+          const { onError } = initOptionsRef.current;
+
+          if (onError) {
+            onError(error);
+          } else {
+            message.error(error.message);
+          }
         }
-      });
+      )
+      .finally(initOptions.onComplete);
   }, []);
 
   useEffect(() => {

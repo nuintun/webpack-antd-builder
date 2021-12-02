@@ -32,17 +32,20 @@ export interface Pagination {
   pageSize: number;
 }
 
-export interface Options extends Omit<UseRequestOptions, 'body' | 'method'> {
+export interface Options<I> extends Omit<UseRequestOptions, 'body' | 'method'> {
+  onSuccess?: (response: BaseResponse<I>) => void;
   onError?: (error: RequestError) => void;
+  onComplete?: () => void;
   pagination?: Partial<Pagination> | false;
 }
 
-export interface TransformOptions<I, T> extends Options {
+export interface TransformOptions<I, T> extends Options<I> {
   transform: (items: I[]) => T[];
 }
 
-export interface RequestOptions extends Omit<Options, 'query'> {
+export interface RequestOptions extends Omit<UseRequestOptions, 'body' | 'method'> {
   search?: Search | false;
+  pagination?: Partial<Pagination> | false;
 }
 
 export interface Refs<I, E = {}> {
@@ -88,7 +91,7 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
  */
 export default function usePagingRequest<I>(
   url: string,
-  options?: Options,
+  options?: Options<I>,
   initialLoadingState?: boolean
 ): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
 /**
@@ -100,7 +103,7 @@ export default function usePagingRequest<I>(
  */
 export default function usePagingRequest<I, E>(
   url: string,
-  options?: Options,
+  options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 /**
@@ -117,7 +120,7 @@ export default function usePagingRequest<I, E, T>(
 ): [loading: boolean, dataSource: T[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
-  options: Options | TransformOptions<I, T> = {},
+  options: Options<I> | TransformOptions<I, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>] {
   const initPagination = useMemo(() => {
@@ -137,7 +140,7 @@ export default function usePagingRequest<I, E, T>(
 
   const fetch = useCallback((options: RequestOptions = {}) => {
     const { search, pagination } = options;
-    const { query: initQuery } = initOptionsRef.current;
+    const { query: initQuery, onComplete } = initOptionsRef.current;
     const hasPagination = hasQuery(pagination ?? paginationRef.current);
     const query: Query = { ...initQuery, ...updateRef(searchRef, { ...search }) };
 
@@ -167,37 +170,41 @@ export default function usePagingRequest<I, E, T>(
       setRef(paginationRef, false);
     }
 
-    return request<Response<I, E>>(url, { ...options, query }).then(
-      response => {
-        const { items }: Response<I, E> = response;
-        const { transform } = initOptionsRef.current;
-        const dataSource = Array.isArray(items) ? items : [];
+    return request<Response<I, E>>(url, { ...options, query })
+      .then(
+        response => {
+          const { items }: Response<I, E> = response;
+          const dataSource = Array.isArray(items) ? items : [];
+          const { transform, onSuccess } = initOptionsRef.current;
 
-        if (hasPagination) {
-          const { total = 0 } = response;
-          const { page: current, pageSize } = paginationRef.current as Pagination;
-          const page = Math.max(1, Math.min(current, Math.ceil(total / pageSize)));
+          onSuccess && onSuccess(response);
 
-          if (page !== current) {
-            setRef(paginationRef, { page, pageSize });
+          if (hasPagination) {
+            const { total = 0 } = response;
+            const { page: current, pageSize } = paginationRef.current as Pagination;
+            const page = Math.max(1, Math.min(current, Math.ceil(total / pageSize)));
+
+            if (page !== current) {
+              setRef(paginationRef, { page, pageSize });
+            }
+          }
+
+          setRef(responseRef, response);
+          setDataSource(transform ? transform(dataSource) : dataSource);
+        },
+        error => {
+          const { onError } = initOptionsRef.current;
+
+          setDataSource([]);
+
+          if (onError) {
+            onError(error);
+          } else {
+            message.error(error.message);
           }
         }
-
-        setRef(responseRef, response);
-        setDataSource(transform ? transform(dataSource) : dataSource);
-      },
-      error => {
-        const { onError } = initOptionsRef.current;
-
-        setDataSource([]);
-
-        if (onError) {
-          onError(error);
-        } else {
-          message.error(error.message);
-        }
-      }
-    );
+      )
+      .finally(onComplete);
   }, []);
 
   const refs = useMemo<Refs<I, E>>(() => {

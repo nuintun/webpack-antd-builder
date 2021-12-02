@@ -19,7 +19,7 @@ type OnChange = NonNullable<PaginationProps['onChange']>;
 
 type Pagination = (UsePagingOptions & Partial<UseRequestPagination>) | false;
 
-export interface Options extends UseRequestOptions {
+export interface Options<I> extends UseRequestOptions<I> {
   pagination?: Pagination;
 }
 
@@ -40,7 +40,7 @@ export interface RequestOptions extends UseRequestInit {
  */
 export default function useList<I>(
   url: string,
-  options?: Options,
+  options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,
@@ -58,7 +58,7 @@ export default function useList<I>(
  */
 export default function useList<I, E>(
   url: string,
-  options?: Options,
+  options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,
@@ -87,7 +87,7 @@ export default function useList<I, E, T>(
 ];
 export default function useList<I, E, T>(
   url: string,
-  options: Options | TransformOptions<I, T> = {},
+  options: Options<I> | TransformOptions<I, T> = {},
   initialLoadingState?: boolean | (() => boolean)
 ): [
   loading: boolean,

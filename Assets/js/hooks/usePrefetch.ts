@@ -7,7 +7,7 @@ import useResponse, { Options as ResponseOptions, TransformOptions as TransformR
 
 type Refetch = (options?: RequestOptions) => Promise<void>;
 
-export interface Options extends Omit<ResponseOptions, 'prefetch'> {}
+export interface Options<R> extends Omit<ResponseOptions<R>, 'prefetch'> {}
 
 export interface TransformOptions<R, T> extends Omit<TransformResponseOptions<R, T>, 'prefetch'> {}
 
@@ -20,7 +20,7 @@ export interface TransformOptions<R, T> extends Omit<TransformResponseOptions<R,
  */
 export default function usePrefetch<R>(
   url: string,
-  options?: Options,
+  options?: Options<R>,
   initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, response: R | undefined, refetch: Refetch];
 /**
@@ -37,7 +37,7 @@ export default function usePrefetch<R, T>(
 ): [loading: boolean, response: T | undefined, refetch: Refetch];
 export default function usePrefetch<R, T>(
   url: string,
-  options: Options | TransformOptions<R, T> = {},
+  options: Options<R> | TransformOptions<R, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, response: R | T | undefined, refetch: Refetch] {
   const [loading, request] = useRequest(options, initialLoadingState);

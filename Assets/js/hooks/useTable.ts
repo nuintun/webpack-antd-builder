@@ -45,7 +45,7 @@ function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
-export interface Options extends UseRequestOptions {
+export interface Options<I> extends UseRequestOptions<I> {
   pagination?: Pagination;
 }
 
@@ -68,7 +68,7 @@ export interface RequestOptions extends UseRequestInit {
  */
 export default function useTable<I>(
   url: string,
-  options?: Options,
+  options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
 /**
@@ -80,7 +80,7 @@ export default function useTable<I>(
  */
 export default function useTable<I, E>(
   url: string,
-  options?: Options,
+  options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 /**
@@ -97,7 +97,7 @@ export default function useTable<I, E, T>(
 ): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
-  options: Options | TransformOptions<I, T> = {},
+  options: Options<I> | TransformOptions<I, T> = {},
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>] {
   const searchRef = useRef<Search | false>(false);
