@@ -43,7 +43,7 @@ export interface TransformOptions<I, T> extends Options<I> {
   transform: (items: I[]) => T[];
 }
 
-export interface RequestOptions extends Omit<UseRequestOptions, 'body' | 'method'> {
+export interface RequestOptions extends Omit<UseRequestOptions, 'body' | 'method' | 'onUnauthorized'> {
   search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }

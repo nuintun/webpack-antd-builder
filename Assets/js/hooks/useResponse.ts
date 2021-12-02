@@ -9,9 +9,9 @@ import usePersistRef from './usePersistRef';
 import { RequestError } from '~js/utils/request';
 import { Options as RequestOptions } from './useRequest';
 
-type Fetch = (options?: RequestOptions) => Promise<void>;
-
 type Request = <R>(url: string, options?: RequestOptions) => Promise<R>;
+
+type Fetch = (options?: Omit<RequestOptions, 'onUnauthorized'>) => Promise<void>;
 
 export interface Options<R> extends RequestOptions {
   prefetch?: boolean;
