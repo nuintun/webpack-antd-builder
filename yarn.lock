@@ -163,7 +163,7 @@
     detect-browser "^5.0.0"
     tslib "^2.0.3"
 
-"@antv/g2@4.1.30", "@antv/g2@^4.1.26", "@antv/g2@^4.1.34":
+"@antv/g2@4.1.32", "@antv/g2@^4.1.26", "@antv/g2@^4.1.34":
   version "4.1.34"
   resolved "https://registry.npmjs.org/@antv/g2/-/g2-4.1.34.tgz#6aa71a09c240b92914bc666f112310aabc0e3e16"
   integrity sha512-/UzyW1ZnE8Bw9zekyu1ZDcSxoFMKMHbRdru/SfZpnIfqRauF28HE3OluEetZq/JE8P5trEwnmPSJkMOnUNkCOw==
@@ -184,7 +184,7 @@
     "@antv/util" "~2.0.5"
     tslib "^2.0.0"
 
-"@antv/g2plot@2.3.35", "@antv/g2plot@^2.3.40":
+"@antv/g2plot@2.3.39", "@antv/g2plot@^2.3.40":
   version "2.3.40"
   resolved "https://registry.npmjs.org/@antv/g2plot/-/g2plot-2.3.40.tgz#bba76712f62325158727b0340615f8ec1e41f00d"
   integrity sha512-A6BqXoEZObauzBlVqOo15fS4PKKzZl/bJAvF4EdraUM5LhwU1yjGinMrPNi1AZ+fIsAwP6NhAFWmpd7TC+bLhw==
@@ -1437,9 +1437,9 @@
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
 "@types/node@*":
-  version "16.11.11"
-  resolved "https://registry.npmjs.org/@types/node/-/node-16.11.11.tgz#6ea7342dfb379ea1210835bada87b3c512120234"
-  integrity sha512-KB0sixD67CeecHC33MYn+eYARkqTheIRNuu97y2XMjR7Wu3XibO1vaY6VBV6O/a89SPI81cEUIYT87UqUWlZNw==
+  version "16.11.12"
+  resolved "https://registry.npmjs.org/@types/node/-/node-16.11.12.tgz#ac7fb693ac587ee182c3780c26eb65546a1a3c10"
+  integrity sha512-+2Iggwg7PxoO5Kyhvsq9VarmPbIelXP070HMImEpbtGCoyWNINQj4wzjbQCXzdHTRXnqufutJb5KAURZANNBAw==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1919,14 +1919,14 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-bizcharts@^4.1.14:
-  version "4.1.14"
-  resolved "https://registry.npmjs.org/bizcharts/-/bizcharts-4.1.14.tgz#6ca03a11f668ec4c69ad56f8b665446574f65840"
-  integrity sha512-CKwRcm4QfgrdoldSOvVPkCCGE5IrHN1S3KSBEfGk9jXme5POH3S3RQAQVr2+IxMb6NugrdV0zesivPfSSReL+w==
+bizcharts@^4.1.15:
+  version "4.1.15"
+  resolved "https://registry.npmjs.org/bizcharts/-/bizcharts-4.1.15.tgz#f893a613e5d231fc9c5472932c478b6b01b42340"
+  integrity sha512-Tx7gQhtZCxi9k5uOmtp5z36Otw5qaKtpn4rB07ZMtZA82qidCb9aRYLfD6ceQjrrBBaFQt9MSiSP6AjH/Dic8g==
   dependencies:
     "@antv/component" "*"
-    "@antv/g2" "4.1.30"
-    "@antv/g2plot" "2.3.35"
+    "@antv/g2" "4.1.32"
+    "@antv/g2plot" "2.3.39"
     "@antv/util" "*"
     "@babel/plugin-transform-modules-commonjs" "^7.12.1"
     "@babel/plugin-transform-runtime" "^7.12.10"
@@ -2320,7 +2320,7 @@ core-js-compat@^3.18.0, core-js-compat@^3.19.1:
     browserslist "^4.18.1"
     semver "7.0.0"
 
-core-js@^3.19.1, core-js@^3.19.3:
+core-js@^3.19.3:
   version "3.19.3"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.19.3.tgz#6df8142a996337503019ff3235a7022d7cdf4559"
   integrity sha512-LeLBMgEGSsG7giquSzvgBrTS7V5UL6ks3eQlUSbN8dJStlLFiRzUm5iqsRyzUB8carhfKjkJ2vzKqE6z1Vga9g==
@@ -5760,18 +5760,18 @@ webpack-dev-middleware@^5.2.2:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server-middleware@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.2.tgz#f244a2c8019375d11a973b8e465afcbe50807481"
-  integrity sha512-IZmHnzOiFrVWv2jpPNCjAnHykgPqUVI40o+MlI5gMXfTBsJ3VL0OwuSABzLwaV0GH2seakSQmKCIVvpEugIx8Q==
+webpack-dev-server-middleware@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.3.tgz#d62e4c3c621e92cd257fdb4423e57e75dd21b287"
+  integrity sha512-/VwjYVnvUxJBLX1rjV43jIY5A+lGgy1GT5yIVQVo0SapYyhhSchsZzBpxyXCnP4/wmJUxvaRUDdXTfLv41XIQw==
   dependencies:
     ansi-regex "^6.0.1"
     bufferutil "^4.0.5"
-    core-js "^3.19.1"
+    core-js "^3.19.3"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.7"
     webpack-dev-middleware "^5.2.2"
-    ws "^8.2.3"
+    ws "^8.3.0"
 
 webpack-sources@^3.2.2:
   version "3.2.2"
@@ -5870,7 +5870,7 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.6.tgz#e59fc509fb15ddfb65487ee9765c5a51dec5fe7b"
   integrity sha512-6GLgCqo2cy2A2rjCNFlxQS6ZljG/coZfZXclldI8FB/1G3CCI36Zd8xy2HrFVACi8tfk5XrgLQEk+P0Tnz9UcA==
 
-ws@^8.2.3:
+ws@^8.3.0:
   version "8.3.0"
   resolved "https://registry.npmjs.org/ws/-/ws-8.3.0.tgz#7185e252c8973a60d57170175ff55fdbd116070d"
   integrity sha512-Gs5EZtpqZzLvmIM59w4igITU57lrtYVFneaa434VROv4thzJyV6UjIL3D42lslWlI+D4KzLYnxSwtfuiO79sNw==
