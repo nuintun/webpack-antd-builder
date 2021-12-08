@@ -163,7 +163,7 @@
     detect-browser "^5.0.0"
     tslib "^2.0.3"
 
-"@antv/g2@4.1.30", "@antv/g2@^4.1.26", "@antv/g2@^4.1.34":
+"@antv/g2@4.1.32", "@antv/g2@^4.1.26", "@antv/g2@^4.1.34":
   version "4.1.34"
   resolved "https://registry.npmjs.org/@antv/g2/-/g2-4.1.34.tgz#6aa71a09c240b92914bc666f112310aabc0e3e16"
   integrity sha512-/UzyW1ZnE8Bw9zekyu1ZDcSxoFMKMHbRdru/SfZpnIfqRauF28HE3OluEetZq/JE8P5trEwnmPSJkMOnUNkCOw==
@@ -184,7 +184,7 @@
     "@antv/util" "~2.0.5"
     tslib "^2.0.0"
 
-"@antv/g2plot@2.3.35", "@antv/g2plot@^2.3.40":
+"@antv/g2plot@2.3.39", "@antv/g2plot@^2.3.40":
   version "2.3.40"
   resolved "https://registry.npmjs.org/@antv/g2plot/-/g2plot-2.3.40.tgz#bba76712f62325158727b0340615f8ec1e41f00d"
   integrity sha512-A6BqXoEZObauzBlVqOo15fS4PKKzZl/bJAvF4EdraUM5LhwU1yjGinMrPNi1AZ+fIsAwP6NhAFWmpd7TC+bLhw==
@@ -1919,14 +1919,14 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-bizcharts@^4.1.14:
-  version "4.1.14"
-  resolved "https://registry.npmjs.org/bizcharts/-/bizcharts-4.1.14.tgz#6ca03a11f668ec4c69ad56f8b665446574f65840"
-  integrity sha512-CKwRcm4QfgrdoldSOvVPkCCGE5IrHN1S3KSBEfGk9jXme5POH3S3RQAQVr2+IxMb6NugrdV0zesivPfSSReL+w==
+bizcharts@^4.1.15:
+  version "4.1.15"
+  resolved "https://registry.npmjs.org/bizcharts/-/bizcharts-4.1.15.tgz#f893a613e5d231fc9c5472932c478b6b01b42340"
+  integrity sha512-Tx7gQhtZCxi9k5uOmtp5z36Otw5qaKtpn4rB07ZMtZA82qidCb9aRYLfD6ceQjrrBBaFQt9MSiSP6AjH/Dic8g==
   dependencies:
     "@antv/component" "*"
-    "@antv/g2" "4.1.30"
-    "@antv/g2plot" "2.3.35"
+    "@antv/g2" "4.1.32"
+    "@antv/g2plot" "2.3.39"
     "@antv/util" "*"
     "@babel/plugin-transform-modules-commonjs" "^7.12.1"
     "@babel/plugin-transform-runtime" "^7.12.10"
