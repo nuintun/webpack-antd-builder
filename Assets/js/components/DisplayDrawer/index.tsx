@@ -59,7 +59,7 @@ export default memo(function DisplayDrawer({
   return (
     <>
       {triggerNode}
-      <FlexDrawer {...restProps} visible={visible} extra={extra(onCloseHandler)}>
+      <FlexDrawer {...restProps} visible={visible} onClose={onCloseHandler} extra={extra(onCloseHandler)}>
         {children}
       </FlexDrawer>
     </>
