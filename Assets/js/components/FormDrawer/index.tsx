@@ -13,7 +13,6 @@ export interface FormDrawerProps<V, R>
     Pick<Options<V, R>, SubmitPicked>,
     Pick<FlexDrawerProps, DrawerPicked> {
   action: string;
-  autoReset?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
   form?: FormInstance<V>;
