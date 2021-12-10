@@ -77,8 +77,9 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
 
   const getPopupContainer = useCallback(triggerNode => {
     const { body } = document;
+    const { current } = contentRef;
 
-    return triggerNode === body ? triggerNode : contentRef.current || body;
+    return triggerNode === body || current === null ? body : current;
   }, []);
 
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
