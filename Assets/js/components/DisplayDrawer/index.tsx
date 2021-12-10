@@ -3,7 +3,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '~js/components/FlexDrawer';
 
-export interface DisplayDrawerProps extends FlexDrawerProps {
+export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible'> {
   onOpen?: () => void;
   onClose?: () => void;
   children?: React.ReactNode;
@@ -59,7 +59,7 @@ export default memo(function DisplayDrawer({
   return (
     <>
       {triggerNode}
-      <FlexDrawer {...restProps} extra={extra(onCloseHandler)}>
+      <FlexDrawer {...restProps} visible={visible} extra={extra(onCloseHandler)}>
         {children}
       </FlexDrawer>
     </>
