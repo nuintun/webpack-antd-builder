@@ -16,15 +16,23 @@ export default memo(function FlexDrawer({
   height = 576,
   ...restProps
 }: FlexDrawerProps): React.ReactElement {
-  const container = useRef<HTMLDivElement>(null);
-  const getContainer = useCallback(() => container.current || document.body, []);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isBrokenWidth = useMedia(`(max-width: ${isString(width) ? width : `${width}px`})`);
   const isBrokenHeight = useMedia(`(max-height: ${isString(height) ? height : `${height}px`})`);
 
+  const getPopupContainer = useCallback((triggerNode?: HTMLElement) => {
+    const { body } = document;
+    const { current } = containerRef;
+
+    return triggerNode === body || current === null ? body : current;
+  }, []);
+
+  const getTargetContainer = useCallback(() => containerRef.current || document.body, []);
+
   return (
     <Drawer {...restProps} width={isBrokenWidth ? '100%' : width} height={isBrokenHeight ? '100%' : height}>
-      <div ref={container} style={containerStyle}>
-        <ConfigProvider getPopupContainer={getContainer} getTargetContainer={getContainer}>
+      <div ref={containerRef} style={containerStyle}>
+        <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
           {children}
         </ConfigProvider>
       </div>
