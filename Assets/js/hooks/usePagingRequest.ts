@@ -131,6 +131,7 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
+  const initURLRef = usePersistRef(url);
   const responseRef = useRef<Response<I, E>>({});
   const searchRef = useRef<Search | false>(false);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
@@ -170,7 +171,7 @@ export default function usePagingRequest<I, E, T>(
       setRef(paginationRef, false);
     }
 
-    return request<Response<I, E>>(url, { ...options, query })
+    return request<Response<I, E>>(initURLRef.current, { ...options, query })
       .then(
         response => {
           const { items }: Response<I, E> = response;

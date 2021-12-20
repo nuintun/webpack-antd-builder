@@ -52,13 +52,14 @@ export default function useResponse<R, T>(
   request: Request,
   options: Options<R> | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch] {
+  const initURLRef = usePersistRef(url);
   const [response, setResponse] = useState<R | T>();
   const initOptionsRef = usePersistRef(options as TransformOptions<R, T>);
 
   const fetch = useCallback<Fetch>(options => {
     const initOptions = initOptionsRef.current;
 
-    return request<R>(url, { ...initOptions, ...options })
+    return request<R>(initURLRef.current, { ...initOptions, ...options })
       .then(
         response => {
           const { transform, onSuccess } = initOptionsRef.current;

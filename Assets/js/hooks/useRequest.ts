@@ -35,14 +35,14 @@ export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
 export default function useRequest(
   optinos: Options = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, request: <R>(input: string, options?: Options) => Promise<R>] {
+): [loading: boolean, request: <R>(url: string, options?: Options) => Promise<R>] {
   const retainRef = useRef(0);
   const isMounted = useIsMounted();
   const history = useHistory<any>();
   const initOptionsRef = usePersistRef(optinos);
   const [loading, setLoading] = useLazyState(initialLoadingState, optinos.delay);
 
-  const request = useCallback(<R>(input: string, options: Options = {}): Promise<R> => {
+  const request = useCallback(<R>(url: string, options: Options = {}): Promise<R> => {
     return new Promise<R>((resolve, reject) => {
       setLoading(true);
 
@@ -62,7 +62,7 @@ export default function useRequest(
 
       const headers = { ...mime.json, ...options.headers };
 
-      return fetch<R>(input, { ...initOptions, ...options, headers, onUnauthorized })
+      return fetch<R>(url, { ...initOptions, ...options, headers, onUnauthorized })
         .then(
           response => {
             isMounted() && resolve(response);
