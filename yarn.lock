@@ -2284,10 +2284,10 @@ core-js-compat@^3.18.0, core-js-compat@^3.19.1:
     browserslist "^4.19.1"
     semver "7.0.0"
 
-core-js@^3.20.0:
-  version "3.20.0"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.0.tgz#1c5ac07986b8d15473ab192e45a2e115a4a95b79"
-  integrity sha512-KjbKU7UEfg4YPpskMtMXPhUKn7m/1OdTHTVjy09ScR2LVaoUXe8Jh0UdvN2EKUR6iKTJph52SJP95mAB0MnVLQ==
+core-js@^3.20.0, core-js@^3.20.1:
+  version "3.20.1"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.1.tgz#eb1598047b7813572f1dc24b7c6a95528c99eef3"
+  integrity sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==
 
 cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
   version "7.0.1"
@@ -5695,18 +5695,18 @@ webpack-dev-middleware@^5.3.0:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server-middleware@^0.7.4:
-  version "0.7.4"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.4.tgz#4e159567280a812c575f38e2356776baa3393779"
-  integrity sha512-+Ubha8DdqIWdRXbmzprwPBpalQ7BQI8w0tiFzdxngavyuLk0admfFBJEK+3DibJ6KYjypQgpOONYWFOH+Yxl1w==
+webpack-dev-server-middleware@^0.7.6:
+  version "0.7.6"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.6.tgz#6229655e55c88cbe4a110976701990c9405ccd2e"
+  integrity sha512-2CxxUvF6WlPLFUH5U12Hvn5qUPrvKc/pEEO5F+PvHHbSY2K648TQs+1DFLUEer3TlYT+fuJAD+KuwcIqQ//8ig==
   dependencies:
     ansi-regex "^6.0.1"
     bufferutil "^4.0.5"
-    core-js "^3.20.0"
+    core-js "^3.20.1"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.7"
     webpack-dev-middleware "^5.3.0"
-    ws "^8.3.0"
+    ws "^8.4.0"
 
 webpack-sources@^3.2.2:
   version "3.2.2"
@@ -5805,7 +5805,7 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.6.tgz#e59fc509fb15ddfb65487ee9765c5a51dec5fe7b"
   integrity sha512-6GLgCqo2cy2A2rjCNFlxQS6ZljG/coZfZXclldI8FB/1G3CCI36Zd8xy2HrFVACi8tfk5XrgLQEk+P0Tnz9UcA==
 
-ws@^8.3.0:
+ws@^8.4.0:
   version "8.4.0"
   resolved "https://registry.npmjs.org/ws/-/ws-8.4.0.tgz#f05e982a0a88c604080e8581576e2a063802bed6"
   integrity sha512-IHVsKe2pjajSUIl4KYMQOdlyliovpEPquKkqbwswulszzI7r0SfQrxnXdWAEqOlDCLrVSJzo+O1hAwdog2sKSQ==
