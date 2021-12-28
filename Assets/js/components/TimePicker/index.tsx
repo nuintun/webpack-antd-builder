@@ -1,6 +1,6 @@
 import 'antd/es/time-picker/style';
 
-import * as React from 'react';
+import { forwardRef, useMemo } from 'react';
 
 import { Dayjs } from 'dayjs';
 import DatePicker from '../DatePicker';
@@ -17,7 +17,7 @@ export interface TimeRangePickerProps extends Omit<RangePickerTimeProps<Dayjs>, 
   popupClassName?: string;
 }
 
-const RangePicker = React.forwardRef<any, TimeRangePickerProps>(({ popupClassName, ...restProps }, ref) => (
+const RangePicker = forwardRef<any, TimeRangePickerProps>(({ popupClassName, ...restProps }, ref) => (
   <InternalRangePicker {...restProps} ref={ref} picker="time" dropdownClassName={popupClassName} />
 ));
 
@@ -25,8 +25,8 @@ export interface TimePickerProps extends Omit<PickerTimeProps<Dayjs>, 'picker'> 
   popupClassName?: string;
 }
 
-const TimePicker = React.forwardRef<any, TimePickerProps>(({ renderExtraFooter, popupClassName, ...restProps }, ref) => {
-  const internalRenderExtraFooter = React.useMemo(() => {
+const TimePicker = forwardRef<any, TimePickerProps>(({ renderExtraFooter, popupClassName, ...restProps }, ref) => {
+  const internalRenderExtraFooter = useMemo(() => {
     return renderExtraFooter;
   }, [renderExtraFooter]);
 

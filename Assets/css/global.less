@@ -103,15 +103,24 @@ body {
 .ui-table {
   border-top: 1px solid @table-border-color;
 
-  &.ant-table-bordered {
-    border-top: none;
-  }
+  .ant-table {
+    .ant-table-content {
+      overflow-x: auto;
 
-  .ant-table-content {
-    overflow-x: auto;
+      table {
+        white-space: nowrap;
+      }
+    }
 
-    table {
-      white-space: nowrap;
+    &.ant-table-bordered {
+      > .ant-table-container {
+        > .ant-table-content,
+        > .ant-table-header {
+          > table {
+            border-top: none;
+          }
+        }
+      }
     }
   }
 }
