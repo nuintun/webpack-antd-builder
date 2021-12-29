@@ -27,7 +27,9 @@ const DEFAULT_CONFIRM_ICON = <QuestionCircleOutlined style={{ color: '#f00' }} /
 
 function ActionButton<T>(props: ActionButtonProps<T>): React.ReactElement {
   const {
+    body,
     delay,
+    query,
     action,
     notify,
     method,
@@ -39,8 +41,6 @@ function ActionButton<T>(props: ActionButtonProps<T>): React.ReactElement {
     requestInit,
     confirmInit,
     confirmTitle,
-    body: initBody,
-    query: initQuery,
     confirmIcon = DEFAULT_CONFIRM_ICON,
     ...restProps
   } = props;
