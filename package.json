@@ -37,7 +37,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.0.6",
-    "antd": "^4.18.1",
+    "antd": "^4.18.2",
     "classnames": "^2.3.1",
     "core-js": "^3.20.1",
     "dayjs": "^1.10.7",
