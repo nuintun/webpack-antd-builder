@@ -1952,10 +1952,10 @@ buffer-from@^1.0.0:
   resolved "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz#2b146a6fd72e80b4f55d255f35ed59a3a9a41bd5"
   integrity sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==
 
-bufferutil@^4.0.5:
-  version "4.0.5"
-  resolved "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.5.tgz#da9ea8166911cc276bf677b8aed2d02d31f59028"
-  integrity sha512-HTm14iMQKK2FjFLRTM5lAVcyaUzOnqbPtesFIvREgXpJHdQm8bWS+GkQgIkfaBYRHuCnea7w8UVNfwiAQhlr9A==
+bufferutil@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.6.tgz#ebd6c67c7922a0e902f053e5d8be5ec850e48433"
+  integrity sha512-jduaYOYtnio4aIAyc6UbvPCVcgq7nYpVnucyxr6eCYg/Woad9Hf/oxxBRDnGGjPfjUm6j5O/uBWhIu4iLebFaw==
   dependencies:
     node-gyp-build "^4.3.0"
 
@@ -2284,10 +2284,10 @@ core-js-compat@^3.18.0, core-js-compat@^3.19.1:
     browserslist "^4.19.1"
     semver "7.0.0"
 
-core-js@^3.20.1:
-  version "3.20.1"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.1.tgz#eb1598047b7813572f1dc24b7c6a95528c99eef3"
-  integrity sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==
+core-js@^3.20.1, core-js@^3.20.2:
+  version "3.20.2"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.2.tgz#46468d8601eafc8b266bd2dd6bf9dee622779581"
+  integrity sha512-nuqhq11DcOAbFBV4zCbKeGbKQsUDRqTX0oqx7AttUBuqe3h20ixsE039QHelbL6P4h+9kytVqyEtyZ6gsiwEYw==
 
 cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
   version "7.0.1"
@@ -5628,10 +5628,10 @@ url-parse-lax@^3.0.0:
   dependencies:
     prepend-http "^2.0.0"
 
-utf-8-validate@^5.0.7:
-  version "5.0.7"
-  resolved "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.7.tgz#c15a19a6af1f7ad9ec7ddc425747ca28c3644922"
-  integrity sha512-vLt1O5Pp+flcArHGIyKEQq883nBt8nN8tVBcoL0qUXj2XT1n7p70yGIq2VK98I5FdZ1YHc0wk/koOnHjnXWk1Q==
+utf-8-validate@^5.0.8:
+  version "5.0.8"
+  resolved "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.8.tgz#4a735a61661dbb1c59a0868c397d2fe263f14e58"
+  integrity sha512-k4dW/Qja1BYDl2qD4tOMB9PFVha/UJtxTc1cXYOe3WwA/2m0Yn4qB7wLMpJyLJ/7DR0XnTut3HsCSzDT4ZvKgA==
   dependencies:
     node-gyp-build "^4.3.0"
 
@@ -5689,16 +5689,16 @@ webpack-dev-middleware@^5.3.0:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server-middleware@^0.7.6:
-  version "0.7.6"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.6.tgz#6229655e55c88cbe4a110976701990c9405ccd2e"
-  integrity sha512-2CxxUvF6WlPLFUH5U12Hvn5qUPrvKc/pEEO5F+PvHHbSY2K648TQs+1DFLUEer3TlYT+fuJAD+KuwcIqQ//8ig==
+webpack-dev-server-middleware@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.7.7.tgz#7c4b7264822e51ecd27c9d8b556b9768210daa97"
+  integrity sha512-sGD3TEoPHtBJh+dZCXK3kig8CzCOQC9REJ0ESQqH1UX/2ADQra/2zpHSK78/BKAE24TedlDlt5c8kI2x+5kgDg==
   dependencies:
     ansi-regex "^6.0.1"
-    bufferutil "^4.0.5"
-    core-js "^3.20.1"
+    bufferutil "^4.0.6"
+    core-js "^3.20.2"
     koa-compose "^4.1.0"
-    utf-8-validate "^5.0.7"
+    utf-8-validate "^5.0.8"
     webpack-dev-middleware "^5.3.0"
     ws "^8.4.0"
 
