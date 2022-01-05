@@ -5,7 +5,6 @@
 
 import React from 'react';
 
-import isURL from './isURL';
 import { preorderTrees } from './tree';
 
 type Key = React.Key;
@@ -67,13 +66,8 @@ export type MenusMap<T> = { [path: string]: MenuItem<T>[] };
 
 export type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
 
-/**
- * @function isAbsolute
- * @param path 路径
- */
-function isAbsolute(path: string): boolean {
-  return /^\//.test(path) || isURL(path);
-}
+// See: https://github.com/sindresorhus/is-absolute-url
+const IS_ABSOLUTE_REGEX = /^(?:[a-zA-Z][a-zA-Z\d+\-.]*?:|\/)/;
 
 /**
  * @function normalizeURL
@@ -85,7 +79,7 @@ function normalizeURL(path: string, base?: string): string {
     throw new RangeError(`route path can't be empty`);
   }
 
-  if (!base || isAbsolute(path)) return path;
+  if (!base || IS_ABSOLUTE_REGEX.test(path)) return path;
 
   const sep = /\/$/.test(base) ? '' : '/';
 
@@ -104,7 +98,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
   const breadcrumbs: Breadcrumbs<T> = {};
 
   // 菜单映射表
-  let menusMap: MenusMap<T>;
+  let menusMap: MenusMap<T> = { [root]: [] };
 
   // 树列表前序深度遍历
   preorderTrees(
@@ -127,11 +121,12 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       }
     },
     (node, parentNode) => {
-      // 当前节点是否为根节点
-      const isRoot = parentNode === undefined;
+      // 当前节点为根节点
+      if (parentNode === undefined) {
+        // 保存前一个根节点的菜单映射表
+        menus.push(...menusMap[root]);
 
-      // 当前节点为根节点时初始化菜单映射表
-      if (isRoot) {
+        // 重新初始化菜单映射表
         menusMap = { [root]: [] };
       }
 
@@ -197,13 +192,11 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
 
         breadcrumbs[path] = breadcrumb;
       }
-
-      // 当前节点为根节点时保存菜单映射表
-      if (isRoot) {
-        menus.push(...menusMap[root]);
-      }
     }
   );
+
+  // 保存最后一个根节点的菜单映射表
+  menus.push(...menusMap[root]);
 
   return { routes, menus, breadcrumbs };
 }

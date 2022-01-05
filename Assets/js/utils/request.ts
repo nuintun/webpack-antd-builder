@@ -87,7 +87,7 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   const code = isStatusOk(status) ? 200 : status;
 
   return response.text().then((payload: any) => {
-    return { code, msg: resloveMessage(code), payload: payload };
+    return { code, msg: resloveMessage(code), payload };
   });
 }
 
