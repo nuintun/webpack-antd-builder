@@ -35,7 +35,7 @@ export function preorderTrees<T>(trees: T[], resolve: Resolve<T>, callback: Call
 
       const childNodes = resolve(node);
 
-      if (childNodes && childNodes.length > 0) {
+      if (!isUndef(childNodes) && childNodes.length > 0) {
         waiting.push(current);
         parentNodes.push(node);
 

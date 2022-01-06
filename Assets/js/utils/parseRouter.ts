@@ -55,6 +55,7 @@ export type BreadcrumbItem<T> = T & {
   name: string;
   path: string;
   href?: string;
+  parent?: string;
 };
 
 export interface Router<T> {
@@ -111,7 +112,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
     parentNode => {
       const { children } = parentNode;
 
-      if (children) {
+      if (!isUndef(children)) {
         return children.map(node => {
           const { href: nodeHref } = node;
           const path = normalizeURL(node.path, parentNode.path);
@@ -122,8 +123,11 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       }
     },
     (node, parentNode) => {
+      // 是否为根节点
+      const isRootNode = isUndef(parentNode);
+
       // 当前节点为根节点
-      if (isUndef(parentNode)) {
+      if (isRootNode) {
         // 保存前一个根节点的菜单映射表
         menus.push(...menusMap[root]);
 
@@ -148,8 +152,9 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         ...rest
       } = node;
       const key = href.toLowerCase();
-      const hasComponent = !!component;
-      const hasChildren = children && children.length > 0;
+      const hasIcon = !isUndef(icon);
+      const hasComponent = !isUndef(component);
+      const hasChildren = !isUndef(children) && children.length > 0;
 
       // 处理路由
       if (component) {
@@ -167,8 +172,12 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
 
       // 处理菜单
       if (hasComponent || hasChildren) {
-        const refer = parentNode ? parentNode.path : root;
-        const menu = { key, name, path, href, icon, ...rest } as MenuItem<T>;
+        const refer = isRootNode ? root : parentNode.path;
+        const menu = { key, name, path, href, ...rest } as MenuItem<T>;
+
+        if (hasIcon) {
+          menu.icon = icon;
+        }
 
         if (hasChildren && !hideChildrenInMenu) {
           menusMap[path] = menu.children = hideInMenu ? menusMap[refer] : [];
@@ -185,10 +194,18 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
 
       // 处理面包屑
       if (!hideInBreadcrumb) {
-        const breadcrumb = { key, name, path, icon, ...rest } as BreadcrumbItem<T>;
+        const breadcrumb = { key, name, path, ...rest } as BreadcrumbItem<T>;
+
+        if (hasIcon) {
+          breadcrumb.icon = icon;
+        }
 
         if (hasComponent) {
           breadcrumb.href = href;
+        }
+
+        if (!isRootNode) {
+          breadcrumb.parent = parentNode.path;
         }
 
         breadcrumbs[path] = breadcrumb;
