@@ -55,7 +55,6 @@ export type BreadcrumbItem<T> = T & {
   name: string;
   path: string;
   href?: string;
-  parent?: string;
 };
 
 export interface Router<T> {
@@ -202,10 +201,6 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
 
         if (hasComponent) {
           breadcrumb.href = href;
-        }
-
-        if (!isRootNode) {
-          breadcrumb.parent = parentNode.path;
         }
 
         breadcrumbs[path] = breadcrumb;
