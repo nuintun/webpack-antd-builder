@@ -22,6 +22,15 @@ export function isString(value: any): value is string {
 }
 
 /**
+ * @function isUndef
+ * @description 是否为未定义
+ * @param value 需要验证的值
+ */
+export function isUndef(value: any): value is undefined {
+  return value === undefined;
+}
+
+/**
  * @function isFunction
  * @description 是否为函数
  * @param value 需要验证的值

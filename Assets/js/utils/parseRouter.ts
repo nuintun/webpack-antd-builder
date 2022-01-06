@@ -5,6 +5,7 @@
 
 import React from 'react';
 
+import { isUndef } from './utils';
 import { preorderTrees } from './tree';
 
 type Key = React.Key;
@@ -122,7 +123,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
     },
     (node, parentNode) => {
       // 当前节点为根节点
-      if (parentNode === undefined) {
+      if (isUndef(parentNode)) {
         // 保存前一个根节点的菜单映射表
         menus.push(...menusMap[root]);
 

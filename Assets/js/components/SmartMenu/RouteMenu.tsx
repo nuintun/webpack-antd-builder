@@ -100,17 +100,9 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   const items = useMemo(() => menuRender(menus, props), [menus, props]);
   const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
 
-  const memoizeFlattenMenus = useCallback<typeof flattenMenus>(menus => {
-    return (memoizeOne(flattenMenus) as typeof flattenMenus)(menus);
-  }, []);
-
-  const memoizeGetExpandKeys = useCallback<typeof getExpandKeys>((path, flatMenus) => {
-    return (memoizeOne(getExpandKeys) as typeof getExpandKeys)(path, flatMenus);
-  }, []);
-
-  const memoizeMergeKeys = useCallback<typeof mergeKeys>((prevKeys, nextKeys, flatMenus) => {
-    return (memoizeOne(mergeKeys) as typeof mergeKeys)(prevKeys, nextKeys, flatMenus);
-  }, []);
+  const memoizeMergeKeys = useMemo(() => memoizeOne(mergeKeys), []);
+  const memoizeFlattenMenus = useMemo(() => memoizeOne(flattenMenus), []);
+  const memoizeGetExpandKeys = useMemo(() => memoizeOne(getExpandKeys), []);
 
   const onOpenChangeHander = useCallback((nextOpenKeys: React.Key[]): void => {
     const keys = nextOpenKeys.map(key => key.toString());

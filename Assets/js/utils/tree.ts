@@ -2,6 +2,8 @@
  * @module tree
  */
 
+import { isUndef } from './utils';
+
 export type Resolve<T> = (node: T) => T[] | void;
 
 export type Callback<T> = (node: T, parentNode?: T) => void;
@@ -19,7 +21,7 @@ export function preorderTrees<T>(trees: T[], resolve: Resolve<T>, callback: Call
 
   let current: Iterator<T, T> | undefined = trees.values();
 
-  while (current !== undefined) {
+  while (!isUndef(current)) {
     const { done, value: node } = current.next();
 
     if (done) {
