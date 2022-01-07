@@ -69,7 +69,7 @@ export function isFunction(value: any): value is Function {
 export function formatThousands(number: number | string | undefined = 0, precision: number = 2): string {
   number = Number(number);
 
-  const { Intl } = globalThis;
+  const { Intl } = window;
 
   if (Intl) {
     return new Intl.NumberFormat('en-us', {

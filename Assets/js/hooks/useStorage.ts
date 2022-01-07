@@ -7,8 +7,6 @@ import { useCallback, useMemo } from 'react';
 import { isFunction } from '~js/utils/utils';
 import createStorage from '~js/utils/storage';
 
-const { sessionStorage, localStorage } = globalThis;
-
 export interface Options<V> {
   session?: boolean;
   serializer?: (value: V) => string;
@@ -46,6 +44,7 @@ export default function useStorage<V = null>(
   const { session, serializer, deserializer, defaultValue } = options as DefaultValueOptions<V>;
 
   const storage = useMemo(() => {
+    const { sessionStorage, localStorage } = window;
     const storage = session ? sessionStorage : localStorage;
 
     return createStorage<V>(storage, serializer, deserializer);
