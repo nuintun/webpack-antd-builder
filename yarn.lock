@@ -25,10 +25,10 @@
     classnames "^2.2.6"
     rc-util "^5.9.4"
 
-"@ant-design/plots@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/@ant-design/plots/-/plots-1.0.6.tgz#082347c2dc4632a2edf85804ef3d04433e95ddfc"
-  integrity sha512-ms0v9XTlx0gQ5nkqgkymaxqBM49kLKIONXMpenRSQ4vw5HTiXdVAj78r7fTEnO8Oj1bL+Fi0TDoMDTsCuJcyBQ==
+"@ant-design/plots@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/@ant-design/plots/-/plots-1.0.7.tgz#62643e5c2d239c7dd002e71d8e04642b924f50e6"
+  integrity sha512-AeYI1yDZgn7AEma3GLxQiaXsENhkTl1fCr4NUI+4Sxh891XhZ1u2iqVql8DdwfBAdpVaeR+dq3E1bYXUs0uqNQ==
   dependencies:
     "@antv/g2plot" "^2.2.11"
     react-content-loader "^5.0.4"
