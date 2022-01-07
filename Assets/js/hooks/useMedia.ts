@@ -23,7 +23,7 @@ export default function useMedia(
   const [matched, setState] = useState(isNull(mql) ? initialState : mql.matches);
 
   useIsomorphicLayoutEffect(() => {
-    if (mql) {
+    if (!isNull(mql)) {
       const onMediaChange = () => {
         const matched = mql.matches;
 
