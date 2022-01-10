@@ -96,7 +96,7 @@ export default function useList<I, E, T>(
   pagination: PaginationProps | false,
   refs: Refs<I, E>
 ] {
-  const resolvePagingOptions = usePagingOptions(options.pagination);
+  const getPagingOptions = usePagingOptions(options.pagination);
   const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(
     url,
     options as TransformOptions<I, T>,
@@ -121,7 +121,7 @@ export default function useList<I, E, T>(
       onChange,
       current: page,
       onShowSizeChange: onChange,
-      ...resolvePagingOptions(pageSize)
+      ...getPagingOptions(pageSize)
     };
   }
 

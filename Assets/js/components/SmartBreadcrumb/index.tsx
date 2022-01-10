@@ -4,12 +4,12 @@ import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
+import { isString, isUndef } from '~js/utils/utils';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BreadcrumbItem as Item } from '~js/utils/parseRouter';
-import { isString, isUndef, pathToPaths } from '~js/utils/utils';
 
 type Breadcrumbs<T> = { [path: string]: Item<T> };
-type BreadcrumbItem<T> = Item<T> & { current: boolean };
+type BreadcrumbItem<T> = Item<T> & { active: boolean };
 
 export interface SmartBreadcrumbProps<T> extends RouteComponentProps {
   breadcrumbs: Breadcrumbs<T>;
@@ -27,35 +27,42 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | un
   return icon;
 }
 
-function getBreadcrumbItems<T>(route: string, pathname: string, breadcrumbs: Breadcrumbs<T>): BreadcrumbItem<T>[] {
-  const unique: { [path: string]: true } = {};
+function getBreadcrumbItem<T>(item: Item<T>, active: boolean) {
+  const { icon } = item;
+  const breadcrumbItem = { ...item, active };
+
+  if (!isUndef(icon)) {
+    breadcrumbItem.icon = iconRender(icon);
+  }
+
+  return breadcrumbItem;
+}
+
+function getBreadcrumbItems<T>(path: string, pathname: string, breadcrumbs: Breadcrumbs<T>): BreadcrumbItem<T>[] {
   const breadcrumbItems: BreadcrumbItem<T>[] = [];
-  const paths = ['/', ...pathToPaths(route), pathname];
 
-  for (const path of paths) {
-    if (!unique[path]) {
-      unique[path] = true;
+  let active = true;
+  let current = breadcrumbs[pathname] || breadcrumbs[path];
 
-      const breadcrumb = breadcrumbs[path];
+  while (!isUndef(current)) {
+    breadcrumbItems.push(getBreadcrumbItem(current, active));
 
-      if (breadcrumb) {
-        const breadcrumbItem = {
-          ...breadcrumb,
-          current: path === pathname
-        };
+    active = false;
 
-        const { icon } = breadcrumb;
+    const { parent } = current;
 
-        if (!isUndef(icon)) {
-          breadcrumbItem.icon = iconRender(icon);
-        }
-
-        breadcrumbItems.push(breadcrumbItem);
-      }
+    if (isUndef(parent)) {
+      break;
+    } else {
+      current = parent;
     }
   }
 
-  return breadcrumbItems;
+  if (pathname !== '/') {
+    breadcrumbItems.push(getBreadcrumbItem(breadcrumbs['/'], active));
+  }
+
+  return breadcrumbItems.reverse();
 }
 
 function SmartBreadcrumb<T>({ match, location, breadcrumbs }: SmartBreadcrumbProps<T>): React.ReactElement {
@@ -67,13 +74,13 @@ function SmartBreadcrumb<T>({ match, location, breadcrumbs }: SmartBreadcrumbPro
     <Breadcrumb className="ui-breadcrumb">
       {breadcrumbItems.map(breadcrumbItem => (
         <Breadcrumb.Item key={breadcrumbItem.key}>
-          {breadcrumbItem.href && !breadcrumbItem.current ? (
+          {breadcrumbItem.href && !breadcrumbItem.active ? (
             <Link className="ui-breadcrumb-link" to={breadcrumbItem.href}>
               {breadcrumbItem.icon}
               <span>{breadcrumbItem.name}</span>
             </Link>
           ) : (
-            <span className={classNames('ui-breadcrumb-item', { 'ui-breadcrumb-current': breadcrumbItem.current })}>
+            <span className={classNames('ui-breadcrumb-item', { 'ui-breadcrumb-active': breadcrumbItem.active })}>
               {breadcrumbItem.icon}
               <span>{breadcrumbItem.name}</span>
             </span>

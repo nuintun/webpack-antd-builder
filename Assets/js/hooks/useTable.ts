@@ -103,7 +103,7 @@ export default function useTable<I, E, T>(
   const searchRef = useRef<Search | false>(false);
   const filterRef = useRef<Filter | false>(false);
   const sorterRef = useRef<Sorter | false>(false);
-  const resolvePagingOptions = usePagingOptions(options.pagination);
+  const getPagingOptions = usePagingOptions(options.pagination);
   const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
     url,
@@ -160,7 +160,7 @@ export default function useTable<I, E, T>(
       total,
       pageSize,
       current: page,
-      ...resolvePagingOptions(pageSize)
+      ...getPagingOptions(pageSize)
     };
   }
 
