@@ -25,7 +25,7 @@ export interface FormDrawerProps<V, R>
 
 function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: () => void): React.ReactNode {
   return (
-    <Space className="fn-right">
+    <Space wrap>
       <Button htmlType="reset" onClick={onClose}>
         取消
       </Button>

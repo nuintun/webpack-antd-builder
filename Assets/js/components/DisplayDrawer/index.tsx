@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '~js/components/FlexDrawer';
 
 export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible'> {
@@ -14,11 +14,9 @@ export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible'> {
 
 function defaultExtra(onClose: () => void): React.ReactNode {
   return (
-    <Space className="fn-right">
-      <Button htmlType="reset" onClick={onClose}>
-        取消
-      </Button>
-    </Space>
+    <Button htmlType="reset" onClick={onClose}>
+      取消
+    </Button>
   );
 }
 
