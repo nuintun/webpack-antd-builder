@@ -42,24 +42,28 @@ function getBreadcrumbItems<T>(path: string, pathname: string, breadcrumbs: Brea
   const breadcrumbItems: BreadcrumbItem<T>[] = [];
 
   let active = true;
+  let hasHome = false;
   let current = breadcrumbs[pathname] || breadcrumbs[path];
 
   while (!isUndef(current)) {
+    const { path, parent } = current;
+
     breadcrumbItems.push(getBreadcrumbItem(current, active));
 
     active = false;
 
-    const { parent } = current;
-
     if (isUndef(parent)) {
+      hasHome = path === '/';
       break;
     } else {
       current = parent;
     }
   }
 
-  if (pathname !== '/') {
-    breadcrumbItems.push(getBreadcrumbItem(breadcrumbs['/'], active));
+  const home = breadcrumbs['/'];
+
+  if (!hasHome && !isUndef(home)) {
+    breadcrumbItems.push(getBreadcrumbItem(home, active));
   }
 
   return breadcrumbItems.reverse();
