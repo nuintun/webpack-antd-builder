@@ -22,9 +22,8 @@ export type Route<T> = T & {
   strict?: boolean;
   sensitive?: boolean;
   hideInMenu?: boolean;
+  hideSubMenu?: boolean;
   children?: Route<T>[];
-  hideInBreadcrumb?: boolean;
-  hideChildrenInMenu?: boolean;
   component?: React.ComponentType<any>;
   target?: React.HTMLAttributeAnchorTarget;
 };
@@ -121,7 +120,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         });
       }
     },
-    (node, parentNode) => {
+    ({ icon, path, href, exact, strict, children, component, sensitive, hideInMenu, hideSubMenu, ...rest }, parentNode) => {
       // 是否为根节点
       const isRootNode = isUndef(parentNode);
 
@@ -135,31 +134,15 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       }
 
       // 当前节点数据操作
-      const {
-        name,
-        icon,
-        path,
-        href,
-        exact,
-        strict,
-        children,
-        component,
-        sensitive,
-        hideInMenu,
-        hideInBreadcrumb,
-        hideChildrenInMenu,
-        ...rest
-      } = node;
       const key = href.toLowerCase();
       const hasIcon = !isUndef(icon);
       const hasComponent = !isUndef(component);
       const hasChildren = !isUndef(children) && children.length > 0;
 
       // 处理路由
-      if (component) {
+      if (hasComponent) {
         routes.push({
           key,
-          name,
           path,
           component,
           exact: exact !== false,
@@ -172,13 +155,13 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       // 处理菜单
       if (hasComponent || hasChildren) {
         const refer = isRootNode ? root : parentNode.path;
-        const menu = { key, name, path, href, ...rest } as MenuItem<T>;
+        const menu = { key, path, href, ...rest } as MenuItem<T>;
 
         if (hasIcon) {
           menu.icon = icon;
         }
 
-        if (hasChildren && !hideChildrenInMenu) {
+        if (hasChildren && !hideSubMenu) {
           menusMap[path] = menu.children = hideInMenu ? menusMap[refer] : [];
         }
 
@@ -192,19 +175,17 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       }
 
       // 处理面包屑
-      if (!hideInBreadcrumb) {
-        const breadcrumb = { key, name, path, ...rest } as BreadcrumbItem<T>;
+      const breadcrumb = { key, path, ...rest } as BreadcrumbItem<T>;
 
-        if (hasIcon) {
-          breadcrumb.icon = icon;
-        }
-
-        if (hasComponent) {
-          breadcrumb.href = href;
-        }
-
-        breadcrumbs[path] = breadcrumb;
+      if (hasIcon) {
+        breadcrumb.icon = icon;
       }
+
+      if (hasComponent) {
+        breadcrumb.href = href;
+      }
+
+      breadcrumbs[path] = breadcrumb;
     }
   );
 
