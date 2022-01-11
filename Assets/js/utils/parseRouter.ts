@@ -112,10 +112,12 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
       const { children } = parentNode;
 
       if (!isUndef(children)) {
+        const { path: parentPath, href: parentHref } = parentNode;
+
         return children.map(node => {
           const { href: nodeHref } = node;
-          const path = normalizeURL(node.path, parentNode.path);
-          const href = nodeHref ? normalizeURL(nodeHref, parentNode.href) : path;
+          const path = normalizeURL(node.path, parentPath);
+          const href = isUndef(nodeHref) ? path : normalizeURL(nodeHref, parentHref);
 
           return { ...node, path, href };
         });
