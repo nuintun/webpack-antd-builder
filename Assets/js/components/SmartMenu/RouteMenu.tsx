@@ -118,7 +118,7 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   }, []);
 
   useEffect(() => {
-    const { match, menus, location, onOpenChange, collapsed = false } = propsRef.current;
+    const { match, menus, location, onOpenChange, collapsed = false } = props;
 
     if (
       !prevProps ||
