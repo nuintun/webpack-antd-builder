@@ -2033,9 +2033,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297:
-  version "1.0.30001298"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001298.tgz#0e690039f62e91c3ea581673d716890512e7ec52"
-  integrity sha512-AcKqikjMLlvghZL/vfTHorlQsLDhGRalYf1+GmWCf5SCMziSGjRYQW/JEksj14NaYHIR6KIhrFAy0HV5C25UzQ==
+  version "1.0.30001299"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001299.tgz#d753bf6444ed401eb503cbbe17aa3e1451b5a68c"
+  integrity sha512-iujN4+x7QzqA2NCSrS5VUy+4gLmRd4xv6vbBBsmfVqTx8bLAD8097euLqQgKxSVLvxjSDcvF1T/i9ocgnUFexw==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -2659,9 +2659,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.17:
-  version "1.4.39"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.39.tgz#19c8e8ff712fe62bfdd4f3fe1c3b3fb4aa179ebb"
-  integrity sha512-bFH3gdRq/l7WlzSleiO6dwpZH3RhiJ8vlMq0tOJMfT+5nb+x397eJn2RHF6Ho/9GCKv+BkimNlUMHl9+Yh+Qcg==
+  version "1.4.42"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.42.tgz#fe3ee7c71f0b5302da12e730cd9cd395609625df"
+  integrity sha512-JJLT8bjdswJzk8sNRnQjee0MGtO4zTn1t7eWwYPr8gPTadQgNRR/wFRKLGD6HZVZby39yHERkvuCVKNm10r7Dg==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -3846,9 +3846,9 @@ ms@^2.1.1:
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
 nanoid@^3.1.30:
-  version "3.1.30"
-  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
-  integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
+  version "3.1.31"
+  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.1.31.tgz#f5b58a1ce1b7604da5f0605757840598d8974dc6"
+  integrity sha512-ZivnJm0o9bb13p2Ot5CpgC2rQdzB9Uxm/mFZweqm5eMViqOJe3PV6LU2E30SiLgheesmcPrjquqraoolONSA0A==
 
 needle@^2.5.2:
   version "2.9.1"
@@ -4158,9 +4158,9 @@ pkg-dir@^4.1.0:
     find-up "^4.0.0"
 
 postcss-calc@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.npmjs.org/postcss-calc/-/postcss-calc-8.2.0.tgz#e67ef8c8456d091c0802968faecf79d0e6e00d24"
-  integrity sha512-PueXCv288diX7OXyJicGNA6Q3+L4xYb2cALTAeFj9X6PXnj+s4pUf1vkZnwn+rldfu2taCA9ondjF93lhRTPFA==
+  version "8.2.1"
+  resolved "https://registry.npmjs.org/postcss-calc/-/postcss-calc-8.2.1.tgz#f8d25b8af6189560aab6f2355472cd11a222ed33"
+  integrity sha512-FdGs2CYvGTWzDYrm71jydvr48zNStiiRtvxrCscsBLvtVwQ0YZ0gPx2HVFawu0xQuiPLCv66dJo3+/ymhZZLkA==
   dependencies:
     postcss-selector-parser "^6.0.2"
     postcss-value-parser "^4.0.2"
@@ -4678,9 +4678,9 @@ rc-rate@~2.9.0:
     rc-util "^5.0.1"
 
 rc-resize-observer@^1.0.0, rc-resize-observer@^1.1.0, rc-resize-observer@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/rc-resize-observer/-/rc-resize-observer-1.1.2.tgz#214bc5d0de19e0a5fcd7d8352d9c1560dd7531b7"
-  integrity sha512-Qp+1x6D88FxyWBFRYP95IV9A1o0xlkC6qhiTX3YakE+o86QH9IzC7UVnltwmm4Q8uYH+E3F/HRmEiuxXJECdSw==
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/rc-resize-observer/-/rc-resize-observer-1.2.0.tgz#9f46052f81cdf03498be35144cb7c53fd282c4c7"
+  integrity sha512-6W+UzT3PyDM0wVCEHfoW3qTHPTvbdSgiA43buiy8PzmeMnfgnDeb9NjdimMXMl3/TcrvvWl5RRVdp+NqcR47pQ==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.1"
@@ -5714,9 +5714,9 @@ webpack-dev-server-middleware@^0.7.7:
     ws "^8.4.0"
 
 webpack-sources@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.2.2.tgz#d88e3741833efec57c4c789b6010db9977545260"
-  integrity sha512-cp5qdmHnu5T8wRg2G3vZZHoJPN14aqQ89SyQ11NpGH5zEMDCclt49rzo+MaRazk7/UeILhAI+/sEtcM+7Fr0nw==
+  version "3.2.3"
+  resolved "https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.2.3.tgz#2d4daab8451fd4b240cc27055ff6a0c2ccea0cde"
+  integrity sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==
 
 webpack@^5.65.0:
   version "5.65.0"

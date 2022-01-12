@@ -25,11 +25,11 @@
       "/css/*": [
         "Assets/css/*"
       ],
+      "/mods/*": [
+        "node_modules/*"
+      ],
       "/images/*": [
         "Assets/images/*"
-      ],
-      "/modules/*": [
-        "node_modules/*"
       ],
       "~*": [
         "node_modules/*"
