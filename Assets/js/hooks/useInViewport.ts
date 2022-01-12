@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { isBrowser, isFunction } from '~js/utils/utils';
+import { isBrowser, isFunction } from '/js/utils/utils';
 
 type InternalTarget<E> = E | null | (() => E | null) | React.MutableRefObject<E | null>;
 

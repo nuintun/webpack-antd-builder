@@ -2,10 +2,10 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 
 import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
-import { isString } from '~js/utils/utils';
-import usePrevious from '~js/hooks/usePrevious';
-import { MenuItem } from '~js/utils/parseRouter';
-import usePersistRef from '~js/hooks/usePersistRef';
+import { isString } from '/js/utils/utils';
+import usePrevious from '/js/hooks/usePrevious';
+import { MenuItem } from '/js/utils/parseRouter';
+import usePersistRef from '/js/hooks/usePersistRef';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
 

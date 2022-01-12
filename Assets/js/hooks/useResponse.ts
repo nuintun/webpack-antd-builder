@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { message } from 'antd';
 import usePersistRef from './usePersistRef';
-import { RequestError } from '~js/utils/request';
+import { RequestError } from '/js/utils/request';
 import { Options as RequestOptions } from './useRequest';
 
 type Request = <R>(url: string, options?: RequestOptions) => Promise<R>;

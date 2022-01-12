@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from 'antd';
-import FlexDrawer, { FlexDrawerProps } from '~js/components/FlexDrawer';
+import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
 export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible'> {
   onOpen?: () => void;

@@ -5,12 +5,12 @@
 import { useCallback, useRef } from 'react';
 
 import { History } from 'history';
-import * as mime from '~js/utils/mime';
+import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
 import usePersistRef from './usePersistRef';
 import { useHistory } from 'react-router-dom';
-import fetch, { Options as RequestOptions } from '~js/utils/request';
+import fetch, { Options as RequestOptions } from '/js/utils/request';
 
 /**
  * @function onUnauthorizedHandler

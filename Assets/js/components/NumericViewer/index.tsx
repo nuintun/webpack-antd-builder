@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { formatThousands } from '~js/utils/utils';
+import { formatThousands } from '/js/utils/utils';
 
 export interface NumericViewerProps {
   precision?: number;

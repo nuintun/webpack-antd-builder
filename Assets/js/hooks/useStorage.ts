@@ -4,8 +4,8 @@
 
 import { useCallback, useMemo } from 'react';
 
-import { isFunction } from '~js/utils/utils';
-import createStorage from '~js/utils/storage';
+import { isFunction } from '/js/utils/utils';
+import createStorage from '/js/utils/storage';
 
 export interface Options<V> {
   session?: boolean;

@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { isBrowser, isNull } from '~js/utils/utils';
+import { isBrowser, isNull } from '/js/utils/utils';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 /**

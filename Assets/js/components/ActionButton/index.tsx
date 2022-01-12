@@ -1,9 +1,9 @@
 import React, { memo, useCallback } from 'react';
 
-import { isFunction } from '~js/utils/utils';
-import useRequest from '~js/hooks/useRequest';
-import usePersistRef from '~js/hooks/usePersistRef';
-import { Options, RequestError } from '~js/utils/request';
+import { isFunction } from '/js/utils/utils';
+import useRequest from '/js/hooks/useRequest';
+import usePersistRef from '/js/hooks/usePersistRef';
+import { Options, RequestError } from '/js/utils/request';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, ButtonProps, message, Popconfirm, PopconfirmProps } from 'antd';
 

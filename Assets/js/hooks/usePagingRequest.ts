@@ -6,7 +6,7 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
 import usePersistRef from './usePersistRef';
-import { RequestError } from '~js/utils/request';
+import { RequestError } from '/js/utils/request';
 import useRequest, { Options as UseRequestOptions } from './useRequest';
 
 interface BaseResponse<I> {

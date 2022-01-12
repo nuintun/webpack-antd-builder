@@ -6,7 +6,7 @@ import React, { useCallback, useState } from 'react';
 
 import useIsMounted from './useIsMounted';
 import usePersistRef from './usePersistRef';
-import { isFunction } from '~js/utils/utils';
+import { isFunction } from '/js/utils/utils';
 import useUpdateEffect from './useUpdateEffect';
 
 export interface Props {

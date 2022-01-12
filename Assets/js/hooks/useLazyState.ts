@@ -6,7 +6,7 @@ import React, { useCallback, useRef } from 'react';
 
 import useSafeState from './useSafeState';
 import usePersistRef from './usePersistRef';
-import { isFunction } from '~js/utils/utils';
+import { isFunction } from '/js/utils/utils';
 
 /**
  * @function useLazyState

@@ -4,9 +4,9 @@ import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
-import { isString, isUndef } from '~js/utils/utils';
+import { isString, isUndef } from '/js/utils/utils';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { BreadcrumbItem as Item } from '~js/utils/parseRouter';
+import { BreadcrumbItem as Item } from '/js/utils/parseRouter';
 
 type Breadcrumbs<T> = { [path: string]: Item<T> };
 type BreadcrumbItem<T> = Item<T> & { active: boolean };

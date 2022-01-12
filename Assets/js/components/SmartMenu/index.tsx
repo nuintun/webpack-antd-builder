@@ -4,7 +4,7 @@ import React, { memo, useCallback, useRef } from 'react';
 
 import { Drawer } from 'antd';
 import { prefixUI } from './SmartMenuUtils';
-import usePersistRef from '~js/hooks/usePersistRef';
+import usePersistRef from '/js/hooks/usePersistRef';
 import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenuProps } from './SiderMenu';
 
 export type { HeaderRender, HeaderRenderProps, SmartMenuProps };

@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useRef } from 'react';
 
-import useMedia from '~js/hooks/useMedia';
-import { isString } from '~js/utils/utils';
+import useMedia from '/js/hooks/useMedia';
+import { isString } from '/js/utils/utils';
 import { ConfigProvider, Drawer, DrawerProps } from 'antd';
 
 const containerStyle: React.CSSProperties = { position: 'relative' };

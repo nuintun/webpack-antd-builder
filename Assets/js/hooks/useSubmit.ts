@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 
 import { message } from 'antd';
 import usePersistRef from './usePersistRef';
-import { RequestError } from '~js/utils/request';
+import { RequestError } from '/js/utils/request';
 import useRequest, { Options as RequestOptions } from './useRequest';
 
 export interface Options<V, R> extends Omit<RequestOptions, 'body'> {

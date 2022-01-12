@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "noEmit": true,
     "strict": true,
-    "pretty": true,
     "allowJs": true,
     "newLine": "lf",
     "jsx": "preserve",
@@ -20,14 +19,20 @@
     "useUnknownInCatchVariables": false,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "~js/*": [
+      "/js/*": [
         "Assets/js/*"
       ],
-      "~css/*": [
+      "/css/*": [
         "Assets/css/*"
       ],
-      "~images/*": [
+      "/images/*": [
         "Assets/images/*"
+      ],
+      "/modules/*": [
+        "node_modules/*"
+      ],
+      "~*": [
+        "node_modules/*"
       ]
     }
   },

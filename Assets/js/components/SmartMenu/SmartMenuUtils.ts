@@ -1,6 +1,6 @@
-import { isUndef } from '~js/utils/utils';
-import { preorderTrees } from '~js/utils/tree';
-import { MenuItem } from '~js/utils/parseRouter';
+import { isUndef } from '/js/utils/utils';
+import { preorderTrees } from '/js/utils/tree';
+import { MenuItem } from '/js/utils/parseRouter';
 
 export interface ExpandKeys {
   openKeys: string[];

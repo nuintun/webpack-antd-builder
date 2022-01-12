@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-import useSubmit, { Options } from '~js/hooks/useSubmit';
+import useSubmit, { Options } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
-import FlexDrawer, { FlexDrawerProps } from '~js/components/FlexDrawer';
+import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
 type FormPicked = 'name' | 'size' | 'colon' | 'layout' | 'preserve' | 'labelAlign' | 'requiredMark' | 'initialValues';

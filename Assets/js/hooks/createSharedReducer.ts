@@ -4,7 +4,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { isFunction } from '~js/utils/utils';
+import { isFunction } from '/js/utils/utils';
 
 /**
  * @function createSharedReducer

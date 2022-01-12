@@ -4,7 +4,7 @@
 
 import { useEffect, useLayoutEffect } from 'react';
 
-import { isBrowser } from '~js/utils/utils';
+import { isBrowser } from '/js/utils/utils';
 
 /**
  * @function useIsomorphicLayoutEffect
