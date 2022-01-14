@@ -171,7 +171,7 @@ export default function parseRouter<T>(router: Route<T>[]): Router<T> {
         if (!hideInMenu) {
           const parentNodeChildren = menusMap[refer];
 
-          if (parentNodeChildren) {
+          if (!isUndef(parentNodeChildren)) {
             parentNodeChildren.push(menu);
           }
         }
