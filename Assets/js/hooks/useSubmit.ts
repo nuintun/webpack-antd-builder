@@ -29,11 +29,11 @@ export default function useSubmit<V, R>(
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
   const initURLRef = usePersistRef(url);
-  const optionsRef = usePersistRef(options);
+  const initOptionsRef = usePersistRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
   const onSubmit = useCallback((values: V) => {
-    const options = optionsRef.current;
+    const options = initOptionsRef.current;
     const { method = 'POST', normalize } = options;
     const params = normalize ? normalize(values) : values;
     const requestOptions: RequestOptions = { ...options, method };
@@ -47,12 +47,12 @@ export default function useSubmit<V, R>(
     return request<R>(initURLRef.current, requestOptions)
       .then(
         response => {
-          const { onSuccess } = optionsRef.current;
+          const { onSuccess } = initOptionsRef.current;
 
           onSuccess && onSuccess(response, values);
         },
         error => {
-          const { onError } = optionsRef.current;
+          const { onError } = initOptionsRef.current;
 
           if (onError) {
             onError(error, values);
@@ -62,7 +62,7 @@ export default function useSubmit<V, R>(
         }
       )
       .finally(() => {
-        const { onComplete } = optionsRef.current;
+        const { onComplete } = initOptionsRef.current;
 
         onComplete && onComplete(values);
       });
