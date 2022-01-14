@@ -28,6 +28,7 @@ export default function useSubmit<V, R>(
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
+  const initURLRef = usePersistRef(url);
   const optionsRef = usePersistRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
@@ -43,7 +44,7 @@ export default function useSubmit<V, R>(
       requestOptions.body = params;
     }
 
-    return request<R>(url, requestOptions)
+    return request<R>(initURLRef.current, requestOptions)
       .then(
         response => {
           const { onSuccess } = optionsRef.current;
