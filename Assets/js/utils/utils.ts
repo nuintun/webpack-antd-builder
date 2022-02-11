@@ -61,6 +61,41 @@ export function isFunction(value: any): value is Function {
 }
 
 /**
+ * @function appendField
+ * @description 新增参数
+ * @param search URLSearchParams 对象
+ * @param key 参数名
+ * @param value 参数值
+ */
+function appendField(search: URLSearchParams, key: string, value: string): void {
+  value != null && search.append(key, value);
+}
+
+/**
+ * @function serializeQuery
+ * @description 序列化参数
+ * @param values 需要序列化的参数
+ * @param search URLSearchParams 对象
+ */
+export function serializeQuery(values: Record<string | number, any>, search = new URLSearchParams()): string {
+  const keys = Object.keys(values);
+
+  for (const key of keys) {
+    const value = values[key];
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        appendField(search, key, item);
+      }
+    } else {
+      appendField(search, key, value);
+    }
+  }
+
+  return search.toString();
+}
+
+/**
  * @function formatThousands
  * @description 格式化数字
  * @param number 需要格式话的数字

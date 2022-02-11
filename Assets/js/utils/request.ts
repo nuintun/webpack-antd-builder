@@ -5,6 +5,7 @@
 
 import 'whatwg-fetch';
 import { message } from 'antd';
+import { serializeQuery } from './utils';
 
 export interface Query {
   [name: string]: any;
@@ -92,41 +93,6 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
 }
 
 /**
- * @function appendField
- * @description 新增参数
- * @param search URLSearchParams 对象
- * @param key 参数名
- * @param value 参数值
- */
-function appendField(search: URLSearchParams, key: string, value: string): void {
-  value != null && search.append(key, value);
-}
-
-/**
- * @function serializeQuery
- * @description 序列化参数
- * @param values 需要序列化的参数
- * @param search URLSearchParams 对象
- */
-function serializeQuery(values: Query, search: URLSearchParams = new URLSearchParams()): URLSearchParams {
-  const keys = Object.keys(values);
-
-  for (const key of keys) {
-    const value = values[key];
-
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        appendField(search, key, item);
-      }
-    } else {
-      appendField(search, key, value);
-    }
-  }
-
-  return search;
-}
-
-/**
  * @function serializeBody
  * @param body 消息体
  * @param useJson 是否使用 JSON 格式
@@ -135,7 +101,7 @@ function serializeBody(body: any, useJson?: boolean): string | null | never {
   if (body) {
     if (useJson) return JSON.stringify(body);
 
-    return serializeQuery(body).toString();
+    return serializeQuery(body);
   }
 
   return null;
