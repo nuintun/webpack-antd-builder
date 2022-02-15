@@ -42,7 +42,7 @@ module.exports = async mode => {
       oneOf: [
         // The loader for js
         {
-          test: /\.[jt]sx?$/i,
+          test: /\.[jt]sx?$/,
           exclude: /[\\/]node_modules[\\/]/,
           use: [
             {
@@ -53,7 +53,7 @@ module.exports = async mode => {
         },
         // The loader for css
         {
-          test: /\.css$/i,
+          test: /\.css$/,
           use: [
             {
               loader: MiniCssExtractPlugin.loader
@@ -76,7 +76,7 @@ module.exports = async mode => {
         },
         // The loader for less
         {
-          test: /\.less$/i,
+          test: /\.less$/,
           use: [
             {
               loader: MiniCssExtractPlugin.loader
@@ -104,14 +104,13 @@ module.exports = async mode => {
         // The loader for assets
         {
           type: 'asset/resource',
-          test: /\.(mp3|ogg|wav|mp4|flv|webm)$/i
+          test: /\.(mp3|ogg|wav|mp4|flv|webm)$/
         },
         {
-          test: /\.svg$/i,
+          test: /\.svg$/,
           oneOf: [
             {
-              issuer: /\.[jt]sx?$/i,
-              resourceQuery: /^\?svgr$/,
+              issuer: /\.[jt]sx?$/,
               use: [
                 {
                   loader: '@svgr/webpack',
@@ -120,13 +119,14 @@ module.exports = async mode => {
               ]
             },
             {
-              type: 'asset/resource'
+              type: 'asset/resource',
+              resourceQuery: /^\?url$/
             }
           ]
         },
         {
           type: 'asset/resource',
-          test: /\.(png|gif|bmp|ico|jpe?g|woff2?|ttf|eot)$/i
+          test: /\.(png|gif|bmp|ico|jpe?g|woff2?|ttf|eot)$/
         }
       ]
     }
