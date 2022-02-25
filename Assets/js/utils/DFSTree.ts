@@ -12,7 +12,6 @@ export type IteratorValue<T> = [node: T, parent: T | undefined];
  */
 export class DFSTree<T> {
   private tree: T[];
-  private resolve: Resolve<T>;
 
   /**
    * @constructor
@@ -20,9 +19,8 @@ export class DFSTree<T> {
    * @param tree 要深度遍历的树
    * @param resolve 子节点获取方法
    */
-  constructor(tree: T, resolve: Resolve<T>) {
-    this.tree = [tree];
-    this.resolve = resolve;
+  constructor(tree: T | T[], private resolve: Resolve<T>) {
+    this.tree = Array.isArray(tree) ? tree : [tree];
   }
 
   /**
