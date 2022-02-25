@@ -6,7 +6,7 @@ import { isUndef } from './utils';
 
 export type Resolve<T> = (node: T) => T[] | void;
 
-export type Callback<T> = (node: T, parentNode?: T) => void;
+export type Callback<T> = (node: T, parent?: T) => void;
 
 /**
  * @function preorderTrees
@@ -16,30 +16,31 @@ export type Callback<T> = (node: T, parentNode?: T) => void;
  * @param callback 遍历回调函数
  */
 export function preorderTrees<T>(trees: T[], resolve: Resolve<T>, callback: Callback<T>): void {
-  const parentNodes: T[] = [];
-  const waiting: Iterator<T, T>[] = [];
+  const parents: T[] = [];
+  const waiting: Iterator<T, undefined>[] = [];
 
-  let current: Iterator<T, T> | undefined = trees.values();
+  let current: Iterator<T, undefined> | undefined = trees.values();
 
   while (!isUndef(current)) {
-    const { done, value: node } = current.next();
+    const item = current.next();
 
-    if (done) {
-      parentNodes.pop();
+    if (item.done) {
+      parents.pop();
 
       current = waiting.pop();
     } else {
-      const parentNode = parentNodes[parentNodes.length - 1];
+      const node = item.value;
+      const parent = parents[parents.length - 1];
 
-      callback(node, parentNode);
+      callback(node, parent);
 
-      const childNodes = resolve(node);
+      const children = resolve(node);
 
-      if (!isUndef(childNodes) && childNodes.length > 0) {
+      if (!isUndef(children) && children.length > 0) {
         waiting.push(current);
-        parentNodes.push(node);
+        parents.push(node);
 
-        current = childNodes.values();
+        current = children.values();
       }
     }
   }
