@@ -25,7 +25,7 @@ export class DFSTree<T> {
 
   /**
    * @method values
-   * @description 深度遍历树节点
+   * @description 节点迭代器
    */
   values(): Iterator<IteratorValue<T>, undefined> {
     const { tree, resolve } = this;
@@ -67,7 +67,7 @@ export class DFSTree<T> {
 
   /**
    * @private iterator
-   * @description 内部迭代方法
+   * @description 内置 for...of 迭代器
    */
   [Symbol.iterator]() {
     return this.values();
