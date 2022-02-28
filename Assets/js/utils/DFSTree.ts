@@ -2,16 +2,18 @@
  * @module DFSTree
  */
 
-export type Resolve<T> = (node: T) => T[] | void;
+type Resolve<T> = (node: T) => T[] | void;
 
-export type IteratorValue<T> = [node: T, parent: T | undefined];
+type IteratorValue<T> = [node: T, parent: T | undefined];
+
+type Waiting<T> = [iterator: Iterator<T, undefined>, parent?: T];
 
 /**
  * @class DFSTree
  * @description 深度遍历树
  */
 export class DFSTree<T> {
-  private tree: T[];
+  private root: T[];
 
   /**
    * @constructor
@@ -19,8 +21,8 @@ export class DFSTree<T> {
    * @param tree 要深度遍历的树
    * @param resolve 子节点获取方法
    */
-  constructor(tree: T | T[], private resolve: Resolve<T>) {
-    this.tree = Array.isArray(tree) ? tree : [tree];
+  constructor(tree: T, private resolve: Resolve<T>) {
+    this.root = [tree];
   }
 
   /**
@@ -28,32 +30,28 @@ export class DFSTree<T> {
    * @description 节点迭代器
    */
   values(): Iterator<IteratorValue<T>, undefined> {
-    const { tree, resolve } = this;
+    const { root, resolve } = this;
+    const waiting: Waiting<T>[] = [];
 
-    const parents: T[] = [];
-    const waiting: Iterator<T, undefined>[] = [];
-
-    let current: Iterator<T, undefined> | undefined = tree.values();
+    let current: Waiting<T> | undefined = [root.values()];
 
     return {
       next() {
         if (current) {
-          const item = current.next();
+          const [iterator] = current;
+          const item = iterator.next();
 
           if (item.done) {
-            parents.pop();
-
             current = waiting.pop();
           } else {
             const node = item.value;
+            const [, parent] = current;
             const children = resolve(node);
-            const parent = parents[parents.length - 1];
 
             if (children && children.length > 0) {
-              parents.push(node);
-              waiting.push(current);
+              waiting.push([iterator, parent]);
 
-              current = children.values();
+              current = [children.values(), node];
             }
 
             return { done: false, value: [node, parent] };
