@@ -90,6 +90,10 @@ export function resolve(from: string, to: string): string {
       return `${origin}${normalize(to)}${query}`;
     }
 
-    return `${origin}${normalize(`${dirname(pathname)}/${to}`)}${query}`;
+    const base = dirname(pathname);
+
+    pathname = base === '' ? to : `${base}/${to}`;
+
+    return `${origin}${normalize(pathname)}${query}`;
   });
 }
