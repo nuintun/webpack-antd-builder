@@ -37,7 +37,7 @@ export default class DFSTree<T> {
 
     return {
       next() {
-        if (current) {
+        while (current) {
           const [iterator] = current;
           const item = iterator.next();
 
@@ -49,7 +49,7 @@ export default class DFSTree<T> {
             const children = resolve(node);
 
             if (children && children.length > 0) {
-              waiting.push([iterator, parent]);
+              waiting.push(current);
 
               current = [children.values(), node];
             }
