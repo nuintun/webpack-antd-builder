@@ -54,9 +54,9 @@ function getBreadcrumbItems<T>(path: string, pathname: string, breadcrumbs: Brea
 
     if (parent) {
       current = parent;
-      break;
     } else {
       hasHome = path === '/';
+      break;
     }
   }
 
