@@ -21,21 +21,6 @@ function isAbsolute(path: string): boolean {
 }
 
 /**
- * @function serialize
- * @description 序列化路径
- * @param path 需要序列化的路径
- * @param serializer 序列化方法
- */
-function serialize(path: string, serializer: (origin: string, pathname: string, query: string) => string) {
-  return path.replace(
-    /^((?:[a-z0-9.+-]+:)?\/\/[^/]+)?([^?#]*)(.*)$/i,
-    (_matched: string, origin: string | undefined = '', pathname: string, query: string): string => {
-      return serializer(origin, pathname, query);
-    }
-  );
-}
-
-/**
  * @function normalize
  * @description 标准化路径
  * @param path 需要标准化的路径
@@ -64,21 +49,9 @@ export function normalize(path: string): string {
  * @param to 指向路径
  */
 export function resolve(from: string, to: string): string {
-  if (isURL(to)) {
-    return serialize(to, (origin, pathname, query) => {
-      return `${origin}${normalize(pathname)}${query}`;
-    });
-  }
+  if (to === '') return from;
 
-  return serialize(from, (origin, pathname, query) => {
-    if (to === '') {
-      return `${origin}${normalize(pathname)}${query}`;
-    }
+  if (isURL(to) || isAbsolute(to)) return to;
 
-    if (isAbsolute(to)) {
-      return `${origin}${normalize(to)}${query}`;
-    }
-
-    return `${origin}${normalize(`${pathname}/${to}`)}${query}`;
-  });
+  return normalize(`${from}/${to}`);
 }
