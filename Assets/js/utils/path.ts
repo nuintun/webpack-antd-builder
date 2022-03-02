@@ -21,17 +21,6 @@ function isAbsolute(path: string): boolean {
 }
 
 /**
- * @function dirname
- * @description 获取路径的目录
- * @param path 需要获取目录的路径
- */
-function dirname(path: string): string {
-  const matched = path.match(/[^?#]*\//);
-
-  return matched === null ? '' : matched[0];
-}
-
-/**
  * @function serialize
  * @description 序列化路径
  * @param path 需要序列化的路径
@@ -90,10 +79,6 @@ export function resolve(from: string, to: string): string {
       return `${origin}${normalize(to)}${query}`;
     }
 
-    const base = dirname(pathname);
-
-    pathname = base === '' ? to : `${base}/${to}`;
-
-    return `${origin}${normalize(pathname)}${query}`;
+    return `${origin}${normalize(`${pathname}/${to}`)}${query}`;
   });
 }
