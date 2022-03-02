@@ -1,5 +1,5 @@
 /**
- * @module DFSTree
+ * @module tree
  */
 
 type Resolve<T> = (node: T) => T[] | void;
