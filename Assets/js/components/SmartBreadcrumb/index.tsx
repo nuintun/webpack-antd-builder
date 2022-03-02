@@ -4,9 +4,9 @@ import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
-import { isString, isUndef } from '/js/utils/utils';
+import { isString } from '/js/utils/utils';
+import { BreadcrumbItem as Item } from '/js/utils/router';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { BreadcrumbItem as Item } from '/js/utils/parseRouter';
 
 type Breadcrumbs<T> = { [path: string]: Item<T> };
 type BreadcrumbItem<T> = Item<T> & { active: boolean };
@@ -31,7 +31,7 @@ function getBreadcrumbItem<T>(item: Item<T>, active: boolean) {
   const { icon } = item;
   const breadcrumbItem = { ...item, active };
 
-  if (!isUndef(icon)) {
+  if (icon) {
     breadcrumbItem.icon = iconRender(icon);
   }
 
@@ -45,24 +45,24 @@ function getBreadcrumbItems<T>(path: string, pathname: string, breadcrumbs: Brea
   let hasHome = false;
   let current = breadcrumbs[pathname] || breadcrumbs[path];
 
-  while (!isUndef(current)) {
+  while (current) {
     const { path, parent } = current;
 
     breadcrumbItems.push(getBreadcrumbItem(current, active));
 
     active = false;
 
-    if (isUndef(parent)) {
-      hasHome = path === '/';
+    if (parent) {
+      current = parent;
       break;
     } else {
-      current = parent;
+      hasHome = path === '/';
     }
   }
 
   const home = breadcrumbs['/'];
 
-  if (!hasHome && !isUndef(home)) {
+  if (!hasHome && home) {
     breadcrumbItems.push(getBreadcrumbItem(home, active));
   }
 

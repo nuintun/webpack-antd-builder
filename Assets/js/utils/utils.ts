@@ -35,7 +35,6 @@ export function isNull(value: any): value is null {
  * @description 是否为未定义
  * @param value 需要验证的值
  */
-export function isUndef(value: any): value is void;
 export function isUndef(value: any): value is undefined {
   return value === undefined;
 }
@@ -46,7 +45,6 @@ export function isUndef(value: any): value is undefined {
  * @param value 需要验证的值
  */
 export function isNullable(value: any): value is null;
-export function isNullable(value: any): value is void;
 export function isNullable(value: any): value is undefined {
   return value == null;
 }

@@ -1,6 +1,6 @@
+import DFSTree from '/js/utils/DFSTree';
 import { isUndef } from '/js/utils/utils';
-import { preorderTrees } from '/js/utils/tree';
-import { MenuItem } from '/js/utils/parseRouter';
+import { MenuItem } from '/js/utils/router';
 
 export interface ExpandKeys {
   openKeys: string[];
@@ -22,9 +22,7 @@ export const prefixUI = 'ui-smart-menu';
  * @param flatMenus 菜单数据
  */
 function isMenuKey<T>(key: string, flatMenus: FlattenMenus<T>): boolean {
-  if (!key) return false;
-
-  return !isUndef(flatMenus[key]);
+  return key ? !!flatMenus[key] : false;
 }
 
 /**
@@ -55,11 +53,11 @@ function uniqueKeys(keys: string[]): string[] {
 export function flattenMenus<T>(menus: MenuItem<T>[]): FlattenMenus<T> {
   const flatMenus: FlattenMenus<T> = {};
 
-  preorderTrees(
-    menus,
-    menu => menu.children,
-    (menu, parent) => {
-      if (!isUndef(parent)) {
+  for (const menu of menus) {
+    const tree = new DFSTree(menu, menu => menu.children);
+
+    for (const [menu, parent] of tree) {
+      if (parent) {
         flatMenus[menu.path] = {
           ...menu,
           parent: parent.path
@@ -68,7 +66,7 @@ export function flattenMenus<T>(menus: MenuItem<T>[]): FlattenMenus<T> {
         flatMenus[menu.path] = menu;
       }
     }
-  );
+  }
 
   return flatMenus;
 }
@@ -96,10 +94,10 @@ export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): Expa
 
   let current = flatMenus[path];
 
-  while (!isUndef(current)) {
+  while (current) {
     const key = current.key.toString();
 
-    if (!isUndef(current.children)) {
+    if (current.children) {
       openKeys.push(key);
     } else {
       selectedKeys.push(key);

@@ -5,7 +5,7 @@ import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
-import { BreadcrumbItem } from '/js/utils/parseRouter';
+import { BreadcrumbItem } from '/js/utils/router';
 import SmartBreadcrumb from '/js/components/SmartBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
