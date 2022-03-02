@@ -29,38 +29,32 @@ export default class DFSTree<T> {
    * @method values
    * @description 节点迭代器
    */
-  values(): Iterator<IteratorValue<T>, undefined> {
+  *values(): Iterator<IteratorValue<T>, void> {
     const { root, resolve } = this;
     const waiting: Waiting<T>[] = [];
 
     let current: Waiting<T> | undefined = [root.values()];
 
-    return {
-      next() {
-        while (current) {
-          const [iterator] = current;
-          const item = iterator.next();
+    while (current) {
+      const [iterator] = current;
+      const item = iterator.next();
 
-          if (item.done) {
-            current = waiting.pop();
-          } else {
-            const node = item.value;
-            const [, parent] = current;
-            const children = resolve(node);
+      if (item.done) {
+        current = waiting.pop();
+      } else {
+        const node = item.value;
+        const [, parent] = current;
+        const children = resolve(node);
 
-            if (children && children.length > 0) {
-              waiting.push(current);
+        if (children && children.length > 0) {
+          waiting.push(current);
 
-              current = [children.values(), node];
-            }
-
-            return { done: false, value: [node, parent] };
-          }
+          current = [children.values(), node];
         }
 
-        return { done: true, value: undefined };
+        yield [node, parent];
       }
-    };
+    }
   }
 
   /**
