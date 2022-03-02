@@ -166,9 +166,7 @@ export class BFSTree<T> {
         const children = resolve(node);
 
         if (children && children.length > 0) {
-          waiting.enqueue(current);
-
-          current = [children.values(), node];
+          waiting.enqueue([children.values(), node]);
         }
 
         yield [node, parent];
