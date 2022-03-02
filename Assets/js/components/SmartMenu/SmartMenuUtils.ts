@@ -1,4 +1,4 @@
-import DFSTree from '/js/utils/DFSTree';
+import { DFSTree } from '/js/utils/tree';
 import { isUndef } from '/js/utils/utils';
 import { MenuItem } from '/js/utils/router';
 

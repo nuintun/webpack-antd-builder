@@ -12,7 +12,7 @@ type Waiting<T> = [iterator: Iterator<T, undefined>, parent?: T];
  * @class DFSTree
  * @description 深度遍历树
  */
-export default class DFSTree<T> {
+export class DFSTree<T> {
   private root: T[];
 
   /**

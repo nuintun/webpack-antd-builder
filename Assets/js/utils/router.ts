@@ -2,8 +2,8 @@
  * @module router
  */
 
-import DFSTree from './DFSTree';
 import { resolve } from './path';
+import { DFSTree } from './tree';
 
 type Key = React.Key;
 
