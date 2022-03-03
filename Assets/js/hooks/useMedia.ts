@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { isBrowser, isNull } from '/js/utils/utils';
+import { isBrowser } from '/js/utils/utils';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 /**
@@ -20,10 +20,10 @@ export default function useMedia(
   initialState: boolean | (() => boolean) = false
 ): boolean {
   const mql = useMemo(() => (isBrowser ? window.matchMedia(query) : null), [query]);
-  const [matched, setState] = useState(isNull(mql) ? initialState : mql.matches);
+  const [matched, setState] = useState(mql ? mql.matches : initialState);
 
   useIsomorphicLayoutEffect(() => {
-    if (!isNull(mql)) {
+    if (mql) {
       const onMediaChange = () => {
         const matched = mql.matches;
 

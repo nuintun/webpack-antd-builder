@@ -1,5 +1,4 @@
 import { DFSTree } from '/js/utils/tree';
-import { isUndef } from '/js/utils/utils';
 import { MenuItem } from '/js/utils/router';
 
 export interface ExpandKeys {
@@ -105,7 +104,7 @@ export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): Expa
 
     const { parent } = current;
 
-    if (isUndef(parent)) {
+    if (parent === undefined) {
       break;
     } else {
       current = flatMenus[parent];

@@ -22,34 +22,6 @@ export function isString(value: any): value is string {
 }
 
 /**
- * @function isNull
- * @description 是否为空值
- * @param value 需要验证的值
- */
-export function isNull(value: any): value is null {
-  return value === null;
-}
-
-/**
- * @function isUndef
- * @description 是否为未定义
- * @param value 需要验证的值
- */
-export function isUndef(value: any): value is undefined {
-  return value === undefined;
-}
-
-/**
- * @function isNullable
- * @description 是否为空值或未定义
- * @param value 需要验证的值
- */
-export function isNullable(value: any): value is null;
-export function isNullable(value: any): value is undefined {
-  return value == null;
-}
-
-/**
  * @function isFunction
  * @description 是否为函数
  * @param value 需要验证的值
@@ -72,11 +44,11 @@ export function serializeQuery(values: Record<string | number, any>, search = ne
 
     if (Array.isArray(value)) {
       for (const item of value) {
-        if (!isNullable(item)) {
+        if (item != null) {
           search.append(key, item);
         }
       }
-    } else if (!isNullable(value)) {
+    } else if (value != null) {
       search.append(key, value);
     }
   }
