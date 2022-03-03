@@ -65,7 +65,7 @@ export function parse<T>(
   const menus: MenuItem<T>[] = [];
   const routes: RouteItem<T>[] = [];
   const breadcrumbs: Breadcrumbs<T> = {};
-  const parseRoute: Resolver = path => ['', path, ''];
+  const resolveRoute: Resolver = path => ['', path, ''];
 
   for (const route of router) {
     const menusMap: MenusMap<T> = { [root]: [] };
@@ -75,7 +75,7 @@ export function parse<T>(
       if (children) {
         return children.map(route => {
           const { href: routeHref } = route;
-          const path = resolve(parent.path, route.path, parseRoute);
+          const path = resolve(parent.path, route.path, resolveRoute);
           const href = routeHref ? resolve(parent.href, routeHref) : path;
 
           return { ...route, path, href };

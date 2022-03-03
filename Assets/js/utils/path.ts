@@ -21,11 +21,11 @@ function isAbsolute(path: string): boolean {
 }
 
 /**
- * @function parse
+ * @function resolveURL
  * @description 解析 URL 路径
  * @param path URL 路径
  */
-function parse(path: string): ReturnType<Resolver> {
+function resolveURL(path: string): ReturnType<Resolver> {
   const matched = path.match(/^((?:[a-z0-9.+-]+:)?\/\/[^/]+)?([^?#]*)(.*)$/i);
 
   if (matched) {
@@ -67,7 +67,7 @@ export type Resolver = (path: string) => [origin: string, pathname: string, quer
  * @param from 开始路径
  * @param to 指向路径
  */
-export function resolve(from: string, to: string, resolver: Resolver = parse): string {
+export function resolve(from: string, to: string, resolver: Resolver = resolveURL): string {
   if (!to) {
     const [origin, pathname, query] = resolver(from);
 
