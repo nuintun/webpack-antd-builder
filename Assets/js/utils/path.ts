@@ -21,6 +21,23 @@ function isAbsolute(path: string): boolean {
 }
 
 /**
+ * @function parse
+ * @description 解析 URL 路径
+ * @param path URL 路径
+ */
+function parse(path: string): ReturnType<Resolver> {
+  const matched = path.match(/^((?:[a-z0-9.+-]+:)?\/\/[^/]+)?([^?#]*)(.*)$/i);
+
+  if (matched) {
+    const [, origin = '', pathname, query] = matched;
+
+    return [origin, pathname, query];
+  }
+
+  return ['', '', ''];
+}
+
+/**
  * @function normalize
  * @description 标准化路径
  * @param path 需要标准化的路径
@@ -31,7 +48,7 @@ export function normalize(path: string): string {
 
   for (const segment of paths) {
     if (segment === '..') {
-      if (segments.length > 1 || segments[0] !== '') {
+      if (segments.length > 1 || segments[0]) {
         segments.pop();
       }
     } else if (segment !== '.') {
@@ -42,16 +59,29 @@ export function normalize(path: string): string {
   return segments.join('/');
 }
 
+export type Resolver = (path: string) => [origin: string, pathname: string, query: string];
+
 /**
  * @function resolve
  * @description 计算路径
  * @param from 开始路径
  * @param to 指向路径
  */
-export function resolve(from: string, to: string): string {
-  if (to === '') return from;
+export function resolve(from: string, to: string, resolver: Resolver = parse): string {
+  if (!to) {
+    const [origin, pathname, query] = resolver(from);
 
-  if (isURL(to) || isAbsolute(to)) return to;
+    return `${origin}${normalize(pathname)}${query}`;
+  }
 
-  return normalize(`${from}/${to}`);
+  if (isURL(to) || isAbsolute(to)) {
+    const [origin, pathname, query] = resolver(to);
+
+    return `${origin}${normalize(pathname)}${query}`;
+  }
+
+  const [origin, base] = resolver(from);
+  const [, pathname, query] = resolver(to);
+
+  return `${origin}${normalize(base ? `${base}/${pathname}` : pathname)}${query}`;
 }

@@ -2,8 +2,8 @@
  * @module router
  */
 
-import { resolve } from './path';
 import { DFSTree } from './tree';
+import { resolve, Resolver } from './path';
 
 type Key = React.Key;
 
@@ -65,6 +65,7 @@ export function parse<T>(
   const menus: MenuItem<T>[] = [];
   const routes: RouteItem<T>[] = [];
   const breadcrumbs: Breadcrumbs<T> = {};
+  const parseRoute: Resolver = path => ['', path, ''];
 
   for (const route of router) {
     const menusMap: MenusMap<T> = { [root]: [] };
@@ -74,7 +75,7 @@ export function parse<T>(
       if (children) {
         return children.map(route => {
           const { href: routeHref } = route;
-          const path = resolve(parent.path, route.path);
+          const path = resolve(parent.path, route.path, parseRoute);
           const href = routeHref ? resolve(parent.href, routeHref) : path;
 
           return { ...route, path, href };
