@@ -80,7 +80,7 @@
     "memfs": "^3.4.1",
     "mini-css-extract-plugin": "^2.5.3",
     "nodemon": "^2.0.15",
-    "postcss": "^8.4.7",
+    "postcss": "^8.4.8",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
     "style-loader": "^3.3.1",
