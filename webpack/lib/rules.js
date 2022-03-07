@@ -111,6 +111,11 @@ module.exports = async mode => {
           oneOf: [
             {
               issuer: /\.[jt]sx?$/,
+              type: 'asset/resource',
+              resourceQuery: /^\?url$/
+            },
+            {
+              issuer: /\.[jt]sx?$/,
               use: [
                 {
                   loader: '@svgr/webpack',
@@ -119,8 +124,7 @@ module.exports = async mode => {
               ]
             },
             {
-              type: 'asset/resource',
-              resourceQuery: /^\?url$/
+              type: 'asset/resource'
             }
           ]
         },
