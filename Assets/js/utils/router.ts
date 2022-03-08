@@ -58,9 +58,16 @@ export type MenusMap<T> = { [path: string]: MenuItem<T>[] };
 
 export type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
 
+/**
+ * @function parse
+ * @description 解析配置文件，并返回路由，菜单，面包屑
+ * @param router
+ */
 export function parse<T>(
   router: Route<T>[]
 ): [routes: RouteItem<T>[], menus: MenuItem<T>[], breadcrumbs: { [path: string]: BreadcrumbItem<T> }] {
+  let uid = 0;
+
   const root: string = '';
   const menus: MenuItem<T>[] = [];
   const routes: RouteItem<T>[] = [];
@@ -88,7 +95,7 @@ export function parse<T>(
       parent
     ] of tree) {
       // 当前节点数据操作
-      const key = href.toLowerCase();
+      const key = uid++;
       const hasSubRoutes = children && children.length > 0;
 
       // 处理路由
