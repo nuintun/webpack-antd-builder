@@ -131,7 +131,7 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
       const defaultKeys = memoizeGetExpandKeys(match.path, flatMenus);
 
       if (!collapsed) {
-        const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys, flatMenus);
+        const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys);
 
         setOpenKeys(nextOpenKeys);
 

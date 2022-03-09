@@ -15,16 +15,6 @@ export interface FlattenMenus<T> {
 export const prefixUI = 'ui-smart-menu';
 
 /**
- * @function isMenuKey
- * @description 指定标识为否为菜单标识
- * @param key 菜单标识
- * @param flatMenus 菜单数据
- */
-function isMenuKey<T>(key: string, flatMenus: FlattenMenus<T>): boolean {
-  return key ? !!flatMenus[key] : false;
-}
-
-/**
  * @function filterKeys
  * @description 菜单标识去重
  * @param keys 菜单标识
@@ -75,10 +65,9 @@ export function flattenMenus<T>(menus: MenuItem<T>[]): FlattenMenus<T> {
  * @description 过滤菜单标识
  * @param prevKeys 更新前菜单标识
  * @param nextKeys 更新后菜单标识
- * @param flatMenus 扁平化菜单数据
  */
-export function mergeKeys<T>(prevKeys: string[], nextKeys: string[], flatMenus: FlattenMenus<T>): string[] {
-  return uniqueKeys([...prevKeys.filter(key => isMenuKey(key, flatMenus)), ...nextKeys]);
+export function mergeKeys(prevKeys: string[], nextKeys: string[]): string[] {
+  return uniqueKeys([...prevKeys, ...nextKeys]);
 }
 
 /**
@@ -94,7 +83,7 @@ export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): Expa
   let current = flatMenus[path];
 
   while (current) {
-    const key = current.key.toString();
+    const key = current.key;
 
     if (current.children) {
       openKeys.push(key);

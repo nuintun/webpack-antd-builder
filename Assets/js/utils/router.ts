@@ -5,12 +5,9 @@
 import { DFSTree } from './tree';
 import { resolve, Resolver } from './path';
 
-type Key = React.Key;
-
 type Icon = string | React.ReactElement;
 
 export type Route<T> = T & {
-  key?: Key;
   icon?: Icon;
   name: string;
   path: string;
@@ -26,7 +23,7 @@ export type Route<T> = T & {
 };
 
 export type RouteItem<T> = T & {
-  key: Key;
+  key: string;
   name: string;
   path: string;
   exact: boolean;
@@ -36,7 +33,7 @@ export type RouteItem<T> = T & {
 };
 
 export type MenuItem<T> = T & {
-  key: Key;
+  key: string;
   icon?: Icon;
   name: string;
   path: string;
@@ -46,7 +43,7 @@ export type MenuItem<T> = T & {
 };
 
 export type BreadcrumbItem<T> = T & {
-  key: Key;
+  key: string;
   icon?: Icon;
   name: string;
   path: string;
@@ -95,7 +92,7 @@ export function parse<T>(
       parent
     ] of tree) {
       // 当前节点数据操作
-      const key = uid++;
+      const key = (uid++).toString();
       const hasSubRoutes = children && children.length > 0;
 
       // 处理路由
