@@ -109,7 +109,7 @@ export function parse<T>(
       }
 
       // 处理菜单
-      if (component || hasSubRoutes) {
+      if (hasSubRoutes || component) {
         const refer = parent ? parent.path : root;
         const menu = { key, path, href, ...rest } as MenuItem<T>;
 
