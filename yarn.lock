@@ -2686,9 +2686,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.76:
-  version "1.4.77"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.77.tgz#c26e454cb8721d4ebdae3e276c57cd32e51c32ed"
-  integrity sha512-fiDxw8mO9Ph1Z0bjX2sFTPpi0J0QkOiwOJF+5Q0J0baNc/F9lLePAvDPlnoxvbUYYMizqrKPeotRRkJ9LtxAew==
+  version "1.4.79"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.79.tgz#02b504e1e6039b2e61edfc5f856895a0927925f5"
+  integrity sha512-nWfAxof87mGHkbORCwVRPst4FlSVdprOKS6dBMrcwn3sjwf8iHXEhsu1+FU5Psd7Ps3KKeBufAdfsPK5BmbSUg==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4856,10 +4856,10 @@ rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.0.7, rc-util@^5.12.0, rc-util@^5.14.0
     react-is "^16.12.0"
     shallowequal "^1.1.0"
 
-rc-virtual-list@^3.2.0, rc-virtual-list@^3.4.2, rc-virtual-list@^3.4.3:
-  version "3.4.3"
-  resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.4.3.tgz#dbc56f2f5d89ddda3b103997a678d20ba61a8b5a"
-  integrity sha512-bNjlFjMPGgvzsKaXwVAQqd34K7UIO+HBdqlsMayGA03PaUGFmONsZwJQBkcins+gnMtLhPoTUbiMWpNJQUZstw==
+rc-virtual-list@^3.2.0, rc-virtual-list@^3.4.2, rc-virtual-list@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.4.4.tgz#be42832edecdcffc56260df131e437a2e0473bca"
+  integrity sha512-Zb2h0B+ZhA/aysZNEUkQYaqx0hd8hq7WMIUegII+1KfFjh99GtHZ4ZMWB+SlpdVadskKJZzUWWzIq5N1mE6AVg==
   dependencies:
     classnames "^2.2.6"
     rc-resize-observer "^1.0.0"
