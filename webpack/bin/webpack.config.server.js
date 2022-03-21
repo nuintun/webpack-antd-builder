@@ -108,7 +108,7 @@ async function resolveEntry(entry, options) {
   const compiler = webpack(configure);
   const logger = compiler.getInfrastructureLogger('webpack-dev-middleware');
 
-  app.use(koaCompress());
+  app.use(koaCompress({ br: false }));
 
   const devServer = devMiddleware(compiler, {
     index: false,
