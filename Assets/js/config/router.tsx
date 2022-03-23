@@ -28,17 +28,18 @@ export const routes: Route<{ id?: number }>[] = [
     children: [
       {
         path: '/news',
-        element: 'News',
         meta: {
-          name: 'News',
-          link: {
-            target: '_blank'
-          }
+          name: 'News'
         },
         children: [
           {
+            index: true,
+            element: 'News',
+            meta: { name: 'News' }
+          },
+          {
             path: 'sport',
-            element: 'sport',
+            element: 'Sport',
             meta: { name: 'Sport' }
           }
         ]

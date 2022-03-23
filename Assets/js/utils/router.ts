@@ -62,11 +62,11 @@ function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
  */
 export function parse<M = unknown, K extends string = string>(
   router: Route<M, K>[]
-): [routes: IRoute<M, K>[], menus: MenuItem[]] {
+): [routes: Route<M, K>[], menus: MenuItem[]] {
   let uid = 0;
 
   const menus: MenuItem[] = [];
-  const routes: IRoute<M>[] = [];
+  const routes: Route<M, K>[] = [];
 
   const getKey = () => (uid++).toString();
 
@@ -100,21 +100,22 @@ export function parse<M = unknown, K extends string = string>(
     );
 
     // 遍历节点
-    for (const [{ meta, sensitive, children, ...rest }, parent] of tree) {
+    for (const [node, parent] of tree) {
       // 当前节点数据操作
+      const { meta, children, ...rest } = node;
       const hasChildren = children && children.length > 0;
       const { key, name, icon, link, hideInMenu, hideInBreadcrumb } = meta;
 
       // 格式验证
       if (__DEV__) {
         if (!hideInMenu || !hideInBreadcrumb) {
-          assert(name, `Route item "${rest.path}" not hidden in menu or breadcrumb must have a name property.`);
+          assert(name, `Route item ${JSON.stringify(node, null, 2)} not hidden in menu or breadcrumbs must have meta.name.`);
         }
       }
 
       // 路由处理
+      const route = { ...rest, meta } as IRoute<M, K>;
       const parentRoute = parent ? flatRoutes[parent.meta.key] : parent;
-      const route = { ...rest, meta, sensitive: sensitive === true } as IRoute<M, K>;
 
       if (hasChildren) {
         flatRoutes[key] = route;
@@ -129,7 +130,7 @@ export function parse<M = unknown, K extends string = string>(
           parentRoute.children = [route];
         }
       } else {
-        routes.push(route);
+        routes.push(route as Route<M, K>);
       }
 
       // 菜单处理
