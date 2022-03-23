@@ -183,9 +183,9 @@
     tslib "^2.0.0"
 
 "@antv/g2plot@^2.2.11":
-  version "2.4.11"
-  resolved "https://registry.npmjs.org/@antv/g2plot/-/g2plot-2.4.11.tgz#54c910bc98ae7b94eba3b1a7ad2ac3eede57a8c3"
-  integrity sha512-O7fRqbJIH/i4DgyDwDCEaIRlVPOg6tnpavVc81w5L/E0pDspsaTAnoVzAM/WJiag2LDk4PVAH4576zYD7YO6zQ==
+  version "2.4.12"
+  resolved "https://registry.npmjs.org/@antv/g2plot/-/g2plot-2.4.12.tgz#1954680d0b8b5a74f703c21031b205bc8ef794ed"
+  integrity sha512-a2kJmSEdjkQjzgb6U5miUhcuz+KfT0aC+7q2aeTRdmJ+/vbY5zwn8OercTOgW0TDpi8WBZ3JuvFy24CkZW+NrQ==
   dependencies:
     "@antv/event-emitter" "^0.1.2"
     "@antv/g2" "^4.1.26"
@@ -4819,10 +4819,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.0.6.tgz#64515977e94cc3311a265c47b9d9a3cba677ed84"
-  integrity sha512-9fyLrL1VqIDDGs/0JCKKGif9PhjA9cyNUKm73DwbXCpoEYUftmf/mqiYX8JhWjcQDvhnoe4E4jMRmNMos5WiwA==
+react-nest-router@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.0.7.tgz#77e96db59ccaeeb1ef6d5037f6d0c0b3ca953c55"
+  integrity sha512-UvsLlf2VtwXq+WSGPaznpqKyCCyPeSX1h3oOuOTM9Scol/qyUhklJO4bIRBRyeR0iltKPIbVk39hQIZuwwKRZw==
   dependencies:
     history "^5.3.0"
     tslib "^2.3.1"
