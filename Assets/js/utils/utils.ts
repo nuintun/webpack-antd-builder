@@ -7,15 +7,6 @@ import dayjs, { Dayjs, OpUnitType } from 'dayjs';
 const { toString } = Object.prototype;
 
 /**
- * @function assert
- * @param cond Assert flags.
- * @param message Assert error message.
- */
-export function assert<T>(cond: T, message: string): asserts cond {
-  if (!cond) throw new Error(message);
-}
-
-/**
  * @type {isBrowser}
  * @description 是否为浏览器环境
  */

@@ -2,164 +2,154 @@
  * @module router
  */
 
-import { resolve } from './url';
-import { assert } from './utils';
 import { DFSTree } from './tree';
-import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
+import { resolve, Resolver } from './path';
 
-export interface Link {
-  href: string;
-  target?: React.HTMLAttributeAnchorTarget;
-}
+type Icon = string | React.ReactElement;
 
-export interface Meta {
+export type Route<T> = T & {
   icon?: Icon;
-  name?: string;
-  link?: Partial<Link>;
-  hideInMenu?: boolean;
-  hideInBreadcrumb?: boolean;
-}
-
-export interface MetaWithKey extends Meta {
-  link: Link;
-  key: string;
-}
-
-export interface MenuItem {
-  key: string;
-  icon?: Icon;
-  link?: Link;
   name: string;
-  children?: MenuItem[];
-}
+  path: string;
+  href?: string;
+  exact?: boolean;
+  strict?: boolean;
+  sensitive?: boolean;
+  hideInMenu?: boolean;
+  hideSubMenu?: boolean;
+  children?: Route<T>[];
+  component?: React.ComponentType<any>;
+  target?: React.HTMLAttributeAnchorTarget;
+};
 
-export type Icon = string | React.ReactElement;
+export type RouteItem<T> = T & {
+  key: string;
+  name: string;
+  path: string;
+  exact: boolean;
+  strict: boolean;
+  sensitive: boolean;
+  component: React.ComponentType<any>;
+};
 
-// export type MenusMap = { [path: string]: MenuItem[] };
+export type MenuItem<T> = T & {
+  key: string;
+  icon?: Icon;
+  name: string;
+  path: string;
+  href: string;
+  children?: MenuItem<T>[];
+  target?: React.HTMLAttributeAnchorTarget;
+};
 
-export type Route<M = unknown, K extends string = string> = NRoute<M & Meta, K>;
+export type BreadcrumbItem<T> = T & {
+  key: string;
+  icon?: Icon;
+  name: string;
+  path: string;
+  href?: string;
+  parent?: BreadcrumbItem<T>;
+};
 
-export interface IRoute<M = unknown, K extends string = string> extends Omit<NIRoute<M, K>, 'meta' | 'children'> {
-  meta: M & MetaWithKey;
-  children?: IRoute<M, K>[];
-}
+export type MenusMap<T> = { [path: string]: MenuItem<T>[] };
 
-function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
-  if (value !== undefined) {
-    source[key] = value;
-  }
-}
+export type Breadcrumbs<T> = { [path: string]: BreadcrumbItem<T> };
 
 /**
  * @function parse
  * @description 解析配置文件，并返回路由，菜单，面包屑
  * @param router
  */
-export function parse<M = unknown, K extends string = string>(
-  router: Route<M, K>[]
-): [routes: IRoute<M, K>[], menus: MenuItem[]] {
+export function parse<T>(
+  router: Route<T>[]
+): [routes: RouteItem<T>[], menus: MenuItem<T>[], breadcrumbs: { [path: string]: BreadcrumbItem<T> }] {
   let uid = 0;
 
-  const menus: MenuItem[] = [];
-  const routes: IRoute<M>[] = [];
+  const root: string = '';
+  const menus: MenuItem<T>[] = [];
+  const routes: RouteItem<T>[] = [];
+  const breadcrumbs: Breadcrumbs<T> = {};
+  const resolveRoute: Resolver = path => ['', path, ''];
 
-  const getKey = () => (uid++).toString();
+  for (const route of router) {
+    const menusMap: MenusMap<T> = { [root]: [] };
+    const tree = new DFSTree({ ...route, href: route.href || route.path }, parent => {
+      const { children } = parent;
 
-  for (const route of router as IRoute<M, K>[]) {
-    const key = getKey();
-    const { path = '/', meta } = route;
-    const { link = { href: path } } = meta || {};
+      if (children) {
+        return children.map(route => {
+          const { href: routeHref } = route;
+          const path = resolve(parent.path, route.path, resolveRoute);
+          const href = routeHref ? resolve(parent.href, routeHref) : path;
 
-    const flatMenus: Record<string, MenuItem> = {};
-    const flatRoutes: Record<string, IRoute<M, K>> = {};
-
-    const tree = new DFSTree(
-      {
-        ...route,
-        meta: { ...route.meta, key, link }
-      },
-      ({ meta, children }) => {
-        const { href: from } = meta.link;
-
-        if (children) {
-          return children.map(route => {
-            const key = getKey();
-            const { meta } = route;
-            const { link } = meta || {};
-            const href = resolve(from, link?.href ?? route.path);
-
-            return { ...route, meta: { ...meta, key, link: { ...link, href } } };
-          });
-        }
+          return { ...route, path, href };
+        });
       }
-    );
+    });
 
-    // 遍历节点
-    for (const [{ path, meta, sensitive, children, ...rest }, parent] of tree) {
+    for (const [
+      { icon, path, href, exact, strict, children, component, sensitive, hideInMenu, hideSubMenu, ...rest },
+      parent
+    ] of tree) {
       // 当前节点数据操作
-      const hasChildren = children && children.length > 0;
-      const { key, name, icon, link, hideInMenu, hideInBreadcrumb } = meta;
+      const key = (uid++).toString();
+      const hasSubRoutes = children && children.length > 0;
 
-      // 格式验证
-      if (__DEV__) {
-        if (!hideInMenu || !hideInBreadcrumb) {
-          assert(name, `Route item "${path}" not hidden in menu or breadcrumb must have a name property.`);
-        }
+      // 处理路由
+      if (component) {
+        routes.push({
+          key,
+          path,
+          component,
+          exact: exact !== false,
+          strict: strict !== false,
+          sensitive: sensitive === true,
+          ...rest
+        } as RouteItem<T>);
       }
 
-      // 路由处理
-      const parentRoute = parent ? flatRoutes[parent.meta.key] : parent;
-      const route = { ...rest, meta, sensitive: sensitive === true } as IRoute<M, K>;
+      // 处理菜单
+      if (hasSubRoutes || component) {
+        const refer = parent ? parent.path : root;
+        const menu = { key, path, href, ...rest } as MenuItem<T>;
 
-      addOptional(route, 'path', path);
-
-      if (hasChildren) {
-        flatRoutes[key] = route;
-      }
-
-      if (parentRoute) {
-        const { children } = parentRoute;
-
-        if (children) {
-          children.push(route);
-        } else {
-          parentRoute.children = [route];
-        }
-      } else {
-        routes.push(route);
-      }
-
-      // 菜单处理
-      const parentMenu = parent ? flatMenus[parent.meta.key] : parent;
-
-      if (hideInMenu) {
-        if (hasChildren && parentMenu) {
-          flatMenus[key] = parentMenu;
-        }
-      } else {
-        const menu = { key, name } as MenuItem;
-
-        addOptional(menu, 'icon', icon);
-        addOptional(menu, 'link', link);
-
-        if (hasChildren) {
-          flatMenus[key] = menu;
+        if (icon) {
+          menu.icon = icon;
         }
 
-        if (parentMenu) {
-          const { children } = parentMenu;
+        if (hasSubRoutes && !hideSubMenu) {
+          menusMap[path] = menu.children = hideInMenu ? menusMap[refer] : [];
+        }
 
-          if (children) {
-            children.push(menu);
-          } else {
-            parentMenu.children = [menu];
+        if (!hideInMenu) {
+          const parentNodeChildren = menusMap[refer];
+
+          if (parentNodeChildren) {
+            parentNodeChildren.push(menu);
           }
-        } else {
-          menus.push(menu);
         }
       }
+
+      // 处理面包屑
+      const breadcrumb = { key, path, ...rest } as BreadcrumbItem<T>;
+
+      if (icon) {
+        breadcrumb.icon = icon;
+      }
+
+      if (component) {
+        breadcrumb.href = href;
+      }
+
+      if (parent) {
+        breadcrumb.parent = breadcrumbs[parent.path];
+      }
+
+      breadcrumbs[path] = breadcrumb;
     }
+
+    menus.push(...menusMap[root]);
   }
 
-  return [routes, menus];
+  return [routes, menus, breadcrumbs];
 }
