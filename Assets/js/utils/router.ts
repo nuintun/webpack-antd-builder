@@ -35,8 +35,6 @@ export interface MenuItem {
 
 export type Icon = string | React.ReactElement;
 
-// export type MenusMap = { [path: string]: MenuItem[] };
-
 export type Route<M = unknown, K extends string = string> = NRoute<M & Meta, K>;
 
 export interface IRoute<M = unknown, K extends string = string> extends Omit<NIRoute<M, K>, 'meta' | 'children'> {
@@ -44,6 +42,13 @@ export interface IRoute<M = unknown, K extends string = string> extends Omit<NIR
   children?: IRoute<M, K>[];
 }
 
+/**
+ * @function addOptional
+ * @description 添加可选属性
+ * @param source 源对象
+ * @param key 属性名
+ * @param value 属性值
+ */
 function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
   if (value !== undefined) {
     source[key] = value;
