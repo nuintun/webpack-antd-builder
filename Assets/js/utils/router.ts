@@ -100,7 +100,7 @@ export function parse<M = unknown, K extends string = string>(
     );
 
     // 遍历节点
-    for (const [{ path, meta, sensitive, children, ...rest }, parent] of tree) {
+    for (const [{ meta, sensitive, children, ...rest }, parent] of tree) {
       // 当前节点数据操作
       const hasChildren = children && children.length > 0;
       const { key, name, icon, link, hideInMenu, hideInBreadcrumb } = meta;
@@ -108,15 +108,13 @@ export function parse<M = unknown, K extends string = string>(
       // 格式验证
       if (__DEV__) {
         if (!hideInMenu || !hideInBreadcrumb) {
-          assert(name, `Route item "${path}" not hidden in menu or breadcrumb must have a name property.`);
+          assert(name, `Route item "${rest.path}" not hidden in menu or breadcrumb must have a name property.`);
         }
       }
 
       // 路由处理
       const parentRoute = parent ? flatRoutes[parent.meta.key] : parent;
       const route = { ...rest, meta, sensitive: sensitive === true } as IRoute<M, K>;
-
-      addOptional(route, 'path', path);
 
       if (hasChildren) {
         flatRoutes[key] = route;
