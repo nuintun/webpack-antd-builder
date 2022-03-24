@@ -1,15 +1,13 @@
 import { DFSTree } from '/js/utils/tree';
-import { MenuItem } from '/js/utils/router';
+import { IRoute, MenuItem } from '/js/utils/router';
 
 export interface ExpandKeys {
   openKeys: string[];
   selectedKeys: string[];
 }
 
-export type FlattenMenuItem<T> = MenuItem<T & { parent?: string }>;
-
-export interface FlattenMenus<T> {
-  [path: string]: FlattenMenuItem<T>;
+export interface FlattenMenus {
+  [key: string]: MenuItem;
 }
 
 export const prefixUI = 'ui-smart-menu';
@@ -19,7 +17,7 @@ export const prefixUI = 'ui-smart-menu';
  * @description 菜单标识去重
  * @param keys 菜单标识
  */
-function uniqueKeys(keys: string[]): string[] {
+export function uniqueKeys(keys: string[]): string[] {
   const result: string[] = [];
   const cached: Record<string, boolean> = {};
 
@@ -39,21 +37,14 @@ function uniqueKeys(keys: string[]): string[] {
  * @description 扁平化菜单数据
  * @param menus 菜单数据
  */
-export function flattenMenus<T>(menus: MenuItem<T>[]): FlattenMenus<T> {
-  const flatMenus: FlattenMenus<T> = {};
+export function flattenMenus(menus: MenuItem[]): FlattenMenus {
+  const flatMenus: FlattenMenus = {};
 
   for (const menu of menus) {
     const tree = new DFSTree(menu, menu => menu.children);
 
-    for (const [menu, parent] of tree) {
-      if (parent) {
-        flatMenus[menu.path] = {
-          ...menu,
-          parent: parent.path
-        };
-      } else {
-        flatMenus[menu.path] = menu;
-      }
+    for (const [menu] of tree) {
+      flatMenus[menu.key] = menu;
     }
   }
 
@@ -73,30 +64,25 @@ export function mergeKeys(prevKeys: string[], nextKeys: string[]): string[] {
 /**
  * @function getExpandKeys
  * @description 通过当前路由获取菜单展开项标识列表
- * @param path 路由路径
+ * @param matches 匹配的路由数据
  * @param flatMenus 扁平化菜单数据
  */
-export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): ExpandKeys {
+export function getExpandKeys(matches: IRoute[], flatMenus: FlattenMenus): ExpandKeys {
   const openKeys: string[] = [];
   const selectedKeys: string[] = [];
 
-  let current = flatMenus[path];
+  for (const match of matches) {
+    const { key } = match.meta;
+    const menu = flatMenus[key];
 
-  while (current) {
-    const key = current.key;
+    if (menu) {
+      const { children } = menu;
 
-    if (current.children) {
-      openKeys.push(key);
-    } else {
-      selectedKeys.push(key);
-    }
-
-    const { parent } = current;
-
-    if (parent === undefined) {
-      break;
-    } else {
-      current = flatMenus[parent];
+      if (children && children.length > 0) {
+        openKeys.push(key);
+      } else {
+        selectedKeys.push(key);
+      }
     }
   }
 

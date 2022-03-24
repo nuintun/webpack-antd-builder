@@ -5,7 +5,6 @@ import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
-import { BreadcrumbItem } from '/js/utils/router';
 import SmartBreadcrumb from '/js/components/SmartBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -13,9 +12,9 @@ import SmartMenu, { HeaderRender, SmartMenuProps } from '/js/components/SmartMen
 
 const { Header, Content } = Layout;
 
-type PickProps = 'theme' | 'menus' | 'match' | 'history' | 'location' | 'collapsedWidth';
+type PickProps = 'theme' | 'menus' | 'collapsedWidth';
 
-export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> {
+export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
   roles?: any;
   siderWith?: number;
   mobileQuery?: string;
@@ -23,21 +22,16 @@ export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> 
   children?: React.ReactNode;
   leftHeaderRender?: HeaderRender;
   rightHeaderRender?: HeaderRender;
-  breadcrumbs: { [path: string]: BreadcrumbItem<T> };
 }
 
 const prefixUI = 'ui-smart-layout';
 const triggerClassName = `${prefixUI}-sider-trigger`;
 
-function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
+export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactElement {
   const {
-    match,
     menus,
-    history,
     children,
-    location,
     siderWith,
-    breadcrumbs,
     theme = 'dark',
     collapsedWidth,
     leftHeaderRender,
@@ -88,12 +82,9 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
     <Layout hasSider={!isMobile} className={`${prefixUI} ${prefixUI}-${theme}`}>
       <SmartMenu
         theme={theme}
-        match={match}
         menus={menus}
         width={siderWith}
-        history={history}
         isMobile={isMobile}
-        location={location}
         collapsed={collapsed}
         onCollapse={onCollapse}
         headerRender={leftHeaderRender}
@@ -127,7 +118,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
         <Content>
           <div ref={contentRef} className={`${prefixUI}-content`}>
             <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
-              <SmartBreadcrumb match={match} location={location} history={history} breadcrumbs={breadcrumbs} />
+              <SmartBreadcrumb />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
             </ConfigProvider>
           </div>
@@ -135,6 +126,4 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
       </Layout>
     </Layout>
   );
-}
-
-export default memo(SmartLayout) as typeof SmartLayout;
+});

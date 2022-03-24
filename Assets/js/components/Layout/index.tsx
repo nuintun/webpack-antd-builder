@@ -4,8 +4,20 @@
  */
 
 import { memo } from 'react';
-import { Outlet } from 'react-nest-router';
+import { MenuItem } from '/js/utils/router';
+import SmartLayout from '/js/components/SmartLayout';
+import { Outlet, useOutletContext } from 'react-nest-router';
+
+interface LayoutOutletContext {
+  menus: MenuItem[];
+}
 
 export default memo(function Layout() {
-  return <Outlet />;
+  const { menus } = useOutletContext<LayoutOutletContext>();
+
+  return (
+    <SmartLayout menus={menus}>
+      <Outlet />
+    </SmartLayout>
+  );
 });

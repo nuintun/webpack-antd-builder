@@ -26,9 +26,9 @@ export interface MetaWithKey extends Meta {
 }
 
 export interface MenuItem {
+  link: Link;
   key: string;
   icon?: Icon;
-  link?: Link;
   name: string;
   children?: MenuItem[];
 }
@@ -37,7 +37,7 @@ export type Icon = string | React.ReactElement;
 
 export type Route<M = unknown, K extends string = string> = NRoute<M & Meta, K>;
 
-export interface IRoute<M = unknown, K extends string = string> extends Omit<NIRoute<M, K>, 'meta' | 'children'> {
+export interface IRoute<M = unknown, K extends string = string> extends NIRoute<M, K> {
   meta: M & MetaWithKey;
   children?: IRoute<M, K>[];
 }
@@ -141,10 +141,9 @@ export function parse<M = unknown, K extends string = string>(
           flatMenus[key] = parentMenu;
         }
       } else {
-        const menu = { key, name } as MenuItem;
+        const menu = { key, name, link } as MenuItem;
 
         addOptional(menu, 'icon', icon);
-        addOptional(menu, 'link', link);
 
         if (hasChildren) {
           flatMenus[key] = menu;

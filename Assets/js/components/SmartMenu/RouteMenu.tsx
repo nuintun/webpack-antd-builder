@@ -1,12 +1,12 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import memoizeOne from 'memoize-one';
+import Link from '/js/components/Link';
 import { Menu, MenuProps } from 'antd';
 import { isString } from '/js/utils/utils';
-import { MenuItem } from '/js/utils/router';
-import usePrevious from '/js/hooks/usePrevious';
+import { IRoute, MenuItem } from '/js/utils/router';
 import usePersistRef from '/js/hooks/usePersistRef';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Location, useLocation, useMatches } from 'react-nest-router';
 import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
 
 const { Fragment } = React;
@@ -25,11 +25,11 @@ type OmitProps =
   | 'onOpenChange'
   | 'defaultSelectedKeys';
 
-export interface RouteMenuProps<T> extends RouteComponentProps, Omit<MenuProps, OmitProps> {
+export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
+  menus: MenuItem[];
   collapsed?: boolean;
-  menus: MenuItem<T>[];
   icon?: string | React.ReactElement;
-  menuItemRender?: (menu: MenuItem<T>) => React.ReactNode;
+  menuItemRender?: (menu: MenuItem) => React.ReactNode;
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
 }
 
@@ -47,7 +47,7 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | un
   }
 }
 
-function titleRender<T>({ name, icon }: MenuItem<T>, hasWrapper: boolean = false): React.ReactElement {
+function titleRender({ name, icon }: MenuItem, hasWrapper: boolean = false): React.ReactElement {
   const Wrapper = hasWrapper ? 'span' : Fragment;
   const props = Wrapper === Fragment ? {} : { className: titleClassName };
 
@@ -59,96 +59,103 @@ function titleRender<T>({ name, icon }: MenuItem<T>, hasWrapper: boolean = false
   );
 }
 
-function menuItemRender<T>(menu: MenuItem<T>, { location, menuItemRender }: RouteMenuProps<T>): React.ReactElement {
-  const { key, name, href, target } = menu;
+function menuItemRender(
+  menu: MenuItem,
+  location: Location,
+  customItemRender: RouteMenuProps['menuItemRender']
+): React.ReactElement {
+  const { key, name } = menu;
+  const { href, target } = menu.link!;
   const replace = href === `${location.pathname}${location.search}${location.hash}`;
 
   return (
     <Item key={key} title={name}>
-      <Link to={href} className={titleClassName} replace={replace} target={target}>
-        {menuItemRender ? menuItemRender(menu) : titleRender(menu)}
+      <Link href={href} className={titleClassName} replace={replace} target={target}>
+        {customItemRender ? customItemRender(menu) : titleRender(menu)}
       </Link>
     </Item>
   );
 }
 
-function subMenuItemRender<T>(menu: MenuItem<T>, props: RouteMenuProps<T>): React.ReactElement {
+function subMenuItemRender(
+  menu: MenuItem,
+  location: Location,
+  customItemRender: RouteMenuProps['menuItemRender']
+): React.ReactElement {
   const { key, children } = menu;
 
   if (children && children.length) {
     return (
       <SubMenu key={key} title={titleRender(menu, true)}>
-        {menuRender(children, props)}
+        {menuRender(children, location, customItemRender)}
       </SubMenu>
     );
   }
 
-  return menuItemRender(menu, props);
+  return menuItemRender(menu, location, customItemRender);
 }
 
-function menuRender<T>(menus: MenuItem<T>[], props: RouteMenuProps<T>): React.ReactElement[] {
-  return menus.map(menu => subMenuItemRender(menu, props));
+function menuRender(
+  menus: MenuItem[],
+  location: Location,
+  customItemRender: RouteMenuProps['menuItemRender']
+): React.ReactElement[] {
+  return menus.map(menu => subMenuItemRender(menu, location, customItemRender));
 }
 
-function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
-  const { match, menus, history, location, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
+export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
+  const { menus, onOpenChange, defaultOpenKeys, collapsed, menuItemRender, ...restProps } = props;
 
-  const prevProps = usePrevious<RouteMenuProps<T>>(props);
-  const propsRef = usePersistRef<RouteMenuProps<T>>(props);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const location = useLocation();
+  const matches = useMatches() as IRoute[];
+
+  const propsRef = usePersistRef<RouteMenuProps>(props);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
-  const items = useMemo(() => menuRender(menus, props), [menus, props]);
-  const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
 
   const memoizeMergeKeys = useMemo(() => memoizeOne(mergeKeys), []);
   const memoizeFlattenMenus = useMemo(() => memoizeOne(flattenMenus), []);
   const memoizeGetExpandKeys = useMemo(() => memoizeOne(getExpandKeys), []);
 
-  const onOpenChangeHander = useCallback((nextOpenKeys: React.Key[]): void => {
-    const keys = nextOpenKeys.map(key => key.toString());
-    const { onOpenChange, collapsed = false } = propsRef.current;
+  const [selectedKeys, setSelectedKeys] = useState<string[]>(() => []);
+  const [openKeys, setOpenKeys] = useState<string[]>(() => (collapsed ? [] : cachedOpenKeysRef.current));
 
-    setOpenKeys(keys);
+  const onOpenChangeHander = useCallback((openKeys: string[]): void => {
+    const { onOpenChange, collapsed } = propsRef.current;
+
+    setOpenKeys(openKeys);
 
     if (!collapsed) {
-      cachedOpenKeysRef.current = keys;
+      cachedOpenKeysRef.current = openKeys;
     }
 
-    onOpenChange && onOpenChange(keys, cachedOpenKeysRef.current);
+    onOpenChange && onOpenChange(openKeys, cachedOpenKeysRef.current);
   }, []);
 
   useEffect(() => {
-    const { match, menus, location, onOpenChange, collapsed = false } = props;
+    const flatMenus = memoizeFlattenMenus(menus);
+    const cachedOpenKeys = cachedOpenKeysRef.current;
+    const defaultKeys = memoizeGetExpandKeys(matches, flatMenus);
 
-    if (
-      !prevProps ||
-      menus !== prevProps.menus ||
-      collapsed !== prevProps.collapsed ||
-      location.pathname !== prevProps.location.pathname
-    ) {
-      const flatMenus = memoizeFlattenMenus(menus);
-      const cachedOpenKeys = cachedOpenKeysRef.current;
-      const defaultKeys = memoizeGetExpandKeys(match.path, flatMenus);
+    if (!collapsed) {
+      const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys);
 
-      if (!collapsed) {
-        const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys);
+      setOpenKeys(nextOpenKeys);
 
-        setOpenKeys(nextOpenKeys);
+      cachedOpenKeysRef.current = nextOpenKeys;
 
-        cachedOpenKeysRef.current = nextOpenKeys;
+      onOpenChange && onOpenChange(nextOpenKeys, nextOpenKeys);
+    } else if (openKeys.length) {
+      const nextOpenKeys: string[] = [];
 
-        onOpenChange && onOpenChange(nextOpenKeys, nextOpenKeys);
-      } else if (openKeys.length) {
-        const nextOpenKeys: string[] = [];
+      setOpenKeys(nextOpenKeys);
 
-        setOpenKeys(nextOpenKeys);
-
-        onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeys);
-      }
-
-      setSelectedKeys(defaultKeys.selectedKeys);
+      onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeys);
     }
-  }, [location, collapsed, menus, onOpenChange]);
+
+    setSelectedKeys(defaultKeys.selectedKeys);
+  }, [location.pathname, collapsed, matches, menus, onOpenChange]);
+
+  const items = useMemo(() => menuRender(menus, location, menuItemRender), [location, menuItemRender, menus]);
 
   return (
     <Menu
@@ -163,6 +170,4 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
       {items}
     </Menu>
   );
-}
-
-export default memo(RouteMenu) as typeof RouteMenu;
+});

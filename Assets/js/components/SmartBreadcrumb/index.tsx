@@ -4,15 +4,17 @@ import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
+import Link from '/js/components/Link';
+import { IRoute } from '/js/utils/router';
 import { isString } from '/js/utils/utils';
-import { BreadcrumbItem as Item } from '/js/utils/router';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { useMatches } from 'react-nest-router';
 
-type Breadcrumbs<T> = { [path: string]: Item<T> };
-type BreadcrumbItem<T> = Item<T> & { active: boolean };
-
-export interface SmartBreadcrumbProps<T> extends RouteComponentProps {
-  breadcrumbs: Breadcrumbs<T>;
+interface BreadcrumbItem {
+  key: string;
+  href?: string;
+  name: string;
+  active: boolean;
+  icon?: React.ReactElement | undefined;
 }
 
 function iconRender(icon?: string | React.ReactElement): React.ReactElement | undefined {
@@ -27,72 +29,54 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | un
   return icon;
 }
 
-function getBreadcrumbItem<T>(item: Item<T>, active: boolean) {
-  const { icon } = item;
-  const breadcrumbItem = { ...item, active };
+function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
+  const breadcrumbs: BreadcrumbItem[] = [];
 
-  if (icon) {
-    breadcrumbItem.icon = iconRender(icon);
-  }
+  const { length } = matches;
 
-  return breadcrumbItem;
-}
+  for (let i = 0; i < length; i++) {
+    const { meta } = matches[i];
+    const { name, hideInBreadcrumb } = meta;
 
-function getBreadcrumbItems<T>(path: string, pathname: string, breadcrumbs: Breadcrumbs<T>): BreadcrumbItem<T>[] {
-  const breadcrumbItems: BreadcrumbItem<T>[] = [];
+    if (!hideInBreadcrumb && name) {
+      const { key, link } = meta;
+      const icon = iconRender(meta.icon);
 
-  let active = true;
-  let hasHome = false;
-  let current = breadcrumbs[pathname] || breadcrumbs[path];
-
-  while (current) {
-    const { path, parent } = current;
-
-    breadcrumbItems.push(getBreadcrumbItem(current, active));
-
-    active = false;
-
-    if (parent) {
-      current = parent;
-    } else {
-      hasHome = path === '/';
-      break;
+      if (i + 1 < length) {
+        breadcrumbs.push({ key, name, icon, active: false });
+      } else {
+        breadcrumbs.push({ key, name, icon, href: link.href, active: true });
+      }
     }
   }
 
-  const home = breadcrumbs['/'];
-
-  if (!hasHome && home) {
-    breadcrumbItems.push(getBreadcrumbItem(home, active));
-  }
-
-  return breadcrumbItems.reverse();
+  return breadcrumbs;
 }
 
-function SmartBreadcrumb<T>({ match, location, breadcrumbs }: SmartBreadcrumbProps<T>): React.ReactElement {
-  const breadcrumbItems = useMemo(() => {
-    return getBreadcrumbItems(match.path, location.pathname, breadcrumbs);
-  }, [match.path, location.pathname, breadcrumbs]);
+export default memo(function SmartBreadcrumb(): React.ReactElement {
+  const matches = useMatches() as IRoute[];
+
+  const breadcrumbs = useMemo(() => {
+    return getBreadcrumbs(matches);
+  }, [matches]);
 
   return (
     <Breadcrumb className="ui-breadcrumb">
-      {breadcrumbItems.map(breadcrumbItem => (
-        <Breadcrumb.Item key={breadcrumbItem.key}>
-          {breadcrumbItem.href && !breadcrumbItem.active ? (
-            <Link className="ui-breadcrumb-link" to={breadcrumbItem.href}>
-              {breadcrumbItem.icon}
-              <span>{breadcrumbItem.name}</span>
+      {breadcrumbs.map(({ key, name, icon, href, active }) => (
+        <Breadcrumb.Item key={key}>
+          {href && !active ? (
+            <Link className="ui-breadcrumb-link" href={href}>
+              {iconRender(icon)}
+              <span>{name}</span>
             </Link>
           ) : (
-            <span className={classNames('ui-breadcrumb-item', { 'ui-breadcrumb-active': breadcrumbItem.active })}>
-              {breadcrumbItem.icon}
-              <span>{breadcrumbItem.name}</span>
+            <span className={classNames('ui-breadcrumb-item', { 'ui-breadcrumb-active': active })}>
+              {iconRender(icon)}
+              <span>{name}</span>
             </span>
           )}
         </Breadcrumb.Item>
       ))}
     </Breadcrumb>
   );
-}
-
-export default memo(SmartBreadcrumb) as typeof SmartBreadcrumb;
+});
