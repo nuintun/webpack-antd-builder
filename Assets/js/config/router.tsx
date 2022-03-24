@@ -39,7 +39,6 @@ export const routes: Route<{ id?: number }>[] = [
     path: '/',
     element: <Layout />,
     meta: {
-      name: 'Layout',
       hideInMenu: true,
       hideInBreadcrumb: true
     },
