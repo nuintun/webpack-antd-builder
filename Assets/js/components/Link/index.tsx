@@ -8,14 +8,16 @@ import { isURL } from '/js/utils/url';
 import usePersistRef from '/js/hooks/usePersistRef';
 import { useNavigate, useResolve } from 'react-nest-router';
 
-function isModifiedEvent(e: React.MouseEvent) {
-  return !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
-}
+type ClickEvent = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
 
 export interface LinkProps<S> extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   state?: S;
   href: string;
   replace?: boolean;
+}
+
+function isModifiedEvent(e: ClickEvent) {
+  return !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
 }
 
 function Link<S>(props: LinkProps<S>): React.ReactElement {
@@ -24,32 +26,24 @@ function Link<S>(props: LinkProps<S>): React.ReactElement {
   const resolve = useResolve();
   const navigate = useNavigate();
   const propsRef = usePersistRef(props);
-  const isExternal = useMemo(() => isURL(to), [to]);
-  const href = useMemo(() => (isExternal ? to : resolve(to)), [to, isExternal]);
+  const href = useMemo(() => (isURL(to) ? to : resolve(to)), [to]);
 
-  const onLinkClick = useCallback<React.MouseEventHandler<HTMLAnchorElement>>(e => {
+  const onLinkClick = useCallback((e: ClickEvent) => {
     const { href: to, state, target = '_self', replace, onClick } = propsRef.current;
 
     if (
-      e.button === 0 && // Ignore everything but left clicks.
-      !isModifiedEvent(e) && // Ignore clicks with modifier keys.
-      /_self/i.test(target) // Ignore target not equal _self.
+      e.button === 0 && // 鼠标左键点击.
+      !isModifiedEvent(e) && // 没有组合按键.
+      /_self/i.test(target) && // 当前窗口打开.
+      !isURL(to) // 非外部链接
     ) {
       e.preventDefault();
 
-      onClick && onClick(e);
-
       navigate(to, { state, replace });
     }
-  }, []);
 
-  if (isExternal) {
-    return (
-      <a {...restProps} href={href} onClick={onClick}>
-        {children}
-      </a>
-    );
-  }
+    onClick && onClick(e);
+  }, []);
 
   return (
     <a {...restProps} href={href} onClick={onLinkClick}>
