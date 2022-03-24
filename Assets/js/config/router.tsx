@@ -37,6 +37,7 @@ export const routes: Route<{ id?: number }>[] = [
     }
   },
   {
+    path: '/',
     element: <Layout />,
     meta: {
       name: 'Layout',
@@ -45,7 +46,14 @@ export const routes: Route<{ id?: number }>[] = [
     },
     children: [
       {
-        path: '/news',
+        index: true,
+        meta: {
+          name: 'Home'
+        },
+        element: 'Home'
+      },
+      {
+        path: 'news',
         meta: {
           name: 'News'
         },

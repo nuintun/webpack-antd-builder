@@ -2,6 +2,8 @@
  * @module App
  */
 
+import '/css/global.less';
+
 import { render } from 'react-dom';
 import { lazy, Suspense, useMemo } from 'react';
 
