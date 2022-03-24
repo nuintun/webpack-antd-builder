@@ -6,20 +6,11 @@ import { lazy } from 'react';
 
 import { Route } from '/js/utils/router';
 
-const NotFound = lazy(() => import('/js/pages/404'));
 const Forbidden = lazy(() => import('/js/pages/403'));
 const ServerError = lazy(() => import('/js/pages/500'));
 const Layout = lazy(() => import('/js/components/Layout'));
 
 export const routes: Route<{ id?: number }>[] = [
-  {
-    path: '/404',
-    element: <NotFound />,
-    meta: {
-      hideInMenu: true,
-      hideInBreadcrumb: true
-    }
-  },
   {
     path: '/403',
     element: <Forbidden />,
