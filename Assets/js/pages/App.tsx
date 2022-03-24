@@ -5,17 +5,52 @@
 import '/css/global.less';
 
 import { render } from 'react-dom';
-import { lazy, Suspense, useMemo } from 'react';
+import { lazy, memo, Suspense, useMemo } from 'react';
 
+import { Button, Result } from 'antd';
 import { parse } from '/js/utils/router';
 import { Router } from 'react-nest-router';
 import * as router from '/js/config/router';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-const [routes, menus] = parse(router.routes);
 const NotFound = lazy(() => import('/js/pages/404'));
 
+const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
+  if (__DEV__) {
+    return (
+      <Result
+        status="error"
+        title="页面错误"
+        extra={
+          <Button type="primary" onClick={resetErrorBoundary}>
+            重试页面
+          </Button>
+        }
+        subTitle="抱歉，发生错误，无法渲染页面，请打开开发者工具查看错误信息！"
+      />
+    );
+  }
+
+  return (
+    <Result
+      status="error"
+      title="页面错误"
+      extra={
+        <Button type="primary" onClick={resetErrorBoundary}>
+          重试页面
+        </Button>
+      }
+      subTitle="抱歉，发生错误，无法渲染页面，请联系系统管理员或者重试页面！"
+    />
+  );
+});
+
 function App() {
+  const [routes, menus] = useMemo(() => {
+    return parse(router.routes);
+  }, []);
+
   const context = useMemo(() => {
     return { menus };
   }, [menus]);
@@ -33,4 +68,9 @@ if (__DEV__) {
   module.hot && module.hot.accept();
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <App />
+  </ErrorBoundary>,
+  document.getElementById('root')
+);
