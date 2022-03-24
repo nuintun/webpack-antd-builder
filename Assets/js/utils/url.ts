@@ -9,7 +9,7 @@ import { normalize } from 'react-nest-router';
  * @description 判断路径是否为 URL
  * @param path 需要判断的路径
  */
-function isURL(path: string): boolean {
+export function isURL(path: string): boolean {
   return /^(?:[a-z0-9.+-]+:)?\/\//i.test(path);
 }
 
@@ -18,7 +18,7 @@ function isURL(path: string): boolean {
  * @description 判断路径是否为绝对路径
  * @param path 需要判断的路径
  */
-function isAbsolute(path: string): boolean {
+export function isAbsolute(path: string): boolean {
   return /^\//.test(path);
 }
 
@@ -27,7 +27,7 @@ function isAbsolute(path: string): boolean {
  * @description 解析 URL 路径
  * @param path URL 路径
  */
-function parseURL(path: string): [origin: string, pathname: string, query: string] {
+export function parseURL(path: string): [origin: string, pathname: string, query: string] {
   const matched = path.match(/^((?:[a-z0-9.+-]+:)?\/\/[^/]+)?([^?#]*)(.*)$/i);
 
   if (matched) {

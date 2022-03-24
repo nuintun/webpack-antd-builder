@@ -46,7 +46,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.4",
-    "react-nest-router": "^0.0.7",
+    "react-nest-router": "^0.0.8",
     "throttle-debounce": "^3.0.1",
     "whatwg-fetch": "^3.6.2"
   },
