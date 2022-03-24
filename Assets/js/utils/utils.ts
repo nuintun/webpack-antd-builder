@@ -4,8 +4,6 @@
 
 import dayjs, { Dayjs, OpUnitType } from 'dayjs';
 
-const { toString } = Object.prototype;
-
 /**
  * @function assert
  * @param cond Assert flags.
@@ -27,7 +25,7 @@ export const isBrowser = typeof window !== 'undefined' && window.document;
  * @param value 需要验证的值
  */
 export function isString(value: any): value is string {
-  return toString.call(value) === '[object String]';
+  return Object.prototype.toString.call(value) === '[object String]';
 }
 
 /**
