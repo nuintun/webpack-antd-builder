@@ -8,21 +8,21 @@ import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
 import usePersistRef from './usePersistRef';
-import { Navigate, useNavigate } from 'react-nest-router';
 import fetch, { Options as RequestOptions } from '/js/utils/request';
+import { Location, Navigate, useLocation, useNavigate } from 'react-nest-router';
 
 /**
  * @function onUnauthorizedHandler
  * @description 默认未授权操作
  * @param history 浏览器历史操作方法
  */
-function onUnauthorizedHandler(navigate: Navigate): void {
-  navigate('/login');
+function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
+  navigate('/login', { state: location });
 }
 
 export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
   delay?: number;
-  onUnauthorized?: (navigate: Navigate) => void;
+  onUnauthorized?: (navigate: Navigate, location: Location) => void;
 }
 
 /**
@@ -36,6 +36,7 @@ export default function useRequest(
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(url: string, options?: Options) => Promise<R>] {
   const retainRef = useRef(0);
+  const location = useLocation();
   const navigate = useNavigate();
   const isMounted = useIsMounted();
   const initOptionsRef = usePersistRef(optinos);
@@ -51,11 +52,11 @@ export default function useRequest(
 
       const onUnauthorized = () => {
         if (options.onUnauthorized) {
-          options.onUnauthorized(navigate);
+          options.onUnauthorized(navigate, location);
         } else if (initOptions.onUnauthorized) {
-          initOptions.onUnauthorized(navigate);
+          initOptions.onUnauthorized(navigate, location);
         } else {
-          onUnauthorizedHandler(navigate);
+          onUnauthorizedHandler(navigate, location);
         }
       };
 

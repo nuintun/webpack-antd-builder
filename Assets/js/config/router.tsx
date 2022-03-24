@@ -37,6 +37,14 @@ export const routes: Route<{ id?: number }>[] = [
     }
   },
   {
+    path: '/login',
+    element: 'Login',
+    meta: {
+      hideInMenu: true,
+      hideInBreadcrumb: true
+    }
+  },
+  {
     path: '/',
     element: <Layout />,
     meta: {
