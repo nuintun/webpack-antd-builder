@@ -60,7 +60,7 @@ module.exports = async mode => {
     favicon: configure.favicon,
     filename: configure.entryHTML,
     template: require.resolve('../template/index.ejs'),
-    templateParameters: { lang: configure.lang, theme: configure.theme }
+    templateParameters: { lang: configure.lang, color: configure.color }
   };
 
   const css = {

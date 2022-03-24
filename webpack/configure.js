@@ -17,7 +17,7 @@ const images = path.resolve('Assets/images');
 module.exports = {
   lang: 'zh-CN',
   title: 'Antd',
-  theme: '#4285f4',
+  color: '#4285f4',
   publicPath: '/public/',
   context: path.resolve('Assets'),
   outputPath: path.resolve('wwwroot/public'),
