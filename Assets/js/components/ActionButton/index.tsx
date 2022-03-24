@@ -7,13 +7,13 @@ import { Options, RequestError } from '/js/utils/request';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, ButtonProps, message, Popconfirm, PopconfirmProps } from 'antd';
 
-export interface ActionButtonProps<T>
+export interface ActionButtonProps<R>
   extends Pick<Options, 'method' | 'notify'>,
     Omit<ButtonProps, 'loading' | 'onClick' | 'onError'> {
   delay?: number;
   action: string;
   onComplete?: () => void;
-  onSuccess?: (response: T) => void;
+  onSuccess?: (response: R) => void;
   confirmIcon?: PopconfirmProps['icon'];
   confirmTitle?: PopconfirmProps['title'];
   onError?: (error: RequestError) => void;
@@ -25,7 +25,7 @@ export interface ActionButtonProps<T>
 
 const DEFAULT_CONFIRM_ICON = <QuestionCircleOutlined style={{ color: '#f00' }} />;
 
-function ActionButton<T>(props: ActionButtonProps<T>): React.ReactElement {
+function ActionButton<R>(props: ActionButtonProps<R>): React.ReactElement {
   const {
     body,
     delay,
@@ -53,7 +53,7 @@ function ActionButton<T>(props: ActionButtonProps<T>): React.ReactElement {
     const body = isFunction(initBody) ? initBody() : initBody;
     const query = isFunction(initQuery) ? initQuery() : initQuery;
 
-    request<T>(action, { ...requestInit, method, body, query, notify })
+    request<R>(action, { ...requestInit, method, body, query, notify })
       .then(
         response => {
           const { onSuccess } = propsRef.current;
