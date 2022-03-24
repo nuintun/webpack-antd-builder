@@ -9,8 +9,8 @@ import { lazy, memo, Suspense, useMemo } from 'react';
 
 import { Button, Result } from 'antd';
 import { parse } from '/js/utils/router';
+import { router } from '/js/config/router';
 import { Router } from 'react-nest-router';
-import * as router from '/js/config/router';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
@@ -48,8 +48,8 @@ const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary }: Fallba
 
 function App() {
   const [routes, menus] = useMemo(() => {
-    return parse(router.routes);
-  }, []);
+    return parse(router);
+  }, [router]);
 
   const context = useMemo(() => {
     return { menus };

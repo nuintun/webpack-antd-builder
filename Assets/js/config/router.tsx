@@ -10,7 +10,7 @@ const Forbidden = lazy(() => import('/js/pages/403'));
 const ServerError = lazy(() => import('/js/pages/500'));
 const Layout = lazy(() => import('/js/components/Layout'));
 
-export const routes: Route<{ id?: number }>[] = [
+export const router: Route<{ id?: number }>[] = [
   {
     path: '/403',
     element: <Forbidden />,
