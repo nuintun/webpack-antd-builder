@@ -38,14 +38,14 @@ export default memo(function LeftHeader({
   if (collapsed) {
     return (
       <Link href="/" title="Home">
-        <img src={logo} style={getLogoStyle(collapsedWidth)} />
+        <img alt="logo" src={logo} style={getLogoStyle(collapsedWidth)} />
       </Link>
     );
   }
 
   return (
     <Link href="/" title="Home">
-      <img src={logo} style={getLogoStyle(collapsedWidth)} />
+      <img alt="logo" src={logo} style={getLogoStyle(collapsedWidth)} />
       <span style={getLogoTitleStyle(width, theme, collapsedWidth)}>Ant Design</span>
     </Link>
   );
