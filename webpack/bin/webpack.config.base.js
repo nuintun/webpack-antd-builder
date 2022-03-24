@@ -59,7 +59,8 @@ module.exports = async mode => {
     minify: !isDevelopment,
     favicon: configure.favicon,
     filename: configure.entryHTML,
-    template: require.resolve('../template/index.ejs')
+    template: require.resolve('../template/index.ejs'),
+    templateParameters: { lang: configure.lang, theme: configure.theme }
   };
 
   const css = {
