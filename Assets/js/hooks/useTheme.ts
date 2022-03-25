@@ -13,7 +13,7 @@ type Theme = 'dark' | 'light';
 const THEME_CACHE_KEY = 'theme';
 
 const storage = createStorage<Theme>(window.localStorage);
-const useSharedTheme = createSharedState<Theme>(() => storage.get(THEME_CACHE_KEY) || 'dark');
+const useSharedTheme = createSharedState<Theme>(() => storage.get(THEME_CACHE_KEY) || 'light');
 
 /**
  * @function useTheme
