@@ -4,7 +4,10 @@
  */
 
 import { memo } from 'react';
+
 import LeftHeader from './LeftHeader';
+import RightHeader from './RightHeader';
+import useTheme from '/js/hooks/useTheme';
 import { MenuItem } from '/js/utils/router';
 import SmartLayout from '/js/components/SmartLayout';
 import { HeaderRender } from '/js/components/SmartMenu';
@@ -15,12 +18,14 @@ interface LayoutOutletContext {
 }
 
 const leftHeaderRender: HeaderRender = props => <LeftHeader {...props} />;
+const rightHeaderRender: HeaderRender = props => <RightHeader {...props} />;
 
 export default memo(function Layout() {
+  const [theme] = useTheme();
   const { menus } = useOutletContext<LayoutOutletContext>();
 
   return (
-    <SmartLayout menus={menus} theme="light" leftHeaderRender={leftHeaderRender}>
+    <SmartLayout menus={menus} theme={theme} leftHeaderRender={leftHeaderRender} rightHeaderRender={rightHeaderRender}>
       <Outlet />
     </SmartLayout>
   );

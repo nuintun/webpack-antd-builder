@@ -1,0 +1,56 @@
+@import (reference) "~antd/es/style/themes/default.less";
+
+@right-header-prefix-cls: ui-right-header;
+
+.@{right-header-prefix-cls} {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  align-items: center;
+  display: inline-flex;
+  justify-content: flex-end;
+
+  > div {
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    padding: 0 12px;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: @menu-item-active-bg;
+    }
+  }
+
+  .ui-info-box {
+    width: auto;
+    color: #fff;
+    position: relative;
+    padding: 0 0 0 12px;
+    white-space: nowrap;
+    display: inline-block;
+
+    .ui-user-name {
+      padding: 0 12px 0 8px;
+    }
+  }
+}
+
+.ui-smart-layout-dark {
+  .@{right-header-prefix-cls} {
+    > div {
+      &:hover {
+        background: #222;
+      }
+    }
+  }
+}
+
+.ui-smart-layout-light {
+  .@{right-header-prefix-cls} {
+    > div {
+      color: #000;
+    }
+  }
+}
