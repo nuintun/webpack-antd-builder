@@ -55,10 +55,12 @@ module.exports = async mode => {
 
   const html = {
     xhtml: true,
+    meta: configure.meta,
     title: configure.title,
     minify: !isDevelopment,
     favicon: configure.favicon,
     filename: configure.entryHTML,
+    templateParameters: { lang: configure.lang },
     template: require.resolve('../template/index.ejs')
   };
 

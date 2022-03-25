@@ -4,7 +4,6 @@ import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { isString } from '/js/utils/utils';
 import { MenuItem } from '/js/utils/router';
-import usePrevious from '/js/hooks/usePrevious';
 import usePersistRef from '/js/hooks/usePersistRef';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
@@ -59,45 +58,65 @@ function titleRender<T>({ name, icon }: MenuItem<T>, hasWrapper: boolean = false
   );
 }
 
-function menuItemRender<T>(menu: MenuItem<T>, { location, menuItemRender }: RouteMenuProps<T>): React.ReactElement {
+function menuItemRender<T>(
+  menu: MenuItem<T>,
+  selectedKeys: string[],
+  customItemRender: RouteMenuProps<T>['menuItemRender']
+): React.ReactElement {
   const { key, name, href, target } = menu;
-  const replace = href === `${location.pathname}${location.search}${location.hash}`;
+  const replace = selectedKeys.includes(key);
 
   return (
     <Item key={key} title={name}>
       <Link to={href} className={titleClassName} replace={replace} target={target}>
-        {menuItemRender ? menuItemRender(menu) : titleRender(menu)}
+        {customItemRender ? customItemRender(menu) : titleRender(menu)}
       </Link>
     </Item>
   );
 }
 
-function subMenuItemRender<T>(menu: MenuItem<T>, props: RouteMenuProps<T>): React.ReactElement {
+function subMenuItemRender<T>(
+  menu: MenuItem<T>,
+  selectedKeys: string[],
+  customItemRender: RouteMenuProps<T>['menuItemRender']
+): React.ReactElement {
   const { key, children } = menu;
 
   if (children && children.length) {
     return (
       <SubMenu key={key} title={titleRender(menu, true)}>
-        {menuRender(children, props)}
+        {menuRender(children, selectedKeys, customItemRender)}
       </SubMenu>
     );
   }
 
-  return menuItemRender(menu, props);
+  return menuItemRender(menu, selectedKeys, customItemRender);
 }
 
-function menuRender<T>(menus: MenuItem<T>[], props: RouteMenuProps<T>): React.ReactElement[] {
-  return menus.map(menu => subMenuItemRender(menu, props));
+function menuRender<T>(
+  menus: MenuItem<T>[],
+  selectedKeys: string[],
+  customItemRender: RouteMenuProps<T>['menuItemRender']
+): React.ReactElement[] {
+  return menus.map(menu => subMenuItemRender(menu, selectedKeys, customItemRender));
 }
 
 function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
-  const { match, menus, history, location, onOpenChange, defaultOpenKeys, collapsed = false, ...restProps } = props;
+  const {
+    match,
+    menus,
+    history,
+    location,
+    onOpenChange,
+    menuItemRender,
+    defaultOpenKeys,
+    collapsed = false,
+    ...restProps
+  } = props;
 
-  const prevProps = usePrevious<RouteMenuProps<T>>(props);
   const propsRef = usePersistRef<RouteMenuProps<T>>(props);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
-  const items = useMemo(() => menuRender(menus, props), [menus, props]);
   const [openKeys, setOpenKeys] = useState<string[]>(collapsed ? [] : cachedOpenKeysRef.current);
 
   const memoizeMergeKeys = useMemo(() => memoizeOne(mergeKeys), []);
@@ -118,37 +137,32 @@ function RouteMenu<T>(props: RouteMenuProps<T>): React.ReactElement {
   }, []);
 
   useEffect(() => {
-    const { match, menus, location, onOpenChange, collapsed = false } = props;
+    const flatMenus = memoizeFlattenMenus(menus);
+    const cachedOpenKeys = cachedOpenKeysRef.current;
+    const defaultKeys = memoizeGetExpandKeys(match.path, flatMenus);
 
-    if (
-      !prevProps ||
-      menus !== prevProps.menus ||
-      collapsed !== prevProps.collapsed ||
-      location.pathname !== prevProps.location.pathname
-    ) {
-      const flatMenus = memoizeFlattenMenus(menus);
-      const cachedOpenKeys = cachedOpenKeysRef.current;
-      const defaultKeys = memoizeGetExpandKeys(match.path, flatMenus);
+    if (!collapsed) {
+      const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys);
 
-      if (!collapsed) {
-        const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys);
+      setOpenKeys(nextOpenKeys);
 
-        setOpenKeys(nextOpenKeys);
+      cachedOpenKeysRef.current = nextOpenKeys;
 
-        cachedOpenKeysRef.current = nextOpenKeys;
+      onOpenChange && onOpenChange(nextOpenKeys, nextOpenKeys);
+    } else if (openKeys.length) {
+      const nextOpenKeys: string[] = [];
 
-        onOpenChange && onOpenChange(nextOpenKeys, nextOpenKeys);
-      } else if (openKeys.length) {
-        const nextOpenKeys: string[] = [];
+      setOpenKeys(nextOpenKeys);
 
-        setOpenKeys(nextOpenKeys);
-
-        onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeys);
-      }
-
-      setSelectedKeys(defaultKeys.selectedKeys);
+      onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeys);
     }
-  }, [location, collapsed, menus, onOpenChange]);
+
+    setSelectedKeys(defaultKeys.selectedKeys);
+  }, [match.path, collapsed, menus, onOpenChange]);
+
+  const items = useMemo(() => {
+    return menuRender(menus, selectedKeys, menuItemRender);
+  }, [selectedKeys, menus, menuItemRender]);
 
   return (
     <Menu

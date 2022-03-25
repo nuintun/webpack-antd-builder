@@ -15,6 +15,7 @@ const mods = path.resolve('node_modules');
 const images = path.resolve('Assets/images');
 
 module.exports = {
+  lang: 'zh-CN',
   title: 'Antd',
   publicPath: '/public/',
   context: path.resolve('Assets'),
@@ -23,5 +24,6 @@ module.exports = {
   theme: path.resolve('Assets/css/theme.less'),
   favicon: path.resolve('wwwroot/favicon.ico'),
   entry: [path.resolve('Assets/js/pages/App.tsx')],
-  alias: { '/js': js, '/css': css, '/mods': mods, '/images': images }
+  alias: { '/js': js, '/css': css, '/mods': mods, '/images': images },
+  meta: { 'theme-color': '#4285f4', viewport: 'width=device-width,initial-scale=1.0' }
 };
