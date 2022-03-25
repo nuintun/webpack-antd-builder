@@ -30,9 +30,8 @@ function iconRender(icon?: string | React.ReactElement): React.ReactElement | un
 }
 
 function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
-  const breadcrumbs: BreadcrumbItem[] = [];
-
   const { length } = matches;
+  const breadcrumbs: BreadcrumbItem[] = [];
 
   for (let i = 0; i < length; i++) {
     const { meta } = matches[i];
