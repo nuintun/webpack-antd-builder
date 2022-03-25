@@ -1,3 +1,7 @@
+/**
+ * @module useTheme
+ */
+
 import { useCallback } from 'react';
 
 import useStorage from './useStorage';
@@ -11,6 +15,10 @@ const THEME_CACHE_KEY = 'theme';
 const storage = createStorage<Theme>(window.localStorage);
 const useSharedTheme = createSharedState<Theme>(() => storage.get(THEME_CACHE_KEY) || 'dark');
 
+/**
+ * @function useTheme
+ * @description [hook] 主题设置
+ */
 export default function useTheme(): [theme: Theme, setTheme: (theme: Theme) => void] {
   const [theme, updateTheme] = useSharedTheme();
   const [writeTheme] = useStorage<Theme>(THEME_CACHE_KEY);
