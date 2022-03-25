@@ -162,9 +162,9 @@
     tslib "^2.0.3"
 
 "@antv/g2@^4.1.26":
-  version "4.1.48"
-  resolved "https://registry.npmjs.org/@antv/g2/-/g2-4.1.48.tgz#f4cfe88f012a50e6473803348f0d229de2494fab"
-  integrity sha512-h5uGUXCK0S+hAHAoqzegoyeB9hASmY3RNlz+B/qHsSL7mIlEs7XbFGzbxN2LKDE3+N65Qwgki5rDqtIU8hX0qA==
+  version "4.1.49"
+  resolved "https://registry.npmjs.org/@antv/g2/-/g2-4.1.49.tgz#ab74f1db2b74ecf9bd771deaa2549bb2c94121c5"
+  integrity sha512-z/wJdPehYjRzm5kMj4fHQZIqVloikATX/4vf8hcLJ3W1wnQVx0qivwWuNLPVxnbbe1PnUbfmovCCFUDUNJlvcw==
   dependencies:
     "@antv/adjust" "^0.2.1"
     "@antv/attr" "^0.3.1"
@@ -2664,9 +2664,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.84:
-  version "1.4.92"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.92.tgz#88996e9aceb3a500710fd439abfa89b6cc1ac56c"
-  integrity sha512-YAVbvQIcDE/IJ/vzDMjD484/hsRbFPW2qXJPaYTfOhtligmfYEYOep+5QojpaEU9kq6bMvNeC2aG7arYvTHYsA==
+  version "1.4.93"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.93.tgz#2e87ac28721cb31d472ec2bd04f7daf9f2e13de2"
+  integrity sha512-ywq9Pc5Gwwpv7NG767CtoU8xF3aAUQJjH9//Wy3MBCg4w5JSLbJUq2L8IsCdzPMjvSgxuue9WcVaTOyyxCL0aQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4371,10 +4371,10 @@ prepend-http@^2.0.0:
   resolved "https://registry.npmjs.org/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@*, prettier@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-2.6.0.tgz#12f8f504c4d8ddb76475f441337542fa799207d4"
-  integrity sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==
+prettier@*, prettier@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-2.6.1.tgz#d472797e0d7461605c1609808e27b80c0f9cfe17"
+  integrity sha512-8UVbTBYGwN37Bs9LERmxCPjdvPxlEowx2urIL6urHzdb3SDq4B/Z6xLFCblrSnE4iKWcS6ziJ3aOYrc1kz/E2A==
 
 pretty-error@^4.0.0:
   version "4.0.0"
