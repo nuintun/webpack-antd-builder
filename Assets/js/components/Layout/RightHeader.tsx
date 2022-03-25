@@ -3,8 +3,8 @@ import './index.less';
 import { memo, useCallback } from 'react';
 
 import useTheme from '/js/hooks/useTheme';
-import { Avatar, Dropdown, Menu } from 'antd';
 import { HeaderRenderProps } from '../SmartMenu';
+import { Avatar, Dropdown, Menu, message } from 'antd';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
 import { MenuClickEventHandler } from 'rc-menu/es/interface';
 
@@ -18,9 +18,46 @@ function getDropdownClassName(selected: boolean): string {
   return selected ? 'ant-dropdown-menu-item-selected' : '';
 }
 
-const LogoutAction = memo(function LogoutAction(): React.ReactElement {
+const ThemeAction = memo(function ThemeAction(): React.ReactElement {
+  const [theme, setTheme] = useTheme();
+  const onSelect: MenuClickEventHandler = useCallback(({ key }) => {
+    setTheme(key as 'dark' | 'light');
+  }, []);
+
   return (
-    <a className="ui-vertical-middle">
+    <Dropdown
+      placement="bottomRight"
+      overlay={
+        <Menu selectable theme={theme} onSelect={onSelect} defaultSelectedKeys={[theme]}>
+          <Menu.Item key="dark">
+            <a className="ui-vertical-middle">
+              <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
+              <span>暗色主题</span>
+            </a>
+          </Menu.Item>
+          <Menu.Item key="light">
+            <a className="ui-vertical-middle">
+              <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
+              <span>浅色主题</span>
+            </a>
+          </Menu.Item>
+        </Menu>
+      }
+    >
+      <div title="Theme">
+        <Icon component={ThemeIcon} style={{ fontSize: 24, color: theme === 'dark' ? '#fff' : '#000' }} />
+      </div>
+    </Dropdown>
+  );
+});
+
+const LogoutAction = memo(function LogoutAction(): React.ReactElement {
+  const onClick = useCallback(() => {
+    message.info('你点击了退出系统😁');
+  }, []);
+
+  return (
+    <a className="ui-vertical-middle" onClick={onClick}>
       <LogoutOutlined style={{ fontSize: 16, marginRight: 8 }} />
       <span>退出系统</span>
     </a>
@@ -74,41 +111,8 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
       }
     >
       <div className="ui-info-box">
-        <Avatar size={40} src={logo} />
+        <Avatar size={40} src={logo} alt="avatar" />
         <span className="ui-user-name">Antd</span>
-      </div>
-    </Dropdown>
-  );
-});
-
-const ThemeAction = memo(function ThemeAction(): React.ReactElement {
-  const [theme, setTheme] = useTheme();
-  const onSelect: MenuClickEventHandler = useCallback(({ key }) => {
-    setTheme(key as 'dark' | 'light');
-  }, []);
-
-  return (
-    <Dropdown
-      placement="bottomRight"
-      overlay={
-        <Menu selectable theme={theme} onSelect={onSelect} defaultSelectedKeys={[theme]}>
-          <Menu.Item key="dark">
-            <a className="ui-vertical-middle">
-              <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
-              <span>暗色主题</span>
-            </a>
-          </Menu.Item>
-          <Menu.Item key="light">
-            <a className="ui-vertical-middle">
-              <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
-              <span>浅色主题</span>
-            </a>
-          </Menu.Item>
-        </Menu>
-      }
-    >
-      <div title="Theme">
-        <Icon component={ThemeIcon} style={{ fontSize: 24, color: theme === 'dark' ? '#fff' : '#000' }} />
       </div>
     </Dropdown>
   );
