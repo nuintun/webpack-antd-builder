@@ -3,11 +3,11 @@
 // 面包屑
 .ui-breadcrumb {
   height: 30px;
-  font-size: 15px;
+  padding: 0 8px;
+  font-size: 14px;
   line-height: 30px;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 0 6px 0 2px;
   scrollbar-width: none;
   background-color: #fff;
   -ms-overflow-style: none;
@@ -16,6 +16,37 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  > span {
+    height: 100%;
+    align-items: center;
+    display: inline-flex;
+
+    .ant-breadcrumb-link,
+    .ant-breadcrumb-separator {
+      height: 100%;
+    }
+  }
+
+  &-link,
+  &-item {
+    align-items: center;
+    display: inline-flex;
+
+    img,
+    .anticon {
+      margin-right: 4px;
+    }
+
+    img {
+      width: auto;
+      height: 16px;
+    }
+
+    .anticon {
+      font-size: 16px;
+    }
   }
 
   &-link {
@@ -31,22 +62,6 @@
 
     &.ui-breadcrumb-active {
       color: @text-color;
-    }
-  }
-
-  &-link,
-  &-item {
-    .anticon {
-      font-size: 15px;
-    }
-
-    img {
-      width: auto;
-      height: 15px;
-    }
-
-    > span {
-      margin-left: 4px;
     }
   }
 }
