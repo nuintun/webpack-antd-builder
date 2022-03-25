@@ -6,7 +6,7 @@ import { Menu, MenuProps } from 'antd';
 import { isString } from '/js/utils/utils';
 import { IRoute, MenuItem } from '/js/utils/router';
 import usePersistRef from '/js/hooks/usePersistRef';
-import { Location, useLocation, useMatches } from 'react-nest-router';
+import { useLocation, useMatches } from 'react-nest-router';
 import { flattenMenus, getExpandKeys, mergeKeys, prefixUI } from './SmartMenuUtils';
 
 const { Fragment } = React;
@@ -61,12 +61,12 @@ function titleRender({ name, icon }: MenuItem, hasWrapper: boolean = false): Rea
 
 function menuItemRender(
   menu: MenuItem,
-  location: Location,
+  selectedKeys: string[],
   customItemRender: RouteMenuProps['menuItemRender']
 ): React.ReactElement {
   const { key, name } = menu;
   const { href, target } = menu.link!;
-  const replace = href === `${location.pathname}${location.search}${location.hash}`;
+  const replace = selectedKeys.includes(key);
 
   return (
     <Item key={key} title={name}>
@@ -79,7 +79,7 @@ function menuItemRender(
 
 function subMenuItemRender(
   menu: MenuItem,
-  location: Location,
+  selectedKeys: string[],
   customItemRender: RouteMenuProps['menuItemRender']
 ): React.ReactElement {
   const { key, children } = menu;
@@ -87,26 +87,26 @@ function subMenuItemRender(
   if (children && children.length) {
     return (
       <SubMenu key={key} title={titleRender(menu, true)}>
-        {menuRender(children, location, customItemRender)}
+        {menuRender(children, selectedKeys, customItemRender)}
       </SubMenu>
     );
   }
 
-  return menuItemRender(menu, location, customItemRender);
+  return menuItemRender(menu, selectedKeys, customItemRender);
 }
 
 function menuRender(
   menus: MenuItem[],
-  location: Location,
+  selectedKeys: string[],
   customItemRender: RouteMenuProps['menuItemRender']
 ): React.ReactElement[] {
-  return menus.map(menu => subMenuItemRender(menu, location, customItemRender));
+  return menus.map(menu => subMenuItemRender(menu, selectedKeys, customItemRender));
 }
 
 export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
   const { menus, onOpenChange, defaultOpenKeys, collapsed, menuItemRender, ...restProps } = props;
 
-  const location = useLocation();
+  const { pathname } = useLocation();
   const matches = useMatches() as IRoute[];
 
   const propsRef = usePersistRef<RouteMenuProps>(props);
@@ -153,9 +153,11 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
     }
 
     setSelectedKeys(defaultKeys.selectedKeys);
-  }, [location.pathname, collapsed, matches, menus, onOpenChange]);
+  }, [pathname, collapsed, matches, menus, onOpenChange]);
 
-  const items = useMemo(() => menuRender(menus, location, menuItemRender), [location, menuItemRender, menus]);
+  const items = useMemo(() => {
+    return menuRender(menus, selectedKeys, menuItemRender);
+  }, [selectedKeys, menuItemRender, menus]);
 
   return (
     <Menu

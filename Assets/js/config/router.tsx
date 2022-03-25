@@ -4,7 +4,13 @@
 
 import { lazy } from 'react';
 
+import Icon from '@ant-design/icons';
 import { Route } from '/js/utils/router';
+
+import HomeIcon from '/images/menus/home.svg';
+import AnalysisIcon from '/images/menus/analysis.svg';
+import UserAnalysisIcon from '/images/menus/user-analysis.svg';
+import RechargeAnalysisIcon from '/images/menus/recharge-analysis.svg';
 
 const Forbidden = lazy(() => import('/js/pages/403'));
 const ServerError = lazy(() => import('/js/pages/500'));
@@ -29,7 +35,7 @@ export const router: Route<{ id?: number }>[] = [
   },
   {
     path: '/login',
-    element: 'Login',
+    element: '登录页',
     meta: {
       hideInMenu: true,
       hideInBreadcrumb: true
@@ -46,25 +52,33 @@ export const router: Route<{ id?: number }>[] = [
       {
         index: true,
         meta: {
-          name: 'Home'
+          name: '网站首页',
+          icon: <Icon component={HomeIcon} />
         },
-        element: 'Home'
+        element: <p style={{ padding: 8 }}>网站首页</p>
       },
       {
-        path: 'news',
+        path: 'analysis',
         meta: {
-          name: 'News'
+          name: '数据分析',
+          icon: <Icon component={AnalysisIcon} />
         },
         children: [
           {
-            index: true,
-            element: 'News',
-            meta: { name: 'News' }
+            path: 'user',
+            element: <p style={{ padding: 8 }}>用户分析</p>,
+            meta: {
+              name: '用户分析',
+              icon: <Icon component={UserAnalysisIcon} />
+            }
           },
           {
-            path: 'sport',
-            element: 'Sport',
-            meta: { name: 'Sport' }
+            path: 'recharge',
+            element: <p style={{ padding: 8 }}>充值分析</p>,
+            meta: {
+              name: '充值分析',
+              icon: <Icon component={RechargeAnalysisIcon} />
+            }
           }
         ]
       }
