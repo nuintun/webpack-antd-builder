@@ -35,11 +35,10 @@ function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
 
   for (let i = 0; i < length; i++) {
     const match = matches[i];
-
     const { meta } = match;
-    const { name, hideInBreadcrumb } = meta;
+    const { name } = meta;
 
-    if (!hideInBreadcrumb && name) {
+    if (name) {
       const { children } = match;
       const { key, link } = meta;
       const icon = iconRender(meta.icon);

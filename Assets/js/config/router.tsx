@@ -22,35 +22,19 @@ const Layout = lazy(() => import('/js/components/Layout'));
 export const router: Route<{ id?: number }>[] = [
   {
     path: '/403',
-    element: <Forbidden />,
-    meta: {
-      hideInMenu: true,
-      hideInBreadcrumb: true
-    }
+    element: <Forbidden />
   },
   {
     path: '/500',
-    element: <ServerError />,
-    meta: {
-      hideInMenu: true,
-      hideInBreadcrumb: true
-    }
+    element: <ServerError />
   },
   {
     path: '/login',
-    element: '登录页',
-    meta: {
-      hideInMenu: true,
-      hideInBreadcrumb: true
-    }
+    element: '登录页'
   },
   {
     path: '/',
     element: <Layout />,
-    meta: {
-      hideInMenu: true,
-      hideInBreadcrumb: true
-    },
     children: [
       {
         index: true,

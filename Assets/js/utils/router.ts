@@ -3,9 +3,9 @@
  */
 
 import { resolve } from './url';
-import { assert } from './utils';
 import { DFSTree } from './tree';
 import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
+import { assert } from './utils';
 
 export interface Link {
   href: string;
@@ -15,9 +15,8 @@ export interface Link {
 export interface Meta {
   icon?: Icon;
   name?: string;
+  hideInMenu?: true;
   link?: Partial<Link>;
-  hideInMenu?: boolean;
-  hideInBreadcrumb?: boolean;
 }
 
 export interface MetaWithKey extends Meta {
@@ -103,14 +102,11 @@ export function parse<M = unknown, K extends string = string>(
     for (const [node, parent] of tree) {
       // 当前节点数据操作
       const { meta, children, ...rest } = node;
+      const { key, name, icon, link, hideInMenu } = meta;
       const hasChildren = children && children.length > 0;
-      const { key, name, icon, link, hideInMenu, hideInBreadcrumb } = meta;
 
-      // 格式验证
       if (__DEV__) {
-        if (!hideInMenu || !hideInBreadcrumb) {
-          assert(name, `Route item ${JSON.stringify(node, null, 2)} not hidden in menu or breadcrumbs must have meta.name.`);
-        }
+        assert(name !== '', `The meta.name of the route item "${link.href}" cannot be an empty string.`);
       }
 
       // 路由处理
@@ -136,12 +132,12 @@ export function parse<M = unknown, K extends string = string>(
       // 菜单处理
       const parentMenu = parent ? flatMenus[parent.meta.key] : parent;
 
-      if (hideInMenu) {
+      if (hideInMenu || !name) {
         if (hasChildren && parentMenu) {
           flatMenus[key] = parentMenu;
         }
       } else {
-        const menu = { key, name, link } as MenuItem;
+        const menu: MenuItem = { key, name, link };
 
         addOptional(menu, 'icon', icon);
 
