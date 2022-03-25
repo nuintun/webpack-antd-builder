@@ -34,15 +34,22 @@ function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
   const breadcrumbs: BreadcrumbItem[] = [];
 
   for (let i = 0; i < length; i++) {
-    const { meta } = matches[i];
+    const match = matches[i];
+
+    const { meta } = match;
     const { name, hideInBreadcrumb } = meta;
 
     if (!hideInBreadcrumb && name) {
+      const { children } = match;
       const { key, link } = meta;
       const icon = iconRender(meta.icon);
 
       if (i + 1 < length) {
-        breadcrumbs.push({ key, name, icon, active: false });
+        if (children && children.some(route => route.index)) {
+          breadcrumbs.push({ key, name, icon, href: link.href, active: false });
+        } else {
+          breadcrumbs.push({ key, name, icon, active: false });
+        }
       } else {
         breadcrumbs.push({ key, name, icon, href: link.href, active: true });
       }
