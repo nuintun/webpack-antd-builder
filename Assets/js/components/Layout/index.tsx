@@ -25,7 +25,13 @@ export default memo(function Layout() {
   const { menus } = useOutletContext<LayoutOutletContext>();
 
   return (
-    <SmartLayout menus={menus} theme={theme} leftHeaderRender={leftHeaderRender} rightHeaderRender={rightHeaderRender}>
+    <SmartLayout
+      theme={theme}
+      menus={menus}
+      siderWith={232}
+      leftHeaderRender={leftHeaderRender}
+      rightHeaderRender={rightHeaderRender}
+    >
       <Outlet />
     </SmartLayout>
   );
