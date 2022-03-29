@@ -37,9 +37,10 @@
     }
   },
   "include": [
-    "Assets"
+    "Assets/**/*",
+    "global.d.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules/**/*"
   ]
 }

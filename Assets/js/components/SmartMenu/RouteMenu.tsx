@@ -82,7 +82,7 @@ function subMenuItemRender<T>(
 ): React.ReactElement {
   const { key, children } = menu;
 
-  if (children && children.length) {
+  if (children && children.length > 0) {
     return (
       <SubMenu key={key} title={titleRender(menu, true)}>
         {menuRender(children, selectedKeys, customItemRender)}

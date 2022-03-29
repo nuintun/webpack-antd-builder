@@ -83,9 +83,9 @@ export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): Expa
   let current = flatMenus[path];
 
   while (current) {
-    const key = current.key;
+    const { key, children } = current;
 
-    if (current.children) {
+    if (children && children.length > 0) {
       openKeys.push(key);
     } else {
       selectedKeys.push(key);
