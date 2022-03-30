@@ -2,7 +2,7 @@
  * @module createSharedState
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { isFunction } from '/js/utils/utils';
 
@@ -38,7 +38,7 @@ export default function createSharedState<S = undefined>(
     return sharedState;
   };
 
-  const dispatchActions = (value: React.SetStateAction<S | undefined>): void => {
+  const setSharedState = (value: React.SetStateAction<S | undefined>): void => {
     sharedState = isFunction(value) ? value(sharedState) : value;
 
     for (const dispatch of dispatches) {
@@ -50,10 +50,6 @@ export default function createSharedState<S = undefined>(
 
   return () => {
     const [state, setState] = useState(getInitialState);
-
-    const setSharedState = useCallback((value: React.SetStateAction<S | undefined>): void => {
-      dispatchActions(value);
-    }, []);
 
     useEffect(() => {
       dispatches.add(setState);

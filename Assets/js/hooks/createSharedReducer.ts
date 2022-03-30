@@ -2,7 +2,7 @@
  * @module createSharedReducer
  */
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { isFunction } from '/js/utils/utils';
 
@@ -59,7 +59,7 @@ export default function createSharedReducer<S, A>(
     return sharedState;
   };
 
-  const dispatchActions = (action: A): void => {
+  const dispatch = (action: A): void => {
     sharedState = reducer(sharedState, action);
 
     for (const dispatch of dispatches) {
@@ -70,24 +70,13 @@ export default function createSharedReducer<S, A>(
   const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
 
   return () => {
-    const initializedRef = useRef(false);
     const [state, setState] = useState(getInitialState);
 
-    if (!initializedRef.current) {
+    useEffect(() => {
       dispatches.add(setState);
 
-      initializedRef.current = true;
-    }
-
-    const dispatch = useCallback<React.Dispatch<A>>(action => {
-      initializedRef.current && dispatchActions(action);
-    }, []);
-
-    useEffect(() => {
       return () => {
         dispatches.delete(setState);
-
-        initializedRef.current = false;
       };
     }, []);
 
