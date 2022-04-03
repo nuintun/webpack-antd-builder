@@ -4,7 +4,7 @@
 
 import '/css/global.less';
 
-import { render } from 'react-dom';
+import { createRoot, Root } from 'react-dom/client';
 import { lazy, memo, Suspense, useMemo } from 'react';
 
 import { Button, Result } from 'antd';
@@ -64,13 +64,34 @@ function App() {
   );
 }
 
-if (__DEV__) {
-  module.hot && module.hot.accept();
+declare global {
+  interface Window {
+    __REACT_ROOT__: Root;
+  }
 }
 
-render(
-  <ErrorBoundary FallbackComponent={ErrorFallback}>
-    <App />
-  </ErrorBoundary>,
-  document.getElementById('root')
-);
+if (__DEV__) {
+  const root = (() => {
+    if (!window.__REACT_ROOT__) {
+      window.__REACT_ROOT__ = createRoot(document.getElementById('root') as HTMLDivElement);
+    }
+
+    return window.__REACT_ROOT__;
+  })();
+
+  root.render(
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <App />
+    </ErrorBoundary>
+  );
+
+  module.hot && module.hot.accept();
+} else {
+  const root = createRoot(document.getElementById('root') as HTMLDivElement);
+
+  root.render(
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <App />
+    </ErrorBoundary>
+  );
+}
