@@ -4,7 +4,6 @@
 
 import '/css/global.less';
 
-import { createRoot, Root } from 'react-dom/client';
 import { lazy, memo, Suspense, useMemo } from 'react';
 
 import { Button, Result } from 'antd';
@@ -46,7 +45,7 @@ const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary }: Fallba
   );
 });
 
-function App() {
+const Page = memo(function Page() {
   const [routes, menus] = useMemo(() => {
     return parse(router);
   }, [router]);
@@ -62,36 +61,12 @@ function App() {
       </Router>
     </Suspense>
   );
-}
+});
 
-declare global {
-  interface Window {
-    __REACT_ROOT__: Root;
-  }
-}
-
-if (__DEV__) {
-  const root = (() => {
-    if (!window.__REACT_ROOT__) {
-      window.__REACT_ROOT__ = createRoot(document.getElementById('root') as HTMLDivElement);
-    }
-
-    return window.__REACT_ROOT__;
-  })();
-
-  root.render(
+export default memo(function App() {
+  return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <App />
+      <Page />
     </ErrorBoundary>
   );
-
-  module.hot && module.hot.accept();
-} else {
-  const root = createRoot(document.getElementById('root') as HTMLDivElement);
-
-  root.render(
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <App />
-    </ErrorBoundary>
-  );
-}
+});
