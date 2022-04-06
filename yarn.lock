@@ -2662,9 +2662,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.84:
-  version "1.4.103"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.103.tgz#abfe376a4d70fa1e1b4b353b95df5d6dfd05da3a"
-  integrity sha512-c/uKWR1Z/W30Wy/sx3dkZoj4BijbXX85QKWu9jJfjho3LBAXNEGAEW3oWiGb+dotA6C6BzCTxL2/aLes7jlUeg==
+  version "1.4.104"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.104.tgz#60973b0a7d398efa877196e8ccb0c93d48b918d8"
+  integrity sha512-2kjoAyiG7uMyGRM9mx25s3HAzmQG2ayuYXxsFmYugHSDcwxREgLtscZvbL1JcW9S/OemeQ3f/SG6JhDwpnCclQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4571,9 +4571,9 @@ rc-menu@~9.3.2:
     shallowequal "^1.1.0"
 
 rc-motion@^2.0.0, rc-motion@^2.0.1, rc-motion@^2.2.0, rc-motion@^2.3.0, rc-motion@^2.3.4, rc-motion@^2.4.3, rc-motion@^2.4.4:
-  version "2.4.6"
-  resolved "https://registry.npmjs.org/rc-motion/-/rc-motion-2.4.6.tgz#b9e07391927fb7bc14e62dcd839146958db6b2ef"
-  integrity sha512-nXIHve2EDQZ8BFHfgJI3HYMMOZ7HGsolCfA9ozP99/gc1UqpgKys1TYrQWdXa2trff0V3JLhgn2zz+w9VsyktA==
+  version "2.4.7"
+  resolved "https://registry.npmjs.org/rc-motion/-/rc-motion-2.4.7.tgz#74f0d9dd16bbeb6cb5a905777ce9d492bb95cb77"
+  integrity sha512-GmC8dYoxCWrGb2pf0JLok97AGdrOFwaCQIJY1xyhnoOYVZuysU419ITu6OCBcjp3SpeogHK80HA6DIwY1cBblg==
   dependencies:
     "@babel/runtime" "^7.11.1"
     classnames "^2.2.1"
