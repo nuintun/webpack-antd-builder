@@ -108,16 +108,19 @@ async function resolveEntry(entry, options) {
   const compiler = webpack(configure);
   const logger = compiler.getInfrastructureLogger('webpack-dev-middleware');
 
+  app.use(async (ctx, next) => {
+    ctx.set({
+      'Access-Control-Allow-Origin': '*',
+      'X-Content-Type-Options': 'nosniff',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+
+    await next();
+  });
+
   app.use(koaCompress({ br: false }));
 
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'X-Content-Type-Options': 'nosniff',
-    'Access-Control-Allow-Credentials': 'true'
-  };
-
   const devServer = devMiddleware(compiler, {
-    headers,
     index: false,
     outputFileSystem: fs
   });
@@ -125,8 +128,6 @@ async function resolveEntry(entry, options) {
   app.use(devServer);
 
   app.use(async ctx => {
-    ctx.set(headers);
-
     ctx.type = 'text/html; charset=utf-8';
 
     ctx.body = fs.createReadStream(entryHTML);
