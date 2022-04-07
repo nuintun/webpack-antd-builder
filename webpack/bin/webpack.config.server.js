@@ -111,6 +111,8 @@ async function resolveEntry(entry, options) {
   app.use(async (ctx, next) => {
     ctx.set({
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
       'X-Content-Type-Options': 'nosniff',
       'Access-Control-Allow-Credentials': 'true'
     });
