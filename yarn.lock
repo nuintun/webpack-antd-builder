@@ -4941,10 +4941,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.0.10.tgz#aaad754b45023d244983e1b8658e635e094b2ab5"
-  integrity sha512-eykgG+BvCjru+9neKaidP4dUgh5G3pW6Cpva+OXYb7adPOXWFqHdEAb2jaJe6LzMuDQdDzK9ljEgOI08XqNKpg==
+react-nest-router@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.1.0.tgz#47c3c11f8271bb91e485274e4ea89ad951696b75"
+  integrity sha512-62v3OvfAIDijWCBqSC+gKG10IO/H+2boVQpftpvgGVKToFwciBUHC2Fr9ClZOSIfIW9qg9PfrtfVJ9m0a2v2Gw==
   dependencies:
     history "^5.3.0"
     tslib "^2.3.1"
@@ -5719,10 +5719,10 @@ webpack-dev-middleware@^5.3.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server-middleware@next:
-  version "0.10.0-dev.9"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.10.0-dev.9.tgz#0aafd5ad79ef53be1f89240ddb9e7b9a386321bf"
-  integrity sha512-6CNahjFsVkKyycOy4m+3ShtyMAHriCEhgWI2C11z2RIYUKCON3sKo4J9sxSX6fJXRIYGaVHawYwhN0CwhxZ22A==
+webpack-dev-server-middleware@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.10.0.tgz#530b271ffcd7649d91ae73f2f3b20950c2726405"
+  integrity sha512-DYmzlsQTzAADn9fLHOAB8Me8IUxUNwS6ng6/WIwS5+4kZ7PIYBh4yuLKigSLOi+/DcvHhjulC1zrvfwUGo4SCQ==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"

@@ -46,7 +46,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-error-boundary": "^3.1.4",
-    "react-nest-router": "^0.0.10",
+    "react-nest-router": "^0.1.0",
     "throttle-debounce": "^4.0.0",
     "whatwg-fetch": "^3.6.2"
   },
@@ -87,6 +87,6 @@
     "typescript": "^4.6.3",
     "webpack": "^5.72.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-dev-server-middleware": "next"
+    "webpack-dev-server-middleware": "^0.10.0"
   }
 }
