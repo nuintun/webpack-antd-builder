@@ -41,11 +41,11 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const onMobileChange = useCallback(isMobile => {
+  const onMobileChange = useCallback((isMobile: boolean) => {
     isMobile && setCollapsed(isMobile);
   }, []);
 
-  const onBrokenChange = useCallback(isBroken => {
+  const onBrokenChange = useCallback((isBroken: boolean) => {
     !readCollapsed() && setCollapsed(isBroken);
   }, []);
 
@@ -68,7 +68,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
     setCollapsed(collapsed);
   }, []);
 
-  const getPopupContainer = useCallback(triggerNode => {
+  const getPopupContainer = useCallback((triggerNode?: HTMLElement) => {
     const { body } = document;
     const { current } = contentRef;
 

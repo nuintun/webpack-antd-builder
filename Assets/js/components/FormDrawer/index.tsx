@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
+import { isFunction } from '/js/utils/utils';
 import useSubmit, { Options } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
@@ -114,7 +115,6 @@ function FormDrawer<V, R>({
         title={title}
         width={width}
         height={height}
-        footer={footer}
         visible={visible}
         placement={placement}
         onClose={onCloseHandler}
@@ -122,6 +122,7 @@ function FormDrawer<V, R>({
         destroyOnClose={destroyOnClose}
         afterVisibleChange={afterVisibleChange}
         extra={extra(submitting, wrapForm, onCloseHandler)}
+        footer={isFunction(footer) && footer(submitting, wrapForm, onCloseHandler)}
       >
         <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit}>
           {children}

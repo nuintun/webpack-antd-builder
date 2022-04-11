@@ -1,9 +1,10 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from 'antd';
+import { isFunction } from '/js/utils/utils';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
-export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible'> {
+export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible' | 'extra' | 'footer'> {
   onOpen?: () => void;
   onClose?: () => void;
   children?: React.ReactNode;
@@ -21,6 +22,7 @@ function defaultExtra(onClose: () => void): React.ReactNode {
 }
 
 export default memo(function DisplayDrawer({
+  footer,
   onOpen,
   trigger,
   onClose,
@@ -57,7 +59,13 @@ export default memo(function DisplayDrawer({
   return (
     <>
       {triggerNode}
-      <FlexDrawer {...restProps} visible={visible} onClose={onCloseHandler} extra={extra(onCloseHandler)}>
+      <FlexDrawer
+        {...restProps}
+        visible={visible}
+        onClose={onCloseHandler}
+        extra={extra(onCloseHandler)}
+        footer={isFunction(footer) && footer(onCloseHandler)}
+      >
         {children}
       </FlexDrawer>
     </>
