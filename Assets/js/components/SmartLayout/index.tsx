@@ -75,7 +75,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
     setCollapsed(collapsed);
   }, []);
 
-  const getPopupContainer = useCallback((triggerNode: HTMLElement | undefined) => {
+  const getPopupContainer = useCallback((triggerNode?: HTMLElement) => {
     const { body } = document;
     const { current } = contentRef;
 
