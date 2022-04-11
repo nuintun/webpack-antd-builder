@@ -2,6 +2,8 @@
  * @module global
  */
 
+/// <reference types="webpack/module" />
+
 declare module '*.png' {
   const content: string;
 
