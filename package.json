@@ -47,7 +47,7 @@
     "react-dom": "^18.0.0",
     "react-error-boundary": "^3.1.4",
     "react-nest-router": "^0.0.10",
-    "throttle-debounce": "^3.0.1",
+    "throttle-debounce": "^4.0.0",
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
@@ -59,8 +59,8 @@
     "@babel/preset-typescript": "^7.16.7",
     "@svgr/webpack": "^6.2.1",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
+    "@types/react": "^18.0.1",
+    "@types/react-dom": "^18.0.0",
     "@types/throttle-debounce": "^2.1.0",
     "@types/webpack-env": "^1.16.3",
     "autoprefixer": "^10.4.4",
@@ -85,8 +85,8 @@
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
     "typescript": "^4.6.3",
-    "webpack": "^5.71.0",
+    "webpack": "^5.72.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-dev-server-middleware": "^0.9.0"
+    "webpack-dev-server-middleware": "next"
   }
 }
