@@ -48,11 +48,11 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const onMobileChange = useCallback(isMobile => {
+  const onMobileChange = useCallback((isMobile: boolean) => {
     isMobile && setCollapsed(isMobile);
   }, []);
 
-  const onBrokenChange = useCallback(isBroken => {
+  const onBrokenChange = useCallback((isBroken: boolean) => {
     !readCollapsed() && setCollapsed(isBroken);
   }, []);
 
@@ -75,7 +75,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
     setCollapsed(collapsed);
   }, []);
 
-  const getPopupContainer = useCallback(triggerNode => {
+  const getPopupContainer = useCallback((triggerNode: HTMLElement | undefined) => {
     const { body } = document;
     const { current } = contentRef;
 

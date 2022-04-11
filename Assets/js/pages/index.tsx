@@ -3,18 +3,17 @@
  */
 
 import App from './App';
-import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 import { on } from 'webpack-dev-server-middleware/client';
 
 const app = document.getElementById('app');
-const root = createRoot(app as HTMLDivElement);
 
-root.render(<App />);
+render(<App />, app);
 
 if (__DEV__) {
   if (import.meta.webpackHot) {
     import.meta.webpackHot.accept(['./App.tsx'], () => {
-      root.render(<App />);
+      render(<App />, app);
     });
   }
 
