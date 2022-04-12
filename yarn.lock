@@ -77,9 +77,9 @@
     tslib "^2.0.3"
 
 "@antv/component@^0.8.19":
-  version "0.8.26"
-  resolved "https://registry.npmjs.org/@antv/component/-/component-0.8.26.tgz#f0fe01ebc20f1f33deacc83a07ad3f76c611b561"
-  integrity sha512-PygBrpJ8ol8/9a31LHqAlyMq+4ykg+j0cVTjCDq9oKf1PVUy4ARpUgRjFGoP83TgoWP93Qw6zNdELExidS7nhg==
+  version "0.8.27"
+  resolved "https://registry.npmjs.org/@antv/component/-/component-0.8.27.tgz#eac6326ba1b5db123f88635f93b4450976249d48"
+  integrity sha512-FY9fgUBjEuWxQ4w7VbcMSwFr7pqnRf1/F1ja1weoEpNndKBlStNYWhXTx4p5uMJVLvMpXoFPqan7RzyP8rel6Q==
   dependencies:
     "@antv/color-util" "^2.0.3"
     "@antv/dom-util" "~2.0.1"
@@ -1593,10 +1593,10 @@
     "@types/history" "^4.7.11"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.1":
-  version "18.0.1"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.1.tgz#1b2e02fb7613212518733946e49fb963dfc66e19"
-  integrity sha512-VnWlrVgG0dYt+NqlfMI0yUYb8Rdl4XUROyH+c6gq/iFCiZ805Vi//26UW38DHnxQkbDhnrIWTBiy6oKZqL11cw==
+"@types/react@*", "@types/react@^18.0.2":
+  version "18.0.2"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.2.tgz#bc6a0572d434642ebe8b4ac0f121d18e2f2d8f7f"
+  integrity sha512-2poV9ReTwwV5ZNxkKyk7t6Vp/odeTfYI3vRjtDYWfUdEstx9mp26jzELfMBwV6gXg1irhHUnmZJH/dJW7xafcA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2165,9 +2165,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001317:
-  version "1.0.30001327"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001327.tgz#c1546d7d7bb66506f0ccdad6a7d07fc6d668c858"
-  integrity sha512-1/Cg4jlD9qjZzhbzkzEaAC2JHsP0WrOc8Rd/3a3LuajGzGWR/hD7TVyvq99VqmTy99eVh8Zkmdq213OgvgXx7w==
+  version "1.0.30001328"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001328.tgz#0ed7a2ca65ec45872c613630201644237ba1e329"
+  integrity sha512-Ue55jHkR/s4r00FLNiX+hGMMuwml/QGqqzVeMQ5thUewznU2EdULFvI3JR7JJid6OrjJNfFvHY2G2dIjmRaDDQ==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -2858,9 +2858,9 @@ error-ex@^1.3.1:
     is-arrayish "^0.2.1"
 
 es-abstract@^1.19.1:
-  version "1.19.2"
-  resolved "https://registry.npmjs.org/es-abstract/-/es-abstract-1.19.2.tgz#8f7b696d8f15b167ae3640b4060670f3d054143f"
-  integrity sha512-gfSBJoZdlL2xRiOCy0g8gLMryhoe1TlimjzU99L/31Z8QEGIhVQI+EWwt5lT+AuU9SnorVupXFqqOGqGfsyO6w==
+  version "1.19.3"
+  resolved "https://registry.npmjs.org/es-abstract/-/es-abstract-1.19.3.tgz#4dd9da55868192756c83c5c30c7878d04e77125d"
+  integrity sha512-4axXLNovnMYf0+csS5rVnS5hLmV1ek+ecx9MuCjByL1E5Nn54avf6CHQxIjgQIHBnfX9AMxTRIy0q+Yu5J/fXA==
   dependencies:
     call-bind "^1.0.2"
     es-to-primitive "^1.2.1"
@@ -2873,7 +2873,7 @@ es-abstract@^1.19.1:
     is-callable "^1.2.4"
     is-negative-zero "^2.0.2"
     is-regex "^1.1.4"
-    is-shared-array-buffer "^1.0.1"
+    is-shared-array-buffer "^1.0.2"
     is-string "^1.0.7"
     is-weakref "^1.0.2"
     object-inspect "^1.12.0"
@@ -2963,9 +2963,9 @@ fast-json-stable-stringify@^2.0.0:
   integrity sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==
 
 fecha@~4.2.0:
-  version "4.2.1"
-  resolved "https://registry.npmjs.org/fecha/-/fecha-4.2.1.tgz#0a83ad8f86ef62a091e22bb5a039cd03d23eecce"
-  integrity sha512-MMMQ0ludy/nBs1/o0zVOiKTpG7qMbonKUzjJgQFEuvq6INZ1OraKPRAWkBq5vlKLOUMpmNYG1JoN3oDPUQ9m3Q==
+  version "4.2.2"
+  resolved "https://registry.npmjs.org/fecha/-/fecha-4.2.2.tgz#902c69d332b93c69be48992b9a11e41d36c03581"
+  integrity sha512-5rOQWkBVz3FnYWTi/ELZmq4CoK1Pb+xKNZWuJRsOwo0+8DrP43CrWJtyLVvb5U7z7ggE5llahfDbLjaVNzXVJQ==
 
 fill-range@^7.0.1:
   version "7.0.1"
@@ -3518,7 +3518,7 @@ is-regex@^1.0.4, is-regex@^1.1.4, is-regex@~1.1.4:
     call-bind "^1.0.2"
     has-tostringtag "^1.0.0"
 
-is-shared-array-buffer@^1.0.1:
+is-shared-array-buffer@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/is-shared-array-buffer/-/is-shared-array-buffer-1.0.2.tgz#8f259c573b60b6a32d4058a1a07430c0a7344c79"
   integrity sha512-sqN2UDu1/0y6uvXyStCOzyhAjCSlHceFoMKJW8W9EU9cvic/QdsZ0kEU93HEy3IUEFZIiH/3w+AH/UQbPHNdhA==
@@ -4834,9 +4834,9 @@ rc-select@~14.0.0-alpha.23, rc-select@~14.0.0-alpha.8, rc-select@~14.0.2:
     rc-virtual-list "^3.2.0"
 
 rc-slider@~10.0.0-alpha.4:
-  version "10.0.0-alpha.6"
-  resolved "https://registry.npmjs.org/rc-slider/-/rc-slider-10.0.0-alpha.6.tgz#d1f0098a2044a0063c912d049a1309e3357404d6"
-  integrity sha512-4tMChJ3lzX0qlttcXqJ2xecQ+CmZYPXJGDOvPnIS5YWsiSl452vt377/l8A1ZnwjwKAAy2V6nrOXNdqPP2Tq7w==
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/rc-slider/-/rc-slider-10.0.0.tgz#8ffe1dd3c8799c9d1f81ac808976f18af3dca206"
+  integrity sha512-Bk54UIKWW4wyhHcL8ehAxt+wX+n69dscnHTX6Uv0FMxSke/TGrlkZz1LSIWblCpfE2zr/dwR2Ca8nZGk3U+Tbg==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.5"
@@ -4927,9 +4927,9 @@ rc-tree@~5.4.3:
     rc-virtual-list "^3.4.2"
 
 rc-trigger@^5.0.0, rc-trigger@^5.0.4, rc-trigger@^5.1.2, rc-trigger@^5.2.10:
-  version "5.2.12"
-  resolved "https://registry.npmjs.org/rc-trigger/-/rc-trigger-5.2.12.tgz#023728bf2e31a3bdd07bdca016e0991aae98e504"
-  integrity sha512-+rymZRe23f2imQwuelWqWSKj3tAnlDbjEU8yjKzW5zh8AlChJ/brda7Qg3FQ4f2jcAquL7phVOwq5BZp2PdhAg==
+  version "5.2.15"
+  resolved "https://registry.npmjs.org/rc-trigger/-/rc-trigger-5.2.15.tgz#f6bfed418e602513cc3e07853ddaf37e5c5339f4"
+  integrity sha512-VxZWqCObtUOzs9V9Be0dDA2JGchriDpvQaJpsCI2EQ4+KWHIvjFz6Ziina4uxK5drRsn0RnBi7nngmTl9j/F7Q==
   dependencies:
     "@babel/runtime" "^7.11.2"
     classnames "^2.2.6"
@@ -5821,10 +5821,10 @@ webpack-dev-middleware@^5.3.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server-middleware@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.10.0.tgz#530b271ffcd7649d91ae73f2f3b20950c2726405"
-  integrity sha512-DYmzlsQTzAADn9fLHOAB8Me8IUxUNwS6ng6/WIwS5+4kZ7PIYBh4yuLKigSLOi+/DcvHhjulC1zrvfwUGo4SCQ==
+webpack-dev-server-middleware@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.11.0.tgz#b886fe3fc179ae7632b3f3ecf381e8b1fac3af52"
+  integrity sha512-Q+pbxo1Wi7sfYzqDP2KLFPSwYIFC0Xq/EzxF31ZueFomW2HhGAdrGvyyn5ShEbQsR1TsKwwoC9HCZfn7Uf0oLw==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"
