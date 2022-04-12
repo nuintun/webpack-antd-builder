@@ -100,6 +100,7 @@ async function resolveEntry(entry, options) {
   configure.entry = entry;
   configure.output.publicPath = devServerPublicPath;
   configure.devtool = 'eval-cheap-module-source-map';
+  configure.watchOptions = { aggregateTimeout: 256 };
   configure.cache.name = `${configure.name}-${configure.mode}-server`;
 
   configure.plugins.push(new webpack.SourceMapDevToolPlugin());
