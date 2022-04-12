@@ -83,6 +83,9 @@ module.exports = async mode => {
       chunkFilename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
       assetModuleFilename: `[path][${isDevelopment ? 'name' : 'contenthash'}][ext]`
     },
+    watchOptions: {
+      aggregateTimeout: 256
+    },
     cache: {
       type: 'filesystem',
       buildDependencies: {

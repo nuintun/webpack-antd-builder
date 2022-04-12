@@ -4,7 +4,6 @@
 
 import App from './App';
 import { createRoot } from 'react-dom/client';
-import { on } from 'webpack-dev-server-middleware/client';
 
 const app = document.getElementById('app');
 const root = createRoot(app as HTMLDivElement);
@@ -16,9 +15,14 @@ if (__DEV__) {
     import.meta.webpackHot.accept(['./App.tsx'], () => {
       root.render(<App />);
     });
-  }
 
-  on('ok', ({ builtAt }) => {
-    console.log(`[HMR] App is up to date at ${new Date(builtAt).toLocaleString()}`);
-  });
+    import(
+      // webpackMode: 'eager'
+      'webpack-dev-server-middleware/client'
+    ).then(({ on }) => {
+      on('ok', ({ builtAt }) => {
+        console.log(`[HMR] App is up to date at ${new Date(builtAt).toLocaleString()}`);
+      });
+    });
+  }
 }
