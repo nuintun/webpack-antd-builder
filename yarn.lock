@@ -76,7 +76,7 @@
     "@antv/util" "^2.0.9"
     tslib "^2.0.3"
 
-"@antv/component@^0.8.19":
+"@antv/component@^0.8.27":
   version "0.8.27"
   resolved "https://registry.npmjs.org/@antv/component/-/component-0.8.27.tgz#eac6326ba1b5db123f88635f93b4450976249d48"
   integrity sha512-FY9fgUBjEuWxQ4w7VbcMSwFr7pqnRf1/F1ja1weoEpNndKBlStNYWhXTx4p5uMJVLvMpXoFPqan7RzyP8rel6Q==
@@ -162,14 +162,14 @@
     tslib "^2.0.3"
 
 "@antv/g2@^4.1.26":
-  version "4.1.49"
-  resolved "https://registry.npmjs.org/@antv/g2/-/g2-4.1.49.tgz#ab74f1db2b74ecf9bd771deaa2549bb2c94121c5"
-  integrity sha512-z/wJdPehYjRzm5kMj4fHQZIqVloikATX/4vf8hcLJ3W1wnQVx0qivwWuNLPVxnbbe1PnUbfmovCCFUDUNJlvcw==
+  version "4.1.50"
+  resolved "https://registry.npmjs.org/@antv/g2/-/g2-4.1.50.tgz#221cc517d529ab4a3d57a7976eb6a01dc90c8657"
+  integrity sha512-GvbmQSY86A5mNPUjFNSrg1Rz6FXv5U5bsmLYvpUGhq5QfVPVX4ikdYxlWZhj5PxRVjGRXOj4sznsNTJcj2XD3A==
   dependencies:
     "@antv/adjust" "^0.2.1"
     "@antv/attr" "^0.3.1"
     "@antv/color-util" "^2.0.2"
-    "@antv/component" "^0.8.19"
+    "@antv/component" "^0.8.27"
     "@antv/coord" "^0.3.0"
     "@antv/dom-util" "^2.0.2"
     "@antv/event-emitter" "~0.1.0"
@@ -2143,9 +2143,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001317:
-  version "1.0.30001328"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001328.tgz#0ed7a2ca65ec45872c613630201644237ba1e329"
-  integrity sha512-Ue55jHkR/s4r00FLNiX+hGMMuwml/QGqqzVeMQ5thUewznU2EdULFvI3JR7JJid6OrjJNfFvHY2G2dIjmRaDDQ==
+  version "1.0.30001331"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001331.tgz#41048f2a5cf0c3c6198f40207cd323388b3d4399"
+  integrity sha512-Y1xk6paHpUXKP/P6YjQv1xqyTbgAP05ycHBcRdQjTcyXlWol868sJJPlmk5ylOekw2BrucWes5jk+LvVd7WZ5Q==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -3657,6 +3657,21 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha1-JzwH7c3Ljfaiwat9We52SRRR7BQ=
 
+koa-webpack-dev-service@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.1.0.tgz#3959b34d059a76a3348b91b9caae29d220810607"
+  integrity sha512-m6cPUu3mQufIZ4vO7wj8pbxw2MLcum1owETc4FLhBE89U6nMuKrP0465urC3yC5WY7nVDASKGvxCxyODDKRNSw==
+  dependencies:
+    "@types/koa" "^2.13.4"
+    "@types/ws" "^8.5.3"
+    ansi-regex "^6.0.1"
+    bufferutil "^4.0.6"
+    core-js "^3.21.1"
+    koa-compose "^4.1.0"
+    utf-8-validate "^5.0.9"
+    webpack-dev-middleware "^5.3.1"
+    ws "^8.5.0"
+
 koa@^2.13.4:
   version "2.13.4"
   resolved "https://registry.npmjs.org/koa/-/koa-2.13.4.tgz#ee5b0cb39e0b8069c38d115139c774833d32462e"
@@ -4985,9 +5000,9 @@ regenerator-transform@^0.15.0:
     "@babel/runtime" "^7.8.4"
 
 regexp.prototype.flags@^1.2.0:
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/regexp.prototype.flags/-/regexp.prototype.flags-1.4.1.tgz#b3f4c0059af9e47eca9f3f660e51d81307e72307"
-  integrity sha512-pMR7hBVUUGI7PMA37m2ofIdQCsomVnas+Jn5UPGAHQ+/LlwKm/aTLJHdasmHRzlfeZwHiAOaRSo2rbBDm3nNUQ==
+  version "1.4.2"
+  resolved "https://registry.npmjs.org/regexp.prototype.flags/-/regexp.prototype.flags-1.4.2.tgz#bf635117a2f4b755595ebb0c0ee2d2a49b2084db"
+  integrity sha512-Ynz8fTQW5/1elh+jWU2EDDzeoNbD0OQ0R+D1VJU5ATOkUaro4A9YEkdN2ODQl/8UQFPPpZNw91fOcLFamM7Pww==
   dependencies:
     call-bind "^1.0.2"
     define-properties "^1.1.3"
@@ -5715,21 +5730,6 @@ webpack-dev-middleware@^5.3.1:
     mime-types "^2.1.31"
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
-
-webpack-dev-server-middleware@^0.11.3:
-  version "0.11.3"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.11.3.tgz#74fad17498347734492194c993d9c14264da84ad"
-  integrity sha512-Umb8apbQjxoni4xXmvU0N3Cea7XjaRQhscgmnCtM1ZZ3JWfODhdmKDi3jv7UUr7wsXGdX60AtLxvnl3QNGbSbw==
-  dependencies:
-    "@types/koa" "^2.13.4"
-    "@types/ws" "^8.5.3"
-    ansi-regex "^6.0.1"
-    bufferutil "^4.0.6"
-    core-js "^3.21.1"
-    koa-compose "^4.1.0"
-    utf-8-validate "^5.0.9"
-    webpack-dev-middleware "^5.3.1"
-    ws "^8.5.0"
 
 webpack-sources@^3.2.3:
   version "3.2.3"
