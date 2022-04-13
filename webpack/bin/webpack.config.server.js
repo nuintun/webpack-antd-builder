@@ -23,7 +23,7 @@ const koaCompress = require('koa-compress');
 const { findFreePorts } = require('find-free-ports');
 const resolveConfigure = require('./webpack.config.base');
 const { publicPath, entryHTML } = require('../configure');
-const devMiddleware = require('webpack-dev-server-middleware');
+const devMiddleware = require('koa-webpack-server-middleware');
 
 const { toString } = Object.prototype;
 
@@ -52,7 +52,7 @@ function httpError(error) {
 
 function injectHotEntry(entry, options) {
   const params = new URLSearchParams(options);
-  const hotEntry = `webpack-dev-server-middleware/client?${params}`;
+  const hotEntry = `koa-webpack-server-middleware/client?${params}`;
 
   if (Array.isArray(entry)) {
     return [hotEntry, ...entry];
