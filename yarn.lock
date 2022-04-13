@@ -5716,10 +5716,10 @@ webpack-dev-middleware@^5.3.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server-middleware@^0.11.2:
-  version "0.11.2"
-  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.11.2.tgz#b0831874d5b7bd061b2e6b0663c956b2d36479c1"
-  integrity sha512-RkzvSugKk6HhEsw34Me2dE7rLDfrzeJBXaKxjEr9z4e6qsjHANi4iRdaELWz1lkzJ6rmmGKuOEtIdmRjM9Vqrg==
+webpack-dev-server-middleware@^0.11.3:
+  version "0.11.3"
+  resolved "https://registry.npmjs.org/webpack-dev-server-middleware/-/webpack-dev-server-middleware-0.11.3.tgz#74fad17498347734492194c993d9c14264da84ad"
+  integrity sha512-Umb8apbQjxoni4xXmvU0N3Cea7XjaRQhscgmnCtM1ZZ3JWfODhdmKDi3jv7UUr7wsXGdX60AtLxvnl3QNGbSbw==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"
