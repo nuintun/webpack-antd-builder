@@ -73,7 +73,7 @@
     "html-webpack-plugin": "^5.5.0",
     "koa": "^2.13.4",
     "koa-compress": "^5.1.0",
-    "koa-webpack-dev-service": "^0.1.0",
+    "koa-webpack-dev-service": "^0.2.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "memfs": "^3.4.1",
