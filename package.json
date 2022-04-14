@@ -64,7 +64,7 @@
     "@types/throttle-debounce": "^4.0.0",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.4",
-    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-import": "^1.13.5",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
