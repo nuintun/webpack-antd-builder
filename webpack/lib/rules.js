@@ -59,7 +59,7 @@ module.exports = async mode => {
               loader: MiniCssExtractPlugin.loader
             },
             {
-              loader: '@teamsupercell/typings-for-css-modules-loader'
+              loader: 'css-modules-types-loader'
             },
             {
               loader: 'css-loader',
@@ -82,7 +82,7 @@ module.exports = async mode => {
               loader: MiniCssExtractPlugin.loader
             },
             {
-              loader: '@teamsupercell/typings-for-css-modules-loader'
+              loader: 'css-modules-types-loader'
             },
             {
               loader: 'css-loader',
