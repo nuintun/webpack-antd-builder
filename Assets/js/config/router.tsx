@@ -15,6 +15,7 @@ import SystemIcon from '/images/menus/system.svg';
 import AccountSystemIcon from '/images/menus/account-system.svg';
 import LogsSystemIcon from '/images/menus/logs-system.svg';
 
+const Home = lazy(() => import('/js/pages/home'));
 const Forbidden = lazy(() => import('/js/pages/403'));
 const ServerError = lazy(() => import('/js/pages/500'));
 const Layout = lazy(() => import('/js/components/Layout'));
@@ -42,7 +43,7 @@ export const router: Route<{ id?: number }>[] = [
           name: '网站首页',
           icon: <Icon component={HomeIcon} />
         },
-        element: <p style={{ padding: 8 }}>网站首页</p>
+        element: <Home />
       },
       {
         path: 'analysis',
