@@ -2,6 +2,7 @@
  * @module global
  */
 
+/// <reference types="react" />
 /// <reference types="webpack/module" />
 
 declare module '*.png' {
@@ -40,14 +41,30 @@ declare module '*.jpeg' {
   export default content;
 }
 
+declare module '*.module.css' {
+  const content: {
+    readonly [name: string]: string;
+  };
+
+  export default content;
+}
+
 declare module '*.css' {
-  const content: { readonly [className: string]: string };
+  const content: string;
+
+  export default content;
+}
+
+declare module '*.module.less' {
+  const content: {
+    readonly [name: string]: string;
+  };
 
   export default content;
 }
 
 declare module '*.less' {
-  const content: { readonly [className: string]: string };
+  const content: string;
 
   export default content;
 }
