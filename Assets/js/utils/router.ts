@@ -4,8 +4,8 @@
 
 import { resolve } from './url';
 import { DFSTree } from './tree';
-import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
 import { assert } from './utils';
+import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
 
 export interface Link {
   href: string;
