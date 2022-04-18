@@ -12,13 +12,14 @@ import SmartMenu, { HeaderRender, SmartMenuProps } from '/js/components/SmartMen
 
 const { Header, Content } = Layout;
 
-type PickProps = 'theme' | 'menus' | 'collapsedWidth';
+type PickProps = 'theme' | 'collapsedWidth';
 
 export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
   siderWith?: number;
   mobileQuery?: string;
   brokenQuery?: string;
   children?: React.ReactNode;
+  menus: SmartMenuProps['items'];
   leftHeaderRender?: HeaderRender;
   rightHeaderRender?: HeaderRender;
 }
@@ -81,7 +82,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
     <Layout hasSider={!isMobile} className={`${prefixUI} ${prefixUI}-${theme}`}>
       <SmartMenu
         theme={theme}
-        menus={menus}
+        items={menus}
         width={siderWith}
         isMobile={isMobile}
         collapsed={collapsed}

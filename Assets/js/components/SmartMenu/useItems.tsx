@@ -47,12 +47,12 @@ function renderItem(item: MenuItem, itemRender?: ItemRender) {
 }
 
 function renderLabel(item: MenuItem, selectedKeys: string[], itemRender?: ItemRender): React.ReactElement {
-  const { children } = item;
+  const { link, children } = item;
 
-  if (children && children.length > 0) {
+  if ((children && children.length > 0) || !link) {
     return <span className={titleClassName}>{renderItem(item, itemRender)}</span>;
   } else {
-    const { key, link } = item;
+    const { key } = item;
     const { href, target } = link;
     const replace = selectedKeys.includes(key);
 
@@ -66,8 +66,8 @@ function renderLabel(item: MenuItem, selectedKeys: string[], itemRender?: ItemRe
 
 export default function useItems(items: MenuItem[], selectedKeys: string[], itemRender?: ItemRender): Item[] {
   return useMemo(() => {
-    const menus: Item[] = [];
-    const flatMenus: Record<string, Item[]> = {};
+    const result: Item[] = [];
+    const itemMapping: Record<string, Item[]> = {};
 
     for (const item of items) {
       const tree = new DFSTree(item, item => item.children);
@@ -81,7 +81,7 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
         if (hasChildren) {
           item = {
             key,
-            children: (flatMenus[key] = children),
+            children: (itemMapping[key] = []),
             label: renderLabel(current, selectedKeys, itemRender)
           };
         } else {
@@ -93,13 +93,13 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
         }
 
         if (parent) {
-          flatMenus[parent.key].push(item);
+          itemMapping[parent.key].push(item);
         } else {
-          menus.push(item);
+          result.push(item);
         }
       }
     }
 
-    return menus;
+    return result;
   }, items);
 }

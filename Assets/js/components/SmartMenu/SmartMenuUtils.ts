@@ -6,7 +6,7 @@ export interface ExpandKeys {
   selectedKeys: string[];
 }
 
-export interface FlattenMenus {
+export interface FlattenItems {
   [key: string]: MenuItem;
 }
 
@@ -33,12 +33,12 @@ export function uniqueKeys(keys: string[]): string[] {
 }
 
 /**
- * @function flattenMenus
+ * @function flattenItems
  * @description 扁平化菜单数据
  * @param menus 菜单数据
  */
-export function flattenMenus(menus: MenuItem[]): FlattenMenus {
-  const flatMenus: FlattenMenus = {};
+export function flattenItems(menus: MenuItem[]): FlattenItems {
+  const flatMenus: FlattenItems = {};
 
   for (const menu of menus) {
     const tree = new DFSTree(menu, menu => menu.children);
@@ -67,7 +67,7 @@ export function mergeKeys(prevKeys: string[], nextKeys: string[]): string[] {
  * @param matches 匹配的路由数据
  * @param flatMenus 扁平化菜单数据
  */
-export function getExpandKeys(matches: IRoute[], flatMenus: FlattenMenus): ExpandKeys {
+export function getExpandKeys(matches: IRoute[], flatMenus: FlattenItems): ExpandKeys {
   const openKeys: string[] = [];
   const selectedKeys: string[] = [];
 

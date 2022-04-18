@@ -25,8 +25,8 @@ export interface MetaWithKey extends Meta {
 }
 
 export interface MenuItem {
-  link: Link;
   key: string;
+  link?: Link;
   icon?: Icon;
   name: string;
   children?: MenuItem[];
@@ -74,8 +74,8 @@ export function parse<M = unknown, K extends string = string>(
     const { path = '/', meta } = route;
     const { link = { href: path } } = meta || {};
 
-    const flatMenus: Record<string, MenuItem> = {};
-    const flatRoutes: Record<string, IRoute<M, K>> = {};
+    const menuMapping: Record<string, MenuItem> = {};
+    const routeMapping: Record<string, IRoute<M, K>> = {};
 
     const tree = new DFSTree(
       {
@@ -111,10 +111,10 @@ export function parse<M = unknown, K extends string = string>(
 
       // 路由处理
       const route = { ...rest, meta } as IRoute<M, K>;
-      const parentRoute = parent ? flatRoutes[parent.meta.key] : parent;
+      const parentRoute = parent ? routeMapping[parent.meta.key] : parent;
 
       if (hasChildren) {
-        flatRoutes[key] = route;
+        routeMapping[key] = route;
       }
 
       if (parentRoute) {
@@ -130,11 +130,11 @@ export function parse<M = unknown, K extends string = string>(
       }
 
       // 菜单处理
-      const parentMenu = parent ? flatMenus[parent.meta.key] : parent;
+      const parentMenu = parent ? menuMapping[parent.meta.key] : parent;
 
       if (hideInMenu || !name) {
         if (hasChildren && parentMenu) {
-          flatMenus[key] = parentMenu;
+          menuMapping[key] = parentMenu;
         }
       } else {
         const menu: MenuItem = { key, name, link };
@@ -142,7 +142,7 @@ export function parse<M = unknown, K extends string = string>(
         addOptional(menu, 'icon', icon);
 
         if (hasChildren) {
-          flatMenus[key] = menu;
+          menuMapping[key] = menu;
         }
 
         if (parentMenu) {
