@@ -16,6 +16,10 @@ import AccountSystemIcon from '/images/menus/account-system.svg';
 import LogsSystemIcon from '/images/menus/logs-system.svg';
 
 const Home = lazy(() => import('/js/pages/home'));
+const User = lazy(() => import('/js/pages/analysis/User'));
+const Recharge = lazy(() => import('/js/pages/analysis/Recharge'));
+const Account = lazy(() => import('/js/pages/system/Account'));
+const Logs = lazy(() => import('/js/pages/system/Logs'));
 const Forbidden = lazy(() => import('/js/pages/403'));
 const ServerError = lazy(() => import('/js/pages/500'));
 const Layout = lazy(() => import('/js/components/Layout'));
@@ -54,7 +58,7 @@ export const router: Route<{ id?: number }>[] = [
         children: [
           {
             path: 'user',
-            element: <p style={{ padding: 8 }}>用户分析</p>,
+            element: <User />,
             meta: {
               name: '用户分析',
               icon: <Icon component={UserAnalysisIcon} />
@@ -62,7 +66,7 @@ export const router: Route<{ id?: number }>[] = [
           },
           {
             path: 'recharge',
-            element: <p style={{ padding: 8 }}>充值分析</p>,
+            element: <Recharge />,
             meta: {
               name: '充值分析',
               icon: <Icon component={RechargeAnalysisIcon} />
@@ -79,7 +83,7 @@ export const router: Route<{ id?: number }>[] = [
         children: [
           {
             path: 'account',
-            element: <p style={{ padding: 8 }}>帐号管理</p>,
+            element: <Account />,
             meta: {
               name: '帐号管理',
               icon: <Icon component={AccountSystemIcon} />
@@ -87,7 +91,7 @@ export const router: Route<{ id?: number }>[] = [
           },
           {
             path: 'logs',
-            element: <p style={{ padding: 8 }}>安全日志</p>,
+            element: <Logs />,
             meta: {
               name: '安全日志',
               icon: <Icon component={LogsSystemIcon} />
