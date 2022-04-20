@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import useItems from './useItems';
 import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
+import useItems, { ItemRender } from './useItems';
 import { IRoute, MenuItem } from '/js/utils/router';
 import usePersistRef from '/js/hooks/usePersistRef';
 import { useLocation, useMatches } from 'react-nest-router';
@@ -22,8 +22,8 @@ type OmitProps =
 export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
   items: MenuItem[];
   collapsed?: boolean;
+  itemRender?: ItemRender;
   icon?: string | React.ReactElement;
-  itemRender?: (menu: MenuItem) => React.ReactNode;
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
 }
 

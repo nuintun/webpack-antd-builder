@@ -14,7 +14,7 @@ import { prefixUI } from './SmartMenuUtils';
 const iconClassName = `${prefixUI}-icon`;
 const titleClassName = `${prefixUI}-title`;
 
-export type ItemRender = (menu: MenuItem) => React.ReactNode;
+export type ItemRender = (item: MenuItem) => React.ReactNode;
 export type Item = NonNullable<NonNullable<MenuProps['items']>[0]>;
 
 function renderIcon(icon?: string | React.ReactElement): React.ReactElement | undefined {
