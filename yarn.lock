@@ -2436,15 +2436,15 @@ css-minimizer-webpack-plugin@3.4.1:
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
 
-css-modules-types-loader@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.0.3.tgz#404a2195650575e67d54b04599f027bf67989227"
-  integrity sha512-LvIdK3h122HevSLP8vljQ9BI1SYDwc1bo6RU5BnB005In0aVf7wrBR6LJtvqJwO0cFrWfIz4kY3FUwK1E4GvcQ==
+css-modules-types-loader@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.1.0.tgz#85278584573d4408ad876d6d2820984f8de33246"
+  integrity sha512-M0tzpOxNLpPkqljqEIPHDyr8vh07/BxBD3rJlRqndgVezv7MwxZDpdmT8XiopY9kf858V+EJrItzTP/s1wypwg==
   dependencies:
     acorn "^8.7.0"
     acorn-walk "^8.2.0"
     threads "^1.7.0"
-    tslib "^2.3.1"
+    tslib "^2.4.0"
 
 css-select@^4.1.3:
   version "4.3.0"
@@ -5567,7 +5567,7 @@ tslib@^1.10.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0:
+tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
