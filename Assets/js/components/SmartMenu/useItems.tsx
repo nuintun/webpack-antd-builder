@@ -101,5 +101,5 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
     }
 
     return result;
-  }, items);
+  }, [items]);
 }
