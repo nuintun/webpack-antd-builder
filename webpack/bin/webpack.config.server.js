@@ -132,8 +132,7 @@ async function resolveEntry(entry, options) {
 
   app.use(async ctx => {
     ctx.type = 'text/html; charset=utf-8';
-
-    ctx.body = fs.createReadStream(entryHTML);
+    ctx.body = fs.readFileSync(entryHTML);
   });
 
   app.on('error', error => {

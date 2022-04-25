@@ -42,7 +42,7 @@
     "core-js": "^3.22.2",
     "dayjs": "^1.11.1",
     "memoize-one": "^6.0.0",
-    "rc-virtual-list": "^3.4.6",
+    "rc-virtual-list": "^3.4.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-error-boundary": "^3.1.4",
