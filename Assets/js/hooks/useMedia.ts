@@ -19,7 +19,10 @@ export default function useMedia(
   onChange?: (matched: boolean) => void,
   initialState: boolean | (() => boolean) = false
 ): boolean {
-  const mql = useMemo(() => (isBrowser ? window.matchMedia(query) : null), [query]);
+  const mql = useMemo(() => {
+    return isBrowser ? window.matchMedia(query) : null;
+  }, [query]);
+
   const [matched, setState] = useState(mql ? mql.matches : initialState);
 
   useIsomorphicLayoutEffect(() => {
