@@ -2,8 +2,7 @@
  * @module router
  */
 
-import { lazy } from 'react';
-
+import lazy from '/js/utils/lazy';
 import Icon from '@ant-design/icons';
 import { Route } from '/js/utils/router';
 
@@ -15,23 +14,14 @@ import SystemIcon from '/images/menus/system.svg';
 import AccountSystemIcon from '/images/menus/account-system.svg';
 import LogsSystemIcon from '/images/menus/logs-system.svg';
 
-const Home = lazy(() => import('/js/pages/home'));
-const User = lazy(() => import('/js/pages/analysis/User'));
-const Recharge = lazy(() => import('/js/pages/analysis/Recharge'));
-const Account = lazy(() => import('/js/pages/system/Account'));
-const Logs = lazy(() => import('/js/pages/system/Logs'));
-const Forbidden = lazy(() => import('/js/pages/403'));
-const ServerError = lazy(() => import('/js/pages/500'));
-const Layout = lazy(() => import('/js/components/Layout'));
-
 export const router: Route<{ id?: number }>[] = [
   {
     path: '/403',
-    element: <Forbidden />
+    element: lazy(() => import('/js/pages/403'))
   },
   {
     path: '/500',
-    element: <ServerError />
+    element: lazy(() => import('/js/pages/500'))
   },
   {
     path: '/login',
@@ -39,7 +29,7 @@ export const router: Route<{ id?: number }>[] = [
   },
   {
     path: '/',
-    element: <Layout />,
+    element: lazy(() => import('/js/components/Layout')),
     children: [
       {
         index: true,
@@ -47,7 +37,7 @@ export const router: Route<{ id?: number }>[] = [
           name: '网站首页',
           icon: <Icon component={HomeIcon} />
         },
-        element: <Home />
+        element: lazy(() => import('/js/pages/home'))
       },
       {
         path: 'analysis',
@@ -58,7 +48,7 @@ export const router: Route<{ id?: number }>[] = [
         children: [
           {
             path: 'user',
-            element: <User />,
+            element: lazy(() => import('/js/pages/analysis/User')),
             meta: {
               name: '用户分析',
               icon: <Icon component={UserAnalysisIcon} />
@@ -66,7 +56,7 @@ export const router: Route<{ id?: number }>[] = [
           },
           {
             path: 'recharge',
-            element: <Recharge />,
+            element: lazy(() => import('/js/pages/analysis/Recharge')),
             meta: {
               name: '充值分析',
               icon: <Icon component={RechargeAnalysisIcon} />
@@ -83,7 +73,7 @@ export const router: Route<{ id?: number }>[] = [
         children: [
           {
             path: 'account',
-            element: <Account />,
+            element: lazy(() => import('/js/pages/system/Account')),
             meta: {
               name: '帐号管理',
               icon: <Icon component={AccountSystemIcon} />
@@ -91,7 +81,7 @@ export const router: Route<{ id?: number }>[] = [
           },
           {
             path: 'logs',
-            element: <Logs />,
+            element: lazy(() => import('/js/pages/system/Logs')),
             meta: {
               name: '安全日志',
               icon: <Icon component={LogsSystemIcon} />
