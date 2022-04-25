@@ -8,7 +8,7 @@ export interface ExpandKeys {
 
 export type FlattenMenuItem<T> = MenuItem<T & { parent?: string }>;
 
-export interface FlattenMenus<T> {
+export interface FlattenItems<T> {
   [path: string]: FlattenMenuItem<T>;
 }
 
@@ -35,29 +35,29 @@ function uniqueKeys(keys: string[]): string[] {
 }
 
 /**
- * @function flattenMenus
+ * @function flattenItems
  * @description 扁平化菜单数据
- * @param menus 菜单数据
+ * @param items 菜单数据
  */
-export function flattenMenus<T>(menus: MenuItem<T>[]): FlattenMenus<T> {
-  const flatMenus: FlattenMenus<T> = {};
+export function flattenItems<T>(items: MenuItem<T>[]): FlattenItems<T> {
+  const flatItems: FlattenItems<T> = {};
 
-  for (const menu of menus) {
-    const tree = new DFSTree(menu, menu => menu.children);
+  for (const item of items) {
+    const tree = new DFSTree(item, item => item.children);
 
-    for (const [menu, parent] of tree) {
+    for (const [item, parent] of tree) {
       if (parent) {
-        flatMenus[menu.path] = {
-          ...menu,
+        flatItems[item.path] = {
+          ...item,
           parent: parent.path
         };
       } else {
-        flatMenus[menu.path] = menu;
+        flatItems[item.path] = item;
       }
     }
   }
 
-  return flatMenus;
+  return flatItems;
 }
 
 /**
@@ -74,13 +74,13 @@ export function mergeKeys(prevKeys: string[], nextKeys: string[]): string[] {
  * @function getExpandKeys
  * @description 通过当前路由获取菜单展开项标识列表
  * @param path 路由路径
- * @param flatMenus 扁平化菜单数据
+ * @param flatItems 扁平化菜单数据
  */
-export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): ExpandKeys {
+export function getExpandKeys<T>(path: string, flatItems: FlattenItems<T>): ExpandKeys {
   const openKeys: string[] = [];
   const selectedKeys: string[] = [];
 
-  let current = flatMenus[path];
+  let current = flatItems[path];
 
   while (current) {
     const { key, children } = current;
@@ -96,7 +96,7 @@ export function getExpandKeys<T>(path: string, flatMenus: FlattenMenus<T>): Expa
     if (parent === undefined) {
       break;
     } else {
-      current = flatMenus[parent];
+      current = flatItems[parent];
     }
   }
 

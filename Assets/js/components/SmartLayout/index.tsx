@@ -13,7 +13,7 @@ import SmartMenu, { HeaderRender, SmartMenuProps } from '/js/components/SmartMen
 
 const { Header, Content } = Layout;
 
-type PickProps = 'theme' | 'menus' | 'match' | 'history' | 'location' | 'collapsedWidth';
+type PickProps = 'theme' | 'items' | 'match' | 'history' | 'location' | 'collapsedWidth';
 
 export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> {
   roles?: any;
@@ -32,7 +32,7 @@ const triggerClassName = `${prefixUI}-sider-trigger`;
 function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
   const {
     match,
-    menus,
+    items,
     history,
     children,
     location,
@@ -89,7 +89,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
       <SmartMenu
         theme={theme}
         match={match}
-        menus={menus}
+        items={items}
         width={siderWith}
         history={history}
         isMobile={isMobile}

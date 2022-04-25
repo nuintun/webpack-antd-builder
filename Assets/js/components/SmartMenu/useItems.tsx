@@ -1,0 +1,104 @@
+/**
+ * @module useItems
+ */
+
+import React, { useMemo } from 'react';
+
+import { MenuProps } from 'antd';
+import { Link } from 'react-router-dom';
+import { DFSTree } from '/js/utils/tree';
+import { isString } from '/js/utils/utils';
+import { MenuItem } from '/js/utils/router';
+import { prefixUI } from './SmartMenuUtils';
+
+const iconClassName = `${prefixUI}-icon`;
+const titleClassName = `${prefixUI}-title`;
+
+export type ItemRender<T> = (item: MenuItem<T>) => React.ReactNode;
+export type Item = NonNullable<NonNullable<MenuProps['items']>[0]>;
+
+function renderIcon(icon?: string | React.ReactElement): React.ReactElement | undefined {
+  if (icon) {
+    if (isString(icon)) {
+      return (
+        <span className={`anticon ${iconClassName}`}>
+          <img src={icon} alt="icon" />
+        </span>
+      );
+    }
+
+    return React.cloneElement(icon, { className: iconClassName });
+  }
+}
+
+function renderItem<T>(item: MenuItem<T>, itemRender?: ItemRender<T>) {
+  if (itemRender) {
+    return itemRender(item);
+  }
+
+  const { icon, name } = item;
+
+  return (
+    <>
+      {renderIcon(icon)}
+      <span>{name}</span>
+    </>
+  );
+}
+
+function renderLabel<T>(item: MenuItem<T>, selectedKeys: string[], itemRender?: ItemRender<T>): React.ReactElement {
+  const { href, children } = item;
+
+  if ((children && children.length > 0) || !href) {
+    return <span className={titleClassName}>{renderItem(item, itemRender)}</span>;
+  } else {
+    const { key, target } = item;
+    const replace = selectedKeys.includes(key);
+
+    return (
+      <Link to={href} className={titleClassName} replace={replace} target={target}>
+        {renderItem(item, itemRender)}
+      </Link>
+    );
+  }
+}
+
+export default function useItems<T>(items: MenuItem<T>[], selectedKeys: string[], itemRender?: ItemRender<T>): Item[] {
+  return useMemo(() => {
+    const result: Item[] = [];
+    const itemMapping: Record<string, Item[]> = {};
+
+    for (const item of items) {
+      const tree = new DFSTree(item, item => item.children);
+
+      for (const [current, parent] of tree) {
+        let item: Item;
+
+        const { key, name, children } = current;
+        const hasChildren = children && children.length > 0;
+
+        if (hasChildren) {
+          item = {
+            key,
+            children: (itemMapping[key] = []),
+            label: renderLabel(current, selectedKeys, itemRender)
+          };
+        } else {
+          item = {
+            key,
+            title: name,
+            label: renderLabel(current, selectedKeys, itemRender)
+          };
+        }
+
+        if (parent) {
+          itemMapping[parent.key].push(item);
+        } else {
+          result.push(item);
+        }
+      }
+    }
+
+    return result;
+  }, [items]);
+}
