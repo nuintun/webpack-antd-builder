@@ -21,7 +21,6 @@ const getLogoStyle = memoizeOne<GetLogoStyle>(collapsedWidth => {
 const getLogoTitleStyle = memoizeOne<GetLogoTitleStyle>((width, theme, collapsedWidth) => {
   return {
     fontSize: 24,
-    marginLeft: 8,
     fontWeight: 700,
     verticalAlign: 'middle',
     maxWidth: width - collapsedWidth,
