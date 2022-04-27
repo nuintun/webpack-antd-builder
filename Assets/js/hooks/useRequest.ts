@@ -73,7 +73,7 @@ export default function useRequest(
         )
         .finally(() => {
           if (--retainRef.current <= 0) {
-            setLoading(false, true);
+            isMounted() && setLoading(false, true);
           }
         });
     });
