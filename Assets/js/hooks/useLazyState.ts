@@ -2,9 +2,8 @@
  * @module useLazyState
  */
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import useSafeState from './useSafeState';
 import usePersistRef from './usePersistRef';
 import { isFunction } from '/js/utils/utils';
 
@@ -34,7 +33,7 @@ export default function useLazyState<S = undefined>(
 ): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void] {
   const timerRef = useRef<Timeout>();
   const delayRef = usePersistRef(delay);
-  const [state, setState] = useSafeState(initialState);
+  const [state, setState] = useState(initialState);
   const prevStateRef = usePersistRef<S | undefined>(state);
 
   const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
