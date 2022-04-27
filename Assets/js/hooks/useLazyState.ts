@@ -2,7 +2,7 @@
  * @module useLazyState
  */
 
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import useSafeState from './useSafeState';
 import usePersistRef from './usePersistRef';
