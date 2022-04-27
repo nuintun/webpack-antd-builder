@@ -56,5 +56,11 @@ export default function useLazyState<S = undefined>(
     }
   }, []);
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerRef.current);
+    };
+  }, []);
+
   return [state, setLazyState];
 }
