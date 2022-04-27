@@ -44,38 +44,40 @@ export default function useRequest(
 
   const request = useCallback(<R>(url: string, options: Options = {}): Promise<R> => {
     return new Promise<R>((resolve, reject) => {
-      setLoading(true);
+      if (isMounted()) {
+        setLoading(true);
 
-      ++retainRef.current;
+        ++retainRef.current;
 
-      const initOptions = initOptionsRef.current;
+        const initOptions = initOptionsRef.current;
 
-      const onUnauthorized = () => {
-        if (options.onUnauthorized) {
-          options.onUnauthorized(history);
-        } else if (initOptions.onUnauthorized) {
-          initOptions.onUnauthorized(history);
-        } else {
-          onUnauthorizedHandler(history);
-        }
-      };
-
-      const headers = { ...mime.json, ...options.headers };
-
-      return fetch<R>(url, { ...initOptions, ...options, headers, onUnauthorized })
-        .then(
-          response => {
-            isMounted() && resolve(response);
-          },
-          error => {
-            isMounted() && reject(error);
+        const onUnauthorized = () => {
+          if (options.onUnauthorized) {
+            options.onUnauthorized(history);
+          } else if (initOptions.onUnauthorized) {
+            initOptions.onUnauthorized(history);
+          } else {
+            onUnauthorizedHandler(history);
           }
-        )
-        .finally(() => {
-          if (--retainRef.current <= 0) {
-            isMounted() && setLoading(false, true);
-          }
-        });
+        };
+
+        const headers = { ...mime.json, ...options.headers };
+
+        return fetch<R>(url, { ...initOptions, ...options, headers, onUnauthorized })
+          .then(
+            response => {
+              isMounted() && resolve(response);
+            },
+            error => {
+              isMounted() && reject(error);
+            }
+          )
+          .finally(() => {
+            if (--retainRef.current <= 0) {
+              isMounted() && setLoading(false, true);
+            }
+          });
+      }
     });
   }, []);
 
