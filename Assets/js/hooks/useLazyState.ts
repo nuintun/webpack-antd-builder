@@ -5,11 +5,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import usePersistRef from './usePersistRef';
-import { isFunction } from '/js/utils/utils';
 
 /**
  * @function useLazyState
- * @description [hook] 使用延时状态，小于指定实际时不会更新状态
+ * @description [hook] 使用延时状态，在延迟时间后更新状态
  * @param initialState 默认状态
  * @param delay 延迟时间
  */
@@ -34,24 +33,18 @@ export default function useLazyState<S = undefined>(
   const timerRef = useRef<Timeout>();
   const delayRef = usePersistRef(delay);
   const [state, setState] = useState(initialState);
-  const prevStateRef = usePersistRef<S | undefined>(state);
 
   const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
     clearTimeout(timerRef.current);
 
-    const prevState = prevStateRef.current;
-    const nextState = isFunction(value) ? value(prevState) : value;
+    const delay = delayRef.current;
 
-    if (nextState !== prevState) {
-      const delay = delayRef.current;
-
-      if (immediate || delay <= 0) {
-        setState(nextState);
-      } else {
-        timerRef.current = setTimeout(() => {
-          setState(nextState);
-        }, delay);
-      }
+    if (immediate || delay <= 0) {
+      setState(value);
+    } else {
+      timerRef.current = setTimeout(() => {
+        setState(value);
+      }, delay);
     }
   }, []);
 

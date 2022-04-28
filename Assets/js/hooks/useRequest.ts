@@ -45,9 +45,9 @@ export default function useRequest(
   const request = useCallback(<R>(url: string, options: Options = {}): Promise<R> => {
     return new Promise<R>((resolve, reject) => {
       if (isMounted()) {
-        setLoading(true);
-
-        ++retainRef.current;
+        if (retainRef.current++ <= 0) {
+          setLoading(true);
+        }
 
         const initOptions = initOptionsRef.current;
 
