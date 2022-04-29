@@ -61,6 +61,12 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
   const [collapsed, setCollapsed] = useState(() => isBroken || isMobile || !!readCollapsed());
 
+  const onItemClick = useCallback(() => {
+    if (isMobile) {
+      setCollapsed(true);
+    }
+  }, [isMobile]);
+
   const onTriggerClick = useCallback(() => {
     setCollapsed(collapsed => {
       collapsed = !collapsed;
@@ -94,6 +100,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
         history={history}
         isMobile={isMobile}
         location={location}
+        onClick={onItemClick}
         collapsed={collapsed}
         onCollapse={onCollapse}
         headerRender={leftHeaderRender}
