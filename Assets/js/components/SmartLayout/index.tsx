@@ -55,6 +55,12 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
   const [collapsed, setCollapsed] = useState(() => isBroken || isMobile || !!readCollapsed());
 
+  const onItemClick = useCallback(() => {
+    if (isMobile) {
+      setCollapsed(true);
+    }
+  }, [isMobile]);
+
   const onTriggerClick = useCallback(() => {
     setCollapsed(collapsed => {
       collapsed = !collapsed;
@@ -85,6 +91,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
         items={menus}
         width={siderWith}
         isMobile={isMobile}
+        onClick={onItemClick}
         collapsed={collapsed}
         onCollapse={onCollapse}
         headerRender={leftHeaderRender}
