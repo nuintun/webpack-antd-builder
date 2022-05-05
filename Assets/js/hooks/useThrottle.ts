@@ -31,11 +31,5 @@ export default function useThrottle<C extends (...args: any[]) => any>(
   const fn = usePersistCallback(callback);
   const { noLeading, noTrailing, debounceMode } = options;
 
-  return useMemo(() => {
-    return throttle(delay, fn, {
-      noLeading,
-      noTrailing,
-      debounceMode
-    });
-  }, [delay, noLeading, noTrailing, debounceMode]);
+  return useMemo(() => throttle(delay, fn, options), [delay, noLeading, noTrailing, debounceMode]);
 }
