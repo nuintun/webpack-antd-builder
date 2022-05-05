@@ -7,19 +7,25 @@ import { useMemo } from 'react';
 import { debounce } from 'throttle-debounce';
 import usePersistCallback from './usePersistCallback';
 
+export interface Options {
+  // 是否前置调用
+  atBegin?: boolean;
+}
+
 /**
  * @function useDebounce
- * @description [hook] 去抖函数
+ * @description [hook] 防抖函数
  * @param callback 目标回调函数
  * @param delay 延迟的时间
- * @param atBegin 是否前置调用
+ * @param options 防抖模式配置
  */
 export default function useDebounce<C extends (...args: any[]) => any>(
   callback: C,
   delay: number,
-  atBegin: boolean = false
+  options: Options = {}
 ): debounce<C> {
+  const { atBegin } = options;
   const fn = usePersistCallback(callback);
 
-  return useMemo(() => debounce(delay, atBegin, fn), [delay, atBegin]);
+  return useMemo(() => debounce(delay, fn, options), [delay, atBegin]);
 }
