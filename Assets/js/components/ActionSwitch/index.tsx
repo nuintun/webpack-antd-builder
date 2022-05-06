@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
 
-import { Button, ButtonProps } from 'antd';
+import { Switch, SwitchProps } from 'antd';
 import Action, { ActionProps } from '/js/components/Action';
 
-export interface ActionButtonProps<R>
+export interface ActionSwitchProps<R>
   extends Omit<ActionProps<R>, 'children' | 'trigger'>,
-    Omit<ButtonProps, 'loading' | 'onClick' | 'onError'> {}
+    Omit<SwitchProps, 'value' | 'loading' | 'onChange'> {}
 
-function ActionButton<R>(props: ActionButtonProps<R>): React.ReactElement {
+function ActionSwitch<R>(props: ActionSwitchProps<R>): React.ReactElement {
   const {
     body,
     delay,
@@ -17,7 +17,6 @@ function ActionButton<R>(props: ActionButtonProps<R>): React.ReactElement {
     method,
     onError,
     disabled,
-    children,
     onSuccess,
     onComplete,
     requestInit,
@@ -36,6 +35,7 @@ function ActionButton<R>(props: ActionButtonProps<R>): React.ReactElement {
       method={method}
       notify={notify}
       onError={onError}
+      trigger="onChange"
       disabled={disabled}
       onSuccess={onSuccess}
       onComplete={onComplete}
@@ -44,9 +44,9 @@ function ActionButton<R>(props: ActionButtonProps<R>): React.ReactElement {
       confirmIcon={confirmIcon}
       confirmTitle={confirmTitle}
     >
-      <Button {...restProps}>{children}</Button>
+      <Switch {...restProps} />
     </Action>
   );
 }
 
-export default memo(ActionButton) as typeof ActionButton;
+export default memo(ActionSwitch) as typeof ActionSwitch;

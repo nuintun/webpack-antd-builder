@@ -2,7 +2,7 @@
  * @module useItems
  */
 
-import React, { useMemo } from 'react';
+import React, { cloneElement, useMemo } from 'react';
 
 import { MenuProps } from 'antd';
 import Link from '/js/components/Link';
@@ -27,7 +27,7 @@ function renderIcon(icon?: string | React.ReactElement): React.ReactElement | un
       );
     }
 
-    return React.cloneElement(icon, { className: iconClassName });
+    return cloneElement(icon, { className: iconClassName });
   }
 }
 

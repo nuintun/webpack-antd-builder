@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { isFunction } from '/js/utils/utils';
 import useSubmit, { Options } from '/js/hooks/useSubmit';
@@ -18,8 +18,8 @@ export interface FormDrawerProps<V, R>
   onClose?: () => void;
   form?: FormInstance<V>;
   children?: React.ReactNode;
-  trigger: React.ReactElement;
   requestInit?: Omit<Options<V, R>, SubmitPicked>;
+  trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
   extra?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
   footer?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
 }
@@ -87,11 +87,11 @@ function FormDrawer<V, R>({
   }, []);
 
   const triggerNode = useMemo(() => {
-    const { onClick } = trigger.props;
+    return cloneElement(trigger, {
+      onClick(...args: unknown[]) {
+        const { onClick } = trigger.props;
 
-    return React.cloneElement(trigger, {
-      onClick(event: React.MouseEvent) {
-        onClick && onClick(event);
+        onClick && onClick(...args);
 
         wrapForm.resetFields();
 
