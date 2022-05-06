@@ -28,9 +28,9 @@ export interface Options {
  * @param options 配置参数
  */
 export default function useTitle(title?: string, options: Options = {}) {
-  const titleRef = useRef(isBrowser ? document.title : '');
-
   const { defaultTitle = __APP_TITLE__, format = defaultFormat, restoreOnUnmount = false } = options;
+
+  const titleRef = useRef(isBrowser ? document.title : defaultTitle);
 
   useEffect(() => {
     if (isBrowser) {
