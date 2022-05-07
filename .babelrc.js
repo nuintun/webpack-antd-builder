@@ -11,7 +11,7 @@ const imports = { style: true, libraryName: 'antd', libraryDirectory: 'es' };
 
 module.exports = {
   presets: [
-    ['@babel/preset-env', { bugfixes: true, corejs, useBuiltIns: 'usage', targets }],
+    ['@babel/preset-env', { bugfixes: true, corejs, useBuiltIns: 'usage' }],
     ['@babel/preset-react', { runtime: 'automatic', development }],
     ['@babel/preset-typescript', { optimizeConstEnums: true }]
   ],
