@@ -46,7 +46,7 @@ module.exports = async mode => {
 
   const env = resolveEnvironment({
     __DEV__: isDevelopment,
-    __APP_TITLE__: configure.title
+    __APP_TITLE__: configure.name
   });
 
   const clean = {
@@ -56,7 +56,7 @@ module.exports = async mode => {
   const html = {
     xhtml: true,
     meta: configure.meta,
-    title: configure.title,
+    title: configure.name,
     minify: !isDevelopment,
     favicon: configure.favicon,
     filename: configure.entryHTML,
