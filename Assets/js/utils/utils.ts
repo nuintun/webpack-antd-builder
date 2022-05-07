@@ -2,7 +2,7 @@
  * @module utils
  */
 
-import dayjs, { Dayjs, OpUnitType } from 'dayjs';
+import dayjs, { Dayjs, ManipulateType } from 'dayjs';
 
 const { toString } = Object.prototype;
 
@@ -124,7 +124,7 @@ export function pathToPaths(path: string): string[] {
  * @param value 偏移值
  * @param unit 偏移单位
  */
-export function getLastRangeDate(value: number, unit: OpUnitType = 'day'): [start: Dayjs, end: Dayjs] {
+export function getLastRangeDate(value: number, unit: ManipulateType = 'day'): [start: Dayjs, end: Dayjs] {
   const today = dayjs();
 
   return [today.subtract(Math.max(0, /^d(ay)?$/.test(unit) ? value - 1 : value), unit), today];
