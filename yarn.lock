@@ -3689,10 +3689,10 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha1-JzwH7c3Ljfaiwat9We52SRRR7BQ=
 
-koa-webpack-dev-service@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.3.1.tgz#82f41fd2af0ce6d0f0b2da48a0fe49082891d4e3"
-  integrity sha512-oaQA9LQv89Fy1UV6MYV4qmTMhxPFXaZ8BA4PdDCimvQpfZRMQ5L5lyi1ZpTuH1zLcg86vJN4zo4VV3jHDK5f3A==
+koa-webpack-dev-service@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.4.1.tgz#9f7173177fd6bb5ed1752e7fe0d16ced5d160c0e"
+  integrity sha512-kx4pKCQwuuN+AYyPdDwiBRYWdkgzq/Q7maiU7G60G07k7woOVxkX2+AppQlHzuGaHMD9t5Dc37KtWaaZfgZ1yA==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"
