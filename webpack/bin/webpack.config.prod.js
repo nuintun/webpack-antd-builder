@@ -6,18 +6,16 @@
  * @see https://github.com/facebook/create-react-app
  */
 
-'use strict';
-
 const mode = 'production';
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
 
-const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
-const resolveConfigure = require('./webpack.config.base');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+import webpack from 'webpack';
+import TerserPlugin from 'terser-webpack-plugin';
+import resolveConfigure from './webpack.config.base.js';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 (async () => {
   const configure = await resolveConfigure(mode);

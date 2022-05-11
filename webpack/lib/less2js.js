@@ -6,9 +6,9 @@
  * @description Cast less variables into JSON key-value pairs
  */
 
-'use strict';
+import less from 'less';
 
-const { parse, contexts } = require('less');
+const { parse, contexts } = less;
 
 /**
  * @function less2js
@@ -16,7 +16,7 @@ const { parse, contexts } = require('less');
  * @param {object} options
  * @returns {Promise<object>}
  */
-module.exports = (code = '', options = {}) => {
+export default (code = '', options = {}) => {
   return new Promise((resolve, reject) => {
     const { config, serialize } = options;
     const hasSerialize = typeof serialize === 'function';

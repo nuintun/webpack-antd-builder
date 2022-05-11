@@ -5,12 +5,10 @@
  * @description Get webpack rules
  */
 
-'use strict';
-
-const fs = require('fs');
-const less2js = require('./less2js');
-const { theme } = require('../configure');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import fs from 'fs';
+import less2js from './less2js.js';
+import configure from '../configure.js';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
  * @function parseTheme
@@ -31,7 +29,8 @@ function parseTheme(path) {
  * @param {string} mode
  * @returns {object}
  */
-module.exports = async mode => {
+export default async mode => {
+  const { theme } = configure;
   const themeVars = await parseTheme(theme);
   const isDevelopment = mode !== 'production';
   const cssIdentName = isDevelopment ? '[local]-[hash:8]' : '[hash:8]';

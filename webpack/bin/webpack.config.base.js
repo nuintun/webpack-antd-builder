@@ -5,16 +5,14 @@
  * @description Webpack base configure
  */
 
-'use strict';
-
-const webpack = require('webpack');
-const pkg = require('../../package.json');
-const configure = require('../configure');
-const resolveRules = require('../lib/rules');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+import webpack from 'webpack';
+import { createRequire } from 'module';
+import configure from '../configure.js';
+import resolveRules from '../lib/rules.js';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 
 /**
  * @function resolveEnvironment
@@ -32,12 +30,14 @@ function resolveEnvironment(env) {
   return output;
 }
 
+const { resolve } = createRequire(import.meta.url);
+
 /**
  * @function resolveConfigure
  * @param {string} mode
  * @returns {Promise<object>}
  */
-module.exports = async mode => {
+export default async mode => {
   const progress = {
     percentBy: 'entries'
   };
@@ -60,8 +60,8 @@ module.exports = async mode => {
     minify: !isDevelopment,
     favicon: configure.favicon,
     filename: configure.entryHTML,
-    templateParameters: { lang: configure.lang },
-    template: require.resolve('../template/index.ejs')
+    template: resolve('../template/index.ejs'),
+    templateParameters: { lang: configure.lang }
   };
 
   const css = {
@@ -72,7 +72,7 @@ module.exports = async mode => {
 
   return {
     mode,
-    name: pkg.name,
+    name: configure.name,
     entry: configure.entry,
     context: configure.context,
     output: {

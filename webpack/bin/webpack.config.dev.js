@@ -6,21 +6,17 @@
  * @see https://github.com/facebook/create-react-app
  */
 
-'use strict';
-
 const mode = 'development';
 
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
 
-const webpack = require('webpack');
-const { watchOptions } = require('../configure');
-const resolveConfigure = require('./webpack.config.base');
+import webpack from 'webpack';
+import resolveConfigure from './webpack.config.base.js';
 
 (async () => {
   const configure = await resolveConfigure(mode);
 
-  configure.watchOptions = watchOptions;
   configure.devtool = 'eval-cheap-module-source-map';
 
   configure.plugins.push(new webpack.SourceMapDevToolPlugin());
