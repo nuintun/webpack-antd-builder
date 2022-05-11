@@ -26,7 +26,7 @@
   ],
   "nodemonConfig": {
     "quiet": true,
-    "delay": "100ms",
+    "delay": "128ms",
     "watch": [
       "webpack/**/*",
       ".babelrc.cjs",
