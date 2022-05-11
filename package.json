@@ -28,9 +28,9 @@
     "quiet": true,
     "delay": "100ms",
     "watch": [
-      ".babelrc.js",
       "webpack/**/*",
-      ".postcssrc.js",
+      ".babelrc.cjs",
+      ".postcssrc.cjs",
       "wwwroot/favicon.ico",
       "Assets/css/theme.less"
     ]
