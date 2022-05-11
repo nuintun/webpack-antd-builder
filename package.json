@@ -37,9 +37,9 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.0.9",
-    "antd": "^4.20.2",
+    "antd": "^4.20.3",
     "classnames": "^2.3.1",
-    "core-js": "^3.22.4",
+    "core-js": "^3.22.5",
     "dayjs": "^1.11.2",
     "memoize-one": "^6.0.0",
     "rc-virtual-list": "^3.4.7",
@@ -69,12 +69,12 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "3.4.1",
-    "css-modules-types-loader": "^0.2.0",
+    "css-modules-types-loader": "^0.3.1",
     "find-free-ports": "^3.0.0",
     "html-webpack-plugin": "^5.5.0",
     "koa": "^2.13.4",
     "koa-compress": "^5.1.0",
-    "koa-webpack-dev-service": "^0.3.1",
+    "koa-webpack-dev-service": "^0.5.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "memfs": "^3.4.1",
@@ -86,7 +86,7 @@
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
     "typescript": "^4.6.4",
-    "webpack": "^5.72.0",
+    "webpack": "^5.72.1",
     "webpack-bundle-analyzer": "^4.5.0"
   }
 }
