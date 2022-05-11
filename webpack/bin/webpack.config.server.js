@@ -13,19 +13,20 @@ const mode = 'development';
 process.env.NODE_ENV = mode;
 process.env.BABEL_ENV = mode;
 
-const Koa = require('koa');
-const path = require('path');
-const memfs = require('memfs');
-const webpack = require('webpack');
-const resolveIp = require('../lib/ip');
-const { URLSearchParams } = require('url');
-const koaCompress = require('koa-compress');
-const { findFreePorts } = require('find-free-ports');
-const devMiddleware = require('koa-webpack-dev-service');
-const resolveConfigure = require('./webpack.config.base');
-const { publicPath, entryHTML } = require('../configure');
+import Koa from 'koa';
+import path from 'path';
+import memfs from 'memfs';
+import webpack from 'webpack';
+import resolveIp from '../lib/ip.js';
+import { URLSearchParams } from 'url';
+import koaCompress from 'koa-compress';
+import configure from '../configure.js';
+import { findFreePorts } from 'find-free-ports';
+import devMiddleware from 'koa-webpack-dev-service';
+import resolveConfigure from './webpack.config.base.js';
 
 const { toString } = Object.prototype;
+const { publicPath, entryHTML } = configure;
 
 function createMemfs() {
   const volume = new memfs.Volume();

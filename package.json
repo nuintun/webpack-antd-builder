@@ -1,18 +1,19 @@
 {
   "name": "webpack-antd-build",
   "version": "1.0.0",
-  "private": true,
   "description": "A webpack antd build tools.",
+  "private": true,
+  "type": "module",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=16.0.0"
   },
   "scripts": {
     "lint": "tsc --noEmit",
     "dev": "node webpack/bin/webpack.config.dev.js",
     "prod": "node webpack/bin/webpack.config.prod.js",
+    "format": "prettier --write *.ts *.cjs webpack Assets",
     "watch": "nodemon webpack/bin/webpack.config.server.js",
-    "report": "node webpack/bin/webpack.config.prod.js --report",
-    "format": "prettier --write .babelrc.js .postcssrc.js webpack Assets"
+    "report": "node webpack/bin/webpack.config.prod.js --report"
   },
   "author": {
     "name": "nuintun",

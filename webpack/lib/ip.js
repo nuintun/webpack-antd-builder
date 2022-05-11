@@ -5,16 +5,14 @@
  * @description Get local external ip
  */
 
-'use strict';
-
-const os = require('os');
+import os from 'os';
 
 /**
  * @function resolveIp
  * @param {string} family
  * @returns {Promise<string>}
  */
-module.exports = async (family = 'IPv4') => {
+export default async (family = 'IPv4') => {
   const networkInterfaces = os.networkInterfaces();
   const interfaces = Object.keys(networkInterfaces);
 
