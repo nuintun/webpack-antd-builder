@@ -3,8 +3,8 @@ import './index.less';
 import { memo, useCallback, useMemo } from 'react';
 
 import useTheme from '/js/hooks/useTheme';
-import { HeaderRenderProps } from '../SmartMenu';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
+import { HeaderRenderProps } from '/js/components/SmartMenu';
 import { MenuClickEventHandler } from 'rc-menu/es/interface';
 import { Avatar, Dropdown, Menu, MenuProps, message } from 'antd';
 

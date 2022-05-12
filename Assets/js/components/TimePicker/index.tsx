@@ -3,7 +3,7 @@ import 'antd/es/time-picker/style';
 import { forwardRef, useMemo } from 'react';
 
 import { Dayjs } from 'dayjs';
-import DatePicker from '../DatePicker';
+import DatePicker from '/js/components/DatePicker';
 import { PickerTimeProps, RangePickerTimeProps } from 'antd/es/date-picker/generatePicker';
 
 const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker;
