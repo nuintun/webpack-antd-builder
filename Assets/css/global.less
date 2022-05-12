@@ -171,6 +171,15 @@ body {
   }
 }
 
+// HACK Antd Form.Item 垂直对齐修复
+.ant-form-inline {
+  .ant-form-item {
+    &-control {
+      align-self: flex-end;
+    }
+  }
+}
+
 @media screen and (max-width: @screen-sm) {
   .ui-page {
     margin: 16px 0;
