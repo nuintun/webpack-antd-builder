@@ -100,6 +100,35 @@ body {
   border-bottom: 1px solid #f0c36d;
 }
 
+.ui-page {
+  margin: 16px;
+  padding: 24px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ui-search {
+  & + .ui-actions {
+    margin: 10px 0 24px;
+  }
+
+  .ant-form-item {
+    padding-bottom: 14px;
+  }
+
+  .ant-form-item-label {
+    padding-bottom: 0;
+  }
+
+  + .ui-table {
+    margin-top: 10px;
+  }
+}
+
+.ui-actions {
+  margin: 0 0 24px;
+}
+
 .ui-table {
   .ant-table {
     border-top: 1px solid @table-border-color;
@@ -122,35 +151,6 @@ body {
         }
       }
     }
-  }
-}
-
-.ui-page {
-  margin: 16px;
-  padding: 24px;
-  overflow: hidden;
-  background: #fff;
-
-  .ui-search {
-    & + .ui-actions {
-      margin: 10px 0 24px;
-    }
-
-    .ant-form-item {
-      padding-bottom: 14px;
-    }
-
-    .ant-form-item-label {
-      padding-bottom: 0;
-    }
-  }
-
-  .ui-actions {
-    margin: 0 0 24px;
-  }
-
-  .ui-table {
-    margin-top: 10px;
   }
 }
 
