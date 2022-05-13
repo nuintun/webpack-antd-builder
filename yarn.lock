@@ -4981,10 +4981,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.3.0.tgz#9a4809a818f12496ba91b0a68933e475db854736"
-  integrity sha512-3fbBCBNH2TE99arApZYvZNqOGmdSmDoMywVUFjjkS8UEEFHreh8UGX37X+IeeWlZzDPjVQ/Sz8kkZEAu4eC5Ww==
+react-nest-router@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.5.0.tgz#42836ab7fc58ce62314fbac1eb7a537726921410"
+  integrity sha512-9RcrZxVTbvVYKWzaMIREHOMPQbQSAXuUW/lIrAax7O6a9Ld1STX5W+xHtpMQK7rrN6fQJeZ6YTzyzns9G2fYXw==
   dependencies:
     history "^5.3.0"
     tslib "^2.4.0"
