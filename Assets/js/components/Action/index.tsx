@@ -1,4 +1,4 @@
-import React, { cloneElement, memo, useCallback, useMemo } from 'react';
+import React, { cloneElement, memo, useCallback } from 'react';
 
 import { isFunction } from '/js/utils/utils';
 import useRequest from '/js/hooks/useRequest';
