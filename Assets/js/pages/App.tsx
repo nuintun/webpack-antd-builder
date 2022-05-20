@@ -46,17 +46,13 @@ const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary }: Fallba
 });
 
 const Page = memo(function Page() {
-  const [routes, menus] = useMemo(() => {
+  const routes = useMemo(() => {
     return parse(router);
   }, [router]);
 
-  const context = useMemo(() => {
-    return { menus };
-  }, [menus]);
-
   return (
     <Suspense fallback={<SuspenseFallBack />}>
-      <Router routes={routes} context={context}>
+      <Router routes={routes} context={routes}>
         <NotFound />
       </Router>
     </Suspense>

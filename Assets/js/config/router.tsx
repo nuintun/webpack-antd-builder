@@ -14,7 +14,12 @@ import SystemIcon from '/images/menus/system.svg';
 import AccountSystemIcon from '/images/menus/account-system.svg';
 import LogsSystemIcon from '/images/menus/logs-system.svg';
 
-export const router: Route<{ id?: number }>[] = [
+export interface Meta {
+  id?: number;
+  hideInMenu?: boolean;
+}
+
+export const router: Route<Meta>[] = [
   {
     path: '/403',
     element: lazy(() => import('/js/pages/403'))
@@ -22,10 +27,6 @@ export const router: Route<{ id?: number }>[] = [
   {
     path: '/500',
     element: lazy(() => import('/js/pages/500'))
-  },
-  {
-    path: '/login',
-    element: '登录页'
   },
   {
     path: '/',

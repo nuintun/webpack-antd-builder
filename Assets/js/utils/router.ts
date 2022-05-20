@@ -15,21 +15,12 @@ export interface Link {
 export interface Meta {
   icon?: Icon;
   name?: string;
-  hideInMenu?: true;
   link?: Partial<Link>;
 }
 
 export interface MetaWithKey extends Meta {
   link: Link;
   key: string;
-}
-
-export interface MenuItem {
-  key: string;
-  link?: Link;
-  icon?: Icon;
-  name: string;
-  children?: MenuItem[];
 }
 
 export type Icon = string | React.ReactElement;
@@ -42,29 +33,13 @@ export interface IRoute<M = unknown, K extends string = string> extends NIRoute<
 }
 
 /**
- * @function addOptional
- * @description 添加可选属性
- * @param source 源对象
- * @param key 属性名
- * @param value 属性值
- */
-function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
-  if (value !== undefined) {
-    source[key] = value;
-  }
-}
-
-/**
  * @function parse
- * @description 解析配置文件，并返回路由，菜单，面包屑
- * @param router
+ * @description 根据配置文件解析出路由
+ * @param router 路由配置
  */
-export function parse<M = unknown, K extends string = string>(
-  router: Route<M, K>[]
-): [routes: Route<M, K>[], menus: MenuItem[]] {
+export function parse<M = unknown, K extends string = string>(router: Route<M, K>[]): Route<M, K>[] {
   let uid = 0;
 
-  const menus: MenuItem[] = [];
   const routes: Route<M, K>[] = [];
 
   const getKey = () => (uid++).toString();
@@ -73,36 +48,27 @@ export function parse<M = unknown, K extends string = string>(
     const key = getKey();
     const { path = '/', meta } = route;
     const { link = { href: path } } = meta || {};
+    const mapping: Record<string, IRoute<M, K>> = {};
 
-    const menuMapping: Record<string, MenuItem> = {};
-    const routeMapping: Record<string, IRoute<M, K>> = {};
+    const tree = new DFSTree({ ...route, meta: { ...route.meta, key, link } }, ({ meta, children }) => {
+      const { href: from } = meta.link;
 
-    const tree = new DFSTree(
-      {
-        ...route,
-        meta: { ...route.meta, key, link }
-      },
-      ({ meta, children }) => {
-        const { href: from } = meta.link;
+      if (children) {
+        return children.map(route => {
+          const key = getKey();
+          const { meta } = route;
+          const { link } = meta || {};
+          const href = resolve(from, link?.href ?? route.path);
 
-        if (children) {
-          return children.map(route => {
-            const key = getKey();
-            const { meta } = route;
-            const { link } = meta || {};
-            const href = resolve(from, link?.href ?? route.path);
-
-            return { ...route, meta: { ...meta, key, link: { ...link, href } } };
-          });
-        }
+          return { ...route, meta: { ...meta, key, link: { ...link, href } } };
+        });
       }
-    );
+    });
 
     // 遍历节点
-    for (const [node, parent] of tree) {
+    for (const [{ meta, children, ...rest }, parent] of tree) {
       // 当前节点数据操作
-      const { meta, children, ...rest } = node;
-      const { key, name, icon, link, hideInMenu } = meta;
+      const { key, name, link } = meta;
       const hasChildren = children && children.length > 0;
 
       if (__DEV__) {
@@ -111,10 +77,10 @@ export function parse<M = unknown, K extends string = string>(
 
       // 路由处理
       const route = { ...rest, meta } as IRoute<M, K>;
-      const parentRoute = parent ? routeMapping[parent.meta.key] : parent;
+      const parentRoute = parent ? mapping[parent.meta.key] : parent;
 
       if (hasChildren) {
-        routeMapping[key] = route;
+        mapping[key] = route;
       }
 
       if (parentRoute) {
@@ -128,37 +94,8 @@ export function parse<M = unknown, K extends string = string>(
       } else {
         routes.push(route as Route<M, K>);
       }
-
-      // 菜单处理
-      const parentMenu = parent ? menuMapping[parent.meta.key] : parent;
-
-      if (hideInMenu || !name) {
-        if (hasChildren && parentMenu) {
-          menuMapping[key] = parentMenu;
-        }
-      } else {
-        const menu: MenuItem = { key, name, link };
-
-        addOptional(menu, 'icon', icon);
-
-        if (hasChildren) {
-          menuMapping[key] = menu;
-        }
-
-        if (parentMenu) {
-          const { children } = parentMenu;
-
-          if (children) {
-            children.push(menu);
-          } else {
-            parentMenu.children = [menu];
-          }
-        } else {
-          menus.push(menu);
-        }
-      }
     }
   }
 
-  return [routes, menus];
+  return routes;
 }

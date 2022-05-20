@@ -3,26 +3,30 @@
  * @description 用户自定义业务模块
  */
 
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 import LeftHeader from './LeftHeader';
 import RightHeader from './RightHeader';
+import { parse } from '/js/utils/menus';
+import { Route } from '/js/utils/router';
+import { Meta } from '/js/config/router';
 import useTheme from '/js/hooks/useTheme';
-import { MenuItem } from '/js/utils/router';
 import SmartLayout from '/js/components/SmartLayout';
 import { HeaderRender } from '/js/components/SmartMenu';
 import { Outlet, useOutletContext } from 'react-nest-router';
-
-interface LayoutOutletContext {
-  menus: MenuItem[];
-}
 
 const leftHeaderRender: HeaderRender = props => <LeftHeader {...props} />;
 const rightHeaderRender: HeaderRender = props => <RightHeader {...props} />;
 
 export default memo(function Layout() {
   const [theme] = useTheme();
-  const { menus } = useOutletContext<LayoutOutletContext>();
+  const routes = useOutletContext<Route<Meta>[]>();
+
+  const menus = useMemo(() => {
+    return parse(routes as Route<Meta>[], ({ meta }) => {
+      return !meta.hideInMenu;
+    });
+  }, [routes]);
 
   return (
     <SmartLayout
