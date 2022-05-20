@@ -79,27 +79,6 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
       });
   }, []);
 
-  const triggerNode = useMemo(() => {
-    if (confirmTitle) {
-      return cloneElement(children, {
-        loading,
-        disabled
-      });
-    }
-
-    return cloneElement(children, {
-      loading,
-      disabled,
-      [trigger](...args: unknown[]) {
-        const onTrigger = children.props[trigger];
-
-        onTrigger && onTrigger(...args);
-
-        onAction();
-      }
-    });
-  }, [loading, disabled, trigger, confirmTitle]);
-
   if (confirmTitle) {
     return (
       <Popconfirm
@@ -110,12 +89,25 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
         onConfirm={onAction}
         disabled={disabled || loading}
       >
-        {triggerNode}
+        {cloneElement(children, {
+          loading,
+          disabled
+        })}
       </Popconfirm>
     );
   }
 
-  return triggerNode;
+  return cloneElement(children, {
+    loading,
+    disabled,
+    [trigger]: (...args: unknown[]) => {
+      const onTrigger = children.props[trigger];
+
+      onTrigger && onTrigger(...args);
+
+      onAction();
+    }
+  });
 }
 
 export default memo(Action) as typeof Action;
