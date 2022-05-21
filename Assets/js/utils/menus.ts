@@ -5,6 +5,12 @@
 import { DFSTree } from './tree';
 import { Icon, IRoute, Link, Route } from './router';
 
+export enum Filter {
+  All = 0,
+  Self = 1,
+  None = 2
+}
+
 export interface MenuItem {
   key: string;
   link?: Link;
@@ -26,10 +32,20 @@ function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
   }
 }
 
-export enum Filter {
-  All = 0,
-  Self = 1,
-  None = 2
+/**
+ * @function removeOnlyLayoutMenus
+ * @description 过滤只有布局的菜单
+ * @param items 菜单配置
+ * @param layouts 布局路由对应菜单映射
+ */
+function removeOnlyLayoutMenus(items: MenuItem[], layouts: Record<string, boolean>): MenuItem[] {
+  return items.filter(({ key, children }) => {
+    if (children && children.length > 0) {
+      return removeOnlyLayoutMenus(children, layouts);
+    }
+
+    return !layouts[key];
+  });
 }
 
 /**
@@ -91,15 +107,5 @@ export function parse<M = unknown>(routes: Route<M>[], filter: (route: IRoute<M>
     }
   }
 
-  const removeOnlyLayoutMenus = (items: MenuItem[]): MenuItem[] => {
-    return items.filter(({ key, children }) => {
-      if (children && children.length > 0) {
-        return removeOnlyLayoutMenus(children);
-      }
-
-      return !layouts[key];
-    });
-  };
-
-  return removeOnlyLayoutMenus(menus);
+  return removeOnlyLayoutMenus(menus, layouts);
 }
