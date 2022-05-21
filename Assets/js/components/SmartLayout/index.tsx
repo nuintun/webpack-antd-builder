@@ -17,7 +17,7 @@ type PickProps = 'theme' | 'items' | 'match' | 'history' | 'location' | 'collaps
 
 export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> {
   roles?: any;
-  siderWith?: number;
+  siderWidth?: number;
   mobileQuery?: string;
   brokenQuery?: string;
   children?: React.ReactNode;
@@ -36,7 +36,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
     history,
     children,
     location,
-    siderWith,
+    siderWidth,
     breadcrumbs,
     theme = 'dark',
     collapsedWidth,
@@ -96,8 +96,8 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
         theme={theme}
         match={match}
         items={items}
-        width={siderWith}
         history={history}
+        width={siderWidth}
         isMobile={isMobile}
         location={location}
         onClick={onItemClick}
@@ -114,7 +114,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
               theme,
               isMobile,
               collapsed: true,
-              width: siderWith as number,
+              width: siderWidth as number,
               collapsedWidth: collapsedWidth as number
             })}
           {collapsed ? (
@@ -127,7 +127,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
               theme,
               isMobile,
               collapsed,
-              width: siderWith as number,
+              width: siderWidth as number,
               collapsedWidth: collapsedWidth as number
             })}
         </Header>
