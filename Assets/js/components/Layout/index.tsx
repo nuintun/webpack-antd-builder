@@ -32,7 +32,7 @@ export default memo(function Layout() {
     <SmartLayout
       theme={theme}
       menus={menus}
-      siderWith={208}
+      siderWidth={256}
       leftHeaderRender={leftHeaderRender}
       rightHeaderRender={rightHeaderRender}
     >

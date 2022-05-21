@@ -15,7 +15,7 @@ const { Header, Content } = Layout;
 type PickProps = 'theme' | 'collapsedWidth';
 
 export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
-  siderWith?: number;
+  siderWidth?: number;
   mobileQuery?: string;
   brokenQuery?: string;
   children?: React.ReactNode;
@@ -31,7 +31,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
   const {
     menus,
     children,
-    siderWith,
+    siderWidth,
     theme = 'dark',
     collapsedWidth,
     leftHeaderRender,
@@ -89,7 +89,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
       <SmartMenu
         theme={theme}
         items={menus}
-        width={siderWith}
+        width={siderWidth}
         isMobile={isMobile}
         onClick={onItemClick}
         collapsed={collapsed}
@@ -105,7 +105,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
               theme,
               isMobile,
               collapsed: true,
-              width: siderWith as number,
+              width: siderWidth as number,
               collapsedWidth: collapsedWidth as number
             })}
           {collapsed ? (
@@ -118,7 +118,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
               theme,
               isMobile,
               collapsed,
-              width: siderWith as number,
+              width: siderWidth as number,
               collapsedWidth: collapsedWidth as number
             })}
         </Header>
