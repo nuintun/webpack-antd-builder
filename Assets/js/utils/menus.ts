@@ -13,8 +13,6 @@ export interface MenuItem {
   children?: MenuItem[];
 }
 
-export type Node<M> = IRoute<M> & { meta: { name: string } };
-
 /**
  * @function addOptional
  * @description 添加可选属性
@@ -28,20 +26,33 @@ function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
   }
 }
 
+export enum Filter {
+  All = 0,
+  Self = 1,
+  None = 2
+}
+
 /**
  * @function parse
  * @description 根据路由解析出菜单
  * @param routes 路由
  * @param filter 过滤器
  */
-export function parse<M = unknown>(routes: Route<M>[], filter: (route: Node<M>) => boolean = () => true): MenuItem[] {
+export function parse<M = unknown>(routes: Route<M>[], filter: (route: IRoute<M>) => Filter = () => Filter.None): MenuItem[] {
   const menus: MenuItem[] = [];
+  const guards: Record<string, Filter> = {};
   const layouts: Record<string, boolean> = {};
 
   for (const route of routes) {
     const mapping: Record<string, MenuItem> = {};
 
-    const tree = new DFSTree(route as IRoute<M>, ({ children }) => children);
+    const tree = new DFSTree(route as IRoute<M>, node => {
+      const guard = filter(node);
+
+      guards[node.meta.key] = guard;
+
+      if (guard !== Filter.All) return node.children;
+    });
 
     // 遍历节点
     for (const [node, parent] of tree) {
@@ -51,7 +62,7 @@ export function parse<M = unknown>(routes: Route<M>[], filter: (route: Node<M>) 
       const hasChildren = children && children.length > 0;
       const parentMenu = parent ? mapping[parent.meta.key] : parent;
 
-      if (!name || !filter(node as Node<M>)) {
+      if (!name || guards[key] !== Filter.None) {
         if (hasChildren && parentMenu) {
           mapping[key] = parentMenu;
         }
