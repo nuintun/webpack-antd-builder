@@ -88,8 +88,8 @@ export function parse<M = unknown>(routes: Route<M>[], filter: (route: IRoute<M>
         addOptional(menu, 'icon', icon);
 
         if (hasChildren) {
-          mapping[key] = menu;
           layouts[key] = true;
+          mapping[key] = menu;
         }
 
         if (parentMenu) {
