@@ -1,5 +1,6 @@
 import { DFSTree } from '/js/utils/tree';
-import { IRoute, MenuItem } from '/js/utils/router';
+import { IRoute } from '/js/utils/router';
+import { MenuItem } from '/js/utils/menus';
 
 export interface ExpandKeys {
   openKeys: string[];

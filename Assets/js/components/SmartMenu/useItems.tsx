@@ -8,7 +8,7 @@ import { MenuProps } from 'antd';
 import Link from '/js/components/Link';
 import { DFSTree } from '/js/utils/tree';
 import { isString } from '/js/utils/utils';
-import { MenuItem } from '/js/utils/router';
+import { MenuItem } from '/js/utils/menus';
 import { prefixUI } from './SmartMenuUtils';
 
 const iconClassName = `${prefixUI}-icon`;

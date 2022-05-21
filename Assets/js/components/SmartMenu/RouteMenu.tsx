@@ -2,8 +2,9 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 
 import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
+import { IRoute } from '/js/utils/router';
+import { MenuItem } from '/js/utils/menus';
 import useItems, { ItemRender } from './useItems';
-import { IRoute, MenuItem } from '/js/utils/router';
 import usePersistRef from '/js/hooks/usePersistRef';
 import { useLocation, useMatches } from 'react-nest-router';
 import { flattenItems, getExpandKeys, mergeKeys } from './SmartMenuUtils';
