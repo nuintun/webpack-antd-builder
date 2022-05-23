@@ -2411,17 +2411,17 @@ copy-to-clipboard@^3.2.0:
     toggle-selection "^1.0.6"
 
 core-js-compat@^3.21.0, core-js-compat@^3.22.1:
-  version "3.22.5"
-  resolved "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.22.5.tgz#7fffa1d20cb18405bd22756ca1353c6f1a0e8614"
-  integrity sha512-rEF75n3QtInrYICvJjrAgV03HwKiYvtKHdPtaba1KucG+cNZ4NJnH9isqt979e67KZlhpbCOTwnsvnIr+CVeOg==
+  version "3.22.6"
+  resolved "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.22.6.tgz#2e7c7a703238c168883dbf55c24bbb67503cddcb"
+  integrity sha512-dQ/SxlHcuiywaPIoSUCU6Fx+Mk/H5TXENqd/ZJcK85ta0ZcQkbzHwblxPeL0hF5o+NsT2uK3q9ZOG5TboiVuWw==
   dependencies:
     browserslist "^4.20.3"
     semver "7.0.0"
 
-core-js@^3.22.5:
-  version "3.22.5"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.22.5.tgz#a5f5a58e663d5c0ebb4e680cd7be37536fb2a9cf"
-  integrity sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA==
+core-js@^3.22.6:
+  version "3.22.6"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.22.6.tgz#294dd824b4cae2c24725a36baa4a791ed00bb0de"
+  integrity sha512-2IGcGH00z9I4twgNWU4uGCNEsBFG1s2JudVQrgSCoVhOfwoTwQjxC8aMo9exrpTMOxvobggEpaHnGMmQY4cfBQ==
 
 cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
   version "7.0.1"
@@ -3704,16 +3704,16 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha1-JzwH7c3Ljfaiwat9We52SRRR7BQ=
 
-koa-webpack-dev-service@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.1.tgz#94baafa2649c8d7f1986a88c53e2947e64ecfb1b"
-  integrity sha512-kFtvV5/+weFRmV5kBX5XkGw+HmpDKIfNvvrA7aq7WCVgeh6xR/OJN3YpPOVcxr+5Q6eZJECth+jUTeKclTVYeg==
+koa-webpack-dev-service@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.2.tgz#71ca721124d90205a485fac266121c394e5c3cac"
+  integrity sha512-XLvE9BWMW9vdAI3Y+1m/sa/IdmFgsnfCTgpqm7wwiPQgmZDPoIfrPUvxntxUGxvQwrgoa29PM/1KVYZrXbziPQ==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"
     ansi-regex "^6.0.1"
     bufferutil "^4.0.6"
-    core-js "^3.22.5"
+    core-js "^3.22.6"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.9"
     webpack-dev-middleware "^5.3.3"
@@ -4065,9 +4065,9 @@ normalize-url@^6.0.1:
   integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
 
 nth-check@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/nth-check/-/nth-check-2.0.1.tgz#2efe162f5c3da06a28959fbd3db75dbeea9f0fc2"
-  integrity sha512-it1vE95zF6dTT9lBsYbxvqh0Soy4SPowchj0UBGj/V6cTPnXXtQOPUbhZ6CmGzAD/rW22LQK6E96pcdJXk4A4w==
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/nth-check/-/nth-check-2.1.0.tgz#0cd91c5c08967b58b409fa76282e13851a33fa47"
+  integrity sha512-/sJnahgHzXT7OGgQeAPJ5WDcxs7teA2FU1wo6fEoYqjoHBU+AQi3Qz5hecKPlnOr1YjnSYwJTlBXADbEsaBMLg==
   dependencies:
     boolbase "^1.0.0"
 
