@@ -46,7 +46,7 @@ export default async mode => {
 
   const env = resolveEnvironment({
     __DEV__: isDevelopment,
-    __APP_TITLE__: configure.name
+    __APP_NAME__: configure.name
   });
 
   const clean = {
