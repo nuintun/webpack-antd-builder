@@ -112,6 +112,7 @@ async function resolveEntry(entry, options) {
 
   app.use(async (ctx, next) => {
     ctx.set({
+      'Cache-Control': 'no-store',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',
