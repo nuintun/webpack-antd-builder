@@ -7,7 +7,7 @@
 
 import os from 'os';
 
-const IPV4_RE = /^\d{1,3}(\.\d{1,3}){3}$/;
+const IPV4_RE = /^\d{1,3}(?:\.\d{1,3}){3}$/;
 
 /**
  * @function resolveIp
