@@ -93,8 +93,6 @@ function FormDrawer<V, R>({
       onClick(event: React.MouseEvent) {
         onClick && onClick(event);
 
-        wrapForm.resetFields();
-
         setVisible(true);
       }
     });
@@ -102,6 +100,8 @@ function FormDrawer<V, R>({
 
   useEffect(() => {
     if (visible) {
+      wrapForm.resetFields();
+
       onOpen && onOpen();
     } else {
       onClose && onClose();
