@@ -87,10 +87,10 @@ function FormDrawer<V, R>({
   }, []);
 
   const triggerNode = useMemo(() => {
-    const { onClick } = trigger.props;
-
     return React.cloneElement(trigger, {
       onClick(event: React.MouseEvent) {
+        const { onClick } = trigger.props;
+
         onClick && onClick(event);
 
         setVisible(true);
