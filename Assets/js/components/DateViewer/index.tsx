@@ -12,17 +12,19 @@ export type DateViewerProps = HTMLSpanElementProps & {
 
 export default memo(function DateViewer({
   value,
-  placeholder = '无',
+  placeholder,
   format = 'YYYY-MM-DD HH:mm:ss',
   ...restProps
 }: DateViewerProps): React.ReactElement | null {
-  if (value == null) {
-    if (placeholder != null) {
-      return <span {...restProps}>{placeholder}</span>;
-    }
+  const date = dayjs(value);
 
-    return null;
+  if (date.isValid()) {
+    return <span {...restProps}>{date.format(format)}</span>;
   }
 
-  return <span {...restProps}>{dayjs(value).format(format)}</span>;
+  if (placeholder) {
+    return <span {...restProps}>{placeholder}</span>;
+  }
+
+  return null;
 });
