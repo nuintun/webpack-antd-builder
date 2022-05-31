@@ -181,6 +181,14 @@ body {
   }
 }
 
+// HACK InputNumber 在垂直布局 Form 中宽度自适应
+.ant-form-vertical {
+  .ant-input-number,
+  .ant-input-number-affix-wrapper {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: @screen-sm) {
   .ui-page {
     margin: 16px 0;
