@@ -5,12 +5,12 @@ import useSubmit, { Options } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
+type FormOmitted = 'title' | 'onError';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
-type FormPicked = 'name' | 'size' | 'colon' | 'layout' | 'preserve' | 'labelAlign' | 'requiredMark' | 'initialValues';
 type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterVisibleChange';
 
 export interface FormDrawerProps<V, R>
-  extends Pick<FormProps, FormPicked>,
+  extends Omit<FormProps<V>, FormOmitted>,
     Pick<Options<V, R>, SubmitPicked>,
     Pick<FlexDrawerProps, DrawerPicked> {
   action: string;
