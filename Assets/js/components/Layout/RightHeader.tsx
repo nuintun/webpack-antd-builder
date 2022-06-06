@@ -114,7 +114,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 
   return (
     <Dropdown placement="bottomRight" overlay={<Menu theme={theme} items={items} />}>
-      <div className="ui-info-box">
+      <div className="ui-user-profile">
         <Avatar size={40} src={logo} alt="avatar" />
         <span className="ui-user-name">Antd</span>
       </div>
