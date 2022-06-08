@@ -143,7 +143,7 @@ export default function usePagingRequest<I, E, T>(
     const { search, pagination } = options;
     const { query: initQuery, onComplete } = initOptionsRef.current;
     const hasPagination = hasQuery(pagination ?? paginationRef.current);
-    const query: Query = { ...initQuery, ...updateRef(searchRef, { ...search }) };
+    const query: Query = { ...initQuery, ...updateRef(searchRef, search) };
 
     if (hasPagination) {
       const { page, pageSize }: Pagination = {
