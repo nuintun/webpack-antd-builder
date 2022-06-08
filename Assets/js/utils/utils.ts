@@ -2,7 +2,7 @@
  * @module utils
  */
 
-import dayjs, { Dayjs, ManipulateType } from 'dayjs';
+import dayjs, { Dayjs, ManipulateType, OpUnitType } from 'dayjs';
 
 /**
  * @function assert
@@ -127,7 +127,7 @@ export function pathToPaths(path: string): string[] {
 
 /**
  * @function getLastRangeDate
- * @description 获取今天向前指定偏移的时间区间
+ * @description 获取当前时间向前指定偏移的时间区间
  * @param value 偏移值
  * @param unit 偏移单位
  */
@@ -135,4 +135,16 @@ export function getLastRangeDate(value: number, unit: ManipulateType = 'day'): [
   const today = dayjs();
 
   return [today.subtract(Math.max(0, /^d(ay)?$/.test(unit) ? value - 1 : value), unit), today];
+}
+
+/**
+ * @function getThisRangeDate
+ * @description 获取当前时间所在的指定范围日期区间
+ * @param unit 指定范围
+ * @param overflow 是否能超过当前时间
+ */
+export function getThisRangeDate(unit: OpUnitType = 'day', overflow: boolean = false): [start: Dayjs, end: Dayjs] {
+  const today = dayjs();
+
+  return [today.startOf(unit), overflow ? today.endOf(unit) : today];
 }
