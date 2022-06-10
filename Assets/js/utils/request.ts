@@ -7,13 +7,9 @@ import 'whatwg-fetch';
 import { message } from 'antd';
 import { serializeQuery } from './utils';
 
-export interface Query {
-  [name: string]: any;
-  [name: number]: any;
-}
+export type Query = Record<string | number, any>;
 
-export interface Options extends Omit<RequestInit, 'body'> {
-  body?: any;
+export interface Options extends RequestInit {
   query?: Query;
   notify?: boolean;
   baseURL?: string;
