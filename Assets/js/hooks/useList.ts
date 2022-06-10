@@ -91,7 +91,7 @@ export default function useList<I, E, T>(
     }
 
     return refsPagination;
-  }, [refs.response, refs.pagination]);
+  }, [refs.pagination, refs.response.total]);
 
   return [{ loading, dataSource, pagination }, fetch, refs];
 }
