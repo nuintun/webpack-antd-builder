@@ -66,19 +66,7 @@ export interface RequestOptions extends UseRequestInit {
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useTable<I>(
-  url: string,
-  options?: Options<I>,
-  initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
-/**
- * @function useTable
- * @description [hook] 表格操作
- * @param url 请求地址
- * @param options 请求配置
- * @param initialLoadingState 初始加载状态
- */
-export default function useTable<I, E>(
+export default function useTable<I, E = {}>(
   url: string,
   options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -148,21 +136,23 @@ export default function useTable<I, E, T>(
     }
   }, []);
 
-  let pagination: TableProps<T>['pagination'] = false;
+  const pagination = useMemo(() => {
+    const originRefsPagination = originRefs.pagination;
 
-  const originRefsPagination = originRefs.pagination;
+    if (hasQuery(originRefsPagination)) {
+      const { total = 0 } = originRefs.response;
+      const { page, pageSize } = originRefsPagination;
 
-  if (hasQuery(originRefsPagination)) {
-    const { total = 0 } = originRefs.response;
-    const { page, pageSize } = originRefsPagination;
+      return {
+        total,
+        pageSize,
+        current: page,
+        ...getPagingOptions(pageSize)
+      };
+    }
 
-    pagination = {
-      total,
-      pageSize,
-      current: page,
-      ...getPagingOptions(pageSize)
-    };
-  }
+    return originRefsPagination;
+  }, [originRefs.response, originRefs.pagination]);
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {

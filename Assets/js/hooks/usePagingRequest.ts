@@ -89,19 +89,7 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function usePagingRequest<I>(
-  url: string,
-  options?: Options<I>,
-  initialLoadingState?: boolean
-): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
-/**
- * @function usePagingRequest
- * @description [hook] 分页请求
- * @param url 请求地址
- * @param options 请求配置
- * @param initialLoadingState 初始加载状态
- */
-export default function usePagingRequest<I, E>(
+export default function usePagingRequest<I, E = {}>(
   url: string,
   options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -141,8 +129,8 @@ export default function usePagingRequest<I, E, T>(
 
   const fetch = useCallback((options: RequestOptions = {}) => {
     const { search, pagination } = options;
+    const hasPagination = hasQuery(paginationRef.current);
     const { query: initQuery, onComplete } = initOptionsRef.current;
-    const hasPagination = hasQuery(pagination ?? paginationRef.current);
     const query: Query = { ...initQuery, ...updateRef(searchRef, search) };
 
     if (hasPagination) {

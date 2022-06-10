@@ -2,7 +2,7 @@
  * @module useList
  */
 
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import usePagingRequest, {
   hasQuery,
@@ -40,19 +40,7 @@ export interface RequestOptions extends UseRequestInit {
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useList<I>(
-  url: string,
-  options?: Options<I>,
-  initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultListProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
-/**
- * @function useList
- * @description [hook] 列表操作
- * @param url 请求地址
- * @param options 请求配置
- * @param initialLoadingState 初始加载状态
- */
-export default function useList<I, E>(
+export default function useList<I, E = {}>(
   url: string,
   options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -85,23 +73,25 @@ export default function useList<I, E, T>(
     fetch({ pagination: { page, pageSize } });
   }, []);
 
-  let pagination: PaginationProps | false = false;
+  const pagination = useMemo(() => {
+    const refsPagination = refs.pagination;
 
-  const refsPagination = refs.pagination;
+    if (hasQuery(refsPagination)) {
+      const { total = 0 } = refs.response;
+      const { page, pageSize } = refsPagination;
 
-  if (hasQuery(refsPagination)) {
-    const { total = 0 } = refs.response;
-    const { page, pageSize } = refsPagination;
+      return {
+        total,
+        pageSize,
+        onChange,
+        current: page,
+        onShowSizeChange: onChange,
+        ...getPagingOptions(pageSize)
+      };
+    }
 
-    pagination = {
-      total,
-      pageSize,
-      onChange,
-      current: page,
-      onShowSizeChange: onChange,
-      ...getPagingOptions(pageSize)
-    };
-  }
+    return refsPagination;
+  }, [refs.response, refs.pagination]);
 
   return [{ loading, dataSource, pagination }, fetch, refs];
 }
