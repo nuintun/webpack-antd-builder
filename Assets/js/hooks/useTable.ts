@@ -152,7 +152,7 @@ export default function useTable<I, E, T>(
     }
 
     return originRefsPagination;
-  }, [originRefs.response, originRefs.pagination]);
+  }, [originRefs.pagination, originRefs.response.total]);
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {
