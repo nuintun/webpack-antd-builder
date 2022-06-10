@@ -9,7 +9,6 @@ import usePagingRequest, {
   hasQuery,
   Options as UseRequestOptions,
   Pagination as UseRequestPagination,
-  Query as RequestQuery,
   Refs as RequestRefs,
   RequestOptions as UseRequestInit,
   Search,
@@ -22,8 +21,6 @@ import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 type Filter = Search;
 
 type SorterField = React.Key | React.Key[];
-
-type Query = Filter & Partial<Sorter> & RequestQuery;
 
 type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
 
@@ -100,7 +97,7 @@ export default function useTable<I, E, T>(
   );
 
   const fetch = useCallback((options: RequestOptions = {}) => {
-    const search: Query = {
+    const search: Search = {
       ...updateRef(searchRef, options.search),
       ...updateRef(filterRef, options.filter),
       ...updateRef(sorterRef, options.sorter)

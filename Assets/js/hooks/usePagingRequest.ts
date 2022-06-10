@@ -6,7 +6,7 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
 import usePersistRef from './usePersistRef';
-import { RequestError } from '/js/utils/request';
+import { Query, RequestError } from '/js/utils/request';
 import useRequest, { Options as UseRequestOptions } from './useRequest';
 
 interface BaseResponse<I> {
@@ -18,14 +18,9 @@ interface BaseResponse<I> {
 
 type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
 
-export type Query = Search & Partial<Pagination>;
+export type Search = Query;
 
 export type Response<I, E = {}> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
-
-export interface Search {
-  [name: string]: any;
-  [name: number]: any;
-}
 
 export interface Pagination {
   page: number;
@@ -33,10 +28,10 @@ export interface Pagination {
 }
 
 export interface Options<I> extends Omit<UseRequestOptions, 'body' | 'method'> {
+  pagination?: Partial<Pagination> | false;
   onSuccess?: (response: BaseResponse<I>) => void;
   onError?: (error: RequestError) => void;
   onComplete?: () => void;
-  pagination?: Partial<Pagination> | false;
 }
 
 export interface TransformOptions<I, T> extends Options<I> {
@@ -131,7 +126,7 @@ export default function usePagingRequest<I, E, T>(
     const { search, pagination } = options;
     const hasPagination = hasQuery(paginationRef.current);
     const { query: initQuery, onComplete } = initOptionsRef.current;
-    const query: Query = { ...initQuery, ...updateRef(searchRef, search) };
+    const query: Search = { ...initQuery, ...updateRef(searchRef, search) };
 
     if (hasPagination) {
       const { page, pageSize }: Pagination = {
