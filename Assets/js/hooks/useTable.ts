@@ -148,21 +148,23 @@ export default function useTable<I, E, T>(
     }
   }, []);
 
-  let pagination: TableProps<T>['pagination'] = false;
+  const pagination = useMemo(() => {
+    const originRefsPagination = originRefs.pagination;
 
-  const originRefsPagination = originRefs.pagination;
+    if (hasQuery(originRefsPagination)) {
+      const { total = 0 } = originRefs.response;
+      const { page, pageSize } = originRefsPagination;
 
-  if (hasQuery(originRefsPagination)) {
-    const { total = 0 } = originRefs.response;
-    const { page, pageSize } = originRefsPagination;
+      return {
+        total,
+        pageSize,
+        current: page,
+        ...getPagingOptions(pageSize)
+      };
+    }
 
-    pagination = {
-      total,
-      pageSize,
-      current: page,
-      ...getPagingOptions(pageSize)
-    };
-  }
+    return false;
+  }, [originRefs.response, originRefs.pagination]);
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {

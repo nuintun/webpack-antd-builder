@@ -92,7 +92,7 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
 export default function usePagingRequest<I>(
   url: string,
   options?: Options<I>,
-  initialLoadingState?: boolean
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
 /**
  * @function usePagingRequest
@@ -141,8 +141,8 @@ export default function usePagingRequest<I, E, T>(
 
   const fetch = useCallback((options: RequestOptions = {}) => {
     const { search, pagination } = options;
+    const hasPagination = hasQuery(paginationRef.current);
     const { query: initQuery, onComplete } = initOptionsRef.current;
-    const hasPagination = hasQuery(pagination ?? paginationRef.current);
     const query: Query = { ...initQuery, ...updateRef(searchRef, search) };
 
     if (hasPagination) {
