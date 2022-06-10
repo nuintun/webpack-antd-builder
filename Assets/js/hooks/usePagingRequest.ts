@@ -89,19 +89,7 @@ export function updateRef<R extends React.MutableRefObject<any>, V extends RefVa
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function usePagingRequest<I>(
-  url: string,
-  options?: Options<I>,
-  initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
-/**
- * @function usePagingRequest
- * @description [hook] 分页请求
- * @param url 请求地址
- * @param options 请求配置
- * @param initialLoadingState 初始加载状态
- */
-export default function usePagingRequest<I, E>(
+export default function usePagingRequest<I, E = {}>(
   url: string,
   options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)

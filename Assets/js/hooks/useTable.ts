@@ -66,19 +66,7 @@ export interface RequestOptions extends UseRequestInit {
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useTable<I>(
-  url: string,
-  options?: Options<I>,
-  initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
-/**
- * @function useTable
- * @description [hook] 表格操作
- * @param url 请求地址
- * @param options 请求配置
- * @param initialLoadingState 初始加载状态
- */
-export default function useTable<I, E>(
+export default function useTable<I, E = {}>(
   url: string,
   options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -163,7 +151,7 @@ export default function useTable<I, E, T>(
       };
     }
 
-    return false;
+    return originRefsPagination;
   }, [originRefs.response, originRefs.pagination]);
 
   const refs = useMemo<Refs<I, E>>(() => {

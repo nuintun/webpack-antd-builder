@@ -40,19 +40,7 @@ export interface RequestOptions extends UseRequestInit {
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useList<I>(
-  url: string,
-  options?: Options<I>,
-  initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultListProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I>];
-/**
- * @function useList
- * @description [hook] 列表操作
- * @param url 请求地址
- * @param options 请求配置
- * @param initialLoadingState 初始加载状态
- */
-export default function useList<I, E>(
+export default function useList<I, E = {}>(
   url: string,
   options?: Options<I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -102,7 +90,7 @@ export default function useList<I, E, T>(
       };
     }
 
-    return false;
+    return refsPagination;
   }, [refs.response, refs.pagination]);
 
   return [{ loading, dataSource, pagination }, fetch, refs];
