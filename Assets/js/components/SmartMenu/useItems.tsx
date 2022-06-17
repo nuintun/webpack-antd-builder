@@ -100,5 +100,5 @@ export default function useItems<T>(items: MenuItem<T>[], selectedKeys: string[]
     }
 
     return result;
-  }, [items]);
+  }, [selectedKeys, items, itemRender]);
 }
