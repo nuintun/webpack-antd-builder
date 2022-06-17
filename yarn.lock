@@ -2446,7 +2446,7 @@ core-js-compat@^3.21.0, core-js-compat@^3.22.1:
     browserslist "^4.20.4"
     semver "7.0.0"
 
-core-js@^3.22.8, core-js@^3.23.1:
+core-js@^3.23.1:
   version "3.23.1"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.23.1.tgz#9f9a9255115f62c512db56d567f636da32ca0b78"
   integrity sha512-wfMYHWi1WQjpgZNC9kAlN4ut04TM9fUTdi7CqIoTVM7yaiOUQTklOzfb+oWH3r9edQcT3F887swuVmxrV+CC8w==
@@ -3749,20 +3749,20 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.5.5:
-  version "0.5.5"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.5.tgz#428a78f372c4d8d909d8fc580cee18b3b54a0e57"
-  integrity sha512-ObdT21VAeco6Y2SY8HC9GyJ1z66R+fJMaGp3P3Nh2U7qH0i0W0eWd1kRK15q/TcuLwHuLIS4dWz9c1oE3YtAow==
+koa-webpack-dev-service@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.6.tgz#eccd6d0ada260cce452a943b48dfffed1632ce08"
+  integrity sha512-cZuZA83LlklblLQlvWOponOofIb8dxxaJ0nciQHQJrqVlZzHjU1FPlUVCEGv1ezl0/qMT76zNH3WJkKYiFgd8A==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"
     ansi-regex "^6.0.1"
     bufferutil "^4.0.6"
-    core-js "^3.22.8"
+    core-js "^3.23.1"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.9"
     webpack-dev-middleware "^5.3.3"
-    ws "^8.7.0"
+    ws "^8.8.0"
 
 koa@^2.13.4:
   version "2.13.4"
@@ -5999,7 +5999,7 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.8.tgz#ac2729881ab9e7cbaf8787fe3469a48c5c7f636a"
   integrity sha512-ri1Id1WinAX5Jqn9HejiGb8crfRio0Qgu8+MtL36rlTA6RLsMdWt1Az/19A2Qij6uSHUMphEFaTKa4WG+UNHNw==
 
-ws@^8.7.0:
+ws@^8.8.0:
   version "8.8.0"
   resolved "https://registry.npmjs.org/ws/-/ws-8.8.0.tgz#8e71c75e2f6348dbf8d78005107297056cb77769"
   integrity sha512-JDAgSYQ1ksuwqfChJusw1LSJ8BizJ2e/vVu5Lxjq3YvNJNlROv1ui4i+c/kUUrPheBvQl4c5UbERhTwKa6QBJQ==
