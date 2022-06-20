@@ -16,7 +16,6 @@ const { Header, Content } = Layout;
 type PickProps = 'theme' | 'items' | 'match' | 'history' | 'location' | 'collapsedWidth';
 
 export interface SmartLayoutProps<T> extends Pick<SmartMenuProps<T>, PickProps> {
-  roles?: any;
   siderWidth?: number;
   mobileQuery?: string;
   brokenQuery?: string;

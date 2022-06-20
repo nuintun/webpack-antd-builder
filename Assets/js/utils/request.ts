@@ -26,8 +26,9 @@ export interface RequestResult<R> {
   payload: R;
 }
 
-export interface RequestError extends Error {
+export interface RequestError<R = any> extends Error {
   code: number;
+  response?: R;
 }
 
 const STATUS_TEXT: Record<number, string> = {
@@ -174,6 +175,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
           const error = new Error(msg) as RequestError;
 
           error.code = code;
+          error.response = payload;
 
           throw error;
         },
