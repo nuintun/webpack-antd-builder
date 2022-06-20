@@ -5,6 +5,7 @@
 import lazy from '/js/utils/lazy';
 import Icon from '@ant-design/icons';
 import { Route } from '/js/utils/router';
+import Document from '/js/components/Document';
 
 import HomeIcon from '/images/menus/home.svg';
 import AnalysisIcon from '/images/menus/analysis.svg';
@@ -21,72 +22,77 @@ export interface Meta {
 
 export const router: Route<Meta>[] = [
   {
-    path: '/403',
-    element: lazy(() => import('/js/pages/403'))
-  },
-  {
-    path: '/500',
-    element: lazy(() => import('/js/pages/500'))
-  },
-  {
-    path: '/',
-    element: lazy(() => import('/js/components/Layout')),
+    element: <Document />,
     children: [
       {
-        index: true,
-        meta: {
-          name: '网站首页',
-          icon: <Icon component={HomeIcon} />
-        },
-        element: lazy(() => import('/js/pages/home'))
+        path: '/403',
+        element: lazy(() => import('/js/pages/403'))
       },
       {
-        path: 'analysis',
-        meta: {
-          name: '数据分析',
-          icon: <Icon component={AnalysisIcon} />
-        },
-        children: [
-          {
-            path: 'user',
-            element: lazy(() => import('/js/pages/analysis/User')),
-            meta: {
-              name: '用户分析',
-              icon: <Icon component={UserAnalysisIcon} />
-            }
-          },
-          {
-            path: 'recharge',
-            element: lazy(() => import('/js/pages/analysis/Recharge')),
-            meta: {
-              name: '充值分析',
-              icon: <Icon component={RechargeAnalysisIcon} />
-            }
-          }
-        ]
+        path: '/500',
+        element: lazy(() => import('/js/pages/500'))
       },
       {
-        path: 'system',
-        meta: {
-          name: '系统管理',
-          icon: <Icon component={SystemIcon} />
-        },
+        path: '/',
+        element: lazy(() => import('/js/components/Layout')),
         children: [
           {
-            path: 'account',
-            element: lazy(() => import('/js/pages/system/Account')),
+            index: true,
             meta: {
-              name: '帐号管理',
-              icon: <Icon component={AccountSystemIcon} />
-            }
+              name: '网站首页',
+              icon: <Icon component={HomeIcon} />
+            },
+            element: lazy(() => import('/js/pages/home'))
           },
           {
-            path: 'logs',
-            element: lazy(() => import('/js/pages/system/Logs')),
+            path: 'analysis',
             meta: {
-              name: '安全日志',
-              icon: <Icon component={LogsSystemIcon} />
-            }
+              name: '数据分析',
+              icon: <Icon component={AnalysisIcon} />
+            },
+            children: [
+              {
+                path: 'user',
+                element: lazy(() => import('/js/pages/analysis/User')),
+                meta: {
+                  name: '用户分析',
+                  icon: <Icon component={UserAnalysisIcon} />
+                }
+              },
+              {
+                path: 'recharge',
+                element: lazy(() => import('/js/pages/analysis/Recharge')),
+                meta: {
+                  name: '充值分析',
+                  icon: <Icon component={RechargeAnalysisIcon} />
+                }
+              }
+            ]
+          },
+          {
+            path: 'system',
+            meta: {
+              name: '系统管理',
+              icon: <Icon component={SystemIcon} />
+            },
+            children: [
+              {
+                path: 'account',
+                element: lazy(() => import('/js/pages/system/Account')),
+                meta: {
+                  name: '帐号管理',
+                  icon: <Icon component={AccountSystemIcon} />
+                }
+              },
+              {
+                path: 'logs',
+                element: lazy(() => import('/js/pages/system/Logs')),
+                meta: {
+                  name: '安全日志',
+                  icon: <Icon component={LogsSystemIcon} />
+                }
+              }
+            ]
           }
         ]
       }
