@@ -23,7 +23,7 @@ export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useSubmit<V, R>(
+export default function useSubmit<V, R = unknown>(
   url: string,
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
