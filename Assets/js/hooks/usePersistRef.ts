@@ -18,7 +18,9 @@ export default function usePersistRef<T>(value: T): React.MutableRefObject<T>;
 export default function usePersistRef<T = undefined>(value?: T): React.MutableRefObject<T | undefined> {
   const valueRef = useRef(value);
 
-  valueRef.current = value;
+  if (valueRef.current !== value) {
+    valueRef.current = value;
+  }
 
   return valueRef;
 }
