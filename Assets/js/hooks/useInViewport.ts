@@ -33,8 +33,9 @@ function isInViewPort(element: HTMLElement | null): boolean {
 
   if (rect) {
     const { top, bottom, left, right } = rect;
-    const viewPortWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    const { body, documentElement } = document;
+    const viewPortWidth = window.innerWidth || documentElement.clientWidth || body.clientWidth;
+    const viewPortHeight = window.innerHeight || documentElement.clientHeight || body.clientHeight;
 
     return bottom > 0 && top <= viewPortHeight && left <= viewPortWidth && right > 0;
   }
