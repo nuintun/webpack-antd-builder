@@ -2417,17 +2417,17 @@ copy-to-clipboard@^3.2.0:
     toggle-selection "^1.0.6"
 
 core-js-compat@^3.21.0, core-js-compat@^3.22.1:
-  version "3.23.1"
-  resolved "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.23.1.tgz#23d44d9f209086e60dabf9130cea7719af6e199b"
-  integrity sha512-KeYrEc8t6FJsKYB2qnDwRHWaC0cJNaqlHfCpMe5q3j/W1nje3moib/txNklddLPCtGb+etcBIyJ8zuMa/LN5/A==
+  version "3.23.2"
+  resolved "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.23.2.tgz#5cbf8a9c8812d665392845b85ae91b5bcc7b615c"
+  integrity sha512-lrgZvxFwbQp9v7E8mX0rJ+JX7Bvh4eGULZXA1IAyjlsnWvCdw6TF8Tg6xtaSUSJMrSrMaLdpmk+V54LM1dvfOA==
   dependencies:
     browserslist "^4.20.4"
     semver "7.0.0"
 
-core-js@^3.23.1:
-  version "3.23.1"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.23.1.tgz#9f9a9255115f62c512db56d567f636da32ca0b78"
-  integrity sha512-wfMYHWi1WQjpgZNC9kAlN4ut04TM9fUTdi7CqIoTVM7yaiOUQTklOzfb+oWH3r9edQcT3F887swuVmxrV+CC8w==
+core-js@^3.23.2:
+  version "3.23.2"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.23.2.tgz#e07a60ca8b14dd129cabdc3d2551baf5a01c76f0"
+  integrity sha512-ELJOWxNrJfOH/WK4VJ3Qd+fOqZuOuDNDJz0xG6Bt4mGg2eO/UT9CljCrbqDGovjLKUrGajEEBcoTOc0w+yBYeQ==
 
 cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
   version "7.0.1"
@@ -2807,9 +2807,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.147:
-  version "1.4.161"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.161.tgz#49cb5b35385bfee6cc439d0a04fbba7a7a7f08a1"
-  integrity sha512-sTjBRhqh6wFodzZtc5Iu8/R95OkwaPNn7tj/TaDU5nu/5EFiQDtADGAXdR4tJcTEHlYfJpHqigzJqHvPgehP8A==
+  version "1.4.163"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.163.tgz#d881ad93360001e79cdc871b3a5b5cd9c74e9639"
+  integrity sha512-c9q94pUVqIdc8hyr7jZDB4bNEoNF3QJ7y35lnddMD+mXtiv5GsL1bT/RmfW/KEOmvlNg5Oy1qioiy4tA7e864Q==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -3703,16 +3703,16 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.5.6:
-  version "0.5.6"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.6.tgz#eccd6d0ada260cce452a943b48dfffed1632ce08"
-  integrity sha512-cZuZA83LlklblLQlvWOponOofIb8dxxaJ0nciQHQJrqVlZzHjU1FPlUVCEGv1ezl0/qMT76zNH3WJkKYiFgd8A==
+koa-webpack-dev-service@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.7.tgz#d9a7a155e58fbdb618c89ca9e13b26e0d6ef222f"
+  integrity sha512-ss07BYBHy6l6l5huDx7AftORdj1Ue165fZMNJpKxOLeZ+MEctdBQ6e6NO8FA/ZCvDINTOnZhpBaD19DezCAWwg==
   dependencies:
     "@types/koa" "^2.13.4"
     "@types/ws" "^8.5.3"
     ansi-regex "^6.0.1"
     bufferutil "^4.0.6"
-    core-js "^3.23.1"
+    core-js "^3.23.2"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.9"
     webpack-dev-middleware "^5.3.3"
@@ -4944,9 +4944,9 @@ rc-upload@~4.3.0:
     rc-util "^5.2.0"
 
 rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.12.0, rc-util@^5.14.0, rc-util@^5.15.0, rc-util@^5.16.1, rc-util@^5.17.0, rc-util@^5.18.1, rc-util@^5.19.2, rc-util@^5.2.0, rc-util@^5.2.1, rc-util@^5.20.0, rc-util@^5.20.1, rc-util@^5.21.0, rc-util@^5.3.0, rc-util@^5.4.0, rc-util@^5.5.0, rc-util@^5.6.1, rc-util@^5.7.0, rc-util@^5.8.0, rc-util@^5.9.4, rc-util@^5.9.8:
-  version "5.22.1"
-  resolved "https://registry.npmjs.org/rc-util/-/rc-util-5.22.1.tgz#1266b70276ff078f8c669f2a2db0a0fd2042e40d"
-  integrity sha512-M+obA187v2n1HGEpjle/RnQxw1tv4aEbnOFyt1ZDT3gS59Kj4rRaIepqYip+NES4Bbq42lyCFcUvMipTDRg07A==
+  version "5.22.3"
+  resolved "https://registry.npmjs.org/rc-util/-/rc-util-5.22.3.tgz#b78e691e92ee216cc3fe2ae03d6a1b944902f890"
+  integrity sha512-DQtfpkGDbCoEB+xhgudUU/QMjcVpkgps9RM+yy/pzPDGBocsDr8vMZMVc67zAz6yOCsKw0YQg+R7AhYKlw0new==
   dependencies:
     "@babel/runtime" "^7.18.3"
     react-is "^16.12.0"
