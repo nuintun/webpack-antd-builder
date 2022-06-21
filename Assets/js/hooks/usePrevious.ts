@@ -21,9 +21,7 @@ export default function usePrevious<V>(value: V, initialValue?: V): V | undefine
   const valueRef = useRef(initialValue);
 
   useEffect(() => {
-    if (valueRef.current !== value) {
-      valueRef.current = value;
-    }
+    valueRef.current = value;
   });
 
   return valueRef.current;
