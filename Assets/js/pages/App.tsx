@@ -15,7 +15,7 @@ import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
-const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary, error }: FallbackProps) {
+const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   if (__DEV__) {
     return (
       <Result
