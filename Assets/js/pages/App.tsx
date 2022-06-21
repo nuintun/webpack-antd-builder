@@ -15,7 +15,7 @@ import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
-const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
+const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary, error }: FallbackProps) {
   if (__DEV__) {
     return (
       <Result
@@ -26,7 +26,13 @@ const ErrorFallback = memo(function ErrorFallback({ resetErrorBoundary }: Fallba
             重试页面
           </Button>
         }
-        subTitle="抱歉，发生错误，无法渲染页面，请打开开发者工具查看错误信息！"
+        subTitle={
+          <div style={{ display: 'flex', margin: '24px 0 0', justifyContent: 'center' }}>
+            <pre style={{ fontFamily: 'monospace', color: '#f00', padding: 0, margin: 0, textAlign: 'left' }}>
+              {error.stack}
+            </pre>
+          </div>
+        }
       />
     );
   }
