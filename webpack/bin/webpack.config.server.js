@@ -143,6 +143,8 @@ async function resolveEntry(entry, options) {
 
   app.listen(port, () => {
     devServer.waitUntilValid(() => {
+      const { logger } = devServer.context;
+
       logger.info(`server run at: \u001B[36m${devServerHost}\u001B[0m`);
     });
   });
