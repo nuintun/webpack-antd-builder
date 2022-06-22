@@ -108,7 +108,6 @@ async function resolveEntry(entry, options) {
 
   const app = new Koa();
   const compiler = webpack(configure);
-  const logger = compiler.getInfrastructureLogger('webpack-dev-middleware');
 
   app.use(async (ctx, next) => {
     ctx.set({
@@ -143,6 +142,8 @@ async function resolveEntry(entry, options) {
 
   app.listen(port, () => {
     devServer.waitUntilValid(() => {
+      const { logger } = devServer.context;
+
       logger.info(`server run at: \u001B[36m${devServerHost}\u001B[0m`);
     });
   });
