@@ -108,7 +108,6 @@ async function resolveEntry(entry, options) {
 
   const app = new Koa();
   const compiler = webpack(configure);
-  const logger = compiler.getInfrastructureLogger('webpack-dev-middleware');
 
   app.use(async (ctx, next) => {
     ctx.set({
