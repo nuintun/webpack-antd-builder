@@ -32,10 +32,10 @@ export interface Pagination {
 }
 
 export interface Options<I> extends Omit<UseRequestOptions, 'body' | 'method'> {
+  onComplete?: () => void;
+  onError?: (error: RequestError) => void;
   pagination?: Partial<Pagination> | false;
   onSuccess?: (response: BaseResponse<I>) => void;
-  onError?: (error: RequestError) => void;
-  onComplete?: () => void;
 }
 
 export interface TransformOptions<I, T> extends Options<I> {
