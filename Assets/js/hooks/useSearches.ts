@@ -40,5 +40,3 @@ export default function useSearches<T extends Search[]>(
 
   return [set, get, resolve];
 }
-
-const [set] = useSearches<[Search]>([false]);
