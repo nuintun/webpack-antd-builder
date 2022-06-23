@@ -5,6 +5,7 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
+import useSearches from './useSearches';
 import usePersistRef from './usePersistRef';
 import { Query, RequestError } from '/js/utils/request';
 import useRequest, { Options as UseRequestOptions } from './useRequest';
@@ -116,24 +117,23 @@ export default function usePagingRequest<I, E, T>(
 
   const initURLRef = usePersistRef(url);
   const responseRef = useRef<Response<I, E>>({});
-  const searchRef = useRef<Search | false>(false);
+  const [serialize, raw] = useSearches<[Search]>([false]);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
   const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
 
   const fetch = useCallback((options: RequestOptions = {}) => {
-    const { search, pagination } = options;
     const hasPagination = hasQuery(paginationRef.current);
     const { query: initQuery, onComplete } = initOptionsRef.current;
-    const query: Search = { ...initQuery, ...updateRef(searchRef, search) };
+    const query: Search = { ...initQuery, ...serialize([options.search]) };
 
     if (hasPagination) {
       const { page, pageSize }: Pagination = {
         ...DEFAULT_PAGINATION,
         ...initPagination,
         ...paginationRef.current,
-        ...pagination
+        ...options.pagination
       };
 
       if (__DEV__) {
@@ -194,7 +194,9 @@ export default function usePagingRequest<I, E, T>(
   const refs = useMemo<Refs<I, E>>(() => {
     return {
       get search() {
-        return searchRef.current;
+        const [search] = raw();
+
+        return search;
       },
       get response() {
         return responseRef.current;

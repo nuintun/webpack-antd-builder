@@ -17,26 +17,26 @@ type Search = Record<string | number, any>;
  */
 export default function useSearches<T extends Search[]>(
   initialValue: Searches<T>
-): [set: (value: Partial<Searches<T>>) => void, get: () => Searches<T>, resolve: () => Search] {
+): [serialize: (value?: Partial<Searches<T>>) => Search, raw: () => Searches<T>] {
   const searchRef = useRef(initialValue);
 
-  const set = useCallback((value: Partial<Searches<T>>) => {
-    searchRef.current = searchRef.current.map((search, index) => {
-      const nextValue = value[index];
+  const serialize = useCallback((value?: Partial<Searches<T>>) => {
+    if (value) {
+      searchRef.current = searchRef.current.map((search, index) => {
+        const nextValue = value[index];
 
-      return nextValue === false ? search : nextValue;
-    }) as T;
-  }, []);
+        return nextValue === false ? search : nextValue;
+      }) as T;
+    }
 
-  const get = useCallback(() => {
-    return searchRef.current;
-  }, []);
-
-  const resolve = useCallback(() => {
     return searchRef.current.reduce<Search>((values, value) => {
       return value ? { ...values, ...value } : values;
     }, {});
   }, []);
 
-  return [set, get, resolve];
+  const raw = useCallback(() => {
+    return searchRef.current;
+  }, []);
+
+  return [serialize, raw];
 }
