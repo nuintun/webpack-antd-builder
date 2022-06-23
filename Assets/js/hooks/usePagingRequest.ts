@@ -19,16 +19,14 @@ interface BaseResponse<I> {
 
 export type Search = Query;
 
-export interface Sorter {
-  orderBy: (string | number)[];
-  orderType: ('ascend' | 'descend')[];
-}
-
-export type Response<I, E = {}> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
-
 export interface Pagination {
   page: number;
   pageSize: number;
+}
+
+export interface Sorter {
+  orderBy: (string | number)[];
+  orderType: ('ascend' | 'descend')[];
 }
 
 export interface Options<I> extends Omit<UseRequestOptions, 'body' | 'method'> {
@@ -46,6 +44,8 @@ export interface RequestOptions extends Omit<UseRequestOptions, 'body' | 'method
   search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }
+
+export type Response<I, E = {}> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
 
 export interface Refs<I, E = {}> {
   readonly search: Search | false;
