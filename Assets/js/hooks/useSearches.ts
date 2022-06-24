@@ -21,7 +21,7 @@ export default function useSearches<T extends Search[]>(
   const searchRef = useRef(initialValue);
 
   const serialize = useCallback((value?: Partial<Searches<T>>) => {
-    if (value) {
+    if (value && searchRef.current !== value) {
       searchRef.current = searchRef.current.map((search, index) => {
         const nextValue = value[index];
 
