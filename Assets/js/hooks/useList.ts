@@ -4,6 +4,8 @@
 
 import { useCallback, useMemo } from 'react';
 
+import useSearches from './useSearches';
+import usePersistRef from './usePersistRef';
 import usePagingRequest, {
   hasQuery,
   Options as UseRequestOptions,
@@ -16,8 +18,6 @@ import usePagingRequest, {
 } from './usePagingRequest';
 import { ListProps, PaginationProps } from 'antd';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
-import usePersistRef from './usePersistRef';
-import useSearches from './useSearches';
 
 type OnChange = NonNullable<PaginationProps['onChange']>;
 
@@ -93,10 +93,10 @@ export default function useList<I, E, T>(
   }, []);
 
   const pagination = useMemo(() => {
-    const refsPagination = refs.pagination;
+    const refsPagination = originRefs.pagination;
 
     if (hasQuery(refsPagination)) {
-      const { total = 0 } = refs.response;
+      const { total = 0 } = originRefs.response;
       const { page, pageSize } = refsPagination;
 
       return {
