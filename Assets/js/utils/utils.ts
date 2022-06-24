@@ -4,7 +4,14 @@
 
 import dayjs, { Dayjs, ManipulateType, OpUnitType } from 'dayjs';
 
-const { toString } = Object.prototype;
+/**
+ * @function assert
+ * @param cond Assert flags.
+ * @param message Assert error message.
+ */
+export function assert<T>(cond: T, message: string): asserts cond {
+  if (!cond) throw new Error(message);
+}
 
 /**
  * @type {isBrowser}
@@ -13,12 +20,21 @@ const { toString } = Object.prototype;
 export const isBrowser = typeof window !== 'undefined' && window.document;
 
 /**
+ * @function isObject
+ * @description 是否为对象
+ * @param value 需要验证的值
+ */
+export function isObject(value: unknown): value is object {
+  return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+/**
  * @function isString
  * @description 是否为字符串
  * @param value 需要验证的值
  */
-export function isString(value: any): value is string {
-  return toString.call(value) === '[object String]';
+export function isString(value: unknown): value is string {
+  return Object.prototype.toString.call(value) === '[object String]';
 }
 
 /**
@@ -26,34 +42,32 @@ export function isString(value: any): value is string {
  * @description 是否为函数
  * @param value 需要验证的值
  */
-export function isFunction(value: any): value is Function {
+export function isFunction(value: unknown): value is Function {
   return typeof value === 'function';
 }
 
 /**
- * @function serializeQuery
+ * @function serialize
  * @description 序列化参数
  * @param values 需要序列化的参数
- * @param search URLSearchParams 对象
+ * @param target 序列化的目标对象
  */
-export function serializeQuery(values: Record<string | number, any>, search = new URLSearchParams()): string {
-  const keys = Object.keys(values);
-
-  for (const key of keys) {
-    const value = values[key];
-
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        if (item != null) {
-          search.append(key, item);
+export function serialize<T extends FormData | URLSearchParams>(values: Record<string | number, any>, target: T): T {
+  for (const [key, value] of Object.entries(values)) {
+    if (value != null) {
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          if (item != null) {
+            target.append(key, item);
+          }
         }
+      } else {
+        target.append(key, value);
       }
-    } else if (value != null) {
-      search.append(key, value);
     }
   }
 
-  return search.toString();
+  return target;
 }
 
 /**
@@ -120,7 +134,7 @@ export function pathToPaths(path: string): string[] {
 
 /**
  * @function getLastRangeDate
- * @description 获取今天向前指定偏移的时间区间
+ * @description 获取当前时间向前指定偏移的时间区间
  * @param value 偏移值
  * @param unit 偏移单位
  */

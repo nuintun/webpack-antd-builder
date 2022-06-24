@@ -5,19 +5,16 @@
 
 import 'whatwg-fetch';
 import { message } from 'antd';
-import { serializeQuery } from './utils';
+import { isObject, serialize } from './utils';
 
-export interface Query {
-  [name: string]: any;
-  [name: number]: any;
-}
+export type Query = Record<string | number, any>;
 
 export interface Options extends Omit<RequestInit, 'body'> {
-  body?: any;
   query?: Query;
   notify?: boolean;
   baseURL?: string;
   onUnauthorized?: () => void;
+  body?: Record<string | number, any> | BodyInit | null;
 }
 
 export interface RequestResult<R> {
@@ -51,19 +48,13 @@ function resloveMessage(code: number): string {
 }
 
 /**
- * @function isJsonType
- * @param type 内容类型
+ * @function isJSONType
+ * @param headers 请求或返回 Headers
  */
-function isJsonType(type: string | null): boolean {
-  return !!type && /^application\/json(;|$)/i.test(type);
-}
+function isJSONType(headers: Headers): boolean {
+  const contentType = headers.get('Content-Type');
 
-/**
- * @function isUrlencodedType
- * @param type 内容类型
- */
-function isUrlencodedType(type: string | null): boolean {
-  return !!type && /^application\/x-www-form-urlencoded(;|$)/i.test(type);
+  return !!contentType && /^application\/json(;|$)/i.test(contentType);
 }
 
 /**
@@ -79,7 +70,7 @@ function isStatusOk(status: number): boolean {
  * @param response 响应内容
  */
 function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
-  if (isJsonType(response.headers.get('Content-Type'))) {
+  if (isJSONType(response.headers)) {
     return response.json().then(({ code, msg, payload }) => {
       return { code, msg: msg || resloveMessage(code), payload };
     });
@@ -96,16 +87,10 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
 /**
  * @function serializeBody
  * @param body 消息体
- * @param useJson 是否使用 JSON 格式
+ * @param json 是否使用 JSON 格式
  */
-function serializeBody(body: any, useJson?: boolean): string | null | never {
-  if (body) {
-    if (useJson) return JSON.stringify(body);
-
-    return serializeQuery(body);
-  }
-
-  return null;
+function serializeBody(body: Record<string | number, any>, json?: boolean): FormData | string {
+  return json ? JSON.stringify(body) : serialize(body, new FormData());
 }
 
 /**
@@ -121,39 +106,22 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   options.headers = new Headers(options.headers || {});
   options.credentials = options.credentials || 'include';
 
+  const { body, headers } = options;
   const input = new URL(url, baseURL);
 
   // 查询参数
-  query && serializeQuery(query, input.searchParams);
-
-  // 请求头
-  const { headers } = options;
+  query && serialize(query, input.searchParams);
 
   // 设置 XMLHttpRequest 头
   headers.set('X-Requested-With', 'XMLHttpRequest');
 
   // 序列化 body
-  if (options.body instanceof FormData) {
-    headers.delete('Content-Type');
-  } else if (options.body != null) {
-    if (!headers.has('Content-Type')) {
-      headers.set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
-      options.body = serializeBody(options.body);
-    } else {
-      const contentType = headers.get('Content-Type');
-
-      // 检测传送数据方式
-      if (isUrlencodedType(contentType)) {
-        options.body = serializeBody(options.body);
-      } else if (isJsonType(contentType)) {
-        options.body = serializeBody(options.body, true);
-      }
-    }
+  if (isObject(body)) {
+    options.body = serializeBody(body, isJSONType(headers));
   }
 
   // 发送请求
-  return fetch(input.href, options).then(
+  return fetch(input.href, options as RequestInit).then(
     (response: Response): Promise<R> => {
       return parseResponse<R>(response).then(
         ({ code, msg, payload }) => {
