@@ -83,7 +83,7 @@ export default function useList<I, E, T>(
 
   const fetch = useCallback((options: RequestOptions = {}) => {
     const { search, sorter } = options;
-    const query: Search = serialize([search, sorter]);
+    const query = serialize([search, sorter]);
 
     return request({ ...initOptionsRef.current, ...options, search: query });
   }, []);
