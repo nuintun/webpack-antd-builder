@@ -5,9 +5,9 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
-import useSearches from './useSearches';
 import usePersistRef from './usePersistRef';
-import { Query, RequestError } from '/js/utils/request';
+import { RequestError } from '/js/utils/request';
+import useSearches, { Search } from './useSearches';
 import useRequest, { Options as UseRequestOptions } from './useRequest';
 
 interface BaseResponse<I> {
@@ -16,8 +16,6 @@ interface BaseResponse<I> {
   // 数据总条数
   readonly total?: number;
 }
-
-export type Search = Query;
 
 export interface Pagination {
   page: number;

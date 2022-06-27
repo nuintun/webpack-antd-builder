@@ -5,7 +5,6 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { TableProps } from 'antd';
-import useSearches from './useSearches';
 import usePersistRef from './usePersistRef';
 import usePagingRequest, {
   hasQuery,
@@ -13,10 +12,10 @@ import usePagingRequest, {
   Pagination as UseRequestPagination,
   Refs as RequestRefs,
   RequestOptions as UseRequestInit,
-  Search,
   Sorter,
   TransformOptions as UseRequestTransformOptions
 } from './usePagingRequest';
+import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 type Filter = Search;

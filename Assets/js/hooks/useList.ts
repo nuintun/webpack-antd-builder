@@ -4,7 +4,6 @@
 
 import { useCallback, useMemo } from 'react';
 
-import useSearches from './useSearches';
 import usePersistRef from './usePersistRef';
 import usePagingRequest, {
   hasQuery,
@@ -12,11 +11,11 @@ import usePagingRequest, {
   Pagination as UseRequestPagination,
   Refs as RequestRefs,
   RequestOptions as UseRequestInit,
-  Search,
   Sorter,
   TransformOptions as UseRequestTransformOptions
 } from './usePagingRequest';
 import { ListProps, PaginationProps } from 'antd';
+import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
 
 type OnChange = NonNullable<PaginationProps['onChange']>;

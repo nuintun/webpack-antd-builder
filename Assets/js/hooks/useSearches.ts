@@ -4,11 +4,13 @@
 
 import { useCallback, useRef } from 'react';
 
-type Searches<T extends unknown[]> = {
+import { Query as Search } from '/js/utils/request';
+
+export type { Search };
+
+export type Searches<T extends unknown[]> = {
   [K in keyof T]: T[K] | false;
 };
-
-type Search = Record<string | number, any>;
 
 /**
  * @function useSearches
