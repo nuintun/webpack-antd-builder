@@ -2,11 +2,12 @@
  * @module usePagingRequest
  */
 
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
 import usePersistRef from './usePersistRef';
 import { RequestError } from '/js/utils/request';
+import useSearches, { Search } from './useSearches';
 import useRequest, { Options as UseRequestOptions } from './useRequest';
 
 interface BaseResponse<I> {
@@ -16,27 +17,21 @@ interface BaseResponse<I> {
   readonly total?: number;
 }
 
-type RefValue<R> = R extends React.MutableRefObject<infer V> ? V : never;
-
-export type Query = Search & Partial<Pagination>;
-
-export type Response<I, E = {}> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
-
-export interface Search {
-  [name: string]: any;
-  [name: number]: any;
-}
-
 export interface Pagination {
   page: number;
   pageSize: number;
 }
 
+export interface Sorter {
+  orderBy: (string | number)[];
+  orderType: ('ascend' | 'descend')[];
+}
+
 export interface Options<I> extends Omit<UseRequestOptions, 'body' | 'method'> {
-  onSuccess?: (response: BaseResponse<I>) => void;
-  onError?: (error: RequestError) => void;
   onComplete?: () => void;
+  onError?: (error: RequestError) => void;
   pagination?: Partial<Pagination> | false;
+  onSuccess?: (response: BaseResponse<I>) => void;
 }
 
 export interface TransformOptions<I, T> extends Options<I> {
@@ -48,13 +43,13 @@ export interface RequestOptions extends Omit<UseRequestOptions, 'body' | 'method
   pagination?: Partial<Pagination> | false;
 }
 
+export type Response<I, E = {}> = BaseResponse<I> & Partial<Omit<E, keyof BaseResponse<I>>>;
+
 export interface Refs<I, E = {}> {
   readonly search: Search | false;
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
 }
-
-export const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
 /**
  * @function hasQuery
@@ -64,23 +59,7 @@ export function hasQuery<Q>(query: Q | false): query is Q {
   return query !== false;
 }
 
-/**
- * @function setRef
- * @param ref 引用对象
- * @param current 引用值
- */
-export function setRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, current: V): V {
-  return (ref.current = current);
-}
-
-/**
- * @function updateRef
- * @param ref 引用对象
- * @param current 引用值
- */
-export function updateRef<R extends React.MutableRefObject<any>, V extends RefValue<R>>(ref: R, current: V | undefined): V {
-  return setRef(ref, current ?? ref.current);
-}
+export const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
 
 /**
  * @function usePagingRequest
@@ -121,24 +100,23 @@ export default function usePagingRequest<I, E, T>(
 
   const initURLRef = usePersistRef(url);
   const responseRef = useRef<Response<I, E>>({});
-  const searchRef = useRef<Search | false>(false);
+  const [serialize, raw] = useSearches<[Search]>([false]);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
   const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
 
   const fetch = useCallback((options: RequestOptions = {}) => {
-    const { search, pagination } = options;
     const hasPagination = hasQuery(paginationRef.current);
     const { query: initQuery, onComplete } = initOptionsRef.current;
-    const query: Query = { ...initQuery, ...updateRef(searchRef, search) };
+    const query: Search = { ...initQuery, ...serialize([options.search]) };
 
     if (hasPagination) {
       const { page, pageSize }: Pagination = {
         ...DEFAULT_PAGINATION,
         ...initPagination,
         ...paginationRef.current,
-        ...pagination
+        ...options.pagination
       };
 
       if (__DEV__) {
@@ -153,10 +131,9 @@ export default function usePagingRequest<I, E, T>(
 
       query.page = page;
       query.pageSize = pageSize;
-
-      setRef(paginationRef, { page, pageSize });
+      paginationRef.current = { page, pageSize };
     } else {
-      setRef(paginationRef, false);
+      paginationRef.current = false;
     }
 
     return request<Response<I, E>>(initURLRef.current, { ...options, query })
@@ -166,6 +143,8 @@ export default function usePagingRequest<I, E, T>(
           const dataSource = Array.isArray(items) ? items : [];
           const { transform, onSuccess } = initOptionsRef.current;
 
+          responseRef.current = response;
+
           onSuccess && onSuccess(response);
 
           if (hasPagination) {
@@ -174,11 +153,10 @@ export default function usePagingRequest<I, E, T>(
             const page = Math.max(1, Math.min(current, Math.ceil(total / pageSize)));
 
             if (page !== current) {
-              setRef(paginationRef, { page, pageSize });
+              paginationRef.current = { page, pageSize };
             }
           }
 
-          setRef(responseRef, response);
           setDataSource(transform ? transform(dataSource) : dataSource);
         },
         error => {
@@ -199,7 +177,9 @@ export default function usePagingRequest<I, E, T>(
   const refs = useMemo<Refs<I, E>>(() => {
     return {
       get search() {
-        return searchRef.current;
+        const [search] = raw();
+
+        return search;
       },
       get response() {
         return responseRef.current;

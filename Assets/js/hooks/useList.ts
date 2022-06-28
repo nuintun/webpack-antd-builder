@@ -4,15 +4,18 @@
 
 import { useCallback, useMemo } from 'react';
 
+import usePersistRef from './usePersistRef';
 import usePagingRequest, {
   hasQuery,
   Options as UseRequestOptions,
   Pagination as UseRequestPagination,
-  Refs,
+  Refs as RequestRefs,
   RequestOptions as UseRequestInit,
+  Sorter,
   TransformOptions as UseRequestTransformOptions
 } from './usePagingRequest';
 import { ListProps, PaginationProps } from 'antd';
+import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
 
 type OnChange = NonNullable<PaginationProps['onChange']>;
@@ -20,6 +23,10 @@ type OnChange = NonNullable<PaginationProps['onChange']>;
 type Pagination = (UsePagingOptions & Partial<UseRequestPagination>) | false;
 
 type DefaultListProps<I> = Required<Pick<ListProps<I>, 'loading' | 'dataSource' | 'pagination'>>;
+
+interface Refs<I, E = {}> extends RequestRefs<I, E> {
+  readonly sorter: Sorter | false;
+}
 
 export interface Options<I> extends UseRequestOptions<I> {
   pagination?: Pagination;
@@ -30,6 +37,7 @@ export interface TransformOptions<I, T> extends UseRequestTransformOptions<I, T>
 }
 
 export interface RequestOptions extends UseRequestInit {
+  sorter?: Sorter | false;
   pagination?: Pagination;
 }
 
@@ -63,21 +71,31 @@ export default function useList<I, E, T>(
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultListProps<I | T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>] {
   const getPagingOptions = usePagingOptions(options.pagination);
-  const [loading, dataSource, fetch, refs] = usePagingRequest<I, E, T>(
+  const [serialize, raw] = useSearches<[Search, Sorter]>([false, false]);
+  const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
+
+  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
     url,
     options as TransformOptions<I, T>,
     initialLoadingState
   );
+
+  const fetch = useCallback((options: RequestOptions = {}) => {
+    const { search, sorter } = options;
+    const query = serialize([search, sorter]);
+
+    return request({ ...initOptionsRef.current, ...options, search: query });
+  }, []);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
     fetch({ pagination: { page, pageSize } });
   }, []);
 
   const pagination = useMemo(() => {
-    const refsPagination = refs.pagination;
+    const refsPagination = originRefs.pagination;
 
     if (hasQuery(refsPagination)) {
-      const { total = 0 } = refs.response;
+      const { total = 0 } = originRefs.response;
       const { page, pageSize } = refsPagination;
 
       return {
@@ -91,7 +109,23 @@ export default function useList<I, E, T>(
     }
 
     return refsPagination;
-  }, [refs.pagination, refs.response.total]);
+  }, [originRefs.pagination, originRefs.response.total]);
+
+  const refs = useMemo<Refs<I, E>>(() => {
+    return {
+      ...originRefs,
+      get search() {
+        const [search] = raw();
+
+        return search;
+      },
+      get sorter() {
+        const [, sorter] = raw();
+
+        return sorter;
+      }
+    };
+  }, []);
 
   return [{ loading, dataSource, pagination }, fetch, refs];
 }
