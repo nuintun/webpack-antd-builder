@@ -4,9 +4,9 @@
 
 export interface IStorage<V> {
   has(key: string): boolean;
-  set(key: string, value: V): void;
-  get(key: string): V | null;
   remove(key: string): void;
+  get(key: string): V | null;
+  set(key: string, value: V): void;
 }
 
 /**
