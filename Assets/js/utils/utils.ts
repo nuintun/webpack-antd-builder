@@ -6,8 +6,9 @@ import dayjs, { Dayjs, ManipulateType, OpUnitType } from 'dayjs';
 
 /**
  * @function assert
- * @param cond Assert flags.
- * @param message Assert error message.
+ * @description 断言
+ * @param cond 断言条件
+ * @param message 断言失败消息
  */
 export function assert<T>(cond: T, message: string): asserts cond {
   if (!cond) throw new Error(message);
