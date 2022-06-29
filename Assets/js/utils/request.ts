@@ -18,9 +18,9 @@ export interface Options extends Omit<RequestInit, 'body'> {
 }
 
 export interface RequestResult<R> {
-  code: number;
-  msg: string;
   payload: R;
+  msg: string;
+  code: number;
 }
 
 export interface RequestError<R = any> extends Error {
