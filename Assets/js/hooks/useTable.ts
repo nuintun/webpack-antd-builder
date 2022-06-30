@@ -144,7 +144,6 @@ export default function useTable<I, E, T>(
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {
-      ...originRefs,
       get search() {
         const [search] = raw();
 
@@ -159,6 +158,12 @@ export default function useTable<I, E, T>(
         const [, , sorter] = raw();
 
         return sorter;
+      },
+      get response() {
+        return originRefs.response;
+      },
+      get pagination() {
+        return originRefs.pagination;
       }
     };
   }, []);
