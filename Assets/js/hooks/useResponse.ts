@@ -15,9 +15,9 @@ type Fetch = (options?: Omit<RequestOptions, 'onUnauthorized'>) => Promise<void>
 
 export interface Options<R> extends RequestOptions {
   prefetch?: boolean;
+  onComplete?: () => void;
   onSuccess?: (response: R) => void;
   onError?: (error: RequestError) => void;
-  onComplete?: () => void;
 }
 
 export interface TransformOptions<R, T> extends Options<R> {
