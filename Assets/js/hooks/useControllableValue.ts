@@ -97,6 +97,7 @@ export default function useControllableValue<V = undefined>(
   const isMounted = useIsMounted();
   const propsRef = usePersistRef(props);
   const optionsRef = usePersistRef(options);
+
   const [value, setValueState] = useState<V | undefined>(() => {
     if (isControlled(props, options)) {
       return getValue(props, options);
