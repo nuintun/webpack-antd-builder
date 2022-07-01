@@ -142,7 +142,7 @@ export function pathToPaths(path: string): string[] {
 export function getLastRangeDate(value: number, unit: ManipulateType = 'day'): [start: Dayjs, end: Dayjs] {
   const today = dayjs();
 
-  return [today.subtract(Math.max(0, /^d(ay)?$/.test(unit) ? value - 1 : value), unit), today];
+  return [today.subtract(value, unit), today];
 }
 
 /**
