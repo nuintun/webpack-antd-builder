@@ -61,10 +61,13 @@ export default function useRequest(
         }
 
         const onUnauthorized = () => {
-          if (options.onUnauthorized) {
-            options.onUnauthorized(history);
-          } else if (initOptions.onUnauthorized) {
-            initOptions.onUnauthorized(history);
+          const { onUnauthorized } = options;
+          const { onUnauthorized: onInitUnauthorized } = initOptionsRef.current;
+
+          if (onUnauthorized) {
+            onUnauthorized(history);
+          } else if (onInitUnauthorized) {
+            onInitUnauthorized(history);
           } else {
             onUnauthorizedHandler(history);
           }
