@@ -106,34 +106,6 @@ export function createMarkup(html: string): { __html: string } {
 }
 
 /**
- * @function pathToPaths
- * @description 将路径拆分为层级路径数组
- * @param path 需要拆分路径
- */
-export function pathToPaths(path: string): string[] {
-  const pattern = /[^/]+/g;
-  const paths: string[] = [];
-  const isAbsolute = path[0] === '/';
-
-  while (true) {
-    const match = pattern.exec(path);
-
-    if (match === null) break;
-
-    const [segment] = match;
-    const { length } = paths;
-
-    if (length > 0) {
-      paths.push(`${paths[length - 1]}/${segment}`);
-    } else {
-      paths.push(isAbsolute ? `/${segment}` : segment);
-    }
-  }
-
-  return isAbsolute && paths.length === 0 ? ['/'] : paths;
-}
-
-/**
  * @function getLastRangeDate
  * @description 获取当前时间向前指定偏移的时间区间
  * @param value 偏移值
