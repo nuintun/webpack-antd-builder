@@ -8,6 +8,7 @@ import { History } from 'history';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
+import { isObject } from '/js/utils/utils';
 import usePersistRef from './usePersistRef';
 import { useHistory } from 'react-router-dom';
 import fetch, { Options as RequestOptions } from '/js/utils/request';
@@ -51,6 +52,14 @@ export default function useRequest(
 
         const initOptions = initOptionsRef.current;
 
+        const headers = new Headers(options.headers);
+
+        if (isObject(options.body)) {
+          if (!headers.has('Content-Type')) {
+            headers.set('Content-Type', mime.json);
+          }
+        }
+
         const onUnauthorized = () => {
           if (options.onUnauthorized) {
             options.onUnauthorized(history);
@@ -60,8 +69,6 @@ export default function useRequest(
             onUnauthorizedHandler(history);
           }
         };
-
-        const headers = { ...mime.json, ...options.headers };
 
         return fetch<R>(url, { ...initOptions, ...options, headers, onUnauthorized })
           .then(
