@@ -50,8 +50,6 @@ export default function useRequest(
           setLoading(true);
         }
 
-        const initOptions = initOptionsRef.current;
-
         const headers = new Headers(options.headers);
 
         if (isObject(options.body)) {
@@ -73,7 +71,7 @@ export default function useRequest(
           }
         };
 
-        return fetch<R>(url, { ...initOptions, ...options, headers, onUnauthorized })
+        return fetch<R>(url, { ...initOptionsRef.current, ...options, headers, onUnauthorized })
           .then(
             response => {
               isMounted() && resolve(response);
