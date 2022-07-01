@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 
 import classNames from 'classnames';
-import { Layout, MenuTheme } from 'antd';
 import { prefixUI } from './SmartMenuUtils';
-import { SiderProps } from 'antd/es/layout/Sider';
+import { Layout, MenuTheme, SiderProps } from 'antd';
 import RouteMenu, { RouteMenuProps } from './RouteMenu';
 
 const { Sider } = Layout;
