@@ -7,6 +7,7 @@ import { useCallback, useRef } from 'react';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
+import { isObject } from '/js/utils/utils';
 import usePersistRef from './usePersistRef';
 import fetch, { Options as RequestOptions } from '/js/utils/request';
 import { Location, Navigate, useLocation, useNavigate } from 'react-nest-router';
@@ -51,17 +52,26 @@ export default function useRequest(
 
         const initOptions = initOptionsRef.current;
 
+        const headers = new Headers(options.headers);
+
+        if (isObject(options.body)) {
+          if (!headers.has('Content-Type')) {
+            headers.set('Content-Type', mime.json);
+          }
+        }
+
         const onUnauthorized = () => {
-          if (options.onUnauthorized) {
-            options.onUnauthorized(navigate, location);
-          } else if (initOptions.onUnauthorized) {
-            initOptions.onUnauthorized(navigate, location);
+          const { onUnauthorized } = options;
+          const { onUnauthorized: onInitUnauthorized } = initOptionsRef.current;
+
+          if (onUnauthorized) {
+            onUnauthorized(navigate, location);
+          } else if (onInitUnauthorized) {
+            onInitUnauthorized(navigate, location);
           } else {
             onUnauthorizedHandler(navigate, location);
           }
         };
-
-        const headers = { ...mime.json, ...options.headers };
 
         return fetch<R>(url, { ...initOptions, ...options, headers, onUnauthorized })
           .then(
