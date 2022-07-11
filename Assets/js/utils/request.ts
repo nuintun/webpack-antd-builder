@@ -116,7 +116,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   headers.set('X-Requested-With', 'XMLHttpRequest');
 
   // 序列化 body
-  if (isObject(body)) {
+  if (isObject(body) || Array.isArray(body)) {
     options.body = serializeBody(body, isJSONType(headers));
   }
 
