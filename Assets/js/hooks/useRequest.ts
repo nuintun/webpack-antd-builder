@@ -50,9 +50,10 @@ export default function useRequest(
           setLoading(true);
         }
 
+        const { body } = options;
         const headers = new Headers(options.headers);
 
-        if (isObject(options.body)) {
+        if (isObject(body) || Array.isArray(body)) {
           if (!headers.has('Content-Type')) {
             headers.set('Content-Type', mime.json);
           }
