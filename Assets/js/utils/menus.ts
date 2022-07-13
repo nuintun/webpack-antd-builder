@@ -39,12 +39,16 @@ function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
  * @param layouts 布局路由对应菜单映射
  */
 function removeOnlyLayoutMenus(items: MenuItem[], layouts: Record<string, boolean>): MenuItem[] {
-  return items.filter(({ key, children }) => {
+  return items.filter(item => {
+    const { children } = item;
+
     if (children && children.length > 0) {
-      return removeOnlyLayoutMenus(children, layouts);
+      item.children = removeOnlyLayoutMenus(children, layouts);
+
+      return item.children.length > 0;
     }
 
-    return !layouts[key];
+    return !layouts[item.key];
   });
 }
 

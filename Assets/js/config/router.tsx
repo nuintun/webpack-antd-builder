@@ -91,6 +91,34 @@ export const router: Route<Meta>[] = [
                   name: '安全日志',
                   icon: <Icon component={LogsSystemIcon} />
                 }
+              },
+              {
+                path: 'tabs',
+                meta: {
+                  name: '选项卡',
+                  icon: <Icon component={SystemIcon} />
+                },
+                element: lazy(() => import('/js/components/LayoutTabs')),
+                children: [
+                  {
+                    path: 'account',
+                    element: '帐号管理',
+                    meta: {
+                      name: '帐号管理',
+                      hideInMenu: true,
+                      icon: <Icon component={AccountSystemIcon} />
+                    }
+                  },
+                  {
+                    path: 'logs',
+                    element: '安全日志',
+                    meta: {
+                      name: '安全日志',
+                      hideInMenu: true,
+                      icon: <Icon component={LogsSystemIcon} />
+                    }
+                  }
+                ]
               }
             ]
           }

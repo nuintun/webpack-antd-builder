@@ -1,0 +1,18 @@
+@import (reference) "~antd/es/style/themes/default.less";
+
+.ui-page {
+  &.ui-tabs-page {
+    padding-top: 12px;
+
+    .ui-tab-nav {
+      font-size: 15px;
+      color: @text-color;
+    }
+
+    .ant-tabs-tab-active {
+      .ui-tab-nav {
+        color: @link-color;
+      }
+    }
+  }
+}
