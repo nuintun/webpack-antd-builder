@@ -3,8 +3,8 @@
  */
 
 import { resolve } from './url';
-import { DFSTree } from './tree';
 import { assert } from './utils';
+import { DFSTree } from './tree';
 import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
 
 export interface Link {
@@ -37,7 +37,7 @@ export interface IRoute<M = unknown, K extends string = string> extends NIRoute<
  * @description 根据配置文件解析出路由
  * @param router 路由配置
  */
-export function parse<M = unknown, K extends string = string>(router: Route<M, K>[]): Route<M, K>[] {
+export function parse<M = unknown, K extends string = string>(router: Route<M, K>[] | readonly Route<M, K>[]): Route<M, K>[] {
   let uid = 0;
 
   const routes: Route<M, K>[] = [];

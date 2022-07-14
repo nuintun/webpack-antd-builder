@@ -17,6 +17,7 @@ import LogsSystemIcon from '/images/menus/logs-system.svg';
 
 export interface Meta {
   id?: number;
+  tabs?: boolean;
   hideInMenu?: boolean;
 }
 
@@ -95,6 +96,7 @@ export const router: Route<Meta>[] = [
               {
                 path: 'tabs',
                 meta: {
+                  tabs: true,
                   name: '选项卡',
                   icon: <Icon component={SystemIcon} />
                 },

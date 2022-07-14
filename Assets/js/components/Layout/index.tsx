@@ -23,9 +23,23 @@ export default memo(function Layout() {
   const routes = useOutletContext<Route<Meta>[]>();
 
   const menus = useMemo(() => {
-    return parse(routes as Route<Meta>[], ({ meta }) => {
-      return meta.hideInMenu ? Filter.Self : Filter.None;
-    });
+    return parse<Meta>(
+      routes,
+      ({ meta }) => {
+        if (meta.tabs) return Filter.Keep;
+
+        return meta.hideInMenu ? Filter.Self : Filter.None;
+      },
+      (menu, route) => {
+        if (route.meta.tabs) {
+          const first = route.children?.[0];
+
+          if (first) return { ...menu, link: { href: first.meta.link.href } };
+        }
+
+        return menu;
+      }
+    );
   }, [routes]);
 
   return (
