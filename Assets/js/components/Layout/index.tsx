@@ -59,7 +59,7 @@ export default memo(function Layout(): React.ReactElement {
     <SmartLayout
       theme={theme}
       menus={menus}
-      siderWidth={256}
+      siderWidth={216}
       leftHeaderRender={leftHeaderRender}
       rightHeaderRender={rightHeaderRender}
     >
