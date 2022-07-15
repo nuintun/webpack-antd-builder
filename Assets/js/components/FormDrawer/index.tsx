@@ -5,6 +5,8 @@ import useSubmit, { Options } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
+const { useForm } = Form;
+
 type FormOmitted = 'title' | 'onError';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
 type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterVisibleChange';
@@ -64,7 +66,7 @@ function FormDrawer<V, R>({
   extra = defaultExtra,
   ...restProps
 }: FormDrawerProps<V, R>): React.ReactElement {
-  const [wrapForm] = Form.useForm<V>(form);
+  const [wrapForm] = useForm<V>(form);
   const [visible, setVisible] = useState(false);
 
   const [submitting, onSubmit] = useSubmit<V, R>(action, {
