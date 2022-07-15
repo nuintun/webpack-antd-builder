@@ -36,7 +36,12 @@ export interface TabsLayoutProps extends Pick<TabsProps, TabsPicked> {
   style?: React.CSSProperties;
 }
 
-export default memo(function TabsLayout({ className, icon = true, ...restProps }: TabsLayoutProps): React.ReactElement {
+export default memo(function TabsLayout({
+  className,
+  icon = true,
+  destroyInactiveTabPane = true,
+  ...restProps
+}: TabsLayoutProps): React.ReactElement {
   const index = useMatchIndex();
   const matches = useMatches() as IRoute<Meta>[];
   const { children: tabs = [] } = useMatch() as IRoute<Meta>;
@@ -44,7 +49,7 @@ export default memo(function TabsLayout({ className, icon = true, ...restProps }
 
   return (
     <div className={classNames(prefixUI, className)}>
-      <Tabs {...restProps} activeKey={activeKey}>
+      <Tabs {...restProps} activeKey={activeKey} destroyInactiveTabPane={destroyInactiveTabPane}>
         {tabs.map(({ meta, element }) => {
           const { link } = meta;
 
