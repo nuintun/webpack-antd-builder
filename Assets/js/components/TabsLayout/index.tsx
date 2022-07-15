@@ -1,32 +1,50 @@
 /**
- * @module LayoutTabs
+ * @module TabsLayout
  */
 
 import './index.less';
 
 import React, { memo, useMemo } from 'react';
 
-import { Tabs } from 'antd';
+import classNames from 'classnames';
 import Link from '/js/components/Link';
+import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
 import { useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 const { TabPane } = Tabs;
+const prefixUI = 'ui-tabs-layout';
 
-export interface LayoutTabsProps {
+type TabsPicked =
+  | 'size'
+  | 'animated'
+  | 'centered'
+  | 'moreIcon'
+  | 'tabBarStyle'
+  | 'tabPosition'
+  | 'tabBarGutter'
+  | 'renderTabBar'
+  | 'popupClassName'
+  | 'tabBarExtraContent'
+  | 'destroyInactiveTabPane';
+
+export interface TabsLayoutProps extends Pick<TabsProps, TabsPicked> {
+  type?: 'line' | 'card';
   icon?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-export default memo(function LayoutTabs({ icon }: LayoutTabsProps): React.ReactElement {
+export default memo(function TabsLayout({ className, icon = true, ...restProps }: TabsLayoutProps): React.ReactElement {
   const index = useMatchIndex();
   const matches = useMatches() as IRoute<Meta>[];
   const { children: tabs = [] } = useMatch() as IRoute<Meta>;
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
   return (
-    <div className="ui-page ui-tabs-page">
-      <Tabs activeKey={activeKey}>
+    <div className={classNames(prefixUI, className)}>
+      <Tabs {...restProps} activeKey={activeKey}>
         {tabs.map(({ meta, element }) => {
           const { link } = meta;
 
@@ -34,7 +52,11 @@ export default memo(function LayoutTabs({ icon }: LayoutTabsProps): React.ReactE
             <TabPane
               key={meta.key}
               tab={
-                <Link className="ui-tab-nav" href={link.href} target={link.target}>
+                <Link
+                  href={link.href}
+                  target={link.target}
+                  className={classNames(`${prefixUI}-nav`, { active: activeKey === meta.key })}
+                >
                   {icon && meta.icon}
                   {meta.name}
                 </Link>

@@ -1,7 +1,9 @@
 @import (reference) "~antd/es/style/themes/default.less";
 
+@smart-breadcrumb-prefix-cls: ui-smart-breadcrumb;
+
 // 面包屑
-.ui-breadcrumb {
+.@{smart-breadcrumb-prefix-cls} {
   height: 30px;
   padding: 0 8px;
   font-size: 14px;
@@ -46,7 +48,7 @@
     cursor: default;
     color: @breadcrumb-link-color;
 
-    &.ui-breadcrumb-active {
+    &.active {
       color: @text-color;
     }
   }

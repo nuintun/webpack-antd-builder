@@ -9,6 +9,8 @@ import { IRoute } from '/js/utils/router';
 import { isString } from '/js/utils/utils';
 import { useMatches } from 'react-nest-router';
 
+const prefixUI = 'ui-smart-breadcrumb';
+
 interface BreadcrumbItem {
   key: string;
   name: string;
@@ -66,16 +68,16 @@ export default memo(function SmartBreadcrumb(): React.ReactElement {
   }, [matches]);
 
   return (
-    <Breadcrumb className="ui-breadcrumb">
+    <Breadcrumb className={prefixUI}>
       {breadcrumbs.map(({ key, name, icon, href, active }) => (
         <Breadcrumb.Item key={key}>
           {href && !active ? (
-            <Link className="ui-breadcrumb-link" href={href}>
+            <Link className={`${prefixUI}-link`} href={href}>
               {iconRender(icon)}
               <span>{name}</span>
             </Link>
           ) : (
-            <span className={classNames('ui-breadcrumb-item', { 'ui-breadcrumb-active': active })}>
+            <span className={classNames(`${prefixUI}-item`, { active })}>
               {iconRender(icon)}
               <span>{name}</span>
             </span>

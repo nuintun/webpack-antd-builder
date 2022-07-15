@@ -14,6 +14,8 @@ import RechargeAnalysisIcon from '/images/menus/recharge-analysis.svg';
 import SystemIcon from '/images/menus/system.svg';
 import AccountSystemIcon from '/images/menus/account-system.svg';
 import LogsSystemIcon from '/images/menus/logs-system.svg';
+import TabsIcon from '/images/menus/tabs.svg';
+import PageIcon from '/images/menus/page.svg';
 
 export interface Meta {
   readonly id?: number;
@@ -100,28 +102,30 @@ export const router: readonly Route<Meta>[] = [
               {
                 path: 'tabs',
                 meta: {
-                  name: '选项卡',
+                  name: '标签导航',
                   type: MenuType.Tabs,
-                  icon: <Icon component={SystemIcon} />
+                  icon: <Icon component={TabsIcon} />
                 },
-                element: lazy(() => import('/js/components/LayoutTabs')),
+                element: lazy(() => import('/js/components/TabsLayout'), {
+                  className: 'ui-tabs-page'
+                }),
                 children: [
                   {
-                    path: 'account',
-                    element: '帐号管理',
+                    path: 'one',
+                    element: '标签页一内容',
                     meta: {
-                      name: '帐号管理',
+                      name: '标签页一',
                       type: MenuType.Hidden,
-                      icon: <Icon component={AccountSystemIcon} />
+                      icon: <Icon component={PageIcon} />
                     }
                   },
                   {
-                    path: 'logs',
-                    element: '安全日志',
+                    path: 'two',
+                    element: '标签页二内容',
                     meta: {
-                      name: '安全日志',
+                      name: '标签页二',
                       type: MenuType.Hidden,
-                      icon: <Icon component={LogsSystemIcon} />
+                      icon: <Icon component={PageIcon} />
                     }
                   }
                 ]
