@@ -5,19 +5,19 @@
 import { DFSTree } from './tree';
 import { Icon, IRoute, Link, Route } from './router';
 
-export enum Filter {
-  All = 0, // 过滤当前节点和子节点
-  Self = 1, // 仅过滤当前节点，子节点正常处理
-  Keep = 2, // 强制保留当前节点，子节点正常处理
-  None = 3 // 缺省模式，若当前节点为布局节点且无子节点，将会被过滤
-}
-
 export interface MenuItem {
   key: string;
   link?: Link;
   icon?: Icon;
   name: string;
   children?: MenuItem[];
+}
+
+export const enum Filter {
+  All = 0, // 过滤当前节点和子节点
+  Self = 1, // 仅过滤当前节点，子节点正常处理
+  Keep = 2, // 强制保留当前节点，子节点正常处理
+  None = 3 // 缺省模式，若当前节点为布局节点且无子节点，将会被过滤
 }
 
 /**
@@ -69,7 +69,7 @@ function removeOnlyLayoutMenus(items: MenuItem[], layouts: Record<string, boolea
  * @param filter 过滤器
  */
 export function parse<M = unknown>(
-  routes: Route<M>[] | readonly Route<M>[],
+  routes: readonly Route<M>[],
   filter: (route: IRoute<M>) => Filter = () => Filter.None,
   transform: (menu: MenuItem, route: IRoute<M>) => MenuItem = menu => menu
 ): MenuItem[] {

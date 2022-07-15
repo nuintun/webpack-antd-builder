@@ -4,13 +4,13 @@
 
 import './index.less';
 
-import { memo, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { Tabs } from 'antd';
 import Link from '/js/components/Link';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
-import { useMatch, useMatches } from 'react-nest-router';
+import { useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 const { TabPane } = Tabs;
 
@@ -18,19 +18,15 @@ export interface LayoutTabsProps {
   icon?: boolean;
 }
 
-export default memo(function LayoutTabs({ icon }: LayoutTabsProps) {
+export default memo(function LayoutTabs({ icon }: LayoutTabsProps): React.ReactElement {
+  const index = useMatchIndex();
   const matches = useMatches() as IRoute<Meta>[];
   const { children: tabs = [] } = useMatch() as IRoute<Meta>;
-
-  const activeTab = useMemo(() => {
-    return matches.find(({ meta: { key } }) => {
-      return tabs.some(({ meta }) => meta.key === key);
-    });
-  }, [matches, tabs]);
+  const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
   return (
     <div className="ui-page ui-tabs-page">
-      <Tabs activeKey={activeTab?.meta.key}>
+      <Tabs activeKey={activeKey}>
         {tabs.map(({ meta, element }) => {
           const { link } = meta;
 

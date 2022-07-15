@@ -8,19 +8,19 @@ import { DFSTree } from './tree';
 import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
 
 export interface Link {
-  href: string;
-  target?: React.HTMLAttributeAnchorTarget;
+  readonly href: string;
+  readonly target?: React.HTMLAttributeAnchorTarget;
 }
 
 export interface Meta {
-  icon?: Icon;
-  name?: string;
-  link?: Partial<Link>;
+  readonly icon?: Icon;
+  readonly name?: string;
+  readonly link?: Partial<Link>;
 }
 
 export interface MetaWithKey extends Meta {
-  link: Link;
-  key: string;
+  readonly link: Link;
+  readonly key: string;
 }
 
 export type Icon = string | React.ReactElement;
@@ -28,8 +28,8 @@ export type Icon = string | React.ReactElement;
 export type Route<M = unknown, K extends string = string> = NRoute<M & Meta, K>;
 
 export interface IRoute<M = unknown, K extends string = string> extends NIRoute<M, K> {
-  meta: M & MetaWithKey;
-  children?: IRoute<M, K>[];
+  readonly meta: M & MetaWithKey;
+  readonly children?: IRoute<M, K>[];
 }
 
 /**
@@ -37,7 +37,7 @@ export interface IRoute<M = unknown, K extends string = string> extends NIRoute<
  * @description 根据配置文件解析出路由
  * @param router 路由配置
  */
-export function parse<M = unknown, K extends string = string>(router: Route<M, K>[] | readonly Route<M, K>[]): Route<M, K>[] {
+export function parse<M = unknown, K extends string = string>(router: readonly Route<M, K>[]): Route<M, K>[] {
   let uid = 0;
 
   const routes: Route<M, K>[] = [];
@@ -48,7 +48,7 @@ export function parse<M = unknown, K extends string = string>(router: Route<M, K
     const key = getKey();
     const { path = '/', meta } = route;
     const { link = { href: path } } = meta || {};
-    const mapping: Record<string, IRoute<M, K>> = {};
+    const mapping: Record<string, Mutable<IRoute<M, K>>> = {};
 
     const tree = new DFSTree({ ...route, meta: { ...route.meta, key, link } }, ({ meta, children }) => {
       const { href: from } = meta.link;

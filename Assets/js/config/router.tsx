@@ -16,12 +16,16 @@ import AccountSystemIcon from '/images/menus/account-system.svg';
 import LogsSystemIcon from '/images/menus/logs-system.svg';
 
 export interface Meta {
-  id?: number;
-  tabs?: boolean;
-  hideInMenu?: boolean;
+  readonly id?: number;
+  readonly type?: MenuType;
 }
 
-export const router: Route<Meta>[] = [
+export const enum MenuType {
+  Tabs,
+  Hidden
+}
+
+export const router: readonly Route<Meta>[] = [
   {
     element: <Document />,
     children: [
@@ -96,8 +100,8 @@ export const router: Route<Meta>[] = [
               {
                 path: 'tabs',
                 meta: {
-                  tabs: true,
                   name: '选项卡',
+                  type: MenuType.Tabs,
                   icon: <Icon component={SystemIcon} />
                 },
                 element: lazy(() => import('/js/components/LayoutTabs')),
@@ -107,7 +111,7 @@ export const router: Route<Meta>[] = [
                     element: '帐号管理',
                     meta: {
                       name: '帐号管理',
-                      hideInMenu: true,
+                      type: MenuType.Hidden,
                       icon: <Icon component={AccountSystemIcon} />
                     }
                   },
@@ -116,7 +120,7 @@ export const router: Route<Meta>[] = [
                     element: '安全日志',
                     meta: {
                       name: '安全日志',
-                      hideInMenu: true,
+                      type: MenuType.Hidden,
                       icon: <Icon component={LogsSystemIcon} />
                     }
                   }

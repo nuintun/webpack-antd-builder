@@ -17,7 +17,7 @@ const titleClassName = `${prefixUI}-title`;
 export type ItemRender = (item: MenuItem) => React.ReactNode;
 export type Item = NonNullable<NonNullable<MenuProps['items']>[0]>;
 
-function renderIcon(icon?: string | React.ReactElement): React.ReactElement | undefined {
+function renderIcon(icon?: string | React.ReactElement): React.ReactNode {
   if (icon) {
     if (isString(icon)) {
       return (
@@ -31,7 +31,7 @@ function renderIcon(icon?: string | React.ReactElement): React.ReactElement | un
   }
 }
 
-function renderItem(item: MenuItem, itemRender?: ItemRender) {
+function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
   if (itemRender) {
     return itemRender(item);
   }
