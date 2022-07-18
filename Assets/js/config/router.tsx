@@ -33,10 +33,18 @@ export const router: readonly Route<Meta>[] = [
     children: [
       {
         path: '/403',
+        meta: {
+          name: '403',
+          type: MenuType.Hidden
+        },
         element: lazy(() => import('/js/pages/403'))
       },
       {
         path: '/500',
+        meta: {
+          name: '500',
+          type: MenuType.Hidden
+        },
         element: lazy(() => import('/js/pages/500'))
       },
       {
