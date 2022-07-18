@@ -115,26 +115,27 @@ export const router: readonly Route<Meta>[] = [
                   icon: <Icon component={TabsIcon} />
                 },
                 element: lazy(() => import('/js/components/TabsLayout'), {
-                  className: 'ui-tabs-page'
+                  tabBarGutter: 0,
+                  className: 'ui-tabs-layout'
                 }),
                 children: [
                   {
                     path: 'one',
-                    element: '标签页一内容',
                     meta: {
                       name: '标签页一',
                       type: MenuType.Hidden,
                       icon: <Icon component={PageIcon} />
-                    }
+                    },
+                    element: <div className="ui-page">标签页一内容</div>
                   },
                   {
                     path: 'two',
-                    element: '标签页二内容',
                     meta: {
                       name: '标签页二',
                       type: MenuType.Hidden,
                       icon: <Icon component={PageIcon} />
-                    }
+                    },
+                    element: <div className="ui-page">标签页二内容</div>
                   }
                 ]
               }

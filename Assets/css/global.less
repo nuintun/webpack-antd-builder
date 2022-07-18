@@ -100,16 +100,27 @@ body {
   border-bottom: 1px solid #f0c36d;
 }
 
-.ui-page,
-.ui-tabs-page {
+.ui-page {
   margin: 16px;
   padding: 24px;
   overflow: hidden;
   background: #fff;
 }
 
-.ui-tabs-page {
-  padding-top: 12px;
+.ui-tabs-layout {
+  .ant-tabs-nav-wrap {
+    padding: 0 16px;
+    background: #fff;
+
+    .ant-tabs-tab {
+      padding: 16px;
+      font-size: 16px;
+    }
+  }
+
+  .ui-page {
+    margin: 0 16px 16px;
+  }
 }
 
 .ui-search {
@@ -156,23 +167,6 @@ body {
         }
       }
     }
-  }
-}
-
-.ui-tabs {
-  .ant-tabs-nav-wrap {
-    padding: 0 16px;
-    background: #fff;
-
-    .ant-tabs-tab {
-      font-size: 18px;
-      margin-right: 0;
-      padding: 12px 16px;
-    }
-  }
-
-  .ui-page {
-    margin: 0 16px 16px;
   }
 }
 
