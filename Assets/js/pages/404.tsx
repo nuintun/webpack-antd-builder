@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from 'react';
 
 import { Button, Result } from 'antd';
+import useTitle from '/js/hooks/useTitle';
 import { useNavigate } from 'react-nest-router';
 
 const style: React.CSSProperties = {
@@ -11,6 +12,8 @@ const style: React.CSSProperties = {
 };
 
 export default memo(function Page(): React.ReactElement {
+  useTitle('404');
+
   const navigate = useNavigate();
 
   const onBackHome = useCallback(() => {
