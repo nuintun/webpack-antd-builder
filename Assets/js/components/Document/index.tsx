@@ -14,9 +14,7 @@ export default memo(function Document(): React.ReactElement {
     while (--index >= 0) {
       const { meta } = matches[index];
 
-      if (meta && meta.name) {
-        return meta.name;
-      }
+      if (meta && meta.name) return meta.name;
     }
 
     return '404';
