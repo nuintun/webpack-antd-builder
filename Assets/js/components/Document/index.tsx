@@ -9,9 +9,17 @@ import { Outlet, useMatches } from 'react-nest-router';
 export default memo(function Document(): React.ReactElement {
   const matches = useMatches<Meta>();
   const title = useMemo(() => {
-    const lastIndex = matches.length - 1;
+    let index = matches.length;
 
-    return matches[lastIndex]?.meta?.name || '404';
+    while (--index >= 0) {
+      const { meta } = matches[index];
+
+      if (meta && meta.name) {
+        return meta.name;
+      }
+    }
+
+    return '404';
   }, [matches]);
 
   useTitle(title);

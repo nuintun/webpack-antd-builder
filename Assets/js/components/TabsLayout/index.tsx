@@ -4,13 +4,14 @@
 
 import './index.less';
 
-import React, { memo, useMemo } from 'react';
+import React, { memo, Suspense, useMemo } from 'react';
 
 import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
+import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 const { TabPane } = Tabs;
@@ -67,7 +68,7 @@ export default memo(function TabsLayout({
                 </Link>
               }
             >
-              {element}
+              <Suspense fallback={<SuspenseFallBack />}>{element}</Suspense>
             </TabPane>
           );
         })}
