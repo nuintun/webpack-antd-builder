@@ -2,12 +2,12 @@
  * @module useItems
  */
 
-import React, { cloneElement, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { MenuProps } from 'antd';
+import SmartIcon from './SmartIcon';
 import Link from '/js/components/Link';
 import { DFSTree } from '/js/utils/tree';
-import { isString } from '/js/utils/utils';
 import { MenuItem } from '/js/utils/menus';
 import { prefixUI } from './SmartMenuUtils';
 
@@ -16,20 +16,6 @@ const titleClassName = `${prefixUI}-title`;
 
 export type ItemRender = (item: MenuItem) => React.ReactNode;
 export type Item = NonNullable<NonNullable<MenuProps['items']>[0]>;
-
-function renderIcon(icon?: string | React.ReactElement): React.ReactNode {
-  if (icon) {
-    if (isString(icon)) {
-      return (
-        <span className={`anticon ${iconClassName}`}>
-          <img src={icon} alt="icon" />
-        </span>
-      );
-    }
-
-    return cloneElement(icon, { className: iconClassName });
-  }
-}
 
 function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
   if (itemRender) {
@@ -40,7 +26,7 @@ function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
 
   return (
     <>
-      {renderIcon(icon)}
+      <SmartIcon icon={icon} className={iconClassName} />
       <span>{name}</span>
     </>
   );

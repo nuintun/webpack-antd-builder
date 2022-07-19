@@ -115,7 +115,7 @@ export const router: readonly Route<Meta>[] = [
                   icon: <Icon component={TabsIcon} />
                 },
                 element: lazy(() => import('/js/components/TabsLayout'), {
-                  tabBarGutter: 24,
+                  tabBarGutter: 16,
                   className: 'ui-layout-tabs'
                 }),
                 children: [

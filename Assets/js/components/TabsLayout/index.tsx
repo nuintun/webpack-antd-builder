@@ -1,17 +1,20 @@
 import './index.less';
 
-import React, { memo, Suspense, useMemo } from 'react';
+import React, { cloneElement, memo, Suspense, useMemo } from 'react';
 
 import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
+import { isString } from '/js/utils/utils';
+import SmartIcon from '/js/components/SmartMenu/SmartIcon';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 const { TabPane } = Tabs;
 const prefixUI = 'ui-tabs-layout';
+const iconClassName = `${prefixUI}-icon`;
 
 type TabsPicked =
   | 'size'
@@ -31,6 +34,20 @@ export interface TabsLayoutProps extends Pick<TabsProps, TabsPicked> {
   icon?: boolean;
   className?: string;
   style?: React.CSSProperties;
+}
+
+function renderIcon(icon?: string | React.ReactElement): React.ReactNode {
+  if (icon) {
+    if (isString(icon)) {
+      return (
+        <span className={`anticon ${iconClassName}`}>
+          <img src={icon} alt="icon" />
+        </span>
+      );
+    }
+
+    return cloneElement(icon, { className: iconClassName });
+  }
 }
 
 export default memo(function TabsLayout({
@@ -59,7 +76,7 @@ export default memo(function TabsLayout({
                   target={link.target}
                   className={classNames(`${prefixUI}-nav`, { active: activeKey === meta.key })}
                 >
-                  {icon && meta.icon}
+                  {icon && <SmartIcon icon={meta.icon} className={iconClassName} />}
                   {meta.name}
                 </Link>
               }
