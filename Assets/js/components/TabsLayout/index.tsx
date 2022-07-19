@@ -1,7 +1,3 @@
-/**
- * @module TabsLayout
- */
-
 import './index.less';
 
 import React, { memo, Suspense, useMemo } from 'react';
@@ -12,7 +8,7 @@ import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
-import { useMatch, useMatches, useMatchIndex } from 'react-nest-router';
+import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 const { TabPane } = Tabs;
 const prefixUI = 'ui-tabs-layout';
@@ -68,7 +64,7 @@ export default memo(function TabsLayout({
                 </Link>
               }
             >
-              <Suspense fallback={<SuspenseFallBack />}>{element}</Suspense>
+              <Suspense fallback={<SuspenseFallBack />}>{element || <Outlet />}</Suspense>
             </TabPane>
           );
         })}

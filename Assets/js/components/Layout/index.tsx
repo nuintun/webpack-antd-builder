@@ -1,8 +1,3 @@
-/**
- * @module Layout
- * @description 用户自定义业务模块
- */
-
 import React, { memo, useMemo } from 'react';
 
 import LeftHeader from './LeftHeader';
