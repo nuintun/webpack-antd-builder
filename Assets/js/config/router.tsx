@@ -116,7 +116,7 @@ export const router: readonly Route<Meta>[] = [
                 },
                 element: lazy(() => import('/js/components/TabsLayout'), {
                   tabBarGutter: 24,
-                  className: 'ui-tabs'
+                  className: 'ui-layout-tabs'
                 }),
                 children: [
                   {
