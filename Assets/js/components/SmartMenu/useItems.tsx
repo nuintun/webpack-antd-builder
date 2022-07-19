@@ -5,11 +5,11 @@
 import React, { useMemo } from 'react';
 
 import { MenuProps } from 'antd';
-import SmartIcon from './SmartIcon';
 import Link from '/js/components/Link';
 import { DFSTree } from '/js/utils/tree';
 import { MenuItem } from '/js/utils/menus';
 import { prefixUI } from './SmartMenuUtils';
+import SmartIcon from '/js/components/SmartIcon';
 
 const iconClassName = `${prefixUI}-icon`;
 const titleClassName = `${prefixUI}-title`;

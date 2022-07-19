@@ -8,7 +8,7 @@ import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
 import { isString } from '/js/utils/utils';
-import SmartIcon from '/js/components/SmartMenu/SmartIcon';
+import SmartIcon from '/js/components/SmartIcon';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 

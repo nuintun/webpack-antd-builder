@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { useMatches } from 'react-nest-router';
 import { Icon, IRoute } from '/js/utils/router';
-import SmartIcon from '/js/components/SmartMenu/SmartIcon';
+import SmartIcon from '/js/components/SmartIcon';
 
 const prefixUI = 'ui-smart-breadcrumb';
 const iconClassName = `${prefixUI}-icon`;
