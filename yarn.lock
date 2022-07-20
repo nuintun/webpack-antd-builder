@@ -4631,9 +4631,9 @@ rc-upload@~4.3.0:
     rc-util "^5.2.0"
 
 rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.12.0, rc-util@^5.14.0, rc-util@^5.15.0, rc-util@^5.16.1, rc-util@^5.17.0, rc-util@^5.18.1, rc-util@^5.19.2, rc-util@^5.2.0, rc-util@^5.2.1, rc-util@^5.20.1, rc-util@^5.21.0, rc-util@^5.22.5, rc-util@^5.3.0, rc-util@^5.4.0, rc-util@^5.5.0, rc-util@^5.6.1, rc-util@^5.7.0, rc-util@^5.8.0, rc-util@^5.9.4, rc-util@^5.9.8:
-  version "5.22.5"
-  resolved "https://registry.npmjs.org/rc-util/-/rc-util-5.22.5.tgz#d4d6d886c5ecb6a2a51dde1840d780a2b70f5179"
-  integrity sha512-awD2TGMGU97OZftT2R3JwrHWjR8k/xIwqjwcivPskciweUdgXE7QsyXkBKVSBHXS+c17AWWMDWuKWsJSheQy8g==
+  version "5.23.0"
+  resolved "https://registry.npmjs.org/rc-util/-/rc-util-5.23.0.tgz#a583b1ec3e1832a80eced7a700a494af0b590743"
+  integrity sha512-lgm6diJ/pLgyfoZY59Vz7sW4mSoQCgozqbBye9IJ7/mb5w5h4T7h+i2JpXAx/UBQxscBZe68q0sP7EW+qfkKUg==
   dependencies:
     "@babel/runtime" "^7.18.3"
     react-is "^16.12.0"
@@ -4673,10 +4673,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.7.1.tgz#3133eb115bd4bfcee4f0adf538a42b2550b46854"
-  integrity sha512-ZhgRRIoGa+N3teErJCika2Rr0OyFzHZ7M7quiG+su16Xiay21NTnOx2SHnPrqvHMJ3449epl6vNNouSgWhNcTg==
+react-nest-router@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.8.0.tgz#22191dfb0233260323018e95629fcf4213a7b3b6"
+  integrity sha512-GOvz3HhQUJQnUIBmSlFpurBR8kut0Z+WWEh4KHlMYqt4f0Dhr9PiQO9/prm5afg+JZRLFWcftImUsHiD0cSN2A==
   dependencies:
     tslib "^2.4.0"
 
