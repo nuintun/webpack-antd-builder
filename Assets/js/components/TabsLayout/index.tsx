@@ -47,30 +47,33 @@ export default memo(function TabsLayout({
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
   return (
-    <div className={classNames(prefixUI, className)}>
-      <Tabs {...restProps} activeKey={activeKey} destroyInactiveTabPane={destroyInactiveTabPane}>
-        {tabs.map(({ meta, element }) => {
-          const { link } = meta;
+    <Tabs
+      {...restProps}
+      activeKey={activeKey}
+      className={classNames(prefixUI, className)}
+      destroyInactiveTabPane={destroyInactiveTabPane}
+    >
+      {tabs.map(({ meta, element }) => {
+        const { link } = meta;
 
-          return (
-            <TabPane
-              key={meta.key}
-              tab={
-                <Link
-                  href={link.href}
-                  target={link.target}
-                  className={classNames(`${prefixUI}-nav`, { active: activeKey === meta.key })}
-                >
-                  {icon && <SmartIcon icon={meta.icon} className={iconClassName} />}
-                  {meta.name}
-                </Link>
-              }
-            >
-              <Suspense fallback={<SuspenseFallBack />}>{element || <Outlet />}</Suspense>
-            </TabPane>
-          );
-        })}
-      </Tabs>
-    </div>
+        return (
+          <TabPane
+            key={meta.key}
+            tab={
+              <Link
+                href={link.href}
+                target={link.target}
+                className={classNames(`${prefixUI}-nav`, { active: activeKey === meta.key })}
+              >
+                {icon && <SmartIcon icon={meta.icon} className={iconClassName} />}
+                {meta.name}
+              </Link>
+            }
+          >
+            <Suspense fallback={<SuspenseFallBack />}>{element || <Outlet />}</Suspense>
+          </TabPane>
+        );
+      })}
+    </Tabs>
   );
 });

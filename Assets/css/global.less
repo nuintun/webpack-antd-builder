@@ -110,18 +110,21 @@ body {
 .ui-layout-tabs {
   border-top: @border-width-base @border-style-base @border-color-split;
 
-  .ant-tabs-nav-wrap {
-    padding: 0 16px;
+  .ant-tabs-nav {
     background: #fff;
 
-    .ant-tabs-tab {
-      padding: 0;
+    .ant-tabs-nav-wrap {
+      padding: 0 16px;
 
-      a {
-        line-height: 1;
-        font-size: 16px;
-        padding: 16px 0;
-        display: inline-block;
+      .ant-tabs-tab {
+        padding: 0;
+
+        a {
+          line-height: 1;
+          font-size: 16px;
+          padding: 16px 0;
+          display: inline-block;
+        }
       }
     }
   }
