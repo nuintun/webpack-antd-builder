@@ -21,6 +21,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
   const configure = await resolveConfigure(mode);
 
   configure.devtool = false;
+  configure.cache.name = 'prod';
 
   configure.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
 
