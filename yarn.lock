@@ -33,10 +33,10 @@
     classnames "^2.2.6"
     rc-util "^5.9.4"
 
-"@ant-design/plots@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@ant-design/plots/-/plots-1.1.1.tgz#80ca7d6cd9645c577bfd70ea35e1b54b0278781e"
-  integrity sha512-ttWVp3uwpRMh5C7RfUHJYxP8s9dDfYI2rpsulmj585rja9yBYZ1es/rM+SpsywqH+jGNJlbEVbFSOWRItTtKxw==
+"@ant-design/plots@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@ant-design/plots/-/plots-1.2.0.tgz#051ceb7e8b6a4e59da38f02bb39a59de697e9f4f"
+  integrity sha512-WVsW8/XekmsICOarqciPdgC3wY9kwZYqiagXoTuwnBNESY1G0gB4XEJYw18dADYS7HHQ+A4A17hpK26aOyQ5Fw==
   dependencies:
     "@antv/g2plot" "^2.2.11"
     react-content-loader "^5.0.4"
@@ -2696,9 +2696,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.188:
-  version "1.4.199"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.199.tgz#e0384fde79fdda89880e8be58196a9153e04db3b"
-  integrity sha512-WIGME0Cs7oob3mxsJwHbeWkH0tYkIE/sjkJ8ML2BYmuRcjhRl/q5kVDXG7W9LOOKwzPU5M0LBlXRq9rlSgnNlg==
+  version "1.4.200"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.200.tgz#6e4c5266106688965b4ea7caa11f0dd315586854"
+  integrity sha512-nPyI7oHc8T64oSqRXrAt99gNMpk0SAgPHw/o+hkNKyb5+bcdnFtZcSO9FUJES5cVkVZvo8u4qiZ1gQILl8UXsA==
 
 emojis-list@^3.0.0:
   version "3.0.0"
@@ -4598,9 +4598,9 @@ rc-tree-select@~5.4.0:
     rc-util "^5.16.1"
 
 rc-tree@~5.6.1, rc-tree@~5.6.3, rc-tree@~5.6.5:
-  version "5.6.5"
-  resolved "https://registry.npmjs.org/rc-tree/-/rc-tree-5.6.5.tgz#1947337fc48f3fe20fabaafb1aed3e4ff1ce71b4"
-  integrity sha512-Bnyen46B251APyRZ9D/jYeTnSqbSEvK2AkU5B4vWkNYgUJNPrxO+VMgcDRedP/8N7YcsgdDT9hxqVvNOq7oCAQ==
+  version "5.6.6"
+  resolved "https://registry.npmjs.org/rc-tree/-/rc-tree-5.6.6.tgz#c04253d8f8345ec52fc196dec2be06c7e708125b"
+  integrity sha512-HI/q4D4AHOp48OZcBUvJFWkI5OfnZivvGYI0xzI0dy0Mita2KcTGZv7/Yl6Aq3bL3od3x5AqAXq/7qxR3x4Kkg==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
