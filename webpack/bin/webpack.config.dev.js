@@ -17,6 +17,7 @@ import resolveConfigure from './webpack.config.base.js';
 (async () => {
   const configure = await resolveConfigure(mode);
 
+  configure.cache.name = 'dev';
   configure.devtool = 'eval-cheap-module-source-map';
 
   configure.plugins.push(new webpack.SourceMapDevToolPlugin());
