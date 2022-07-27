@@ -2,9 +2,10 @@ import './index.less';
 
 import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 
+import { Layout } from 'antd';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
-import { ConfigProvider, Layout } from 'antd';
+import Configure from '/js/components/Configure';
 import { BreadcrumbItem } from '/js/utils/router';
 import SmartBreadcrumb from '/js/components/SmartBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
@@ -132,10 +133,10 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
         </Header>
         <Content>
           <div ref={contentRef} className={`${prefixUI}-content`}>
-            <ConfigProvider virtual getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
+            <Configure virtual getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
               <SmartBreadcrumb match={match} location={location} history={history} breadcrumbs={breadcrumbs} />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
-            </ConfigProvider>
+            </Configure>
           </div>
         </Content>
       </Layout>
