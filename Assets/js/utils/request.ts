@@ -9,12 +9,14 @@ import { isObject, serialize } from './utils';
 
 export type Query = Record<string | number, any>;
 
+export type Body = Record<string | number, any> | BodyInit | null;
+
 export interface Options extends Omit<RequestInit, 'body'> {
+  body?: Body;
   query?: Query;
   notify?: boolean;
   baseURL?: string;
   onUnauthorized?: () => void;
-  body?: Record<string | number, any> | BodyInit | null;
 }
 
 export interface RequestResult<R> {
