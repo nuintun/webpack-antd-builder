@@ -1,9 +1,9 @@
 import React, { memo, useMemo } from 'react';
 
-import { ConfigProvider } from 'antd';
 import { Meta } from '/js/utils/router';
 import zhCN from 'antd/es/locale/zh_CN';
 import useTitle from '/js/hooks/useTitle';
+import Configure from '/js/components/Configure';
 import { Outlet, useMatches } from 'react-nest-router';
 
 export default memo(function Document(): React.ReactElement {
@@ -23,8 +23,8 @@ export default memo(function Document(): React.ReactElement {
   useTitle(title);
 
   return (
-    <ConfigProvider virtual locale={zhCN}>
+    <Configure virtual locale={zhCN}>
       <Outlet />
-    </ConfigProvider>
+    </Configure>
   );
 });

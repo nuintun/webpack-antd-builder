@@ -2,9 +2,10 @@ import './index.less';
 
 import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 
+import { Layout } from 'antd';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
-import { ConfigProvider, Layout } from 'antd';
+import Configure from '/js/components/Configure';
 import SmartBreadcrumb from '/js/components/SmartBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -124,10 +125,10 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
         </Header>
         <Content>
           <div ref={contentRef} className={`${prefixUI}-content`}>
-            <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
+            <Configure getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
               <SmartBreadcrumb />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
-            </ConfigProvider>
+            </Configure>
           </div>
         </Content>
       </Layout>
