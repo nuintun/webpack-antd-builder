@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from 'antd';
 import { isFunction } from '/js/utils/utils';
@@ -8,9 +8,9 @@ export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible' | 'e
   onOpen?: () => void;
   onClose?: () => void;
   children?: React.ReactNode;
-  trigger: React.ReactElement;
   extra?: (onClose: () => void) => React.ReactNode;
   footer?: (onClose: () => void) => React.ReactNode;
+  trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
 }
 
 function defaultExtra(onClose: () => void): React.ReactNode {
@@ -27,6 +27,8 @@ export default memo(function DisplayDrawer({
   trigger,
   onClose,
   children,
+  width = 1440,
+  height = 720,
   extra = defaultExtra,
   ...restProps
 }: DisplayDrawerProps): React.ReactElement {
@@ -37,11 +39,11 @@ export default memo(function DisplayDrawer({
   }, []);
 
   const triggerNode = useMemo(() => {
-    return React.cloneElement(trigger, {
-      onClick(event: React.MouseEvent) {
+    return cloneElement(trigger, {
+      onClick(...args: unknown[]) {
         const { onClick } = trigger.props;
 
-        onClick && onClick(event);
+        onClick && onClick(...args);
 
         setVisible(true);
       }
@@ -60,6 +62,8 @@ export default memo(function DisplayDrawer({
     <>
       {triggerNode}
       <FlexDrawer
+        width={width}
+        height={height}
         {...restProps}
         visible={visible}
         onClose={onCloseHandler}
