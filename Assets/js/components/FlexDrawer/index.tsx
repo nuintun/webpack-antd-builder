@@ -12,8 +12,8 @@ export interface FlexDrawerProps extends DrawerProps {
 
 export default memo(function FlexDrawer({
   children,
-  width = 576,
-  height = 576,
+  width = 512,
+  height = 512,
   ...restProps
 }: FlexDrawerProps): React.ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
