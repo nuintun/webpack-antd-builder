@@ -132,7 +132,7 @@ function SmartLayout<T>(props: SmartLayoutProps<T>): React.ReactElement {
         </Header>
         <Content>
           <div ref={contentRef} className={`${prefixUI}-content`}>
-            <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
+            <ConfigProvider virtual getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
               <SmartBreadcrumb match={match} location={location} history={history} breadcrumbs={breadcrumbs} />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
             </ConfigProvider>
