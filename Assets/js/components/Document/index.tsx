@@ -23,7 +23,7 @@ export default memo(function Document(): React.ReactElement {
   useTitle(title);
 
   return (
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider virtual locale={zhCN}>
       <Outlet />
     </ConfigProvider>
   );
