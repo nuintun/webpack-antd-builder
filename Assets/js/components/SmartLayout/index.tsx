@@ -17,8 +17,8 @@ type PickProps = 'theme' | 'collapsedWidth';
 
 export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
   siderWidth?: number;
+  breakQuery?: string;
   mobileQuery?: string;
-  brokenQuery?: string;
   children?: React.ReactNode;
   menus: SmartMenuProps['items'];
   leftHeaderRender?: HeaderRender;
@@ -37,24 +37,24 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
     collapsedWidth,
     leftHeaderRender,
     rightHeaderRender,
-    mobileQuery = '(max-width: 576px)',
-    brokenQuery = '(max-width: 992px)'
+    breakQuery = '(max-width: 992px)',
+    mobileQuery = '(max-width: 576px)'
   } = props;
 
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const onBreakChange = useCallback((isBreak: boolean) => {
+    !readCollapsed() && setCollapsed(isBreak);
+  }, []);
 
   const onMobileChange = useCallback((isMobile: boolean) => {
     isMobile && setCollapsed(isMobile);
   }, []);
 
-  const onBrokenChange = useCallback((isBroken: boolean) => {
-    !readCollapsed() && setCollapsed(isBroken);
-  }, []);
-
+  const isBreak = useMedia(breakQuery, onBreakChange);
   const isMobile = useMedia(mobileQuery, onMobileChange);
-  const isBroken = useMedia(brokenQuery, onBrokenChange);
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
-  const [collapsed, setCollapsed] = useState(() => isBroken || isMobile || !!readCollapsed());
+  const [collapsed, setCollapsed] = useState(() => isBreak || isMobile || !!readCollapsed());
 
   const onItemClick = useCallback(() => {
     if (isMobile) {

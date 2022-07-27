@@ -27,6 +27,8 @@ export default memo(function DisplayDrawer({
   trigger,
   onClose,
   children,
+  width = 1440,
+  height = 720,
   extra = defaultExtra,
   ...restProps
 }: DisplayDrawerProps): React.ReactElement {
@@ -60,6 +62,8 @@ export default memo(function DisplayDrawer({
     <>
       {triggerNode}
       <FlexDrawer
+        width={width}
+        height={height}
         {...restProps}
         visible={visible}
         onClose={onCloseHandler}

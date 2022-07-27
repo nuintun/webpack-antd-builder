@@ -9,17 +9,21 @@ const containerStyle: React.CSSProperties = { position: 'relative' };
 
 export interface FlexDrawerProps extends DrawerProps {
   children?: React.ReactNode;
+  breakWidth?: string | number;
+  breakHeight?: string | number;
 }
 
 export default memo(function FlexDrawer({
   children,
   width = 512,
   height = 512,
+  breakWidth = '100vw',
+  breakHeight = '100vh',
   ...restProps
 }: FlexDrawerProps): React.ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isBrokenWidth = useMedia(`(max-width: ${isString(width) ? width : `${width}px`})`);
-  const isBrokenHeight = useMedia(`(max-height: ${isString(height) ? height : `${height}px`})`);
+  const isBreakWidth = useMedia(`(max-width: ${isString(width) ? width : `${width}px`})`);
+  const isBreakHeight = useMedia(`(max-height: ${isString(height) ? height : `${height}px`})`);
 
   const getPopupContainer = useCallback((triggerNode?: HTMLElement) => {
     const { body } = document;
@@ -31,7 +35,7 @@ export default memo(function FlexDrawer({
   const getTargetContainer = useCallback(() => containerRef.current || document.body, []);
 
   return (
-    <Drawer {...restProps} width={isBrokenWidth ? '100%' : width} height={isBrokenHeight ? '100%' : height}>
+    <Drawer {...restProps} width={isBreakWidth ? breakWidth : width} height={isBreakHeight ? breakHeight : height}>
       <div ref={containerRef} style={containerStyle}>
         <Configure getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
           {children}
