@@ -99,12 +99,12 @@ export default function useList<I, E, T>(
       const { page, pageSize } = refsPagination;
 
       return {
-        total,
+        ...getPagingOptions(pageSize),
+        onShowSizeChange: onChange,
+        current: page,
         pageSize,
         onChange,
-        current: page,
-        onShowSizeChange: onChange,
-        ...getPagingOptions(pageSize)
+        total
       };
     }
 

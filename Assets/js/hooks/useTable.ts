@@ -132,10 +132,10 @@ export default function useTable<I, E, T>(
       const { page, pageSize } = originRefsPagination;
 
       return {
-        total,
-        pageSize,
+        ...getPagingOptions(pageSize),
         current: page,
-        ...getPagingOptions(pageSize)
+        pageSize,
+        total
       };
     }
 
