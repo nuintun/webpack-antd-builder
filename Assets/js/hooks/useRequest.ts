@@ -10,7 +10,12 @@ import useLazyState from './useLazyState';
 import { isObject } from '/js/utils/utils';
 import usePersistRef from './usePersistRef';
 import fetch, { Options as RequestOptions } from '/js/utils/request';
-import { Location, Navigate, useLocation, useNavigate } from 'react-nest-router';
+import { Location, NavigateOptions, To, useLocation, useNavigate } from 'react-nest-router';
+
+export interface Navigate {
+  (delta: number): void;
+  <S = unknown>(to: To, options?: NavigateOptions<S>): void;
+}
 
 /**
  * @function onUnauthorizedHandler
