@@ -20,7 +20,8 @@ export interface Navigate {
 /**
  * @function onUnauthorizedHandler
  * @description 默认未授权操作
- * @param history 浏览器历史操作方法
+ * @param navigate 导航方法
+ * @param location 导航信息
  */
 function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
   navigate('/login', { state: location });
