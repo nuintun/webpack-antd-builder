@@ -1,38 +1,41 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
-import memoizeOne from 'memoize-one';
 import Link from '/js/components/Link';
 import { HeaderRenderProps } from '/js/components/SmartMenu';
 
 import logo from '/images/logo.svg?url';
 
 type Theme = HeaderRenderProps['theme'];
-type GetLogoStyle = () => React.CSSProperties;
-type GetLogoTitleStyle = (theme: Theme) => React.CSSProperties;
-
-const getLogoStyle = memoizeOne<GetLogoStyle>(() => {
-  return {
-    width: 64,
-    padding: 8,
-    aspectRatio: '1 / 1',
-    verticalAlign: 'middle'
-  };
-});
-
-const getLogoTitleStyle = memoizeOne<GetLogoTitleStyle>(theme => {
-  return {
-    fontSize: 24,
-    fontWeight: 700,
-    verticalAlign: 'middle',
-    color: theme === 'dark' ? '#fff' : '#000'
-  };
-});
 
 export default memo(function LeftHeader({ theme, collapsed }: HeaderRenderProps): React.ReactElement {
+  const style = useMemo<React.CSSProperties>(() => {
+    return {
+      fontSize: 0
+    };
+  }, []);
+
+  const logoStyle = useMemo<React.CSSProperties>(() => {
+    return {
+      width: 64,
+      padding: 8,
+      aspectRatio: '1 / 1',
+      verticalAlign: 'middle'
+    };
+  }, []);
+
+  const titleStyle = useMemo<React.CSSProperties>(() => {
+    return {
+      fontSize: 24,
+      fontWeight: 700,
+      verticalAlign: 'middle',
+      color: theme === 'dark' ? '#fff' : '#000'
+    };
+  }, [theme]);
+
   return (
-    <Link href="/" title="Home">
-      <img alt="logo" src={logo} style={getLogoStyle()} />
-      {!collapsed && <span style={getLogoTitleStyle(theme)}>Ant Design</span>}
+    <Link href="/" title="Home" style={style}>
+      <img alt="logo" src={logo} style={logoStyle} />
+      {!collapsed && <span style={titleStyle}>Ant Design</span>}
     </Link>
   );
 });
