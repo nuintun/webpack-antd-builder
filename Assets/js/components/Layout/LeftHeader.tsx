@@ -5,8 +5,6 @@ import { HeaderRenderProps } from '/js/components/SmartMenu';
 
 import logo from '/images/logo.svg?url';
 
-type Theme = HeaderRenderProps['theme'];
-
 export default memo(function LeftHeader({ theme, collapsed }: HeaderRenderProps): React.ReactElement {
   const style = useMemo<React.CSSProperties>(() => {
     return {
