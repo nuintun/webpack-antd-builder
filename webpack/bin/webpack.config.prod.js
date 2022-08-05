@@ -22,9 +22,6 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
   configure.devtool = false;
   configure.cache.name = 'prod';
-
-  configure.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
-
   configure.optimization.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];
 
   // 开启 webpack-bundle-analyzer 分析工具
