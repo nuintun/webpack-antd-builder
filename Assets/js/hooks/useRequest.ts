@@ -35,19 +35,19 @@ export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
 /**
  * @function useRequest
  * @description [hook] 请求操作
- * @param optinos 请求配置
+ * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
 export default function useRequest(
-  optinos: Options = {},
+  options: Options = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(url: string, options?: Options) => Promise<R>] {
   const retainRef = useRef(0);
   const location = useLocation();
   const navigate = useNavigate();
   const isMounted = useIsMounted();
-  const initOptionsRef = usePersistRef(optinos);
-  const [loading, setLoading] = useLazyState(initialLoadingState, optinos.delay);
+  const initOptionsRef = usePersistRef(options);
+  const [loading, setLoading] = useLazyState(initialLoadingState, options.delay);
 
   const request = useCallback(<R>(url: string, options: Options = {}): Promise<R> => {
     return new Promise<R>((resolve, reject) => {
