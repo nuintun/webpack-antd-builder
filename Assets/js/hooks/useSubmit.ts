@@ -4,16 +4,18 @@
 
 import { useCallback } from 'react';
 
-import { message } from 'antd';
 import usePersistRef from './usePersistRef';
 import { RequestError } from '/js/utils/request';
-import useRequest, { Options as RequestOptions } from './useRequest';
+import useRequest, { RequestOptions } from './useRequest';
 
-export interface Options<V, R> extends Omit<RequestOptions, 'body'> {
-  normalize?: (values: V) => any;
+type OmitProps = 'body' | 'onError' | 'onSuccess' | 'onComplete';
+
+export interface Options<V, R> extends Omit<RequestOptions<R>, OmitProps> {
+  delay?: number;
+  normalize?: <T>(values: V) => T;
   onComplete?: (values: V) => void;
   onSuccess?: (response: R, values: V) => void;
-  onError?: (error: RequestError, values: V) => void;
+  onError?: (error: RequestError<R>, values: V) => void;
 }
 
 /**
@@ -33,39 +35,34 @@ export default function useSubmit<V, R = unknown>(
   const [loading, request] = useRequest(options, initialLoadingState);
 
   const onSubmit = useCallback((values: V) => {
-    const options = initOptionsRef.current;
-    const { method = 'POST', normalize } = options;
-    const params = normalize ? normalize(values) : values;
-    const requestOptions: RequestOptions = { ...options, method };
+    const initOptions = initOptionsRef.current;
+    const { method = 'POST', normalize } = initOptions;
+    const params: V = normalize ? normalize(values) : values;
+
+    const options: RequestOptions<R> = {
+      ...initOptions,
+      method,
+      onError(error) {
+        initOptions.onError?.(error, values);
+      },
+      onSuccess(response) {
+        initOptions.onSuccess?.(response, values);
+      },
+      onComplete() {
+        initOptions.onComplete?.(values);
+      }
+    };
 
     if (/^(?:GET|HEAD)$/i.test(method)) {
-      requestOptions.query = { ...requestOptions.query, ...params };
+      options.query = {
+        ...options.query,
+        ...params
+      };
     } else {
-      requestOptions.body = params;
+      options.body = params;
     }
 
-    return request<R>(initURLRef.current, requestOptions)
-      .then(
-        response => {
-          const { onSuccess } = initOptionsRef.current;
-
-          onSuccess && onSuccess(response, values);
-        },
-        error => {
-          const { onError } = initOptionsRef.current;
-
-          if (onError) {
-            onError(error, values);
-          } else {
-            message.error(error.message);
-          }
-        }
-      )
-      .finally(() => {
-        const { onComplete } = initOptionsRef.current;
-
-        onComplete && onComplete(values);
-      });
+    request<R>(initURLRef.current, options);
   }, []);
 
   return [loading, onSubmit];

@@ -4,20 +4,19 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { message } from 'antd';
 import usePersistRef from './usePersistRef';
-import { RequestError } from '/js/utils/request';
-import { Options as RequestOptions } from './useRequest';
+import { RequestOptions } from './useRequest';
 
-type Request = <R>(url: string, options?: RequestOptions) => Promise<R>;
+interface Fetch<R> {
+  (options?: RequestOptions<R>): void;
+}
 
-type Fetch = (options?: Omit<RequestOptions, 'onUnauthorized'>) => Promise<void>;
+interface Request<R> {
+  (url: string, options?: RequestOptions<R>): void;
+}
 
-export interface Options<R> extends RequestOptions {
+export interface Options<R> extends RequestOptions<R> {
   prefetch?: boolean;
-  onComplete?: () => void;
-  onSuccess?: (response: R) => void;
-  onError?: (error: RequestError) => void;
 }
 
 export interface TransformOptions<R, T> extends Options<R> {
@@ -28,57 +27,51 @@ export interface TransformOptions<R, T> extends Options<R> {
  * @function useResponse
  * @description [hook]
  * @param url 请求地址
- * @param fetch 发送请求工厂函数
+ * @param request 发送请求工厂函数
+ * @param options 发送请求请求配置
  */
 export default function useResponse<R>(
   url: string,
-  request: Request,
+  request: Request<R>,
   options?: Options<R>
-): [response: R | undefined, fetch: Fetch];
+): [response: R | undefined, fetch: Fetch<R>];
 /**
  * @function useResponse
  * @description [hook]
  * @param url 请求地址
- * @param fetch 发送请求工厂函数
- * @param options 请求结果转换函数
+ * @param request 发送请求工厂函数
+ * @param options 发送请求请求配置
  */
 export default function useResponse<R, T>(
   url: string,
-  request: Request,
+  request: Request<R>,
   options: TransformOptions<R, T>
-): [response: T | undefined, fetch: Fetch];
+): [response: T | undefined, fetch: Fetch<R>];
 export default function useResponse<R, T>(
   url: string,
-  request: Request,
+  request: Request<R>,
   options: Options<R> | TransformOptions<R, T> = {}
-): [response: R | T | undefined, fetch: Fetch] {
+): [response: R | T | undefined, fetch: Fetch<R>] {
   const initURLRef = usePersistRef(url);
   const [response, setResponse] = useState<R | T>();
   const initOptionsRef = usePersistRef(options as TransformOptions<R, T>);
 
-  const fetch = useCallback<Fetch>(options => {
-    const initOptions = initOptionsRef.current;
+  const fetch = useCallback<Fetch<R>>(options => {
+    const requestInit = {
+      ...initOptionsRef.current,
+      ...options
+    };
 
-    return request<R>(initURLRef.current, { ...initOptions, ...options })
-      .then(
-        response => {
-          const { transform, onSuccess } = initOptionsRef.current;
+    request(initURLRef.current, {
+      ...requestInit,
+      onSuccess(response) {
+        const { transform } = requestInit;
 
-          onSuccess && onSuccess(response);
+        requestInit.onSuccess?.(response);
 
-          setResponse(transform ? transform(response) : response);
-        },
-        error => {
-          const { onError } = initOptionsRef.current;
-
-          if (onError) {
-            onError(error);
-          } else {
-            message.error(error.message);
-          }
-        }
-      )
-      .finally(initOptions.onComplete);
+        setResponse(transform ? transform(response) : response);
+      }
+    });
   }, []);
 
   useEffect(() => {

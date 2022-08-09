@@ -1,11 +1,11 @@
 import React, { cloneElement, memo, useCallback } from 'react';
 
 import { isFunction } from '/js/utils/utils';
-import useRequest from '/js/hooks/useRequest';
+import { Body, Query } from '/js/utils/request';
+import { Popconfirm, PopconfirmProps } from 'antd';
 import usePersistRef from '/js/hooks/usePersistRef';
-import { Options, RequestError } from '/js/utils/request';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { message, Popconfirm, PopconfirmProps } from 'antd';
+import useRequest, { RequestOptions } from '/js/hooks/useRequest';
 
 type Trigger = 'onClick' | 'onChange';
 
@@ -16,20 +16,19 @@ type ActionChildrenProps = {
   [onTrigger in Trigger]: (...args: unknown[]) => void;
 };
 
-export interface ActionProps<R> extends Pick<Options, 'method' | 'notify'> {
+type RequestPicked = 'query' | 'body' | 'method' | 'notify' | 'onError' | 'onSuccess' | 'onComplete';
+
+export interface ActionProps<R> extends Pick<RequestOptions<R>, RequestPicked> {
   delay?: number;
   action: string;
   trigger?: Trigger;
   disabled?: boolean;
-  onComplete?: () => void;
-  onSuccess?: (response: R) => void;
+  body?: (() => Body) | Body;
+  query?: (() => Query) | Query;
   confirmIcon?: PopconfirmProps['icon'];
   confirmTitle?: PopconfirmProps['title'];
-  onError?: (error: RequestError) => void;
-  body?: (() => Options['body']) | Options['body'];
   children: React.ReactElement<ActionChildrenProps>;
-  query?: (() => Options['query']) | Options['query'];
-  requestInit?: Omit<Options, 'query' | 'body' | 'method' | 'notify'>;
+  requestInit?: Omit<RequestOptions<R>, RequestPicked>;
   confirmInit?: Omit<PopconfirmProps, 'icon' | 'title' | 'disabled' | 'onConfirm'>;
 }
 
@@ -50,33 +49,21 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
   const [loading, request] = useRequest({ delay }, false);
 
   const onAction = useCallback(() => {
-    const { action, notify, requestInit, method = 'PUT', body: initBody, query: initQuery } = propsRef.current;
-
+    const {
+      action,
+      notify,
+      onError,
+      onSuccess,
+      onComplete,
+      requestInit,
+      method = 'PUT',
+      body: initBody,
+      query: initQuery
+    } = propsRef.current;
     const body = isFunction(initBody) ? initBody() : initBody;
     const query = isFunction(initQuery) ? initQuery() : initQuery;
 
-    request<R>(action, { ...requestInit, method, body, query, notify })
-      .then(
-        response => {
-          const { onSuccess } = propsRef.current;
-
-          onSuccess && onSuccess(response);
-        },
-        error => {
-          const { onError } = propsRef.current;
-
-          if (onError) {
-            onError(error);
-          } else {
-            message.error(error.message);
-          }
-        }
-      )
-      .finally(() => {
-        const { onComplete } = propsRef.current;
-
-        onComplete && onComplete();
-      });
+    request<R>(action, { ...requestInit, body, query, method, notify, onError, onSuccess, onComplete });
   }, []);
 
   if (confirmTitle) {
