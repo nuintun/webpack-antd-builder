@@ -106,10 +106,9 @@ export default function useTable<I, E, T>(
       case 'sort':
         const orderBy: Sorter['orderBy'] = [];
         const orderType: Sorter['orderType'] = [];
+        const items = Array.isArray(sorter) ? sorter : [sorter];
 
-        sorter = Array.isArray(sorter) ? sorter : [sorter];
-
-        for (const { columnKey, field, order } of sorter) {
+        for (const { columnKey, field, order } of items) {
           if (order) {
             if (columnKey || field) {
               orderBy.push(columnKey || serializeField(field as SorterField));
