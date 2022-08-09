@@ -120,7 +120,7 @@ export const router: readonly Route<Meta>[] = [
                 }),
                 children: [
                   {
-                    path: 'one',
+                    path: 'first',
                     meta: {
                       name: '标签页一',
                       type: MenuType.Hidden,
@@ -129,7 +129,7 @@ export const router: readonly Route<Meta>[] = [
                     element: <div className="ui-page">标签页一内容</div>
                   },
                   {
-                    path: 'two',
+                    path: 'second',
                     meta: {
                       name: '标签页二',
                       type: MenuType.Hidden,
