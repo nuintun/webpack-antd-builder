@@ -63,9 +63,9 @@ export default function compose<C>(middlewares: Middleware<C>[]): ComposedMiddle
    * @param context 执行上下文
    * @param [next] 下一个中间件
    */
-  return async (context, next) => {
+  return (context, next) => {
     const stack = { index: -1, done: false };
 
-    await dispatch<C>(middlewares, 0, stack, context, next);
+    return dispatch<C>(middlewares, 0, stack, context, next);
   };
 }
