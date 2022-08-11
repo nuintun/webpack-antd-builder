@@ -37,7 +37,7 @@ async function dispatch<C>(
   const { length } = middlewares;
 
   if (!stack.done && index <= length) {
-    stack.done = index === length;
+    stack.done = index >= length;
 
     if (!stack.done) {
       const middleware = middlewares[index];
