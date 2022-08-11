@@ -42,11 +42,11 @@ async function dispatch<C>(
     if (!stack.done) {
       const middleware = middlewares[index];
 
-      return middleware(context, () => {
-        return dispatch(middlewares, index + 1, stack, context, next);
+      await middleware(context, async () => {
+        await dispatch(middlewares, index + 1, stack, context, next);
       });
     } else if (next) {
-      return next();
+      await next();
     }
   }
 }
