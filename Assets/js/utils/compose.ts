@@ -42,7 +42,9 @@ async function dispatch<C>(
     if (!stack.done) {
       const middleware = middlewares[index];
 
-      return middleware(context, () => dispatch(middlewares, index + 1, stack, context, next));
+      return middleware(context, () => {
+        return dispatch(middlewares, index + 1, stack, context, next);
+      });
     } else if (next) {
       return next();
     }
@@ -62,6 +64,8 @@ export default function compose<C>(middlewares: Middleware<C>[]): ComposedMiddle
    * @param [next] 下一个中间件
    */
   return async (context, next) => {
-    await dispatch<C>(middlewares, 0, { index: -1, done: false }, context, next);
+    const stack = { index: -1, done: false };
+
+    await dispatch<C>(middlewares, 0, stack, context, next);
   };
 }
