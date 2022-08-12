@@ -12,7 +12,7 @@ type OmitProps = 'body' | 'onError' | 'onSuccess' | 'onComplete';
 
 export interface Options<V, R> extends Omit<RequestOptions<R>, OmitProps> {
   delay?: number;
-  normalize?: <T>(values: V) => T;
+  normalize?: (values: V) => any;
   onComplete?: (values: V) => void;
   onSuccess?: (response: R, values: V) => void;
   onError?: (error: RequestError<R>, values: V) => void;
