@@ -2130,9 +2130,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001370, caniuse-lite@^1.0.30001373:
-  version "1.0.30001382"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001382.tgz#4d37f0d0b6fffb826c8e5e1c0f4bf8ce592db949"
-  integrity sha512-2rtJwDmSZ716Pxm1wCtbPvHtbDWAreTPxXbkc5RkKglow3Ig/4GNGazDI9/BVnXbG/wnv6r3B5FEbkfg9OcTGg==
+  version "1.0.30001383"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001383.tgz#aecf317ccd940690725ae3ae4f28293c5fb8050e"
+  integrity sha512-swMpEoTp5vDoGBZsYZX7L7nXHe6dsHxi9o6/LKf/f0LukVtnrxly5GVb/fWdCDTqi/yw6Km6tiJ0pmBacm0gbg==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -4678,10 +4678,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.10.0.tgz#b133e7917b479290c49f8888ce81021e8ad065e3"
-  integrity sha512-o+fKLRXNKsxEiGdctl3M1J4r91ZktsgAKj6lOldnhlM8O284RMAC89IRNkZGK3Di/ULLcnBRarw8gdlGlw1epg==
+react-nest-router@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.11.0.tgz#8c440f0b9086368054542bb3401bef60c4cd042f"
+  integrity sha512-BaEtFUnBUMthoTKmG+U+kmoVhDRfxlItaniNP3mg+vvgnvT3+K7Js3vkHElGkbWUO9c9ggWpE7vdWIjYbBEQZw==
   dependencies:
     tslib "^2.4.0"
 
