@@ -38,7 +38,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.2.1",
-    "antd": "^4.22.7",
+    "antd": "^4.22.8",
     "classnames": "^2.3.1",
     "core-js": "^3.25.0",
     "dayjs": "^1.11.5",
@@ -47,7 +47,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
-    "react-nest-router": "^0.11.0",
+    "react-nest-router": "^0.12.0",
     "throttle-debounce": "^5.0.0",
     "whatwg-fetch": "^3.6.2"
   },
@@ -69,12 +69,12 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "4.0.0",
-    "css-modules-types-loader": "^0.3.5",
+    "css-modules-types-loader": "^0.3.6",
     "find-free-ports": "^3.0.0",
     "html-webpack-plugin": "^5.5.0",
     "koa": "^2.13.4",
     "koa-compress": "^5.1.0",
-    "koa-webpack-dev-service": "^0.5.12",
+    "koa-webpack-dev-service": "^0.6.0",
     "less": "^4.1.3",
     "less-loader": "^11.0.0",
     "memfs": "^3.4.7",
@@ -85,7 +85,7 @@
     "prettier": "^2.7.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.5",
-    "typescript": "^4.7.4",
+    "typescript": "^4.8.2",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.6.1"
   }

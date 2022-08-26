@@ -1878,10 +1878,10 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.22.7:
-  version "4.22.7"
-  resolved "https://registry.npmjs.org/antd/-/antd-4.22.7.tgz#3c94bbc37466a727f6f4eac2ca6adb5fb0eb7a25"
-  integrity sha512-CMf5tYHtlhP1blYjwNTRsB7G/bocwKmIFHgYYk4pZNgo1kk/XnPPI2/MKRCXWc54wuCQQlnmL/2AKtE7HWaE8g==
+antd@^4.22.8:
+  version "4.22.8"
+  resolved "https://registry.npmjs.org/antd/-/antd-4.22.8.tgz#e2f446932815a522a8aa3d285a8a9bdcb3d0fa9f"
+  integrity sha512-mqHuCg9itZX+z6wk+mvRBcfz/U9iiIXS4LoNkyo8X/UBgdN8CoetFmrdvA1UQy1BuWa0/n62LiS1LatdvoTuHw==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.7.0"
@@ -2353,7 +2353,7 @@ core-js-compat@^3.21.0, core-js-compat@^3.22.1:
     browserslist "^4.21.3"
     semver "7.0.0"
 
-core-js@^3.24.1, core-js@^3.25.0:
+core-js@^3.25.0:
   version "3.25.0"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.25.0.tgz#be71d9e0dd648ffd70c44a7ec2319d039357eceb"
   integrity sha512-CVU1xvJEfJGhyCpBrzzzU1kjCfgsGUxhEvwUV2e/cOedYWHdmluamx+knDnmhqALddMG16fZvIqvs9aijsHHaA==
@@ -2400,10 +2400,10 @@ css-minimizer-webpack-plugin@4.0.0:
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
 
-css-modules-types-loader@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.5.tgz#045ef9cd62d15ddfcb8847ed594b8b504d59bb9c"
-  integrity sha512-NwbLjynHpmtjbroFmnOXRz84/9uS9maYeDW9whNvmcdLUiBPBWpuyyHxKfaUXcAJtdbIS90VD5VJIUAjb46ahQ==
+css-modules-types-loader@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.6.tgz#ab0a0863efff80fe3a25cca9695bce6c0b77f12e"
+  integrity sha512-X8qNm+hBkltZDRdQnvYu6Sd7ISvRoJNGcZqiwKPUlRDSNsVipNQnojQ5RaNIL6aLSEFfls4nV5HNvm8wenFtaw==
   dependencies:
     acorn "^8.8.0"
     acorn-walk "^8.2.0"
@@ -3456,16 +3456,16 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.5.12:
-  version "0.5.12"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.5.12.tgz#29446b62abaa03b94c76436ef513d955f4857b15"
-  integrity sha512-sljd/FPzCmUthBgYTxG3A/Elx07gsF4hZn4+dN/u/0cTVVAYQjZn9sKwr3sMOrz9cZPK4CT0sHWkwC5X9bp+2A==
+koa-webpack-dev-service@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.6.0.tgz#22b178e9a606b1c16d07a720f5fc5ea5f34811aa"
+  integrity sha512-Op7YVzkW9OFUYUQHqu/TNbCWxqAk/sLTwHgZebWeMi6OqvW/4rOmF3pxVRNemc04JUtu2VVC9aiMrXNIS96BjQ==
   dependencies:
     "@types/koa" "^2.13.5"
     "@types/ws" "^8.5.3"
     ansi-regex "^6.0.1"
     bufferutil "^4.0.6"
-    core-js "^3.24.1"
+    core-js "^3.25.0"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.9"
     webpack-dev-middleware "^5.3.3"
@@ -4678,10 +4678,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.11.0.tgz#8c440f0b9086368054542bb3401bef60c4cd042f"
-  integrity sha512-BaEtFUnBUMthoTKmG+U+kmoVhDRfxlItaniNP3mg+vvgnvT3+K7Js3vkHElGkbWUO9c9ggWpE7vdWIjYbBEQZw==
+react-nest-router@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.12.0.tgz#508322615e67f20d89bf9d4ff2682d5ec0c9692e"
+  integrity sha512-YG9MLNHxdnGYabKSRv6E4lqwV7eDox007HsorbGPdP6tlXGYnRPCRtqF2wu+eMcbj2jaF3dZ5c6St79XcBVyjg==
   dependencies:
     tslib "^2.4.0"
 
@@ -5260,10 +5260,10 @@ type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typescript@^4.7.4:
-  version "4.7.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+typescript@^4.8.2:
+  version "4.8.2"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
+  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
 
 uglify-js@^2.6.2:
   version "2.8.29"
