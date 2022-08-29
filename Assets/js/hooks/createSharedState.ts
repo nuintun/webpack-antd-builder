@@ -6,25 +6,22 @@ import React, { useEffect, useState } from 'react';
 
 import { isFunction } from '/js/utils/utils';
 
+type SetSharedState<S> = React.Dispatch<React.SetStateAction<S>>;
+
+type UseSharedState<S> = () => [state: S, setState: SetSharedState<S>];
+
 /**
  * @function createSharedState
  * @description [hook] 生成共享状态
  */
-export default function createSharedState<S = undefined>(): () => [
-  state: S | undefined,
-  setState: React.Dispatch<React.SetStateAction<S | undefined>>
-];
+export default function createSharedState<S = undefined>(): UseSharedState<S | undefined>;
 /**
  * @function createSharedState
  * @description [hook] 生成共享状态
  * @param initialState 初始状态
  */
-export default function createSharedState<S>(
-  initialState: S | (() => S)
-): () => [state: S, setState: React.Dispatch<React.SetStateAction<S>>];
-export default function createSharedState<S = undefined>(
-  initialState?: S | (() => S)
-): () => [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {
+export default function createSharedState<S>(initialState: S | (() => S)): UseSharedState<S>;
+export default function createSharedState<S = undefined>(initialState?: S | (() => S)): UseSharedState<S | undefined> {
   let initialized = false;
   let sharedState: S | undefined;
 

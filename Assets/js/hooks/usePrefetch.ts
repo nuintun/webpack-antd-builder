@@ -3,13 +3,17 @@
  */
 
 import useRequest, { Options as RequestOptions } from './useRequest';
-import useResponse, { Options as ResponseOptions, TransformOptions as TransformResponseOptions } from './useResponse';
+import useResponse, { Options as InitOptions, TransformOptions as InitTransformOptions } from './useResponse';
 
-type Refetch = (options?: RequestOptions) => Promise<void>;
+type Refetch = (options?: RequestOptions) => void;
 
-export interface Options<R> extends Omit<ResponseOptions<R>, 'prefetch'> {}
+export interface Options<R> extends Omit<InitOptions<R>, 'prefetch'> {
+  delay?: number;
+}
 
-export interface TransformOptions<R, T> extends Omit<TransformResponseOptions<R, T>, 'prefetch'> {}
+export interface TransformOptions<R, T> extends Omit<InitTransformOptions<R, T>, 'prefetch'> {
+  delay?: number;
+}
 
 /**
  * @function usePrefetch

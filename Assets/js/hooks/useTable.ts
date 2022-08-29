@@ -8,12 +8,12 @@ import { TableProps } from 'antd';
 import usePersistRef from './usePersistRef';
 import usePagingRequest, {
   hasQuery,
-  Options as UseRequestOptions,
-  Pagination as UseRequestPagination,
+  Options as InitOptions,
+  Pagination as RequestPagination,
   Refs as RequestRefs,
-  RequestOptions as UseRequestInit,
+  RequestOptions as RequestInit,
   Sorter,
-  TransformOptions as UseRequestTransformOptions
+  TransformOptions as InitTransformOptions
 } from './usePagingRequest';
 import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
@@ -24,7 +24,7 @@ type SorterField = React.Key | React.Key[];
 
 type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
 
-type Pagination = (PagingOptions & Partial<UseRequestPagination>) | false;
+type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
 
 type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
 
@@ -37,15 +37,15 @@ function serializeField(filed: SorterField): React.Key {
   return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
-export interface Options<I> extends UseRequestOptions<I> {
+export interface Options<I, E> extends InitOptions<I, E> {
   pagination?: Pagination;
 }
 
-export interface TransformOptions<I, T> extends UseRequestTransformOptions<I, T> {
+export interface TransformOptions<I, E, T> extends InitTransformOptions<I, E, T> {
   pagination?: Pagination;
 }
 
-export interface RequestOptions extends UseRequestInit {
+export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
   sorter?: Sorter | false;
   pagination?: Pagination;
@@ -60,9 +60,9 @@ export interface RequestOptions extends UseRequestInit {
  */
 export default function useTable<I, E = {}>(
   url: string,
-  options?: Options<I>,
+  options?: Options<I, E>,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
+): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -72,21 +72,21 @@ export default function useTable<I, E = {}>(
  */
 export default function useTable<I, E, T>(
   url: string,
-  options: TransformOptions<I, T>,
+  options: TransformOptions<I, E, T>,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>];
+): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
-  options: Options<I> | TransformOptions<I, T> = {},
+  options: Options<I, E> | TransformOptions<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => Promise<void>, refs: Refs<I, E>] {
+): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
   const getPagingOptions = usePagingOptions(options.pagination);
-  const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
+  const initOptionsRef = usePersistRef(options as TransformOptions<I, E, T>);
   const [serialize, raw] = useSearches<[Search, Filter, Sorter]>([false, false, false]);
 
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
     url,
-    options as TransformOptions<I, T>,
+    options as TransformOptions<I, E, T>,
     initialLoadingState
   );
 
@@ -94,7 +94,7 @@ export default function useTable<I, E, T>(
     const { search, filter, sorter } = options;
     const query = serialize([search, filter, sorter]);
 
-    return request({ ...initOptionsRef.current, ...options, search: query });
+    request({ ...initOptionsRef.current, ...options, search: query });
   }, []);
 
   const onChange = useCallback<OnChange<I | T>>((pagination, filter, sorter, { action }) => {
@@ -106,10 +106,9 @@ export default function useTable<I, E, T>(
       case 'sort':
         const orderBy: Sorter['orderBy'] = [];
         const orderType: Sorter['orderType'] = [];
+        const items = Array.isArray(sorter) ? sorter : [sorter];
 
-        sorter = Array.isArray(sorter) ? sorter : [sorter];
-
-        for (const { columnKey, field, order } of sorter) {
+        for (const { columnKey, field, order } of items) {
           if (order) {
             if (columnKey || field) {
               orderBy.push(columnKey || serializeField(field as SorterField));

@@ -4,90 +4,112 @@
 
 import { useCallback, useRef } from 'react';
 
-import { History } from 'history';
+import { message } from 'antd';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
 import { isObject } from '/js/utils/utils';
+import { History, Location } from 'history';
 import usePersistRef from './usePersistRef';
-import { useHistory } from 'react-router-dom';
-import fetch, { Options as RequestOptions } from '/js/utils/request';
+import { useHistory, useLocation } from 'react-router-dom';
+import fetch, { Options as RequestInit, RequestError } from '/js/utils/request';
+
+export interface Options extends Omit<RequestInit, 'onUnauthorized'> {
+  delay?: number;
+  onUnauthorized?: (history: History, location: Location) => void;
+}
+
+export interface RequestOptions<R> extends Omit<Options, 'delay'> {
+  onComplete?: () => void;
+  onSuccess?: (response: R) => void;
+  onError?: (error: RequestError<R>) => void;
+}
 
 /**
  * @function onUnauthorizedHandler
  * @description 默认未授权操作
- * @param history 浏览器历史操作方法
+ * @param navigate 导航方法
+ * @param location 导航信息
  */
-function onUnauthorizedHandler(history: History<any>): void {
-  history.push('/login');
-}
-
-export interface Options extends Omit<RequestOptions, 'onUnauthorized'> {
-  delay?: number;
-  onUnauthorized?: (history: History<any>) => void;
+function onUnauthorizedHandler(history: History, location: Location): void {
+  history.push('/login', { state: location });
 }
 
 /**
  * @function useRequest
  * @description [hook] 请求操作
- * @param optinos 请求配置
+ * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
 export default function useRequest(
-  optinos: Options = {},
+  options: Options = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, request: <R>(url: string, options?: Options) => Promise<R>] {
+): [loading: boolean, request: <R>(url: string, options?: RequestOptions<R>) => void] {
   const retainRef = useRef(0);
+  const history = useHistory();
+  const location = useLocation();
   const isMounted = useIsMounted();
-  const history = useHistory<any>();
-  const initOptionsRef = usePersistRef(optinos);
-  const [loading, setLoading] = useLazyState(initialLoadingState, optinos.delay);
+  const initOptionsRef = usePersistRef(options);
+  const [loading, setLoading] = useLazyState(initialLoadingState, options.delay);
 
-  const request = useCallback(<R>(url: string, options: Options = {}): Promise<R> => {
-    return new Promise<R>((resolve, reject) => {
-      if (isMounted()) {
-        if (retainRef.current++ <= 0) {
-          setLoading(true);
+  const request = useCallback(<R>(url: string, options: RequestOptions<R> = {}): void => {
+    if (isMounted()) {
+      const requestInit = {
+        ...initOptionsRef.current,
+        ...options
+      };
+      const { body } = requestInit;
+      const headers = new Headers(requestInit.headers);
+
+      const onUnauthorized = () => {
+        const { onUnauthorized } = requestInit;
+
+        if (onUnauthorized) {
+          onUnauthorized(history, location);
+        } else {
+          onUnauthorizedHandler(history, location);
         }
+      };
 
-        const { body } = options;
-        const headers = new Headers(options.headers);
-
-        if (isObject(body) || Array.isArray(body)) {
-          if (!headers.has('Content-Type')) {
-            headers.set('Content-Type', mime.json);
-          }
-        }
-
-        const onUnauthorized = () => {
-          const { onUnauthorized } = options;
-          const { onUnauthorized: onInitUnauthorized } = initOptionsRef.current;
-
-          if (onUnauthorized) {
-            onUnauthorized(history);
-          } else if (onInitUnauthorized) {
-            onInitUnauthorized(history);
-          } else {
-            onUnauthorizedHandler(history);
-          }
-        };
-
-        return fetch<R>(url, { ...initOptionsRef.current, ...options, headers, onUnauthorized })
-          .then(
-            response => {
-              isMounted() && resolve(response);
-            },
-            error => {
-              isMounted() && reject(error);
-            }
-          )
-          .finally(() => {
-            if (--retainRef.current <= 0) {
-              isMounted() && setLoading(false, true);
-            }
-          });
+      if (retainRef.current++ <= 0) {
+        setLoading(true);
       }
-    });
+
+      if (isObject(body) || Array.isArray(body)) {
+        if (!headers.has('Content-Type')) {
+          headers.set('Content-Type', mime.json);
+        }
+      }
+
+      fetch<R>(url, { ...requestInit, headers, onUnauthorized })
+        .then(
+          response => {
+            if (isMounted()) {
+              requestInit.onSuccess?.(response);
+            }
+          },
+          (error: RequestError<R>) => {
+            if (isMounted()) {
+              const { onError } = requestInit;
+
+              if (onError) {
+                onError(error);
+              } else {
+                message.error(error.message);
+              }
+            }
+          }
+        )
+        .finally(() => {
+          if (isMounted()) {
+            if (--retainRef.current <= 0) {
+              setLoading(false, true);
+            }
+
+            requestInit.onComplete?.();
+          }
+        });
+    }
   }, []);
 
   return [loading, request];
