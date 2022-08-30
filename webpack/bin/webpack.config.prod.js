@@ -26,7 +26,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
   // 开启 webpack-bundle-analyzer 分析工具
   if (process.argv[2] === '--report') {
-    configure.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', analyzerPort: 'auto' }));
+    configure.plugins.push(new BundleAnalyzerPlugin({ analyzerPort: 'auto' }));
   }
 
   const compiler = webpack(configure);
