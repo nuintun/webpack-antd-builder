@@ -1562,9 +1562,9 @@
   integrity sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==
 
 "@types/minimatch@*":
-  version "5.1.1"
-  resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-5.1.1.tgz#b1429c0c016cd50e105f3166bf179f6918b7365f"
-  integrity sha512-v55NF6Dz0wrj14Rn8iEABTWrhYRmgkJYuokduunSiq++t3hZ9VZ6dvcDt+850Pm5sGJZk8RaHzkFCXPxVINZ+g==
+  version "5.1.2"
+  resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-5.1.2.tgz#07508b45797cb81ec3f273011b054cd0755eddca"
+  integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*":
   version "18.7.14"
@@ -1598,10 +1598,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.17":
-  version "18.0.17"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.17.tgz#4583d9c322d67efe4b39a935d223edcc7050ccf4"
-  integrity sha512-38ETy4tL+rn4uQQi7mB81G7V1g0u2ryquNmsVIOKUAEIDK+3CUjZ6rSRpdvS99dNBnkLFL83qfmtLacGOTIhwQ==
+"@types/react@*", "@types/react@^18.0.18":
+  version "18.0.18"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.18.tgz#9f16f33d57bc5d9dca848d12c3572110ff9429ac"
+  integrity sha512-6hI08umYs6NaiHFEEGioXnxJ+oEhY3eRz8VCUaudZmGdtvPviCJB8mgaMxaDWAdPSYd4eFavrPk2QIolwbLYrg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2130,9 +2130,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001370, caniuse-lite@^1.0.30001373:
-  version "1.0.30001384"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001384.tgz#029527c2d781a3cfef13fa63b3a78a6088e35973"
-  integrity sha512-BBWt57kqWbc0GYZXb47wTXpmAgqr5LSibPzNjk/AWMdmJMQhLqOl3c/Kd4OAU/tu4NLfYkMx8Tlq3RVBkOBolQ==
+  version "1.0.30001387"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001387.tgz#90d2b9bdfcc3ab9a5b9addee00a25ef86c9e2e1e"
+  integrity sha512-fKDH0F1KOJvR+mWSOvhj8lVRr/Q/mc5u5nabU2vi1/sgvlSqEsE8dOq0Hy/BqVbDkCYQPRRHB1WRjW6PGB/7PA==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -2702,9 +2702,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.234"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.234.tgz#ff8fb29c2edac74ef3935ca03a2ecbe62ede400b"
-  integrity sha512-VqlJ4Ihd9F7eQIfwEtf7C0eZZDl6bQtpez8vx8VHN9iCZEzePZjr7n9OGFHSav4WN9zfLa2CFLowj0siBoc0hQ==
+  version "1.4.239"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.239.tgz#5b04acb39c16b897a508980d1be95ba5f0201771"
+  integrity sha512-XbhfzxPIFzMjJm17T7yUGZEyYh5XuUjrA/FQ7JUy2bEd4qQ7MvFTaKpZ6zXZog1cfVttESo2Lx0ctnf7eQOaAQ==
 
 emojis-list@^3.0.0:
   version "3.0.0"
@@ -4510,9 +4510,9 @@ rc-segmented@~2.1.0:
     rc-util "^5.17.0"
 
 rc-select@~14.1.0, rc-select@~14.1.1:
-  version "14.1.9"
-  resolved "https://registry.npmjs.org/rc-select/-/rc-select-14.1.9.tgz#9c9eceff00920ad8a0a53b77b76afc177ffe5ab4"
-  integrity sha512-DK01+Q7oCWr5jVPiEp/BTQ8xCB4rI4LfXzZtSmBWJhOMuibyZD1Vlz/DlVKCUFmtBM4SzG4/SltGHoGlcbCqiw==
+  version "14.1.10"
+  resolved "https://registry.npmjs.org/rc-select/-/rc-select-14.1.10.tgz#8dcc13b72e6971ab1543095ca1e67811484e1f5c"
+  integrity sha512-qH1bvlWrhY7F0L0V6O1CUkkHOpBfipFb9trFAk9LD3/uTXZ0yWpJFpZsyCS6lfm80/n+Hv2qpjAYiUaGV7sKPA==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
@@ -4678,10 +4678,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.12.1.tgz#4f0452c476a9128f657c256d7cb8c478bb7d2d36"
-  integrity sha512-DxhsTggivW75Qhn0mwmTd2Bv2/CYWRz8XjeQUmSiTNg3wws/AihiJHMlwUP+KLkJhg8YFkStR9FSIZHGlWtKtw==
+react-nest-router@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.12.3.tgz#3828c0cb3baa9ee19085611fe63ea3330c1ecd1b"
+  integrity sha512-IWfa3vGlQTuUEL4VYrysGdkHc6PQYqlzROpUtnvAJaUdvGC0fMUhzS7u7F7V2aMBve8fpuYNZca0uiS0QAzM5Q==
   dependencies:
     tslib "^2.4.0"
 
