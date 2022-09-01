@@ -5,7 +5,7 @@
 import { useMemo } from 'react';
 
 import { debounce } from 'throttle-debounce';
-import usePersistCallback from './usePersistCallback';
+import useStableCallback from './useStableCallback';
 
 export interface Options {
   // 是否前置调用
@@ -25,7 +25,7 @@ export default function useDebounce<C extends (...args: any[]) => any>(
   options: Options = {}
 ): debounce<C> {
   const { atBegin } = options;
-  const fn = usePersistCallback(callback);
+  const fn = useStableCallback(callback);
 
   return useMemo(() => debounce(delay, fn, options), [delay, atBegin]);
 }

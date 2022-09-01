@@ -4,7 +4,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import usePersistRef from './usePersistRef';
+import useSyncRef from './useSyncRef';
 
 /**
  * @function useLazyState
@@ -31,7 +31,7 @@ export default function useLazyState<S = undefined>(
   delay: number = 128
 ): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void] {
   const timerRef = useRef<Timeout>();
-  const delayRef = usePersistRef(delay);
+  const delayRef = useSyncRef(delay);
   const [state, setState] = useState(initialState);
 
   const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {

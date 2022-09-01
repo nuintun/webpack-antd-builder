@@ -4,8 +4,8 @@
 
 import React, { useCallback, useState } from 'react';
 
+import useSyncRef from './useSyncRef';
 import useIsMounted from './useIsMounted';
-import usePersistRef from './usePersistRef';
 import { isFunction } from '/js/utils/utils';
 import useUpdateEffect from './useUpdateEffect';
 
@@ -95,8 +95,8 @@ export default function useControllableValue<V = undefined>(
   options: Options<V> = {}
 ): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void] {
   const isMounted = useIsMounted();
-  const propsRef = usePersistRef(props);
-  const optionsRef = usePersistRef(options);
+  const propsRef = useSyncRef(props);
+  const optionsRef = useSyncRef(options);
 
   const [value, setValueState] = useState<V | undefined>(() => {
     if (isControlled(props, options)) {
@@ -110,17 +110,17 @@ export default function useControllableValue<V = undefined>(
     return options.defaultValue;
   });
 
-  const prevValueRef = usePersistRef(value);
+  const valueRef = useSyncRef(value);
 
   const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {
       const props = propsRef.current;
 
-      const setStateAction = (prevState: V | undefined): V | undefined => {
+      const setStateAction = (state: V | undefined): V | undefined => {
         const { trigger = 'onChange' } = props;
-        const nextState = isFunction(value) ? value(prevState) : value;
+        const nextState = isFunction(value) ? value(state) : value;
 
-        if (nextState !== prevState && isFunction(props[trigger])) {
+        if (nextState !== state && isFunction(props[trigger])) {
           props[trigger](nextState, ...args);
         }
 
@@ -128,7 +128,7 @@ export default function useControllableValue<V = undefined>(
       };
 
       if (isControlled(props, optionsRef.current)) {
-        setStateAction(prevValueRef.current);
+        setStateAction(valueRef.current);
       } else {
         setValueState(setStateAction);
       }
@@ -137,7 +137,7 @@ export default function useControllableValue<V = undefined>(
 
   useUpdateEffect(() => {
     if (isControlled(props, options)) {
-      const prevValue = prevValueRef.current;
+      const prevValue = valueRef.current;
       const nextValue = getValue(props, options);
 
       if (nextValue !== prevValue) {

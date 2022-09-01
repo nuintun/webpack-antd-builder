@@ -5,7 +5,7 @@
 import { useMemo } from 'react';
 
 import { throttle } from 'throttle-debounce';
-import usePersistCallback from './usePersistCallback';
+import useStableCallback from './useStableCallback';
 
 export interface Options {
   // 是否使用首调用模式
@@ -28,7 +28,7 @@ export default function useThrottle<C extends (...args: any[]) => any>(
   delay: number,
   options: Options = {}
 ): throttle<C> {
-  const fn = usePersistCallback(callback);
+  const fn = useStableCallback(callback);
   const { noLeading, noTrailing, debounceMode } = options;
 
   return useMemo(() => throttle(delay, fn, options), [delay, noLeading, noTrailing, debounceMode]);

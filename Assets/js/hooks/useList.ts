@@ -4,7 +4,7 @@
 
 import { useCallback, useMemo } from 'react';
 
-import usePersistRef from './usePersistRef';
+import useSyncRef from './useSyncRef';
 import usePagingRequest, {
   hasQuery,
   Options as InitOptions,
@@ -71,8 +71,8 @@ export default function useList<I, E, T>(
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultListProps<I | T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
   const getPagingOptions = usePagingOptions(options.pagination);
+  const initOptionsRef = useSyncRef(options as TransformOptions<I, T>);
   const [serialize, raw] = useSearches<[Search, Sorter]>([false, false]);
-  const initOptionsRef = usePersistRef(options as TransformOptions<I, T>);
 
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
     url,

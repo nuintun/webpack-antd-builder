@@ -4,7 +4,7 @@
 
 import { useCallback } from 'react';
 
-import usePersistRef from './usePersistRef';
+import useSyncRef from './useSyncRef';
 import useRequest, { RequestOptions } from './useRequest';
 import { Body, Query, RequestError } from '/js/utils/request';
 
@@ -32,8 +32,8 @@ export default function useSubmit<V extends Values, R = unknown>(
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
-  const initURLRef = usePersistRef(url);
-  const initOptionsRef = usePersistRef(options);
+  const initURLRef = useSyncRef(url);
+  const initOptionsRef = useSyncRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
   const onSubmit = useCallback((values: V) => {

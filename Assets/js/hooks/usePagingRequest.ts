@@ -5,7 +5,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
-import usePersistRef from './usePersistRef';
+import useSyncRef from './useSyncRef';
 import useSearches, { Search } from './useSearches';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
 
@@ -95,13 +95,13 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
-  const initURLRef = usePersistRef(url);
+  const initURLRef = useSyncRef(url);
   const responseRef = useRef<Response<I, E>>({});
   const [serialize, raw] = useSearches<[Search]>([false]);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
-  const initOptionsRef = usePersistRef(options as TransformOptions<I, E, T>);
+  const initOptionsRef = useSyncRef(options as TransformOptions<I, E, T>);
 
   const fetch = useCallback((options: RequestOptions = {}) => {
     const requestInit = {

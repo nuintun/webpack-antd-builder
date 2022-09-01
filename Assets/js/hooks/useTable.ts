@@ -5,7 +5,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { TableProps } from 'antd';
-import usePersistRef from './usePersistRef';
+import useSyncRef from './useSyncRef';
 import usePagingRequest, {
   hasQuery,
   Options as InitOptions,
@@ -81,7 +81,7 @@ export default function useTable<I, E, T>(
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
   const getPagingOptions = usePagingOptions(options.pagination);
-  const initOptionsRef = usePersistRef(options as TransformOptions<I, E, T>);
+  const initOptionsRef = useSyncRef(options as TransformOptions<I, E, T>);
   const [serialize, raw] = useSearches<[Search, Filter, Sorter]>([false, false, false]);
 
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(

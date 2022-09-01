@@ -4,8 +4,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import useSyncRef from './useSyncRef';
 import useIsMounted from './useIsMounted';
-import usePersistRef from './usePersistRef';
 
 interface Socket<M> {
   readyState: number;
@@ -51,8 +51,8 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
 
   const isMounted = useIsMounted();
   const reconnectTimesRef = useRef(0);
+  const optionsRef = useSyncRef(options);
   const websocketRef = useRef<WebSocket>();
-  const optionsRef = usePersistRef(options);
   const reconnectTimerRef = useRef<Timeout>();
   const [message, setMessage] = useState<MessageEvent<M>>();
   const [readyState, setReadyState] = useState<number>(WebSocket.CLOSED);

@@ -4,7 +4,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import usePersistRef from './usePersistRef';
+import useSyncRef from './useSyncRef';
 import { RequestOptions } from './useRequest';
 
 interface Fetch<R> {
@@ -52,9 +52,9 @@ export default function useResponse<R, T>(
   request: Request<R>,
   options: Options<R> | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch<R>] {
-  const initURLRef = usePersistRef(url);
+  const initURLRef = useSyncRef(url);
   const [response, setResponse] = useState<R | T>();
-  const initOptionsRef = usePersistRef(options as TransformOptions<R, T>);
+  const initOptionsRef = useSyncRef(options as TransformOptions<R, T>);
 
   const fetch = useCallback<Fetch<R>>(options => {
     const requestInit = {
