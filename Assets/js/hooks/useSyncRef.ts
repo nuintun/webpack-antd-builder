@@ -2,7 +2,7 @@
  * @module useSyncRef
  */
 
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 /**
  * @function useSyncRef
@@ -18,7 +18,8 @@ export default function useSyncRef<T>(value: T): React.MutableRefObject<T>;
 export default function useSyncRef<T = undefined>(value?: T): React.MutableRefObject<T | undefined> {
   const valueRef = useRef(value);
 
-  valueRef.current = value;
+  // https://github.com/alibaba/hooks/issues/728
+  valueRef.current = useMemo(() => value, [value]);
 
   return valueRef;
 }
