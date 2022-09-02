@@ -20,6 +20,10 @@ export interface Options<V> {
   defaultValuePropName?: string;
 }
 
+export interface SetValueAction<V> {
+  (value: React.SetStateAction<V>, ...args: unknown[]): void;
+}
+
 /**
  * @function getValuePropName
  * @param options 配置选项
@@ -90,15 +94,29 @@ function getDefaultValue<V>(props: Props, options: Options<V>): V {
  * @param props 组件 Props
  * @param options 配置选项
  */
+export default function useControllableValue<V>(
+  props: Props,
+  options: Options<V> & { defaultValue: V }
+): [value: V, setValue: SetValueAction<V>];
+/**
+ * @function useControllableValue
+ * @description [hook] 生成同时支持受控和非受控状态的值
+ * @param props 组件 Props
+ * @param options 配置选项
+ */
+export default function useControllableValue<V = undefined>(
+  props: Props,
+  options?: Omit<Options<V>, 'defaultValue'>
+): [value: V | undefined, setValue: SetValueAction<V | undefined>];
 export default function useControllableValue<V = undefined>(
   props: Props,
   options: Options<V> = {}
-): [value: V | undefined, setValue: (value: React.SetStateAction<V | undefined>, ...args: any[]) => void] {
+): [value: V | undefined, setValue: SetValueAction<V | undefined>] {
   const isMounted = useIsMounted();
   const propsRef = useSyncRef(props);
   const optionsRef = useSyncRef(options);
 
-  const [value, setValueState] = useState<V | undefined>(() => {
+  const [value = options.defaultValue, setValueState] = useState<V | undefined>(() => {
     if (isControlled(props, options)) {
       return getValue(props, options);
     }
