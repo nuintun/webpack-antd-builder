@@ -10,7 +10,6 @@ import { useCallback, useEffect, useRef } from 'react';
  */
 export default function useIsMounted(): () => boolean {
   const isMountedRef = useRef(false);
-  const isMounted = useCallback(() => isMountedRef.current, []);
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -20,5 +19,5 @@ export default function useIsMounted(): () => boolean {
     };
   }, []);
 
-  return isMounted;
+  return useCallback(() => isMountedRef.current, []);
 }
