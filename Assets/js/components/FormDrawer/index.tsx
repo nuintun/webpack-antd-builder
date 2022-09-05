@@ -9,7 +9,7 @@ const { useForm } = Form;
 
 type FormOmitted = 'title' | 'onError';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
-type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterVisibleChange';
+type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterOpenChange';
 
 export interface FormDrawerProps<V extends Values, R>
   extends Omit<FormProps<V>, FormOmitted>,
@@ -43,12 +43,10 @@ function FormDrawer<V extends Values, R>({
   form,
   title,
   query,
-  width,
   action,
   method,
   notify,
   onOpen,
-  height,
   footer,
   onClose,
   trigger,
@@ -60,14 +58,16 @@ function FormDrawer<V extends Values, R>({
   onComplete,
   requestInit,
   forceRender,
+  width = 560,
+  height = 560,
   destroyOnClose,
-  afterVisibleChange,
+  afterOpenChange,
   layout = 'vertical',
   extra = defaultExtra,
   ...restProps
 }: FormDrawerProps<V, R>): React.ReactElement {
   const [wrapForm] = useForm<V>(form);
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const [submitting, onSubmit] = useSubmit<V, R>(action, {
     ...requestInit,
@@ -78,14 +78,14 @@ function FormDrawer<V extends Values, R>({
     normalize,
     onComplete,
     onSuccess(response: R, values: V) {
-      setVisible(false);
+      setOpen(false);
 
       onSuccess && onSuccess(response, values);
     }
   });
 
   const onCloseHandler = useCallback(() => {
-    !submitting && setVisible(false);
+    !submitting && setOpen(false);
   }, []);
 
   const triggerNode = useMemo(() => {
@@ -95,34 +95,34 @@ function FormDrawer<V extends Values, R>({
 
         onClick && onClick(...args);
 
-        setVisible(true);
+        setOpen(true);
       }
     });
   }, [trigger]);
 
   useEffect(() => {
-    if (visible) {
+    if (open) {
       wrapForm.resetFields();
 
       onOpen && onOpen();
     } else {
       onClose && onClose();
     }
-  }, [visible]);
+  }, [open]);
 
   return (
     <>
       {triggerNode}
       <FlexDrawer
+        open={open}
         title={title}
         width={width}
         height={height}
-        visible={visible}
         placement={placement}
         onClose={onCloseHandler}
         forceRender={forceRender}
         destroyOnClose={destroyOnClose}
-        afterVisibleChange={afterVisibleChange}
+        afterOpenChange={afterOpenChange}
         extra={extra(submitting, wrapForm, onCloseHandler)}
         footer={isFunction(footer) && footer(submitting, wrapForm, onCloseHandler)}
       >

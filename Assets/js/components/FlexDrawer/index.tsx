@@ -15,8 +15,8 @@ export interface FlexDrawerProps extends DrawerProps {
 
 export default memo(function FlexDrawer({
   children,
-  width = 560,
-  height = 560,
+  width = 1440,
+  height = 720,
   breakWidth = '100vw',
   breakHeight = '100vh',
   ...restProps

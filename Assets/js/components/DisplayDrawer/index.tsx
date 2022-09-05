@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { isFunction } from '/js/utils/utils';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
-export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'visible' | 'extra' | 'footer'> {
+export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
   onOpen?: () => void;
   onClose?: () => void;
   children?: React.ReactNode;
@@ -27,15 +27,13 @@ export default memo(function DisplayDrawer({
   trigger,
   onClose,
   children,
-  width = 1440,
-  height = 720,
   extra = defaultExtra,
   ...restProps
 }: DisplayDrawerProps): React.ReactElement {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const onCloseHandler = useCallback(() => {
-    setVisible(false);
+    setOpen(false);
   }, []);
 
   const triggerNode = useMemo(() => {
@@ -45,27 +43,25 @@ export default memo(function DisplayDrawer({
 
         onClick && onClick(...args);
 
-        setVisible(true);
+        setOpen(true);
       }
     });
   }, [trigger]);
 
   useEffect(() => {
-    if (visible) {
+    if (open) {
       onOpen && onOpen();
     } else {
       onClose && onClose();
     }
-  }, [visible]);
+  }, [open]);
 
   return (
     <>
       {triggerNode}
       <FlexDrawer
-        width={width}
-        height={height}
         {...restProps}
-        visible={visible}
+        open={open}
         onClose={onCloseHandler}
         extra={extra(onCloseHandler)}
         footer={isFunction(footer) && footer(onCloseHandler)}

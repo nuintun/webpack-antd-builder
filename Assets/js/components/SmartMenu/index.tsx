@@ -35,10 +35,10 @@ export default memo(function SmartMenu(props: SmartMenuProps): React.ReactElemen
     return (
       <Drawer
         width={width}
-        placement="left"
         closable={false}
+        placement="left"
+        open={!collapsed}
         onClose={onClose}
-        visible={!collapsed}
         className={`${prefixUI}-drawer`}
       >
         <SiderMenu
