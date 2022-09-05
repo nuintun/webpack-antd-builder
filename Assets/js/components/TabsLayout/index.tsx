@@ -55,7 +55,9 @@ export default memo(function TabsLayout({
           <Link
             href={link.href}
             target={link.target}
-            className={classNames(`${prefixUI}-nav`, { active: activeKey === meta.key })}
+            className={classNames(`${prefixUI}-nav`, {
+              active: activeKey === key
+            })}
           >
             {icon && <SmartIcon icon={meta.icon} className={iconClassName} />}
             {meta.name}
