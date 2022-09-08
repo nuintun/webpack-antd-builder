@@ -5,7 +5,7 @@
 import { useMemo } from 'react';
 
 import { debounce } from 'throttle-debounce';
-import useStableCallback from './useStableCallback';
+import useStableCallback, { Callback } from './useStableCallback';
 
 export interface Options {
   // 是否前置调用
@@ -19,11 +19,7 @@ export interface Options {
  * @param delay 延迟的时间
  * @param options 防抖模式配置
  */
-export default function useDebounce<C extends (...args: any[]) => any>(
-  callback: C,
-  delay: number,
-  options: Options = {}
-): debounce<C> {
+export default function useDebounce<C extends Callback>(callback: C, delay: number, options: Options = {}): debounce<C> {
   const { atBegin } = options;
   const fn = useStableCallback(callback);
 
