@@ -2,9 +2,9 @@
  * @module useLazyState
  */
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import useSyncRef from './useSyncRef';
+import useStableCallback from './useStableCallback';
 
 /**
  * @function useLazyState
@@ -31,13 +31,10 @@ export default function useLazyState<S = undefined>(
   delay: number = 128
 ): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void] {
   const timerRef = useRef<Timeout>();
-  const delayRef = useSyncRef(delay);
   const [state, setState] = useState(initialState);
 
-  const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
+  const setLazyState = useStableCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
     clearTimeout(timerRef.current);
-
-    const delay = delayRef.current;
 
     if (immediate || delay <= 0) {
       setState(value);
@@ -46,7 +43,7 @@ export default function useLazyState<S = undefined>(
         setState(value);
       }, delay);
     }
-  }, []);
+  });
 
   useEffect(() => {
     return () => {

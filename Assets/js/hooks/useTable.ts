@@ -5,7 +5,6 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { TableProps } from 'antd';
-import useSyncRef from './useSyncRef';
 import usePagingRequest, {
   hasQuery,
   Options as InitOptions,
@@ -16,6 +15,7 @@ import usePagingRequest, {
   TransformOptions as InitTransformOptions
 } from './usePagingRequest';
 import useSearches, { Search } from './useSearches';
+import useStableCallback from './useStableCallback';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 type Filter = Search;
@@ -80,8 +80,9 @@ export default function useTable<I, E, T>(
   options: Options<I, E> | TransformOptions<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
+  const initOptions = options;
+
   const getPagingOptions = usePagingOptions(options.pagination);
-  const initOptionsRef = useSyncRef(options as TransformOptions<I, E, T>);
   const [serialize, raw] = useSearches<[Search, Filter, Sorter]>([false, false, false]);
 
   const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
@@ -90,12 +91,12 @@ export default function useTable<I, E, T>(
     initialLoadingState
   );
 
-  const fetch = useCallback((options: RequestOptions = {}) => {
+  const fetch = useStableCallback((options: RequestOptions = {}) => {
     const { search, filter, sorter } = options;
     const query = serialize([search, filter, sorter]);
 
-    request({ ...initOptionsRef.current, ...options, search: query });
-  }, []);
+    request({ ...initOptions, ...options, search: query });
+  });
 
   const onChange = useCallback<OnChange<I | T>>((pagination, filter, sorter, { action }) => {
     switch (action) {

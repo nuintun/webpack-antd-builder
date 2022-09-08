@@ -2,14 +2,14 @@
  * @module useRequest
  */
 
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 
 import { message } from 'antd';
-import useSyncRef from './useSyncRef';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
 import { isObject } from '/js/utils/utils';
+import useStableCallback from './useStableCallback';
 import fetch, { Options as RequestInit, RequestError } from '/js/utils/request';
 import { Location, NavigateOptions, To, useLocation, useNavigate } from 'react-nest-router';
 
@@ -49,19 +49,21 @@ export default function useRequest(
   options: Options = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(url: string, options?: RequestOptions<R>) => void] {
+  const initOptions = options;
+
   const retainRef = useRef(0);
   const location = useLocation();
   const navigate = useNavigate();
   const isMounted = useIsMounted();
-  const initOptionsRef = useSyncRef(options);
   const [loading, setLoading] = useLazyState(initialLoadingState, options.delay);
 
-  const request = useCallback(<R>(url: string, options: RequestOptions<R> = {}): void => {
+  const request = useStableCallback(<R>(url: string, options: RequestOptions<R> = {}): void => {
     if (isMounted()) {
       const requestInit = {
-        ...initOptionsRef.current,
+        ...initOptions,
         ...options
       };
+
       const { body } = requestInit;
       const headers = new Headers(requestInit.headers);
 
@@ -114,7 +116,7 @@ export default function useRequest(
           }
         });
     }
-  }, []);
+  });
 
   return [loading, request];
 }

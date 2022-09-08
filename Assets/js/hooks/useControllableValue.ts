@@ -2,12 +2,13 @@
  * @module useControllableValue
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import useSyncRef from './useSyncRef';
 import useIsMounted from './useIsMounted';
 import { isFunction } from '/js/utils/utils';
 import useUpdateEffect from './useUpdateEffect';
+import useStableCallback from './useStableCallback';
 
 export interface Props {
   [prop: string]: any;
@@ -113,8 +114,6 @@ export default function useControllableValue<V = undefined>(
   options: Options<V> = {}
 ): [value: V | undefined, setValue: SetValueAction<V | undefined>] {
   const isMounted = useIsMounted();
-  const propsRef = useSyncRef(props);
-  const optionsRef = useSyncRef(options);
 
   const [value = options.defaultValue, setValueState] = useState<V | undefined>(() => {
     if (isControlled(props, options)) {
@@ -130,10 +129,8 @@ export default function useControllableValue<V = undefined>(
 
   const valueRef = useSyncRef(value);
 
-  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
+  const setValue = useStableCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {
-      const props = propsRef.current;
-
       const setStateAction = (state: V | undefined): V | undefined => {
         const { trigger = 'onChange' } = props;
         const nextState = isFunction(value) ? value(state) : value;
@@ -145,13 +142,13 @@ export default function useControllableValue<V = undefined>(
         return nextState;
       };
 
-      if (isControlled(props, optionsRef.current)) {
+      if (isControlled(props, options)) {
         setStateAction(valueRef.current);
       } else {
         setValueState(setStateAction);
       }
     }
-  }, []);
+  });
 
   useUpdateEffect(() => {
     if (isControlled(props, options)) {

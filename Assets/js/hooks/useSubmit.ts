@@ -2,9 +2,7 @@
  * @module useSubmit
  */
 
-import { useCallback } from 'react';
-
-import useSyncRef from './useSyncRef';
+import useStableCallback from './useStableCallback';
 import useRequest, { RequestOptions } from './useRequest';
 import { Body, Query, RequestError } from '/js/utils/request';
 
@@ -32,12 +30,11 @@ export default function useSubmit<V extends Values, R = unknown>(
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
-  const initURLRef = useSyncRef(url);
-  const initOptionsRef = useSyncRef(options);
+  const initOptions = options;
+
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const onSubmit = useCallback((values: V) => {
-    const initOptions = initOptionsRef.current;
+  const onSubmit = useStableCallback((values: V) => {
     const { method = 'POST', normalize } = initOptions;
     const params: V = normalize ? normalize(values) : values;
 
@@ -64,8 +61,8 @@ export default function useSubmit<V extends Values, R = unknown>(
       options.body = params as Body;
     }
 
-    request<R>(initURLRef.current, options);
-  }, []);
+    request<R>(url, options);
+  });
 
   return [loading, onSubmit];
 }

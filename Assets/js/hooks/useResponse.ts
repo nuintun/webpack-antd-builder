@@ -2,10 +2,10 @@
  * @module useResponse
  */
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import useSyncRef from './useSyncRef';
 import { RequestOptions } from './useRequest';
+import useStableCallback from './useStableCallback';
 
 interface Fetch<R> {
   (options?: RequestOptions<R>): void;
@@ -52,17 +52,17 @@ export default function useResponse<R, T>(
   request: Request<R>,
   options: Options<R> | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch<R>] {
-  const initURLRef = useSyncRef(url);
+  const initOptions = options;
+
   const [response, setResponse] = useState<R | T>();
-  const initOptionsRef = useSyncRef(options as TransformOptions<R, T>);
 
-  const fetch = useCallback<Fetch<R>>(options => {
+  const fetch = useStableCallback<Fetch<R>>(options => {
     const requestInit = {
-      ...initOptionsRef.current,
+      ...initOptions,
       ...options
-    };
+    } as TransformOptions<R, T>;
 
-    request(initURLRef.current, {
+    request(url, {
       ...requestInit,
       onSuccess(response) {
         const { transform } = requestInit;
@@ -72,10 +72,10 @@ export default function useResponse<R, T>(
         setResponse(transform ? transform(response) : response);
       }
     });
-  }, []);
+  });
 
   useEffect(() => {
-    initOptionsRef.current.prefetch && fetch();
+    options.prefetch && fetch();
   }, []);
 
   return [response, fetch];
