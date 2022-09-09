@@ -2353,7 +2353,7 @@ core-js-compat@^3.21.0, core-js-compat@^3.22.1:
   dependencies:
     browserslist "^4.21.3"
 
-core-js@^3.25.0, core-js@^3.25.1:
+core-js@^3.25.1:
   version "3.25.1"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.25.1.tgz#5818e09de0db8956e16bf10e2a7141e931b7c69c"
   integrity sha512-sr0FY4lnO1hkQ4gLDr24K0DGnweGO1QwSj5BpfQjpSJPdqWalja4cTps29Y/PJVG/P7FYlPDkH3hO+Tr0CvDgQ==
@@ -2702,9 +2702,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.244"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.244.tgz#ae9b56ed4ae2107e3a860dad80ed662c936e369e"
-  integrity sha512-E21saXLt2eTDaTxgUtiJtBUqanF9A32wZasAwDZ8gvrqXoxrBrbwtDCx7c/PQTLp81wj4X0OLDeoGQg7eMo3+w==
+  version "1.4.246"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.246.tgz#802132d1bbd3ff32ce82fcd6a6ed6ab59b4366dc"
+  integrity sha512-/wFCHUE+Hocqr/LlVGsuKLIw4P2lBWwFIDcNMDpJGzyIysQV4aycpoOitAs32FT94EHKnNqDR/CVZJFbXEufJA==
 
 emojis-list@^3.0.0:
   version "3.0.0"
@@ -3456,16 +3456,16 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.6.0.tgz#22b178e9a606b1c16d07a720f5fc5ea5f34811aa"
-  integrity sha512-Op7YVzkW9OFUYUQHqu/TNbCWxqAk/sLTwHgZebWeMi6OqvW/4rOmF3pxVRNemc04JUtu2VVC9aiMrXNIS96BjQ==
+koa-webpack-dev-service@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.6.1.tgz#d88db799637e2d0a2372dbd16f3dff4bc75ed08e"
+  integrity sha512-AK/MHaJqzoG9kjM9sC56DC4RtX1v9XwLkmeC6SSrr1SBQLrOMeuxBRt7J8YQqCRAH0v0ed/pV+qMtN2IXr2iYA==
   dependencies:
     "@types/koa" "^2.13.5"
     "@types/ws" "^8.5.3"
     ansi-regex "^6.0.1"
     bufferutil "^4.0.6"
-    core-js "^3.25.0"
+    core-js "^3.25.1"
     koa-compose "^4.1.0"
     utf-8-validate "^5.0.9"
     webpack-dev-middleware "^5.3.3"
@@ -4679,10 +4679,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.12.5:
-  version "0.12.5"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.12.5.tgz#454ebd2e5ac9dee5af21ccf2765593404e64ba29"
-  integrity sha512-XT4VwDYxmcX4Vy2sqnyBdtNa7/a3x8ROjeeZRf0ulLNC4Lw+QMPYEEFcqJ4RC1zYGZjcL5L6X4h3QG7oXwjnog==
+react-nest-router@^0.12.6:
+  version "0.12.6"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.12.6.tgz#b202e8d5a889c1cf840f765b5b052a2db7fd7ea2"
+  integrity sha512-Y88ND8Rl/L4m1m0aNH2SiRbEoV8JlksZ+iL1R/pq7KnWtZe5RmLU/j/jDdQPtRoqBmG5Dhih31dC0GNxDW344A==
   dependencies:
     tslib "^2.4.0"
 
@@ -5261,10 +5261,10 @@ type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typescript@^4.8.2:
-  version "4.8.2"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
-  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
+typescript@^4.8.3:
+  version "4.8.3"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
+  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 uglify-js@^2.6.2:
   version "2.8.29"
