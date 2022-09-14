@@ -2,6 +2,7 @@
  * @module useSubmit
  */
 
+import { message } from 'antd';
 import useStableCallback from './useStableCallback';
 import useRequest, { RequestOptions } from './useRequest';
 import { Body, Query, RequestError } from '/js/utils/request';
@@ -41,11 +42,17 @@ export default function useSubmit<V extends Values, R = unknown>(
     const options: RequestOptions<R> = {
       ...initOptions,
       method,
-      onError(error) {
-        initOptions.onError?.(error, values);
-      },
       onSuccess(response) {
         initOptions.onSuccess?.(response, values);
+      },
+      onError(error) {
+        const { onError } = initOptions;
+
+        if (onError) {
+          onError(error, values);
+        } else {
+          message.error(error.message);
+        }
       },
       onComplete() {
         initOptions.onComplete?.(values);
