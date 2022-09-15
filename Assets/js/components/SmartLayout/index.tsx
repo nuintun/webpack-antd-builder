@@ -60,6 +60,16 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
     if (isMobile) {
       setCollapsed(true);
     }
+
+    const { current } = contentRef;
+
+    if (current) {
+      current.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
   }, [isMobile]);
 
   const onTriggerClick = useCallback(() => {
