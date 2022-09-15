@@ -66,7 +66,7 @@ export default memo(function TabsLayout({
         children: <Suspense fallback={<SuspenseFallBack />}>{element || <Outlet />}</Suspense>
       };
     });
-  }, [match]);
+  }, [activeKey, match]);
 
   return (
     <Tabs
