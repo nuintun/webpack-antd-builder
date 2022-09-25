@@ -13,8 +13,8 @@ type OmitProps = 'body' | 'onError' | 'onSuccess' | 'onComplete';
 
 export interface Options<V extends Values, R> extends Omit<RequestOptions<R>, OmitProps> {
   delay?: number;
-  normalize?: (values: V) => any;
   onComplete?: (values: V) => void;
+  normalize?: (values: V) => Values;
   onSuccess?: (response: R, values: V) => void;
   onError?: (error: RequestError<R>, values: V) => void;
 }
@@ -37,7 +37,7 @@ export default function useSubmit<V extends Values, R = unknown>(
 
   const onSubmit = useStableCallback((values: V) => {
     const { method = 'POST', normalize } = initOptions;
-    const params: V = normalize ? normalize(values) : values;
+    const params = normalize ? normalize(values) : values;
 
     const options: RequestOptions<R> = {
       ...initOptions,
