@@ -9,7 +9,7 @@ import { isObject, serialize } from './utils';
 
 export type Query = Record<string | number, any>;
 
-export type Body = Record<string | number, any> | BodyInit | null;
+export type Body = Query | BodyInit | null;
 
 export interface Options extends Omit<RequestInit, 'body'> {
   body?: Body;
