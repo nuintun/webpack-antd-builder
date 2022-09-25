@@ -19,13 +19,13 @@ export interface Options extends Omit<RequestInit, 'body'> {
   onUnauthorized?: () => void;
 }
 
-export interface RequestResult<R> {
+export interface RequestResult<R = unknown> {
   payload: R;
   msg: string;
   code: number;
 }
 
-export interface RequestError<R = any> extends Error {
+export interface RequestError<R = unknown> extends Error {
   code: number;
   response?: R;
 }
