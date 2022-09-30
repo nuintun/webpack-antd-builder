@@ -14,10 +14,10 @@ export default function useUpdateEffect(effect: React.EffectCallback, deps?: Rea
   const isMountedRef = useRef(false);
 
   useEffect(() => {
-    if (!isMountedRef.current) {
-      isMountedRef.current = true;
-    } else {
+    if (isMountedRef.current) {
       return effect();
+    } else {
+      isMountedRef.current = true;
     }
   }, deps);
 }

@@ -74,7 +74,9 @@ export default function useInViewport(target: Target, defaultVisible: boolean = 
 
       observer.observe(element);
 
-      return () => observer.disconnect();
+      return () => {
+        observer.disconnect();
+      };
     }
   }, [target]);
 
