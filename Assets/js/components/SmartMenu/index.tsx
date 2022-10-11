@@ -4,7 +4,7 @@ import React, { memo, useCallback, useRef } from 'react';
 
 import { Drawer } from 'antd';
 import { prefixUI } from './SmartMenuUtils';
-import useSyncRef from '/js/hooks/useSyncRef';
+import useLatestRef from '/js/hooks/useLatestRef';
 import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenuProps } from './SiderMenu';
 
 export type { HeaderRender, HeaderRenderProps, SmartMenuProps };
@@ -12,7 +12,7 @@ export type { HeaderRender, HeaderRenderProps, SmartMenuProps };
 export default memo(function SmartMenu(props: SmartMenuProps): React.ReactElement {
   const { isMobile, collapsed, onCollapse, width = 256, onOpenChange, defaultOpenKeys = [], ...restProps } = props;
 
-  const propsRef = useSyncRef(props);
+  const propsRef = useLatestRef(props);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys);
 
   const onClose = useCallback((): void => {

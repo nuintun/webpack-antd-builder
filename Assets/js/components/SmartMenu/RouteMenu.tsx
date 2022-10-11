@@ -4,7 +4,7 @@ import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
-import useSyncRef from '/js/hooks/useSyncRef';
+import useLatestRef from '/js/hooks/useLatestRef';
 import useItems, { ItemRender } from './useItems';
 import { useLocation, useMatches } from 'react-nest-router';
 import { flattenItems, getExpandKeys, mergeKeys } from './SmartMenuUtils';
@@ -34,7 +34,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   const { pathname } = useLocation();
   const matches = useMatches() as IRoute[];
 
-  const propsRef = useSyncRef<RouteMenuProps>(props);
+  const propsRef = useLatestRef<RouteMenuProps>(props);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
 
   const memoizeMergeKeys = useMemo(() => memoizeOne(mergeKeys), []);

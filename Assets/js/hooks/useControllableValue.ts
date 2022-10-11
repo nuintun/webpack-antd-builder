@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 
-import useSyncRef from './useSyncRef';
+import useLatestRef from './useLatestRef';
 import useIsMounted from './useIsMounted';
 import { isFunction } from '/js/utils/utils';
 import useUpdateEffect from './useUpdateEffect';
@@ -127,7 +127,7 @@ export default function useControllableValue<V = undefined>(
     return options.defaultValue;
   });
 
-  const valueRef = useSyncRef(value);
+  const valueRef = useLatestRef(value);
 
   const setValue = useStableCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {

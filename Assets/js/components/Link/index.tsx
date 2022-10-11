@@ -4,7 +4,7 @@
 
 import React, { memo, useCallback, useMemo } from 'react';
 
-import useSyncRef from '/js/hooks/useSyncRef';
+import useLatestRef from '/js/hooks/useLatestRef';
 import { To, useNavigate, useResolve } from 'react-nest-router';
 
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
@@ -25,7 +25,7 @@ function Link<S>(props: LinkProps<S>): React.ReactElement {
 
   const resolve = useResolve();
   const navigate = useNavigate();
-  const propsRef = useSyncRef(props);
+  const propsRef = useLatestRef(props);
   const href = useMemo(() => resolve(to), [to]);
 
   const onLinkClick = useCallback((e: ClickEvent) => {
