@@ -36,7 +36,7 @@ export default function useSubmit<V extends Values, R = unknown>(
   const opitonsRef = useLatestRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const onSubmit = useCallback((values: V) => {
+  const onSubmit = useCallback((values: V): void => {
     const { current: initOptions } = opitonsRef;
     const { method = 'POST', normalize } = initOptions;
     const params = normalize ? normalize(values) : values;

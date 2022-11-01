@@ -90,7 +90,7 @@ export default function useTable<I, E, T>(
     initialLoadingState
   );
 
-  const fetch = useCallback((options: RequestOptions = {}) => {
+  const fetch = useCallback((options: RequestOptions = {}): void => {
     const { search, filter, sorter } = options;
     const query = serialize([search, filter, sorter]);
 

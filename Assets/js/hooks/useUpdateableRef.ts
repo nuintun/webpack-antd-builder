@@ -22,7 +22,7 @@ export default function useUpdateableRef<T = undefined>(
   const guardRef = useLatestRef(guard);
   const ref = useRef<T | undefined>(initialValue);
 
-  return useCallback((value: T | undefined) => {
+  return useCallback((value: T | undefined): T | undefined => {
     if (guardRef.current(value, ref.current)) {
       ref.current = value;
     }

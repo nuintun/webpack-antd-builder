@@ -107,7 +107,7 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
         }
       };
 
-      ws.onmessage = (message: MessageEvent<M>) => {
+      ws.onmessage = (message: MessageEvent<M>): void => {
         optionsRef.current.onMessage?.(message);
 
         isMounted() && setMessage(message);
@@ -158,7 +158,7 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
    * @description 发送消息
    * @param message
    */
-  const send: WebSocket['send'] = useCallback(message => {
+  const send = useCallback<WebSocket['send']>(message => {
     const ws = websocketRef.current;
 
     if (ws && ws.readyState === WebSocket.OPEN) {
@@ -180,7 +180,7 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
   /**
    * @description 断开连接
    */
-  const disconnect = useCallback((code: number = 1000, reason?: string) => {
+  const disconnect = useCallback((code: number = 1000, reason?: string): void => {
     const { reconnectLimit = 3 } = optionsRef.current;
 
     clearTimeout(reconnectTimerRef.current);

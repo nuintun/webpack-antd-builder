@@ -113,7 +113,7 @@ export default function useControllableValue<V = undefined>(
     return getDefaultValue(props, options);
   });
 
-  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
+  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]): void => {
     if (isMounted()) {
       setState(prevState => {
         const { current: props } = propsRef;

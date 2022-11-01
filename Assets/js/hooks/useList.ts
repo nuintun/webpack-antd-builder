@@ -80,7 +80,7 @@ export default function useList<I, E, T>(
     initialLoadingState
   );
 
-  const fetch = useCallback((options: RequestOptions = {}) => {
+  const fetch = useCallback((options: RequestOptions = {}): void => {
     const { search, sorter } = options;
     const query = serialize([search, sorter]);
 
