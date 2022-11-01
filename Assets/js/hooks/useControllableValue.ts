@@ -2,13 +2,12 @@
  * @module useControllableValue
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import useLatestRef from './useLatestRef';
 import useIsMounted from './useIsMounted';
+import useLatestRef from './useLatestRef';
 import { isFunction } from '/js/utils/utils';
 import useUpdateEffect from './useUpdateEffect';
-import useStableCallback from './useStableCallback';
 
 export interface Props {
   [prop: string]: any;
@@ -54,17 +53,6 @@ function isControlled<V>(props: Props, options: Options<V>): boolean {
   const valuePropName = getValuePropName(options);
 
   return valuePropName in props;
-}
-
-/**
- * @function isUncontrolled
- * @param props 组件 Props
- * @param options 配置选项
- */
-function isUncontrolled<V>(props: Props, options: Options<V>): boolean {
-  const defaultValuePropName = getDefaultValuePropName(options);
-
-  return defaultValuePropName in props;
 }
 
 /**
@@ -114,49 +102,44 @@ export default function useControllableValue<V = undefined>(
   options: Options<V> = {}
 ): [value: V | undefined, setValue: SetValueAction<V | undefined>] {
   const isMounted = useIsMounted();
+  const propsRef = useLatestRef(props);
+  const optionsRef = useLatestRef(options);
 
-  const [value = options.defaultValue, setValueState] = useState<V | undefined>(() => {
+  const [value = options.defaultValue, setState] = useState<V | undefined>(() => {
     if (isControlled(props, options)) {
       return getValue(props, options);
     }
 
-    if (isUncontrolled(props, options)) {
-      return getDefaultValue(props, options);
-    }
-
-    return options.defaultValue;
+    return getDefaultValue(props, options);
   });
 
-  const valueRef = useLatestRef(value);
-
-  const setValue = useStableCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
+  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]) => {
     if (isMounted()) {
-      const setStateAction = (state: V | undefined): V | undefined => {
+      setState(prevState => {
+        const { current: props } = propsRef;
         const { trigger = 'onChange' } = props;
-        const nextState = isFunction(value) ? value(state) : value;
+        const { current: options } = optionsRef;
+        const state = isFunction(value) ? value(prevState) : value;
 
-        if (nextState !== state && isFunction(props[trigger])) {
-          props[trigger](nextState, ...args);
+        if (state !== prevState && isFunction(props[trigger])) {
+          props[trigger](state, ...args);
         }
 
-        return nextState;
-      };
+        if (isControlled(props, options)) {
+          return prevState;
+        }
 
-      if (isControlled(props, options)) {
-        setStateAction(valueRef.current);
-      } else {
-        setValueState(setStateAction);
-      }
+        return state;
+      });
     }
-  });
+  }, []);
 
   useUpdateEffect(() => {
     if (isControlled(props, options)) {
-      const prevValue = valueRef.current;
       const nextValue = getValue(props, options);
 
-      if (nextValue !== prevValue) {
-        setValueState(nextValue);
+      if (nextValue !== value) {
+        setState(nextValue);
       }
     }
   });

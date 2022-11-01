@@ -4,6 +4,7 @@
 
 import { useCallback, useMemo } from 'react';
 
+import useLatestRef from './useLatestRef';
 import usePagingRequest, {
   hasQuery,
   Options as InitOptions,
@@ -15,7 +16,6 @@ import usePagingRequest, {
 } from './usePagingRequest';
 import { ListProps, PaginationProps } from 'antd';
 import useSearches, { Search } from './useSearches';
-import useStableCallback from './useStableCallback';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
 
 type OnChange = NonNullable<PaginationProps['onChange']>;
@@ -70,8 +70,7 @@ export default function useList<I, E, T>(
   options: Options<I, E> | TransformOptions<I, T> = {},
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultListProps<I | T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
-  const initOptions = options;
-
+  const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
   const [serialize, raw] = useSearches<[Search, Sorter]>([false, false]);
 
@@ -81,12 +80,12 @@ export default function useList<I, E, T>(
     initialLoadingState
   );
 
-  const fetch = useStableCallback((options: RequestOptions = {}) => {
+  const fetch = useCallback((options: RequestOptions = {}) => {
     const { search, sorter } = options;
     const query = serialize([search, sorter]);
 
-    request({ ...initOptions, ...options, search: query });
-  });
+    request({ ...opitonsRef.current, ...options, search: query });
+  }, []);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
     fetch({ pagination: { page, pageSize } });

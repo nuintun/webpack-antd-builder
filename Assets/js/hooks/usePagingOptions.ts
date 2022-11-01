@@ -2,11 +2,11 @@
  * @module usePagingOptions
  */
 
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import memoizeOne from 'memoize-one';
 import { PaginationProps } from 'antd';
-import useStableCallback from './useStableCallback';
+import useLatestRef from './useLatestRef';
 
 type PagingOptions = Omit<PaginationProps, 'total' | 'current' | 'pageSize' | 'defaultCurrent' | 'defaultPageSize'>;
 
@@ -57,11 +57,13 @@ export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
  * @param opitons 分页配置
  */
 export default function usePagingOptions(opitons?: Options | false): (pageSize: number) => PagingOptions | undefined {
+  const opitonsRef = useLatestRef(opitons);
+
   const memoizeNormalizePagingOptions = useMemo(() => {
     return memoizeOne(normalizePagingOptions);
   }, []);
 
-  return useStableCallback((pageSize: number): PagingOptions | undefined => {
-    return memoizeNormalizePagingOptions(pageSize, opitons);
-  });
+  return useCallback((pageSize: number): PagingOptions | undefined => {
+    return memoizeNormalizePagingOptions(pageSize, opitonsRef.current);
+  }, []);
 }

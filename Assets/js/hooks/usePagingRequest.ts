@@ -2,11 +2,11 @@
  * @module usePagingRequest
  */
 
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { message } from 'antd';
+import useLatestRef from './useLatestRef';
 import useSearches, { Search } from './useSearches';
-import useStableCallback from './useStableCallback';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
 
 interface Page<I> {
@@ -87,8 +87,6 @@ export default function usePagingRequest<I, E, T>(
   options: Options<I, E> | TransformOptions<I, E, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, dataSource: I[] | T[], fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
-  const initOptions = options;
-
   const initPagination = useMemo(() => {
     const { pagination } = options;
 
@@ -97,15 +95,16 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
+  const opitonsRef = useLatestRef(options);
   const responseRef = useRef<Response<I, E>>({});
   const [serialize, raw] = useSearches<[Search]>([false]);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const fetch = useStableCallback((options: RequestOptions = {}) => {
+  const fetch = useCallback((options: RequestOptions = {}): void => {
     const requestInit = {
-      ...initOptions,
+      ...opitonsRef.current,
       ...options
     } as TransformOptions<I, E, T>;
 
@@ -174,7 +173,7 @@ export default function usePagingRequest<I, E, T>(
         }
       }
     });
-  });
+  }, []);
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {

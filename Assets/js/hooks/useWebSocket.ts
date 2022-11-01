@@ -5,7 +5,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useIsMounted from './useIsMounted';
-import useStableCallback from './useStableCallback';
+import useLatestRef from './useLatestRef';
 
 interface Socket<M> {
   readyState: number;
@@ -47,10 +47,10 @@ export interface Options<M> {
  * @param options 配置参数
  */
 export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url: string, options: Options<M> = {}): Socket<M> {
-  const { protocols, manual = false } = options;
-
   const isMounted = useIsMounted();
+  const urlRef = useLatestRef(url);
   const reconnectTimesRef = useRef(0);
+  const optionsRef = useLatestRef(options);
   const websocketRef = useRef<WebSocket>();
   const reconnectTimerRef = useRef<Timeout>();
   const [message, setMessage] = useState<MessageEvent<M>>();
@@ -60,7 +60,8 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
   /**
    * @description 重连
    */
-  const reconnect = useStableCallback(() => {
+  const reconnect = useCallback(() => {
+    const { current: options } = optionsRef;
     const { reconnectLimit = 3 } = options;
 
     if (reconnectTimesRef.current < reconnectLimit && websocketRef.current?.readyState !== WebSocket.OPEN) {
@@ -71,33 +72,29 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
       reconnectTimerRef.current = setTimeout(() => {
         connectWebSocket();
 
-        const { onReconnect } = options;
         const reconnectTimes = reconnectTimesRef.current++;
 
-        onReconnect && onReconnect(reconnectTimes, reconnectLimit);
+        optionsRef.current.onReconnect?.(reconnectTimes, reconnectLimit);
       }, reconnectInterval);
     }
-  });
+  }, []);
 
-  const connectWebSocket = useStableCallback(() => {
+  const connectWebSocket = useCallback(() => {
     clearTimeout(reconnectTimerRef.current);
 
     websocketRef.current?.close(1000);
 
     const connect = () => {
-      const { protocols } = options;
-
-      const ws = new WebSocket(url, protocols);
+      const { current: options } = optionsRef;
+      const ws = new WebSocket(urlRef.current, options.protocols);
       const getReadyState = () => ws.readyState || WebSocket.CLOSED;
 
       ws.onopen = event => {
-        const { onOpen } = options;
-
         reconnectTimesRef.current = 0;
 
-        onOpen && onOpen(event);
+        optionsRef.current.onOpen?.(event);
 
-        isMounted() && setReadyState(getReadyState());
+        isMounted() && setReadyState(getReadyState);
 
         const messages = sendQueueRef.current;
 
@@ -111,15 +108,13 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
       };
 
       ws.onmessage = (message: MessageEvent<M>) => {
-        const { onMessage } = options;
-
-        onMessage && onMessage(message);
+        optionsRef.current.onMessage?.(message);
 
         isMounted() && setMessage(message);
       };
 
       ws.onerror = event => {
-        const { onError } = options;
+        const { onError } = optionsRef.current;
 
         if (onError) {
           onError(event);
@@ -127,19 +122,17 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
           console.error(event);
         }
 
-        isMounted() && setReadyState(getReadyState());
+        isMounted() && setReadyState(getReadyState);
       };
 
       ws.onclose = event => {
-        const { onClose } = options;
-
         removeWsEvents(ws);
 
         sendQueueRef.current = [];
 
-        onClose && onClose(event);
+        optionsRef.current.onClose?.(event);
 
-        isMounted() && setReadyState(getReadyState());
+        isMounted() && setReadyState(getReadyState);
 
         !event.wasClean && reconnect();
       };
@@ -159,7 +152,7 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
         console.error(error);
       }
     }
-  });
+  }, []);
 
   /**
    * @description 发送消息
@@ -187,15 +180,17 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
   /**
    * @description 断开连接
    */
-  const disconnect = useStableCallback((code: number = 1000, reason?: string) => {
-    const { reconnectLimit = 3 } = options;
+  const disconnect = useCallback((code: number = 1000, reason?: string) => {
+    const { reconnectLimit = 3 } = optionsRef.current;
 
     clearTimeout(reconnectTimerRef.current);
 
     reconnectTimesRef.current = reconnectLimit;
 
     websocketRef.current?.close(code, reason);
-  });
+  }, []);
+
+  const { protocols, manual } = options;
 
   // 初始时连接，卸载时断连
   useEffect(() => {

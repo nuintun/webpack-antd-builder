@@ -4,8 +4,8 @@
 
 import { useMemo } from 'react';
 
+import useLatestRef from './useLatestRef';
 import { throttle } from 'throttle-debounce';
-import useStableCallback, { Callback } from './useStableCallback';
 
 export interface Options {
   // 是否使用首调用模式
@@ -16,6 +16,10 @@ export interface Options {
   debounceMode?: boolean;
 }
 
+export interface Callback {
+  (this: any, ...args: any[]): any;
+}
+
 /**
  * @function useThrottle
  * @description [hook] 节流函数
@@ -24,8 +28,11 @@ export interface Options {
  * @param options 节流模式配置
  */
 export default function useThrottle<C extends Callback>(callback: C, delay: number, options: Options = {}): throttle<C> {
-  const fn = useStableCallback(callback);
+  const callbackRef = useLatestRef(callback);
   const { noLeading, noTrailing, debounceMode } = options;
 
-  return useMemo(() => throttle(delay, fn, options), [delay, noLeading, noTrailing, debounceMode]);
+  return useMemo(
+    () => throttle<Callback>(delay, (...args) => callbackRef.current(...args), options),
+    [delay, noLeading, noTrailing, debounceMode]
+  );
 }

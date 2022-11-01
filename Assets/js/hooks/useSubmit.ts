@@ -2,8 +2,10 @@
  * @module useSubmit
  */
 
+import { useCallback } from 'react';
+
 import { message } from 'antd';
-import useStableCallback from './useStableCallback';
+import useLatestRef from './useLatestRef';
 import useRequest, { RequestOptions } from './useRequest';
 import { Body, Query, RequestError } from '/js/utils/request';
 
@@ -31,11 +33,11 @@ export default function useSubmit<V extends Values, R = unknown>(
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
-  const initOptions = options;
-
+  const opitonsRef = useLatestRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const onSubmit = useStableCallback((values: V) => {
+  const onSubmit = useCallback((values: V) => {
+    const { current: initOptions } = opitonsRef;
     const { method = 'POST', normalize } = initOptions;
     const params = normalize ? normalize(values) : values;
 
@@ -69,7 +71,7 @@ export default function useSubmit<V extends Values, R = unknown>(
     }
 
     request<R>(url, options);
-  });
+  }, []);
 
   return [loading, onSubmit];
 }

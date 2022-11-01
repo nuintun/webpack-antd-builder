@@ -2,9 +2,9 @@
  * @module useLazyState
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import useStableCallback from './useStableCallback';
+import useLatestRef from './useLatestRef';
 
 /**
  * @function useLazyState
@@ -15,7 +15,7 @@ import useStableCallback from './useStableCallback';
 export default function useLazyState<S>(
   initialState: S | (() => S),
   delay?: number
-): [state: S, setLazyState: (value: React.SetStateAction<S>, immediate?: boolean) => void];
+): [state: S, setLazyState: (value: React.SetStateAction<S>, delay?: number) => void];
 /**
  * @function useLazyState
  * @description [hook] 使用延时状态，在延迟时间后更新状态
@@ -25,25 +25,26 @@ export default function useLazyState<S>(
 export default function useLazyState<S = undefined>(
   initialState?: S | (() => S),
   delay?: number
-): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void];
+): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, delay?: number) => void];
 export default function useLazyState<S = undefined>(
   initialState?: S | (() => S),
   delay: number = 128
-): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, immediate?: boolean) => void] {
+): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, delay?: number) => void] {
   const timerRef = useRef<Timeout>();
+  const delayRef = useLatestRef(delay);
   const [state, setState] = useState(initialState);
 
-  const setLazyState = useStableCallback((value: React.SetStateAction<S | undefined>, immediate?: boolean): void => {
+  const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, delay: number = delayRef.current): void => {
     clearTimeout(timerRef.current);
 
-    if (immediate || delay <= 0) {
+    if (delay <= 0) {
       setState(value);
     } else {
       timerRef.current = setTimeout(() => {
         setState(value);
       }, delay);
     }
-  });
+  }, []);
 
   useEffect(() => {
     return () => {

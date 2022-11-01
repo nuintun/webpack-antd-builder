@@ -4,12 +4,16 @@
 
 import { useMemo } from 'react';
 
+import useLatestRef from './useLatestRef';
 import { debounce } from 'throttle-debounce';
-import useStableCallback, { Callback } from './useStableCallback';
 
 export interface Options {
   // 是否前置调用
   atBegin?: boolean;
+}
+
+export interface Callback {
+  (this: any, ...args: any[]): any;
 }
 
 /**
@@ -21,7 +25,7 @@ export interface Options {
  */
 export default function useDebounce<C extends Callback>(callback: C, delay: number, options: Options = {}): debounce<C> {
   const { atBegin } = options;
-  const fn = useStableCallback(callback);
+  const callbackRef = useLatestRef(callback);
 
-  return useMemo(() => debounce(delay, fn, options), [delay, atBegin]);
+  return useMemo(() => debounce<Callback>(delay, (...args) => callbackRef.current(...args), options), [delay, atBegin]);
 }
