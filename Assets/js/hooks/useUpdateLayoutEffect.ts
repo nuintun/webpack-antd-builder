@@ -4,7 +4,7 @@
 
 import React, { useRef } from 'react';
 
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import useIsoLayoutEffect from './useIsoLayoutEffect';
 
 /**
  * @function useUpdateLayoutEffect
@@ -15,7 +15,7 @@ import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 export default function useUpdateLayoutEffect(effect: React.EffectCallback, deps?: React.DependencyList): void {
   const isMountedRef = useRef(false);
 
-  useIsomorphicLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     if (!isMountedRef.current) {
       isMountedRef.current = true;
     } else {

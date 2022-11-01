@@ -2,9 +2,8 @@
  * @module useUpdateableRef
  */
 
-import { useRef } from 'react';
-
-import useStableCallback from './useStableCallback';
+import useLatestRef from './useLatestRef';
+import { useCallback, useRef } from 'react';
 
 type UpdateRef<T> = (value: T) => T;
 
@@ -19,13 +18,14 @@ export default function useUpdateableRef<T = undefined>(
   guard: Guard<T | undefined> = defaultGuard,
   initialValue?: T
 ): UpdateRef<T | undefined> {
+  const guardRef = useLatestRef(guard);
   const ref = useRef<T | undefined>(initialValue);
 
-  return useStableCallback((value: T | undefined) => {
-    if (guard(value, ref.current)) {
+  return useCallback((value: T | undefined) => {
+    if (guardRef.current(value, ref.current)) {
       ref.current = value;
     }
 
     return ref.current;
-  });
+  }, []);
 }
