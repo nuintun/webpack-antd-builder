@@ -2,8 +2,9 @@
  * @module useUpdateableRef
  */
 
-import useLatestRef from './useLatestRef';
 import { useCallback, useRef } from 'react';
+
+import useLatestRef from './useLatestRef';
 
 type UpdateRef<T> = (value: T) => T;
 
