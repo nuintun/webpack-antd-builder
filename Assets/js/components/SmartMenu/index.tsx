@@ -21,7 +21,7 @@ export default memo(function SmartMenu(props: SmartMenuProps): React.ReactElemen
     onCollapse && onCollapse(true, 'clickTrigger');
   }, []);
 
-  const onOpenChangeHander = useCallback((openKeys: string[], cachedOpenKeys: string[]): void => {
+  const onOpenChangeHander = useCallback<NonNullable<SmartMenuProps['onOpenChange']>>((openKeys, cachedOpenKeys) => {
     const { collapsed, onOpenChange } = propsRef.current;
 
     if (!collapsed) {
