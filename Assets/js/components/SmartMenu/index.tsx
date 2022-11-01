@@ -15,13 +15,13 @@ export default memo(function SmartMenu(props: SmartMenuProps): React.ReactElemen
   const propsRef = useLatestRef(props);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys);
 
-  const onClose = useCallback((): void => {
+  const onClose = useCallback(() => {
     const { onCollapse } = propsRef.current;
 
     onCollapse && onCollapse(true, 'clickTrigger');
   }, []);
 
-  const onOpenChangeHander = useCallback((openKeys: string[], cachedOpenKeys: string[]) => {
+  const onOpenChangeHander = useCallback((openKeys: string[], cachedOpenKeys: string[]): void => {
     const { collapsed, onOpenChange } = propsRef.current;
 
     if (!collapsed) {
