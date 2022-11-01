@@ -30,9 +30,6 @@
       ],
       "/images/*": [
         "Assets/images/*"
-      ],
-      "~*": [
-        "node_modules/*"
       ]
     }
   },
