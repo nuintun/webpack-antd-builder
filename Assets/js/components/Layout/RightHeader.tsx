@@ -2,11 +2,11 @@ import './index.less';
 
 import { memo, useCallback, useMemo } from 'react';
 
-import useTheme from '/js/hooks/useTheme';
+import useTheme, { Theme } from '/js/hooks/useTheme';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
+import { Avatar, Dropdown, MenuProps, message } from 'antd';
 import { HeaderRenderProps } from '/js/components/SmartMenu';
 import { MenuClickEventHandler } from 'rc-menu/es/interface';
-import { Avatar, Dropdown, Menu, MenuProps, message } from 'antd';
 
 import logo from '/images/logo.svg?url';
 
@@ -18,31 +18,35 @@ function getDropdownActiveClassName(selected: boolean): string {
   return selected ? 'ant-dropdown-menu-item-selected' : '';
 }
 
-function getThemeItems(theme?: string, onThemeClick?: MenuClickEventHandler): MenuProps['items'] {
-  return [
-    {
-      key: 'dark',
-      onClick: onThemeClick,
-      className: getDropdownActiveClassName(theme === 'dark'),
-      label: (
-        <a className="ui-vertical-middle">
-          <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
-          <span>暗色主题</span>
-        </a>
-      )
-    },
-    {
-      key: 'light',
-      onClick: onThemeClick,
-      className: getDropdownActiveClassName(theme === 'light'),
-      label: (
-        <a className="ui-vertical-middle">
-          <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
-          <span>浅色主题</span>
-        </a>
-      )
-    }
-  ];
+function getThemeMenu(theme: Theme, onThemeClick?: MenuClickEventHandler): MenuProps {
+  return {
+    theme,
+    selectable: true,
+    items: [
+      {
+        key: 'dark',
+        onClick: onThemeClick,
+        className: getDropdownActiveClassName(theme === 'dark'),
+        label: (
+          <a className="ui-vertical-middle">
+            <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
+            <span>暗色主题</span>
+          </a>
+        )
+      },
+      {
+        key: 'light',
+        onClick: onThemeClick,
+        className: getDropdownActiveClassName(theme === 'light'),
+        label: (
+          <a className="ui-vertical-middle">
+            <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
+            <span>浅色主题</span>
+          </a>
+        )
+      }
+    ]
+  };
 }
 
 const ThemeAction = memo(function ThemeAction(): React.ReactElement {
@@ -52,10 +56,10 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
     setTheme(key as 'dark' | 'light');
   }, []);
 
-  const items = useMemo(() => getThemeItems(theme, onThemeClick), [theme]);
+  const menu = useMemo(() => getThemeMenu(theme, onThemeClick), [theme]);
 
   return (
-    <Dropdown placement="bottomRight" overlay={<Menu selectable theme={theme} items={items} />}>
+    <Dropdown placement="bottomRight" menu={menu}>
       <div title="Theme">
         <Icon component={ThemeIcon} style={{ fontSize: 24, color: theme === 'dark' ? '#fff' : '#000' }} />
       </div>
@@ -87,33 +91,39 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
     setTheme(key as 'dark' | 'light');
   }, []);
 
-  const items = useMemo<MenuProps['items']>(() => {
+  const menu = useMemo<MenuProps>(() => {
     const logout = {
       key: 'logout',
       label: <LogoutAction />
     };
 
     if (isMobile) {
-      return [
-        {
-          key: 'theme',
-          children: getThemeItems(theme, onThemeClick),
-          label: (
-            <a className="ui-vertical-middle" style={{ display: 'inline-flex' }}>
-              <Icon component={ThemeIcon} style={{ fontSize: 18, marginRight: 8 }} />
-              <span>主题设置</span>
-            </a>
-          )
-        },
-        logout
-      ];
+      return {
+        theme,
+        items: [
+          {
+            key: 'theme',
+            children: getThemeMenu(theme, onThemeClick),
+            label: (
+              <a className="ui-vertical-middle" style={{ display: 'inline-flex' }}>
+                <Icon component={ThemeIcon} style={{ fontSize: 18, marginRight: 8 }} />
+                <span>主题设置</span>
+              </a>
+            )
+          },
+          logout
+        ]
+      };
     }
 
-    return [logout];
+    return {
+      theme,
+      items: [logout]
+    };
   }, [theme, isMobile]);
 
   return (
-    <Dropdown placement="bottomRight" overlay={<Menu theme={theme} items={items} />}>
+    <Dropdown placement="bottomRight" menu={menu}>
       <div className="ui-user-profile">
         <Avatar size={40} src={logo} alt="avatar" />
         <span className="ui-user-name">Antd</span>

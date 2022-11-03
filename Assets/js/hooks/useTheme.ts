@@ -8,7 +8,7 @@ import useStorage from './useStorage';
 import createStorage from '/js/utils/storage';
 import createSharedState from './createSharedState';
 
-type Theme = 'dark' | 'light';
+export type Theme = 'dark' | 'light';
 
 const THEME_CACHE_KEY = 'theme';
 
