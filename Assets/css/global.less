@@ -178,6 +178,22 @@ a {
   }
 }
 
+// HACK 修复 dark 模式下拉菜单展开箭头问题
+.ant-dropdown-menu {
+  &-submenu-expand-icon {
+    .anticon {
+      color: inherit !important;
+    }
+  }
+}
+
+// HACK 修复 dark 模式下二级菜单背景问题
+.ant-dropdown-menu-dark {
+  &.ant-dropdown-menu-submenu {
+    background: transparent;
+  }
+}
+
 @media screen and (max-width: @screen-sm) {
   .ui-page {
     margin: 16px 0;

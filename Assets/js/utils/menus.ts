@@ -17,7 +17,7 @@ export const enum Filter {
   All, // 过滤当前节点和子节点
   Self, // 仅过滤当前节点，子节点正常处理
   Keep, // 强制保留当前节点，子节点正常处理
-  None // 缺省模式，若当前节点为布局节点且无子节点，将会被过滤
+  Auto // 缺省模式，若当前节点为布局节点且无子节点，将会被过滤
 }
 
 /**
@@ -70,7 +70,7 @@ function removeOnlyLayoutMenus(items: MenuItem[], layouts: Record<string, boolea
  */
 export function parse<M = unknown>(
   routes: readonly Route<M>[],
-  filter: (route: IRoute<M>) => Filter = () => Filter.None,
+  filter: (route: IRoute<M>) => Filter = () => Filter.Auto,
   transform: (menu: MenuItem, route: IRoute<M>) => MenuItem = menu => menu
 ): MenuItem[] {
   const menus: MenuItem[] = [];

@@ -27,7 +27,7 @@ export default memo(function Layout(): React.ReactElement {
           case MenuType.Hidden:
             return Filter.Self;
           default:
-            return Filter.None;
+            return Filter.Auto;
         }
       },
       (menu, { meta, children }) => {

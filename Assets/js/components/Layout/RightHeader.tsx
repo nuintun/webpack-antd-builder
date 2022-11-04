@@ -18,35 +18,31 @@ function getDropdownActiveClassName(selected: boolean): string {
   return selected ? 'ant-dropdown-menu-item-selected' : '';
 }
 
-function getThemeMenu(theme: Theme, onThemeClick?: MenuClickEventHandler): MenuProps {
-  return {
-    theme,
-    selectable: true,
-    items: [
-      {
-        key: 'dark',
-        onClick: onThemeClick,
-        className: getDropdownActiveClassName(theme === 'dark'),
-        label: (
-          <a className="ui-vertical-middle">
-            <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
-            <span>暗色主题</span>
-          </a>
-        )
-      },
-      {
-        key: 'light',
-        onClick: onThemeClick,
-        className: getDropdownActiveClassName(theme === 'light'),
-        label: (
-          <a className="ui-vertical-middle">
-            <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
-            <span>浅色主题</span>
-          </a>
-        )
-      }
-    ]
-  };
+function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): MenuProps['items'] {
+  return [
+    {
+      key: 'dark',
+      onClick: onThemeClick,
+      className: getDropdownActiveClassName(theme === 'dark'),
+      label: (
+        <a className="ui-vertical-middle">
+          <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
+          <span>暗色主题</span>
+        </a>
+      )
+    },
+    {
+      key: 'light',
+      onClick: onThemeClick,
+      className: getDropdownActiveClassName(theme === 'light'),
+      label: (
+        <a className="ui-vertical-middle">
+          <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
+          <span>浅色主题</span>
+        </a>
+      )
+    }
+  ];
 }
 
 const ThemeAction = memo(function ThemeAction(): React.ReactElement {
@@ -56,7 +52,12 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
     setTheme(key as 'dark' | 'light');
   }, []);
 
-  const menu = useMemo(() => getThemeMenu(theme, onThemeClick), [theme]);
+  const menu = useMemo<MenuProps>(() => {
+    return {
+      theme,
+      items: getThemeItems(theme, onThemeClick)
+    };
+  }, [theme]);
 
   return (
     <Dropdown placement="bottomRight" menu={menu}>
@@ -102,8 +103,9 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
         theme,
         items: [
           {
+            theme,
             key: 'theme',
-            children: getThemeMenu(theme, onThemeClick),
+            children: getThemeItems(theme, onThemeClick),
             label: (
               <a className="ui-vertical-middle" style={{ display: 'inline-flex' }}>
                 <Icon component={ThemeIcon} style={{ fontSize: 18, marginRight: 8 }} />
