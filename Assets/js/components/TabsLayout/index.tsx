@@ -24,8 +24,7 @@ type TabsPicked =
   | 'tabBarGutter'
   | 'renderTabBar'
   | 'popupClassName'
-  | 'tabBarExtraContent'
-  | 'destroyInactiveTabPane';
+  | 'tabBarExtraContent';
 
 export interface TabsLayoutProps extends Pick<TabsProps, TabsPicked> {
   icon?: boolean;
@@ -34,12 +33,7 @@ export interface TabsLayoutProps extends Pick<TabsProps, TabsPicked> {
   style?: React.CSSProperties;
 }
 
-export default memo(function TabsLayout({
-  className,
-  icon = true,
-  destroyInactiveTabPane = true,
-  ...restProps
-}: TabsLayoutProps): React.ReactElement {
+export default memo(function TabsLayout({ className, icon = true, ...restProps }: TabsLayoutProps): React.ReactElement {
   const index = useMatchIndex();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];
@@ -48,22 +42,21 @@ export default memo(function TabsLayout({
   const items = useMemo(() => {
     return match.children?.map(({ meta, element }) => {
       const { key, link } = meta;
+      const active = key === activeKey;
 
       return {
         key,
+        children: active && (
+          <Suspense fallback={<SuspenseFallBack />}>
+            <Outlet />
+          </Suspense>
+        ),
         label: (
-          <Link
-            href={link.href}
-            target={link.target}
-            className={classNames(`${prefixUI}-nav`, {
-              active: activeKey === key
-            })}
-          >
+          <Link href={link.href} target={link.target} className={classNames(`${prefixUI}-nav`, { active })}>
             {icon && <SmartIcon icon={meta.icon} className={iconClassName} />}
             {meta.name}
           </Link>
-        ),
-        children: <Suspense fallback={<SuspenseFallBack />}>{element || <Outlet />}</Suspense>
+        )
       };
     });
   }, [activeKey, match]);
@@ -73,8 +66,8 @@ export default memo(function TabsLayout({
       {...restProps}
       items={items}
       activeKey={activeKey}
+      destroyInactiveTabPane
       className={classNames(prefixUI, className)}
-      destroyInactiveTabPane={destroyInactiveTabPane}
     />
   );
 });
