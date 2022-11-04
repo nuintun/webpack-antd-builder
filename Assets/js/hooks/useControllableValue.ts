@@ -125,11 +125,7 @@ export default function useControllableValue<V = undefined>(
           props[trigger](state, ...args);
         }
 
-        if (isControlled(props, options)) {
-          return prevState;
-        }
-
-        return state;
+        return isControlled(props, options) ? prevState : state;
       });
     }
   }, []);
