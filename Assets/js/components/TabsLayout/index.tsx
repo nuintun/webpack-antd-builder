@@ -39,7 +39,7 @@ export default memo(function TabsLayout({ className, icon = true, ...restProps }
   const matches = useMatches() as IRoute<Meta>[];
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
-  const items = useMemo(() => {
+  const items = useMemo<TabsProps['items']>(() => {
     return match.children?.map(({ meta }) => {
       const { key, link } = meta;
       const active = key === activeKey;
