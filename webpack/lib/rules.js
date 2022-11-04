@@ -46,7 +46,10 @@ export default async mode => {
           use: [
             {
               loader: 'babel-loader',
-              options: { highlightCode: true, cacheDirectory: true }
+              options: {
+                highlightCode: true,
+                cacheDirectory: true
+              }
             }
           ]
         },
@@ -96,7 +99,12 @@ export default async mode => {
             },
             {
               loader: 'less-loader',
-              options: { lessOptions: { modifyVars: themeVars, javascriptEnabled: true } }
+              options: {
+                lessOptions: {
+                  modifyVars: themeVars,
+                  javascriptEnabled: true
+                }
+              }
             }
           ]
         },
