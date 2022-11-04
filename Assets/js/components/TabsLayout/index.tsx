@@ -40,7 +40,7 @@ export default memo(function TabsLayout({ className, icon = true, ...restProps }
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
   const items = useMemo(() => {
-    return match.children?.map(({ meta, element }) => {
+    return match.children?.map(({ meta }) => {
       const { key, link } = meta;
       const active = key === activeKey;
 
