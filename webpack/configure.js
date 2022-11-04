@@ -15,12 +15,13 @@ const images = path.resolve('Assets/images');
 export default {
   name: 'Antd',
   lang: 'zh-CN',
+  compact: false,
   publicPath: '/public/',
   context: path.resolve('Assets'),
   outputPath: path.resolve('wwwroot/public'),
   entryHTML: path.resolve('wwwroot/app.html'),
-  theme: path.resolve('Assets/css/theme.less'),
   favicon: path.resolve('wwwroot/favicon.ico'),
+  theme: path.resolve('Assets/css/theme.less'),
   entry: [path.resolve('Assets/js/pages/index.tsx')],
   alias: { '/js': js, '/css': css, '/mods': mods, '/images': images },
   meta: { 'theme-color': '#4285f4', viewport: 'width=device-width,initial-scale=1.0' }

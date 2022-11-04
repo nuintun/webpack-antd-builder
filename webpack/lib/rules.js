@@ -7,8 +7,13 @@
 
 import fs from 'fs';
 import less2js from './less2js.js';
+import { createRequire } from 'module';
 import configure from '../configure.js';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const require = createRequire(import.meta.url);
+
+const { getThemeVariables } = require('antd/dist/theme');
 
 /**
  * @function parseTheme
@@ -18,8 +23,11 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
  */
 function parseTheme(path) {
   return new Promise(resolve => {
+    const { compact } = configure;
+    const antd = getThemeVariables({ compact });
+
     fs.readFile(path, { encoding: 'utf-8' }, (error, code) => {
-      resolve(error ? {} : less2js(code));
+      resolve(error ? antd : { ...antd, ...less2js(code) });
     });
   });
 }
