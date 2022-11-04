@@ -60,10 +60,14 @@ export default function createSharedReducer<S, A>(
   };
 
   const dispatch = (action: A): void => {
-    sharedState = reducer(sharedState, action);
+    const setStateAction = (prevState: S | undefined): S | undefined => {
+      sharedState = reducer(prevState, action);
+
+      return sharedState;
+    };
 
     for (const dispatch of dispatches) {
-      dispatch(sharedState);
+      dispatch(setStateAction);
     }
   };
 

@@ -36,10 +36,14 @@ export default function createSharedState<S = undefined>(initialState?: S | (() 
   };
 
   const setSharedState = (value: React.SetStateAction<S | undefined>): void => {
-    sharedState = isFunction(value) ? value(sharedState) : value;
+    const setStateAction = (prevState: S | undefined): S | undefined => {
+      sharedState = isFunction(value) ? value(prevState) : value;
+
+      return sharedState;
+    };
 
     for (const dispatch of dispatches) {
-      dispatch(sharedState);
+      dispatch(setStateAction);
     }
   };
 
