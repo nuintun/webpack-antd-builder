@@ -2,12 +2,11 @@
  * @module useControllableValue
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import useIsMounted from './useIsMounted';
 import useLatestRef from './useLatestRef';
 import { isFunction } from '/js/utils/utils';
-import useUpdateEffect from './useUpdateEffect';
 
 export interface Props {
   [prop: string]: any;
@@ -130,7 +129,7 @@ export default function useControllableValue<V = undefined>(
     }
   }, []);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     if (isControlled(props, options)) {
       const nextValue = getValue(props, options);
 
