@@ -22,12 +22,18 @@ const { getThemeVariables } = require('antd/dist/theme');
  * @returns {Promise<object>}
  */
 function parseTheme(path) {
-  return new Promise(resolve => {
-    const { compact } = configure;
-    const antd = getThemeVariables({ compact });
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, { encoding: 'utf-8' }, async (error, code) => {
+      if (error) {
+        reject(error);
+      } else {
+        const { compact } = configure;
+        const theme = await less2js(code, {
+          serialize: name => name.slice(1)
+        });
 
-    fs.readFile(path, { encoding: 'utf-8' }, (error, code) => {
-      resolve(error ? antd : { ...antd, ...less2js(code) });
+        resolve({ ...getThemeVariables({ compact }), ...theme });
+      }
     });
   });
 }
