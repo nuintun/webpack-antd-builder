@@ -136,7 +136,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 
 export default memo(function RightHeader({ theme, isMobile }: HeaderRenderProps): React.ReactElement {
   return (
-    <div className={`ui-right-header ui-${theme}-right-header`}>
+    <div className={`ui-right-header ui-right-header-${theme}`}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>
