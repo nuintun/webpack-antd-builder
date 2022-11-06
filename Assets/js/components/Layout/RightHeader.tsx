@@ -14,6 +14,8 @@ import ThemeIcon from '/images/theme.svg';
 import ThemeDarkIcon from '/images/theme-dark.svg';
 import ThemeLightIcon from '/images/theme-light.svg';
 
+const prefixUI = 'ui-right-header';
+
 function getDropdownActiveClassName(selected: boolean): string {
   return selected ? 'ant-dropdown-menu-item-selected' : '';
 }
@@ -136,7 +138,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 
 export default memo(function RightHeader({ theme, isMobile }: HeaderRenderProps): React.ReactElement {
   return (
-    <div className={`ui-right-header ui-right-header-${theme}`}>
+    <div className={`${prefixUI} ${prefixUI}-${theme}`}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>
