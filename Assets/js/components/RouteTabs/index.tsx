@@ -11,7 +11,7 @@ import SmartIcon from '/js/components/SmartIcon';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
-const prefixUI = 'ui-tabs-layout';
+const prefixUI = 'ui-route-tabs';
 const iconClassName = `${prefixUI}-icon`;
 
 type TabsPicked =
@@ -26,14 +26,14 @@ type TabsPicked =
   | 'popupClassName'
   | 'tabBarExtraContent';
 
-export interface TabsLayoutProps extends Pick<TabsProps, TabsPicked> {
+export interface RouteTabsProps extends Pick<TabsProps, TabsPicked> {
   icon?: boolean;
   className?: string;
   type?: 'line' | 'card';
   style?: React.CSSProperties;
 }
 
-export default memo(function TabsLayout({ className, icon = true, ...restProps }: TabsLayoutProps): React.ReactElement {
+export default memo(function RouteTabs({ className, icon = true, ...restProps }: RouteTabsProps): React.ReactElement {
   const index = useMatchIndex();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];

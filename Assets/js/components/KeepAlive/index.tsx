@@ -1,11 +1,21 @@
-import { memo, useMemo } from 'react';
-import { createPortal } from 'react-dom';
+import { createContext, memo, useContext, useEffect, useMemo } from 'react';
 
+import { createPortal } from 'react-dom';
 import { Outlet, useMatches, useMatchIndex } from 'react-nest-router';
 
 export interface KeepAliveProps {
   target: React.ReactNode;
   getOutletRoot?: () => HTMLElement;
+}
+
+const context = createContext(false);
+
+export function useActiveChange(onChange: (active: boolean) => void): void {
+  const active = useContext(context);
+
+  useEffect(() => {
+    onChange(active);
+  }, [active]);
 }
 
 export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps): React.ReactElement {
@@ -25,9 +35,9 @@ export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps
   }, [getOutletRoot]);
 
   return (
-    <>
+    <context.Provider value={active}>
       <div hidden={active}>{target}</div>
       {outlet}
-    </>
+    </context.Provider>
   );
 });
