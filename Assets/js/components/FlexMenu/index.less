@@ -1,82 +1,80 @@
 @flex-menu-prefix-cls: ui-flex-menu;
 
-.@{flex-menu-prefix-cls} {
-  &-sider {
+.@{flex-menu-prefix-cls}-sider {
+  overflow: hidden;
+
+  &-header {
+    display: flex;
     overflow: hidden;
+    align-items: center;
+    white-space: nowrap;
+    word-break: keep-all;
+    justify-items: center;
+    height: @layout-header-height;
+    background: @layout-sider-background-light;
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
+  }
 
-    .@{flex-menu-prefix-cls} {
-      overflow: auto;
-      user-select: none;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      -ms-scroll-chaining: none;
-      overscroll-behavior: contain;
-      -webkit-overflow-scrolling: touch;
-      height: calc(100% - @layout-header-height);
+  .@{flex-menu-prefix-cls} {
+    overflow: auto;
+    user-select: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -ms-scroll-chaining: none;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    height: calc(100% - @layout-header-height);
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-      &-header {
-        display: flex;
-        overflow: hidden;
-        align-items: center;
-        white-space: nowrap;
-        word-break: keep-all;
-        justify-items: center;
-        height: @layout-header-height;
-        background: @layout-sider-background-light;
-        transition: all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
-      }
+    .ant-menu-item,
+    .ant-menu-submenu {
+      .ant-menu-title-content {
+        .@{flex-menu-prefix-cls}-title {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
 
-      .ant-menu-item,
-      .ant-menu-submenu {
-        .ant-menu-title-content {
-          .@{flex-menu-prefix-cls}-title {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
+          .@{flex-menu-prefix-cls}-icon {
+            line-height: 0;
+            font-size: @menu-icon-size;
 
-            .@{flex-menu-prefix-cls}-icon {
-              line-height: 0;
-              font-size: @menu-icon-size;
-
-              > img {
-                height: @menu-icon-size;
-              }
+            > img {
+              height: @menu-icon-size;
             }
           }
         }
       }
     }
   }
+}
 
-  &-drawer {
-    padding: 0;
-    height: 100vh;
+.@{flex-menu-prefix-cls}-drawer {
+  padding: 0;
+  height: 100vh;
 
-    .ant-drawer-content {
-      .ant-drawer-body {
-        padding: 0;
-        display: flex;
-        overflow: hidden;
-        flex-direction: row;
-      }
+  .ant-drawer-content {
+    .ant-drawer-body {
+      padding: 0;
+      display: flex;
+      overflow: hidden;
+      flex-direction: row;
     }
   }
+}
 
-  &-light {
-    .@{flex-menu-prefix-cls}-header {
-      background: @layout-sider-background-light;
-      border-bottom: @border-width-base @border-style-base @border-color-split;
-    }
+.@{flex-menu-prefix-cls}-light {
+  .@{flex-menu-prefix-cls}-header {
+    background: @layout-sider-background-light;
+    border-bottom: @border-width-base @border-style-base @border-color-split;
   }
+}
 
-  &-dark {
-    .@{flex-menu-prefix-cls}-header {
-      border-bottom: none;
-      background: @layout-sider-background;
-    }
+.@{flex-menu-prefix-cls}-dark {
+  .@{flex-menu-prefix-cls}-header {
+    border-bottom: none;
+    background: @layout-sider-background;
   }
 }
