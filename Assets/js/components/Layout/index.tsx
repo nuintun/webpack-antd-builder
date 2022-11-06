@@ -6,8 +6,8 @@ import { Route } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import { Filter, parse } from '/js/utils/menus';
 import { MenuType, Meta } from '/js/config/router';
-import SmartLayout from '/js/components/SmartLayout';
-import { HeaderRender } from '/js/components/SmartMenu';
+import FlexLayout from '/js/components/FlexLayout';
+import { HeaderRender } from '/js/components/FlexMenu';
 import { Outlet, useOutletContext } from 'react-nest-router';
 
 const leftHeaderRender: HeaderRender = props => <LeftHeader {...props} />;
@@ -51,7 +51,7 @@ export default memo(function Layout(): React.ReactElement {
   }, [routes]);
 
   return (
-    <SmartLayout
+    <FlexLayout
       theme={theme}
       menus={menus}
       siderWidth={216}
@@ -59,6 +59,6 @@ export default memo(function Layout(): React.ReactElement {
       rightHeaderRender={rightHeaderRender}
     >
       <Outlet />
-    </SmartLayout>
+    </FlexLayout>
   );
 });

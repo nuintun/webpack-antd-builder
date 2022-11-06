@@ -1,3 +1,7 @@
+/**
+ * @module utils
+ */
+
 import { DFSTree } from '/js/utils/tree';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
@@ -11,7 +15,7 @@ export interface FlattenItems {
   [key: string]: MenuItem;
 }
 
-export const prefixUI = 'ui-smart-menu';
+export const prefixUI = 'ui-flex-menu';
 
 /**
  * @function filterKeys

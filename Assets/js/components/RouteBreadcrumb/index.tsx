@@ -1,3 +1,7 @@
+/**
+ * @module RouteBreadcrumb
+ */
+
 import './index.less';
 
 import React, { memo, useMemo } from 'react';
@@ -5,11 +9,11 @@ import React, { memo, useMemo } from 'react';
 import { Breadcrumb } from 'antd';
 import classNames from 'classnames';
 import Link from '/js/components/Link';
+import FlexIcon from '/js/components/FlexIcon';
 import { useMatches } from 'react-nest-router';
 import { Icon, IRoute } from '/js/utils/router';
-import SmartIcon from '/js/components/SmartIcon';
 
-const prefixUI = 'ui-smart-breadcrumb';
+const prefixUI = 'ui-route-breadcrumb';
 const iconClassName = `${prefixUI}-icon`;
 
 interface BreadcrumbItem {
@@ -48,7 +52,7 @@ function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
   return breadcrumbs;
 }
 
-export default memo(function SmartBreadcrumb(): React.ReactElement {
+export default memo(function RouteBreadcrumb(): React.ReactElement {
   const matches = useMatches() as IRoute[];
 
   const breadcrumbs = useMemo(() => {
@@ -61,12 +65,12 @@ export default memo(function SmartBreadcrumb(): React.ReactElement {
         <Breadcrumb.Item key={key}>
           {href && !active ? (
             <Link className={`${prefixUI}-link`} href={href}>
-              <SmartIcon icon={icon} className={iconClassName} />
+              <FlexIcon icon={icon} className={iconClassName} />
               <span>{name}</span>
             </Link>
           ) : (
             <span className={classNames(`${prefixUI}-item`, { active })}>
-              <SmartIcon icon={icon} className={iconClassName} />
+              <FlexIcon icon={icon} className={iconClassName} />
               <span>{name}</span>
             </span>
           )}

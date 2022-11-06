@@ -1,3 +1,5 @@
+@import (reference) "/js/components/FlexLayout/index.less";
+
 @right-header-prefix-cls: ui-right-header;
 
 .@{right-header-prefix-cls} {
@@ -35,20 +37,22 @@
   }
 }
 
-.ui-smart-layout-dark {
-  .@{right-header-prefix-cls} {
-    > div {
-      &:hover {
-        background: #222;
+.@{flex-layout-prefix-cls} {
+  &-dark {
+    .@{right-header-prefix-cls} {
+      > div {
+        &:hover {
+          background: @menu-dark-bg;
+        }
       }
     }
   }
-}
 
-.ui-smart-layout-light {
-  .@{right-header-prefix-cls} {
-    > div {
-      color: #000;
+  &-light {
+    .@{right-header-prefix-cls} {
+      > div {
+        color: @menu-item-color;
+      }
     }
   }
 }

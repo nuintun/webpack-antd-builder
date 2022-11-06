@@ -4,10 +4,10 @@ import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
-import useLatestRef from '/js/hooks/useLatestRef';
 import useItems, { ItemRender } from './useItems';
+import useLatestRef from '/js/hooks/useLatestRef';
 import { useLocation, useMatches } from 'react-nest-router';
-import { flattenItems, getExpandKeys, mergeKeys } from './SmartMenuUtils';
+import { flattenItems, getExpandKeys, mergeKeys } from './utils';
 
 type OmitProps =
   | 'mode'

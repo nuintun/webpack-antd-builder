@@ -5,11 +5,11 @@
 import React, { useMemo } from 'react';
 
 import { MenuProps } from 'antd';
+import { prefixUI } from './utils';
 import Link from '/js/components/Link';
 import { DFSTree } from '/js/utils/tree';
 import { MenuItem } from '/js/utils/menus';
-import { prefixUI } from './SmartMenuUtils';
-import SmartIcon from '/js/components/SmartIcon';
+import FlexIcon from '/js/components/FlexIcon';
 
 const iconClassName = `${prefixUI}-icon`;
 const titleClassName = `${prefixUI}-title`;
@@ -26,7 +26,7 @@ function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
 
   return (
     <>
-      <SmartIcon icon={icon} className={iconClassName} />
+      <FlexIcon icon={icon} className={iconClassName} />
       <span>{name}</span>
     </>
   );

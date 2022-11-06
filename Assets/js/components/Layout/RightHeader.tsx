@@ -5,7 +5,7 @@ import { memo, useCallback, useMemo } from 'react';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, MenuProps, message } from 'antd';
-import { HeaderRenderProps } from '/js/components/SmartMenu';
+import { HeaderRenderProps } from '/js/components/FlexMenu';
 import { MenuClickEventHandler } from 'rc-menu/es/interface';
 
 import logo from '/images/logo.svg?url';

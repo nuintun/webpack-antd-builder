@@ -7,7 +7,7 @@ import Link from '/js/components/Link';
 import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
-import SmartIcon from '/js/components/SmartIcon';
+import FlexIcon from '/js/components/FlexIcon';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
@@ -53,7 +53,7 @@ export default memo(function RouteTabs({ className, icon = true, ...restProps }:
         ),
         label: (
           <Link href={link.href} target={link.target} className={classNames(`${prefixUI}-nav`, { active })}>
-            {icon && <SmartIcon icon={meta.icon} className={iconClassName} />}
+            {icon && <FlexIcon icon={meta.icon} className={iconClassName} />}
             {meta.name}
           </Link>
         )

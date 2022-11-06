@@ -6,29 +6,29 @@ import { Layout } from 'antd';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
 import Configure from '/js/components/Configure';
-import SmartBreadcrumb from '/js/components/SmartBreadcrumb';
+import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import SmartMenu, { HeaderRender, SmartMenuProps } from '/js/components/SmartMenu';
+import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
 
 const { Header, Content } = Layout;
 
 type PickProps = 'theme' | 'collapsedWidth';
 
-export interface SmartLayoutProps extends Pick<SmartMenuProps, PickProps> {
+export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
   siderWidth?: number;
   breakQuery?: string;
   mobileQuery?: string;
   children?: React.ReactNode;
-  menus: SmartMenuProps['items'];
+  menus: FlexMenuProps['items'];
   leftHeaderRender?: HeaderRender;
   rightHeaderRender?: HeaderRender;
 }
 
-const prefixUI = 'ui-smart-layout';
+const prefixUI = 'ui-flex-layout';
 const triggerClassName = `${prefixUI}-sider-trigger`;
 
-export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactElement {
+export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElement {
   const {
     menus,
     children,
@@ -97,7 +97,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
 
   return (
     <Layout hasSider={!isMobile} className={`${prefixUI} ${prefixUI}-${theme}`}>
-      <SmartMenu
+      <FlexMenu
         theme={theme}
         items={menus}
         width={siderWidth}
@@ -136,7 +136,7 @@ export default memo(function SmartLayout(props: SmartLayoutProps): React.ReactEl
         <Content>
           <div ref={contentRef} className={`${prefixUI}-content`}>
             <Configure getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
-              <SmartBreadcrumb />
+              <RouteBreadcrumb />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
             </Configure>
           </div>

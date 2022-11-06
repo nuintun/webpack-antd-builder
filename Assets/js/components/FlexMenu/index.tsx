@@ -3,13 +3,13 @@ import './index.less';
 import React, { memo, useCallback, useRef } from 'react';
 
 import { Drawer } from 'antd';
-import { prefixUI } from './SmartMenuUtils';
+import { prefixUI } from './utils';
 import useLatestRef from '/js/hooks/useLatestRef';
-import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as SmartMenuProps } from './SiderMenu';
+import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as FlexMenuProps } from './SiderMenu';
 
-export type { HeaderRender, HeaderRenderProps, SmartMenuProps };
+export type { HeaderRender, HeaderRenderProps, FlexMenuProps };
 
-export default memo(function SmartMenu(props: SmartMenuProps): React.ReactElement {
+export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement {
   const { isMobile, collapsed, onCollapse, width = 256, onOpenChange, defaultOpenKeys = [], ...restProps } = props;
 
   const propsRef = useLatestRef(props);
@@ -21,7 +21,7 @@ export default memo(function SmartMenu(props: SmartMenuProps): React.ReactElemen
     onCollapse && onCollapse(true, 'clickTrigger');
   }, []);
 
-  const onOpenChangeHander = useCallback<NonNullable<SmartMenuProps['onOpenChange']>>((openKeys, cachedOpenKeys) => {
+  const onOpenChangeHander = useCallback<NonNullable<FlexMenuProps['onOpenChange']>>((openKeys, cachedOpenKeys) => {
     const { collapsed, onOpenChange } = propsRef.current;
 
     if (!collapsed) {

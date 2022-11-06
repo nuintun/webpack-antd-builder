@@ -1,4 +1,4 @@
-@layout-prefix-cls: ui-smart-layout;
+@flex-layout-prefix-cls: ui-flex-layout;
 
 @layout-trigger-size: 21px;
 @layout-trigger-margin-left: 0;
@@ -8,7 +8,7 @@
 @layout-trigger-hover-color: @primary-color;
 @layout-trigger-hover-color-light: @primary-color;
 
-.@{layout-prefix-cls} {
+.@{flex-layout-prefix-cls} {
   height: 100vh;
   overflow: hidden;
 
@@ -47,12 +47,12 @@
   }
 
   &-dark {
-    .@{layout-prefix-cls}-header {
+    .@{flex-layout-prefix-cls}-header {
       border-bottom: none;
       background: @layout-header-background;
     }
 
-    .@{layout-prefix-cls}-sider-trigger {
+    .@{flex-layout-prefix-cls}-sider-trigger {
       color: @layout-trigger-color;
 
       &:hover {

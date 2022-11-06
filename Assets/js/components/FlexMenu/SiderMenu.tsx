@@ -1,7 +1,11 @@
+/**
+ * @module SiderMenu
+ */
+
 import React, { memo } from 'react';
 
+import { prefixUI } from './utils';
 import classNames from 'classnames';
-import { prefixUI } from './SmartMenuUtils';
 import { Layout, MenuTheme, SiderProps } from 'antd';
 import RouteMenu, { RouteMenuProps } from './RouteMenu';
 
