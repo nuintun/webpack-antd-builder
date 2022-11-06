@@ -16,8 +16,8 @@ import ThemeLightIcon from '/images/theme-light.svg';
 
 const prefixUI = 'ui-right-header';
 
-function getDropdownActiveClassName(selected: boolean): string {
-  return selected ? 'ant-dropdown-menu-item-selected' : '';
+function getDropdownActiveClassName(selected: boolean): string | undefined {
+  if (selected) return 'ant-dropdown-menu-item-selected';
 }
 
 function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): MenuProps['items'] {
