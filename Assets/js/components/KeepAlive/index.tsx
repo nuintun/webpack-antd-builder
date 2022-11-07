@@ -36,7 +36,7 @@ export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps
 
   return (
     <context.Provider value={active}>
-      <div hidden={active}>{target}</div>
+      <div hidden={!active}>{target}</div>
       {outlet}
     </context.Provider>
   );
