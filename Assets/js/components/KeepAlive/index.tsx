@@ -10,6 +10,8 @@ export interface KeepAliveProps {
 
 const context = createContext(false);
 
+const { Provider } = context;
+
 export function useActiveChange(onChange: (active: boolean) => void): void {
   const active = useContext(context);
 
@@ -35,9 +37,9 @@ export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps
   }, [getOutletRoot]);
 
   return (
-    <context.Provider value={active}>
+    <Provider value={active}>
       <div hidden={!active}>{target}</div>
       {outlet}
-    </context.Provider>
+    </Provider>
   );
 });
