@@ -18,9 +18,9 @@
     align-items: center;
     justify-items: center;
     height: @layout-header-height;
-    background: @layout-header-background-light;
+
     padding: 0 @layout-header-padding-right 0 @layout-header-padding-left;
-    border-bottom: @border-width-base @border-style-base @border-color-split;
+
     transition: border @animation-duration-slow, background @animation-duration-slow;
   }
 
@@ -38,7 +38,7 @@
   &-sider-trigger {
     cursor: pointer;
     font-size: @layout-trigger-size;
-    color: @layout-trigger-color-light;
+
     margin: 0 0 0 @layout-trigger-margin-left;
 
     &:hover {
@@ -46,10 +46,25 @@
     }
   }
 
+  &-light {
+    .@{flex-layout-prefix-cls}-header {
+      background: @layout-header-background-light;
+      border-bottom: @border-width-base @border-style-base @border-color-split;
+    }
+
+    .@{flex-layout-prefix-cls}-sider-trigger {
+      color: @layout-trigger-color-light;
+
+      &:hover {
+        color: @layout-trigger-hover-color-light;
+      }
+    }
+  }
+
   &-dark {
     .@{flex-layout-prefix-cls}-header {
-      border-bottom: none;
       background: @layout-header-background;
+      border-bottom: @border-width-base @border-style-base @layout-sider-background;
     }
 
     .@{flex-layout-prefix-cls}-sider-trigger {
