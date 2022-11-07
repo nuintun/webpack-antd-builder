@@ -19,9 +19,9 @@
     justify-items: center;
     height: @layout-header-height;
     background: @layout-header-background-light;
-    transition: all 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
     padding: 0 @layout-header-padding-right 0 @layout-header-padding-left;
     border-bottom: @border-width-base @border-style-base @border-color-split;
+    transition: border @animation-duration-slow, background @animation-duration-slow;
   }
 
   &-content {
