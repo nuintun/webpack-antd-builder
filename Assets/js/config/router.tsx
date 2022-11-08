@@ -57,7 +57,7 @@ export const router: readonly Route<Meta>[] = [
               name: '网站首页',
               icon: <Icon component={HomeIcon} />
             },
-            element: lazy(() => import('/js/pages/home'))
+            element: lazy(() => import('/js/pages/Home'))
           },
           {
             path: 'analysis',
@@ -68,7 +68,7 @@ export const router: readonly Route<Meta>[] = [
             children: [
               {
                 path: 'user',
-                element: lazy(() => import('/js/pages/analysis/User')),
+                element: lazy(() => import('/js/pages/Analysis/User')),
                 meta: {
                   name: '用户分析',
                   icon: <Icon component={UserAnalysisIcon} />
@@ -76,7 +76,7 @@ export const router: readonly Route<Meta>[] = [
               },
               {
                 path: 'recharge',
-                element: lazy(() => import('/js/pages/analysis/Recharge')),
+                element: lazy(() => import('/js/pages/Analysis/Recharge')),
                 meta: {
                   name: '充值分析',
                   icon: <Icon component={RechargeAnalysisIcon} />
@@ -93,7 +93,7 @@ export const router: readonly Route<Meta>[] = [
             children: [
               {
                 path: 'account',
-                element: lazy(() => import('/js/pages/system/Account')),
+                element: lazy(() => import('/js/pages/System/Account')),
                 meta: {
                   name: '帐号管理',
                   icon: <Icon component={AccountSystemIcon} />
@@ -101,7 +101,7 @@ export const router: readonly Route<Meta>[] = [
               },
               {
                 path: 'logs',
-                element: lazy(() => import('/js/pages/system/Logs')),
+                element: lazy(() => import('/js/pages/System/Logs')),
                 meta: {
                   name: '安全日志',
                   icon: <Icon component={LogsSystemIcon} />
