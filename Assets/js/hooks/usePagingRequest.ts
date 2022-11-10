@@ -141,13 +141,13 @@ export default function usePagingRequest<I, E, T>(
       ...requestInit,
       query,
       onSuccess(response) {
+        const { transform } = requestInit;
         const { items }: Response<I, E> = response;
-        const { transform, onSuccess } = requestInit;
         const dataSource = Array.isArray(items) ? items : [];
 
         responseRef.current = response;
 
-        onSuccess && onSuccess(response);
+        requestInit.onSuccess?.(response);
 
         if (hasPagination) {
           const { total = 0 } = response;

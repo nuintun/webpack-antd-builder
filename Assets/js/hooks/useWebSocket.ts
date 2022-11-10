@@ -90,51 +90,61 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
       const getReadyState = () => ws.readyState || WebSocket.CLOSED;
 
       ws.onopen = event => {
-        reconnectTimesRef.current = 0;
+        if (isMounted()) {
+          setReadyState(getReadyState);
 
-        optionsRef.current.onOpen?.(event);
+          reconnectTimesRef.current = 0;
 
-        isMounted() && setReadyState(getReadyState);
+          optionsRef.current.onOpen?.(event);
 
-        const messages = sendQueueRef.current;
+          const messages = sendQueueRef.current;
 
-        if (messages.length) {
-          sendQueueRef.current = [];
+          if (messages.length) {
+            sendQueueRef.current = [];
 
-          for (const message of messages) {
-            send(message);
+            for (const message of messages) {
+              send(message);
+            }
           }
         }
       };
 
       ws.onmessage = (message: MessageEvent<M>): void => {
-        optionsRef.current.onMessage?.(message);
+        if (isMounted()) {
+          setMessage(message);
 
-        isMounted() && setMessage(message);
+          optionsRef.current.onMessage?.(message);
+        }
       };
 
       ws.onerror = event => {
-        const { onError } = optionsRef.current;
+        if (isMounted()) {
+          setReadyState(getReadyState);
 
-        if (onError) {
-          onError(event);
-        } else {
-          console.error(event);
+          const { onError } = optionsRef.current;
+
+          if (onError) {
+            onError(event);
+          } else {
+            console.error(event);
+          }
         }
-
-        isMounted() && setReadyState(getReadyState);
       };
 
       ws.onclose = event => {
-        removeWsEvents(ws);
+        if (isMounted()) {
+          removeWsEvents(ws);
 
-        sendQueueRef.current = [];
+          sendQueueRef.current = [];
 
-        optionsRef.current.onClose?.(event);
+          setReadyState(getReadyState);
 
-        isMounted() && setReadyState(getReadyState);
+          optionsRef.current.onClose?.(event);
 
-        !event.wasClean && reconnect();
+          if (!event.wasClean) {
+            reconnect();
+          }
+        }
       };
 
       websocketRef.current = ws;
@@ -194,7 +204,9 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
 
   // 初始时连接，卸载时断连
   useEffect(() => {
-    !manual && connect();
+    if (!manual) {
+      connect();
+    }
 
     return () => {
       disconnect();

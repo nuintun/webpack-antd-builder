@@ -74,7 +74,9 @@ export default function useResponse<R, T>(
   }, []);
 
   useEffect(() => {
-    options.prefetch && fetch();
+    if (options.prefetch) {
+      fetch();
+    }
   }, []);
 
   return [response, fetch];

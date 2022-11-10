@@ -32,7 +32,7 @@ export default function useMedia(
 
         setState(matched);
 
-        onChange && onChange(matched);
+        onChange?.(matched);
       };
 
       mql.addEventListener('change', onMediaChange);
