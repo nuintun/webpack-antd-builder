@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
@@ -34,7 +33,6 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   const matches = useMatches() as IRoute[];
   const propsRef = useLatestRef<RouteMenuProps>(props);
   const flatItems = useMemo(() => flattenItems(items), [items]);
-  const mergeOpenKeys = useMemo(() => memoizeOne(mergeKeys), []);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(() => []);
   const expandKeys = useMemo(() => getExpandKeys(matches, flatItems), [matches, flatItems]);
@@ -58,7 +56,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
     const cachedOpenKeys = cachedOpenKeysRef.current;
 
     if (!collapsed) {
-      const nextOpenKeys = mergeOpenKeys(cachedOpenKeys, openKeys);
+      const nextOpenKeys = mergeKeys(cachedOpenKeys, openKeys);
 
       setOpenKeys(nextOpenKeys);
 
