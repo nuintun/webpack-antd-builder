@@ -41,9 +41,9 @@ export default memo(function DisplayDrawer({
       onClick(...args: unknown[]) {
         const { onClick } = trigger.props;
 
-        onClick && onClick(...args);
-
         setOpen(true);
+
+        onClick && onClick(...args);
       }
     });
   }, [trigger]);

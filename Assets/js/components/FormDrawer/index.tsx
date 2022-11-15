@@ -93,9 +93,9 @@ function FormDrawer<V extends Values, R>({
       onClick(...args: unknown[]) {
         const { onClick } = trigger.props;
 
-        onClick && onClick(...args);
-
         setOpen(true);
+
+        onClick && onClick(...args);
       }
     });
   }, [trigger]);

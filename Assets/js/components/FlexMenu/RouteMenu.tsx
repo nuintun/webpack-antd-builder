@@ -4,9 +4,9 @@ import memoizeOne from 'memoize-one';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
+import { useMatches } from 'react-nest-router';
 import useItems, { ItemRender } from './useItems';
 import useLatestRef from '/js/hooks/useLatestRef';
-import { useLocation, useMatches } from 'react-nest-router';
 import { flattenItems, getExpandKeys, mergeKeys } from './utils';
 
 type OmitProps =
@@ -29,19 +29,15 @@ export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
 }
 
 export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
-  const { items, onOpenChange, defaultOpenKeys, collapsed, itemRender, ...restProps } = props;
+  const { collapsed, defaultOpenKeys, itemRender, items, ...restProps } = props;
 
-  const { pathname } = useLocation();
   const matches = useMatches() as IRoute[];
-
   const propsRef = useLatestRef<RouteMenuProps>(props);
+  const flatItems = useMemo(() => flattenItems(items), [items]);
+  const mergeOpenKeys = useMemo(() => memoizeOne(mergeKeys), []);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
-
-  const memoizeMergeKeys = useMemo(() => memoizeOne(mergeKeys), []);
-  const memoizeFlattenItems = useMemo(() => memoizeOne(flattenItems), []);
-  const memoizeGetExpandKeys = useMemo(() => memoizeOne(getExpandKeys), []);
-
   const [selectedKeys, setSelectedKeys] = useState<string[]>(() => []);
+  const expandKeys = useMemo(() => getExpandKeys(matches, flatItems), [matches, flatItems]);
   const [openKeys, setOpenKeys] = useState<string[]>(() => (collapsed ? [] : cachedOpenKeysRef.current));
 
   const onOpenChangeHander = useCallback((openKeys: string[]): void => {
@@ -57,19 +53,19 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   }, []);
 
   useEffect(() => {
-    const flatItems = memoizeFlattenItems(items);
+    const { onOpenChange } = propsRef.current;
+    const { openKeys, selectedKeys } = expandKeys;
     const cachedOpenKeys = cachedOpenKeysRef.current;
-    const defaultKeys = memoizeGetExpandKeys(matches, flatItems);
 
     if (!collapsed) {
-      const nextOpenKeys = memoizeMergeKeys(cachedOpenKeys, defaultKeys.openKeys);
+      const nextOpenKeys = mergeOpenKeys(cachedOpenKeys, openKeys);
 
       setOpenKeys(nextOpenKeys);
 
       cachedOpenKeysRef.current = nextOpenKeys;
 
       onOpenChange && onOpenChange(nextOpenKeys, nextOpenKeys);
-    } else if (openKeys.length) {
+    } else if (openKeys.length > 0) {
       const nextOpenKeys: string[] = [];
 
       setOpenKeys(nextOpenKeys);
@@ -77,8 +73,8 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeys);
     }
 
-    setSelectedKeys(defaultKeys.selectedKeys);
-  }, [pathname, collapsed, matches, items, onOpenChange]);
+    setSelectedKeys(selectedKeys);
+  }, [expandKeys, collapsed]);
 
   return (
     <Menu
