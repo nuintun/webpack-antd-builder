@@ -90,9 +90,9 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
     [trigger]: (...args: unknown[]) => {
       const onTrigger = children.props[trigger];
 
-      onTrigger && onTrigger(...args);
-
       onAction();
+
+      onTrigger && onTrigger(...args);
     }
   });
 }
