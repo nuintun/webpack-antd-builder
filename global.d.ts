@@ -92,6 +92,11 @@ declare type Mutable<T> = {
 };
 
 /**
+ * @description 定义非空数组
+ */
+declare type NonEmptyArray<T> = [T, ...T[]];
+
+/**
  * @description 定时器标识类型
  */
 declare type Timeout = number | NodeJS.Timeout;

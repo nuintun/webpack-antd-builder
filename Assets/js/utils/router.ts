@@ -29,7 +29,7 @@ export type Route<M = unknown, K extends string = string> = NRoute<M & Meta, K>;
 
 export interface IRoute<M = unknown, K extends string = string> extends NIRoute<M, K> {
   readonly meta: M & MetaWithKey;
-  readonly children?: IRoute<M, K>[];
+  readonly children?: NonEmptyArray<IRoute<M, K>>;
 }
 
 /**
