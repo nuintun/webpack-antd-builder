@@ -7,9 +7,9 @@ import 'whatwg-fetch';
 import { message } from 'antd';
 import { isObject, serialize } from './utils';
 
-export type Query = Record<string | number, any>;
-
 export type Body = Query | BodyInit | null;
+
+export type Query = Record<string | number, any>;
 
 export interface Options extends Omit<RequestInit, 'body'> {
   body?: Body;
