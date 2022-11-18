@@ -2,10 +2,9 @@ import './index.less';
 
 import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 
-import { Layout } from 'antd';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
-import Configure from '/js/components/Configure';
+import { ConfigProvider, Layout } from 'antd';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -135,10 +134,10 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         </Header>
         <Content>
           <div ref={contentRef} className={`${prefixUI}-content`}>
-            <Configure getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
+            <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
               <RouteBreadcrumb />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
-            </Configure>
+            </ConfigProvider>
           </div>
         </Content>
       </Layout>

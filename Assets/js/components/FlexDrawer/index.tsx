@@ -2,8 +2,7 @@ import React, { memo, useCallback, useRef } from 'react';
 
 import useMedia from '/js/hooks/useMedia';
 import { isString } from '/js/utils/utils';
-import { Drawer, DrawerProps } from 'antd';
-import Configure from '/js/components/Configure';
+import { ConfigProvider, Drawer, DrawerProps } from 'antd';
 
 const containerStyle: React.CSSProperties = { position: 'relative' };
 
@@ -37,9 +36,9 @@ export default memo(function FlexDrawer({
   return (
     <Drawer {...restProps} width={isBreakWidth ? breakWidth : width} height={isBreakHeight ? breakHeight : height}>
       <div ref={containerRef} style={containerStyle}>
-        <Configure getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
+        <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
           {children}
-        </Configure>
+        </ConfigProvider>
       </div>
     </Drawer>
   );
