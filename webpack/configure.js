@@ -20,7 +20,6 @@ export default {
   outputPath: path.resolve('wwwroot/public'),
   entryHTML: path.resolve('wwwroot/app.html'),
   favicon: path.resolve('wwwroot/favicon.ico'),
-  theme: path.resolve('Assets/css/theme.less'),
   entry: [path.resolve('Assets/js/pages/index.tsx')],
   alias: { '/js': js, '/css': css, '/mods': mods, '/images': images },
   meta: { 'theme-color': '#4285f4', viewport: 'width=device-width,initial-scale=1.0' }

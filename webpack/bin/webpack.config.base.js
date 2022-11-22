@@ -86,7 +86,6 @@ export default async mode => {
     cache: {
       type: 'filesystem',
       buildDependencies: {
-        theme: [configure.theme],
         configure: [resolve('../configure.js')]
       }
     },

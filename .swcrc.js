@@ -8,7 +8,6 @@ import browsers from './webpack/lib/browsers.js';
 export default async () => {
   return {
     env: {
-      mode: 'usage',
       targets: await browsers()
     },
     jsc: {

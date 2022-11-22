@@ -1,0 +1,60 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+}
+
+// 设置内联, 减少浮动带来的 BUG
+.fn-left,
+.fn-right {
+  display: inline;
+}
+
+.fn-left {
+  float: left;
+}
+
+.fn-right {
+  float: right;
+}
+
+// 清理浮动
+.fn-clear:after {
+  height: 0;
+  content: "";
+  clear: both;
+  font-size: 0;
+  display: block;
+  visibility: hidden;
+}
+
+// for IE6 IE7
+.fn-clear {
+  zoom: 1;
+}
+
+:focus {
+  outline: 0;
+}
+
+#app {
+  height: 100vh;
+}
+
+.ui-page {
+  margin: 16px;
+  padding: 24px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ui-unsupported {
+  width: 100%;
+  color: #f00;
+  cursor: default;
+  line-height: 30px;
+  text-align: center;
+  background: #fff1a8;
+  border-bottom: 1px solid #f0c36d;
+}
