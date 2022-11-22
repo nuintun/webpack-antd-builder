@@ -2,7 +2,7 @@
  * @module rules
  * @listens MIT
  * @author nuintun
- * @description Get webpack rules
+ * @description 配置 Webpack 规则
  */
 
 import fs from 'fs';

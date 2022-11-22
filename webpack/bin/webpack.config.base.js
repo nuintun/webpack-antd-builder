@@ -2,7 +2,7 @@
  * @module webpack.config.base
  * @listens MIT
  * @author nuintun
- * @description Webpack base configure
+ * @description 基础 Webpack 配置
  */
 
 import webpack from 'webpack';

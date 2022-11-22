@@ -2,7 +2,7 @@
  * @module ip
  * @listens MIT
  * @author nuintun
- * @description Get local external ip
+ * @description 获取本机 IP 地址
  */
 
 import os from 'os';

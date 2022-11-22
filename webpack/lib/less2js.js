@@ -2,8 +2,8 @@
  * @module less2js
  * @listens MIT
  * @author nuintun
+ * @description 将 Less 变量解析为 json 数据
  * @see https://github.com/paulmorar/cast-less-vars-to-json
- * @description Cast less variables into JSON key-value pairs
  */
 
 import less from 'less';

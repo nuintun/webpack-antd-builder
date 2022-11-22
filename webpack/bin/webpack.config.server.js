@@ -2,7 +2,7 @@
  * @module webpack.config.server
  * @listens MIT
  * @author nuintun
- * @description Webpack development server configure
+ * @description 监听模式 Webpack 配置
  * @see https://github.com/facebook/create-react-app
  */
 
