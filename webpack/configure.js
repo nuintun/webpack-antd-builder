@@ -2,7 +2,7 @@
  * @module configure
  * @listens MIT
  * @author nuintun
- * @description Webpack project configure
+ * @description 项目配置
  */
 
 import path from 'path';

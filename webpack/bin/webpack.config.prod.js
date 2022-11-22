@@ -2,7 +2,7 @@
  * @module webpack.config.prod
  * @listens MIT
  * @author nuintun
- * @description Webpack production configure
+ * @description 生成模式 Webpack 配置
  * @see https://github.com/facebook/create-react-app
  */
 
