@@ -106,4 +106,4 @@ dist
 # Build dist
 /wwwroot/public/
 /wwwroot/app.html
-*.module.less.d.ts
+*.module.scss.d.ts

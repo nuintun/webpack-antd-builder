@@ -55,7 +55,7 @@ declare module '*.css' {
   export default content;
 }
 
-declare module '*.module.less' {
+declare module '*.module.scss' {
   const content: {
     readonly [name: string]: string;
   };
@@ -63,7 +63,7 @@ declare module '*.module.less' {
   export default content;
 }
 
-declare module '*.less' {
+declare module '*.scss' {
   const content: string;
 
   export default content;

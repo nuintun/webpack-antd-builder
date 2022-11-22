@@ -2,7 +2,7 @@
  * @module ip
  * @listens MIT
  * @author nuintun
- * @description Get local external ip
+ * @description 获取本机 IP 地址
  */
 
 import os from 'os';
@@ -12,7 +12,7 @@ const IPV4_RE = /^\d{1,3}(?:\.\d{1,3}){3}$/;
 /**
  * @function resolveIp
  * @param {boolean} ipv4
- * @returns {Promise<string>}
+ * @return {Promise<string>}
  */
 export default async (ipv4 = true) => {
   const networkInterfaces = os.networkInterfaces();

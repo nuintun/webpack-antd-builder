@@ -17,7 +17,7 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 /**
  * @function resolveEnvironment
  * @param {object} env
- * @returns {object}
+ * @return {object}
  */
 function resolveEnvironment(env) {
   const output = {};
@@ -35,7 +35,7 @@ const { resolve } = createRequire(import.meta.url);
 /**
  * @function resolveConfigure
  * @param {string} mode
- * @returns {Promise<object>}
+ * @return {Promise<object>}
  */
 export default async mode => {
   const progress = {

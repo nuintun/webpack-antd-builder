@@ -20,25 +20,21 @@
     "email": "nuintun@qq.com"
   },
   "license": "MIT",
-  "browserslist": [
-    "defaults",
-    "not IE >= 0"
-  ],
   "nodemonConfig": {
     "quiet": true,
     "delay": "128ms",
     "watch": [
+      ".swcrc.js",
       "webpack/**/*",
-      ".babelrc.cjs",
-      ".postcssrc.cjs",
-      "wwwroot/favicon.ico",
-      "Assets/css/theme.less"
+      ".postcssrc.js",
+      ".browserslistrc",
+      "wwwroot/favicon.ico"
     ]
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
     "@ant-design/plots": "^1.2.2",
-    "antd": "^4.24.3",
+    "antd": "^5.0.0",
     "classnames": "^2.3.2",
     "core-js": "^3.26.1",
     "dayjs": "^1.11.6",
@@ -52,19 +48,13 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/plugin-proposal-decorators": "^7.20.2",
-    "@babel/plugin-transform-runtime": "^7.19.6",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
     "@svgr/webpack": "^6.5.1",
+    "@swc/core": "^1.3.19",
+    "@swc/helpers": "^0.4.14",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@types/throttle-debounce": "^5.0.0",
     "autoprefixer": "^10.4.13",
-    "babel-loader": "^9.1.0",
-    "babel-plugin-import": "^1.13.5",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.2",
@@ -75,15 +65,16 @@
     "koa": "^2.13.4",
     "koa-compress": "^5.1.0",
     "koa-webpack-dev-service": "^0.8.0",
-    "less": "^4.1.3",
-    "less-loader": "^11.1.0",
-    "memfs": "^3.4.11",
+    "memfs": "^3.4.12",
     "mini-css-extract-plugin": "^2.7.0",
     "nodemon": "^2.0.20",
     "postcss": "^8.4.19",
     "postcss-loader": "^7.0.1",
     "prettier": "^2.7.1",
+    "sass": "^1.56.1",
+    "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
+    "swc-loader": "^0.2.3",
     "terser-webpack-plugin": "^5.3.6",
     "typescript": "^4.9.3",
     "webpack": "^5.75.0",

@@ -15,7 +15,6 @@ const images = path.resolve('Assets/images');
 export default {
   name: 'Antd',
   lang: 'zh-CN',
-  compact: false,
   publicPath: '/public/',
   context: path.resolve('Assets'),
   outputPath: path.resolve('wwwroot/public'),
