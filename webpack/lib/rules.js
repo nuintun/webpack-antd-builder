@@ -19,7 +19,7 @@ const { getThemeVariables } = require('antd/dist/theme');
  * @function parseTheme
  * @description 解析主题文件
  * @param {string} path
- * @returns {Promise<object>}
+ * @return {Promise<object>}
  */
 function parseTheme(path) {
   return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ function parseTheme(path) {
 /**
  * @function resolveRules
  * @param {string} mode
- * @returns {object}
+ * @return {object}
  */
 export default async mode => {
   const { theme } = configure;

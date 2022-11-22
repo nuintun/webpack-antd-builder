@@ -14,7 +14,7 @@ const { parse, contexts } = less;
  * @function less2js
  * @param {string} code
  * @param {object} options
- * @returns {Promise<object>}
+ * @return {Promise<object>}
  */
 export default (code = '', options = {}) => {
   return new Promise((resolve, reject) => {
