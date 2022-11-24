@@ -2,7 +2,7 @@
  * @module App
  */
 
-import '/css/global.less';
+import '/css/global.scss';
 
 import { lazy, memo, Suspense, useMemo } from 'react';
 

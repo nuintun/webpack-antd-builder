@@ -1,4 +1,4 @@
-import styles from '/css/pages/home/index.module.less';
+import styles from '/css/pages/home/index.module.scss';
 
 import { memo, useEffect, useMemo, useState } from 'react';
 
