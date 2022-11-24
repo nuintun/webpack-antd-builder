@@ -42,16 +42,18 @@ export default memo(function RouteTabs({ className, icon = true, ...restProps }:
     return {
       [`.${prefixUI}`]: {
         [`.${prefixUI}-nav`]: {
-          color: token.colorText,
+          color: token.colorLink,
+          fontSize: token.fontSizeLG,
           '&.active': {
             color: token.colorLinkActive
           },
           [`.${prefixUI}-icon`]: {
-            marginInlineEnd: token.marginXXS,
-
-            '> img': {
-              width: 'auto',
-              height: token.size
+            '&.anticon': {
+              marginInlineEnd: token.marginXXS,
+              '> img': {
+                width: 'auto',
+                height: token.fontSizeLG
+              }
             }
           }
         }
