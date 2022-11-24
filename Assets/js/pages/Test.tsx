@@ -6,8 +6,8 @@ import '/css/global.scss';
 
 import { memo } from 'react';
 
-import { Button, ConfigProvider, Result } from 'antd';
 import { useStyleSheets } from '../hooks/useStyleSheets';
+import { Button, ConfigProvider, Result, theme } from 'antd';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
@@ -52,11 +52,12 @@ const Page = memo(function Page() {
       '.flex-menu': {
         margin: 0,
         padding: 0,
-        color: token.colorPrimary,
+        height: '100%',
+        color: token.colorText,
+        backgroundColor: token.colorBgContainer,
         '> p': {
           margin: 0,
-          padding: 0,
-          background: token.colorBgContainer
+          padding: 0
         }
       }
     };
@@ -73,9 +74,7 @@ export default memo(function App() {
   return (
     <ConfigProvider
       theme={{
-        token: {
-          colorPrimary: '#8daa32'
-        }
+        algorithm: [theme.darkAlgorithm]
       }}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>

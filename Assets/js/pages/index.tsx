@@ -2,7 +2,7 @@
  * @module index
  */
 
-import App from './Test';
+import App from './App';
 import { createRoot } from 'react-dom/client';
 
 const app = document.getElementById('app');
@@ -12,7 +12,7 @@ root.render(<App />);
 
 if (__DEV__) {
   if (import.meta.webpackHot) {
-    import.meta.webpackHot.accept(['./Test.tsx'], () => {
+    import.meta.webpackHot.accept(['./App.tsx'], () => {
       root.render(<App />);
     });
 

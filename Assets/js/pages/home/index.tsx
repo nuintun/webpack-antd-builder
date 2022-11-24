@@ -37,7 +37,7 @@ const LineChart = memo(() => {
 
 export default memo(function Page() {
   return (
-    <div className={`ui-page ${styles.main}`}>
+    <div className={styles.main}>
       <div className={styles.chart}>
         <LineChart />
       </div>

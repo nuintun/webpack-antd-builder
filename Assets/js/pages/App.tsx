@@ -6,10 +6,10 @@ import '/css/global.scss';
 
 import { lazy, memo, Suspense, useMemo } from 'react';
 
-import { Button, Result } from 'antd';
 import { parse } from '/js/utils/router';
-import { router } from '/js/config/router';
 import { Router } from 'react-nest-router';
+import { router } from '/js/config/router';
+import { Button, ConfigProvider, Result, theme } from 'antd';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
@@ -56,19 +56,29 @@ const Page = memo(function Page() {
     return parse(router);
   }, [router]);
 
+  const { token } = theme.useToken();
+
   return (
-    <Suspense fallback={<SuspenseFallBack />}>
-      <Router routes={routes} context={routes}>
-        <NotFound />
-      </Router>
-    </Suspense>
+    <div style={{ backgroundColor: token.colorBgContainer, height: '100%' }}>
+      <Suspense fallback={<SuspenseFallBack />}>
+        <Router routes={routes} context={routes}>
+          <NotFound />
+        </Router>
+      </Suspense>
+    </div>
   );
 });
 
 export default memo(function App() {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Page />
-    </ErrorBoundary>
+    <ConfigProvider
+      theme={{
+        algorithm: [theme.darkAlgorithm]
+      }}
+    >
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Page />
+      </ErrorBoundary>
+    </ConfigProvider>
   );
 });
