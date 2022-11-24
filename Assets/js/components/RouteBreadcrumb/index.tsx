@@ -2,8 +2,6 @@
  * @module RouteBreadcrumb
  */
 
-import './index.less';
-
 import React, { memo, useMemo } from 'react';
 
 import { Breadcrumb } from 'antd';
@@ -12,6 +10,7 @@ import Link from '/js/components/Link';
 import FlexIcon from '/js/components/FlexIcon';
 import { useMatches } from 'react-nest-router';
 import { Icon, IRoute } from '/js/utils/router';
+import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
 const prefixUI = 'ui-route-breadcrumb';
 const iconClassName = `${prefixUI}-icon`;
@@ -58,6 +57,24 @@ export default memo(function RouteBreadcrumb(): React.ReactElement {
   const breadcrumbs = useMemo(() => {
     return getBreadcrumbs(matches);
   }, [matches]);
+
+  const [] = useStyleSheets(prefixUI, token => {
+    return {
+      [`.${prefixUI}`]: {
+        height: 30,
+        padding: '0 8px',
+        fontSize: 14,
+        lineHeight: '30px',
+        overflowY: 'hidden',
+        whiteSpace: 'nowrap',
+        scrollbarWidth: 'none',
+        backgroundColor: '#fff',
+        color: 'rgba(0, 0, 0, 0.65)',
+        msOverflowStyle: 'none',
+        WebkitOverflowScrolling: 'touch'
+      }
+    };
+  });
 
   return (
     <Breadcrumb className={prefixUI}>
