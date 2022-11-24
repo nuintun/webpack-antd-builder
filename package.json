@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.0.0",
+    "@ant-design/cssinjs": "^1.0.2",
     "@ant-design/icons": "^4.8.0",
     "@ant-design/plots": "^1.2.2",
     "antd": "^5.0.1",
