@@ -4,7 +4,7 @@
 
 import React, { memo, useMemo } from 'react';
 
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, BreadcrumbProps } from 'antd';
 import classNames from 'classnames';
 import Link from '/js/components/Link';
 import FlexIcon from '/js/components/FlexIcon';
@@ -12,8 +12,9 @@ import { useMatches } from 'react-nest-router';
 import { Icon, IRoute } from '/js/utils/router';
 import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
+const { Item } = Breadcrumb;
+
 const prefixUI = 'ui-route-breadcrumb';
-const iconClassName = `${prefixUI}-icon`;
 
 interface BreadcrumbItem {
   key: string;
@@ -21,6 +22,12 @@ interface BreadcrumbItem {
   name: string;
   href?: string;
   active: boolean;
+}
+
+type BreadcrumbPicked = 'style' | 'className' | 'separator';
+
+export interface RouteBreadcrumbProps extends Pick<BreadcrumbProps, BreadcrumbPicked> {
+  icon?: boolean;
 }
 
 function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
@@ -51,47 +58,76 @@ function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
   return breadcrumbs;
 }
 
-export default memo(function RouteBreadcrumb(): React.ReactElement {
+export default memo(function RouteBreadcrumb({
+  style,
+  className,
+  icon: showIcon = true
+}: RouteBreadcrumbProps): React.ReactElement {
   const matches = useMatches() as IRoute[];
 
   const breadcrumbs = useMemo(() => {
     return getBreadcrumbs(matches);
   }, [matches]);
 
-  const [] = useStyleSheets(prefixUI, token => {
+  const render = useStyleSheets(prefixUI, token => {
+    const { fontSizeHeading2 } = token;
+
     return {
-      [`.${prefixUI}`]: {
-        height: 30,
-        padding: '0 8px',
-        fontSize: 14,
-        lineHeight: '30px',
-        overflowY: 'hidden',
-        whiteSpace: 'nowrap',
-        scrollbarWidth: 'none',
-        backgroundColor: '#fff',
-        color: 'rgba(0, 0, 0, 0.65)',
-        msOverflowStyle: 'none',
-        WebkitOverflowScrolling: 'touch'
+      '.ui-component': {
+        [`&.${prefixUI}`]: {
+          overflowY: 'hidden',
+          whiteSpace: 'nowrap',
+          color: token.colorText,
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          fontSize: token.fontSize,
+          height: fontSizeHeading2,
+          WebkitOverflowScrolling: 'touch',
+          lineHeight: `${fontSizeHeading2}px`,
+          backgroundColor: token.colorBgContainer,
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          },
+          [`.${prefixUI}-link, .${prefixUI}-item`]: {
+            cursor: 'default',
+            [`.${prefixUI}-icon`]: {
+              marginInlineEnd: token.marginXXS,
+              '> img': {
+                width: 'auto',
+                height: fontSizeHeading2
+              }
+            },
+            '&.active': {
+              color: token.colorPrimary
+            }
+          },
+          [`.${prefixUI}-link`]: {
+            cursor: 'pointer',
+            '&:hover': {
+              color: token.colorPrimary
+            }
+          }
+        }
       }
     };
   });
 
-  return (
-    <Breadcrumb className={prefixUI}>
+  return render(
+    <Breadcrumb style={style} className={classNames('ui-component', prefixUI, className)}>
       {breadcrumbs.map(({ key, name, icon, href, active }) => (
-        <Breadcrumb.Item key={key}>
+        <Item key={key}>
           {href && !active ? (
             <Link className={`${prefixUI}-link`} href={href}>
-              <FlexIcon icon={icon} className={iconClassName} />
+              {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
               <span>{name}</span>
             </Link>
           ) : (
             <span className={classNames(`${prefixUI}-item`, { active })}>
-              <FlexIcon icon={icon} className={iconClassName} />
+              {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
               <span>{name}</span>
             </span>
           )}
-        </Breadcrumb.Item>
+        </Item>
       ))}
     </Breadcrumb>
   );

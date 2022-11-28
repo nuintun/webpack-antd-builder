@@ -11,49 +11,50 @@ import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 const prefixUI = 'ui-route-tabs';
-const iconClassName = `${prefixUI}-icon`;
 
 type TabsPicked =
   | 'size'
+  | 'style'
   | 'animated'
   | 'centered'
   | 'moreIcon'
+  | 'className'
   | 'tabBarStyle'
   | 'tabPosition'
-  | 'tabBarGutter'
   | 'renderTabBar'
+  | 'tabBarGutter'
   | 'popupClassName'
   | 'tabBarExtraContent';
 
 export interface RouteTabsProps extends Pick<TabsProps, TabsPicked> {
   icon?: boolean;
-  className?: string;
   type?: 'line' | 'card';
-  style?: React.CSSProperties;
 }
 
-export default memo(function RouteTabs({ className, icon = true, ...restProps }: RouteTabsProps): React.ReactElement {
+export default memo(function RouteTabs({ className, icon: showIcon = true, ...restProps }: RouteTabsProps): React.ReactElement {
   const index = useMatchIndex();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
-  const [namespace, render] = useStyleSheets(prefixUI, token => {
+  const render = useStyleSheets(prefixUI, token => {
     return {
-      [`.${prefixUI}`]: {
-        [`.${prefixUI}-nav`]: {
-          color: token.colorLink,
-          fontSize: token.fontSizeLG,
-          '&.active': {
-            color: token.colorLinkActive
-          },
-          [`.${prefixUI}-icon`]: {
-            '&.anticon': {
-              margin: 'unset',
-              marginInlineEnd: token.marginXXS,
-              '> img': {
-                width: 'auto',
-                height: token.fontSizeLG
+      '.ui-component': {
+        [`&.${prefixUI}`]: {
+          [`.${prefixUI}-nav`]: {
+            color: token.colorLink,
+            fontSize: token.fontSizeLG,
+            '&.active': {
+              color: token.colorLinkActive
+            },
+            [`.${prefixUI}-icon`]: {
+              '&.anticon': {
+                margin: 'unset',
+                marginInlineEnd: token.marginXXS,
+                '> img': {
+                  width: 'auto',
+                  height: token.fontSizeLG
+                }
               }
             }
           }
@@ -76,7 +77,7 @@ export default memo(function RouteTabs({ className, icon = true, ...restProps }:
         ),
         label: (
           <Link href={link.href} target={link.target} className={classNames(`${prefixUI}-nav`, { active })}>
-            {icon && <FlexIcon icon={meta.icon} className={iconClassName} />}
+            {showIcon && <FlexIcon icon={meta.icon} className={`${prefixUI}-icon`} />}
             {meta.name}
           </Link>
         )
@@ -90,7 +91,7 @@ export default memo(function RouteTabs({ className, icon = true, ...restProps }:
       items={items}
       activeKey={activeKey}
       destroyInactiveTabPane
-      className={classNames(namespace, className)}
+      className={classNames('ui-component', prefixUI, className)}
     />
   );
 });

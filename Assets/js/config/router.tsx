@@ -65,7 +65,7 @@ export const router: readonly Route<Meta>[] = [
               type: MenuType.Hidden,
               icon: <Icon component={PageIcon} />
             },
-            element: <div className="ui-page">标签页一内容</div>
+            element: lazy(() => import('/js/pages/System/Tabs/First'))
           },
           {
             path: 'second',
@@ -74,7 +74,7 @@ export const router: readonly Route<Meta>[] = [
               type: MenuType.Hidden,
               icon: <Icon component={PageIcon} />
             },
-            element: <div className="ui-page">标签页二内容</div>
+            element: lazy(() => import('/js/pages/System/Tabs/Second'))
           }
         ]
       }
@@ -157,7 +157,7 @@ export const router: readonly Route<Meta>[] = [
       //                 type: MenuType.Hidden,
       //                 icon: <Icon component={PageIcon} />
       //               },
-      //               element: <div className="ui-page">标签页一内容</div>
+      //               element: lazy(()=>import('/js/pages/System/Tabs/First'))
       //             },
       //             {
       //               path: 'second',
@@ -166,7 +166,7 @@ export const router: readonly Route<Meta>[] = [
       //                 type: MenuType.Hidden,
       //                 icon: <Icon component={PageIcon} />
       //               },
-      //               element: <div className="ui-page">标签页二内容</div>
+      //               element: lazy(()=>import('/js/pages/System/Tabs/Second'))
       //             }
       //           ]
       //         }
