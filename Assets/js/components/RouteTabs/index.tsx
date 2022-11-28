@@ -49,6 +49,7 @@ export default memo(function RouteTabs({ className, icon = true, ...restProps }:
           },
           [`.${prefixUI}-icon`]: {
             '&.anticon': {
+              margin: 'unset',
               marginInlineEnd: token.marginXXS,
               '> img': {
                 width: 'auto',
