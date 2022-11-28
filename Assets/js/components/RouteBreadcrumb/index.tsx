@@ -82,6 +82,8 @@ export default memo(function RouteBreadcrumb({
           msOverflowStyle: 'none',
           fontSize: token.fontSize,
           height: fontSizeHeading2,
+          msScrollChaining: 'none',
+          OverscrollBehavior: 'contain',
           WebkitOverflowScrolling: 'touch',
           lineHeight: `${fontSizeHeading2}px`,
           backgroundColor: token.colorBgContainer,

@@ -47,7 +47,7 @@ const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }:
 });
 
 const Page = memo(function Page() {
-  const [namespace, render] = useStyleSheets('flex-menu', token => {
+  const render = useStyleSheets('flex-menu', token => {
     return {
       '.flex-menu': {
         margin: 0,
@@ -64,7 +64,7 @@ const Page = memo(function Page() {
   });
 
   return render(
-    <div className={namespace}>
+    <div className="flex-menu">
       <p className="a">App</p>
     </div>
   );

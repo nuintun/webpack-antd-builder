@@ -1,13 +1,12 @@
-import './index.less';
-
-import React, { memo, useCallback, useRef } from 'react';
+import React, { CSSProperties, memo, useCallback, useRef } from 'react';
 
 import { Drawer } from 'antd';
-import { prefixUI } from './utils';
 import useLatestRef from '/js/hooks/useLatestRef';
 import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as FlexMenuProps } from './SiderMenu';
 
 export type { HeaderRender, HeaderRenderProps, FlexMenuProps };
+
+const drawerBodyStyle: CSSProperties = { padding: 0, overflow: 'hidden' };
 
 export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement {
   const { isMobile, collapsed, onCollapse, width = 256, onOpenChange, defaultOpenKeys = [], ...restProps } = props;
@@ -33,14 +32,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
 
   if (isMobile) {
     return (
-      <Drawer
-        width={width}
-        closable={false}
-        placement="left"
-        open={!collapsed}
-        onClose={onClose}
-        className={`${prefixUI}-drawer`}
-      >
+      <Drawer width={width} closable={false} placement="left" open={!collapsed} onClose={onClose} bodyStyle={drawerBodyStyle}>
         <SiderMenu
           {...restProps}
           width={width}

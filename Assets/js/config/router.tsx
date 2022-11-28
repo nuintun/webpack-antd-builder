@@ -49,131 +49,100 @@ export const router: readonly Route<Meta>[] = [
       },
       {
         path: '/',
-        meta: {
-          name: '标签导航',
-          icon: <Icon component={TabsIcon} />
-        },
-        element: lazy(() => import('/js/components/RouteTabs'), {
-          tabBarGutter: 24,
-          className: 'ui-layout-tabs'
-        }),
+        element: lazy(() => import('/js/components/Layout')),
         children: [
           {
-            path: 'first',
+            index: true,
             meta: {
-              name: '标签页一',
-              type: MenuType.Hidden,
-              icon: <Icon component={PageIcon} />
+              name: '网站首页',
+              icon: <Icon component={HomeIcon} />
             },
-            element: lazy(() => import('/js/pages/System/Tabs/First'))
+            element: lazy(() => import('/js/pages/Home'))
           },
           {
-            path: 'second',
+            path: 'analysis',
             meta: {
-              name: '标签页二',
-              type: MenuType.Hidden,
-              icon: <Icon component={PageIcon} />
+              name: '数据分析',
+              icon: <Icon component={AnalysisIcon} />
             },
-            element: lazy(() => import('/js/pages/System/Tabs/Second'))
+            children: [
+              {
+                path: 'user',
+                element: lazy(() => import('/js/pages/Analysis/User')),
+                meta: {
+                  name: '用户分析',
+                  icon: <Icon component={UserAnalysisIcon} />
+                }
+              },
+              {
+                path: 'recharge',
+                element: lazy(() => import('/js/pages/Analysis/Recharge')),
+                meta: {
+                  name: '充值分析',
+                  icon: <Icon component={RechargeAnalysisIcon} />
+                }
+              }
+            ]
+          },
+          {
+            path: 'system',
+            meta: {
+              name: '系统管理',
+              icon: <Icon component={SystemIcon} />
+            },
+            children: [
+              {
+                path: 'account',
+                element: lazy(() => import('/js/pages/System/Account')),
+                meta: {
+                  name: '帐号管理',
+                  icon: <Icon component={AccountSystemIcon} />
+                }
+              },
+              {
+                path: 'logs',
+                element: lazy(() => import('/js/pages/System/Logs')),
+                meta: {
+                  name: '安全日志',
+                  icon: <Icon component={LogsSystemIcon} />
+                }
+              },
+              {
+                path: 'tabs',
+                meta: {
+                  name: '标签导航',
+                  type: MenuType.Tabs,
+                  icon: <Icon component={TabsIcon} />
+                },
+                element: lazy(() => import('/js/components/RouteTabs'), {
+                  tabBarGutter: 24,
+                  className: 'ui-layout-tabs'
+                }),
+                children: [
+                  {
+                    path: 'first',
+                    meta: {
+                      name: '标签页一',
+                      type: MenuType.Hidden,
+                      icon: <Icon component={PageIcon} />
+                    },
+                    element: lazy(() => import('/js/pages/System/Tabs/First'))
+                  },
+                  {
+                    path: 'second',
+                    meta: {
+                      name: '标签页二',
+                      type: MenuType.Hidden,
+                      icon: <Icon component={PageIcon} />
+                    },
+                    element: lazy(() => import('/js/pages/System/Tabs/Second'))
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
-      // {
-      //   path: '/',
-      //   element: lazy(() => import('/js/components/Layout')),
-      //   children: [
-      //     {
-      //       index: true,
-      //       meta: {
-      //         name: '网站首页',
-      //         icon: <Icon component={HomeIcon} />
-      //       },
-      //       element: lazy(() => import('/js/pages/Home'))
-      //     },
-      //     {
-      //       path: 'analysis',
-      //       meta: {
-      //         name: '数据分析',
-      //         icon: <Icon component={AnalysisIcon} />
-      //       },
-      //       children: [
-      //         {
-      //           path: 'user',
-      //           element: lazy(() => import('/js/pages/Analysis/User')),
-      //           meta: {
-      //             name: '用户分析',
-      //             icon: <Icon component={UserAnalysisIcon} />
-      //           }
-      //         },
-      //         {
-      //           path: 'recharge',
-      //           element: lazy(() => import('/js/pages/Analysis/Recharge')),
-      //           meta: {
-      //             name: '充值分析',
-      //             icon: <Icon component={RechargeAnalysisIcon} />
-      //           }
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       path: 'system',
-      //       meta: {
-      //         name: '系统管理',
-      //         icon: <Icon component={SystemIcon} />
-      //       },
-      //       children: [
-      //         {
-      //           path: 'account',
-      //           element: lazy(() => import('/js/pages/System/Account')),
-      //           meta: {
-      //             name: '帐号管理',
-      //             icon: <Icon component={AccountSystemIcon} />
-      //           }
-      //         },
-      //         {
-      //           path: 'logs',
-      //           element: lazy(() => import('/js/pages/System/Logs')),
-      //           meta: {
-      //             name: '安全日志',
-      //             icon: <Icon component={LogsSystemIcon} />
-      //           }
-      //         },
-      //         {
-      //           path: 'tabs',
-      //           meta: {
-      //             name: '标签导航',
-      //             type: MenuType.Tabs,
-      //             icon: <Icon component={TabsIcon} />
-      //           },
-      //           element: lazy(() => import('/js/components/RouteTabs'), {
-      //             tabBarGutter: 24,
-      //             className: 'ui-layout-tabs'
-      //           }),
-      //           children: [
-      //             {
-      //               path: 'first',
-      //               meta: {
-      //                 name: '标签页一',
-      //                 type: MenuType.Hidden,
-      //                 icon: <Icon component={PageIcon} />
-      //               },
-      //               element: lazy(()=>import('/js/pages/System/Tabs/First'))
-      //             },
-      //             {
-      //               path: 'second',
-      //               meta: {
-      //                 name: '标签页二',
-      //                 type: MenuType.Hidden,
-      //                 icon: <Icon component={PageIcon} />
-      //               },
-      //               element: lazy(()=>import('/js/pages/System/Tabs/Second'))
-      //             }
-      //           ]
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // }
     ]
   }
 ];

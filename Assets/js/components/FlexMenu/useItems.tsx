@@ -11,9 +11,6 @@ import { DFSTree } from '/js/utils/tree';
 import { MenuItem } from '/js/utils/menus';
 import FlexIcon from '/js/components/FlexIcon';
 
-const iconClassName = `${prefixUI}-icon`;
-const titleClassName = `${prefixUI}-title`;
-
 export type ItemRender = (item: MenuItem) => React.ReactNode;
 export type Item = NonNullable<NonNullable<MenuProps['items']>[0]>;
 
@@ -26,7 +23,7 @@ function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
 
   return (
     <>
-      <FlexIcon icon={icon} className={iconClassName} />
+      <FlexIcon icon={icon} className={`${prefixUI}-icon`} />
       <span>{name}</span>
     </>
   );
@@ -36,14 +33,14 @@ function renderLabel(item: MenuItem, selectedKeys: string[], itemRender?: ItemRe
   const { link, children } = item;
 
   if ((children && children.length > 0) || !link) {
-    return <span className={titleClassName}>{renderItem(item, itemRender)}</span>;
+    return <span className={`${prefixUI}-title`}>{renderItem(item, itemRender)}</span>;
   } else {
     const { key } = item;
     const { href, target } = link;
     const replace = selectedKeys.includes(key);
 
     return (
-      <Link href={href} className={titleClassName} replace={replace} target={target}>
+      <Link href={href} className={`${prefixUI}-title`} replace={replace} target={target}>
         {renderItem(item, itemRender)}
       </Link>
     );

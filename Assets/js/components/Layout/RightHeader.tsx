@@ -1,5 +1,3 @@
-import './index.less';
-
 import { memo, useCallback, useMemo } from 'react';
 
 import useTheme, { Theme } from '/js/hooks/useTheme';

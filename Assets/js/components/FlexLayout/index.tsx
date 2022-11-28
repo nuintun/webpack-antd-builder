@@ -1,5 +1,3 @@
-import './index.less';
-
 import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 
 import useMedia from '/js/hooks/useMedia';
@@ -12,7 +10,7 @@ import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
 
 const { Header, Content } = Layout;
 
-type PickProps = 'theme' | 'collapsedWidth';
+type PickProps = 'theme' | 'headerHeight' | 'collapsedWidth';
 
 export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
   siderWidth?: number;
@@ -31,11 +29,12 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   const {
     menus,
     children,
-    siderWidth,
     theme = 'dark',
-    collapsedWidth,
     leftHeaderRender,
+    siderWidth = 256,
+    headerHeight = 64,
     rightHeaderRender,
+    collapsedWidth = 64,
     breakQuery = '(max-width: 992px)',
     mobileQuery = '(max-width: 576px)'
   } = props;
@@ -95,7 +94,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
 
   return (
-    <Layout hasSider={!isMobile} className={`${prefixUI} ${prefixUI}-${theme}`}>
+    <Layout hasSider={!isMobile} style={{ height: '100%' }} className={`${prefixUI} ${prefixUI}-${theme}`}>
       <FlexMenu
         theme={theme}
         items={menus}
@@ -115,8 +114,9 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
               theme,
               isMobile,
               collapsed: true,
-              width: siderWidth as number,
-              collapsedWidth: collapsedWidth as number
+              width: siderWidth,
+              height: headerHeight,
+              collapsedWidth: collapsedWidth
             })}
           {collapsed ? (
             <MenuUnfoldOutlined className={triggerClassName} onClick={onTriggerClick} />
@@ -128,8 +128,9 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
               theme,
               isMobile,
               collapsed,
-              width: siderWidth as number,
-              collapsedWidth: collapsedWidth as number
+              width: siderWidth,
+              height: headerHeight,
+              collapsedWidth: collapsedWidth
             })}
         </Header>
         <Content>
