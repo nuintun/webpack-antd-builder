@@ -47,7 +47,6 @@ export default memo(function SiderMenu({
   ...restProps
 }: SiderMenuProps): React.ReactElement {
   const render = useStyleSheets(prefixUI, token => {
-    console.log(token);
     return {
       '.ui-component': {
         [`&.${prefixUI}-sider`]: {
