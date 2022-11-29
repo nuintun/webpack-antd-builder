@@ -47,6 +47,7 @@ export default memo(function SiderMenu({
   ...restProps
 }: SiderMenuProps): React.ReactElement {
   const render = useStyleSheets(['components', 'FlexMenu'], token => {
+    const { fontSizeLG } = token;
     const borderSize = token.Menu?.colorActiveBarBorderSize;
     const lineWidth = borderSize ?? theme == 'light' ? token.lineWidth : 0;
     const borderSplit = `${lineWidth}px ${token.lineType} ${token.colorSplit}`;
@@ -56,17 +57,19 @@ export default memo(function SiderMenu({
         [`&.${prefixUI}-sider`]: {
           height: '100%',
           overflow: 'hidden',
+
           [`.${prefixUI}-header`]: {
             display: 'flex',
             overflow: 'hidden',
-            alignItems: 'center',
             height: headerHeight,
+            placeItems: 'center',
             whiteSpace: 'nowrap',
             wordBreak: 'keep-all',
-            color: token.colorText,
-            justifyItems: 'center',
-            borderBlockEnd: borderSplit
+            borderBlockEnd: borderSplit,
+            color: token.colorPrimaryText,
+            lineHeight: `${headerHeight - lineWidth}px`
           },
+
           [`.${prefixUI}`]: {
             overflow: 'auto',
             userSelect: 'none',
@@ -76,19 +79,24 @@ export default memo(function SiderMenu({
             OverscrollBehavior: 'contain',
             WebkitOverflowScrolling: 'touch',
             height: `calc(100% - ${headerHeight}px)`,
+
             '&::-webkit-scrollbar': {
               display: 'none'
             },
+
             [`.${prefixUI}-title`]: {
               overflow: 'hidden',
+              fontSize: fontSizeLG,
               textOverflow: 'ellipsis',
-              fontSize: token.fontSizeLG,
+
               [`.${prefixUI}-icon`]: {
                 lineHeight: 0,
-                fontSize: token.fontSizeLG,
+                fontSize: fontSizeLG,
+
                 '> img': {
-                  height: token.fontSizeLG
+                  height: fontSizeLG
                 },
+
                 '+ span': {
                   marginInlineStart: token.marginXXS
                 }

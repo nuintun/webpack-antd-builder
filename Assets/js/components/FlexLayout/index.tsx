@@ -25,7 +25,6 @@ export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
 }
 
 const prefixUI = 'ui-flex-layout';
-const triggerClassName = `${prefixUI}-sider-trigger`;
 
 export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElement {
   const {
@@ -111,11 +110,33 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
           [`.${prefixUI}-header`]: {
             display: 'flex',
             overflow: 'hidden',
-            alignItems: 'center',
-            justifyItems: 'center',
+            height: headerHeight,
+            placeItems: 'center',
             borderBlockEnd: borderSplit,
+            justifyContent: 'space-between',
             padding: `0 ${token.paddingXS}px`,
-            backgroundColor: isLight ? token.colorBgContainer : colorBgLayout
+            lineHeight: `${headerHeight - lineWidth}px`,
+            backgroundColor: isLight ? token.colorBgContainer : colorBgLayout,
+
+            [`.${prefixUI}-trigger`]: {
+              cursor: 'pointer',
+              fontSize: token.fontSizeXL,
+              color: token.colorPrimaryText,
+
+              ':hover': {
+                color: token.colorPrimaryTextHover
+              }
+            }
+          },
+
+          [`.${prefixUI}-content`]: {
+            height: '100%',
+            overflow: 'auto',
+            position: 'relative',
+            msScrollChaining: 'none',
+            scrollBehavior: 'smooth',
+            OverscrollBehavior: 'contain',
+            WebkitOverflowScrolling: 'touch'
           }
         }
       }
@@ -125,15 +146,16 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   return render(
     <Layout hasSider={!isMobile} style={{ height: '100%' }} className={classNames('ui-component', prefixUI)}>
       <FlexMenu
-        theme={theme}
         items={menus}
+        theme={theme}
         width={siderWidth}
         isMobile={isMobile}
-        onClick={onItemClick}
         collapsed={collapsed}
+        onClick={onItemClick}
         onCollapse={onCollapse}
-        headerRender={leftHeaderRender}
+        headerHeight={headerHeight}
         collapsedWidth={collapsedWidth}
+        headerRender={leftHeaderRender}
       />
       <Layout>
         <Header className={`${prefixUI}-header`}>
@@ -148,9 +170,9 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
               collapsedWidth: collapsedWidth
             })}
           {collapsed ? (
-            <MenuUnfoldOutlined className={triggerClassName} onClick={onTriggerClick} />
+            <MenuUnfoldOutlined className={`${prefixUI}-trigger`} onClick={onTriggerClick} />
           ) : (
-            <MenuFoldOutlined className={triggerClassName} onClick={onTriggerClick} />
+            <MenuFoldOutlined className={`${prefixUI}-trigger`} onClick={onTriggerClick} />
           )}
           {rightHeaderRender &&
             rightHeaderRender({

@@ -8,7 +8,9 @@ import logo from '/images/logo.svg?url';
 export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React.ReactElement {
   const style = useMemo<React.CSSProperties>(() => {
     return {
-      fontSize: 0
+      fontSize: 0,
+      display: 'flex',
+      placeItems: 'center'
     };
   }, []);
 
@@ -17,7 +19,7 @@ export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React
       width: 64,
       padding: 8,
       aspectRatio: '1 / 1',
-      verticalAlign: 'middle'
+      boxSizing: 'border-box'
     };
   }, []);
 
@@ -25,7 +27,7 @@ export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React
     return {
       fontSize: 24,
       fontWeight: 700,
-      verticalAlign: 'middle'
+      lineHeight: '64px'
     };
   }, []);
 

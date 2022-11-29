@@ -38,21 +38,32 @@ export default memo(function RouteTabs({ className, icon: showIcon = true, ...re
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
   const render = useStyleSheets(['components', 'RouteTabs'], token => {
+    const { fontSizeLG } = token;
+
     return {
       '.ui-component': {
         [`&.${prefixUI}`]: {
+          backgroundColor: token.colorBgContainer,
+
+          '> div': {
+            padding: `0 ${token.paddingXS}px`
+          },
+
           [`.${prefixUI}-nav`]: {
+            fontSize: fontSizeLG,
             color: token.colorLink,
-            fontSize: token.fontSizeLG,
+
             '&.active': {
               color: token.colorLinkActive
             },
+
             [`.${prefixUI}-icon`]: {
               margin: 'unset',
               marginInlineEnd: token.marginXXS,
+
               '> img': {
                 width: 'auto',
-                height: token.fontSizeLG
+                height: fontSizeLG
               }
             }
           }

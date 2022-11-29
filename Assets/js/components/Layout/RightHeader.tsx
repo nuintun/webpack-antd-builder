@@ -139,7 +139,16 @@ export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React
   const render = useStyleSheets(['components', 'RightHeader'], token => {
     return {
       [`.${prefixUI}`]: {
-        padding: 0
+        padding: 0,
+        display: 'flex',
+        overflow: 'hidden',
+        placeItems: 'center',
+        fontSize: token.fontSizeLG,
+        color: token.colorPrimaryText,
+
+        ':hover': {
+          color: token.colorPrimaryTextHover
+        }
       }
     };
   });

@@ -70,7 +70,7 @@ export default memo(function RouteBreadcrumb({
   }, [matches]);
 
   const render = useStyleSheets(['components', 'RouteBreadcrumb'], token => {
-    const { fontSizeHeading2 } = token;
+    const { colorPrimary, fontSizeHeading2 } = token;
 
     return {
       '.ui-component': {
@@ -85,28 +85,37 @@ export default memo(function RouteBreadcrumb({
           msScrollChaining: 'none',
           OverscrollBehavior: 'contain',
           WebkitOverflowScrolling: 'touch',
+          padding: `0 ${token.paddingXS}px`,
           lineHeight: `${fontSizeHeading2}px`,
           backgroundColor: token.colorBgContainer,
+          borderBlockEnd: `${token.lineWidth}px ${token.lineType} ${token.colorSplit}`,
+
           '&::-webkit-scrollbar': {
             display: 'none'
           },
+
           [`.${prefixUI}-link, .${prefixUI}-item`]: {
             cursor: 'default',
+
             [`.${prefixUI}-icon`]: {
               marginInlineEnd: token.marginXXS,
+
               '> img': {
                 width: 'auto',
                 height: fontSizeHeading2
               }
             },
+
             '&.active': {
-              color: token.colorPrimary
+              color: colorPrimary
             }
           },
+
           [`.${prefixUI}-link`]: {
             cursor: 'pointer',
+
             '&:hover': {
-              color: token.colorPrimary
+              color: colorPrimary
             }
           }
         }
