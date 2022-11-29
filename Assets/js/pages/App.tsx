@@ -69,7 +69,7 @@ export default memo(function App() {
   return (
     <ConfigProvider
       theme={{
-        algorithm: [theme.defaultAlgorithm]
+        algorithm: [theme.darkAlgorithm]
       }}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
