@@ -56,16 +56,12 @@ const Page = memo(function Page() {
     return parse(router);
   }, [router]);
 
-  const { token } = theme.useToken();
-
   return (
-    <div style={{ backgroundColor: token.colorBgContainer, height: '100%' }}>
-      <Suspense fallback={<SuspenseFallBack />}>
-        <Router routes={routes} context={routes}>
-          <NotFound />
-        </Router>
-      </Suspense>
-    </div>
+    <Suspense fallback={<SuspenseFallBack />}>
+      <Router routes={routes} context={routes}>
+        <NotFound />
+      </Router>
+    </Suspense>
   );
 });
 
@@ -73,7 +69,7 @@ export default memo(function App() {
   return (
     <ConfigProvider
       theme={{
-        algorithm: [theme.darkAlgorithm]
+        algorithm: [theme.defaultAlgorithm]
       }}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>

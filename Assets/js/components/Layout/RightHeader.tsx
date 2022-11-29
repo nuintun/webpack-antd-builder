@@ -11,6 +11,7 @@ import logo from '/images/logo.svg?url';
 import ThemeIcon from '/images/theme.svg';
 import ThemeDarkIcon from '/images/theme-dark.svg';
 import ThemeLightIcon from '/images/theme-light.svg';
+import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
 const prefixUI = 'ui-right-header';
 
@@ -25,7 +26,7 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
       onClick: onThemeClick,
       className: getDropdownActiveClassName(theme === 'dark'),
       label: (
-        <a className="ui-vertical-middle">
+        <a>
           <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
           <span>暗色主题</span>
         </a>
@@ -36,7 +37,7 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
       onClick: onThemeClick,
       className: getDropdownActiveClassName(theme === 'light'),
       label: (
-        <a className="ui-vertical-middle">
+        <a>
           <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
           <span>浅色主题</span>
         </a>
@@ -62,7 +63,7 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
   return (
     <Dropdown placement="bottomRight" menu={menu}>
       <div title="Theme">
-        <Icon component={ThemeIcon} style={{ fontSize: 24, color: theme === 'dark' ? '#fff' : '#000' }} />
+        <Icon component={ThemeIcon} style={{ fontSize: 24 }} />
       </div>
     </Dropdown>
   );
@@ -74,7 +75,7 @@ const LogoutAction = memo(function LogoutAction(): React.ReactElement {
   }, []);
 
   return (
-    <a className="ui-vertical-middle" onClick={onClick}>
+    <a onClick={onClick}>
       <LogoutOutlined style={{ fontSize: 16, marginRight: 8 }} />
       <span>退出系统</span>
     </a>
@@ -107,7 +108,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
             key: 'theme',
             children: getThemeItems(theme, onThemeClick),
             label: (
-              <a className="ui-vertical-middle" style={{ display: 'inline-flex' }}>
+              <a>
                 <Icon component={ThemeIcon} style={{ fontSize: 18, marginRight: 8 }} />
                 <span>主题设置</span>
               </a>
@@ -134,9 +135,17 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
   );
 });
 
-export default memo(function RightHeader({ theme, isMobile }: HeaderRenderProps): React.ReactElement {
-  return (
-    <div className={`${prefixUI} ${prefixUI}-${theme}`}>
+export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React.ReactElement {
+  const render = useStyleSheets(['components', 'RightHeader'], token => {
+    return {
+      [`.${prefixUI}`]: {
+        padding: 0
+      }
+    };
+  });
+
+  return render(
+    <div className={prefixUI}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>

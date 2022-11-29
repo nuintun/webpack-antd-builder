@@ -7,6 +7,8 @@ import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
+import { useStyleSheets } from '/js/hooks/useStyleSheets';
+import classNames from 'classnames';
 
 const { Header, Content } = Layout;
 
@@ -93,8 +95,35 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
 
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
 
-  return (
-    <Layout hasSider={!isMobile} style={{ height: '100%' }} className={`${prefixUI} ${prefixUI}-${theme}`}>
+  const render = useStyleSheets(['components', 'FlexLayout'], token => {
+    const isLight = theme == 'light';
+    const borderSize = token.Menu?.colorActiveBarBorderSize;
+    const lineWidth = borderSize ?? isLight ? token.lineWidth : 0;
+    const colorBgLayout = token.Layout?.colorBgHeader ?? '#001529';
+    const borderSplit = `${lineWidth}px ${token.lineType} ${token.colorSplit}`;
+
+    return {
+      '.ui-component': {
+        [`&.${prefixUI}`]: {
+          height: '100%',
+          overflow: 'hidden',
+
+          [`.${prefixUI}-header`]: {
+            display: 'flex',
+            overflow: 'hidden',
+            alignItems: 'center',
+            justifyItems: 'center',
+            borderBlockEnd: borderSplit,
+            padding: `0 ${token.paddingXS}px`,
+            backgroundColor: isLight ? token.colorBgContainer : colorBgLayout
+          }
+        }
+      }
+    };
+  });
+
+  return render(
+    <Layout hasSider={!isMobile} style={{ height: '100%' }} className={classNames('ui-component', prefixUI)}>
       <FlexMenu
         theme={theme}
         items={menus}

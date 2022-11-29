@@ -47,7 +47,10 @@ export default memo(function SiderMenu({
   ...restProps
 }: SiderMenuProps): React.ReactElement {
   const render = useStyleSheets(['components', 'FlexMenu'], token => {
-    console.log(token);
+    const borderSize = token.Menu?.colorActiveBarBorderSize;
+    const lineWidth = borderSize ?? theme == 'light' ? token.lineWidth : 0;
+    const borderSplit = `${lineWidth}px ${token.lineType} ${token.colorSplit}`;
+
     return {
       '.ui-component': {
         [`&.${prefixUI}-sider`]: {
@@ -56,11 +59,13 @@ export default memo(function SiderMenu({
           [`.${prefixUI}-header`]: {
             display: 'flex',
             overflow: 'hidden',
-            height: headerHeight,
             alignItems: 'center',
+            height: headerHeight,
             whiteSpace: 'nowrap',
             wordBreak: 'keep-all',
-            justifyItems: 'center'
+            color: token.colorText,
+            justifyItems: 'center',
+            borderBlockEnd: borderSplit
           },
           [`.${prefixUI}`]: {
             overflow: 'auto',
@@ -105,7 +110,7 @@ export default memo(function SiderMenu({
       collapsed={collapsed}
       onCollapse={onCollapse}
       collapsedWidth={collapsedWidth}
-      className={classNames('ui-component', `${prefixUI}-sider`, `${prefixUI}-${theme}`, className)}
+      className={classNames('ui-component', `${prefixUI}-sider`, className)}
     >
       {headerRender && (
         <div className={`${prefixUI}-header`}>

@@ -5,7 +5,7 @@ import { HeaderRenderProps } from '/js/components/FlexMenu';
 
 import logo from '/images/logo.svg?url';
 
-export default memo(function LeftHeader({ theme, collapsed }: HeaderRenderProps): React.ReactElement {
+export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React.ReactElement {
   const style = useMemo<React.CSSProperties>(() => {
     return {
       fontSize: 0
@@ -25,10 +25,9 @@ export default memo(function LeftHeader({ theme, collapsed }: HeaderRenderProps)
     return {
       fontSize: 24,
       fontWeight: 700,
-      verticalAlign: 'middle',
-      color: theme === 'dark' ? '#fff' : '#000'
+      verticalAlign: 'middle'
     };
-  }, [theme]);
+  }, []);
 
   return (
     <Link href="/" title="Home" style={style}>
