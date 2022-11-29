@@ -47,6 +47,7 @@ export default memo(function SiderMenu({
   ...restProps
 }: SiderMenuProps): React.ReactElement {
   const render = useStyleSheets(['components', 'FlexMenu'], token => {
+    console.log(token);
     return {
       '.ui-component': {
         [`&.${prefixUI}-sider`]: {
@@ -78,12 +79,10 @@ export default memo(function SiderMenu({
               textOverflow: 'ellipsis',
               fontSize: token.fontSizeLG,
               [`.${prefixUI}-icon`]: {
-                '&.anticon': {
-                  lineHeight: 0,
-                  fontSize: token.fontSizeLG,
-                  '> img': {
-                    height: token.fontSizeLG
-                  }
+                lineHeight: 0,
+                fontSize: token.fontSizeLG,
+                '> img': {
+                  height: token.fontSizeLG
                 },
                 '+ span': {
                   marginInlineStart: token.marginXXS

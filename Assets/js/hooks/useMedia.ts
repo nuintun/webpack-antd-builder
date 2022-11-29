@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { isBrowser } from '/js/utils/utils';
+import { canUseDOM } from '/js/utils/utils';
 import useIsoLayoutEffect from './useIsoLayoutEffect';
 
 /**
@@ -20,7 +20,7 @@ export default function useMedia(
   initialState: boolean | (() => boolean) = false
 ): boolean {
   const mql = useMemo(() => {
-    return isBrowser ? window.matchMedia(query) : null;
+    return canUseDOM ? window.matchMedia(query) : null;
   }, [query]);
 
   const [matched, setState] = useState(mql ? mql.matches : initialState);

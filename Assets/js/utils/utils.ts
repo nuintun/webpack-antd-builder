@@ -5,6 +5,15 @@
 import dayjs, { Dayjs, ManipulateType, OpUnitType } from 'dayjs';
 
 /**
+ * @type {boolean} canUseDOM
+ * @description 是否支持 DOM 操作
+ */
+export const canUseDOM =
+  typeof window !== 'undefined' &&
+  typeof window.document !== 'undefined' &&
+  typeof window.document.createElement !== 'undefined';
+
+/**
  * @function assert
  * @description 断言
  * @param cond 断言条件
@@ -13,12 +22,6 @@ import dayjs, { Dayjs, ManipulateType, OpUnitType } from 'dayjs';
 export function assert<T>(cond: T, message: string): asserts cond {
   if (!cond) throw new Error(message);
 }
-
-/**
- * @type {isBrowser}
- * @description 是否为浏览器环境
- */
-export const isBrowser = typeof window !== 'undefined' && window.document;
 
 /**
  * @function isObject

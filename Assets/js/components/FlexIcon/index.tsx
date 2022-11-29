@@ -2,9 +2,10 @@
  * @module FlexIcon
  */
 
-import React, { cloneElement, memo } from 'react';
+import React, { cloneElement, memo, useContext } from 'react';
 
 import classNames from 'classnames';
+import { ConfigProvider } from 'antd';
 import { Icon } from '/js/utils/router';
 import { isString } from '/js/utils/utils';
 
@@ -13,11 +14,16 @@ export interface FlexIconProps {
   className?: string;
 }
 
+const { ConfigContext } = ConfigProvider;
+
 export default memo(function FlexIcon({ className, icon }: FlexIconProps): React.ReactElement | null {
+  // HACK Antd 私有 API
+  const { iconPrefixCls } = useContext(ConfigContext);
+
   if (icon) {
     if (isString(icon)) {
       return (
-        <span className={classNames('anticon', className)}>
+        <span className={classNames(iconPrefixCls, className)}>
           <img src={icon} alt="icon" />
         </span>
       );

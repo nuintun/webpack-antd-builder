@@ -4,7 +4,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { isBrowser } from '/js/utils/utils';
+import { canUseDOM } from '/js/utils/utils';
 
 /**
  * @function defaultFormat
@@ -30,16 +30,16 @@ export interface Options {
 export default function useTitle(title?: string, options: Options = {}) {
   const { defaultTitle = __APP_NAME__, format = defaultFormat, restoreOnUnmount = false } = options;
 
-  const titleRef = useRef(isBrowser ? document.title : defaultTitle);
+  const titleRef = useRef(canUseDOM ? document.title : defaultTitle);
 
   useEffect(() => {
-    if (isBrowser) {
+    if (canUseDOM) {
       document.title = format(title, defaultTitle);
     }
   }, [title]);
 
   useEffect(() => {
-    if (isBrowser && restoreOnUnmount) {
+    if (canUseDOM && restoreOnUnmount) {
       return () => {
         document.title = titleRef.current;
       };

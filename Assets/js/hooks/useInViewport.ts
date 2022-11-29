@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { isBrowser, isFunction } from '/js/utils/utils';
+import { canUseDOM, isFunction } from '/js/utils/utils';
 
 type InternalTarget<E> = E | null | (() => E | null) | React.MutableRefObject<E | null>;
 
@@ -53,7 +53,7 @@ export type Target = InternalTarget<HTMLElement>;
  */
 export default function useInViewport(target: Target, defaultVisible: boolean = false): boolean {
   const [inViewPort, setInViewport] = useState<boolean>(() => {
-    if (!isBrowser) return defaultVisible;
+    if (!canUseDOM) return defaultVisible;
 
     const element = getTargetElement(target);
 

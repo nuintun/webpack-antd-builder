@@ -48,13 +48,11 @@ export default memo(function RouteTabs({ className, icon: showIcon = true, ...re
               color: token.colorLinkActive
             },
             [`.${prefixUI}-icon`]: {
-              '&.anticon': {
-                margin: 'unset',
-                marginInlineEnd: token.marginXXS,
-                '> img': {
-                  width: 'auto',
-                  height: token.fontSizeLG
-                }
+              margin: 'unset',
+              marginInlineEnd: token.marginXXS,
+              '> img': {
+                width: 'auto',
+                height: token.fontSizeLG
               }
             }
           }
