@@ -69,7 +69,7 @@ export default memo(function RouteBreadcrumb({
     return getBreadcrumbs(matches);
   }, [matches]);
 
-  const render = useStyleSheets(prefixUI, token => {
+  const render = useStyleSheets(['components', 'RouteBreadcrumb'], token => {
     const { fontSizeHeading2 } = token;
 
     return {

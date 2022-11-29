@@ -37,7 +37,7 @@ export default memo(function RouteTabs({ className, icon: showIcon = true, ...re
   const matches = useMatches() as IRoute<Meta>[];
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
 
-  const render = useStyleSheets(prefixUI, token => {
+  const render = useStyleSheets(['components', 'RouteTabs'], token => {
     return {
       '.ui-component': {
         [`&.${prefixUI}`]: {

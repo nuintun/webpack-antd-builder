@@ -46,7 +46,7 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
-  const render = useStyleSheets(prefixUI, token => {
+  const render = useStyleSheets(['components', 'FlexMenu'], token => {
     return {
       '.ui-component': {
         [`&.${prefixUI}-sider`]: {

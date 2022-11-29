@@ -22,12 +22,12 @@ export interface StyleSheets {
 /**
  * @function useStyleSheets
  * @description [hook] 动态样式生成
- * @param namespace 命名空间
+ * @param path 路径片段数组
  * @param styleSheets 样式生成函数
  */
-export function useStyleSheets(namespace: string, styleSheets: StyleSheets): Render {
+export function useStyleSheets(path: string[], styleSheets: StyleSheets): Render {
   const { theme, token } = useToken();
-  const options = { theme, token, path: [namespace] };
+  const options = { theme, token, path };
 
   return useStyleRegister(options, () => styleSheets(token));
 }
