@@ -2,10 +2,11 @@
  * @module SiderMenu
  */
 
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { prefixUI } from './utils';
 import classNames from 'classnames';
+import useBorderSize from './useBorderSize';
 import { Layout, MenuTheme, SiderProps } from 'antd';
 import RouteMenu, { RouteMenuProps } from './RouteMenu';
 import { useStyleSheets } from '/js/hooks/useStyleSheets';
@@ -13,12 +14,12 @@ import { useStyleSheets } from '/js/hooks/useStyleSheets';
 const { Sider } = Layout;
 
 export interface HeaderRenderProps {
-  width: number;
-  height: number;
-  theme: MenuTheme;
-  isMobile: boolean;
-  collapsed: boolean;
-  collapsedWidth: number;
+  readonly width: number;
+  readonly height: number;
+  readonly theme: MenuTheme;
+  readonly isMobile: boolean;
+  readonly collapsed: boolean;
+  readonly collapsedWidth: number;
 }
 
 export type HeaderRender = (props: HeaderRenderProps) => React.ReactNode;
@@ -38,19 +39,19 @@ export default memo(function SiderMenu({
   onCollapse,
   width = 256,
   headerRender,
-  theme = 'dark',
   trigger = null,
+  theme = 'light',
   isMobile = false,
   collapsed = false,
   headerHeight = 64,
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
+  const borderSize = useBorderSize();
+
   const render = useStyleSheets(['components', 'FlexMenu'], token => {
     const { fontSizeLG } = token;
-    const borderSize = token.Menu?.colorActiveBarBorderSize;
-    const lineWidth = borderSize ?? theme == 'light' ? token.lineWidth : 0;
-    const borderSplit = `${lineWidth}px ${token.lineType} ${token.colorSplit}`;
+    const borderSplit = `${borderSize}px ${token.lineType} ${token.colorSplit}`;
 
     return {
       '.ui-component': {
@@ -61,13 +62,11 @@ export default memo(function SiderMenu({
           [`.${prefixUI}-header`]: {
             display: 'flex',
             overflow: 'hidden',
-            height: headerHeight,
             placeItems: 'center',
             whiteSpace: 'nowrap',
             wordBreak: 'keep-all',
             borderBlockEnd: borderSplit,
-            color: token.colorPrimaryText,
-            lineHeight: `${headerHeight - lineWidth}px`
+            color: token.colorPrimaryText
           },
 
           [`.${prefixUI}`]: {
@@ -78,7 +77,10 @@ export default memo(function SiderMenu({
             msScrollChaining: 'none',
             OverscrollBehavior: 'contain',
             WebkitOverflowScrolling: 'touch',
-            height: `calc(100% - ${headerHeight}px)`,
+
+            [`&.${prefixUI}-border`]: {
+              borderInlineEnd: borderSplit
+            },
 
             '&::-webkit-scrollbar': {
               display: 'none'
@@ -108,6 +110,19 @@ export default memo(function SiderMenu({
     };
   });
 
+  const headerStyle = useMemo<React.CSSProperties>(() => {
+    return {
+      height: headerHeight,
+      lineHeight: `${headerHeight - borderSize}px`
+    };
+  }, [headerHeight, borderSize]);
+
+  const menuStyle = useMemo<React.CSSProperties>(() => {
+    return {
+      height: `calc(100% - ${headerHeight}px)`
+    };
+  }, [headerHeight]);
+
   return render(
     <Sider
       collapsible
@@ -121,11 +136,24 @@ export default memo(function SiderMenu({
       className={classNames('ui-component', `${prefixUI}-sider`, className)}
     >
       {headerRender && (
-        <div className={`${prefixUI}-header`}>
-          {headerRender({ width, theme, isMobile, collapsed, collapsedWidth, height: headerHeight })}
+        <div className={`${prefixUI}-header`} style={headerStyle}>
+          {headerRender({
+            theme,
+            width,
+            isMobile,
+            collapsed,
+            collapsedWidth,
+            height: headerHeight - borderSize
+          })}
         </div>
       )}
-      <RouteMenu {...restProps} theme={theme} collapsed={collapsed} className={prefixUI} />
+      <RouteMenu
+        theme={theme}
+        {...restProps}
+        style={menuStyle}
+        collapsed={collapsed}
+        className={classNames(prefixUI, `${prefixUI}-border`)}
+      />
     </Sider>
   );
 });

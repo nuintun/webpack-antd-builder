@@ -5,7 +5,7 @@ import { HeaderRenderProps } from '/js/components/FlexMenu';
 
 import logo from '/images/logo.svg?url';
 
-export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React.ReactElement {
+export default memo(function LeftHeader({ height, collapsed }: HeaderRenderProps): React.ReactElement {
   const style = useMemo<React.CSSProperties>(() => {
     return {
       fontSize: 0,
@@ -16,7 +16,7 @@ export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React
 
   const logoStyle = useMemo<React.CSSProperties>(() => {
     return {
-      width: 64,
+      height,
       padding: 8,
       aspectRatio: '1 / 1',
       boxSizing: 'border-box'
@@ -26,8 +26,7 @@ export default memo(function LeftHeader({ collapsed }: HeaderRenderProps): React
   const titleStyle = useMemo<React.CSSProperties>(() => {
     return {
       fontSize: 24,
-      fontWeight: 700,
-      lineHeight: '64px'
+      fontWeight: 700
     };
   }, []);
 

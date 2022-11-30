@@ -27,7 +27,7 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
       className: getDropdownActiveClassName(theme === 'dark'),
       label: (
         <a>
-          <Icon component={ThemeDarkIcon} style={{ fontSize: 18, marginRight: 8 }} />
+          <Icon component={ThemeDarkIcon} style={{ marginRight: 4 }} />
           <span>暗色主题</span>
         </a>
       )
@@ -38,7 +38,7 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
       className: getDropdownActiveClassName(theme === 'light'),
       label: (
         <a>
-          <Icon component={ThemeLightIcon} style={{ fontSize: 18, marginRight: 8 }} />
+          <Icon component={ThemeLightIcon} style={{ marginRight: 4 }} />
           <span>浅色主题</span>
         </a>
       )
@@ -62,9 +62,7 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
 
   return (
     <Dropdown placement="bottomRight" menu={menu}>
-      <div title="Theme">
-        <Icon component={ThemeIcon} style={{ fontSize: 24 }} />
-      </div>
+      <Icon component={ThemeIcon} style={{ fontSize: 24 }} />
     </Dropdown>
   );
 });
@@ -76,7 +74,7 @@ const LogoutAction = memo(function LogoutAction(): React.ReactElement {
 
   return (
     <a onClick={onClick}>
-      <LogoutOutlined style={{ fontSize: 16, marginRight: 8 }} />
+      <LogoutOutlined style={{ marginRight: 4 }} />
       <span>退出系统</span>
     </a>
   );
@@ -109,7 +107,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
             children: getThemeItems(theme, onThemeClick),
             label: (
               <a>
-                <Icon component={ThemeIcon} style={{ fontSize: 18, marginRight: 8 }} />
+                <Icon component={ThemeIcon} style={{ marginRight: 4 }} />
                 <span>主题设置</span>
               </a>
             )
@@ -139,8 +137,8 @@ export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React
   const render = useStyleSheets(['components', 'RightHeader'], token => {
     return {
       [`.${prefixUI}`]: {
-        padding: 0,
         display: 'flex',
+        gap: token.margin,
         overflow: 'hidden',
         placeItems: 'center',
         fontSize: token.fontSizeLG,
