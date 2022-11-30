@@ -52,6 +52,7 @@ export default memo(function RouteTabs({ className, icon: showIcon = true, ...re
           [`.${prefixUI}-nav`]: {
             fontSize: fontSizeLG,
             color: token.colorLink,
+            lineHeight: `${fontSizeLG}px`,
 
             '&.active': {
               color: token.colorLinkActive

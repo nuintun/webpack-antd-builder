@@ -90,6 +90,7 @@ export default memo(function SiderMenu({
               overflow: 'hidden',
               fontSize: fontSizeLG,
               textOverflow: 'ellipsis',
+              lineHeight: `${fontSizeLG}px`,
 
               [`.${prefixUI}-icon`]: {
                 lineHeight: 0,
