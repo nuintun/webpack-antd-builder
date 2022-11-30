@@ -5,7 +5,7 @@
 import React, { useMemo } from 'react';
 
 import { MenuProps } from 'antd';
-import { prefixUI } from './utils';
+import { prefixUI } from './style';
 import Link from '/js/components/Link';
 import { DFSTree } from '/js/utils/tree';
 import { MenuItem } from '/js/utils/menus';

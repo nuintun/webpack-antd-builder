@@ -2,9 +2,9 @@ import React, { memo, Suspense, useCallback, useMemo, useRef, useState } from 'r
 
 import classNames from 'classnames';
 import useMedia from '/js/hooks/useMedia';
+import useStyle, { prefixUI } from './style';
 import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
-import { useStyleSheets } from '/js/hooks/useStyleSheets';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import useBorderSize from '/js/components/FlexMenu/useBorderSize';
@@ -25,8 +25,6 @@ export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
   rightHeaderRender?: HeaderRender;
 }
 
-const prefixUI = 'ui-flex-layout';
-
 export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElement {
   const {
     menus,
@@ -40,6 +38,8 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
     breakQuery = '(max-width: 992px)',
     mobileQuery = '(max-width: 576px)'
   } = props;
+
+  const render = useStyle();
 
   const borderSize = useBorderSize();
 
@@ -96,74 +96,6 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   }, []);
 
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
-
-  const render = useStyleSheets(['components', 'FlexLayout'], token => {
-    const colorBgHeader = token.Layout?.colorBgHeader;
-    const borderSplit = `${borderSize}px ${token.lineType} ${token.colorSplit}`;
-
-    return {
-      '.ui-component': {
-        [`&.${prefixUI}`]: {
-          height: '100%',
-          overflow: 'hidden',
-
-          [`.${prefixUI}-header`]: {
-            padding: 0,
-            display: 'flex',
-            overflow: 'hidden',
-            height: headerHeight,
-            placeItems: 'center',
-            borderBlockEnd: borderSplit,
-            justifyContent: 'space-between',
-
-            [`.${prefixUI}-trigger`]: {
-              flex: 0,
-              cursor: 'pointer',
-              fontSize: token.fontSizeXL,
-              color: token.colorPrimaryText,
-
-              ':hover': {
-                color: token.colorPrimaryTextHover
-              }
-            },
-
-            [`.${prefixUI}-header-right`]: {
-              flex: 1,
-              display: 'flex',
-              gap: token.margin,
-              placeItems: 'center',
-              justifyContent: 'space-between',
-              padding: `0 ${token.paddingXS}px`
-            }
-          },
-
-          [`.${prefixUI}-content`]: {
-            height: '100%',
-            overflow: 'auto',
-            position: 'relative',
-            color: token.colorText,
-            msScrollChaining: 'none',
-            scrollBehavior: 'smooth',
-            OverscrollBehavior: 'contain',
-            WebkitOverflowScrolling: 'touch',
-            backgroundColor: token.colorBgContainer
-          },
-
-          [`&.${prefixUI}-dark`]: {
-            [`.${prefixUI}-header`]: {
-              backgroundColor: colorBgHeader ?? '#001529'
-            }
-          },
-
-          [`&.${prefixUI}-light`]: {
-            [`.${prefixUI}-header`]: {
-              backgroundColor: colorBgHeader ?? token.colorBgContainer
-            }
-          }
-        }
-      }
-    };
-  });
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {

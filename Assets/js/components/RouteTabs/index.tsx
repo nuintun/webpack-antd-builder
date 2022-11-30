@@ -5,12 +5,10 @@ import Link from '/js/components/Link';
 import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
+import useStyle, { prefixUI } from './style';
 import FlexIcon from '/js/components/FlexIcon';
-import { useStyleSheets } from '/js/hooks/useStyleSheets';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
-
-const prefixUI = 'ui-route-tabs';
 
 type TabsPicked =
   | 'size'
@@ -32,51 +30,11 @@ export interface RouteTabsProps extends Pick<TabsProps, TabsPicked> {
 }
 
 export default memo(function RouteTabs({ className, icon: showIcon = true, ...restProps }: RouteTabsProps): React.ReactElement {
+  const render = useStyle();
   const index = useMatchIndex();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
-
-  const render = useStyleSheets(['components', 'RouteTabs'], token => {
-    const { fontSizeLG } = token;
-
-    return {
-      '.ui-component': {
-        [`&.${prefixUI}`]: {
-          backgroundColor: token.colorBgContainer,
-
-          '> div': {
-            margin: 0,
-            padding: 0,
-
-            '&:first-child': {
-              padding: `0 ${token.paddingXS}px`
-            }
-          },
-
-          [`.${prefixUI}-nav`]: {
-            fontSize: fontSizeLG,
-            color: token.colorLink,
-            lineHeight: `${fontSizeLG}px`,
-
-            '&.active': {
-              color: token.colorLinkActive
-            },
-
-            [`.${prefixUI}-icon`]: {
-              margin: 'unset',
-              marginInlineEnd: token.marginXXS,
-
-              '> img': {
-                width: 'auto',
-                height: fontSizeLG
-              }
-            }
-          }
-        }
-      }
-    };
-  });
 
   const items = useMemo<TabsProps['items']>(() => {
     return match.children?.map(({ meta }) => {

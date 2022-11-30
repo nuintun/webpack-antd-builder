@@ -15,8 +15,6 @@ export interface FlattenItems {
   [key: string]: MenuItem;
 }
 
-export const prefixUI = 'ui-flex-menu';
-
 /**
  * @function filterKeys
  * @description 菜单标识去重

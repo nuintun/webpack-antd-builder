@@ -6,15 +6,13 @@ import React, { memo, useMemo } from 'react';
 
 import classNames from 'classnames';
 import Link from '/js/components/Link';
+import useStyle, { prefixUI } from './style';
 import FlexIcon from '/js/components/FlexIcon';
 import { useMatches } from 'react-nest-router';
 import { Icon, IRoute } from '/js/utils/router';
 import { Breadcrumb, BreadcrumbProps } from 'antd';
-import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
 const { Item } = Breadcrumb;
-
-const prefixUI = 'ui-route-breadcrumb';
 
 interface BreadcrumbItem {
   key: string;
@@ -63,65 +61,9 @@ export default memo(function RouteBreadcrumb({
   className,
   icon: showIcon = true
 }: RouteBreadcrumbProps): React.ReactElement {
+  const render = useStyle();
   const matches = useMatches() as IRoute[];
-
-  const breadcrumbs = useMemo(() => {
-    return getBreadcrumbs(matches);
-  }, [matches]);
-
-  const render = useStyleSheets(['components', 'RouteBreadcrumb'], token => {
-    const { colorPrimary, fontSizeHeading2 } = token;
-
-    return {
-      '.ui-component': {
-        [`&.${prefixUI}`]: {
-          overflowY: 'hidden',
-          whiteSpace: 'nowrap',
-          color: token.colorText,
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          fontSize: token.fontSize,
-          height: fontSizeHeading2,
-          msScrollChaining: 'none',
-          OverscrollBehavior: 'contain',
-          WebkitOverflowScrolling: 'touch',
-          padding: `0 ${token.paddingXS}px`,
-          backgroundColor: token.colorBgContainer,
-          lineHeight: `${fontSizeHeading2 - token.lineWidth}px`,
-          borderBlockEnd: `${token.lineWidth}px ${token.lineType} ${token.colorSplit}`,
-
-          '&::-webkit-scrollbar': {
-            display: 'none'
-          },
-
-          [`.${prefixUI}-link, .${prefixUI}-item`]: {
-            cursor: 'default',
-
-            [`.${prefixUI}-icon`]: {
-              marginInlineEnd: token.marginXXS,
-
-              '> img': {
-                width: 'auto',
-                height: fontSizeHeading2
-              }
-            },
-
-            '&.active': {
-              color: colorPrimary
-            }
-          },
-
-          [`.${prefixUI}-link`]: {
-            cursor: 'pointer',
-
-            '&:hover': {
-              color: colorPrimary
-            }
-          }
-        }
-      }
-    };
-  });
+  const breadcrumbs = useMemo(() => getBreadcrumbs(matches), [matches]);
 
   return render(
     <Breadcrumb style={style} className={classNames('ui-component', prefixUI, className)}>

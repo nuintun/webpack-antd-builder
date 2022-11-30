@@ -4,12 +4,11 @@
 
 import React, { memo, useMemo } from 'react';
 
-import { prefixUI } from './utils';
 import classNames from 'classnames';
 import useBorderSize from './useBorderSize';
+import useStyle, { prefixUI } from './style';
 import { Layout, MenuTheme, SiderProps } from 'antd';
 import RouteMenu, { RouteMenuProps } from './RouteMenu';
-import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
 const { Sider } = Layout;
 
@@ -47,69 +46,9 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
+  const render = useStyle();
+
   const borderSize = useBorderSize();
-
-  const render = useStyleSheets(['components', 'FlexMenu'], token => {
-    const { fontSizeLG } = token;
-    const borderSplit = `${borderSize}px ${token.lineType} ${token.colorSplit}`;
-
-    return {
-      '.ui-component': {
-        [`&.${prefixUI}-sider`]: {
-          height: '100%',
-          overflow: 'hidden',
-
-          [`.${prefixUI}-header`]: {
-            display: 'flex',
-            overflow: 'hidden',
-            placeItems: 'center',
-            whiteSpace: 'nowrap',
-            wordBreak: 'keep-all',
-            borderBlockEnd: borderSplit,
-            color: token.colorPrimaryText
-          },
-
-          [`.${prefixUI}`]: {
-            overflow: 'auto',
-            userSelect: 'none',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            msScrollChaining: 'none',
-            OverscrollBehavior: 'contain',
-            WebkitOverflowScrolling: 'touch',
-
-            [`&.${prefixUI}-border`]: {
-              borderInlineEnd: borderSplit
-            },
-
-            '&::-webkit-scrollbar': {
-              display: 'none'
-            },
-
-            [`.${prefixUI}-title`]: {
-              overflow: 'hidden',
-              fontSize: fontSizeLG,
-              textOverflow: 'ellipsis',
-              lineHeight: `${fontSizeLG}px`,
-
-              [`.${prefixUI}-icon`]: {
-                lineHeight: 0,
-                fontSize: fontSizeLG,
-
-                '> img': {
-                  height: fontSizeLG
-                },
-
-                '+ span': {
-                  marginInlineStart: token.marginXXS
-                }
-              }
-            }
-          }
-        }
-      }
-    };
-  });
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {
