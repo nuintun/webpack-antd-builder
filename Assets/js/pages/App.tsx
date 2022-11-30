@@ -4,7 +4,7 @@
 
 import '/css/global.scss';
 
-import { lazy, memo, Suspense, useMemo } from 'react';
+import React, { lazy, memo, Suspense, useMemo } from 'react';
 
 import { parse } from '/js/utils/router';
 import { Router } from 'react-nest-router';
@@ -12,6 +12,8 @@ import { router } from '/js/config/router';
 import { Button, ConfigProvider, Result, theme } from 'antd';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+
+const { useToken } = theme;
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
@@ -52,16 +54,26 @@ const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }:
 });
 
 const Page = memo(function Page() {
-  const routes = useMemo(() => {
-    return parse(router);
-  }, [router]);
+  const { token } = useToken();
+  const { colorBgContainer } = token;
+  const routes = useMemo(() => parse(router), [router]);
+
+  const pageStyle = useMemo<React.CSSProperties>(() => {
+    return {
+      width: '100%',
+      height: '100%',
+      backgroundColor: colorBgContainer
+    };
+  }, [colorBgContainer]);
 
   return (
-    <Suspense fallback={<SuspenseFallBack />}>
-      <Router routes={routes} context={routes}>
-        <NotFound />
-      </Router>
-    </Suspense>
+    <div style={pageStyle}>
+      <Suspense fallback={<SuspenseFallBack />}>
+        <Router routes={routes} context={routes}>
+          <NotFound />
+        </Router>
+      </Suspense>
+    </div>
   );
 });
 
