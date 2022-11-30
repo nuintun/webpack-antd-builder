@@ -32,7 +32,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
 
   if (isMobile) {
     return (
-      <Drawer width={width} closable={false} onClose={onClose} open={!collapsed} placement="right" bodyStyle={drawerBodyStyle}>
+      <Drawer width={width} closable={false} onClose={onClose} open={!collapsed} placement="left" bodyStyle={drawerBodyStyle}>
         <SiderMenu
           {...restProps}
           width={width}
