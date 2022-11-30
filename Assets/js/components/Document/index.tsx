@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 
+import zhCN from 'antd/locale/zh_CN';
 import { ConfigProvider } from 'antd';
-import zhCN from 'antd/es/locale/zh_CN';
 import { Meta } from '/js/utils/router';
 import useTitle from '/js/hooks/useTitle';
 import { Outlet, useMatches } from 'react-nest-router';
