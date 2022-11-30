@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.0.2",
+    "@ant-design/cssinjs": "^1.1.0",
     "@ant-design/icons": "^4.8.0",
     "@ant-design/plots": "^1.2.2",
     "antd": "^5.0.2",
@@ -67,10 +67,10 @@
     "koa-compress": "^5.1.0",
     "koa-webpack-dev-service": "^0.8.0",
     "memfs": "^3.4.12",
-    "mini-css-extract-plugin": "^2.7.0",
+    "mini-css-extract-plugin": "^2.7.1",
     "nodemon": "^2.0.20",
     "postcss": "^8.4.19",
-    "postcss-loader": "^7.0.1",
+    "postcss-loader": "^7.0.2",
     "prettier": "^2.8.0",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
