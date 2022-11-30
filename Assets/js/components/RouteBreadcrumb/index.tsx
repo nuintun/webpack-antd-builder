@@ -4,12 +4,12 @@
 
 import React, { memo, useMemo } from 'react';
 
-import { Breadcrumb, BreadcrumbProps } from 'antd';
 import classNames from 'classnames';
 import Link from '/js/components/Link';
 import FlexIcon from '/js/components/FlexIcon';
 import { useMatches } from 'react-nest-router';
 import { Icon, IRoute } from '/js/utils/router';
+import { Breadcrumb, BreadcrumbProps } from 'antd';
 import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
 const { Item } = Breadcrumb;
@@ -128,7 +128,7 @@ export default memo(function RouteBreadcrumb({
       {breadcrumbs.map(({ key, name, icon, href, active }) => (
         <Item key={key}>
           {href && !active ? (
-            <Link className={`${prefixUI}-link`} href={href}>
+            <Link href={href} className={`${prefixUI}-link`}>
               {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
               <span>{name}</span>
             </Link>

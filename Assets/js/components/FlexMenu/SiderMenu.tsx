@@ -126,9 +126,9 @@ export default memo(function SiderMenu({
   return render(
     <Sider
       collapsible
-      width={width}
-      theme={theme}
       style={style}
+      theme={theme}
+      width={width}
       trigger={trigger}
       collapsed={collapsed}
       onCollapse={onCollapse}

@@ -191,7 +191,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         headerRender={leftHeaderRender}
       />
       <Layout>
-        <Header className={`${prefixUI}-header`} style={headerStyle}>
+        <Header style={headerStyle} className={`${prefixUI}-header`}>
           {isMobile &&
             leftHeaderRender &&
             leftHeaderRender({
@@ -204,9 +204,9 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
             })}
           <div className={`${prefixUI}-header-right`}>
             {collapsed ? (
-              <MenuUnfoldOutlined className={`${prefixUI}-trigger`} onClick={onTriggerClick} />
+              <MenuUnfoldOutlined onClick={onTriggerClick} className={`${prefixUI}-trigger`} />
             ) : (
-              <MenuFoldOutlined className={`${prefixUI}-trigger`} onClick={onTriggerClick} />
+              <MenuFoldOutlined onClick={onTriggerClick} className={`${prefixUI}-trigger`} />
             )}
             {rightHeaderRender &&
               rightHeaderRender({
