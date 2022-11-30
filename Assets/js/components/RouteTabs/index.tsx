@@ -46,7 +46,12 @@ export default memo(function RouteTabs({ className, icon: showIcon = true, ...re
           backgroundColor: token.colorBgContainer,
 
           '> div': {
-            padding: `0 ${token.paddingXS}px`
+            margin: 0,
+            padding: 0,
+
+            '&:first-child': {
+              padding: `0 ${token.paddingXS}px`
+            }
           },
 
           [`.${prefixUI}-nav`]: {
