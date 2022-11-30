@@ -1,19 +1,18 @@
 import { memo, useCallback, useMemo } from 'react';
 
+import useStyle, { prefixUI } from './style/right';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, MenuProps, message } from 'antd';
 import { HeaderRenderProps } from '/js/components/FlexMenu';
-import { MenuClickEventHandler } from 'rc-menu/es/interface';
 
 import logo from '/images/logo.svg?url';
 
 import ThemeIcon from '/images/theme.svg';
 import ThemeDarkIcon from '/images/theme-dark.svg';
 import ThemeLightIcon from '/images/theme-light.svg';
-import { useStyleSheets } from '/js/hooks/useStyleSheets';
 
-const prefixUI = 'ui-right-header';
+type MenuClickEventHandler = NonNullable<MenuProps['onClick']>;
 
 function getDropdownActiveClassName(selected: boolean): string | undefined {
   if (selected) return 'ant-dropdown-menu-item-selected';
@@ -134,22 +133,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 });
 
 export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React.ReactElement {
-  const render = useStyleSheets(['components', 'RightHeader'], token => {
-    return {
-      [`.${prefixUI}`]: {
-        display: 'flex',
-        gap: token.margin,
-        overflow: 'hidden',
-        placeItems: 'center',
-        fontSize: token.fontSizeLG,
-        color: token.colorPrimaryText,
-
-        ':hover': {
-          color: token.colorPrimaryTextHover
-        }
-      }
-    };
-  });
+  const render = useStyle();
 
   return render(
     <div className={prefixUI}>
