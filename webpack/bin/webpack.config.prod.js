@@ -22,7 +22,14 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
   configure.devtool = false;
   configure.cache.name = 'prod';
-  configure.optimization.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];
+
+  // 使用自定义 minimizer 工具
+  configure.optimization.minimizer = [
+    new CssMinimizerPlugin(),
+    new TerserPlugin({
+      minify: TerserPlugin.swcMinify
+    })
+  ];
 
   // 开启 webpack-bundle-analyzer 分析工具
   if (process.argv[2] === '--report') {
