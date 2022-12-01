@@ -1,5 +1,5 @@
 /**
- * @module browsers
+ * @module targets
  * @listens MIT
  * @author nuintun
  * @description 解析 browserslist 配置

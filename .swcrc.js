@@ -3,12 +3,12 @@
  * @description SWC 配置
  */
 
-import browsers from './webpack/lib/browsers.js';
+import targets from './webpack/lib/targets.js';
 
 export default async () => {
   return {
     env: {
-      targets: await browsers()
+      targets: await targets()
     },
     jsc: {
       parser: {
