@@ -29,7 +29,12 @@ export interface RouteTabsProps extends Pick<TabsProps, TabsPicked> {
   type?: 'line' | 'card';
 }
 
-export default memo(function RouteTabs({ className, icon: showIcon = true, ...restProps }: RouteTabsProps): React.ReactElement {
+export default memo(function RouteTabs({
+  className,
+  tabPosition,
+  icon: showIcon = true,
+  ...restProps
+}: RouteTabsProps): React.ReactElement {
   const render = useStyle();
   const index = useMatchIndex();
   const match = useMatch() as IRoute<Meta>;
@@ -64,7 +69,10 @@ export default memo(function RouteTabs({ className, icon: showIcon = true, ...re
       items={items}
       activeKey={activeKey}
       destroyInactiveTabPane
-      className={classNames('ui-component', prefixUI, className)}
+      tabPosition={tabPosition}
+      className={classNames('ui-component', prefixUI, className, {
+        [`${prefixUI}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
+      })}
     />
   );
 });

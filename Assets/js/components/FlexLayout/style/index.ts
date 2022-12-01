@@ -52,8 +52,7 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
           msScrollChaining: 'none',
           scrollBehavior: 'smooth',
           OverscrollBehavior: 'contain',
-          WebkitOverflowScrolling: 'touch',
-          backgroundColor: token.colorBgContainer
+          WebkitOverflowScrolling: 'touch'
         },
 
         [`&.${prefixUI}-dark`]: {

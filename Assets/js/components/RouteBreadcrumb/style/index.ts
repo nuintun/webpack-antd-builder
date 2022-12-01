@@ -20,9 +20,8 @@ function getRouteBreadcrumbStyle(token: Token): CSSInterpolation {
         OverscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',
         padding: `0 ${token.paddingXS}px`,
+        lineHeight: `${fontSizeHeading2}px`,
         backgroundColor: token.colorBgContainer,
-        lineHeight: `${fontSizeHeading2 - token.lineWidth}px`,
-        borderBlockEnd: `${token.lineWidth}px ${token.lineType} ${token.colorSplit}`,
 
         '&::-webkit-scrollbar': {
           display: 'none'

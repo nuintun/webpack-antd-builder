@@ -9,14 +9,17 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
   return {
     '.ui-component': {
       [`&.${prefixUI}`]: {
-        backgroundColor: token.colorBgContainer,
+        marginBlockStart: -1,
+        borderBlockStart: `${token.lineWidth}px ${token.lineType} ${token.colorSplit}`,
 
-        '> div': {
+        '> [role=tablist]': {
           margin: 0,
-          padding: 0,
+          paddingBlock: 0,
+          paddingInline: token.paddingXS,
+          backgroundColor: token.colorBgContainer,
 
-          '&:first-child': {
-            padding: `0 ${token.paddingXS}px`
+          '&::before': {
+            display: 'none'
           }
         },
 
@@ -38,6 +41,14 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
               height: fontSizeLG
             }
           }
+        }
+      },
+
+      [`.${prefixUI}-vertical`]: {
+        '> [role=tablist]': {
+          paddingInline: 0,
+          borderBlockStart: 'none',
+          paddingBlock: token.paddingXS
         }
       }
     }
