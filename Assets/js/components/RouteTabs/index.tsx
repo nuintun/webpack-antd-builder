@@ -32,6 +32,7 @@ export interface RouteTabsProps extends Pick<TabsProps, TabsPicked> {
 export default memo(function RouteTabs({
   className,
   tabPosition,
+  tabBarGutter = 16,
   icon: showIcon = true,
   ...restProps
 }: RouteTabsProps): React.ReactElement {
@@ -70,6 +71,7 @@ export default memo(function RouteTabs({
       activeKey={activeKey}
       destroyInactiveTabPane
       tabPosition={tabPosition}
+      tabBarGutter={tabBarGutter}
       className={classNames('ui-component', prefixUI, className, {
         [`${prefixUI}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
       })}
