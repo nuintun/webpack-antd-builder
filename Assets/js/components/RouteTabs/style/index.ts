@@ -15,7 +15,7 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
         '> [role=tablist]': {
           margin: 0,
           paddingBlock: 0,
-          paddingInline: token.paddingXS,
+          paddingInline: token.paddingXS * 2,
           backgroundColor: token.colorBgContainer,
 
           '&::before': {
