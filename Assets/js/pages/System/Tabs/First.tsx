@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import Paper from '/js/components/Paper';
+
 export default memo(function Page() {
-  return <p>标签页一内容</p>;
+  return <Paper>标签页一内容</Paper>;
 });

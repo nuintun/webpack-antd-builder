@@ -2,6 +2,7 @@ import styles from '/css/pages/home/index.module.scss';
 
 import { memo, useEffect, useMemo, useState } from 'react';
 
+import Paper from '/js/components/Paper';
 import { Line, LineConfig } from '@ant-design/plots';
 
 const LineChart = memo(() => {
@@ -37,10 +38,12 @@ const LineChart = memo(() => {
 
 export default memo(function Page() {
   return (
-    <div className={styles.main}>
-      <div className={styles.chart}>
-        <LineChart />
+    <Paper>
+      <div className={styles.main}>
+        <div className={styles.chart}>
+          <LineChart />
+        </div>
       </div>
-    </div>
+    </Paper>
   );
 });
