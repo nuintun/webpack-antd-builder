@@ -9,7 +9,7 @@ import { readFile } from 'fs';
 import { resolve } from 'path';
 
 // 默认配置
-const defaultConfig = resolve(process.cwd(), '.browserslistrc');
+const defaultConfig = resolve('.browserslistrc');
 
 /**
  * @function parse
