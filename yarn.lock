@@ -3537,17 +3537,17 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.8.0.tgz#37abeb8c154ded457e376e0cb55a6c680e198b46"
-  integrity sha512-J1w38fzCfaYExHIDXqFDsFqluIk/+yYsRRz+1u3P9r9wbJqlZdUnuRJDW/B9y3rtYtMrLzdYK+019/K+/V7wLw==
+koa-webpack-dev-service@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.0.tgz#45809c9d8a5d38c89682085b4eeacaf17de16df1"
+  integrity sha512-DRb2rngytN/OtALMYMb/CHkQKpSlKrnCMXXINqVX8DN/0hUDzWVrnYzoz2a2Fv2ja08Xe2wfbjpWrW13UOaHiQ==
   dependencies:
     "@types/koa" "^2.13.5"
     "@types/ws" "^8.5.3"
     ansi-regex "^6.0.1"
     core-js "^3.26.1"
     koa-compose "^4.1.0"
-    webpack-dev-middleware "^5.3.3"
+    webpack-dev-middleware "^6.0.1"
     ws "^8.11.0"
   optionalDependencies:
     bufferutil "^4.0.6"
@@ -3658,7 +3658,7 @@ media-typer@0.3.0:
   resolved "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==
 
-memfs@^3.4.12, memfs@^3.4.3:
+memfs@^3.4.12:
   version "3.4.12"
   resolved "https://registry.npmjs.org/memfs/-/memfs-3.4.12.tgz#d00f8ad8dab132dc277c659dc85bfd14b07d03bd"
   integrity sha512-BcjuQn6vfqP+k100e0E9m61Hyqa//Brp+I3f0OBmN0ATHlFA8vx3Lt8z57R3u2bPqe3WGDBC+nF72fTH7isyEw==
@@ -5359,13 +5359,13 @@ webpack-bundle-analyzer@^4.7.0:
     sirv "^1.0.7"
     ws "^7.3.1"
 
-webpack-dev-middleware@^5.3.3:
-  version "5.3.3"
-  resolved "https://registry.npmjs.org/webpack-dev-middleware/-/webpack-dev-middleware-5.3.3.tgz#efae67c2793908e7311f1d9b06f2a08dcc97e51f"
-  integrity sha512-hj5CYrY0bZLB+eTO+x/j67Pkrquiy7kWepMHmUMoPsmcUaeEnQJqFzHJOyxgWlq746/wUuA64p9ta34Kyb01pA==
+webpack-dev-middleware@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.npmjs.org/webpack-dev-middleware/-/webpack-dev-middleware-6.0.1.tgz#fd585127ed44dab3f253daf0d98f4d58a5088cc2"
+  integrity sha512-PZPZ6jFinmqVPJZbisfggDiC+2EeGZ1ZByyMP5sOFJcPPWSexalISz+cvm+j+oYPT7FIJyxT76esjnw9DhE5sw==
   dependencies:
     colorette "^2.0.10"
-    memfs "^3.4.3"
+    memfs "^3.4.12"
     mime-types "^2.1.31"
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
