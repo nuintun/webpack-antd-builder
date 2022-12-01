@@ -26,8 +26,8 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
       className: getDropdownActiveClassName(theme === 'dark'),
       label: (
         <a>
-          <Icon component={ThemeDarkIcon} style={{ marginRight: 4 }} />
-          <span>暗色主题</span>
+          <Icon component={ThemeDarkIcon} />
+          <span style={{ marginInlineStart: 4 }}>暗色主题</span>
         </a>
       )
     },
@@ -37,8 +37,8 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
       className: getDropdownActiveClassName(theme === 'light'),
       label: (
         <a>
-          <Icon component={ThemeLightIcon} style={{ marginRight: 4 }} />
-          <span>浅色主题</span>
+          <Icon component={ThemeLightIcon} />
+          <span style={{ marginInlineStart: 4 }}>浅色主题</span>
         </a>
       )
     }
@@ -73,8 +73,8 @@ const LogoutAction = memo(function LogoutAction(): React.ReactElement {
 
   return (
     <a onClick={onClick}>
-      <LogoutOutlined style={{ marginRight: 4 }} />
-      <span>退出系统</span>
+      <LogoutOutlined />
+      <span style={{ marginInlineStart: 4 }}>退出系统</span>
     </a>
   );
 });
@@ -106,8 +106,8 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
             children: getThemeItems(theme, onThemeClick),
             label: (
               <a>
-                <Icon component={ThemeIcon} style={{ marginRight: 4 }} />
-                <span>主题设置</span>
+                <Icon component={ThemeIcon} />
+                <span style={{ marginInlineStart: 4 }}>主题设置</span>
               </a>
             )
           },
