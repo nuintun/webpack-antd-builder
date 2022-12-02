@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { getBorderSize } from './utils';
 import useStyle, { prefixUI } from './style';
 import { Layout, MenuTheme, SiderProps } from 'antd';
-import RouteMenu, { RouteMenuProps } from './RouteMenu';
+import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
 
 const { Sider } = Layout;
 
@@ -23,9 +23,10 @@ export interface HeaderRenderProps {
 
 export type HeaderRender = (props: HeaderRenderProps) => React.ReactNode;
 
-export interface SiderMenuProps extends RouteMenuProps, Pick<SiderProps, 'trigger' | 'onCollapse'> {
+export interface SiderMenuProps extends Omit<RouteMenuProps, 'inlineCollapsed'>, Pick<SiderProps, 'trigger' | 'onCollapse'> {
   width?: number;
   isMobile?: boolean;
+  collapsed?: boolean;
   headerHeight?: number;
   collapsedWidth?: number;
   headerRender?: HeaderRender;
@@ -59,9 +60,10 @@ export default memo(function SiderMenu({
 
   const menuStyle = useMemo<React.CSSProperties>(() => {
     return {
+      borderWidth: borderSize,
       height: `calc(100% - ${headerHeight}px)`
     };
-  }, [headerHeight]);
+  }, [headerHeight, borderSize]);
 
   return render(
     <Sider
@@ -87,13 +89,7 @@ export default memo(function SiderMenu({
           })}
         </div>
       )}
-      <RouteMenu
-        theme={theme}
-        {...restProps}
-        style={menuStyle}
-        collapsed={collapsed}
-        className={classNames(prefixUI, `${prefixUI}-border`)}
-      />
+      <RouteMenu theme={theme} {...restProps} mode="inline" style={menuStyle} />
     </Sider>
   );
 });

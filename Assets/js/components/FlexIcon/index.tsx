@@ -17,7 +17,6 @@ export interface FlexIconProps {
 const { ConfigContext } = ConfigProvider;
 
 export default memo(function FlexIcon({ className, icon }: FlexIconProps): React.ReactElement | null {
-  // HACK Antd 私有 API
   const { iconPrefixCls } = useContext(ConfigContext);
 
   if (icon) {

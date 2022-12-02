@@ -1,54 +1,61 @@
-import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
+import useStyle, { prefixUI } from './style';
 import { useMatches } from 'react-nest-router';
 import useItems, { ItemRender } from './useItems';
 import useLatestRef from '/js/hooks/useLatestRef';
+import { SiderContext } from 'antd/es/layout/Sider';
 import { flattenItems, getExpandKeys, mergeKeys } from './utils';
 
 type OmitProps =
-  | 'mode'
-  | 'items'
   | 'multiple'
   | 'openKeys'
+  | 'selectable'
   | 'onDeselect'
   | 'selectedKeys'
-  | 'inlineIndent'
   | 'onOpenChange'
   | 'defaultSelectedKeys';
 
 export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
   items: MenuItem[];
-  collapsed?: boolean;
   itemRender?: ItemRender;
   icon?: string | React.ReactElement;
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
 }
 
 export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
-  const { collapsed, defaultOpenKeys, itemRender, items, ...restProps } = props;
+  const { inlineCollapsed } = props;
+  const { items, className, itemRender, defaultOpenKeys, ...restProps } = props;
 
+  const { render } = useStyle();
   const matches = useMatches() as IRoute[];
+  const { siderCollapsed } = useContext(SiderContext);
   const propsRef = useLatestRef<RouteMenuProps>(props);
   const flatItems = useMemo(() => flattenItems(items), [items]);
-  const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys || []);
+  const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys ?? []);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(() => []);
   const expandKeys = useMemo(() => getExpandKeys(matches, flatItems), [matches, flatItems]);
+  const collapsed = useMemo(() => siderCollapsed ?? inlineCollapsed, [inlineCollapsed, siderCollapsed]);
   const [openKeys, setOpenKeys] = useState<string[]>(() => (collapsed ? [] : cachedOpenKeysRef.current));
 
-  const onOpenChangeHander = useCallback((openKeys: string[]): void => {
-    const { onOpenChange, collapsed } = propsRef.current;
+  const onOpenChangeHander = useCallback(
+    (openKeys: string[]): void => {
+      const { onOpenChange } = propsRef.current;
 
-    setOpenKeys(openKeys);
+      setOpenKeys(openKeys);
 
-    if (!collapsed) {
-      cachedOpenKeysRef.current = openKeys;
-    }
+      if (!collapsed) {
+        cachedOpenKeysRef.current = openKeys;
+      }
 
-    onOpenChange && onOpenChange(openKeys, cachedOpenKeysRef.current);
-  }, []);
+      onOpenChange && onOpenChange(openKeys, cachedOpenKeysRef.current);
+    },
+    [collapsed]
+  );
 
   useEffect(() => {
     const { onOpenChange } = propsRef.current;
@@ -74,16 +81,15 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
     setSelectedKeys(selectedKeys);
   }, [expandKeys, collapsed]);
 
-  return (
+  return render(
     <Menu
       {...restProps}
-      mode="inline"
       multiple={false}
-      inlineIndent={16}
       openKeys={openKeys}
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
       items={useItems(items, selectedKeys, itemRender)}
+      className={classNames('ui-component', prefixUI, `${prefixUI}-border`, className)}
     />
   );
 });
