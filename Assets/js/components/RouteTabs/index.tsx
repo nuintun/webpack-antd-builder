@@ -55,7 +55,13 @@ export default memo(function RouteTabs({
           </Suspense>
         ),
         label: (
-          <Link href={link.href} target={link.target} className={classNames(`${prefixUI}-nav`, { active })}>
+          <Link
+            href={link.href}
+            target={link.target}
+            className={classNames(`${prefixUI}-nav`, {
+              [`${prefixUI}-active`]: active
+            })}
+          >
             {showIcon && <FlexIcon icon={meta.icon} className={`${prefixUI}-icon`} />}
             {meta.name}
           </Link>

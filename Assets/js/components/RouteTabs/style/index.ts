@@ -25,11 +25,11 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
 
         [`.${prefixUI}-nav`]: {
           fontSize: fontSizeLG,
-          color: token.colorLink,
+          color: 'inherit',
           lineHeight: `${fontSizeLG}px`,
 
-          '&.active': {
-            color: token.colorLinkActive
+          [`&:hover, &.${prefixUI}-active`]: {
+            color: 'inherit'
           },
 
           [`.${prefixUI}-icon`]: {
