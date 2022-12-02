@@ -1,6 +1,6 @@
 import { CSSInterpolation } from '@ant-design/cssinjs';
-import { getBorderSize } from '/js/components/FlexMenu/useBorderSize';
-import { Render, Token, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { getBorderSize } from '/js/components/FlexMenu/utils';
+import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-flex-layout';
 
@@ -51,7 +51,8 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
           msScrollChaining: 'none',
           scrollBehavior: 'smooth',
           OverscrollBehavior: 'contain',
-          WebkitOverflowScrolling: 'touch'
+          WebkitOverflowScrolling: 'touch',
+          transition: `all ${token.motionDurationMid}`
         },
 
         [`&.${prefixUI}-dark`]: {
@@ -72,6 +73,6 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
   };
 }
 
-export default function useStyle(): Render {
+export default function useStyle(): UseStyleSheets {
   return useStyleSheets(['components', 'FlexLayout'], getFlexLayoutStyle);
 }

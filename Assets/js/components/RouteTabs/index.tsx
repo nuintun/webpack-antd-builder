@@ -36,7 +36,7 @@ export default memo(function RouteTabs({
   icon: showIcon = true,
   ...restProps
 }: RouteTabsProps): React.ReactElement {
-  const render = useStyle();
+  const { render } = useStyle();
   const index = useMatchIndex();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];

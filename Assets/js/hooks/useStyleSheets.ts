@@ -9,12 +9,14 @@ import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
 
 const { useToken } = theme;
 
-export interface Render {
-  (node: ReactElement): ReactElement;
+export interface StyleSheets {
+  (token: Token): CSSInterpolation;
 }
 
-export interface StyleSheets {
-  (token: Token, hashId?: string): CSSInterpolation;
+export interface UseStyleSheets {
+  readonly token: Token;
+  readonly hashId: string;
+  readonly render: (node: ReactElement) => ReactElement;
 }
 
 export type Token = ReturnType<typeof useToken>['token'];
@@ -25,9 +27,12 @@ export type Token = ReturnType<typeof useToken>['token'];
  * @param path 路径片段数组
  * @param styleSheets 样式生成函数
  */
-export function useStyleSheets(path: string[], styleSheets: StyleSheets): Render {
-  const { theme, token } = useToken();
-  const options = { theme, token, path };
+export function useStyleSheets(path: string[], styleSheets: StyleSheets): UseStyleSheets {
+  const { theme, token, hashId } = useToken();
 
-  return useStyleRegister(options, () => styleSheets(token));
+  const options = { theme, token, path, hashId };
+
+  const render = useStyleRegister(options, () => styleSheets(token));
+
+  return { token, hashId, render };
 }

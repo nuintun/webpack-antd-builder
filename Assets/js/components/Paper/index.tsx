@@ -9,7 +9,7 @@ export interface PaperProps {
 }
 
 export default memo(function RouteTabs({ className, children }: PaperProps): React.ReactElement {
-  const render = useStyle();
+  const { hashId, render } = useStyle();
 
-  return render(<div className={classNames(prefixUI, className)}>{children}</div>);
+  return render(<div className={classNames(hashId, prefixUI, className)}>{children}</div>);
 });

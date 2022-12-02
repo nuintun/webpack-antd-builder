@@ -1,5 +1,5 @@
 import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Render, Token, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-route-tabs';
 
@@ -55,6 +55,6 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
   };
 }
 
-export default function useStyle(): Render {
+export default function useStyle(): UseStyleSheets {
   return useStyleSheets(['components', 'RouteTabs'], getRouteTabsStyle);
 }

@@ -4,7 +4,7 @@
 
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-import { message } from 'antd';
+import useMessage from './useMessage';
 import useLatestRef from './useLatestRef';
 import useSearches, { Search } from './useSearches';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
@@ -95,6 +95,7 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
+  const message = useMessage();
   const opitonsRef = useLatestRef(options);
   const responseRef = useRef<Response<I, E>>({});
   const [serialize, raw] = useSearches<[Search]>([false]);

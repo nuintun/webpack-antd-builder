@@ -4,7 +4,7 @@
 
 import { useCallback, useRef } from 'react';
 
-import { message } from 'antd';
+import useMessage from './useMessage';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLatestRef from './useLatestRef';
@@ -15,8 +15,9 @@ import fetch, { Options as RequestInit, RequestError } from '/js/utils/request';
 
 export type Navigate = ReturnType<typeof useNavigate>;
 
-export interface Options extends Omit<RequestInit, 'onUnauthorized'> {
+export interface Options extends Omit<RequestInit, 'onMessage' | 'onUnauthorized'> {
   delay?: number;
+  notify?: boolean;
   onUnauthorized?: (navigate: Navigate, location: Location) => void;
 }
 
@@ -47,6 +48,7 @@ export default function useRequest(
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(url: string, options?: RequestOptions<R>) => void] {
   const retainRef = useRef(0);
+  const message = useMessage();
   const location = useLocation();
   const navigate = useNavigate();
   const isMounted = useIsMounted();
@@ -60,7 +62,7 @@ export default function useRequest(
         ...options
       };
 
-      const { body } = requestInit;
+      const { body, notify } = requestInit;
       const headers = new Headers(requestInit.headers);
 
       const onUnauthorized = () => {
@@ -83,7 +85,11 @@ export default function useRequest(
         }
       }
 
-      fetch<R>(url, { ...requestInit, headers, onUnauthorized })
+      const onMessage = (msg: string) => {
+        notify && message.success(msg);
+      };
+
+      fetch<R>(url, { ...requestInit, headers, onMessage, onUnauthorized })
         .then(
           response => {
             if (isMounted()) {

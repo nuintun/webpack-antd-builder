@@ -5,9 +5,9 @@ import useMedia from '/js/hooks/useMedia';
 import useStyle, { prefixUI } from './style';
 import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
+import { getBorderSize } from '../FlexMenu/utils';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
-import useBorderSize from '/js/components/FlexMenu/useBorderSize';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
 
@@ -39,9 +39,9 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
     mobileQuery = '(max-width: 576px)'
   } = props;
 
-  const render = useStyle();
+  const { token, render } = useStyle();
 
-  const borderSize = useBorderSize();
+  const borderSize = getBorderSize(token);
 
   const contentRef = useRef<HTMLDivElement>(null);
 

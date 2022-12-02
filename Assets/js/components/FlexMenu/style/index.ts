@@ -1,6 +1,6 @@
-import { getBorderSize } from '../useBorderSize';
+import { getBorderSize } from '../utils';
 import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Render, Token, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-flex-menu';
 
@@ -67,6 +67,6 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
   };
 }
 
-export default function useStyle(): Render {
+export default function useStyle(): UseStyleSheets {
   return useStyleSheets(['components', 'FlexMenu'], getFlexMenuStyle);
 }

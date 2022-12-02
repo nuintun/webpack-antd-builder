@@ -9,11 +9,14 @@ import React, { lazy, memo, Suspense, useMemo } from 'react';
 import { parse } from '/js/utils/router';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
-import { Button, ConfigProvider, Result, theme } from 'antd';
+import { Provider } from '/js/hooks/useMessage';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { Button, ConfigProvider, message, Result, theme } from 'antd';
 
 const { useToken } = theme;
+
+const { useMessage } = message;
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
@@ -57,6 +60,7 @@ const Page = memo(function Page() {
   const { token } = useToken();
   const { colorBgContainer } = token;
   const routes = useMemo(() => parse(router), [router]);
+  const [message, context] = useMessage({ maxCount: 3 });
 
   const pageStyle = useMemo<React.CSSProperties>(() => {
     return {
@@ -67,13 +71,16 @@ const Page = memo(function Page() {
   }, [colorBgContainer]);
 
   return (
-    <div style={pageStyle}>
-      <Suspense fallback={<SuspenseFallBack />}>
-        <Router routes={routes} context={routes}>
-          <NotFound />
-        </Router>
-      </Suspense>
-    </div>
+    <Provider value={message}>
+      {context}
+      <div style={pageStyle}>
+        <Suspense fallback={<SuspenseFallBack />}>
+          <Router routes={routes} context={routes}>
+            <NotFound />
+          </Router>
+        </Suspense>
+      </div>
+    </Provider>
   );
 });
 

@@ -5,6 +5,7 @@
 import { DFSTree } from '/js/utils/tree';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
+import { Token } from '/js/hooks/useStyleSheets';
 
 export interface ExpandKeys {
   openKeys: string[];
@@ -90,4 +91,13 @@ export function getExpandKeys(matches: IRoute[], flatMenus: FlattenItems): Expan
   }
 
   return { openKeys, selectedKeys };
+}
+
+/**
+ * @function getBorderSize
+ * @description 获取边框大小
+ * @param token 主题字段
+ */
+export function getBorderSize(token: Token): number {
+  return token.Menu?.colorActiveBarBorderSize ?? token.lineWidth;
 }

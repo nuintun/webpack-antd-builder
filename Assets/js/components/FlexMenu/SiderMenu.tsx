@@ -5,7 +5,7 @@
 import React, { memo, useMemo } from 'react';
 
 import classNames from 'classnames';
-import useBorderSize from './useBorderSize';
+import { getBorderSize } from './utils';
 import useStyle, { prefixUI } from './style';
 import { Layout, MenuTheme, SiderProps } from 'antd';
 import RouteMenu, { RouteMenuProps } from './RouteMenu';
@@ -46,9 +46,9 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
-  const render = useStyle();
+  const { token, render } = useStyle();
 
-  const borderSize = useBorderSize();
+  const borderSize = getBorderSize(token);
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {

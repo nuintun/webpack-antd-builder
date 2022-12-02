@@ -1,9 +1,11 @@
 import { memo, useCallback, useMemo } from 'react';
 
+import classNames from 'classnames';
+import useMessage from '/js/hooks/useMessage';
 import useStyle, { prefixUI } from './style/right';
+import { Avatar, Dropdown, MenuProps } from 'antd';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown, MenuProps, message } from 'antd';
 import { HeaderRenderProps } from '/js/components/FlexMenu';
 
 import logo from '/images/logo.svg?url';
@@ -67,6 +69,8 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
 });
 
 const LogoutAction = memo(function LogoutAction(): React.ReactElement {
+  const message = useMessage();
+
   const onClick = useCallback(() => {
     message.info('你点击了退出系统😁');
   }, []);
@@ -133,10 +137,10 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 });
 
 export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React.ReactElement {
-  const render = useStyle();
+  const { hashId, render } = useStyle();
 
   return render(
-    <div className={prefixUI}>
+    <div className={classNames(hashId, prefixUI)}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>

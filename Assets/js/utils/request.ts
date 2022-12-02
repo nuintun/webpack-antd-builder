@@ -4,7 +4,6 @@
  */
 
 import 'whatwg-fetch';
-import { message } from 'antd';
 import { isObject, serialize } from './utils';
 
 export type Body = Query | BodyInit | null;
@@ -14,9 +13,9 @@ export type Query = Record<string | number, any>;
 export interface Options extends Omit<RequestInit, 'body'> {
   body?: Body;
   query?: Query;
-  notify?: boolean;
   baseURL?: string;
   onUnauthorized?: () => void;
+  onMessage?: (message: string) => void;
 }
 
 export interface RequestResult<R = unknown> {
@@ -102,7 +101,7 @@ function serializeBody(body: Record<string | number, any>, json?: boolean): Form
  * @param init 请求配置
  */
 export default function request<R>(url: string, init: Options = {}): Promise<R> {
-  const { query, notify = false, baseURL = location.href, onUnauthorized, ...options } = init;
+  const { query, onMessage, baseURL = location.href, onUnauthorized, ...options } = init;
 
   options.cache = options.cache || 'no-cache';
   options.headers = new Headers(options.headers || {});
@@ -130,7 +129,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
           const { status } = response;
 
           if (isStatusOk(status) && code === 200) {
-            notify && message.success(msg);
+            onMessage && onMessage(msg);
 
             // 操作成功
             return payload;
