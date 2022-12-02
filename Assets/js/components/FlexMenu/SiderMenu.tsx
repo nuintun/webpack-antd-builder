@@ -46,7 +46,7 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
-  const { token, render } = useStyle();
+  const { token, hashId, render } = useStyle();
 
   const borderSize = getBorderSize(token);
 
@@ -73,7 +73,7 @@ export default memo(function SiderMenu({
       collapsed={collapsed}
       onCollapse={onCollapse}
       collapsedWidth={collapsedWidth}
-      className={classNames('ui-component', `${prefixUI}-sider`, className)}
+      className={classNames(hashId, 'ui-component', `${prefixUI}-sider`, className)}
     >
       {headerRender && (
         <div className={`${prefixUI}-header`} style={headerStyle}>

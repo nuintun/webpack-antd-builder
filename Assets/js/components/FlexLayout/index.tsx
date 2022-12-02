@@ -105,11 +105,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   }, [headerHeight, borderSize]);
 
   return render(
-    <Layout
-      hasSider={!isMobile}
-      style={{ height: '100%' }}
-      className={classNames('ui-component', prefixUI, `${prefixUI}-${theme}`)}
-    >
+    <Layout hasSider={!isMobile} className={classNames('ui-component', prefixUI, `${prefixUI}-${theme}`)}>
       <FlexMenu
         items={menus}
         theme={theme}
