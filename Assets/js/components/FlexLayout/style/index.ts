@@ -20,17 +20,16 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
           display: 'flex',
           overflow: 'hidden',
           placeItems: 'center',
+          fontSize: token.fontSizeXL,
           borderBlockEnd: borderSplit,
           justifyContent: 'space-between',
+          transition: `all ${token.motionDurationMid}`,
 
           [`.${prefixUI}-trigger`]: {
             flex: 0,
-            cursor: 'pointer',
-            fontSize: token.fontSizeXL,
-            color: token.colorPrimaryText,
 
-            ':hover': {
-              color: token.colorPrimaryTextHover
+            '&:hover': {
+              color: token.colorPrimaryHover
             }
           },
 
@@ -57,12 +56,14 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
 
         [`&.${prefixUI}-dark`]: {
           [`.${prefixUI}-header`]: {
+            color: token.colorTextLightSolid,
             backgroundColor: colorBgHeader ?? '#001529'
           }
         },
 
         [`&.${prefixUI}-light`]: {
           [`.${prefixUI}-header`]: {
+            color: token.colorText,
             backgroundColor: colorBgHeader ?? token.colorBgContainer
           }
         }

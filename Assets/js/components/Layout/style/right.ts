@@ -10,11 +10,16 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
       gap: token.margin,
       overflow: 'hidden',
       placeItems: 'center',
-      fontSize: token.fontSizeLG,
-      color: token.colorPrimaryText,
 
-      ':hover': {
+      '> *:hover': {
         color: token.colorPrimaryTextHover
+      },
+
+      [`.${prefixUI}-profile`]: {
+        display: 'flex',
+        cursor: 'default',
+        gap: token.marginXXS,
+        placeItems: 'center'
       }
     }
   };
