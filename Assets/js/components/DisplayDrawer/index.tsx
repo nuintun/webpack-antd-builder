@@ -1,7 +1,6 @@
 import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from 'antd';
-import { isFunction } from '/js/utils/utils';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
 export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
@@ -43,16 +42,16 @@ export default memo(function DisplayDrawer({
 
         setOpen(true);
 
-        onClick && onClick(...args);
+        onClick?.(...args);
       }
     });
   }, [trigger]);
 
   useEffect(() => {
     if (open) {
-      onOpen && onOpen();
+      onOpen?.();
     } else {
-      onClose && onClose();
+      onClose?.();
     }
   }, [open]);
 
@@ -64,7 +63,7 @@ export default memo(function DisplayDrawer({
         open={open}
         onClose={onCloseHandler}
         extra={extra(onCloseHandler)}
-        footer={isFunction(footer) && footer(onCloseHandler)}
+        footer={footer?.(onCloseHandler)}
       >
         {children}
       </FlexDrawer>

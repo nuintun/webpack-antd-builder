@@ -129,7 +129,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
           const { status } = response;
 
           if (isStatusOk(status) && code === 200) {
-            onMessage && onMessage(msg);
+            onMessage?.(msg);
 
             // 操作成功
             return payload;
@@ -137,7 +137,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
 
           if (status === 401 || code === 401) {
             // 需要登录认证
-            onUnauthorized && onUnauthorized();
+            onUnauthorized?.();
           }
 
           // 其它错误，403 等

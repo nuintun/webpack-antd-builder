@@ -42,7 +42,7 @@ function getBreadcrumbs(matches: IRoute[]): BreadcrumbItem[] {
       const { key, icon, link } = meta;
 
       if (i + 1 < length) {
-        if (children && children.some(route => route.index)) {
+        if (children?.some(route => route.index)) {
           breadcrumbs.push({ key, name, icon, href: link.href, active: false });
         } else {
           breadcrumbs.push({ key, name, icon, active: false });

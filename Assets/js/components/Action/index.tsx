@@ -13,7 +13,7 @@ type ActionChildrenProps = {
   loading?: boolean;
   disabled?: boolean;
 } & {
-  [onTrigger in Trigger]: (...args: unknown[]) => void;
+  [onTrigger in Trigger]?: (...args: unknown[]) => void;
 };
 
 type RequestPicked = 'query' | 'body' | 'method' | 'notify' | 'onError' | 'onSuccess' | 'onComplete';
@@ -93,7 +93,7 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
 
       onAction();
 
-      onTrigger && onTrigger(...args);
+      onTrigger?.(...args);
     }
   });
 }

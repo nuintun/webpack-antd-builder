@@ -1,6 +1,5 @@
 import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { isFunction } from '/js/utils/utils';
 import useSubmit, { Options, Values } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
@@ -80,7 +79,7 @@ function FormDrawer<V extends Values, R>({
     onSuccess(response: R, values: V) {
       setOpen(false);
 
-      onSuccess && onSuccess(response, values);
+      onSuccess?.(response, values);
     }
   });
 
@@ -95,7 +94,7 @@ function FormDrawer<V extends Values, R>({
 
         setOpen(true);
 
-        onClick && onClick(...args);
+        onClick?.(...args);
       }
     });
   }, [trigger]);
@@ -104,9 +103,9 @@ function FormDrawer<V extends Values, R>({
     if (open) {
       wrapForm.resetFields();
 
-      onOpen && onOpen();
+      onOpen?.();
     } else {
-      onClose && onClose();
+      onClose?.();
     }
   }, [open]);
 
@@ -124,7 +123,7 @@ function FormDrawer<V extends Values, R>({
         destroyOnClose={destroyOnClose}
         afterOpenChange={afterOpenChange}
         extra={extra(submitting, wrapForm, onCloseHandler)}
-        footer={isFunction(footer) && footer(submitting, wrapForm, onCloseHandler)}
+        footer={footer?.(submitting, wrapForm, onCloseHandler)}
       >
         <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit}>
           {children}

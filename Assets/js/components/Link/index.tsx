@@ -41,7 +41,7 @@ function Link<S>(props: LinkProps<S>): React.ReactElement {
       navigate(to, { state, replace });
     }
 
-    onClick && onClick(e);
+    onClick?.(e);
   }, []);
 
   return (

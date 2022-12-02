@@ -17,7 +17,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
   const onClose = useCallback(() => {
     const { onCollapse } = propsRef.current;
 
-    onCollapse && onCollapse(true, 'clickTrigger');
+    onCollapse?.(true, 'clickTrigger');
   }, []);
 
   const onOpenChangeHander = useCallback<NonNullable<FlexMenuProps['onOpenChange']>>((openKeys, cachedOpenKeys) => {
@@ -27,7 +27,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
       cachedOpenKeysRef.current = cachedOpenKeys;
     }
 
-    onOpenChange && onOpenChange(openKeys, cachedOpenKeys);
+    onOpenChange?.(openKeys, cachedOpenKeys);
   }, []);
 
   if (isMobile) {

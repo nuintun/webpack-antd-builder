@@ -52,7 +52,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
         cachedOpenKeysRef.current = openKeys;
       }
 
-      onOpenChange && onOpenChange(openKeys, cachedOpenKeysRef.current);
+      onOpenChange?.(openKeys, cachedOpenKeysRef.current);
     },
     [collapsed]
   );
@@ -69,13 +69,13 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
 
       cachedOpenKeysRef.current = nextOpenKeys;
 
-      onOpenChange && onOpenChange(nextOpenKeys, nextOpenKeys);
+      onOpenChange?.(nextOpenKeys, nextOpenKeys);
     } else if (openKeys.length > 0) {
       const nextOpenKeys: string[] = [];
 
       setOpenKeys(nextOpenKeys);
 
-      onOpenChange && onOpenChange(nextOpenKeys, cachedOpenKeys);
+      onOpenChange?.(nextOpenKeys, cachedOpenKeys);
     }
 
     setSelectedKeys(selectedKeys);
