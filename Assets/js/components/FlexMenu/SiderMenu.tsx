@@ -23,7 +23,9 @@ export interface HeaderRenderProps {
 
 export type HeaderRender = (props: HeaderRenderProps) => React.ReactNode;
 
-export interface SiderMenuProps extends Omit<RouteMenuProps, 'inlineCollapsed'>, Pick<SiderProps, 'trigger' | 'onCollapse'> {
+export interface SiderMenuProps
+  extends Pick<SiderProps, 'trigger' | 'onCollapse'>,
+    Omit<RouteMenuProps, 'mode' | 'inlineCollapsed'> {
   width?: number;
   isMobile?: boolean;
   collapsed?: boolean;
