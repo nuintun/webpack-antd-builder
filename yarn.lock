@@ -1727,10 +1727,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.25":
-  version "18.0.25"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.25.tgz#8b1dcd7e56fe7315535a4af25435e0bb55c8ae44"
-  integrity sha512-xD6c0KDT4m7n9uD4ZHi02lzskaiqcBxf4zi+tXZY98a04wvc0hi/TcCPC2FOESZi51Nd7tlUeOJY8RofL799/g==
+"@types/react@*", "@types/react@^18.0.26":
+  version "18.0.26"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.26.tgz#8ad59fc01fef8eaf5c74f4ea392621749f0b7917"
+  integrity sha512-hCR3PJQsAIXyxhTNSiDFY//LhnMZWpNNr5etoCqx/iUfGc5gXWtQR2Phl908jVR6uPXacojQWTg4qRpkxTuGug==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2244,9 +2244,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001400, caniuse-lite@^1.0.30001426:
-  version "1.0.30001435"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001435.tgz#502c93dbd2f493bee73a408fe98e98fb1dad10b2"
-  integrity sha512-kdCkUTjR+v4YAJelyiDTqiu82BDr4W4CP5sgTA0ZBmqn30XfS2ZghPLMowik9TPhS+psWJiUNxsqLyurDbmutA==
+  version "1.0.30001436"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001436.tgz#22d7cbdbbbb60cdc4ca1030ccd6dea9f5de4848b"
+  integrity sha512-ZmWkKsnC2ifEPoWUvSAIGyOYwT+keAaaWPHiQ9DfMqS1t6tfuyFYoWR78TeZtznkEQ64+vGXH9cZrElwR2Mrxg==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -4477,9 +4477,9 @@ rc-segmented@~2.1.0:
     rc-util "^5.17.0"
 
 rc-select@~14.1.0, rc-select@~14.1.13:
-  version "14.1.14"
-  resolved "https://registry.npmjs.org/rc-select/-/rc-select-14.1.14.tgz#1c58370c15ac1fbf85aa6be2404b5fb5979c8fd2"
-  integrity sha512-QARbPioNxyrwUzMaXep0Lx6dSyGSvtBqDOTiMwR9H0UZSvz50oYt9Vn7AZiF/8MR+SOwYtybbT6sIMcN+Xvcwg==
+  version "14.1.16"
+  resolved "https://registry.npmjs.org/rc-select/-/rc-select-14.1.16.tgz#0cc4b5a1fc551a2db7c96bc1ece0896317ecdd47"
+  integrity sha512-71XLHleuZmufpdV2vis5oituRkhg2WNvLpVMJBGWRar6WGAVOHXaY9DR5HvwWry3EGTn19BqnL6Xbybje6f8YA==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
