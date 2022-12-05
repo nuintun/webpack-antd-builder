@@ -1,5 +1,6 @@
 import { CSSInterpolation } from '@ant-design/cssinjs';
 import { getBorderSize } from '/js/components/FlexMenu/utils';
+import { colorDarkBgHeader } from '/js/components/FlexMenu/style';
 import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-flex-layout';
@@ -58,7 +59,7 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
         [`&.${prefixUI}-dark`]: {
           [`.${prefixUI}-header`]: {
             color: token.colorTextLightSolid,
-            backgroundColor: colorBgHeader ?? '#001529'
+            backgroundColor: colorBgHeader ?? colorDarkBgHeader
           }
         },
 
