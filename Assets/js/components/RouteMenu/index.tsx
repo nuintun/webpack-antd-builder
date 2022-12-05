@@ -89,7 +89,9 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
       items={useItems(items, selectedKeys, itemRender)}
-      className={classNames('ui-component', prefixUI, `${prefixUI}-border`, className)}
+      className={classNames('ui-component', prefixUI, `${prefixUI}-border`, className, {
+        [`${prefixUI}-collapsed`]: collapsed
+      })}
     />
   );
 });

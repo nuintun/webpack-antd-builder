@@ -58,7 +58,7 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
       for (const [current, parent] of tree) {
         let item: Item;
 
-        const { key, name, children } = current;
+        const { key, children } = current;
         const hasChildren = children && children.length > 0;
 
         if (hasChildren) {
@@ -70,7 +70,6 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
         } else {
           item = {
             key,
-            title: name,
             label: renderLabel(current, selectedKeys, itemRender)
           };
         }

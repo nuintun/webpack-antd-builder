@@ -4,7 +4,8 @@ import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets'
 export const prefixUI = 'ui-route-menu';
 
 function getFlexMenuStyle(token: Token): CSSInterpolation {
-  const { fontSizeLG } = token;
+  const { marginXXS, fontSizeLG } = token;
+  const marginInline = token.Menu?.itemMarginInline ?? marginXXS;
 
   return {
     '.ui-component': {
@@ -36,8 +37,14 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
             },
 
             '+ span': {
-              marginInlineStart: token.marginXXS
+              marginInlineStart: marginXXS
             }
+          }
+        },
+
+        [`&.${prefixUI}-collapsed`]: {
+          '[role=menuitem]': {
+            paddingInline: `calc(50% - ${fontSizeLG / 2 + marginInline}px)`
           }
         }
       }
