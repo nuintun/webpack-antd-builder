@@ -6,9 +6,9 @@
  */
 
 import webpack from 'webpack';
-import { createRequire } from 'module';
-import configure from '../configure.js';
+import { resolve } from 'path';
 import resolveRules from '../lib/rules.js';
+import appConfig from '../../app.config.js';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -30,8 +30,6 @@ function resolveEnvironment(env) {
   return output;
 }
 
-const { resolve } = createRequire(import.meta.url);
-
 /**
  * @function resolveConfigure
  * @param {string} mode
@@ -46,22 +44,22 @@ export default async mode => {
 
   const env = resolveEnvironment({
     __DEV__: isDevelopment,
-    __APP_NAME__: configure.name
+    __APP_NAME__: appConfig.name
   });
 
   const clean = {
-    cleanOnceBeforeBuildPatterns: ['**/*', configure.entryHTML]
+    cleanOnceBeforeBuildPatterns: ['**/*', appConfig.entryHTML]
   };
 
   const html = {
     xhtml: true,
-    meta: configure.meta,
-    title: configure.name,
+    meta: appConfig.meta,
+    title: appConfig.name,
     minify: !isDevelopment,
-    favicon: configure.favicon,
-    filename: configure.entryHTML,
-    template: resolve('../template/index.ejs'),
-    templateParameters: { lang: configure.lang }
+    favicon: appConfig.favicon,
+    filename: appConfig.entryHTML,
+    templateParameters: { lang: appConfig.lang },
+    template: resolve('webpack/template/index.ejs')
   };
 
   const css = {
@@ -72,13 +70,13 @@ export default async mode => {
 
   return {
     mode,
-    name: configure.name,
-    entry: configure.entry,
-    context: configure.context,
+    name: appConfig.name,
+    entry: appConfig.entry,
+    context: appConfig.context,
     output: {
       hashFunction: 'xxhash64',
-      path: configure.outputPath,
-      publicPath: configure.publicPath,
+      path: appConfig.outputPath,
+      publicPath: appConfig.publicPath,
       filename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
       chunkFilename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
       assetModuleFilename: `[path][${isDevelopment ? 'name' : 'contenthash'}][ext]`
@@ -86,7 +84,13 @@ export default async mode => {
     cache: {
       type: 'filesystem',
       buildDependencies: {
-        configure: [resolve('../configure.js')]
+        config: [
+          resolve('.swcrc.js'),
+          resolve('package.json'),
+          resolve('.postcssrc.js'),
+          resolve('app.config.js'),
+          resolve('.browserslistrc')
+        ]
       }
     },
     stats: {
@@ -101,12 +105,11 @@ export default async mode => {
       hints: false
     },
     resolve: {
-      alias: configure.alias,
+      alias: appConfig.alias,
       fallback: { url: false },
       extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     module: {
-      noParse: configure.noParse,
       strictExportPresence: true,
       rules: await resolveRules(mode)
     },

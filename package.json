@@ -27,6 +27,7 @@
       ".swcrc.js",
       "webpack/**/*",
       ".postcssrc.js",
+      "app.config.js",
       ".browserslistrc",
       "wwwroot/favicon.ico"
     ]

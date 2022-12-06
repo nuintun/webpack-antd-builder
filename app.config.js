@@ -1,8 +1,8 @@
 /**
- * @module configure
+ * @module app.config
  * @listens MIT
  * @author nuintun
- * @description 项目配置
+ * @description 应用配置
  */
 
 import path from 'path';

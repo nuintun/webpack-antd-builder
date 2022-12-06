@@ -20,13 +20,12 @@ import webpack from 'webpack';
 import resolveIp from '../lib/ip.js';
 import { URLSearchParams } from 'url';
 import koaCompress from 'koa-compress';
-import configure from '../configure.js';
+import appConfig from '../../app.config.js';
 import { findFreePorts } from 'find-free-ports';
 import devMiddleware from 'koa-webpack-dev-service';
 import resolveConfigure from './webpack.config.base.js';
 
 const { toString } = Object.prototype;
-const { publicPath, entryHTML } = configure;
 
 function createMemfs() {
   const volume = new memfs.Volume();
@@ -95,7 +94,7 @@ async function resolveEntry(entry, options) {
   const port = await resolvePort();
   const devServerHost = `http://${ip}:${port}`;
   const configure = await resolveConfigure(mode);
-  const devServerPublicPath = devServerHost + publicPath;
+  const devServerPublicPath = devServerHost + appConfig.publicPath;
   const entry = await resolveEntry(configure.entry, { host: `${ip}:${port}` });
 
   configure.entry = entry;
@@ -133,7 +132,7 @@ async function resolveEntry(entry, options) {
 
   app.use(async ctx => {
     ctx.type = 'text/html; charset=utf-8';
-    ctx.body = fs.readFileSync(entryHTML);
+    ctx.body = fs.createReadStream(appConfig.entryHTML);
   });
 
   app.on('error', error => {
