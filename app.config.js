@@ -22,5 +22,5 @@ export default {
   favicon: path.resolve('wwwroot/favicon.ico'),
   entry: [path.resolve('Assets/js/pages/index.tsx')],
   alias: { '/js': js, '/css': css, '/mods': mods, '/images': images },
-  meta: { 'theme-color': '#4285f4', viewport: 'width=device-width,initial-scale=1.0' }
+  meta: { 'theme-color': '#1668dc', viewport: 'width=device-width,initial-scale=1.0' }
 };
