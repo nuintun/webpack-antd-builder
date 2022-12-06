@@ -36,20 +36,16 @@ function resolveEnvironment(env) {
  * @return {Promise<object>}
  */
 export default async mode => {
+  const isDevelopment = mode !== 'production';
+
   const progress = {
     percentBy: 'entries'
   };
-
-  const isDevelopment = mode !== 'production';
 
   const env = resolveEnvironment({
     __DEV__: isDevelopment,
     __APP_NAME__: appConfig.name
   });
-
-  const clean = {
-    cleanOnceBeforeBuildPatterns: [appConfig.entryHTML, appConfig.outputPath]
-  };
 
   const html = {
     xhtml: true,
@@ -66,6 +62,10 @@ export default async mode => {
     ignoreOrder: true,
     filename: `css/[${isDevelopment ? 'name' : 'contenthash'}].css`,
     chunkFilename: `css/[${isDevelopment ? 'name' : 'contenthash'}].css`
+  };
+
+  const clean = {
+    cleanOnceBeforeBuildPatterns: [appConfig.entryHTML, appConfig.outputPath]
   };
 
   return {
