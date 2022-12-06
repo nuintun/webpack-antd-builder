@@ -48,7 +48,7 @@ export default async mode => {
   });
 
   const clean = {
-    cleanOnceBeforeBuildPatterns: ['**/*', appConfig.entryHTML]
+    cleanOnceBeforeBuildPatterns: [appConfig.entryHTML, appConfig.outputPath]
   };
 
   const html = {
