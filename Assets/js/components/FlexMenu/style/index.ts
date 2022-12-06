@@ -9,7 +9,6 @@ export const colorDarkBgHeader = '#001529';
 function getFlexMenuStyle(token: Token): CSSInterpolation {
   const borderSize = getBorderSize(token);
   const colorBgHeader = token.Layout?.colorBgHeader;
-  const borderSplit = `${borderSize}px ${token.lineType} ${token.colorSplit}`;
 
   return {
     '.ui-component': {
@@ -17,15 +16,22 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
         height: '100%',
         overflow: 'hidden',
 
+        '> div': {
+          height: '100%',
+          marginTop: -0.1,
+          paddingTop: 0.1
+        },
+
         [`.${prefixUI}-header`]: {
           display: 'flex',
           overflow: 'hidden',
           placeItems: 'center',
           whiteSpace: 'nowrap',
           wordBreak: 'keep-all',
-          borderBlockEnd: borderSplit,
           color: token.colorPrimaryText,
-          transition: `all ${token.motionDurationMid}`
+          transition: `all ${token.motionDurationMid}`,
+          borderInlineEnd: `${borderSize}px ${token.lineType} transparent`,
+          borderBlockEnd: `${borderSize}px ${token.lineType} ${token.colorSplit}`
         },
 
         [`&.${prefixUI}-dark`]: {
@@ -38,6 +44,14 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
           [`.${prefixUI}-header`]: {
             backgroundColor: colorBgHeader ?? token.colorBgContainer
           }
+        }
+      }
+    },
+
+    [`.${prefixUI}-drawer`]: {
+      [`.${prefixUI}-sider`]: {
+        [`.${prefixUI}-header`]: {
+          borderInlineColor: token.colorSplit
         }
       }
     }

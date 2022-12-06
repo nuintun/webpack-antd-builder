@@ -8,7 +8,6 @@ export const prefixUI = 'ui-flex-layout';
 function getFlexLayoutStyle(token: Token): CSSInterpolation {
   const borderSize = getBorderSize(token);
   const colorBgHeader = token.Layout?.colorBgHeader;
-  const borderSplit = `${borderSize}px ${token.lineType} ${token.colorSplit}`;
 
   return {
     '.ui-component': {
@@ -22,9 +21,9 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
           overflow: 'hidden',
           placeItems: 'center',
           fontSize: token.fontSizeXL,
-          borderBlockEnd: borderSplit,
           justifyContent: 'space-between',
           transition: `all ${token.motionDurationMid}`,
+          borderBlockEnd: `${borderSize}px ${token.lineType} ${token.colorSplit}`,
 
           [`.${prefixUI}-trigger`]: {
             flex: 0,

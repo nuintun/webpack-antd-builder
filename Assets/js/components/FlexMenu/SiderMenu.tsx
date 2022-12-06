@@ -4,13 +4,14 @@
 
 import React, { memo, useMemo } from 'react';
 
+import { prefixUI } from './style';
 import classNames from 'classnames';
 import { getBorderSize } from './utils';
-import useStyle, { prefixUI } from './style';
-import { Layout, MenuTheme, SiderProps } from 'antd';
+import { Layout, MenuTheme, SiderProps, theme } from 'antd';
 import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
 
 const { Sider } = Layout;
+const { useToken } = theme;
 
 export interface HeaderRenderProps {
   readonly width: number;
@@ -49,7 +50,7 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
-  const { token, hashId, render } = useStyle();
+  const { token, hashId } = useToken();
 
   const borderSize = getBorderSize(token);
 
@@ -67,7 +68,7 @@ export default memo(function SiderMenu({
     };
   }, [headerHeight, borderSize]);
 
-  return render(
+  return (
     <Sider
       collapsible
       style={style}
