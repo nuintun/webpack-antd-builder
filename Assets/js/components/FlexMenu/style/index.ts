@@ -59,5 +59,5 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'FlexMenu'], getFlexMenuStyle);
+  return useStyleSheets(['components', 'FlexMenu', prefixUI], getFlexMenuStyle);
 }

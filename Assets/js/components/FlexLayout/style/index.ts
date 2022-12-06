@@ -74,5 +74,5 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'FlexLayout'], getFlexLayoutStyle);
+  return useStyleSheets(['components', 'FlexLayout', prefixUI], getFlexLayoutStyle);
 }

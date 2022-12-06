@@ -56,5 +56,5 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'RouteTabs'], getRouteTabsStyle);
+  return useStyleSheets(['components', 'RouteTabs', prefixUI], getRouteTabsStyle);
 }

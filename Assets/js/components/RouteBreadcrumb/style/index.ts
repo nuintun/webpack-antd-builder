@@ -57,5 +57,5 @@ function getRouteBreadcrumbStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'RouteBreadcrumb'], getRouteBreadcrumbStyle);
+  return useStyleSheets(['components', 'RouteBreadcrumb', prefixUI], getRouteBreadcrumbStyle);
 }

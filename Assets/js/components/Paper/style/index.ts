@@ -15,5 +15,5 @@ function getRoutePaperStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'Paper'], getRoutePaperStyle);
+  return useStyleSheets(['components', 'Paper', prefixUI], getRoutePaperStyle);
 }
