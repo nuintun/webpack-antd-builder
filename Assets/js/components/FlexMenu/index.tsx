@@ -32,18 +32,6 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
     onOpenChange?.(openKeys, cachedOpenKeys);
   }, []);
 
-  const x = (
-    <SiderMenu
-      {...restProps}
-      width={width}
-      isMobile={isMobile}
-      collapsed={collapsed}
-      onCollapse={onCollapse}
-      onOpenChange={onOpenChangeHander}
-      defaultOpenKeys={cachedOpenKeysRef.current}
-    />
-  );
-
   return render(
     isMobile ? (
       <Drawer
