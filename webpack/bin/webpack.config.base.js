@@ -81,6 +81,8 @@ export default async mode => {
       chunkFilename: `js/[${isDevelopment ? 'name' : 'contenthash'}].js`,
       assetModuleFilename: `[path][${isDevelopment ? 'name' : 'contenthash'}][ext]`
     },
+    externals: appConfig.externals,
+    externalsType: appConfig.externalsType,
     cache: {
       type: 'filesystem',
       buildDependencies: {
