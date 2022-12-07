@@ -122,14 +122,14 @@ export default async mode => {
       new HtmlWebpackPlugin(html)
     ],
     optimization: {
+      splitChunks: {
+        chunks: 'all'
+      },
       removeEmptyChunks: true,
       mergeDuplicateChunks: true,
       removeAvailableModules: true,
       runtimeChunk: {
         name: entrypoint => `runtime-${entrypoint.name}`
-      },
-      splitChunks: {
-        chunks: 'all'
       }
     }
   };
