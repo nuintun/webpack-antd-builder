@@ -112,20 +112,26 @@ export default function useControllableValue<V = undefined>(
     return getDefaultValue(props, options);
   });
 
+  const valueRef = useLatestRef(value);
+
   const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]): void => {
     if (isMounted()) {
-      setState(prevState => {
+      const { current: prevState } = valueRef;
+      const state = isFunction(value) ? value(prevState) : value;
+
+      if (state !== prevState) {
         const { current: props } = propsRef;
         const { trigger = 'onChange' } = props;
         const { current: options } = optionsRef;
-        const state = isFunction(value) ? value(prevState) : value;
 
-        if (state !== prevState && isFunction(props[trigger])) {
-          props[trigger](state, ...args);
+        if (!isControlled(props, options)) {
+          setState(state);
         }
 
-        return isControlled(props, options) ? prevState : state;
-      });
+        if (isFunction(props[trigger])) {
+          props[trigger](state, ...args);
+        }
+      }
     }
   }, []);
 
