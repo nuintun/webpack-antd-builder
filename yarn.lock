@@ -349,6 +349,13 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@nuintun/svgo-loader@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@nuintun/svgo-loader/-/svgo-loader-0.0.1.tgz#9dfd846491701861ae2577e68590ee81c487e429"
+  integrity sha512-HN8CwII+HQCYvPgEm/BEr5HLzNG71fKY19DEF1E+RGkwIa56RWi1EO5OWmsnD1f5wlKfAImNyejd3V+w2o9T4w==
+  dependencies:
+    svgo "^3.0.2"
+
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.21"
   resolved "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
@@ -3957,7 +3964,7 @@ svgc-loader@^0.0.3:
     svgo "3.0.2"
     tslib "^2.4.1"
 
-svgo@3.0.2, svgo@^2.7.0, svgo@^3.0.0:
+svgo@3.0.2, svgo@^2.7.0, svgo@^3.0.0, svgo@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/svgo/-/svgo-3.0.2.tgz#5e99eeea42c68ee0dc46aa16da093838c262fe0a"
   integrity sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==

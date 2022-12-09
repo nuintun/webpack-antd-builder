@@ -97,7 +97,12 @@ export default async mode => {
             {
               issuer: /\.[jt]sx?$/i,
               type: 'asset/resource',
-              resourceQuery: /^\?url$/
+              resourceQuery: /^\?url$/,
+              use: [
+                {
+                  loader: '@nuintun/svgo-loader'
+                }
+              ]
             },
             {
               issuer: /\.[jt]sx?$/i,
@@ -112,7 +117,12 @@ export default async mode => {
               ]
             },
             {
-              type: 'asset/resource'
+              type: 'asset/resource',
+              use: [
+                {
+                  loader: '@nuintun/svgo-loader'
+                }
+              ]
             }
           ]
         },
