@@ -3955,10 +3955,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.0.3.tgz#d35ca96091538a4f0ff5c96cbded76a493c169b8"
-  integrity sha512-eq9p9UG4vM93XNHIp9tQzjXGP5JJUrri9QQ3nT6HMqL1XFcN/PjZ4Y0tJrgb/6sM3BPpIGsJ6NGrf8gwFGR7oA==
+svgc-loader@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.0.tgz#5960a37d9b8301c34a23f99829b26ad1b379dcfa"
+  integrity sha512-uomoUv/3w+EO5vQ/FMyhisy9bUQ4IIc/lmRSHPnvLeWGxUCqjoDnzohxHpQPQS+uF4+IPSbqhk9Vqel+3RNb5Q==
   dependencies:
     css-tree "^2.3.0"
     svgo "3.0.2"
