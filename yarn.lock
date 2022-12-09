@@ -1434,14 +1434,6 @@ css-select@^5.1.0:
     domutils "^3.0.1"
     nth-check "^2.0.1"
 
-css-tree@^1.1.2, css-tree@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.npmjs.org/css-tree/-/css-tree-1.1.3.tgz#eb4870fb6fd7707327ec95c2ff2ab09b5e8db91d"
-  integrity sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q==
-  dependencies:
-    mdn-data "2.0.14"
-    source-map "^0.6.1"
-
 css-tree@^2.2.1, css-tree@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/css-tree/-/css-tree-2.3.0.tgz#a0122cbc85305576df92ac528fb079c8217a15b2"
@@ -1516,13 +1508,6 @@ cssnano@^5.1.8:
     cssnano-preset-default "^5.2.13"
     lilconfig "^2.0.3"
     yaml "^1.10.2"
-
-csso@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/csso/-/csso-4.2.0.tgz#ea3a561346e8dc9f546d6febedd50187cf389529"
-  integrity sha512-wvlcdIbf6pwKEk7vHj8/Bkc0B4ylXZruLvOgs9doS5eOsOpuodOV2zJChSpkp+pRpYQLQMeF04nr3Z68Sta9jA==
-  dependencies:
-    css-tree "^1.1.2"
 
 csso@^5.0.5:
   version "5.0.5"
@@ -2572,11 +2557,6 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
-
-mdn-data@2.0.14:
-  version "2.0.14"
-  resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"
-  integrity sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==
 
 mdn-data@2.0.28:
   version "2.0.28"
@@ -3863,11 +3843,6 @@ source-map@~0.5.1:
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==
 
-stable@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.npmjs.org/stable/-/stable-0.1.8.tgz#836eb3c8382fe2936feaf544631017ce7d47a3cf"
-  integrity sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==
-
 "statuses@>= 1.5.0 < 2", statuses@^1.5.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
@@ -3973,16 +3948,16 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.0.2.tgz#68ee91b179bcdd90976fbbe50c0a8e9b7bbce9ba"
-  integrity sha512-lELqbSfS2qRFY6bc7LwdvUUYnSfTzEajAHrG08AFrA8VQzjoOFbG2tlnef3Lyl0yhDCwUC1dSFRmNIV+R7aenw==
+svgc-loader@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.0.3.tgz#d35ca96091538a4f0ff5c96cbded76a493c169b8"
+  integrity sha512-eq9p9UG4vM93XNHIp9tQzjXGP5JJUrri9QQ3nT6HMqL1XFcN/PjZ4Y0tJrgb/6sM3BPpIGsJ6NGrf8gwFGR7oA==
   dependencies:
     css-tree "^2.3.0"
     svgo "3.0.2"
     tslib "^2.4.1"
 
-svgo@3.0.2:
+svgo@3.0.2, svgo@^2.7.0, svgo@^3.0.0:
   version "3.0.2"
   resolved "https://registry.npmjs.org/svgo/-/svgo-3.0.2.tgz#5e99eeea42c68ee0dc46aa16da093838c262fe0a"
   integrity sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==
@@ -3993,19 +3968,6 @@ svgo@3.0.2:
     css-tree "^2.2.1"
     csso "^5.0.5"
     picocolors "^1.0.0"
-
-svgo@^2.7.0:
-  version "2.8.0"
-  resolved "https://registry.npmjs.org/svgo/-/svgo-2.8.0.tgz#4ff80cce6710dc2795f0c7c74101e6764cfccd24"
-  integrity sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==
-  dependencies:
-    "@trysound/sax" "0.2.0"
-    commander "^7.2.0"
-    css-select "^4.1.3"
-    css-tree "^1.1.3"
-    csso "^4.2.0"
-    picocolors "^1.0.0"
-    stable "^0.1.8"
 
 swc-loader@^0.2.3:
   version "0.2.3"
