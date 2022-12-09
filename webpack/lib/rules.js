@@ -107,8 +107,7 @@ export default async mode => {
                   options: swcOptions
                 },
                 {
-                  loader: '@svgr/webpack',
-                  options: { memo: true, babel: false }
+                  loader: 'svgc-loader'
                 }
               ]
             },
