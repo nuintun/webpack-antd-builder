@@ -27,7 +27,9 @@ const LineChart = memo(() => {
   useEffect(() => {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
       .then(response => response.json())
-      .then((json: Record<string, number>[]) => setData(json))
+      .then((json: Record<string, number>[]) => {
+        setData(json);
+      })
       .catch((error: Error) => {
         console.error('fetch data failed', error);
       });
