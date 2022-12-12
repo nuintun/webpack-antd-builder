@@ -349,10 +349,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@nuintun/svgo-loader@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.npmjs.org/@nuintun/svgo-loader/-/svgo-loader-0.0.1.tgz#9dfd846491701861ae2577e68590ee81c487e429"
-  integrity sha512-HN8CwII+HQCYvPgEm/BEr5HLzNG71fKY19DEF1E+RGkwIa56RWi1EO5OWmsnD1f5wlKfAImNyejd3V+w2o9T4w==
+"@nuintun/svgo-loader@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/@nuintun/svgo-loader/-/svgo-loader-0.1.0.tgz#4a93afff7a61ae47065b34f064919721381560c8"
+  integrity sha512-97g23I2uLwzm/13qV8xhSwC7C8zKaF+wxH0tIyhAuM0RbugsGv1U4QyIAizVXIz/ltx0zmPjeV1Hrh2MURihzA==
   dependencies:
     svgo "^3.0.2"
 
@@ -1409,10 +1409,10 @@ css-minimizer-webpack-plugin@4.2.2:
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
 
-css-modules-types-loader@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.8.tgz#91e7d3c06c2a608633bf61a7f6cb651e263dc89a"
-  integrity sha512-+KeCS0MqrvUXiPvZWcpt9gHaU79fDYBbIgWgDetMnHgE4MbH6injbCgpJxpTLTeGahReIsYCgizJLa8lImupVw==
+css-modules-types-loader@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.9.tgz#06b7aaeae1ef3a65ce26aaca95c43b6d9bf2b840"
+  integrity sha512-amVJ0LI6PFa3jPgiUlpfCicXyNR45VYGCpizH0s/A8MAgbFKXGDVSOm7ERz7KaPKQG7RFeJ3YqDc8ESoFQeovA==
   dependencies:
     acorn "^8.8.1"
     acorn-walk "^8.2.0"
@@ -2459,10 +2459,10 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.0.tgz#45809c9d8a5d38c89682085b4eeacaf17de16df1"
-  integrity sha512-DRb2rngytN/OtALMYMb/CHkQKpSlKrnCMXXINqVX8DN/0hUDzWVrnYzoz2a2Fv2ja08Xe2wfbjpWrW13UOaHiQ==
+koa-webpack-dev-service@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.3.tgz#bc8d97b7b39a715e95ee4ca442e6297dd7c1e14f"
+  integrity sha512-vyzclhSTNl1Ic2rvzIuwuxof6AQHlgFgKn4WxRRfZ+bGLxehsoxg/L2+t9VmCKwyRWGXz/AWwZpSbPn5njvENg==
   dependencies:
     "@types/koa" "^2.13.5"
     "@types/ws" "^8.5.3"
@@ -3130,10 +3130,10 @@ postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.4.17, postcss@^8.4.18, postcss@^8.4.19:
-  version "8.4.19"
-  resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.19.tgz#61178e2add236b17351897c8bcc0b4c8ecab56fc"
-  integrity sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==
+postcss@^8.4.17, postcss@^8.4.18, postcss@^8.4.20:
+  version "8.4.20"
+  resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.20.tgz#64c52f509644cecad8567e949f4081d98349dc56"
+  integrity sha512-6Q04AXR1212bXr5fh03u8aAwbLxAQNGQ/Q1LNa0VfOI06ZAlhPHtQvE4OIdpj4kLThXilalPnmDSOD65DcHt+g==
   dependencies:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
@@ -3955,10 +3955,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.0.tgz#5960a37d9b8301c34a23f99829b26ad1b379dcfa"
-  integrity sha512-uomoUv/3w+EO5vQ/FMyhisy9bUQ4IIc/lmRSHPnvLeWGxUCqjoDnzohxHpQPQS+uF4+IPSbqhk9Vqel+3RNb5Q==
+svgc-loader@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.1.tgz#cb311ade688a8d1cad1f79ad3d787f8791f5aab9"
+  integrity sha512-Zs59A6ldV173jERr/NNeOSLtNX0MIUIHKOI07UFzUgnl99+i1IuBa8ceOHfQRMsij2GxiyKnErgMM1AHlmFA2Q==
   dependencies:
     css-tree "^2.3.0"
     svgo "3.0.2"
