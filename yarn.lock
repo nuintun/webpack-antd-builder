@@ -378,9 +378,9 @@
     rc-util "^5.24.4"
 
 "@rc-component/tour@~1.0.1-2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@rc-component/tour/-/tour-1.0.2.tgz#ad994fd750e89101f83beec20d260c02e2fc9cf4"
-  integrity sha512-yFTUjqQdlG+S7k9yVM+QwxsW6t/kaJ850EUihbTTGPCv65hJwm+c5TO0uO5qhc/Ro+YhE6nwdfu4Wt5EDJcNFw==
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/@rc-component/tour/-/tour-1.0.3.tgz#4f47ce8cda0253a589f4a14e60a16d51e8a774c9"
+  integrity sha512-fLQAj2gYX0SqOcPa+BUCKtjnv5Tkd0uMWeWGIoT6me9lJIfxuKxSJ7iRxN9tBF1fRee9V0t0UeYBAOIyElmaXQ==
   dependencies:
     "@babel/runtime" "^7.18.0"
     "@rc-component/portal" "^1.0.0-9"
@@ -1409,10 +1409,10 @@ css-minimizer-webpack-plugin@4.2.2:
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
 
-css-modules-types-loader@^0.3.10:
-  version "0.3.10"
-  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.10.tgz#6510f888c3a3a19823196345496d472355d71551"
-  integrity sha512-+fgOD2atLL2OOi6dhpop+TgNdC/Wpa6g9cT1LJ/7N3P5CTuJ3Jr01Wb/sPr84NddY5arsvdMbGAZj2jzumxmaA==
+css-modules-types-loader@^0.3.11:
+  version "0.3.11"
+  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.11.tgz#d0ae23d9973b6381ddfebb3d22d84060f8224ee0"
+  integrity sha512-K/ZxDanYuWWQnT2k3x1KDIuzEDY3uC6TW3nGa0r5FEVjyO88nyVVe5Rrt68DtPn0RBcwc6B6fiWhSkO/FhpiLQ==
   dependencies:
     acorn "^8.8.1"
     acorn-walk "^8.2.0"
@@ -3955,10 +3955,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.1.tgz#cb311ade688a8d1cad1f79ad3d787f8791f5aab9"
-  integrity sha512-Zs59A6ldV173jERr/NNeOSLtNX0MIUIHKOI07UFzUgnl99+i1IuBa8ceOHfQRMsij2GxiyKnErgMM1AHlmFA2Q==
+svgc-loader@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.2.tgz#b09ec884fe0503398e96636b0693788b17a1f5e8"
+  integrity sha512-lJg2Tp0TDMws5EBFArx272PyvydGlspZrdDtMwIWDjl9VOrzvuI4rY3Bdd+cL72pZoo51/blLK3WAWCNoE+tFA==
   dependencies:
     css-tree "^2.3.0"
     svgo "3.0.2"
