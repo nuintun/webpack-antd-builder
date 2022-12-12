@@ -10,9 +10,8 @@
   "scripts": {
     "lint": "tsc --noEmit",
     "format": "prettier --write .",
-    "dev": "node webpack/bin/webpack.config.dev.js",
     "prod": "node webpack/bin/webpack.config.prod.js",
-    "watch": "nodemon webpack/bin/webpack.config.server.js",
+    "dev": "nodemon webpack/bin/webpack.config.dev.js",
     "report": "node webpack/bin/webpack.config.prod.js --report"
   },
   "author": {
