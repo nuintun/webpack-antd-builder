@@ -1409,10 +1409,10 @@ css-minimizer-webpack-plugin@4.2.2:
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
 
-css-modules-types-loader@^0.3.9:
-  version "0.3.9"
-  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.9.tgz#06b7aaeae1ef3a65ce26aaca95c43b6d9bf2b840"
-  integrity sha512-amVJ0LI6PFa3jPgiUlpfCicXyNR45VYGCpizH0s/A8MAgbFKXGDVSOm7ERz7KaPKQG7RFeJ3YqDc8ESoFQeovA==
+css-modules-types-loader@^0.3.10:
+  version "0.3.10"
+  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.10.tgz#6510f888c3a3a19823196345496d472355d71551"
+  integrity sha512-+fgOD2atLL2OOi6dhpop+TgNdC/Wpa6g9cT1LJ/7N3P5CTuJ3Jr01Wb/sPr84NddY5arsvdMbGAZj2jzumxmaA==
   dependencies:
     acorn "^8.8.1"
     acorn-walk "^8.2.0"

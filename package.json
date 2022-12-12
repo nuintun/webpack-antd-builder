@@ -64,7 +64,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "4.2.2",
-    "css-modules-types-loader": "^0.3.9",
+    "css-modules-types-loader": "^0.3.10",
     "find-free-ports": "^3.0.0",
     "html-webpack-plugin": "^5.5.0",
     "koa": "^2.14.1",
