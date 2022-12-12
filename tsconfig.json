@@ -16,7 +16,6 @@
     "moduleResolution": "Node",
     "noUnusedParameters": true,
     "experimentalDecorators": true,
-    "useUnknownInCatchVariables": false,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "/js/*": [
