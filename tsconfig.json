@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "noEmit": true,
     "strict": true,
     "allowJs": true,
-    "baseUrl": "./",
     "newLine": "lf",
     "jsx": "preserve",
     "module": "ESNext",
