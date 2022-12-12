@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "noEmit": true,
     "strict": true,
     "allowJs": true,
+    "baseUrl": "./",
     "newLine": "lf",
     "jsx": "preserve",
     "module": "ESNext",
@@ -25,19 +25,17 @@
       "/css/*": [
         "Assets/css/*"
       ],
-      "/mods/*": [
-        "node_modules/*"
-      ],
       "/images/*": [
         "Assets/images/*"
       ]
     }
   },
   "include": [
-    "Assets/**/*",
+    "**/*.ts",
+    "**/*.tsx",
     "global.d.ts"
   ],
   "exclude": [
-    "node_modules/**/*"
+    "node_modules"
   ]
 }
