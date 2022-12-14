@@ -33,7 +33,7 @@ function resolveEnvironment(env) {
 /**
  * @function resolveConfigure
  * @param {string} mode
- * @return {Promise<object>}
+ * @return {Promise<import('webpack').Configuration>}
  */
 export default async mode => {
   const isDevelopment = mode !== 'production';

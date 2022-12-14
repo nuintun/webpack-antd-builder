@@ -12,7 +12,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 /**
  * @function resolveRules
  * @param {string} mode
- * @return {object}
+ * @return {Promise<NonNullable<import('webpack').Configuration['module']>['rules']>}
  */
 export default async mode => {
   const isDevelopment = mode !== 'production';
