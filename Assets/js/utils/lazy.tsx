@@ -2,7 +2,7 @@
  * @module lazy
  */
 
-import { lazy as lazyImpl } from 'react';
+import React, { lazy as lazyImpl } from 'react';
 
 export interface Factory<P = unknown> {
   (): Promise<{ default: React.ComponentType<P> }>;
