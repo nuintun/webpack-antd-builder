@@ -3229,9 +3229,9 @@ rc-dialog@~9.0.0, rc-dialog@~9.0.2:
     rc-util "^5.21.0"
 
 rc-drawer@~6.0.0:
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/rc-drawer/-/rc-drawer-6.0.1.tgz#437040ac7ba305b5d964ba51e88f30797671e8f8"
-  integrity sha512-ibWXGf8I+KRPXE03X4s0/xXzQI37YWXUV+oPy+R29GKxkjr98UTMgwvoQDKlZTm5AiaRuVFqhTKm0kNHqJh+TQ==
+  version "6.0.2"
+  resolved "https://registry.npmjs.org/rc-drawer/-/rc-drawer-6.0.2.tgz#e5f87fa43efbc4f143ea8dd82bc96048656c3346"
+  integrity sha512-EeVU4Q4NHNBeyInfPjFKSDkfR4lJK/1sHbD4f41uCaY0mUCRXD9FDj9KxY1Tioz4aFplbMyP/CVCE4gT601GJw==
   dependencies:
     "@babel/runtime" "^7.10.1"
     "@rc-component/portal" "^1.0.0-6"
@@ -3535,7 +3535,7 @@ rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.12.0, rc-util@^5.15.0, rc-util@^5.16.
     react-is "^16.12.0"
     shallowequal "^1.1.0"
 
-rc-virtual-list@^3.2.0, rc-virtual-list@^3.4.12, rc-virtual-list@^3.4.8:
+rc-virtual-list@^3.2.0, rc-virtual-list@^3.4.13, rc-virtual-list@^3.4.8:
   version "3.4.13"
   resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.4.13.tgz#20acc934b263abcf7b7c161f50ef82281b2f7e8d"
   integrity sha512-cPOVDmcNM7rH6ANotanMDilW/55XnFPw0Jh/GQYtrzZSy3AmWvCnqVNyNC/pgg3lfVmX2994dlzAhuUrd4jG7w==
