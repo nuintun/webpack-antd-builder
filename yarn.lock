@@ -1441,7 +1441,7 @@ css-select@^5.1.0:
     domutils "^3.0.1"
     nth-check "^2.0.1"
 
-css-tree@^2.2.1, css-tree@^2.3.0:
+css-tree@^2.2.1, css-tree@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npmjs.org/css-tree/-/css-tree-2.3.1.tgz#10264ce1e5442e8572fc82fbe490644ff54b5c20"
   integrity sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==
@@ -3956,15 +3956,15 @@ supports-preserve-symlinks-flag@^1.0.0:
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
 svgc-loader@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.2.tgz#b09ec884fe0503398e96636b0693788b17a1f5e8"
-  integrity sha512-lJg2Tp0TDMws5EBFArx272PyvydGlspZrdDtMwIWDjl9VOrzvuI4rY3Bdd+cL72pZoo51/blLK3WAWCNoE+tFA==
+  version "0.1.3"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.3.tgz#cfa548546133fa5915fb835670c93e5c42539682"
+  integrity sha512-plLweuy0SAQuLoyu45mQFDs63ufiBgIURdedrksMKBhTS19LN7ToH2JAXP1A/a+EMGcw1o6aglerZylHOuDFRQ==
   dependencies:
-    css-tree "^2.3.0"
-    svgo "3.0.2"
+    css-tree "^2.3.1"
+    svgo "^3.0.2"
     tslib "^2.4.1"
 
-svgo@3.0.2, svgo@^2.7.0, svgo@^3.0.0, svgo@^3.0.2:
+svgo@^2.7.0, svgo@^3.0.0, svgo@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/svgo/-/svgo-3.0.2.tgz#5e99eeea42c68ee0dc46aa16da093838c262fe0a"
   integrity sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==
