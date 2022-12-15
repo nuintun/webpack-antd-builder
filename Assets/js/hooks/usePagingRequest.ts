@@ -96,6 +96,7 @@ export default function usePagingRequest<I, E, T>(
   }, []);
 
   const message = useMessage();
+  const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const responseRef = useRef<Response<I, E>>({});
   const [serialize, raw] = useSearches<[Search]>([false]);
@@ -138,7 +139,7 @@ export default function usePagingRequest<I, E, T>(
       paginationRef.current = false;
     }
 
-    request<Response<I, E>>(url, {
+    request<Response<I, E>>(urlRef.current, {
       ...requestInit,
       query,
       onSuccess(response) {
