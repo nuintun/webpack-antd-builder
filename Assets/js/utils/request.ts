@@ -160,7 +160,7 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
       );
     },
     (error: RequestError): never => {
-      error.code = 0;
+      error.code = -1;
 
       if (!__DEV__) {
         error.message = '发送请求失败';
