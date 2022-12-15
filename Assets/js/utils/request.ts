@@ -72,7 +72,7 @@ function isStatusOk(status: number): boolean {
  */
 function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   if (isJSONType(response.headers)) {
-    return response.json().then(({ code, msg, payload }) => {
+    return response.json().then(({ code, msg, payload }: RequestResult<R>) => {
       return { code, msg: msg || resloveMessage(code), payload };
     });
   }
@@ -80,8 +80,8 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   const { status } = response;
   const code = isStatusOk(status) ? 200 : status;
 
-  return response.text().then((payload: any) => {
-    return { code, msg: resloveMessage(code), payload };
+  return response.text().then(payload => {
+    return { code, msg: resloveMessage(code), payload } as RequestResult<R>;
   });
 }
 
