@@ -9,7 +9,6 @@ import path from 'path';
 
 const js = path.resolve('Assets/js');
 const css = path.resolve('Assets/css');
-const mods = path.resolve('node_modules');
 const images = path.resolve('Assets/images');
 
 export default {
