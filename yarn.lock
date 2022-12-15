@@ -3955,7 +3955,7 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.1.2:
+svgc-loader@^0.1.3:
   version "0.1.3"
   resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.3.tgz#cfa548546133fa5915fb835670c93e5c42539682"
   integrity sha512-plLweuy0SAQuLoyu45mQFDs63ufiBgIURdedrksMKBhTS19LN7ToH2JAXP1A/a+EMGcw1o6aglerZylHOuDFRQ==
