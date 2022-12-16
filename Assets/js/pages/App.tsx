@@ -6,6 +6,7 @@ import '/css/global.scss';
 
 import React, { lazy, memo, Suspense, useMemo } from 'react';
 
+import useTheme from '../hooks/useTheme';
 import { parse } from '/js/utils/router';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
@@ -17,6 +18,8 @@ import { Button, ConfigProvider, message, Result, theme } from 'antd';
 const { useToken } = theme;
 
 const { useMessage } = message;
+
+const { darkAlgorithm, defaultAlgorithm } = theme;
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
@@ -85,10 +88,12 @@ const Page = memo(function Page() {
 });
 
 export default memo(function App() {
+  const [theme] = useTheme();
+
   return (
     <ConfigProvider
       theme={{
-        algorithm: [theme.darkAlgorithm]
+        algorithm: [theme === 'dark' ? darkAlgorithm : defaultAlgorithm]
       }}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>

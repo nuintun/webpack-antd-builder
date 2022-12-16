@@ -52,11 +52,11 @@ export default memo(function Layout(): React.ReactElement {
 
   return (
     <FlexLayout
-      theme={theme}
       menus={menus}
       siderWidth={216}
       leftHeaderRender={leftHeaderRender}
       rightHeaderRender={rightHeaderRender}
+      theme={theme === 'dark' ? 'light' : 'dark'}
     >
       <Outlet />
     </FlexLayout>
