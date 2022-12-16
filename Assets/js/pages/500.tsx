@@ -6,7 +6,8 @@ import { useNavigate } from 'react-nest-router';
 const style: React.CSSProperties = {
   display: 'flex',
   minHeight: '100vh',
-  placeItems: 'center'
+  placeItems: 'center',
+  placeContent: 'center'
 };
 
 export default memo(function Page(): React.ReactElement {
