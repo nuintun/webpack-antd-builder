@@ -54,8 +54,8 @@ export default async mode => {
     minify: !isDevelopment,
     favicon: appConfig.favicon,
     filename: appConfig.entryHTML,
-    templateParameters: { lang: appConfig.lang },
-    template: resolve('webpack/lib/template.ejs')
+    template: resolve('tools/lib/template.ejs'),
+    templateParameters: { lang: appConfig.lang }
   };
 
   const css = {

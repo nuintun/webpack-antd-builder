@@ -3,7 +3,7 @@
  * @description SWC 配置
  */
 
-import targets from './webpack/lib/targets.js';
+import targets from './tools/lib/targets.js';
 
 export default async () => {
   return {
