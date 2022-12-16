@@ -55,7 +55,7 @@ export default async mode => {
     favicon: appConfig.favicon,
     filename: appConfig.entryHTML,
     templateParameters: { lang: appConfig.lang },
-    template: resolve('webpack/template/index.ejs')
+    template: resolve('webpack/lib/template.ejs')
   };
 
   const css = {
