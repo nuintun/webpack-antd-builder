@@ -20,5 +20,4 @@ indent_style = tab
 
 # Minified files
 [*.min.*]
-indent_style = false
 insert_final_newline = false

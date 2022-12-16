@@ -5,6 +5,9 @@
 
 import targets from './tools/lib/targets.js';
 
+/**
+ * @return {Promise<import('@swc/core').Options>}
+ */
 export default async () => {
   return {
     env: {

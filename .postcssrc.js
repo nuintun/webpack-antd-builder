@@ -5,6 +5,13 @@
 
 import targets from './tools/lib/targets.js';
 
+/**
+ * @param {string} mode
+ * @return {Promise<import('postcss').ProcessOptions & {
+ *   sourceMap?: boolean;
+ *   plugins?: import('postcss').Plugin[] }>;
+ * }
+ */
 export default async mode => {
   return {
     sourceMap: mode !== 'production',
