@@ -3176,9 +3176,9 @@ range-parser@^1.2.1:
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
 rc-align@^4.0.0:
-  version "4.0.12"
-  resolved "https://registry.npmjs.org/rc-align/-/rc-align-4.0.12.tgz#065b5c68a1cc92a00800c9239320d9fdf5f16207"
-  integrity sha512-3DuwSJp8iC/dgHzwreOQl52soj40LchlfUHtgACOUtwGuoFIOVh6n/sCpfqCU8kO5+iz6qR0YKvjgB8iPdE3aQ==
+  version "4.0.13"
+  resolved "https://registry.npmjs.org/rc-align/-/rc-align-4.0.13.tgz#5aa1b7b9d20e63f18eb12550cac2eb8d5ef3fe4b"
+  integrity sha512-l/UwiJllPFVLL/bfDpm0W2ySb1heXeSELnmiMRjXiNp0sboO0z7DnjItXQKS8fNRp6CApzRT1+P6pNWZztbbnA==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
