@@ -23,17 +23,6 @@ function getDropdownActiveClassName(selected: boolean): string | undefined {
 function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): MenuProps['items'] {
   return [
     {
-      key: 'dark',
-      onClick: onThemeClick,
-      className: getDropdownActiveClassName(theme === 'dark'),
-      label: (
-        <a>
-          <Icon component={ThemeDarkIcon} />
-          <span style={{ marginInlineStart: 4 }}>暗色主题</span>
-        </a>
-      )
-    },
-    {
       key: 'light',
       onClick: onThemeClick,
       className: getDropdownActiveClassName(theme === 'light'),
@@ -41,6 +30,17 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
         <a>
           <Icon component={ThemeLightIcon} />
           <span style={{ marginInlineStart: 4 }}>浅色主题</span>
+        </a>
+      )
+    },
+    {
+      key: 'dark',
+      onClick: onThemeClick,
+      className: getDropdownActiveClassName(theme === 'dark'),
+      label: (
+        <a>
+          <Icon component={ThemeDarkIcon} />
+          <span style={{ marginInlineStart: 4 }}>暗色主题</span>
         </a>
       )
     }
