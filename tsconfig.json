@@ -19,13 +19,13 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "/js/*": [
-        "Assets/js/*"
+        "app/js/*"
       ],
       "/css/*": [
-        "Assets/css/*"
+        "app/css/*"
       ],
       "/images/*": [
-        "Assets/images/*"
+        "app/images/*"
       ]
     }
   },
