@@ -12,7 +12,7 @@ const css = path.resolve('app/css');
 const images = path.resolve('app/images');
 
 /**
- * @type {import('./tools/config').AppConfig}
+ * @type {import('./tools/interface').AppConfig}
  */
 export default {
   name: 'Antd',
