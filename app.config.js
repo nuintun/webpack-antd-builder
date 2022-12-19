@@ -11,6 +11,9 @@ const js = path.resolve('app/js');
 const css = path.resolve('app/css');
 const images = path.resolve('app/images');
 
+/**
+ * @type {import('./tools/config').AppConfig}
+ */
 export default {
   name: 'Antd',
   lang: 'zh-CN',
