@@ -1,7 +1,5 @@
 /**
  * @module webpack.config.base
- * @listens MIT
- * @author nuintun
  * @description 基础 Webpack 配置
  */
 

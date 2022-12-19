@@ -1,7 +1,5 @@
 /**
  * @module app.config
- * @listens MIT
- * @author nuintun
  * @description 应用配置
  */
 

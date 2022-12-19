@@ -1,7 +1,5 @@
 /**
  * @module ip
- * @listens MIT
- * @author nuintun
  * @description 获取本机 IP 地址
  */
 

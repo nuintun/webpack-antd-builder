@@ -1,7 +1,5 @@
 /**
  * @module rules
- * @listens MIT
- * @author nuintun
  * @description 配置 Webpack 规则
  */
 
