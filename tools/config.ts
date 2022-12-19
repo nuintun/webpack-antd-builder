@@ -1,5 +1,6 @@
 /**
  * @module config
+ * @description App 配置类型定义
  */
 
 import { Configuration } from 'webpack';
