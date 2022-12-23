@@ -10,14 +10,9 @@ import useTheme from '../hooks/useTheme';
 import { parse } from '/js/utils/router';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
-import { Provider } from '/js/hooks/useMessage';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
-import { Button, ConfigProvider, message, Result, theme } from 'antd';
-
-const { useToken } = theme;
-
-const { useMessage } = message;
+import { App as Framework, Button, ConfigProvider, Result, theme } from 'antd';
 
 const { darkAlgorithm, defaultAlgorithm } = theme;
 
@@ -60,30 +55,18 @@ const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }:
 });
 
 const Page = memo(function Page() {
-  const { token } = useToken();
-  const { colorBgContainer } = token;
   const routes = useMemo(() => parse(router), [router]);
-  const [message, context] = useMessage({ maxCount: 3 });
-
-  const pageStyle = useMemo<React.CSSProperties>(() => {
-    return {
-      width: '100%',
-      height: '100%',
-      backgroundColor: colorBgContainer
-    };
-  }, [colorBgContainer]);
 
   return (
-    <Provider value={message}>
-      {context}
-      <div style={pageStyle}>
+    <Framework className="ui-app">
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<SuspenseFallBack />}>
           <Router routes={routes} context={routes}>
             <NotFound />
           </Router>
         </Suspense>
-      </div>
-    </Provider>
+      </ErrorBoundary>
+    </Framework>
   );
 });
 
@@ -96,9 +79,7 @@ export default memo(function App() {
         algorithm: [theme === 'dark' ? darkAlgorithm : defaultAlgorithm]
       }}
     >
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Page />
-      </ErrorBoundary>
+      <Page />
     </ConfigProvider>
   );
 });

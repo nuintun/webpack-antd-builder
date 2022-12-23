@@ -4,7 +4,7 @@
 
 import { useCallback } from 'react';
 
-import useMessage from './useMessage';
+import { App } from 'antd';
 import useLatestRef from './useLatestRef';
 import useRequest, { RequestOptions } from './useRequest';
 import { Body, Query, RequestError } from '/js/utils/request';
@@ -21,6 +21,8 @@ export interface Options<V extends Values, R> extends Omit<RequestOptions<R>, Om
   onError?: (error: RequestError<R>, values: V) => void;
 }
 
+const { useApp } = App;
+
 /**
  * @function useSubmit
  * @description [hook] 提交操作
@@ -33,7 +35,7 @@ export default function useSubmit<V extends Values, R = unknown>(
   options: Options<V, R> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
-  const message = useMessage();
+  const { message } = useApp();
   const opitonsRef = useLatestRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 

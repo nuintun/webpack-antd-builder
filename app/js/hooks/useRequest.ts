@@ -4,7 +4,7 @@
 
 import { useCallback, useRef } from 'react';
 
-import useMessage from './useMessage';
+import { App } from 'antd';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLatestRef from './useLatestRef';
@@ -27,6 +27,8 @@ export interface RequestOptions<R> extends Omit<Options, 'delay'> {
   onError?: (error: RequestError<R>) => void;
 }
 
+const { useApp } = App;
+
 /**
  * @function onUnauthorizedHandler
  * @description 默认未授权操作
@@ -48,7 +50,7 @@ export default function useRequest(
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, request: <R>(url: string, options?: RequestOptions<R>) => void] {
   const retainRef = useRef(0);
-  const message = useMessage();
+  const { message } = useApp();
   const location = useLocation();
   const navigate = useNavigate();
   const isMounted = useIsMounted();

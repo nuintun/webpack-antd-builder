@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import { canUseDOM, isFunction } from '/js/utils/utils';
 
-type InternalTarget<E> = E | null | (() => E | null) | React.MutableRefObject<E | null>;
+export type Target = HTMLElement | null | (() => HTMLElement | null) | React.MutableRefObject<HTMLElement | null>;
 
 /**
  * @function getTargetElement
@@ -42,8 +42,6 @@ function isInViewPort(element: HTMLElement | null): boolean {
 
   return false;
 }
-
-export type Target = InternalTarget<HTMLElement>;
 
 /**
  * @function useInViewport

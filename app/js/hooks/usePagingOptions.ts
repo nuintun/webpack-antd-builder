@@ -10,6 +10,10 @@ import useLatestRef from './useLatestRef';
 
 type PagingOptions = Omit<PaginationProps, 'total' | 'current' | 'pageSize' | 'defaultCurrent' | 'defaultPageSize'>;
 
+export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
+  pageSizeOptions?: number[];
+}
+
 const DEFAULT_PAGE_SIZE_OPTIONS = [20, 30, 50, 80];
 
 /**
@@ -45,10 +49,6 @@ function normalizePagingOptions(pageSize: number, opitons?: Options | false): Pa
       pageSizeOptions: pageSizeOptions.map(item => item.toString())
     };
   }
-}
-
-export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
-  pageSizeOptions?: number[];
 }
 
 /**

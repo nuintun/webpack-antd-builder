@@ -7,8 +7,6 @@ import { ReactElement } from 'react';
 import { theme } from 'antd';
 import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
 
-const { useToken } = theme;
-
 export interface StyleSheets {
   (token: Token): CSSInterpolation;
 }
@@ -20,6 +18,8 @@ export interface UseStyleSheets {
 }
 
 export type Token = ReturnType<typeof useToken>['token'];
+
+const { useToken } = theme;
 
 /**
  * @function useStyleSheets

@@ -1,10 +1,9 @@
 import { memo, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
-import useMessage from '/js/hooks/useMessage';
 import useStyle, { prefixUI } from './style/right';
-import { Avatar, Dropdown, MenuProps } from 'antd';
 import useTheme, { Theme } from '/js/hooks/useTheme';
+import { App, Avatar, Dropdown, MenuProps } from 'antd';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
 import { HeaderRenderProps } from '/js/components/FlexMenu';
 
@@ -13,6 +12,8 @@ import logo from '/images/logo.svg?url';
 import ThemeIcon from '/images/theme.svg';
 import ThemeDarkIcon from '/images/theme-dark.svg';
 import ThemeLightIcon from '/images/theme-light.svg';
+
+const { useApp } = App;
 
 type MenuClickEventHandler = NonNullable<MenuProps['onClick']>;
 
@@ -69,7 +70,7 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
 });
 
 const LogoutAction = memo(function LogoutAction(): React.ReactElement {
-  const message = useMessage();
+  const { message } = useApp();
 
   const onClick = useCallback(() => {
     message.info('你点击了退出系统😁');

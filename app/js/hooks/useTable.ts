@@ -33,10 +33,6 @@ interface Refs<I, E = {}> extends RequestRefs<I, E> {
   readonly sorter: Sorter | false;
 }
 
-function serializeField(filed: SorterField): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : filed;
-}
-
 export interface Options<I, E> extends InitOptions<I, E> {
   pagination?: Pagination;
 }
@@ -49,6 +45,10 @@ export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
   sorter?: Sorter | false;
   pagination?: Pagination;
+}
+
+function serializeField(filed: SorterField): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : filed;
 }
 
 /**

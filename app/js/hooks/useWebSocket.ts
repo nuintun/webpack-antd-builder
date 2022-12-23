@@ -15,6 +15,18 @@ interface Socket<M> {
   disconnect: (code?: number, reason?: string) => void;
 }
 
+export interface Options<M> {
+  manual?: boolean;
+  reconnectLimit?: number;
+  reconnectInterval?: number;
+  protocols?: string | string[];
+  onOpen?: (event: Event) => void;
+  onError?: (event: Event) => void;
+  onClose?: (event: CloseEvent) => void;
+  onMessage?: (event: MessageEvent<M>) => void;
+  onReconnect?: (reconnectTimes: number, reconnectLimit: number) => void;
+}
+
 /**
  * @function removeWsEvents
  * @param ws WebSocket 实例
@@ -26,18 +38,6 @@ function removeWsEvents(ws: WebSocket) {
     ws.onerror = null;
     ws.onclose = null;
   }
-}
-
-export interface Options<M> {
-  manual?: boolean;
-  reconnectLimit?: number;
-  reconnectInterval?: number;
-  protocols?: string | string[];
-  onOpen?: (event: Event) => void;
-  onError?: (event: Event) => void;
-  onClose?: (event: CloseEvent) => void;
-  onMessage?: (event: MessageEvent<M>) => void;
-  onReconnect?: (reconnectTimes: number, reconnectLimit: number) => void;
 }
 
 /**

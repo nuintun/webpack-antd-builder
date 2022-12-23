@@ -6,6 +6,12 @@ import { useEffect, useRef } from 'react';
 
 import { canUseDOM } from '/js/utils/utils';
 
+export interface Options {
+  defaultTitle?: string;
+  restoreOnUnmount?: boolean;
+  format?: (title: string | undefined, defaultTitle: string) => string;
+}
+
 /**
  * @function defaultFormat
  * @param title 标题
@@ -13,12 +19,6 @@ import { canUseDOM } from '/js/utils/utils';
  */
 function defaultFormat(title: string | undefined, defaultTitle: string): string {
   return title ? `${defaultTitle} - ${title}` : defaultTitle;
-}
-
-export interface Options {
-  defaultTitle?: string;
-  restoreOnUnmount?: boolean;
-  format?: (title: string | undefined, defaultTitle: string) => string;
 }
 
 /**

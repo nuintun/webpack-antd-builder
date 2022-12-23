@@ -4,7 +4,7 @@
 
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-import useMessage from './useMessage';
+import { App } from 'antd';
 import useLatestRef from './useLatestRef';
 import useSearches, { Search } from './useSearches';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
@@ -47,6 +47,8 @@ export interface Refs<I, E> {
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
 }
+
+const { useApp } = App;
 
 /**
  * @function hasQuery
@@ -95,7 +97,7 @@ export default function usePagingRequest<I, E, T>(
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);
 
-  const message = useMessage();
+  const { message } = useApp();
   const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const responseRef = useRef<Response<I, E>>({});
