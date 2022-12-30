@@ -701,10 +701,10 @@
   resolved "https://registry.npmjs.org/@types/throttle-debounce/-/throttle-debounce-5.0.0.tgz#8208087f0af85107bcc681c50fa837fc9505483e"
   integrity sha512-Pb7k35iCGFcGPECoNE4DYp3Oyf2xcTd3FbFQxXUI9hEYKUl6YX+KLf7HrBmgVcD05nl50LIH6i+80js4iYmWbw==
 
-"@types/ws@^8.5.3":
-  version "8.5.3"
-  resolved "https://registry.npmjs.org/@types/ws/-/ws-8.5.3.tgz#7d25a1ffbecd3c4f2d35068d0b283c037003274d"
-  integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
+"@types/ws@^8.5.4":
+  version "8.5.4"
+  resolved "https://registry.npmjs.org/@types/ws/-/ws-8.5.4.tgz#bb10e36116d6e570dd943735f86c933c1587b8a5"
+  integrity sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==
   dependencies:
     "@types/node" "*"
 
@@ -714,9 +714,9 @@
   integrity sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==
 
 "@types/yargs@^17.0.8":
-  version "17.0.17"
-  resolved "https://registry.npmjs.org/@types/yargs/-/yargs-17.0.17.tgz#5672e5621f8e0fca13f433a8017aae4b7a2a03e7"
-  integrity sha512-72bWxFKTK6uwWJAVT+3rF6Jo6RTojiJ27FQo8Rf60AL+VZbzoVPnMFhKsUnbjR8A3BTCYQ7Mv3hnl8T0A+CX9g==
+  version "17.0.18"
+  resolved "https://registry.npmjs.org/@types/yargs/-/yargs-17.0.18.tgz#466225ab4fbabb9aa711f5b406796daf1374a5b7"
+  integrity sha512-eIJR1UER6ur3EpKM3d+2Pgd+ET+k6Kn9B4ZItX0oPjjVI5PrfaRjKyLT5UYendDpLuoiJMNJvovLQbEXqhsPaw==
   dependencies:
     "@types/yargs-parser" "*"
 
@@ -1106,7 +1106,7 @@ buffer-from@^1.0.0:
   resolved "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz#2b146a6fd72e80b4f55d255f35ed59a3a9a41bd5"
   integrity sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==
 
-bufferutil@^4.0.6:
+bufferutil@^4.0.0:
   version "4.0.7"
   resolved "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.7.tgz#60c0d19ba2c992dd8273d3f73772ffc894c153ad"
   integrity sha512-kukuqc39WOHtdxtw4UScxF/WVnMFVSQVKhtx3AjZJzhd0RGZZldcrfSEbVsWWe6KNH253574cq5F+wpv0G9pJw==
@@ -1364,10 +1364,10 @@ copy-to-clipboard@^3.2.0:
   dependencies:
     toggle-selection "^1.0.6"
 
-core-js@^3.27.0:
-  version "3.27.0"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.27.0.tgz#a343bc614f29d9dcffa7616e65e10f9001cdd332"
-  integrity sha512-wY6cKosevs430KRkHUIsvepDXHGjlXOZO3hYXNyqpD6JvB0X28aXyv0t1Y1vZMwE7SoKmtfa6IASHCPN52FwBQ==
+core-js@^3.27.1:
+  version "3.27.1"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.27.1.tgz#23cc909b315a6bb4e418bf40a52758af2103ba46"
+  integrity sha512-GutwJLBChfGCpwwhbYoqfv03LAfmiz7e7D/BNxzeMxwQf10GRSzqiOjx7AmtEk+heiD/JWmBuyBPgFtx0Sg1ww==
 
 cosmiconfig@^7.0.0:
   version "7.1.0"
@@ -2461,21 +2461,21 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.9.5:
-  version "0.9.5"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.5.tgz#ce0bc79970fbb82ead414db102ed704751ed5fba"
-  integrity sha512-wZmczRO6oulm9arI4Kh3x8Ru7C1QCLLl4+I990HWcp/LygzPM+gOSgRVi4On+/HCYaJoyTgrzSQlHVG617ldNg==
+koa-webpack-dev-service@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.6.tgz#d76a8652af7e3562ac02f1781349d9ab7599cc25"
+  integrity sha512-F4xniT1PFqw2fEx4nBqPXTzdY7jAw+reiaXcTbN6RKOY0E3kH2/T0/Oz5NEthDixuVn6nDaD6qVQSltH3DP2xg==
   dependencies:
     "@types/koa" "^2.13.5"
-    "@types/ws" "^8.5.3"
+    "@types/ws" "^8.5.4"
     ansi-regex "^6.0.1"
-    core-js "^3.27.0"
+    core-js "^3.27.1"
     koa-compose "^4.1.0"
     webpack-dev-middleware "^6.0.1"
     ws "^8.11.0"
   optionalDependencies:
-    bufferutil "^4.0.6"
-    utf-8-validate "^5.0.9"
+    bufferutil "^4.0.0"
+    utf-8-validate "^5.0.0"
 
 koa@^2.14.1:
   version "2.14.1"
@@ -4165,7 +4165,7 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-utf-8-validate@^5.0.9:
+utf-8-validate@^5.0.0:
   version "5.0.10"
   resolved "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.10.tgz#d7d10ea39318171ca982718b6b96a8d2442571a2"
   integrity sha512-Z6czzLq4u8fPOyx7TU6X3dvUZVvoJmxSQ+IcrlmagKhilxlhZgxPK6C5Jqbkw1IDUmFTM+cz9QDnnLTwDz/2gQ==
