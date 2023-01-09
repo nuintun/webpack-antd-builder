@@ -1321,10 +1321,10 @@ compressible@^2.0.0:
   dependencies:
     mime-db ">= 1.43.0 < 2"
 
-compute-scroll-into-view@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-2.0.3.tgz#e78c9804a2396a7a47159523b23b0695ad2391cc"
-  integrity sha512-mj/AjC7WqXeVlUB6zUq5Qrivb6et0kyasDQcbCWLDusYUqaXng+BfOnhCdRqPOa5/dWNn5e9+u40H6w2BYRdNQ==
+compute-scroll-into-view@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-2.0.4.tgz#2b444b2b9e4724819d2531efacb7ac094155fdf6"
+  integrity sha512-y/ZA3BGnxoM/QHHQ2Uy49CLtnWPbt4tTPpEEZiEmmiWBFKjej7nEyH8Ryz54jH0MLXflUYA3Er2zUxPSJu5R+g==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -3795,11 +3795,11 @@ schema-utils@^4.0.0:
     ajv-keywords "^5.0.0"
 
 scroll-into-view-if-needed@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.npmjs.org/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.0.3.tgz#57256bef78f3c3c288070d2aaa63cf547aa11e70"
-  integrity sha512-QoCH0lVw0tbA7Rl6sToH7e1tO3n95Oi6JgBgC8hEpNNZUC91MfasJ/4E1ZdbzGueNDZ+Y7ObfRaelKUgTyPbJA==
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.0.4.tgz#4b3101712f0ac8ec982c0a7ab4d071e393241e21"
+  integrity sha512-s+/F50jwTOUt+u5oEIAzum9MN2lUQNvWBe/zfEsVQcbaERjGkKLq1s+2wCHkahMLC8nMLbzMVKivx9JhunXaZg==
   dependencies:
-    compute-scroll-into-view "^2.0.2"
+    compute-scroll-into-view "^2.0.4"
 
 semver@^5.7.1:
   version "5.7.1"
@@ -3957,11 +3957,6 @@ strip-ansi@^6.0.1:
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
   dependencies:
     ansi-regex "^5.0.1"
-
-style-loader@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/style-loader/-/style-loader-3.3.1.tgz#057dfa6b3d4d7c7064462830f9113ed417d38575"
-  integrity sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ==
 
 stylehacks@^5.1.1:
   version "5.1.1"
