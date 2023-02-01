@@ -74,11 +74,7 @@ export default memo(function App() {
   const [theme] = useTheme();
 
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: [theme === 'dark' ? darkAlgorithm : defaultAlgorithm]
-      }}
-    >
+    <ConfigProvider theme={{ algorithm: [theme === 'dark' ? darkAlgorithm : defaultAlgorithm] }}>
       <Page />
     </ConfigProvider>
   );
