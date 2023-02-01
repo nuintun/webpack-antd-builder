@@ -4,7 +4,7 @@
 
 import '/css/global.scss';
 
-import React, { lazy, memo, Suspense, useMemo } from 'react';
+import React, { lazy, memo, Suspense, useInsertionEffect, useMemo } from 'react';
 
 import useTheme from '../hooks/useTheme';
 import { parse } from '/js/utils/router';
@@ -14,7 +14,7 @@ import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { App as Framework, Button, ConfigProvider, Result, theme } from 'antd';
 
-const { darkAlgorithm, defaultAlgorithm } = theme;
+const { useToken, darkAlgorithm, defaultAlgorithm } = theme;
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
@@ -55,7 +55,15 @@ const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }:
 });
 
 const Page = memo(function Page() {
+  const { token } = useToken();
+  const { colorBgContainer } = token;
   const routes = useMemo(() => parse(router), [router]);
+
+  useInsertionEffect(() => {
+    const { style } = document.documentElement;
+
+    style.setProperty('--app-background', colorBgContainer);
+  }, [colorBgContainer]);
 
   return (
     <Framework className="ui-app">

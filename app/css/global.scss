@@ -1,9 +1,14 @@
 @import "antd/dist/reset.css";
 
+:root {
+  --app-background: transparent;
+}
+
 #app {
   height: 100%;
 
   .ui-app {
     height: 100%;
+    background-color: var(--app-background);
   }
 }
