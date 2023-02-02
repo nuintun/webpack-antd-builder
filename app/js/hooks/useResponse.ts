@@ -52,6 +52,7 @@ export default function useResponse<R, T>(
   request: Request<R>,
   options: Options<R> | TransformOptions<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch<R>] {
+  const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const [response, setResponse] = useState<R | T>();
 
@@ -61,7 +62,7 @@ export default function useResponse<R, T>(
       ...options
     } as TransformOptions<R, T>;
 
-    request(url, {
+    request(urlRef.current, {
       ...requestInit,
       onSuccess(response) {
         const { transform } = requestInit;
