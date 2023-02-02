@@ -29,7 +29,7 @@ function resolveEnvironment(env) {
 }
 
 /**
- * @function resolveConfigure
+ * @function webpackrc
  * @param {string} mode
  * @return {Promise<import('webpack').Configuration>}
  */

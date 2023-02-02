@@ -6,6 +6,7 @@
 import targets from './tools/lib/targets.js';
 
 /**
+ * @function postcssrc
  * @param {string} mode
  * @return {Promise<import('./tools/interface').PostcssConfig>}
  */

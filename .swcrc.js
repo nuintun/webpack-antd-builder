@@ -6,6 +6,7 @@
 import targets from './tools/lib/targets.js';
 
 /**
+ * @function swcrc
  * @return {Promise<import('./tools/interface').SwcConfig>}
  */
 export default async () => {
