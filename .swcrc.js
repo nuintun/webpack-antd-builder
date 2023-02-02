@@ -14,7 +14,7 @@ export default async () => {
       targets: await targets()
     },
     jsc: {
-      target: 'es2016',
+      target: 'es2015',
       externalHelpers: true,
       parser: {
         tsx: true,
