@@ -14,6 +14,8 @@ export default async () => {
       targets: await targets()
     },
     jsc: {
+      target: 'es2016',
+      externalHelpers: true,
       parser: {
         tsx: true,
         syntax: 'typescript'
@@ -22,8 +24,7 @@ export default async () => {
         react: {
           runtime: 'automatic'
         }
-      },
-      externalHelpers: true
+      }
     }
   };
 };
