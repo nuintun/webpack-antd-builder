@@ -30,9 +30,9 @@ const { useToken } = theme;
 export function useStyleSheets(path: string[], styleSheets: StyleSheets): UseStyleSheets {
   const { theme, token, hashId } = useToken();
 
-  const options = { theme, token, path, hashId };
-
-  const render = useStyleRegister(options, () => styleSheets(token, hashId));
+  const render = useStyleRegister({ path, theme, token, hashId }, () => {
+    return styleSheets(token, hashId);
+  });
 
   return { token, hashId, render };
 }
