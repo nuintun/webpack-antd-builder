@@ -11,7 +11,7 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
   const colorBgHeader = token.Layout?.colorBgHeader;
 
   return {
-    [`.${prefixUI}`]: {
+    '.ui-component': {
       [`&.${prefixUI}-sider`]: {
         height: '100%',
         overflow: 'hidden',
