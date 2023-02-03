@@ -8,7 +8,7 @@ import { theme } from 'antd';
 import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
 
 export interface StyleSheets {
-  (token: Token): CSSInterpolation;
+  (token: Token, hashId: string): CSSInterpolation;
 }
 
 export interface UseStyleSheets {
@@ -32,7 +32,7 @@ export function useStyleSheets(path: string[], styleSheets: StyleSheets): UseSty
 
   const options = { theme, token, path, hashId };
 
-  const render = useStyleRegister(options, () => styleSheets(token));
+  const render = useStyleRegister(options, () => styleSheets(token, hashId));
 
   return { token, hashId, render };
 }
