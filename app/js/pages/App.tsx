@@ -31,7 +31,15 @@ const ErrorFallback = memo(function ErrorFallback({ error, resetErrorBoundary }:
         }
         subTitle={
           <div style={{ display: 'flex', margin: '24px 0 0', justifyContent: 'center' }}>
-            <pre style={{ fontFamily: 'monospace', color: '#f00', padding: 0, margin: 0, textAlign: 'left' }}>
+            <pre
+              style={{
+                margin: 0,
+                padding: 0,
+                color: '#f00',
+                textAlign: 'left',
+                fontFamily: 'Consolas, "Lucida Console", monospace'
+              }}
+            >
               {error.stack?.replace(/(\r?\n)\s{2,}/gm, '$1  ') || error.message}
             </pre>
           </div>
