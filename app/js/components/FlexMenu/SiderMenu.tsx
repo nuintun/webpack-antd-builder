@@ -78,7 +78,7 @@ export default memo(function SiderMenu({
       collapsed={collapsed}
       onCollapse={onCollapse}
       collapsedWidth={collapsedWidth}
-      className={classNames(hashId, 'ui-component', `${prefixUI}-sider`, `${prefixUI}-${theme}`, className)}
+      className={classNames(hashId, prefixUI, `${prefixUI}-sider`, `${prefixUI}-${theme}`, className)}
     >
       {headerRender && (
         <div className={`${prefixUI}-header`} style={headerStyle}>
