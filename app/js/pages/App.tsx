@@ -4,15 +4,15 @@
 
 import '/css/global.scss';
 
-import React, { lazy, memo, Suspense, useInsertionEffect, useMemo } from 'react';
+import React, { lazy, memo, Suspense, useMemo } from 'react';
 
 import useTheme from '../hooks/useTheme';
 import { parse } from '/js/utils/router';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
+import { App, Button, ConfigProvider, Result, theme } from 'antd';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
-import { App as Framework, Button, ConfigProvider, Result, theme } from 'antd';
 
 const { useToken, darkAlgorithm, defaultAlgorithm } = theme;
 
@@ -67,22 +67,24 @@ const Page = memo(function Page() {
   const { colorBgContainer } = token;
   const routes = useMemo(() => parse(router), [router]);
 
-  useInsertionEffect(() => {
-    const { style } = document.documentElement;
-
-    style.setProperty('--app-background', colorBgContainer);
-  }, [colorBgContainer]);
-
   return (
-    <Framework className="ui-app">
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<SuspenseFallBack />}>
-          <Router routes={routes} context={routes}>
-            <NotFound />
-          </Router>
-        </Suspense>
-      </ErrorBoundary>
-    </Framework>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: colorBgContainer
+      }}
+    >
+      <App className="ui-app">
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Suspense fallback={<SuspenseFallBack />}>
+            <Router routes={routes} context={routes}>
+              <NotFound />
+            </Router>
+          </Suspense>
+        </ErrorBoundary>
+      </App>
+    </div>
   );
 });
 
