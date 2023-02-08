@@ -12,20 +12,24 @@ export interface Options<R> extends RequestOptions<R> {
   action: string;
 }
 
-export default function useAction<R>(options: Options<R>): [loading: boolean, onAction: () => void] {
-  const { delay } = options;
-
-  const optionsRef = useLatestRef(options);
+export default function useAction<R>(
+  action: string,
+  requestInit: RequestOptions<R>,
+  delay?: number
+): [loading: boolean, onAction: () => void] {
+  const actionRef = useLatestRef(action);
+  const requestInitRef = useLatestRef(requestInit);
   const [loading, request] = useRequest({ delay }, false);
 
   const onAction = useCallback(() => {
-    const { action, method = 'PUT', body: initBody, query: initQuery, ...requestInit } = optionsRef.current;
+    const { current: requestInit } = requestInitRef;
+    const { method = 'PUT', body: initBody, query: initQuery } = requestInit;
 
     const isBlobBody = initBody instanceof Blob;
     const query = isFunction(initQuery) ? initQuery() : initQuery;
     const body = !isBlobBody && isFunction(initBody) ? initBody() : initBody;
 
-    request<R>(action, { ...requestInit, body, query, method });
+    request<R>(actionRef.current, { ...requestInit, body, query, method });
   }, []);
 
   return [loading, onAction];
