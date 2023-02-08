@@ -2,8 +2,8 @@ import React, { cloneElement, memo, useCallback } from 'react';
 
 import { isFunction } from '/js/utils/utils';
 import { Body, Query } from '/js/utils/request';
+import useLatestRef from '/js/hooks/useLatestRef';
 import { Popconfirm, PopconfirmProps } from 'antd';
-import useLatestRefef from '/js/hooks/useLatestRef';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import useRequest, { RequestOptions } from '/js/hooks/useRequest';
 
@@ -45,7 +45,7 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
     confirmIcon = DEFAULT_CONFIRM_ICON
   } = props;
 
-  const propsRef = useLatestRefef(props);
+  const propsRef = useLatestRef(props);
   const [loading, request] = useRequest({ delay }, false);
 
   const onAction = useCallback(() => {
