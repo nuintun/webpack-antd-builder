@@ -4,8 +4,6 @@ import useMedia from '/js/hooks/useMedia';
 import { isString } from '/js/utils/utils';
 import { ConfigProvider, Drawer, DrawerProps } from 'antd';
 
-const containerStyle: React.CSSProperties = { position: 'relative' };
-
 export interface FlexDrawerProps extends DrawerProps {
   children?: React.ReactNode;
   breakWidth?: string | number;
@@ -18,6 +16,7 @@ export default memo(function FlexDrawer({
   height = 720,
   breakWidth = '100vw',
   breakHeight = '100vh',
+  bodyStyle = { position: 'relative' },
   ...restProps
 }: FlexDrawerProps): React.ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,8 +33,13 @@ export default memo(function FlexDrawer({
   const getTargetContainer = useCallback(() => containerRef.current || document.body, []);
 
   return (
-    <Drawer {...restProps} width={isBreakWidth ? breakWidth : width} height={isBreakHeight ? breakHeight : height}>
-      <div ref={containerRef} style={containerStyle}>
+    <Drawer
+      {...restProps}
+      bodyStyle={bodyStyle}
+      width={isBreakWidth ? breakWidth : width}
+      height={isBreakHeight ? breakHeight : height}
+    >
+      <div ref={containerRef}>
         <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
           {children}
         </ConfigProvider>
