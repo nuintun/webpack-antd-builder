@@ -6,9 +6,17 @@ import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 
 const { useForm } = Form;
 
+type DrawerPicked =
+  | 'title'
+  | 'width'
+  | 'height'
+  | 'placement'
+  | 'forceRender'
+  | 'maskClosable'
+  | 'destroyOnClose'
+  | 'afterOpenChange';
 type FormOmitted = 'title' | 'onError';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
-type DrawerPicked = 'title' | 'width' | 'height' | 'placement' | 'forceRender' | 'destroyOnClose' | 'afterOpenChange';
 
 export interface FormDrawerProps<V extends Values, R>
   extends Omit<FormProps<V>, FormOmitted>,
@@ -40,25 +48,26 @@ function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: ()
 
 function FormDrawer<V extends Values, R>({
   form,
-  title,
   query,
+  title,
   action,
+  footer,
   method,
   notify,
   onOpen,
-  footer,
   onClose,
-  trigger,
   onError,
+  trigger,
   children,
-  placement,
   normalize,
   onSuccess,
+  placement,
   onComplete,
-  requestInit,
   forceRender,
+  requestInit,
   width = 560,
   height = 560,
+  maskClosable,
   destroyOnClose,
   afterOpenChange,
   layout = 'vertical',
@@ -120,6 +129,7 @@ function FormDrawer<V extends Values, R>({
         placement={placement}
         onClose={onCloseHandler}
         forceRender={forceRender}
+        maskClosable={maskClosable}
         destroyOnClose={destroyOnClose}
         afterOpenChange={afterOpenChange}
         extra={extra(submitting, wrapForm, onCloseHandler)}

@@ -15,6 +15,7 @@ export default memo(function FlexDrawer({
   width = 1440,
   height = 720,
   breakWidth = '100vw',
+  maskClosable = false,
   breakHeight = '100vh',
   bodyStyle = { position: 'relative' },
   ...restProps
@@ -36,6 +37,7 @@ export default memo(function FlexDrawer({
     <Drawer
       {...restProps}
       bodyStyle={bodyStyle}
+      maskClosable={maskClosable}
       width={isBreakWidth ? breakWidth : width}
       height={isBreakHeight ? breakHeight : height}
     >
