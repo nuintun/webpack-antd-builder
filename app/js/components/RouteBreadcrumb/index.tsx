@@ -24,7 +24,7 @@ interface BreadcrumbItem {
 
 function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbItem[] {
   const { length } = matches;
-  const breadcrumbs: BreadcrumbItem[] = [];
+  const items: BreadcrumbItem[] = [];
 
   for (let i = 0; i < length; i++) {
     const match = matches[i];
@@ -38,7 +38,7 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
       const isLink = !active && children?.some(route => route.index);
 
       if (isLink) {
-        breadcrumbs.push({
+        items.push({
           title: (
             <Link href={link.href} target={link.target} className={`${prefixUI}-link`}>
               {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
@@ -47,7 +47,7 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
           )
         });
       } else {
-        breadcrumbs.push({
+        items.push({
           title: (
             <span className={classNames(`${prefixUI}-item`, { active })}>
               {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
@@ -59,7 +59,7 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
     }
   }
 
-  return breadcrumbs;
+  return items;
 }
 
 export default memo(function RouteBreadcrumb({
