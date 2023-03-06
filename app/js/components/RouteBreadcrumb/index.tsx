@@ -12,14 +12,14 @@ import FlexIcon from '/js/components/FlexIcon';
 import { useMatches } from 'react-nest-router';
 import { Breadcrumb, BreadcrumbProps } from 'antd';
 
+interface BreadcrumbItem {
+  title: React.ReactNode;
+}
+
 type BreadcrumbPicked = 'style' | 'className' | 'separator';
 
 export interface RouteBreadcrumbProps extends Pick<BreadcrumbProps, BreadcrumbPicked> {
   icon?: boolean;
-}
-
-interface BreadcrumbItem {
-  title: React.ReactNode;
 }
 
 function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbItem[] {
