@@ -15,9 +15,20 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 /**
  * @function resolveEnvironment
  * @param {object} env
+ * @param {boolean} isDevelopment
  * @return {object}
  */
-function resolveEnvironment(env) {
+function resolveEnvironment(env, isDevelopment) {
+  if (typeof env === 'function') {
+    env = env(isDevelopment);
+  }
+
+  env = {
+    ...env,
+    __DEV__: isDevelopment,
+    __APP_NAME__: appConfig.name
+  };
+
   const output = {};
   const entries = Object.entries(env);
 
@@ -40,11 +51,6 @@ export default async mode => {
     percentBy: 'entries'
   };
 
-  const env = resolveEnvironment({
-    __DEV__: isDevelopment,
-    __APP_NAME__: appConfig.name
-  });
-
   const html = {
     xhtml: true,
     meta: appConfig.meta,
@@ -55,6 +61,8 @@ export default async mode => {
     template: resolve('tools/lib/template.ejs'),
     templateParameters: { lang: appConfig.lang }
   };
+
+  const env = resolveEnvironment(appConfig.env, isDevelopment);
 
   const css = {
     ignoreOrder: true,

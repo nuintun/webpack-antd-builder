@@ -12,6 +12,16 @@ import { Plugin, ProcessOptions } from 'postcss';
 export { Options as SwcConfig } from '@swc/core';
 
 /**
+ * @description Env 配置
+ */
+type Env = Record<string, unknown>;
+
+/**
+ * @description Env 配置函数
+ */
+type EnvFunction = (isDevelopment: boolean) => Env;
+
+/**
  * @description 获取对象指定属性非空类型
  */
 type Prop<T, K extends keyof T> = NonNullable<T[K]>;
@@ -34,6 +44,7 @@ export interface AppConfig extends Pick<Configuration, 'context' | 'externals'> 
   entryHTML: string;
   outputPath: string;
   publicPath?: string;
+  env?: Env | EnvFunction;
   meta?: Record<string, string>;
   entry: Prop<Configuration, 'entry'>;
   alias?: Prop<Prop<Configuration, 'resolve'>, 'alias'>;
