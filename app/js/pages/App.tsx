@@ -68,23 +68,15 @@ const Page = memo(function Page() {
   const routes = useMemo(() => parse(router), [router]);
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: colorBgContainer
-      }}
-    >
-      <App className="ui-app">
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Suspense fallback={<SuspenseFallBack />}>
-            <Router routes={routes} context={routes}>
-              <NotFound />
-            </Router>
-          </Suspense>
-        </ErrorBoundary>
-      </App>
-    </div>
+    <App className="ui-app" style={{ backgroundColor: colorBgContainer }} message={{ maxCount: 3 }}>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<SuspenseFallBack />}>
+          <Router routes={routes} context={routes}>
+            <NotFound />
+          </Router>
+        </Suspense>
+      </ErrorBoundary>
+    </App>
   );
 });
 
