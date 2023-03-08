@@ -72,7 +72,7 @@
     "koa-compress": "^5.1.0",
     "koa-webpack-dev-service": "^0.9.13",
     "memfs": "^3.4.13",
-    "mini-css-extract-plugin": "^2.7.2",
+    "mini-css-extract-plugin": "^2.7.3",
     "nodemon": "^2.0.21",
     "postcss": "^8.4.21",
     "postcss-loader": "^7.0.2",
