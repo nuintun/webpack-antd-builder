@@ -47,5 +47,6 @@ export interface AppConfig extends Pick<Configuration, 'context' | 'externals'> 
   env?: Env | EnvFunction;
   meta?: Record<string, string>;
   entry: Prop<Configuration, 'entry'>;
+  ports: [start: number, end?: number];
   alias?: Prop<Prop<Configuration, 'resolve'>, 'alias'>;
 }

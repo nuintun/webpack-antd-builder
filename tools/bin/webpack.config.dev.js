@@ -24,7 +24,12 @@ import devMiddleware from 'koa-webpack-dev-service';
 import resolveConfigure from './webpack.config.base.js';
 
 const { toString } = Object.prototype;
+const { ports, publicPath } = appConfig;
 
+/**
+ * @function createMemfs
+ * @return {import('memfs').IFs}
+ */
 function createMemfs() {
   const volume = new memfs.Volume();
   const fs = memfs.createFsFromVolume(volume);
@@ -34,20 +39,44 @@ function createMemfs() {
   return fs;
 }
 
-function isTypeof(value, type) {
-  return toString.call(value).toLowerCase() === `[object ${type.toLowerCase()}]`;
-}
-
-async function resolvePort(startPort = 8000, endPort = 9000) {
+/**
+ * @function resolvePort
+ * @param {import('../interface').AppConfig['ports']} ports
+ * @returns {number}
+ */
+async function resolvePort(ports = [8000, 9000]) {
+  const [startPort, endPort = startPort + 1] = ports;
   const [port] = await findFreePorts(1, { startPort, endPort });
 
   return port;
 }
 
+/**
+ * @function httpError
+ * @param {Error & { code: string }} error
+ * @return {boolean}
+ */
 function httpError(error) {
   return /^(EOF|EPIPE|ECANCELED|ECONNRESET|ECONNABORTED)$/i.test(error.code);
 }
 
+/**
+ * @function isTypeof
+ * @param {unknown} value
+ * @param {string} type
+ * @returns {boolean}
+ */
+function isTypeof(value, type) {
+  return toString.call(value).toLowerCase() === `[object ${type.toLowerCase()}]`;
+}
+
+/**
+ * @function injectHotEntry
+ * @typedef {import('webpack').Configuration['entry']} Entry
+ * @param {Entry} entry
+ * @param {Record<string | number, unknown>} options
+ * @return {Entry}
+ */
 function injectHotEntry(entry, options) {
   const params = new URLSearchParams(options);
   const hotEntry = `koa-webpack-dev-service/client?${params}`;
@@ -63,10 +92,21 @@ function injectHotEntry(entry, options) {
   return entry;
 }
 
+/**
+ * @function resolveEntry
+ * @typedef {import('webpack').Configuration['entry']} Entry
+ * @param {Entry} entry
+ * @param {Record<string | number, unknown>} options
+ * @return {Entry}
+ */
 async function resolveEntry(entry, options) {
-  if (typeof entry === 'function') entry = entry();
+  if (typeof entry === 'function') {
+    entry = entry();
+  }
 
-  if (typeof entry === 'function') entry = await entry();
+  if (typeof entry === 'function') {
+    entry = await entry();
+  }
 
   if (isTypeof(entry, 'object')) {
     const entries = {};
@@ -89,10 +129,10 @@ async function resolveEntry(entry, options) {
 (async () => {
   const fs = createMemfs();
   const ip = await resolveIp();
-  const port = await resolvePort();
+  const port = await resolvePort(ports);
   const devServerHost = `http://${ip}:${port}`;
   const configure = await resolveConfigure(mode);
-  const devServerPublicPath = devServerHost + appConfig.publicPath;
+  const devServerPublicPath = devServerHost + publicPath;
   const entry = await resolveEntry(configure.entry, { host: `${ip}:${port}` });
 
   configure.entry = entry;
