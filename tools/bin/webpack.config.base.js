@@ -16,11 +16,11 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
  * @function resolveEnvironment
  * @param {object} env
  * @param {boolean} isDevelopment
- * @return {object}
+ * @return {Promise<object>}
  */
-function resolveEnvironment(env, isDevelopment) {
+async function resolveEnvironment(env, isDevelopment) {
   if (typeof env === 'function') {
-    env = env(isDevelopment);
+    env = await env(isDevelopment, process.env);
   }
 
   env = {
@@ -62,7 +62,7 @@ export default async mode => {
     templateParameters: { lang: appConfig.lang }
   };
 
-  const env = resolveEnvironment(appConfig.env, isDevelopment);
+  const env = await resolveEnvironment(appConfig.env, isDevelopment);
 
   const css = {
     ignoreOrder: true,

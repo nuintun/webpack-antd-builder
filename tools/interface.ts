@@ -17,14 +17,14 @@ export { Options as SwcConfig } from '@swc/core';
 type Env = Record<string, unknown>;
 
 /**
- * @description Env 配置函数
- */
-type EnvFunction = (isDevelopment: boolean) => Env;
-
-/**
  * @description 获取对象指定属性非空类型
  */
 type Prop<T, K extends keyof T> = NonNullable<T[K]>;
+
+/**
+ * @description Env 配置函数
+ */
+type EnvFunction = (isDevelopment: boolean, env: Env) => Env | Promise<Env>;
 
 /**
  * @description Postcss 配置
