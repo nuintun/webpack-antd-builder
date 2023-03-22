@@ -67,11 +67,12 @@
     tslib "^1.10.0"
 
 "@antv/attr@^0.3.1":
-  version "0.3.3"
-  resolved "https://registry.npmjs.org/@antv/attr/-/attr-0.3.3.tgz#9966895cdc31e331b1cc738c286d50f48da01d2b"
-  integrity sha512-7iSSRhYzZ7pYXZKTL1ECGhTdKVHPQx1Vj7yYVTAiyLMsWsLUAoMf0m6dT6msTs0SdrXHRbjzXavVXxRj/wZZJA==
+  version "0.3.4"
+  resolved "https://registry.npmjs.org/@antv/attr/-/attr-0.3.4.tgz#e90de2f6fbb0a4d769d49c52ed03a425ca2b177e"
+  integrity sha512-f71EkBtT0VcsWrz+ZMTKSJ6leFz5cw1okKOdH7yr4hmUtXLvZzo6/+0lenzmGbWaDldNbwSYJqLYaTCiM4rOuA==
   dependencies:
     "@antv/color-util" "^2.0.1"
+    "@antv/scale" "^0.3.0"
     "@antv/util" "~2.0.0"
     tslib "^1.10.0"
 
@@ -245,7 +246,7 @@
     lodash-es "^4.17.21"
     tslib "^2.0.3"
 
-"@antv/scale@^0.3.14", "@antv/scale@^0.3.18", "@antv/scale@~0.3.1":
+"@antv/scale@^0.3.0", "@antv/scale@^0.3.14", "@antv/scale@^0.3.18", "@antv/scale@~0.3.1":
   version "0.3.18"
   resolved "https://registry.npmjs.org/@antv/scale/-/scale-0.3.18.tgz#b911f431b3e0b9547b6a65f66d0d3fa295b5ef32"
   integrity sha512-GHwE6Lo7S/Q5fgaLPaCsW+CH+3zl4aXpnN1skOiEY0Ue9/u+s2EySv6aDXYkAqs//i0uilMDD/0/4n8caX9U9w==
@@ -369,10 +370,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@nuintun/svgo-loader@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/@nuintun/svgo-loader/-/svgo-loader-0.1.0.tgz#4a93afff7a61ae47065b34f064919721381560c8"
-  integrity sha512-97g23I2uLwzm/13qV8xhSwC7C8zKaF+wxH0tIyhAuM0RbugsGv1U4QyIAizVXIz/ltx0zmPjeV1Hrh2MURihzA==
+"@nuintun/svgo-loader@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/@nuintun/svgo-loader/-/svgo-loader-0.1.1.tgz#64fb9a67b85bb5e53748d4e6155f336da253b502"
+  integrity sha512-nHCDwkmEC63hy9gdlMY862swLKWKjtbx7MK8/GcuhaTjIVBMNLUiD/3jOHGuSDGD+VbnxjVVaLgQwkJW2OIBNw==
   dependencies:
     svgo "^3.0.2"
 
@@ -1468,10 +1469,10 @@ css-minimizer-webpack-plugin@4.2.2:
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
 
-css-modules-types-loader@^0.3.12:
-  version "0.3.12"
-  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.12.tgz#dbc13cf241efc9a663cbe1facac6e905a9c52ea2"
-  integrity sha512-Me9soP7u5ruWaZAl0Gk5c+OtjuYK+PevPlyRkHEqiacujyVYjovhimUXZFR+z44bUScZXC3IJ1bJ5AoiJThaEA==
+css-modules-types-loader@^0.3.13:
+  version "0.3.13"
+  resolved "https://registry.npmjs.org/css-modules-types-loader/-/css-modules-types-loader-0.3.13.tgz#2f2acd51403028a6d9717e7b6ae244807aeb9298"
+  integrity sha512-J9sI1370KaU0JOCSU9tK/jkV8ZTbbyrTj5s/CsQd7IruhqQaSjWwDwPdYdJM3HVGJ5SrL5ZaEGPbbcoLmDAHow==
   dependencies:
     acorn "^8.8.2"
     acorn-walk "^8.2.0"
@@ -2575,10 +2576,10 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.9.16:
-  version "0.9.16"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.16.tgz#0add926f240bccda30493ae0a567ac726edea70b"
-  integrity sha512-1AzoX9kxkMGkO8DCWGWKNt2iO/NCliBL8wPl49cL2bCjapLxU21BmUINdjhJlNjtWo4Qu9yVFJ2+ThhfmcvQjA==
+koa-webpack-dev-service@^0.9.17:
+  version "0.9.17"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.17.tgz#b18704c6a20734032c1cf7d2cc8a202e600154bd"
+  integrity sha512-pGnN8jpN1Av4RWMndcrMYWKslAow0b3JOFj6XlMD5WxAJHO96i5S1uaph6Mmmzf08B6MKQ5iaBgUkJCFcm0uNQ==
   dependencies:
     "@types/koa" "^2.13.5"
     "@types/ws" "^8.5.4"
@@ -3691,10 +3692,10 @@ react-is@^16.12.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-nest-router@^0.19.1:
-  version "0.19.1"
-  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.19.1.tgz#8570eb1af01daf7ae7197af1d502acad8bca0235"
-  integrity sha512-7y9uVRfL59jvUlMDNg18usYnxmxhm6led4D7SbfWFaRr6lUQJomnQEoIPvpBwUEezn5MJfpeaKmypL1qkY1oPA==
+react-nest-router@^0.19.2:
+  version "0.19.2"
+  resolved "https://registry.npmjs.org/react-nest-router/-/react-nest-router-0.19.2.tgz#10f686a5026d0975e6bfd628e790e95e08debaeb"
+  integrity sha512-F6ccdvrx8GnFOaf16UzY2orbSVCaa8zWIttUhdrMqEbZNBzkjegurSHBzwMKs196YADf40kw/aNAB/gWVCyk6A==
   dependencies:
     tslib "^2.5.0"
 
@@ -4066,10 +4067,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.4.tgz#ab8235123f0448adbec78f8e2408fd9fd3b41dbe"
-  integrity sha512-L41m7rGvBTfMIt4AtO/Q4WopYjtBhvjLN69pU5BMhtOexgEv7aOO1d5LQH7EpMkMCVf406AeltgBI/OXDGJEtw==
+svgc-loader@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.5.tgz#535e8c553e4715c1eef056cbb05278e6b2eba82f"
+  integrity sha512-4plloewwKA9zDK4tTJBXBNbLX/FrGOiXAzuaKw+iz+p02Y8/lX9/YUQSlArLPhvfoWs9pKfoyC4+Aj7RzAqrOg==
   dependencies:
     css-tree "^2.3.1"
     svgo "^3.0.2"

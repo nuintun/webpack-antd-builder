@@ -13,13 +13,6 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/nuintun/webpack-antd-builder",
-  "scripts": {
-    "lint": "tsc --noEmit",
-    "format": "prettier --write .",
-    "prod": "node tools/bin/webpack.config.prod.js",
-    "dev": "nodemon tools/bin/webpack.config.dev.js",
-    "report": "node tools/bin/webpack.config.prod.js --report"
-  },
   "nodemonConfig": {
     "quiet": true,
     "delay": "128ms",
@@ -31,6 +24,13 @@
       ".browserslistrc",
       "wwwroot/favicon.ico"
     ]
+  },
+  "scripts": {
+    "lint": "tsc --noEmit",
+    "format": "prettier --write .",
+    "prod": "node tools/bin/webpack.config.prod.js",
+    "dev": "nodemon tools/bin/webpack.config.dev.js",
+    "report": "node tools/bin/webpack.config.prod.js --report"
   },
   "resolutions": {
     "svgo": "^3.0.0"
@@ -48,12 +48,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.0",
-    "react-nest-router": "^0.19.1",
+    "react-nest-router": "^0.19.2",
     "throttle-debounce": "^5.0.0",
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
-    "@nuintun/svgo-loader": "^0.1.0",
+    "@nuintun/svgo-loader": "^0.1.1",
     "@swc/core": "^1.3.42",
     "@swc/helpers": "^0.4.14",
     "@types/react": "^18.0.28",
@@ -65,12 +65,12 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "4.2.2",
-    "css-modules-types-loader": "^0.3.12",
+    "css-modules-types-loader": "^0.3.13",
     "find-free-ports": "^3.0.0",
     "html-webpack-plugin": "^5.5.0",
     "koa": "^2.14.1",
     "koa-compress": "^5.1.0",
-    "koa-webpack-dev-service": "^0.9.16",
+    "koa-webpack-dev-service": "^0.9.17",
     "memfs": "^3.4.13",
     "mini-css-extract-plugin": "^2.7.5",
     "nodemon": "^2.0.21",
@@ -79,7 +79,7 @@
     "prettier": "^2.8.6",
     "sass": "^1.59.3",
     "sass-loader": "^13.2.1",
-    "svgc-loader": "^0.1.4",
+    "svgc-loader": "^0.1.5",
     "swc-loader": "^0.2.3",
     "terser-webpack-plugin": "^5.3.7",
     "typescript": "^5.0.2",
