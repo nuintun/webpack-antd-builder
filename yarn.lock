@@ -67,14 +67,14 @@
     tslib "^1.10.0"
 
 "@antv/attr@^0.3.1":
-  version "0.3.4"
-  resolved "https://registry.npmjs.org/@antv/attr/-/attr-0.3.4.tgz#e90de2f6fbb0a4d769d49c52ed03a425ca2b177e"
-  integrity sha512-f71EkBtT0VcsWrz+ZMTKSJ6leFz5cw1okKOdH7yr4hmUtXLvZzo6/+0lenzmGbWaDldNbwSYJqLYaTCiM4rOuA==
+  version "0.3.5"
+  resolved "https://registry.npmjs.org/@antv/attr/-/attr-0.3.5.tgz#0708c74fed5ad6ee03ad1e2913099ed8248f7ebf"
+  integrity sha512-wuj2gUo6C8Q2ASSMrVBuTcb5LcV+Tc0Egiy6bC42D0vxcQ+ta13CLxgMmHz8mjD0FxTPJDXSciyszRSC5TdLsg==
   dependencies:
     "@antv/color-util" "^2.0.1"
     "@antv/scale" "^0.3.0"
     "@antv/util" "~2.0.0"
-    tslib "^1.10.0"
+    tslib "^2.3.1"
 
 "@antv/color-util@^2.0.1", "@antv/color-util@^2.0.2", "@antv/color-util@^2.0.3", "@antv/color-util@^2.0.6":
   version "2.0.6"
@@ -729,9 +729,9 @@
     csstype "^3.0.2"
 
 "@types/scheduler@*":
-  version "0.16.2"
-  resolved "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
-  integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
+  version "0.16.3"
+  resolved "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
+  integrity sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==
 
 "@types/serve-static@*":
   version "1.15.1"
@@ -1805,9 +1805,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.284:
-  version "1.4.335"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.335.tgz#69c08baa608bbb58e290d83320190fa82c835efe"
-  integrity sha512-l/eowQqTnrq3gu+WSrdfkhfNHnPgYqlKAwxz7MTOj6mom19vpEDHNXl6dxDxyTiYuhemydprKr/HCrHfgk+OfQ==
+  version "1.4.337"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.337.tgz#710168240b2dc5fe5eb5f8e4ef9c16d70aedc0ba"
+  integrity sha512-W8gdzXG86mVPoc56eM8YA+QiLxaAxJ8cmDjxZgfhLLWVvZQxyA918w5tX2JEWApZta45T1/sYcmFHTsTOUE3nw==
 
 encodeurl@^1.0.2:
   version "1.0.2"
@@ -2797,10 +2797,10 @@ node-releases@^2.0.8:
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.10.tgz#c311ebae3b6a148c89b1813fd7c4d3c024ef537f"
   integrity sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==
 
-nodemon@^2.0.21:
-  version "2.0.21"
-  resolved "https://registry.npmjs.org/nodemon/-/nodemon-2.0.21.tgz#267edff25578da91075d6aa54346ef77ecb7b302"
-  integrity sha512-djN/n2549DUtY33S7o1djRCd7dEm0kBnj9c7S9XVXqRUbuggN1MZH/Nqa+5RFQr63Fbefq37nFXAE9VU86yL1A==
+nodemon@^2.0.22:
+  version "2.0.22"
+  resolved "https://registry.npmjs.org/nodemon/-/nodemon-2.0.22.tgz#182c45c3a78da486f673d6c1702e00728daf5258"
+  integrity sha512-B8YqaKMmyuCO7BowF1Z1/mkPqLk6cs/l63Ojtd6otKjMx47Dq1utxfRxcavH1I7VSaL8n5BUaoutadnsX3AAVQ==
   dependencies:
     chokidar "^3.5.2"
     debug "^3.2.7"
@@ -3680,10 +3680,10 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-error-boundary@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/react-error-boundary/-/react-error-boundary-4.0.0.tgz#fe3691e4a5c1ed3758b65976bf94ff7babc356f4"
-  integrity sha512-vNbTyivmwBxCpJA68Ry55rJhZMzJSB+egkEm8hkEzbEBJLsJp5054zEVpoK/8ndxt6B+dvEA2LDw33xUfvE8og==
+react-error-boundary@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/react-error-boundary/-/react-error-boundary-4.0.1.tgz#89b348004a1bb73988ab0b74fcffd955d612c007"
+  integrity sha512-1z9zlNkYz35NwHETsksZtYDh00BJkoeBKxYehEx6cVNUQCXPMAiI/hkX6yxpJcpd4bECCPhfqIqXuDLVTmmkSw==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
@@ -4203,7 +4203,7 @@ tslib@^1.10.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0, tslib@^2.5.0:
+tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.5.0:
   version "2.5.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
   integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
@@ -4342,10 +4342,10 @@ webpack-sources@^3.2.3:
   resolved "https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.2.3.tgz#2d4daab8451fd4b240cc27055ff6a0c2ccea0cde"
   integrity sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==
 
-webpack@^5.76.2:
-  version "5.76.2"
-  resolved "https://registry.npmjs.org/webpack/-/webpack-5.76.2.tgz#6f80d1c1d1e3bf704db571b2504a0461fac80230"
-  integrity sha512-Th05ggRm23rVzEOlX8y67NkYCHa9nTNcwHPBhdg+lKG+mtiW7XgggjAeeLnADAe7mLjJ6LUNfgHAuRRh+Z6J7w==
+webpack@^5.76.3:
+  version "5.76.3"
+  resolved "https://registry.npmjs.org/webpack/-/webpack-5.76.3.tgz#dffdc72c8950e5b032fddad9c4452e7787d2f489"
+  integrity sha512-18Qv7uGPU8b2vqGeEEObnfICyw2g39CHlDEK4I7NK13LOur1d0HGmGNKGT58Eluwddpn3oEejwvBPoP4M7/KSA==
   dependencies:
     "@types/eslint-scope" "^3.7.3"
     "@types/estree" "^0.0.51"
