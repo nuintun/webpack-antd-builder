@@ -50,7 +50,9 @@ export default function createSharedReducer<S, A>(
   let sharedState: S | undefined;
 
   const getInitialState = (): S | undefined => {
-    if (initialized) return sharedState;
+    if (initialized) {
+      return sharedState;
+    }
 
     initialized = true;
 

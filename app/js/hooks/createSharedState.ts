@@ -26,7 +26,9 @@ export default function createSharedState<S = undefined>(initialState?: S | (() 
   let sharedState: S | undefined;
 
   const getInitialState = (): S | undefined => {
-    if (initialized) return sharedState;
+    if (initialized) {
+      return sharedState;
+    }
 
     initialized = true;
 

@@ -27,7 +27,9 @@ export default function useSearches<T extends Search[]>(
       searchRef.current = searchRef.current.map((search, index) => {
         const nextValue = value[index];
 
-        if (nextValue === false) return nextValue;
+        if (nextValue === false) {
+          return nextValue;
+        }
 
         return nextValue ?? search;
       }) as T;

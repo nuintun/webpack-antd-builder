@@ -55,9 +55,13 @@ export default function useStorage<V = null>(
   }, []);
 
   const get = useCallback(() => {
-    if (storage.has(key)) return storage.get(key);
+    if (storage.has(key)) {
+      return storage.get(key);
+    }
 
-    if (defaultValue == null) return null;
+    if (defaultValue == null) {
+      return null;
+    }
 
     return isFunction(defaultValue) ? defaultValue() : defaultValue;
   }, []);

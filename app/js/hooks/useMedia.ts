@@ -12,18 +12,18 @@ import useIsoLayoutEffect from './useIsoLayoutEffect';
  * @description [hook] CSS 媒体查询
  * @param query 查询条件
  * @param onChange 查询条件触发回调
- * @param initialState 默认状态
+ * @param initialMatchState 默认匹配状态
  */
 export default function useMedia(
   query: string,
   onChange?: (matched: boolean) => void,
-  initialState: boolean | (() => boolean) = false
+  initialMatchState: boolean | (() => boolean) = false
 ): boolean {
   const mql = useMemo(() => {
     return canUseDOM ? window.matchMedia(query) : null;
   }, [query]);
 
-  const [matched, setState] = useState(mql ? mql.matches : initialState);
+  const [matched, setState] = useState(mql ? mql.matches : initialMatchState);
 
   useIsoLayoutEffect(() => {
     if (mql) {

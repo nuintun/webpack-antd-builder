@@ -92,7 +92,9 @@ export default function usePagingRequest<I, E, T>(
   const initPagination = useMemo(() => {
     const { pagination } = options;
 
-    if (pagination === false) return pagination as false;
+    if (pagination === false) {
+      return pagination as false;
+    }
 
     return { ...DEFAULT_PAGINATION, ...pagination };
   }, []);

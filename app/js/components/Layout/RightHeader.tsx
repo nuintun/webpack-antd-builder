@@ -18,7 +18,9 @@ const { useApp } = App;
 type MenuClickEventHandler = NonNullable<MenuProps['onClick']>;
 
 function getDropdownActiveClassName(selected: boolean): string | undefined {
-  if (selected) return 'ant-dropdown-menu-item-selected';
+  if (selected) {
+    return 'ant-dropdown-menu-item-selected';
+  }
 }
 
 function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): MenuProps['items'] {

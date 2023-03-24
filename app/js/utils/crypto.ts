@@ -91,7 +91,9 @@ export function decrypt(text: string): string {
   const { length } = atobText;
   const offset = 4;
 
-  if (length <= offset || length % 2 !== 0) return '';
+  if (length <= offset || length % 2 !== 0) {
+    return '';
+  }
 
   const encryptKey = readUint16(atobText, 0);
 

@@ -85,7 +85,9 @@ export function parse<M = unknown>(
 
       guards[node.meta.key] = guard;
 
-      if (guard !== Filter.All) return node.children;
+      if (guard !== Filter.All) {
+        return node.children;
+      }
     });
 
     // 遍历节点

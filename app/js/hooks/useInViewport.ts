@@ -6,77 +6,80 @@ import React, { useEffect, useState } from 'react';
 
 import { canUseDOM, isFunction } from '/js/utils/utils';
 
-export type Target = HTMLElement | null | (() => HTMLElement | null) | React.MutableRefObject<HTMLElement | null>;
+type TargetValue<T> = T | undefined | null;
+
+type TargetType = HTMLElement | Element | Window | Document;
+
+export type Target<T extends TargetType = Element> =
+  | TargetValue<T>
+  | (() => TargetValue<T>)
+  | React.MutableRefObject<TargetValue<T>>;
+
+export interface Options extends Omit<IntersectionObserverInit, 'root'> {
+  root?: Target<Element | Document>;
+}
 
 /**
  * @function getTargetElement
  * @param target 目标元素
  */
-function getTargetElement(target: Target): HTMLElement | null {
-  if (!target) return null;
-
-  if (isFunction(target)) return target();
-
-  if ('current' in target) return target.current;
-
-  return target;
-}
-
-/**
- * @function isInViewPort
- * @param element HTML 元素
- */
-function isInViewPort(element: HTMLElement | null): boolean {
-  if (!element) return false;
-
-  const rect = element.getBoundingClientRect();
-
-  if (rect) {
-    const { top, bottom, left, right } = rect;
-    const { body, documentElement } = document;
-    const viewPortWidth = window.innerWidth || documentElement.clientWidth || body.clientWidth;
-    const viewPortHeight = window.innerHeight || documentElement.clientHeight || body.clientHeight;
-
-    return bottom > 0 && top <= viewPortHeight && left <= viewPortWidth && right > 0;
+function getTargetElement<T extends TargetType>(target: Target<T>): TargetValue<T> | null {
+  if (!target) {
+    return null;
   }
 
-  return false;
+  if (isFunction(target)) {
+    return target();
+  }
+
+  if ('current' in target) {
+    return target.current;
+  }
+
+  return target;
 }
 
 /**
  * @function useInViewport
  * @description [hook] 监听指定元素是否可见
  * @param target 监听元素
- * @param defaultVisible 默认是否可见
+ * @param options 监听配置
+ * @param initialVisibleState 默认可见状态
  */
-export default function useInViewport(target: Target, defaultVisible: boolean = false): boolean {
-  const [inViewPort, setInViewport] = useState<boolean>(() => {
-    if (!canUseDOM) return defaultVisible;
-
-    const element = getTargetElement(target);
-
-    return isInViewPort(element);
-  });
+export default function useInViewport(
+  target: Target,
+  options: Options = {},
+  initialVisibleState: boolean | (() => boolean) = false
+): boolean {
+  const [inViewPort, setInViewport] = useState<boolean>(initialVisibleState);
 
   useEffect(() => {
-    const element = getTargetElement(target);
+    if (canUseDOM) {
+      const element = getTargetElement(target);
 
-    if (element) {
-      const observer = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-          if (entry.target === element) {
-            return setInViewport(entry.isIntersecting);
+      if (element) {
+        const observer = new IntersectionObserver(
+          entries => {
+            for (const entry of entries) {
+              if (entry.target === element) {
+                return setInViewport(entry.isIntersecting);
+              }
+            }
+          },
+          {
+            ...options,
+            root: getTargetElement(options.root)
           }
-        }
-      });
+        );
 
-      observer.observe(element);
+        observer.observe(element);
 
-      return () => {
-        observer.disconnect();
-      };
+        return () => {
+          observer.disconnect();
+        };
+      }
     }
-  }, [target]);
+  }, [target, options.root, options.rootMargin, options.threshold]);
 
   return inViewPort;
 }
