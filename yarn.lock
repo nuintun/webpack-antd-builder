@@ -668,7 +668,7 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa@*", "@types/koa@^2.13.5":
+"@types/koa@*", "@types/koa@^2.13.6":
   version "2.13.6"
   resolved "https://registry.npmjs.org/@types/koa/-/koa-2.13.6.tgz#6dc14e727baf397310aa6f414ebe5d144983af42"
   integrity sha512-diYUfp/GqfWBAiwxHtYJ/FQYIXhlEhlyaU7lB/bWQrx4Il9lCET5UwpFy3StOAohfsxxvEQ11qIJgT1j2tfBvw==
@@ -2575,12 +2575,12 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.9.17:
-  version "0.9.17"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.17.tgz#b18704c6a20734032c1cf7d2cc8a202e600154bd"
-  integrity sha512-pGnN8jpN1Av4RWMndcrMYWKslAow0b3JOFj6XlMD5WxAJHO96i5S1uaph6Mmmzf08B6MKQ5iaBgUkJCFcm0uNQ==
+koa-webpack-dev-service@^0.9.18:
+  version "0.9.18"
+  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.9.18.tgz#ae91da82b301814af324661e539b8c345191036e"
+  integrity sha512-fnIMs2nY78Y+A+cR8sg5Yy7EJ3PEc0YEtuyy73vk4ym5kz1tRIqQTMo4xpvO3sVXA8eawE2KQTgRlY5om893Eg==
   dependencies:
-    "@types/koa" "^2.13.5"
+    "@types/koa" "^2.13.6"
     "@types/ws" "^8.5.4"
     koa-compose "^4.1.0"
     tslib "^2.5.0"

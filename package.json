@@ -67,7 +67,7 @@
     "html-webpack-plugin": "^5.5.0",
     "koa": "^2.14.1",
     "koa-compress": "^5.1.0",
-    "koa-webpack-dev-service": "^0.9.17",
+    "koa-webpack-dev-service": "^0.9.18",
     "memfs": "^3.4.13",
     "mini-css-extract-plugin": "^2.7.5",
     "nodemon": "^2.0.22",
