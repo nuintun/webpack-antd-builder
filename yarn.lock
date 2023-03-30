@@ -1222,9 +1222,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001449, caniuse-lite@^1.0.30001464:
-  version "1.0.30001472"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001472.tgz#3f484885f2a2986c019dc416e65d9d62798cdd64"
-  integrity sha512-xWC/0+hHHQgj3/vrKYY0AAzeIUgr7L9wlELIcAvZdDUHlhL/kNxMdnQLOSOQfP8R51ZzPhmHdyMkI0MMpmxCfg==
+  version "1.0.30001473"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001473.tgz#3859898b3cab65fc8905bb923df36ad35058153c"
+  integrity sha512-ewDad7+D2vlyy+E4UJuVfiBsU69IL+8oVmTuZnH5Q6CIUbxNfI50uVpRHbUPDD6SUaN2o0Lh4DhTrvLG/Tn1yg==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -1804,9 +1804,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.284:
-  version "1.4.344"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.344.tgz#4f9b5a9ef2ca49fd223b753022904d3307eab847"
-  integrity sha512-m4HjHLGMPJddM0FZmPxZkk6whzeqK/B3zkzAB7KAopv2TkePzXQcM8aOfDS+1NOjD44lgA89yHRkNAQ/5uCQXQ==
+  version "1.4.345"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.345.tgz#c90b7183b39245cddf0e990337469063bfced6f0"
+  integrity sha512-znGhOQK2TUYLICgS25uaM0a7pHy66rSxbre7l762vg9AUoCcJK+Bu+HCPWpjL/U/kK8/Hf+6E0szAUJSyVYb3Q==
 
 encodeurl@^1.0.2:
   version "1.0.2"
@@ -4080,10 +4080,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svgc-loader@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.5.tgz#535e8c553e4715c1eef056cbb05278e6b2eba82f"
-  integrity sha512-4plloewwKA9zDK4tTJBXBNbLX/FrGOiXAzuaKw+iz+p02Y8/lX9/YUQSlArLPhvfoWs9pKfoyC4+Aj7RzAqrOg==
+svgc-loader@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.npmjs.org/svgc-loader/-/svgc-loader-0.1.6.tgz#94cdeed14baec46ad0c18365c0ff09ab9e570bba"
+  integrity sha512-uTiqL651sWuYRW1m1u/wkLi+SG2vauCewr1jgPctlo+1r9D8TeXA4F6cEO60kNaPBQ7ATdCUXndat+8tYy7D8w==
   dependencies:
     css-tree "^2.3.1"
     svgo "^3.0.2"
