@@ -37,7 +37,7 @@ export interface PostcssConfig extends ProcessOptions {
 /**
  * @description App 配置
  */
-export interface AppConfig extends Pick<Configuration, 'context' | 'externals'> {
+export interface AppConfig extends Pick<Configuration, 'context' | 'plugins' | 'externals'> {
   lang: string;
   name: string;
   favicon: string;

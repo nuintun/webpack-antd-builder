@@ -127,7 +127,8 @@ export default async mode => {
       new CleanWebpackPlugin(clean),
       new webpack.DefinePlugin(env),
       new MiniCssExtractPlugin(css),
-      new HtmlWebpackPlugin(html)
+      new HtmlWebpackPlugin(html),
+      ...(appConfig.plugins || [])
     ],
     optimization: {
       splitChunks: {
