@@ -3,6 +3,7 @@
  * @description 配置 Webpack 规则
  */
 
+import crypto from 'crypto';
 import swcrc from '../../.swcrc.js';
 import postcssrc from '../../.postcssrc.js';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -110,7 +111,23 @@ export default async mode => {
                   options: swcOptions
                 },
                 {
-                  loader: 'svgc-loader'
+                  loader: 'svgc-loader',
+                  options: {
+                    plugins: [
+                      'preset-default',
+                      {
+                        name: 'prefixIds',
+                        params: {
+                          delim: '-',
+                          prefix(_xast, { path }) {
+                            const hash = crypto.createHash('sha1');
+
+                            return hash.update(path).digest('hex').slice(0, 8);
+                          }
+                        }
+                      }
+                    ]
+                  }
                 }
               ]
             },
