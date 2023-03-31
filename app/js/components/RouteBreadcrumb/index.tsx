@@ -35,9 +35,9 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
       const { children } = match;
       const { icon, link } = meta;
       const active = i + 1 >= length;
-      const isLink = !active && children?.some(route => route.index);
+      const isLinkable = !active && children?.some(route => route.index || route.available);
 
-      if (isLink) {
+      if (isLinkable) {
         items.push({
           title: (
             <Link href={link.href} target={link.target} className={`${prefixUI}-link`}>
