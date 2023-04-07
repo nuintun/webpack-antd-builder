@@ -25,7 +25,7 @@ type OnChange<T> = NonNullable<UploadProps<T>['onChange']>;
 
 export interface ImageUploadProps<T>
   extends Pick<React.CSSProperties, 'width' | 'height'>,
-    Omit<UploadProps<T>, 'onChange' | 'itemRender'> {
+    Omit<UploadProps<T>, 'onChange' | 'listType' | 'itemRender'> {
   action: string;
   value?: string[];
   defaultValue?: string[];
