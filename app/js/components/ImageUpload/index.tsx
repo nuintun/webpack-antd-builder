@@ -1,6 +1,6 @@
 import useStyle, { prefixUI } from './style';
 
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { App, Image, Upload, UploadProps } from 'antd';
 import { useLocation, useNavigate } from 'react-nest-router';
@@ -34,6 +34,12 @@ export interface ImageUploadProps<T>
   onChange?: (value: string[]) => void;
 }
 
+function getFileList<T>(value: string[]): FileList<T> {
+  return value.map(value => {
+    return { uid: value, url: value, name: value, status: 'done', thumbUrl: value };
+  });
+}
+
 export default memo(function ImageUpload<T extends UploadResponse>(props: ImageUploadProps<T>) {
   const {
     action,
@@ -41,6 +47,7 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
     width = 96,
     height = 96,
     maxCount = 1,
+    value: propsValue,
     accept = 'image/*',
     showUploadList = true,
     withCredentials = true
@@ -51,11 +58,7 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
   const navigate = useNavigate();
   const { hashId, render } = useStyle();
   const [value = [], setValue] = useControllableValue<string[]>(props);
-  const [fileList, setFileList] = useState<FileList<T>>(() => {
-    return value.map(value => {
-      return { url: value, thumbUrl: value, uid: value, name: value, status: 'done' };
-    });
-  });
+  const [fileList, setFileList] = useState<FileList<T>>(() => getFileList(value));
 
   const onChange = useCallback<OnChange<T>>(
     ({ file, fileList }) => {
@@ -116,6 +119,12 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
     },
     [maxCount]
   );
+
+  useEffect(() => {
+    if (propsValue) {
+      setFileList(getFileList(propsValue));
+    }
+  }, [propsValue]);
 
   return render(
     <div className={`${hashId} ${prefixUI}`}>
