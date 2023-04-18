@@ -44,7 +44,7 @@
     "rc-virtual-list": "^3.4.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-error-boundary": "^4.0.3",
+    "react-error-boundary": "^4.0.4",
     "react-nest-router": "^0.19.2",
     "throttle-debounce": "^5.0.0",
     "whatwg-fetch": "^3.6.2"
@@ -53,7 +53,7 @@
     "@nuintun/svgo-loader": "^0.1.1",
     "@swc/core": "^1.3.51",
     "@swc/helpers": "^0.5.0",
-    "@types/react": "^18.0.35",
+    "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@types/throttle-debounce": "^5.0.0",
     "autoprefixer": "^10.4.14",
