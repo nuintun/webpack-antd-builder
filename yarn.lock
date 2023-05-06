@@ -191,9 +191,9 @@
     tslib "^2.0.0"
 
 "@antv/g2plot@^2.2.11":
-  version "2.4.29"
-  resolved "https://registry.npmjs.org/@antv/g2plot/-/g2plot-2.4.29.tgz#e751461073b34a346daf55e632c09fde125c5e33"
-  integrity sha512-DWWsFRGiRg51G9SVESdlYt2hMNIX2z9oLkYFgu0kb/ij3YNEroh4xCcungfWKGe1CBOHgSt8QcIQ4ts4RU13Cg==
+  version "2.4.30"
+  resolved "https://registry.npmjs.org/@antv/g2plot/-/g2plot-2.4.30.tgz#c4b55251d118dd201ff6b7f730759407665fbaf2"
+  integrity sha512-f6AzlvTTRN8IWOktgW6hg0m0cl3Sfdv0ztNG4OgSGUXdQvwa5ZpaLFoiUk7gt8eK1j2AHNBUk2v8AqNnO1TXpA==
   dependencies:
     "@antv/color-util" "^2.0.6"
     "@antv/event-emitter" "^0.1.2"
@@ -432,9 +432,9 @@
     rc-util "^5.24.4"
 
 "@rc-component/trigger@^1.0.4", "@rc-component/trigger@^1.3.6", "@rc-component/trigger@^1.5.0", "@rc-component/trigger@^1.7.0":
-  version "1.10.0"
-  resolved "https://registry.npmjs.org/@rc-component/trigger/-/trigger-1.10.0.tgz#932f618ceecbcca6dc98ff62f8d23ce942eb5e55"
-  integrity sha512-kDnsBBUIX+oCk1nhZ8vwCFiq15sIXqvYlRLTnSWXDTgec8SRjHxIA2T47FbWVlZ9PtlT1NIVWH8q3GbiSRKWUA==
+  version "1.10.2"
+  resolved "https://registry.npmjs.org/@rc-component/trigger/-/trigger-1.10.2.tgz#d22cce2f6971bc69fe94497c3d08c6f6ec05d75d"
+  integrity sha512-dcHqGglYhf2MUQ98bpX+P27yfnpaA959a4hbmseU6cPNWE/2X3Ayj57aXvprlCDOwFbfUV+KT19x9bxbd5PRXw==
   dependencies:
     "@babel/runtime" "^7.18.3"
     "@rc-component/portal" "^1.1.0"
@@ -699,9 +699,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*":
-  version "18.16.3"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.16.3.tgz#6bda7819aae6ea0b386ebc5b24bdf602f1b42b01"
-  integrity sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==
+  version "20.1.0"
+  resolved "https://registry.npmjs.org/@types/node/-/node-20.1.0.tgz#258805edc37c327cf706e64c6957f241ca4c4c20"
+  integrity sha512-O+z53uwx64xY7D6roOi4+jApDGFg0qn6WHcxe5QeqjMaTezBO/mxdfFXIVAVVyNWKx84OmPB3L8kbVYOTeN34A==
 
 "@types/prop-types@*":
   version "15.7.5"
@@ -718,10 +718,10 @@
   resolved "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@^18.2.3":
-  version "18.2.3"
-  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.3.tgz#2fe492bb0e67047b7b43e18166d8f50d44e0525e"
-  integrity sha512-hxXEXWxFJXbY0LMj/T69mznqOZJXNtQMqVxIiirVAZnnpeYiD4zt+lPsgcr/cfWg2VLsxZ1y26vigG03prYB+Q==
+"@types/react-dom@^18.2.4":
+  version "18.2.4"
+  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.4.tgz#13f25bfbf4e404d26f62ac6e406591451acba9e0"
+  integrity sha512-G2mHoTMTL4yoydITgOGwWdWMVd8sNgyEP85xVmMKAPUBwQWm9wBPQUmvbeF4V3WBY1P7mmL4BkjQ0SqUpf1snw==
   dependencies:
     "@types/react" "*"
 
@@ -1817,9 +1817,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.284:
-  version "1.4.383"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.383.tgz#61f44a9bb55957b1bb1236704ca53f7214f7a941"
-  integrity sha512-BQyvFauIMzCJqILViJNs0kIBEAlx1bYLS5CRLyJtlun1KAnZlhNSgyfyWifPWagQ5s8KYPY6BpNHZsEMkxZAQQ==
+  version "1.4.385"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.385.tgz#1afd8d6280d510145148777b899ff481c65531ff"
+  integrity sha512-L9zlje9bIw0h+CwPQumiuVlfMcV4boxRjFIWDcLfFqTZNbkwOExBzfmswytHawObQX4OUhtNv8gIiB21kOurIg==
 
 encodeurl@^1.0.2:
   version "1.0.2"
@@ -3016,9 +3016,9 @@ pinkie@^2.0.0:
   integrity sha512-MnUuEycAemtSaeFSjXKW/aroV7akBbY+Sv+RkyqFjgAe73F+MR0TBWKBRDkmfWq/HiFmdavfZ1G7h4SPZXaCSg==
 
 postcss-calc@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.npmjs.org/postcss-calc/-/postcss-calc-9.0.0.tgz#cd9b2b155e57c823687eb67c9afcbe97c98ecaa4"
-  integrity sha512-B9BNW/SVh4SMJfoCQ6D9h1Wo7Yjqks7UdbiARJ16J5TIsQn5NEqwMF5joSgOYb26oJPUR5Uv3fCQ/4PvmZWeJQ==
+  version "9.0.1"
+  resolved "https://registry.npmjs.org/postcss-calc/-/postcss-calc-9.0.1.tgz#a744fd592438a93d6de0f1434c572670361eb6c6"
+  integrity sha512-TipgjGyzP5QzEhsOZUaIkeO5mKeMFpebWzRogWG/ysonUlnHcq5aJe0jOjpfzUU8PeSaBQnrE8ehR0QA5vs8PQ==
   dependencies:
     postcss-selector-parser "^6.0.11"
     postcss-value-parser "^4.2.0"
@@ -4039,9 +4039,9 @@ stylehacks@^6.0.0:
     postcss-selector-parser "^6.0.4"
 
 stylis@^4.0.13:
-  version "4.1.4"
-  resolved "https://registry.npmjs.org/stylis/-/stylis-4.1.4.tgz#9cb60e7153d8ac6d02d773552bf51c7a0344535b"
-  integrity sha512-USf5pszRYwuE6hg9by0OkKChkQYEXfkeTtm0xKw+jqQhwyjCVLdYyMBK7R+n7dhzsblAWJnGxju4vxq5eH20GQ==
+  version "4.2.0"
+  resolved "https://registry.npmjs.org/stylis/-/stylis-4.2.0.tgz#79daee0208964c8fe695a42fcffcac633a211a51"
+  integrity sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==
 
 supports-color@^2.0.0:
   version "2.0.0"
