@@ -2592,21 +2592,6 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npmjs.org/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha512-+97CtHAlWDx0ndt0J8y3P12EWLwTLMXIfMnYDev3wOTwH/RpBGMlfn4bDXlMEg1u73K6XRE9BbUp+5ZAYoRYWw==
 
-koa-webpack-dev-service@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/koa-webpack-dev-service/-/koa-webpack-dev-service-0.10.0.tgz#c9a26b4a0cc42499874d619781f17bdbaec2488b"
-  integrity sha512-MiciEkQMS0k1Ay5evLPAxZW7+kj27Mg/xbGyxaJDwGodIH/W1oGVJX+C5UIrYgW91nc0oeUJyvpo+0POaM4DFw==
-  dependencies:
-    "@types/koa" "^2.13.6"
-    "@types/ws" "^8.5.4"
-    koa-compose "^4.1.0"
-    tslib "^2.5.0"
-    webpack-dev-middleware "^6.1.0"
-    ws "^8.13.0"
-  optionalDependencies:
-    bufferutil ">=4.0.0"
-    utf-8-validate ">=5.0.0"
-
 koa@^2.14.2:
   version "2.14.2"
   resolved "https://registry.npmjs.org/koa/-/koa-2.14.2.tgz#a57f925c03931c2b4d94b19d2ebf76d3244863fc"
@@ -4343,6 +4328,21 @@ webpack-dev-middleware@^6.1.0:
     mime-types "^2.1.31"
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
+
+webpack-dev-service@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.1.0.tgz#69cfb74a515d77544c5b126e9f7430779eec5558"
+  integrity sha512-b7QyQuCULU4NKzP6rZDaL0d8SFI1mc0JIe7VsZQWMYOirdZKV/vFCvUupSePYFkcNmRRdcOk8c/acFPZ+b9GPA==
+  dependencies:
+    "@types/koa" "^2.13.6"
+    "@types/ws" "^8.5.4"
+    koa-compose "^4.1.0"
+    tslib "^2.5.0"
+    webpack-dev-middleware "^6.1.0"
+    ws "^8.13.0"
+  optionalDependencies:
+    bufferutil ">=4.0.0"
+    utf-8-validate ">=5.0.0"
 
 webpack-sources@^3.2.3:
   version "3.2.3"

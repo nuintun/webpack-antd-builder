@@ -18,7 +18,7 @@ if (__DEV__) {
 
     import(
       // webpackMode: 'eager'
-      'koa-webpack-dev-service/events'
+      'webpack-dev-service/events'
     ).then(({ on }) => {
       on('ok', ({ builtAt }) => {
         console.log(`[HMR] App is up to date at ${new Date(builtAt).toLocaleString()}`);

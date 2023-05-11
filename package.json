@@ -67,7 +67,6 @@
     "html-webpack-plugin": "^5.5.1",
     "koa": "^2.14.2",
     "koa-compress": "^5.1.1",
-    "koa-webpack-dev-service": "^0.10.0",
     "memfs": "^3.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "nodemon": "^2.0.22",
@@ -82,6 +81,7 @@
     "typescript": "^5.0.4",
     "utf-8-validate": "^6.0.3",
     "webpack": "^5.82.1",
-    "webpack-bundle-analyzer": "^4.8.0"
+    "webpack-bundle-analyzer": "^4.8.0",
+    "webpack-dev-service": "^0.1.0"
   }
 }

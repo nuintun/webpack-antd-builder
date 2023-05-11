@@ -19,8 +19,8 @@ import resolveIp from '../lib/ip.js';
 import { URLSearchParams } from 'url';
 import koaCompress from 'koa-compress';
 import appConfig from '../../app.config.js';
+import devMiddleware from 'webpack-dev-service';
 import { findFreePorts } from 'find-free-ports';
-import devMiddleware from 'koa-webpack-dev-service';
 import resolveConfigure from './webpack.config.base.js';
 
 const { toString } = Object.prototype;
@@ -79,7 +79,7 @@ function isTypeof(value, type) {
  */
 function injectHotEntry(entry, options) {
   const params = new URLSearchParams(options);
-  const hotEntry = `koa-webpack-dev-service/client?${params}`;
+  const hotEntry = `webpack-dev-service/client?${params}`;
 
   if (Array.isArray(entry)) {
     return [...entry, hotEntry];
