@@ -82,11 +82,11 @@ function injectHotEntry(entry, options) {
   const hotEntry = `koa-webpack-dev-service/client?${params}`;
 
   if (Array.isArray(entry)) {
-    return [hotEntry, ...entry];
+    return [...entry, hotEntry];
   }
 
   if (isTypeof(entry, 'string')) {
-    return [hotEntry, entry];
+    return [entry, hotEntry];
   }
 
   return entry;
