@@ -81,7 +81,7 @@
     "terser-webpack-plugin": "^5.3.8",
     "typescript": "^5.0.4",
     "utf-8-validate": "^6.0.3",
-    "webpack": "^5.82.0",
+    "webpack": "^5.82.1",
     "webpack-bundle-analyzer": "^4.8.0"
   }
 }
