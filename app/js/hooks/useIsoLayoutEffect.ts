@@ -4,7 +4,7 @@
 
 import { useEffect, useLayoutEffect } from 'react';
 
-import { canUseDOM } from '/js/utils/utils';
+import { canUseDOM } from '/js/utils/dom';
 
 /**
  * @function useIsoLayoutEffect

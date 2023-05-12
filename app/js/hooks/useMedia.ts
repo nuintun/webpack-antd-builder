@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { canUseDOM } from '/js/utils/utils';
+import { canUseDOM } from '/js/utils/dom';
 import useIsoLayoutEffect from './useIsoLayoutEffect';
 
 /**

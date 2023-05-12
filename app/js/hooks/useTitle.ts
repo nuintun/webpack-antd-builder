@@ -4,7 +4,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { canUseDOM } from '/js/utils/utils';
+import { canUseDOM } from '/js/utils/dom';
 
 export interface Options {
   defaultTitle?: string;
