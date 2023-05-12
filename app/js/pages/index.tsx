@@ -12,7 +12,7 @@ root.render(<App />);
 
 if (__DEV__) {
   if (import.meta.webpackHot) {
-    import.meta.webpackHot.accept(['./App.tsx'], () => {
+    import.meta.webpackHot.accept('./App.tsx', () => {
       root.render(<App />);
     });
 
