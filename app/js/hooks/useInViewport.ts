@@ -2,41 +2,11 @@
  * @module useInViewport
  */
 
-import React, { useEffect, useState } from 'react';
-
-import { canUseDOM, isFunction } from '/js/utils/utils';
-
-type TargetValue<T> = T | undefined | null;
-
-type TargetType = HTMLElement | Element | Window | Document;
-
-export type Target<T extends TargetType = Element> =
-  | TargetValue<T>
-  | (() => TargetValue<T>)
-  | React.MutableRefObject<TargetValue<T>>;
+import { useEffect, useState } from 'react';
+import { canUseDOM, getTargetElement, Target } from '/js/utils/dom';
 
 export interface Options extends Omit<IntersectionObserverInit, 'root'> {
   root?: Target<Element | Document>;
-}
-
-/**
- * @function getTargetElement
- * @param target 目标元素
- */
-function getTargetElement<T extends TargetType>(target: Target<T>): TargetValue<T> | null {
-  if (!target) {
-    return null;
-  }
-
-  if (isFunction(target)) {
-    return target();
-  }
-
-  if ('current' in target) {
-    return target.current;
-  }
-
-  return target;
 }
 
 /**

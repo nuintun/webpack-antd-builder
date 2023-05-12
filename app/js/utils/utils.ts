@@ -5,15 +5,6 @@
 import dayjs, { Dayjs, ManipulateType, OpUnitType } from 'dayjs';
 
 /**
- * @type {boolean} canUseDOM
- * @description 是否支持 DOM 操作
- */
-export const canUseDOM =
-  typeof window !== 'undefined' &&
-  typeof window.document !== 'undefined' &&
-  typeof window.document.createElement !== 'undefined';
-
-/**
  * @function assert
  * @description 断言
  * @param cond 断言条件
