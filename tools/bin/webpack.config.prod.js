@@ -1,6 +1,6 @@
 /**
  * @module webpack.config.prod
- * @description 生成模式 Webpack 配置
+ * @description 生产环境 Webpack 配置
  * @see https://github.com/facebook/create-react-app
  */
 

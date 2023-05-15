@@ -1,6 +1,6 @@
 /**
  * @module webpack.config.dev
- * @description 开发模式 Webpack 配置
+ * @description 开发环境 Webpack 配置
  * @see https://github.com/facebook/create-react-app
  */
 
