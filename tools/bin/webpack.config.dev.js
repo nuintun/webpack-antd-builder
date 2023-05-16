@@ -141,8 +141,6 @@ async function resolveEntry(entry, options) {
   configure.devtool = 'eval-cheap-module-source-map';
   configure.watchOptions = { aggregateTimeout: 256 };
 
-  configure.plugins.push(new webpack.SourceMapDevToolPlugin());
-
   const app = new Koa();
   const compiler = webpack(configure);
 
