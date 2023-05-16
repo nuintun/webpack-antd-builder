@@ -443,9 +443,9 @@
     rc-util "^5.24.4"
 
 "@rc-component/trigger@^1.0.4", "@rc-component/trigger@^1.10.2", "@rc-component/trigger@^1.12.0", "@rc-component/trigger@^1.3.6", "@rc-component/trigger@^1.5.0", "@rc-component/trigger@^1.7.0":
-  version "1.12.1"
-  resolved "https://registry.npmjs.org/@rc-component/trigger/-/trigger-1.12.1.tgz#92ba66d37d0ed50983683d4e09fe10179995d636"
-  integrity sha512-i6xSkFuINuiyM5UgYM1ir051R78YdyCVCzezZEmUg6L8m66CpqrpNUbx6LKbxCkeeZV5wzor7iYHmvSRh7tRuA==
+  version "1.13.0"
+  resolved "https://registry.npmjs.org/@rc-component/trigger/-/trigger-1.13.0.tgz#ba7e1f3b36ec6fbcb2ec382d11b80ae15f23e46d"
+  integrity sha512-3HEafu2+glZQn0LcW7DAMbYqVMOP5/MM37ta+AWA3kVOMyWlHos9QMUhxUgMzKCYzSY+W87W9ysf/ZXjHo4lOQ==
   dependencies:
     "@babel/runtime" "^7.18.3"
     "@rc-component/portal" "^1.1.0"
@@ -3667,10 +3667,10 @@ rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.15.0, rc-util@^5.16.0, rc-util@^5.16.
     "@babel/runtime" "^7.18.3"
     react-is "^16.12.0"
 
-rc-virtual-list@^3.4.13, rc-virtual-list@^3.4.8:
-  version "3.4.13"
-  resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.4.13.tgz#20acc934b263abcf7b7c161f50ef82281b2f7e8d"
-  integrity sha512-cPOVDmcNM7rH6ANotanMDilW/55XnFPw0Jh/GQYtrzZSy3AmWvCnqVNyNC/pgg3lfVmX2994dlzAhuUrd4jG7w==
+rc-virtual-list@^3.4.13, rc-virtual-list@^3.4.8, rc-virtual-list@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.5.1.tgz#f0b0fb38fb209922f50f44c30d04a27ac026f0ef"
+  integrity sha512-LKeiurnV8vPNnZvaZLwyqTrkemjTo4W8ezjaiOuFbC1fU9hUWtJbou2zXXrXTY24zSTEYxaICuYnXzmyp6g/hQ==
   dependencies:
     "@babel/runtime" "^7.20.0"
     classnames "^2.2.6"
