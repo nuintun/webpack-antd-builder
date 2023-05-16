@@ -18,7 +18,7 @@ export default memo(function Page(): React.ReactElement {
 
   const onBackHome = useCallback(() => {
     navigate('/');
-  }, [navigate]);
+  }, []);
 
   return (
     <div style={style}>
