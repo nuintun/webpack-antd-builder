@@ -4342,10 +4342,10 @@ webpack-dev-middleware@^6.1.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-service@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.1.3.tgz#c9caeda2ac511e0a30f7831ecbfe1328a5468485"
-  integrity sha512-VXW8A2xLen4D7J54Qu3ZQ+eXj7RNCw7yVc4mhqfSxcZkawoBBma2ZWMzVMyMP/cp2ZivYej/yflOZ6zevpEMZw==
+webpack-dev-service@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.2.0.tgz#c6d0bfe62060ea1608c6a076529c5441657bf219"
+  integrity sha512-dpKF2F7/LOdG4ez4AfOd4I8NQt3e32pV2ST2f4EveD45gd6bzgoU7Bts6GyU3gi/SAdAhpu3iq8y12zTGnBZrg==
   dependencies:
     "@types/koa" "^2.13.6"
     "@types/ws" "^8.5.4"
