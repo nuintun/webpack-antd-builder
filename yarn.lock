@@ -388,9 +388,9 @@
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
 "@rc-component/color-picker@~1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@rc-component/color-picker/-/color-picker-1.0.0.tgz#fb614322c275d95443630cc05c00786cd69d6b2d"
-  integrity sha512-8u7S744okf5CY+LAR4v3j8xgK0x39hiqoiIhoSkYNqGF4wysv4N99/t30od9wQhHzZe7rXBXmiQlkP34pTSxhg==
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@rc-component/color-picker/-/color-picker-1.0.2.tgz#2bf26cba97816ab2201c39bd71933471b8d8cfc2"
+  integrity sha512-pf/4AJXzL6SmDwvrqYjJIdSIn5I2WQ5iOD6reM2BA4hiAKYbxxGYUiq5y6pgEH2jMDWLEjInzMYwaUo3186sCQ==
   dependencies:
     "@babel/runtime" "^7.10.1"
     "@ctrl/tinycolor" "^3.6.0"
@@ -4342,10 +4342,10 @@ webpack-dev-middleware@^6.1.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-service@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.2.0.tgz#c6d0bfe62060ea1608c6a076529c5441657bf219"
-  integrity sha512-dpKF2F7/LOdG4ez4AfOd4I8NQt3e32pV2ST2f4EveD45gd6bzgoU7Bts6GyU3gi/SAdAhpu3iq8y12zTGnBZrg==
+webpack-dev-service@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.3.0.tgz#ab19aada3f29aa4e3904053805997bb90036b607"
+  integrity sha512-9g9u0RwroFNiPPYrawv+Kog9VKizGDneBNNBNaTNIp/DxvysVGRZUdsDtFuRpsQjq+1sgkrBGK3zTzHu1IAHzQ==
   dependencies:
     "@types/koa" "^2.13.6"
     "@types/ws" "^8.5.4"
