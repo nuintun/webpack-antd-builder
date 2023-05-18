@@ -3667,10 +3667,10 @@ rc-util@^5.0.1, rc-util@^5.0.6, rc-util@^5.15.0, rc-util@^5.16.0, rc-util@^5.16.
     "@babel/runtime" "^7.18.3"
     react-is "^16.12.0"
 
-rc-virtual-list@^3.4.13, rc-virtual-list@^3.4.8, rc-virtual-list@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.5.1.tgz#f0b0fb38fb209922f50f44c30d04a27ac026f0ef"
-  integrity sha512-LKeiurnV8vPNnZvaZLwyqTrkemjTo4W8ezjaiOuFbC1fU9hUWtJbou2zXXrXTY24zSTEYxaICuYnXzmyp6g/hQ==
+rc-virtual-list@^3.4.13, rc-virtual-list@^3.4.8, rc-virtual-list@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.npmjs.org/rc-virtual-list/-/rc-virtual-list-3.5.2.tgz#5e1028869bae900eacbae6788d4eca7210736006"
+  integrity sha512-sE2G9hTPjVmatQni8OP2Kx33+Oth6DMKm67OblBBmgMBJDJQOOFpSGH7KZ6Pm85rrI2IGxDRXZCr0QhYOH2pfQ==
   dependencies:
     "@babel/runtime" "^7.20.0"
     classnames "^2.2.6"
@@ -4342,10 +4342,10 @@ webpack-dev-middleware@^6.1.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-service@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.3.1.tgz#52bcbb59ccdcbed00e02acfa56f3951867ead153"
-  integrity sha512-/s9ttB+2UYDF6xcQrNdM5688RedFKISu0OB2FnSXoBSrfoXvb8zhhlNPWnvIzO7KgAfH/Dn0WT4160CKugLtJg==
+webpack-dev-service@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmjs.org/webpack-dev-service/-/webpack-dev-service-0.4.0.tgz#7e2ffdf1222b392117ad923878f8087927b32711"
+  integrity sha512-Sz3JARwe8mmZohRYAGHtBS5adWTdpi91HRuKQMpUfda3cc/jfsNyun5zfhWgRzcqJKpxgOv8AoXPqaZzPhfPCQ==
   dependencies:
     "@types/koa" "^2.13.6"
     "@types/ws" "^8.5.4"
