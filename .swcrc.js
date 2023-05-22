@@ -11,9 +11,6 @@ import targets from './tools/lib/targets.js';
  */
 export default async () => {
   return {
-    env: {
-      targets: await targets()
-    },
     jsc: {
       target: 'es2015',
       externalHelpers: true,
@@ -26,6 +23,9 @@ export default async () => {
           runtime: 'automatic'
         }
       }
+    },
+    env: {
+      targets: await targets()
     }
   };
 };
