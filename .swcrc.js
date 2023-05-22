@@ -3,6 +3,7 @@
  * @description SWC 配置
  */
 
+import { resolve } from 'path';
 import targets from './tools/lib/targets.js';
 
 /**
@@ -22,6 +23,9 @@ export default async () => {
         react: {
           runtime: 'automatic'
         }
+      },
+      experimental: {
+        cacheRoot: resolve('node_modules/.cache/swc')
       }
     },
     env: {
