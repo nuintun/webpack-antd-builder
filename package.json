@@ -83,5 +83,11 @@
     "webpack": "^5.83.1",
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-dev-service": "^0.5.1"
+  },
+  "overrides": {
+    "ws": "^8.0.0"
+  },
+  "resolutions": {
+    "ws": "^8.0.0"
   }
 }
