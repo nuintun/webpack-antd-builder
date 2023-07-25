@@ -1,5 +1,5 @@
-import { getBorderSize } from '../utils';
 import { CSSInterpolation } from '@ant-design/cssinjs';
+import { getBorderSize } from '/js/components/FlexMenu/utils';
 import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-flex-menu';

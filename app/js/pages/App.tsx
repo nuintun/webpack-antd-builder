@@ -6,8 +6,8 @@ import '/css/global.scss';
 
 import React, { lazy, memo, Suspense, useMemo } from 'react';
 
-import useTheme from '../hooks/useTheme';
 import { parse } from '/js/utils/router';
+import useTheme from '/js/hooks/useTheme';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';

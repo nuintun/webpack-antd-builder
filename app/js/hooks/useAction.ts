@@ -3,8 +3,8 @@
  */
 
 import { useCallback } from 'react';
-import { isFunction } from '../utils/utils';
 import useLatestRef from './useLatestRef';
+import { isFunction } from '/js/utils/utils';
 import useRequest, { RequestOptions } from './useRequest';
 
 export interface Options<R> extends RequestOptions<R> {
