@@ -132,7 +132,7 @@ async function resolveEntry(entry, options) {
   const port = await resolvePort(ports);
   const devServerHost = `http://${ip}:${port}`;
   const configure = await resolveConfigure(mode);
-  const devServerPublicPath = devServerHost + publicPath;
+  const devServerPublicPath = new URL(publicPath, devServerHost).toString();
   const entry = await resolveEntry(configure.entry, { host: `${ip}:${port}` });
 
   configure.entry = entry;
