@@ -82,7 +82,10 @@ export class DFSTree<T> {
    * @param tree 要深度遍历的树
    * @param resolve 子节点获取方法
    */
-  constructor(tree: T, private resolve: Resolve<T>) {
+  constructor(
+    tree: T,
+    private resolve: Resolve<T>
+  ) {
     this.root = [tree];
   }
 
@@ -140,7 +143,10 @@ export class BFSTree<T> {
    * @param tree 要广度遍历的树
    * @param resolve 子节点获取方法
    */
-  constructor(tree: T, private resolve: Resolve<T>) {
+  constructor(
+    tree: T,
+    private resolve: Resolve<T>
+  ) {
     this.root = [tree];
   }
 
