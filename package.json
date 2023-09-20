@@ -36,12 +36,12 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^1.2.5",
     "@swc/helpers": "^0.5.2",
-    "antd": "^5.9.1",
+    "antd": "^5.9.2",
     "classnames": "^2.3.2",
     "core-js": "^3.32.2",
-    "dayjs": "^1.11.9",
+    "dayjs": "^1.11.10",
     "memoize-one": "^6.0.0",
-    "rc-virtual-list": "^3.10.8",
+    "rc-virtual-list": "^3.10.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.11",
@@ -81,7 +81,7 @@
     "utf-8-validate": "^6.0.3",
     "webpack": "^5.88.2",
     "webpack-bundle-analyzer": "^4.9.1",
-    "webpack-dev-service": "^0.5.11"
+    "webpack-dev-service": "^0.5.12"
   },
   "overrides": {
     "ws": "^8.0.0"
