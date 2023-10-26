@@ -2,7 +2,7 @@
  * @module usePagingRequest
  */
 
-import { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import { App } from 'antd';
 import useLatestRef from './useLatestRef';
@@ -24,7 +24,7 @@ export interface Pagination {
 }
 
 export interface Sorter {
-  orderBy: (string | number)[];
+  orderBy: React.Key[];
   orderType: ('ascend' | 'descend')[];
 }
 

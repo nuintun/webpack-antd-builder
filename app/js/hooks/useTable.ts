@@ -20,8 +20,6 @@ import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 type Filter = Search;
 
-type SorterField = React.Key | React.Key[];
-
 type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
 
 type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
@@ -47,8 +45,8 @@ export interface RequestOptions extends RequestInit {
   pagination?: Pagination;
 }
 
-function serializeField(filed: SorterField): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : filed;
+function serializeField(filed: React.Key | readonly React.Key[]): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : (filed as React.Key);
 }
 
 /**
@@ -110,12 +108,15 @@ export default function useTable<I, E, T>(
 
         for (const { columnKey, field, order } of items) {
           if (order) {
-            if (columnKey || field) {
-              orderBy.push(columnKey || serializeField(field as SorterField));
-              orderType.push(order);
+            if (columnKey) {
+              orderBy.push(columnKey);
+            } else if (field) {
+              orderBy.push(serializeField(field));
             } else {
               throw new Error('table column missing sort field');
             }
+
+            orderType.push(order);
           }
         }
 
