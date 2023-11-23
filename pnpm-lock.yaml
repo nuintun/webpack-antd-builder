@@ -59,8 +59,8 @@ dependencies:
 
 devDependencies:
   '@nuintun/svgo-loader':
-    specifier: ^0.2.0
-    version: 0.2.0(webpack@5.89.0)
+    specifier: ^0.2.2
+    version: 0.2.2(webpack@5.89.0)
   '@swc/core':
     specifier: ^1.3.99
     version: 1.3.99(@swc/helpers@0.5.3)
@@ -267,8 +267,8 @@ packages:
       svg-path-parser: 1.1.0
     dev: false
 
-  /@antv/coord@0.4.6:
-    resolution: {integrity: sha512-Zu1dJkyPvJ4McUmESWkpjgIf129MsBrZttxf7Bx0rs/N9txGXuj2YZpq1M77mBCWmclxHrcTJU9v1k/iMuIv0A==}
+  /@antv/coord@0.4.7:
+    resolution: {integrity: sha512-UTbrMLhwJUkKzqJx5KFnSRpU3BqrdLORJbwUbHK2zHSCT3q3bjcFA//ZYLVfIlwqFDXp/hzfMyRtp0c77A9ZVA==}
     dependencies:
       '@antv/scale': 0.4.12
       '@antv/util': 2.0.17
@@ -406,7 +406,7 @@ packages:
     resolution: {integrity: sha512-zvo/jd+4wKfvWsHCzqb+NdCrT5DXGytkAqS9eX2qN3UHDB7ptiY1kteh6LiCTfLtSTLko6asGYlwxcrUAOSM/w==}
     dependencies:
       '@antv/component': 1.0.0-beta.2(@antv/g@5.18.21)
-      '@antv/coord': 0.4.6
+      '@antv/coord': 0.4.7
       '@antv/event-emitter': 0.1.3
       '@antv/g': 5.18.21
       '@antv/g-canvas': 1.11.24
@@ -587,8 +587,8 @@ packages:
       call-bind: 1.0.5
     dev: false
 
-  /@nuintun/svgo-loader@0.2.0(webpack@5.89.0):
-    resolution: {integrity: sha512-xy6iMYJQgMOUmcNitcOY2o5Mqil9x6Tfbdu9Zg9MKN4IaOQXLDog6W5kDoKhIPOBWP2QnCWsivPaiykqvJMyeA==}
+  /@nuintun/svgo-loader@0.2.2(webpack@5.89.0):
+    resolution: {integrity: sha512-VFf0jPldjgKXjpxvcqmDrzaryjPT+8VjbccJAW9bWzpW2ZW2H1NpdDdG7/KkkXkrpJHm+yMroxJRFALKlbcDeQ==}
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
