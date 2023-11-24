@@ -12,12 +12,12 @@ export interface FlexDrawerProps extends DrawerProps {
 
 export default memo(function FlexDrawer({
   children,
-  width = 1440,
   height = 720,
-  breakWidth = '100vw',
+  width = 1440,
   maskClosable = false,
+  breakWidth = '100vw',
   breakHeight = '100vh',
-  bodyStyle = { position: 'relative' },
+  styles = { body: { position: 'relative' } },
   ...restProps
 }: FlexDrawerProps): React.ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -36,7 +36,7 @@ export default memo(function FlexDrawer({
   return (
     <Drawer
       {...restProps}
-      bodyStyle={bodyStyle}
+      styles={styles}
       maskClosable={maskClosable}
       width={isBreakWidth ? breakWidth : width}
       height={isBreakHeight ? breakHeight : height}
