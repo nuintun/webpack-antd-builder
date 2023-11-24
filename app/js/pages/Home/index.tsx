@@ -5,8 +5,14 @@ import { memo, useEffect, useMemo, useState } from 'react';
 import Paper from '/js/components/Paper';
 import { Line, LineConfig } from '@ant-design/plots';
 
+interface LineItem {
+  year: string;
+  value: number;
+  category: string;
+}
+
 const LineChart = memo(() => {
-  const [data, setData] = useState<Record<string, number>[]>([]);
+  const [data, setData] = useState<LineItem[]>([]);
 
   const config = useMemo<LineConfig>(() => {
     return {
@@ -15,6 +21,17 @@ const LineChart = memo(() => {
       yField: 'value',
       xAxis: { type: 'time' },
       seriesField: 'category',
+      tooltip: {
+        // 数值格式化为千分位
+        formatter(data) {
+          const { category, value } = data as LineItem;
+
+          return {
+            name: category,
+            value: `${value}`.replace(/\d{1,3}(?=(\d{3})+$)/g, matched => `${matched},`)
+          };
+        }
+      },
       yAxis: {
         label: {
           // 数值格式化为千分位
@@ -29,7 +46,7 @@ const LineChart = memo(() => {
   useEffect(() => {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
       .then(response => response.json())
-      .then((json: Record<string, number>[]) => {
+      .then((json: LineItem[]) => {
         setData(json);
       })
       .catch((error: Error) => {
