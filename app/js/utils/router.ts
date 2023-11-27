@@ -3,8 +3,8 @@
  */
 
 import { resolve } from './url';
-import { assert } from './utils';
 import { DFSTree } from './tree';
+import { assert } from './utils';
 import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
 
 export interface Link {
@@ -72,7 +72,7 @@ export function parse<M = unknown, K extends string = string>(router: readonly R
       const hasChildren = children && children.length > 0;
 
       if (__DEV__) {
-        assert(name !== '', `The meta.name of the route item "${link.href}" cannot be an empty string.`);
+        assert(name !== '', `The meta.name of the route item "${link.href}" cannot be an empty string`);
       }
 
       // 路由处理
