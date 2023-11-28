@@ -50,7 +50,8 @@ function toByteString(value: number): string {
  */
 export function encrypt(text: string): string {
   const { length } = text;
-  const key = Math.floor(Math.random() * (0xffff + 1));
+  const seed = new Uint16Array(1);
+  const [key] = crypto.getRandomValues(seed);
 
   let result = '';
   let nextKey = key;
