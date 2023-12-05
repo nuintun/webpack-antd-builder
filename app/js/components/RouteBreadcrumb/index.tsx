@@ -71,5 +71,5 @@ export default memo(function RouteBreadcrumb({
   const matches = useMatches() as IRoute[];
   const items = useMemo(() => getBreadcrumbItems(matches, showIcon), [matches, showIcon]);
 
-  return render(<Breadcrumb items={items} style={style} className={classNames('ui-component', prefixUI, className)} />);
+  return render(<Breadcrumb items={items} style={style} className={classNames(prefixUI, className)} />);
 });

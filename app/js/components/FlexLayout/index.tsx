@@ -1,6 +1,5 @@
 import React, { memo, Suspense, useCallback, useMemo, useRef, useState } from 'react';
 
-import classNames from 'classnames';
 import useMedia from '/js/hooks/useMedia';
 import useStyle, { prefixUI } from './style';
 import useStorage from '/js/hooks/useStorage';
@@ -105,7 +104,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   }, [headerHeight, borderSize]);
 
   return render(
-    <Layout hasSider={!isMobile} className={classNames('ui-component', prefixUI, `${prefixUI}-${theme}`)}>
+    <Layout hasSider={!isMobile} className={`${prefixUI} ${prefixUI}-${theme}`}>
       <FlexMenu
         items={menus}
         theme={theme}

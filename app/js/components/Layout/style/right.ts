@@ -18,8 +18,8 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
       [`.${prefixUI}-profile`]: {
         display: 'flex',
         cursor: 'default',
-        gap: token.marginXXS,
-        placeItems: 'center'
+        placeItems: 'center',
+        gap: token.marginXXS
       }
     }
   };

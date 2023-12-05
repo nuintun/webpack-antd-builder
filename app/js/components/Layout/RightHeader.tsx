@@ -1,6 +1,5 @@
 import { memo, useCallback, useMemo } from 'react';
 
-import classNames from 'classnames';
 import useStyle, { prefixUI } from './style/right';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import { App, Avatar, Dropdown, MenuProps } from 'antd';
@@ -143,7 +142,7 @@ export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React
   const { hashId, render } = useStyle();
 
   return render(
-    <div className={classNames(hashId, prefixUI)}>
+    <div className={`${hashId} ${prefixUI}`}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>

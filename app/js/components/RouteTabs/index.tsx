@@ -78,7 +78,7 @@ export default memo(function RouteTabs({
       destroyInactiveTabPane
       tabPosition={tabPosition}
       tabBarGutter={tabBarGutter}
-      className={classNames('ui-component', prefixUI, className, {
+      className={classNames(prefixUI, className, {
         [`${prefixUI}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
       })}
     />

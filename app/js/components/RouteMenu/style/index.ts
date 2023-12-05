@@ -8,44 +8,42 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
   const marginInline = token.Menu?.itemMarginInline ?? marginXXS;
 
   return {
-    '.ui-component': {
-      [`&.${prefixUI}`]: {
-        overflow: 'auto',
-        userSelect: 'none',
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
-        msScrollChaining: 'none',
-        OverscrollBehavior: 'contain',
-        WebkitOverflowScrolling: 'touch',
+    [`.${prefixUI}`]: {
+      overflow: 'auto',
+      userSelect: 'none',
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none',
+      msScrollChaining: 'none',
+      OverscrollBehavior: 'contain',
+      WebkitOverflowScrolling: 'touch',
 
-        '&::-webkit-scrollbar': {
-          display: 'none'
-        },
+      '&::-webkit-scrollbar': {
+        display: 'none'
+      },
 
-        [`.${prefixUI}-title`]: {
-          overflow: 'hidden',
+      [`.${prefixUI}-title`]: {
+        overflow: 'hidden',
+        fontSize: fontSizeLG,
+        textOverflow: 'ellipsis',
+        lineHeight: `${fontSizeLG}px`,
+
+        [`.${prefixUI}-icon`]: {
+          lineHeight: 0,
           fontSize: fontSizeLG,
-          textOverflow: 'ellipsis',
-          lineHeight: `${fontSizeLG}px`,
 
-          [`.${prefixUI}-icon`]: {
-            lineHeight: 0,
-            fontSize: fontSizeLG,
+          '> img': {
+            height: fontSizeLG
+          },
 
-            '> img': {
-              height: fontSizeLG
-            },
-
-            '+ span': {
-              marginInlineStart: marginXXS
-            }
+          '+ span': {
+            marginInlineStart: marginXXS
           }
-        },
+        }
+      },
 
-        [`&.${prefixUI}-collapsed`]: {
-          '[role=menuitem]': {
-            paddingInline: `calc(50% - ${fontSizeLG / 2 + marginInline}px)`
-          }
+      [`&.${prefixUI}-collapsed`]: {
+        '[role=menuitem]': {
+          paddingInline: `calc(50% - ${fontSizeLG / 2 + marginInline}px)`
         }
       }
     }

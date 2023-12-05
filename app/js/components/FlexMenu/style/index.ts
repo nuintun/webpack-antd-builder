@@ -4,46 +4,45 @@ import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets'
 
 export const prefixUI = 'ui-flex-menu';
 
-export const colorDarkBgHeader = '#001529';
+export const headerBgDark = '#141414';
+export const headerBgLight = '#001529';
 
 function getFlexMenuStyle(token: Token): CSSInterpolation {
   const borderSize = getBorderSize(token);
-  const colorBgHeader = token.Layout?.colorBgHeader;
+  const headerBg = token.Layout?.headerBg;
 
   return {
-    '.ui-component': {
-      [`&.${prefixUI}-sider`]: {
+    [`.${prefixUI}-sider`]: {
+      height: '100%',
+      overflow: 'hidden',
+
+      '> div': {
         height: '100%',
+        marginTop: -0.1,
+        paddingTop: 0.1
+      },
+
+      [`.${prefixUI}-header`]: {
+        display: 'flex',
         overflow: 'hidden',
+        placeItems: 'center',
+        whiteSpace: 'nowrap',
+        wordBreak: 'keep-all',
+        color: token.colorPrimaryText,
+        transition: `all ${token.motionDurationMid}`,
+        borderInlineEnd: `${borderSize}px ${token.lineType} transparent`,
+        borderBlockEnd: `${borderSize}px ${token.lineType} ${token.colorSplit}`
+      },
 
-        '> div': {
-          height: '100%',
-          marginTop: -0.1,
-          paddingTop: 0.1
-        },
-
+      [`&.${prefixUI}-dark`]: {
         [`.${prefixUI}-header`]: {
-          display: 'flex',
-          overflow: 'hidden',
-          placeItems: 'center',
-          whiteSpace: 'nowrap',
-          wordBreak: 'keep-all',
-          color: token.colorPrimaryText,
-          transition: `all ${token.motionDurationMid}`,
-          borderInlineEnd: `${borderSize}px ${token.lineType} transparent`,
-          borderBlockEnd: `${borderSize}px ${token.lineType} ${token.colorSplit}`
-        },
+          backgroundColor: headerBg ?? headerBgDark
+        }
+      },
 
-        [`&.${prefixUI}-dark`]: {
-          [`.${prefixUI}-header`]: {
-            backgroundColor: colorBgHeader ?? colorDarkBgHeader
-          }
-        },
-
-        [`&.${prefixUI}-light`]: {
-          [`.${prefixUI}-header`]: {
-            backgroundColor: colorBgHeader ?? token.colorBgContainer
-          }
+      [`&.${prefixUI}-light`]: {
+        [`.${prefixUI}-header`]: {
+          backgroundColor: headerBg ?? headerBgLight
         }
       }
     },

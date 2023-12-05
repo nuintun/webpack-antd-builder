@@ -10,5 +10,5 @@ import { Token } from '/js/hooks/useStyleSheets';
  * @param token 主题字段
  */
 export function getBorderSize(token: Token): number {
-  return token.Menu?.colorActiveBarBorderSize ?? token.lineWidth;
+  return token.Menu?.activeBarBorderWidth ?? token.lineWidth;
 }
