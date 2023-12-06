@@ -1,7 +1,7 @@
-import useStyle, { prefixUI } from './style';
-
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
+import classNames from 'classnames';
+import useStyle, { prefixUI } from './style';
 import { App, Image, Upload, UploadProps } from 'antd';
 import { useLocation, useNavigate } from 'react-nest-router';
 import useControllableValue from '/js/hooks/useControllableValue';
@@ -127,7 +127,7 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
   }, [propsValue]);
 
   return render(
-    <div className={`${hashId} ${prefixUI}`}>
+    <div className={classNames(hashId, prefixUI)}>
       {showUploadList &&
         fileList.map(file => {
           const style = { width, height };
