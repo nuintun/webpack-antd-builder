@@ -33,7 +33,7 @@
     "format": "prettier --write . --ignore-path .prettierignore"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.18.0",
+    "@ant-design/cssinjs": "^1.18.1",
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^1.2.6",
     "@swc/helpers": "^0.5.3",
