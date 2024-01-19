@@ -37,7 +37,7 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^1.2.6",
     "@swc/helpers": "^0.5.3",
-    "antd": "^5.13.1",
+    "antd": "^5.13.2",
     "classnames": "^2.5.1",
     "core-js": "^3.35.0",
     "dayjs": "^1.11.10",
