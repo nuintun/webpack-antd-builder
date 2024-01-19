@@ -60,7 +60,7 @@
     "bufferutil": "^4.0.8",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "clean-webpack-plugin": "^4.0.0",
-    "css-loader": "^6.9.0",
+    "css-loader": "^6.9.1",
     "css-minimizer-webpack-plugin": "6.0.0",
     "css-modules-types-loader": "^0.3.31",
     "find-free-ports": "^3.1.1",
