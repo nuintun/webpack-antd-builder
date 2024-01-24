@@ -23,7 +23,9 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
 
       [`.${prefixUI}-title`]: {
         overflow: 'hidden',
+        alignItems: 'center',
         fontSize: fontSizeLG,
+        display: 'inline-flex',
         textOverflow: 'ellipsis',
         lineHeight: `${fontSizeLG}px`,
 
