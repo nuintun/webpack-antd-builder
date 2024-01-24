@@ -27,9 +27,9 @@ function getRouteBreadcrumbStyle(token: Token): CSSInterpolation {
       },
 
       [`.${prefixUI}-link, .${prefixUI}-item`]: {
+        display: 'flex',
         cursor: 'default',
         alignItems: 'center',
-        display: 'inline-flex',
 
         [`.${prefixUI}-icon`]: {
           marginInlineEnd: token.marginXXS,
