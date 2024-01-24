@@ -27,7 +27,6 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
         alignItems: 'center',
         fontSize: fontSizeLG,
         textOverflow: 'ellipsis',
-        lineHeight: `${fontSizeLG}px`,
 
         [`.${prefixUI}-icon`]: {
           lineHeight: 0,
