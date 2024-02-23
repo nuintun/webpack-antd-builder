@@ -35,7 +35,7 @@
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.4",
     "@ant-design/icons": "^5.3.0",
-    "@ant-design/plots": "^2.1.13",
+    "@ant-design/plots": "^1.2.6",
     "@swc/helpers": "^0.5.6",
     "antd": "^5.14.1",
     "classnames": "^2.5.1",
