@@ -8,8 +8,8 @@ import { Query as Search } from '/js/utils/request';
 
 export type { Search };
 
-export type Searches<T extends unknown[]> = {
-  [K in keyof T]: T[K] | false;
+export type Searches<T extends Search[]> = {
+  [K in keyof T]: T[K] extends Search ? T[K] | false : T[K];
 };
 
 /**
@@ -25,14 +25,8 @@ export default function useSearches<T extends Search[]>(
   const serialize = useCallback((value?: Partial<Searches<T>>) => {
     if (value && searchRef.current !== value) {
       searchRef.current = searchRef.current.map((search, index) => {
-        const nextValue = value[index];
-
-        if (nextValue === false) {
-          return nextValue;
-        }
-
-        return nextValue ?? search;
-      }) as T;
+        return value[index] ?? search;
+      }) as Searches<T>;
     }
 
     return searchRef.current.reduce<Search>((values, value) => {
