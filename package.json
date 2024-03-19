@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.4",
-    "@ant-design/icons": "^4.8.2",
+    "@ant-design/icons": "^5.3.4",
     "@ant-design/plots": "^1.2.6",
     "@swc/helpers": "^0.5.7",
     "antd": "^5.15.3",
