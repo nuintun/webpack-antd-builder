@@ -152,8 +152,8 @@ devDependencies:
     specifier: ^4.10.1
     version: 4.10.1(bufferutil@4.0.8)(utf-8-validate@6.0.3)
   webpack-dev-service:
-    specifier: ^0.8.0
-    version: 0.8.0(bufferutil@4.0.8)(utf-8-validate@6.0.3)(webpack@5.91.0)
+    specifier: ^0.8.1
+    version: 0.8.1(bufferutil@4.0.8)(utf-8-validate@6.0.3)(webpack@5.91.0)
 
 packages:
 
@@ -5004,8 +5004,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webpack-dev-service@0.8.0(bufferutil@4.0.8)(utf-8-validate@6.0.3)(webpack@5.91.0):
-    resolution: {integrity: sha512-fysLEeu37Nm0gYKnzOxQ3b2auaHHhzUkxfVmSXY+kw0n5p3He/DqfIDjf5790QVMALJWwvQmSSa5RAfcitqFsg==}
+  /webpack-dev-service@0.8.1(bufferutil@4.0.8)(utf-8-validate@6.0.3)(webpack@5.91.0):
+    resolution: {integrity: sha512-pYITLzFdlwno8eO6anuQLAIRpmIAilVa+xugGZcSlqtDmkV+Dxzqt1buRYdY2o8qZaB3ydCyDc27W6NgxuFzZg==}
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
