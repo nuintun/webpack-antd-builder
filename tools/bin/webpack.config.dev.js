@@ -43,6 +43,10 @@ function createMemfs() {
  * @returns {number}
  */
 async function resolvePort(ports = [8000, 9000]) {
+  if (!Array.isArray(ports)) {
+    ports = [ports, ports + 1];
+  }
+
   const [startPort, endPort = startPort + 1] = ports;
   const [port] = await findFreePorts(1, { startPort, endPort });
 

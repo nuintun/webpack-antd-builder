@@ -13,6 +13,7 @@ const images = path.resolve('app/images');
  * @type {import('./tools/interface').AppConfig}
  */
 export default {
+  ports: 8000,
   name: 'Antd',
   lang: 'zh-CN',
   publicPath: '/public/',
