@@ -42,7 +42,7 @@ function createMemfs() {
  * @param {import('../interface').AppConfig['ports']} ports
  * @returns {number}
  */
-async function resolvePort(ports = [8000]) {
+async function resolvePort(ports = [8000, 9000]) {
   const [startPort, endPort = startPort + 1] = ports;
   const [port] = await findFreePorts(1, { startPort, endPort });
 
