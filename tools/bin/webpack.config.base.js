@@ -136,10 +136,7 @@ export default async mode => {
       },
       removeEmptyChunks: true,
       mergeDuplicateChunks: true,
-      removeAvailableModules: true,
-      runtimeChunk: {
-        name: entrypoint => `runtime-${entrypoint.name}`
-      }
+      removeAvailableModules: true
     }
   };
 };
