@@ -76,7 +76,7 @@ function httpError(error) {
   const devService = dev(compiler, {
     fs,
     headers: {
-      'Cache-Control': 'no-store',
+      'Cache-Control': 'no-cache',
       'X-Content-Type-Options': 'nosniff'
     }
   });
