@@ -21,7 +21,7 @@ export default {
   outputPath: path.resolve('wwwroot/public'),
   entryHTML: path.resolve('wwwroot/app.html'),
   favicon: path.resolve('wwwroot/favicon.ico'),
-  entry: [path.resolve('app/js/pages/index.tsx')],
+  entry: path.resolve('app/js/pages/index.tsx'),
   alias: { '/js': js, '/css': css, '/images': images },
   meta: { viewport: 'width=device-width,initial-scale=1.0' }
 };
