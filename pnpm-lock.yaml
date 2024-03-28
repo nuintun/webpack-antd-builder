@@ -1427,7 +1427,7 @@ packages:
     engines: {node: '>= 6.0.0'}
     dependencies:
       mime-types: 2.1.35
-      ylru: 1.3.2
+      ylru: 1.4.0
     dev: true
 
   /call-bind@1.0.7:
@@ -5134,7 +5134,7 @@ packages:
       window-size: 0.1.0
     dev: false
 
-  /ylru@1.3.2:
-    resolution: {integrity: sha512-RXRJzMiK6U2ye0BlGGZnmpwJDPgakn6aNQ0A7gHRbD4I0uvK4TW6UqkK1V0pp9jskjJBAXd3dRrbzWkqJ+6cxA==}
+  /ylru@1.4.0:
+    resolution: {integrity: sha512-2OQsPNEmBCvXuFlIni/a+Rn+R2pHW9INm0BxXJ4hVDA8TirqMj+J/Rp9ItLatT/5pZqWwefVrTQcHpixsxnVlA==}
     engines: {node: '>= 4.0.0'}
     dev: true
