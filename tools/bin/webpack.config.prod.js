@@ -25,7 +25,8 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
   configure.optimization.minimizer = [
     new CssMinimizerPlugin(),
     new TerserPlugin({
-      minify: TerserPlugin.swcMinify
+      minify: TerserPlugin.swcMinify,
+      terserOptions: { format: { comments: false } }
     })
   ];
 
