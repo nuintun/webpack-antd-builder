@@ -12,19 +12,6 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/nuintun/webpack-antd-builder",
-  "nodemonConfig": {
-    "quiet": true,
-    "delay": "128ms",
-    "watch": [
-      ".swcrc.js",
-      "tools/**/*",
-      ".postcssrc.js",
-      "app.config.js",
-      "svgo.config.js",
-      ".browserslistrc",
-      "wwwroot/favicon.ico"
-    ]
-  },
   "scripts": {
     "lint": "tsc --noEmit",
     "prod": "node tools/bin/webpack.config.prod.js",
@@ -33,11 +20,11 @@
     "format": "prettier --write . --ignore-path .prettierignore"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.18.5",
-    "@ant-design/icons": "^5.3.5",
+    "@ant-design/cssinjs": "^1.19.1",
+    "@ant-design/icons": "^5.3.6",
     "@ant-design/plots": "^1.2.6",
     "@swc/helpers": "^0.5.8",
-    "antd": "^5.15.4",
+    "antd": "^5.16.0",
     "classnames": "^2.5.1",
     "core-js": "^3.36.1",
     "dayjs": "^1.11.10",
@@ -54,7 +41,7 @@
     "@nuintun/svgo-loader": "^0.2.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@swc/core": "^1.4.11",
-    "@types/react": "^18.2.73",
+    "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.23",
     "@types/throttle-debounce": "^5.0.2",
     "autoprefixer": "^10.4.19",
@@ -68,7 +55,7 @@
     "html-webpack-plugin": "^5.6.0",
     "koa": "^2.15.2",
     "koa-compress": "^5.1.1",
-    "memfs": "^4.8.0",
+    "memfs": "^4.8.1",
     "mini-css-extract-plugin": "^2.8.1",
     "nodemon": "^3.1.0",
     "postcss": "^8.4.38",
@@ -83,7 +70,7 @@
     "utf-8-validate": "^6.0.3",
     "webpack": "^5.91.0",
     "webpack-bundle-analyzer": "^4.10.1",
-    "webpack-dev-service": "^0.11.0"
+    "webpack-dev-service": "^0.11.1"
   },
   "overrides": {
     "ws": "^8.0.0"
