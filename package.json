@@ -41,7 +41,7 @@
     "@nuintun/svgo-loader": "^0.2.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@swc/core": "^1.4.13",
-    "@types/react": "^18.2.77",
+    "@types/react": "^18.2.78",
     "@types/react-dom": "^18.2.25",
     "@types/throttle-debounce": "^5.0.2",
     "autoprefixer": "^10.4.19",
