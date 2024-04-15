@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo, Suspense, useMemo } from 'react';
 
 import classNames from 'classnames';

@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import { createContext, memo, useContext, useEffect, useMemo } from 'react';
 
 import { createPortal } from 'react-dom';

@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo } from 'react';
 
 import dayjs, { ConfigType } from 'dayjs';

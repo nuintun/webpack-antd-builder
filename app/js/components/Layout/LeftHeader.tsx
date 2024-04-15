@@ -1,3 +1,7 @@
+/**
+ * @module LeftHeader
+ */
+
 import React, { memo, useMemo } from 'react';
 
 import Link from '/js/components/Link';

@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';

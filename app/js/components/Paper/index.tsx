@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo } from 'react';
 
 import classNames from 'classnames';
@@ -8,7 +12,7 @@ export interface PaperProps {
   children?: React.ReactNode;
 }
 
-export default memo(function RouteTabs({ className, children }: PaperProps): React.ReactElement {
+export default memo(function Paper({ className, children }: PaperProps): React.ReactElement {
   const { hashId, render } = useStyle();
 
   return render(<div className={classNames(hashId, prefixUI, className)}>{children}</div>);

@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { cloneElement, memo, useCallback } from 'react';
 
 import { isFunction } from '/js/utils/utils';

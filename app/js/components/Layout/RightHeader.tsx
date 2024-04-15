@@ -1,3 +1,7 @@
+/**
+ * @module RightHeader
+ */
+
 import { memo, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';

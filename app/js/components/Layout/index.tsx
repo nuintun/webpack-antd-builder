@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo, useMemo } from 'react';
 
 import LeftHeader from './LeftHeader';

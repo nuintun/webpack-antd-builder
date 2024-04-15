@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from 'antd';

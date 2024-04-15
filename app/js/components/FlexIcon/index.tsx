@@ -1,5 +1,5 @@
 /**
- * @module FlexIcon
+ * @module index
  */
 
 import React, { cloneElement, memo, useContext } from 'react';

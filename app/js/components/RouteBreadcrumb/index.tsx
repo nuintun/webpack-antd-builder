@@ -1,5 +1,5 @@
 /**
- * @module RouteBreadcrumb
+ * @module index
  */
 
 import React, { memo, useMemo } from 'react';

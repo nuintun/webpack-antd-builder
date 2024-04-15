@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo, useCallback, useRef } from 'react';
 
 import useMedia from '/js/hooks/useMedia';

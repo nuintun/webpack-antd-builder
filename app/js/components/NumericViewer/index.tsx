@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo } from 'react';
 
 import { formatThousands } from '/js/utils/utils';

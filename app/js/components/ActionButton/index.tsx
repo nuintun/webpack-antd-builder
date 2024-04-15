@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import React, { memo } from 'react';
 
 import { Button, ButtonProps } from 'antd';

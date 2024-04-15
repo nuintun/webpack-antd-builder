@@ -1,5 +1,5 @@
 /**
- * @module Link
+ * @module index
  */
 
 import React, { memo, useCallback, useMemo } from 'react';
