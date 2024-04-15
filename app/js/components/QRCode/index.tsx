@@ -29,10 +29,10 @@ export default memo(function QRCode({
   encode,
   version,
   segments,
-  moduleSize = 2,
+  quietZone,
+  moduleSize,
   background = '#ffffff',
   foreground = '#000000',
-  quietZone = moduleSize * 4,
   ...props
 }: QRCodeProps) {
   const src = useMemo(() => {
