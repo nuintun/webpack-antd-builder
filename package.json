@@ -23,6 +23,7 @@
     "@ant-design/cssinjs": "^1.19.1",
     "@ant-design/icons": "^5.3.6",
     "@ant-design/plots": "^1.2.6",
+    "@nuintun/qrcode": "^4.1.2",
     "@swc/helpers": "^0.5.9",
     "antd": "^5.16.2",
     "classnames": "^2.5.1",

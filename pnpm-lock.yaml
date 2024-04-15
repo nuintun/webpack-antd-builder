@@ -17,6 +17,9 @@ dependencies:
   '@ant-design/plots':
     specifier: ^1.2.6
     version: 1.2.6(react-dom@18.2.0)(react@18.2.0)
+  '@nuintun/qrcode':
+    specifier: ^4.1.2
+    version: 4.1.2
   '@swc/helpers':
     specifier: ^0.5.9
     version: 0.5.9
@@ -538,6 +541,12 @@ packages:
     dependencies:
       tslib: 2.6.2
     dev: true
+
+  /@nuintun/qrcode@4.1.2:
+    resolution: {integrity: sha512-WcvwViOcdWBoKYjNvAZEXo42b0oQJb4YUrawEnULyFRXH5m3XGCW7juNdweWz/J1+FU+fILgYY5ZUsOudZwO6A==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
 
   /@nuintun/svgo-loader@0.2.5(webpack@5.91.0):
     resolution: {integrity: sha512-qIyRJA0Sp+tX8PIfJOY1XBmVeV9HPMIrntKrJHqy0oeo2E+lrS03QMJbSt2T8d2QSwU9xaIixXwrTzvAJTl8dw==}
