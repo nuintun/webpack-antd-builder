@@ -130,6 +130,5 @@ dist
 .pnp.*
 
 # Build dist
-/wwwroot/public/
-/wwwroot/app.html
+/wwwroot/
 *.module.scss.d.ts
