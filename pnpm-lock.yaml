@@ -110,8 +110,8 @@ devDependencies:
     specifier: ^5.1.1
     version: 5.1.1
   memfs:
-    specifier: ^4.8.1
-    version: 4.8.1
+    specifier: ^4.8.2
+    version: 4.8.2
   mini-css-extract-plugin:
     specifier: ^2.8.1
     version: 2.8.1(webpack@5.91.0)
@@ -155,8 +155,8 @@ devDependencies:
     specifier: ^4.10.2
     version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.3)
   webpack-dev-service:
-    specifier: ^0.11.1
-    version: 0.11.1(bufferutil@4.0.8)(utf-8-validate@6.0.3)(webpack@5.91.0)
+    specifier: ^0.11.2
+    version: 0.11.2(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.3)(webpack@5.91.0)
 
 packages:
 
@@ -3112,8 +3112,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /memfs@4.8.1:
-    resolution: {integrity: sha512-7q/AdPzf2WpwPlPL4v1kE2KsJsHl7EF4+hAeVzlyanr2+YnR21NVn9mDqo+7DEaKDRsQy8nvxPlKH4WqMtiO0w==}
+  /memfs@4.8.2:
+    resolution: {integrity: sha512-j4WKth315edViMBGkHW6NTF0QBjsTrcRDmYNcGsPq+ozMEyCCCIlX2d2mJ5wuh6iHvJ3FevUrr48v58YRqVdYg==}
     engines: {node: '>= 4.0.0'}
     dependencies:
       tslib: 2.6.2
@@ -5129,10 +5129,11 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webpack-dev-service@0.11.1(bufferutil@4.0.8)(utf-8-validate@6.0.3)(webpack@5.91.0):
-    resolution: {integrity: sha512-kSLZ8Y1EUrlivXbQYar5CBOJp3ofnZhzHpKUSgIFurD3e4gktAWhF9JE+H7C6NCGhszkGDgPbws6C+ZZRc74+Q==}
+  /webpack-dev-service@0.11.2(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.3)(webpack@5.91.0):
+    resolution: {integrity: sha512-41kBK2EWxYP63Ct3eN4dhDw8tBsQoPk4zEXfE/2w9s3oRuOuDOf2Eb8fL1N6OrJaipnKU7MM05wzcp1I3qFFrw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
+      koa: '>=2.0.0'
       webpack: '>=5.20.0'
     dependencies:
       '@nuintun/ansi': 0.0.3
@@ -5140,7 +5141,8 @@ packages:
       '@types/ws': 8.5.10
       destroy: 1.2.0
       etag: 1.8.1
-      memfs: 4.8.1
+      koa: 2.15.3
+      memfs: 4.8.2
       range-parser: 1.2.1
       schema-utils: 4.2.0
       supports-color: 9.4.0
