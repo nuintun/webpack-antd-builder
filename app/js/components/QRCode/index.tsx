@@ -14,9 +14,7 @@ type Segment = Alphanumeric | Byte | Hanzi | Kanji | Numeric;
 const SHORT_HEX_RE = /^#([a-f\d])([a-f\d])([a-f\d])([a-f\d])?$/i;
 
 function hex2rgb(hex: HEX): [R: number, G: number, B: number] {
-  hex = hex.replace(SHORT_HEX_RE, (_match, r, g, b, a) => {
-    a = a ?? '';
-
+  hex = hex.replace(SHORT_HEX_RE, (_match, r, g, b, a = '') => {
     return `#${r + r + g + g + b + b + a + a}`;
   }) as HEX;
 
