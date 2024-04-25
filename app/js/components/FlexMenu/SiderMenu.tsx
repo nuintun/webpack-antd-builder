@@ -6,7 +6,6 @@ import React, { memo, useMemo } from 'react';
 
 import { prefixUI } from './style';
 import classNames from 'classnames';
-import { getBorderSize } from './utils';
 import { Layout, MenuTheme, SiderProps, theme } from 'antd';
 import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
 
@@ -50,23 +49,20 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
-  const { token, hashId } = useToken();
-
-  const borderSize = getBorderSize(token);
+  const { hashId } = useToken();
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {
       height: headerHeight,
-      lineHeight: `${headerHeight - borderSize}px`
+      lineHeight: `${headerHeight}px`
     };
-  }, [headerHeight, borderSize]);
+  }, [headerHeight]);
 
   const menuStyle = useMemo<React.CSSProperties>(() => {
     return {
-      borderWidth: borderSize,
       height: `calc(100% - ${headerHeight}px)`
     };
-  }, [headerHeight, borderSize]);
+  }, [headerHeight]);
 
   return (
     <Sider
@@ -88,7 +84,7 @@ export default memo(function SiderMenu({
             isMobile,
             collapsed,
             collapsedWidth,
-            height: headerHeight - borderSize
+            height: headerHeight
           })}
         </div>
       )}

@@ -1,13 +1,15 @@
 import { CSSInterpolation } from '@ant-design/cssinjs';
-import { getBorderSize } from '/js/components/FlexMenu/utils';
 import { headerBgDark, headerBgLight } from '/js/components/FlexMenu/style';
 import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-flex-layout';
 
 function getFlexLayoutStyle(token: Token): CSSInterpolation {
-  const borderSize = getBorderSize(token);
+  const layout = token.Layout;
   const headerBg = token.Layout?.headerBg;
+  const lineType = layout?.lineType ?? token.lineType;
+  const lineWidth = layout?.lineWidth ?? token.lineWidth;
+  const colorSplit = layout?.colorSplit ?? token.colorSplit;
 
   return {
     [`.${prefixUI}`]: {
@@ -22,7 +24,6 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
         fontSize: token.fontSizeXL,
         justifyContent: 'space-between',
         transition: `all ${token.motionDurationMid}`,
-        borderBlockEnd: `${borderSize}px ${token.lineType} ${token.colorSplit}`,
 
         [`.${prefixUI}-trigger`]: {
           flex: 0,
@@ -43,7 +44,6 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
       },
 
       [`.${prefixUI}-content`]: {
-        height: '100%',
         overflow: 'auto',
         position: 'relative',
         color: token.colorText,
@@ -51,7 +51,8 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
         scrollBehavior: 'smooth',
         OverscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',
-        transition: `all ${token.motionDurationMid}`
+        transition: `all ${token.motionDurationMid}`,
+        borderBlockStart: `${lineWidth}px ${lineType} ${colorSplit}`
       },
 
       [`&.${prefixUI}-dark`]: {
@@ -67,6 +68,10 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
           backgroundColor: headerBg ?? headerBgLight
         }
       }
+    },
+
+    [`.${prefixUI}-menu`]: {
+      borderBlockStart: `${lineWidth}px ${lineType} ${colorSplit}`
     }
   };
 }
