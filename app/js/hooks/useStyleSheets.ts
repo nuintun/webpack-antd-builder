@@ -4,8 +4,10 @@
 
 import { ReactElement } from 'react';
 
-import { theme } from 'antd';
+import { GlobalToken, theme, ThemeConfig } from 'antd';
 import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
+
+const { useToken } = theme;
 
 export interface StyleSheets {
   (token: Token, hashId: string): CSSInterpolation;
@@ -17,9 +19,7 @@ export interface UseStyleSheets {
   readonly render: (node: ReactElement) => ReactElement;
 }
 
-export type Token = ReturnType<typeof useToken>['token'];
-
-const { useToken } = theme;
+export type Token = GlobalToken & ThemeConfig['components'];
 
 /**
  * @function useStyleSheets
