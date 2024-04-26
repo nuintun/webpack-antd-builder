@@ -9,6 +9,8 @@ import useLatestRef from './useLatestRef';
 import useRequest, { RequestOptions } from './useRequest';
 import { Body, Query, RequestError } from '/js/utils/request';
 
+const { useApp } = App;
+
 export type Values = Query | Body;
 
 type OmitProps = 'body' | 'onError' | 'onSuccess' | 'onComplete';
@@ -20,8 +22,6 @@ export interface Options<V extends Values, R> extends Omit<RequestOptions<R>, Om
   onSuccess?: (response: R, values: V) => void;
   onError?: (error: RequestError<R>, values: V) => void;
 }
-
-const { useApp } = App;
 
 /**
  * @function useSubmit

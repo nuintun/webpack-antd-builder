@@ -8,20 +8,20 @@ import memoizeOne from 'memoize-one';
 import { PaginationProps } from 'antd';
 import useLatestRef from './useLatestRef';
 
-type PagingOptions = Omit<PaginationProps, 'total' | 'current' | 'pageSize' | 'defaultCurrent' | 'defaultPageSize'>;
-
-export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
-  pageSizeOptions?: number[];
-}
-
-const DEFAULT_PAGE_SIZE_OPTIONS = [20, 30, 50, 80];
-
 /**
  * @function showTotal
  * @param total 总条数
  */
 function showTotal(total: number): string {
   return `共 ${total} 条`;
+}
+
+const DEFAULT_PAGE_SIZE_OPTIONS = [20, 30, 50, 80];
+
+type PagingOptions = Omit<PaginationProps, 'total' | 'current' | 'pageSize' | 'defaultCurrent' | 'defaultPageSize'>;
+
+export interface Options extends Omit<PagingOptions, 'pageSizeOptions'> {
+  pageSizeOptions?: number[];
 }
 
 /**

@@ -18,15 +18,15 @@ import { ListProps, PaginationProps } from 'antd';
 import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
 
+interface Refs<I, E> extends RequestRefs<I, E> {
+  readonly sorter: Sorter | false;
+}
+
 type OnChange = NonNullable<PaginationProps['onChange']>;
 
 type Pagination = (UsePagingOptions & Partial<RequestPagination>) | false;
 
 type DefaultListProps<I> = Required<Pick<ListProps<I>, 'loading' | 'dataSource' | 'pagination'>>;
-
-interface Refs<I, E> extends RequestRefs<I, E> {
-  readonly sorter: Sorter | false;
-}
 
 export interface Options<I, E> extends InitOptions<I, E> {
   pagination?: Pagination;

@@ -13,7 +13,19 @@ import { isObject } from '/js/utils/utils';
 import { Location, useLocation, useNavigate } from 'react-nest-router';
 import fetch, { Options as RequestInit, RequestError } from '/js/utils/request';
 
+const { useApp } = App;
+
 export type Navigate = ReturnType<typeof useNavigate>;
+
+/**
+ * @function onUnauthorizedHandler
+ * @description 默认未授权操作
+ * @param navigate 导航方法
+ * @param location 导航信息
+ */
+function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
+  navigate('/login', { state: location });
+}
 
 export interface Options extends Omit<RequestInit, 'onMessage' | 'onUnauthorized'> {
   delay?: number;
@@ -25,18 +37,6 @@ export interface RequestOptions<R> extends Omit<Options, 'delay'> {
   onComplete?: () => void;
   onSuccess?: (response: R) => void;
   onError?: (error: RequestError<R>) => void;
-}
-
-const { useApp } = App;
-
-/**
- * @function onUnauthorizedHandler
- * @description 默认未授权操作
- * @param navigate 导航方法
- * @param location 导航信息
- */
-function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
-  navigate('/login', { state: location });
 }
 
 /**

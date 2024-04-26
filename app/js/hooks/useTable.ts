@@ -20,15 +20,30 @@ import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 type Filter = Search;
 
+interface Refs<I, E = {}> extends RequestRefs<I, E> {
+  readonly filter: Filter | false;
+  readonly sorter: Sorter | false;
+}
+
 type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
 
 type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
 
+/**
+ * @function serializeField
+ * @description 字段序列化
+ * @param filed 字段
+ */
+function serializeField(filed: React.Key | readonly React.Key[]): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : (filed as React.Key);
+}
+
 type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
 
-interface Refs<I, E = {}> extends RequestRefs<I, E> {
-  readonly filter: Filter | false;
-  readonly sorter: Sorter | false;
+export interface RequestOptions extends RequestInit {
+  filter?: Filter | false;
+  sorter?: Sorter | false;
+  pagination?: Pagination;
 }
 
 export interface Options<I, E> extends InitOptions<I, E> {
@@ -37,16 +52,6 @@ export interface Options<I, E> extends InitOptions<I, E> {
 
 export interface TransformOptions<I, E, T> extends InitTransformOptions<I, E, T> {
   pagination?: Pagination;
-}
-
-export interface RequestOptions extends RequestInit {
-  filter?: Filter | false;
-  sorter?: Sorter | false;
-  pagination?: Pagination;
-}
-
-function serializeField(filed: React.Key | readonly React.Key[]): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : (filed as React.Key);
 }
 
 /**

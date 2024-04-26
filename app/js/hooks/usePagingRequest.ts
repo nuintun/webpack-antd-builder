@@ -9,14 +9,14 @@ import useLatestRef from './useLatestRef';
 import useSearches, { Search } from './useSearches';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
 
+const { useApp } = App;
+
 interface Page<I> {
   // 数据项
   readonly items?: I[];
   // 数据总条数
   readonly total?: number;
 }
-
-export type Response<I, E> = Page<I> & Partial<Omit<E, keyof Page<I>>>;
 
 export interface Pagination {
   page: number;
@@ -27,6 +27,14 @@ export interface Sorter {
   orderBy: React.Key[];
   orderType: ('ascend' | 'descend')[];
 }
+
+export interface Refs<I, E> {
+  readonly search: Search | false;
+  readonly response: Response<I, E>;
+  readonly pagination: Pagination | false;
+}
+
+export type Response<I, E> = Page<I> & Partial<Omit<E, keyof Page<I>>>;
 
 export interface Options<I, E> extends Omit<RequestInit<Response<I, E>>, 'body' | 'method'> {
   delay?: number;
@@ -41,14 +49,6 @@ export interface RequestOptions extends Omit<InitOptions, 'body' | 'delay' | 'me
   search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }
-
-export interface Refs<I, E> {
-  readonly search: Search | false;
-  readonly response: Response<I, E>;
-  readonly pagination: Pagination | false;
-}
-
-const { useApp } = App;
 
 /**
  * @function hasQuery
