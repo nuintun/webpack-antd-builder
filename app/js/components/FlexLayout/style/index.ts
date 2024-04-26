@@ -44,6 +44,7 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
       },
 
       [`.${prefixUI}-content`]: {
+        height: '100%',
         overflow: 'auto',
         position: 'relative',
         color: token.colorText,
