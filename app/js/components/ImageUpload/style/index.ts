@@ -3,7 +3,7 @@ import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets'
 
 export const prefixUI = 'ui-image-upload';
 
-function getRoutePaperStyle(token: Token): CSSInterpolation {
+function getImageUploadStyle(token: Token): CSSInterpolation {
   return {
     [`.${prefixUI}`]: {
       gap: 8,
@@ -67,5 +67,5 @@ function getRoutePaperStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'ImageUpload', prefixUI], getRoutePaperStyle);
+  return useStyleSheets(['components', 'ImageUpload', prefixUI], getImageUploadStyle);
 }

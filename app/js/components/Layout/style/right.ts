@@ -3,7 +3,7 @@ import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets'
 
 export const prefixUI = 'ui-right-header';
 
-function getRouteTabsStyle(token: Token): CSSInterpolation {
+function getRightHeaderStyle(token: Token): CSSInterpolation {
   return {
     [`.${prefixUI}`]: {
       display: 'flex',
@@ -26,5 +26,5 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'Layout', 'RightHeader', prefixUI], getRouteTabsStyle);
+  return useStyleSheets(['components', 'Layout', 'RightHeader', prefixUI], getRightHeaderStyle);
 }

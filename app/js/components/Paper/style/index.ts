@@ -3,7 +3,7 @@ import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets'
 
 export const prefixUI = 'ui-paper';
 
-function getRoutePaperStyle(token: Token): CSSInterpolation {
+function getPaperStyle(token: Token): CSSInterpolation {
   return {
     [`.${prefixUI}`]: {
       margin: token.marginXS,
@@ -15,5 +15,5 @@ function getRoutePaperStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'Paper', prefixUI], getRoutePaperStyle);
+  return useStyleSheets(['components', 'Paper', prefixUI], getPaperStyle);
 }

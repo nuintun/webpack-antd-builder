@@ -3,7 +3,7 @@ import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets'
 
 export const prefixUI = 'ui-route-menu';
 
-function getFlexMenuStyle(token: Token): CSSInterpolation {
+function getRouteMenuStyle(token: Token): CSSInterpolation {
   const { marginXXS, fontSizeLG } = token;
   const marginInline = token.Menu?.itemMarginInline ?? marginXXS;
 
@@ -52,5 +52,5 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
 }
 
 export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'RouteMenu', prefixUI], getFlexMenuStyle);
+  return useStyleSheets(['components', 'RouteMenu', prefixUI], getRouteMenuStyle);
 }

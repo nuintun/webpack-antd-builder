@@ -10,6 +10,7 @@ import { parse } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
+import { StyleProvider } from '@ant-design/cssinjs';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { App, Button, ConfigProvider, Result, theme } from 'antd';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
@@ -82,10 +83,19 @@ const Page = memo(function Page() {
 
 export default memo(function App() {
   const [theme] = useTheme();
+  const algorithm = useMemo(() => {
+    if (theme === 'dark') {
+      return darkAlgorithm;
+    }
+
+    return defaultAlgorithm;
+  }, [theme]);
 
   return (
-    <ConfigProvider theme={{ algorithm: [theme === 'dark' ? darkAlgorithm : defaultAlgorithm] }}>
-      <Page />
-    </ConfigProvider>
+    <StyleProvider autoClear>
+      <ConfigProvider theme={{ algorithm, cssVar: true }}>
+        <Page />
+      </ConfigProvider>
+    </StyleProvider>
   );
 });
