@@ -83,17 +83,16 @@ const Page = memo(function Page() {
 
 export default memo(function App() {
   const [theme] = useTheme();
-  const algorithm = useMemo(() => {
-    if (theme === 'dark') {
-      return darkAlgorithm;
-    }
-
-    return defaultAlgorithm;
-  }, [theme]);
 
   return (
     <StyleProvider autoClear>
-      <ConfigProvider theme={{ algorithm, cssVar: true }}>
+      <ConfigProvider
+        theme={{
+          cssVar: true,
+          hashed: false,
+          algorithm: theme === 'dark' ? darkAlgorithm : defaultAlgorithm
+        }}
+      >
         <Page />
       </ConfigProvider>
     </StyleProvider>
