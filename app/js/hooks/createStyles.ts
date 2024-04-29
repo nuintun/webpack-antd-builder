@@ -84,10 +84,10 @@ export function createStyles(path: string[], styles: Styles): UseStyles {
       }
 
       if (cssVar) {
-        const { prefix } = cssVar;
+        const { key } = cssVar;
 
-        if (prefix) {
-          scopes.push(prefix);
+        if (key) {
+          scopes.push(key);
         }
       }
 
