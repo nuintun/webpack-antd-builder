@@ -85,11 +85,6 @@ export default memo(function App() {
   return (
     <ConfigProvider
       theme={{
-        components: {
-          Layout: {
-            colorBgContainer: '#f0f2f5'
-          }
-        },
         cssVar: true,
         hashed: false,
         algorithm: theme === 'dark' ? darkAlgorithm : defaultAlgorithm
