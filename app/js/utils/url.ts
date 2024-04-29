@@ -1,5 +1,5 @@
 /**
- * @module path
+ * @module url
  */
 
 import { normalize } from 'react-nest-router';

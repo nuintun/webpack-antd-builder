@@ -3,7 +3,6 @@
  */
 
 import React, { memo } from 'react';
-
 import { Button, ButtonProps } from 'antd';
 import Action, { ActionProps } from '/js/components/Action';
 

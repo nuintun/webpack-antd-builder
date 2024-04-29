@@ -3,7 +3,6 @@
  */
 
 import { useMemo } from 'react';
-
 import useLatestRef from './useLatestRef';
 import { debounce } from 'throttle-debounce';
 

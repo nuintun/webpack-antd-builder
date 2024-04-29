@@ -2,9 +2,8 @@
  * @module useMedia
  */
 
-import { useMemo, useState } from 'react';
-
 import { canUseDOM } from '/js/utils/dom';
+import { useMemo, useState } from 'react';
 import useIsoLayoutEffect from './useIsoLayoutEffect';
 
 /**

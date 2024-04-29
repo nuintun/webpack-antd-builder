@@ -2,10 +2,9 @@
  * @module index
  */
 
-import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
-
 import { Button } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
+import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
   onOpen?: () => void;

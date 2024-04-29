@@ -1,12 +1,11 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-flex-menu';
 
 export const headerBgDark = '#141414';
 export const headerBgLight = '#001529';
 
-function getFlexMenuStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'FlexMenu', prefixUI], token => {
   const headerBg = token.Layout?.headerBg;
 
   return {
@@ -37,8 +36,4 @@ function getFlexMenuStyle(token: Token): CSSInterpolation {
       }
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'FlexMenu', prefixUI], getFlexMenuStyle);
-}
+});

@@ -2,10 +2,9 @@
  * @module index
  */
 
-import React, { memo, useCallback, useRef } from 'react';
-
 import useMedia from '/js/hooks/useMedia';
 import { isString } from '/js/utils/utils';
+import React, { memo, useCallback, useRef } from 'react';
 import { ConfigProvider, Drawer, DrawerProps } from 'antd';
 
 export interface FlexDrawerProps extends DrawerProps {

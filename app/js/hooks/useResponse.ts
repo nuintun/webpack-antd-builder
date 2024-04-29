@@ -2,10 +2,9 @@
  * @module useResponse
  */
 
-import { useCallback, useEffect, useState } from 'react';
-
 import useLatestRef from './useLatestRef';
 import { RequestOptions } from './useRequest';
+import { useCallback, useEffect, useState } from 'react';
 
 interface Fetch<R> {
   (options?: RequestOptions<R>): void;

@@ -2,9 +2,8 @@
  * @module useIsoLayoutEffect
  */
 
-import { useEffect, useLayoutEffect } from 'react';
-
 import { canUseDOM } from '/js/utils/dom';
+import { useEffect, useLayoutEffect } from 'react';
 
 /**
  * @function useIsoLayoutEffect

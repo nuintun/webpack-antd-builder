@@ -1,5 +1,4 @@
 import { memo, useMemo } from 'react';
-
 import Paper from '/js/components/Paper';
 import QRCode from '/js/components/QRCode';
 import { Byte, Charset } from '@nuintun/qrcode';

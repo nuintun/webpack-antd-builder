@@ -2,8 +2,6 @@
  * @module useList
  */
 
-import { useCallback, useMemo } from 'react';
-
 import useLatestRef from './useLatestRef';
 import usePagingRequest, {
   hasQuery,
@@ -14,6 +12,7 @@ import usePagingRequest, {
   Sorter,
   TransformOptions as InitTransformOptions
 } from './usePagingRequest';
+import { useCallback, useMemo } from 'react';
 import { ListProps, PaginationProps } from 'antd';
 import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';

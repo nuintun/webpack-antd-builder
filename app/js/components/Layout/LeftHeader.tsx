@@ -2,9 +2,8 @@
  * @module LeftHeader
  */
 
-import React, { memo, useMemo } from 'react';
-
 import Link from '/js/components/Link';
+import React, { memo, useMemo } from 'react';
 import { HeaderRenderProps } from '/js/components/FlexMenu';
 
 import logo from '/images/logo.svg?url';

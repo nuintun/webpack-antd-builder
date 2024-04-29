@@ -1,9 +1,8 @@
 import * as styles from '/css/pages/home/index.module.scss';
 
-import { memo, useEffect, useMemo, useState } from 'react';
-
 import Paper from '/js/components/Paper';
 import { Line, LineConfig } from '@ant-design/plots';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 interface LineItem {
   year: string;

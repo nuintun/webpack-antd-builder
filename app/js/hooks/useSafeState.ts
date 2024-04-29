@@ -2,9 +2,8 @@
  * @module useSafeState
  */
 
-import React, { useCallback, useState } from 'react';
-
 import useIsMounted from './useIsMounted';
+import React, { useCallback, useState } from 'react';
 
 /**
  * @function useSafeState

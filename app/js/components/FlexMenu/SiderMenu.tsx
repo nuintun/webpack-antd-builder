@@ -2,15 +2,13 @@
  * @module SiderMenu
  */
 
-import React, { memo, useMemo } from 'react';
-
-import { prefixUI } from './style';
 import classNames from 'classnames';
-import { Layout, MenuTheme, SiderProps, theme } from 'antd';
+import React, { memo, useMemo } from 'react';
+import useStyles, { prefixUI } from './style';
+import { Layout, MenuTheme, SiderProps } from 'antd';
 import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
 
 const { Sider } = Layout;
-const { useToken } = theme;
 
 export interface HeaderRenderProps {
   readonly width: number;
@@ -49,7 +47,7 @@ export default memo(function SiderMenu({
   collapsedWidth = 64,
   ...restProps
 }: SiderMenuProps): React.ReactElement {
-  const { hashId } = useToken();
+  const [scope, render] = useStyles();
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {
@@ -64,7 +62,7 @@ export default memo(function SiderMenu({
     };
   }, [headerHeight]);
 
-  return (
+  return render(
     <Sider
       collapsible
       style={style}
@@ -74,7 +72,7 @@ export default memo(function SiderMenu({
       collapsed={collapsed}
       onCollapse={onCollapse}
       collapsedWidth={collapsedWidth}
-      className={classNames(hashId, `${prefixUI}-sider`, `${prefixUI}-${theme}`, className)}
+      className={classNames(scope, `${prefixUI}-sider`, `${prefixUI}-${theme}`, className)}
     >
       {headerRender && (
         <div className={`${prefixUI}-header`} style={headerStyle}>

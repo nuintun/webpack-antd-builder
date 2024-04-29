@@ -1,9 +1,8 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-image-upload';
 
-function getImageUploadStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'ImageUpload', prefixUI], token => {
   return {
     [`.${prefixUI}`]: {
       gap: 8,
@@ -64,8 +63,4 @@ function getImageUploadStyle(token: Token): CSSInterpolation {
       }
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'ImageUpload', prefixUI], getImageUploadStyle);
-}
+});

@@ -3,7 +3,6 @@
  */
 
 import React, { memo } from 'react';
-
 import { Switch, SwitchProps } from 'antd';
 import Action, { ActionProps } from '/js/components/Action';
 

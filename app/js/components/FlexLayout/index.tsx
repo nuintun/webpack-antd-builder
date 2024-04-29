@@ -2,16 +2,16 @@
  * @module index
  */
 
-import React, { memo, Suspense, useCallback, useMemo, useRef, useState } from 'react';
-
+import classNames from 'classnames';
 import useMedia from '/js/hooks/useMedia';
-import useStyle, { prefixUI } from './style';
 import useStorage from '/js/hooks/useStorage';
+import useStyles, { prefixUI } from './style';
 import { ConfigProvider, Layout } from 'antd';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
+import React, { memo, Suspense, useCallback, useMemo, useRef, useState } from 'react';
 
 const { Header, Content } = Layout;
 
@@ -41,7 +41,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
     mobileQuery = '(max-width: 576px)'
   } = props;
 
-  const { hashId, render } = useStyle();
+  const [scope, render] = useStyles();
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -105,7 +105,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   }, [headerHeight]);
 
   return render(
-    <Layout hasSider={!isMobile} className={`${prefixUI} ${prefixUI}-${theme}`}>
+    <Layout hasSider={!isMobile} className={classNames(scope, prefixUI, `${prefixUI}-${theme}`)}>
       <FlexMenu
         items={menus}
         theme={theme}
@@ -117,7 +117,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         headerHeight={headerHeight}
         collapsedWidth={collapsedWidth}
         headerRender={leftHeaderRender}
-        rootClassName={`${hashId} ${prefixUI}-menu`}
+        rootClassName={`${prefixUI}-menu`}
       />
       <Layout>
         <Header style={headerStyle} className={`${prefixUI}-header`}>

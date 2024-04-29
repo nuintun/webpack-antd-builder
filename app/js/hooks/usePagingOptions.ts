@@ -2,11 +2,10 @@
  * @module usePagingOptions
  */
 
-import { useCallback, useMemo } from 'react';
-
 import memoizeOne from 'memoize-one';
 import { PaginationProps } from 'antd';
 import useLatestRef from './useLatestRef';
+import { useCallback, useMemo } from 'react';
 
 /**
  * @function showTotal

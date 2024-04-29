@@ -2,9 +2,8 @@
  * @module useTitle
  */
 
-import { useEffect, useRef } from 'react';
-
 import { canUseDOM } from '/js/utils/dom';
+import { useEffect, useRef } from 'react';
 
 export interface Options {
   defaultTitle?: string;

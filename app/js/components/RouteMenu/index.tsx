@@ -2,18 +2,17 @@
  * @module index
  */
 
-import React, { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-
 import classNames from 'classnames';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
-import useStyle, { prefixUI } from './style';
+import useStyles, { prefixUI } from './style';
 import { useMatches } from 'react-nest-router';
 import useItems, { ItemRender } from './useItems';
 import useLatestRef from '/js/hooks/useLatestRef';
 import { SiderContext } from 'antd/es/layout/Sider';
 import { flattenItems, getExpandKeys, mergeKeys } from './utils';
+import React, { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 type OmitProps =
   | 'multiple'
@@ -35,7 +34,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
   const { inlineCollapsed } = props;
   const { items, className, itemRender, defaultOpenKeys, ...restProps } = props;
 
-  const { render } = useStyle();
+  const [scope, render] = useStyles();
   const matches = useMatches() as IRoute[];
   const { siderCollapsed } = useContext(SiderContext);
   const propsRef = useLatestRef<RouteMenuProps>(props);
@@ -93,7 +92,7 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
       items={useItems(items, selectedKeys, itemRender)}
-      className={classNames(prefixUI, `${prefixUI}-border`, className, {
+      className={classNames(scope, prefixUI, `${prefixUI}-border`, className, {
         [`${prefixUI}-collapsed`]: collapsed
       })}
     />

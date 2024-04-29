@@ -2,10 +2,9 @@
  * @module useWebSocket
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-
 import useIsMounted from './useIsMounted';
 import useLatestRef from './useLatestRef';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Socket<M> {
   readyState: number;

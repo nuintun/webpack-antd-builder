@@ -2,10 +2,9 @@
  * @module RightHeader
  */
 
-import { memo, useCallback, useMemo } from 'react';
-
 import classNames from 'classnames';
-import useStyle, { prefixUI } from './style/right';
+import { memo, useCallback, useMemo } from 'react';
+import useStyles, { prefixUI } from './style/right';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import { App, Avatar, Dropdown, MenuProps } from 'antd';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
@@ -144,10 +143,10 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 });
 
 export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React.ReactElement {
-  const { hashId, render } = useStyle();
+  const [scope, render] = useStyles();
 
   return render(
-    <div className={classNames(hashId, prefixUI)}>
+    <div className={classNames(scope, prefixUI)}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>

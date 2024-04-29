@@ -1,21 +1,20 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-route-tabs';
 
-function getRouteTabsStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'RouteTabs', prefixUI], (token, { calc, unit }) => {
   const { fontSizeLG } = token;
 
   return {
     [`.${prefixUI}`]: {
       marginBlockStart: -1,
-      borderBlockStart: `${token.lineWidth}px ${token.lineType} ${token.colorSplit}`,
+      borderBlockStart: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
 
       '> [role=tablist]': {
         margin: 0,
         paddingBlock: 0,
-        paddingInline: token.paddingXS * 2,
         backgroundColor: token.colorBgContainer,
+        paddingInline: calc(token.paddingXS).mul(2).equal(),
 
         '&::before': {
           display: 'none'
@@ -23,9 +22,9 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
       },
 
       [`.${prefixUI}-nav`]: {
-        fontSize: fontSizeLG,
         color: 'inherit',
-        lineHeight: `${fontSizeLG}px`,
+        fontSize: fontSizeLG,
+        lineHeight: unit(fontSizeLG),
 
         [`&:hover, &.${prefixUI}-active`]: {
           color: 'inherit'
@@ -51,8 +50,4 @@ function getRouteTabsStyle(token: Token): CSSInterpolation {
       }
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'RouteTabs', prefixUI], getRouteTabsStyle);
-}
+});

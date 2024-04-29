@@ -1,10 +1,9 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
+import { createStyles } from '/js/hooks/createStyles';
 import { headerBgDark, headerBgLight } from '/js/components/FlexMenu/style';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
 
 export const prefixUI = 'ui-flex-layout';
 
-function getFlexLayoutStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'FlexLayout', prefixUI], (token, { unit }) => {
   const layout = token.Layout;
   const headerBg = token.Layout?.headerBg;
   const lineType = layout?.lineType ?? token.lineType;
@@ -39,7 +38,7 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
           gap: token.margin,
           placeItems: 'center',
           justifyContent: 'space-between',
-          padding: `0 ${token.paddingXS}px`
+          padding: `0 ${unit(token.paddingXS)}`
         }
       },
 
@@ -53,7 +52,7 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
         OverscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',
         transition: `all ${token.motionDurationMid}`,
-        borderBlockStart: `${lineWidth}px ${lineType} ${colorSplit}`
+        borderBlockStart: `${unit(lineWidth)} ${lineType} ${colorSplit}`
       },
 
       [`&.${prefixUI}-dark`]: {
@@ -72,11 +71,7 @@ function getFlexLayoutStyle(token: Token): CSSInterpolation {
     },
 
     [`.${prefixUI}-menu`]: {
-      borderBlockStart: `${lineWidth}px ${lineType} ${colorSplit}`
+      borderBlockStart: `${unit(lineWidth)} ${lineType} ${colorSplit}`
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'FlexLayout', prefixUI], getFlexLayoutStyle);
-}
+});

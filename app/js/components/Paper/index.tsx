@@ -5,7 +5,7 @@
 import React, { memo } from 'react';
 
 import classNames from 'classnames';
-import useStyle, { prefixUI } from './style';
+import useStyles, { prefixUI } from './style';
 
 export interface PaperProps {
   className?: string;
@@ -13,7 +13,7 @@ export interface PaperProps {
 }
 
 export default memo(function Paper({ className, children }: PaperProps): React.ReactElement {
-  const { hashId, render } = useStyle();
+  const [scope, render] = useStyles();
 
-  return render(<div className={classNames(hashId, prefixUI, className)}>{children}</div>);
+  return render(<div className={classNames(scope, prefixUI, className)}>{children}</div>);
 });

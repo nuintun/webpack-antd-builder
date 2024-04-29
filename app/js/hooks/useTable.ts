@@ -2,8 +2,6 @@
  * @module useTable
  */
 
-import React, { useCallback, useMemo } from 'react';
-
 import { TableProps } from 'antd';
 import useLatestRef from './useLatestRef';
 import usePagingRequest, {
@@ -15,6 +13,7 @@ import usePagingRequest, {
   Sorter,
   TransformOptions as InitTransformOptions
 } from './usePagingRequest';
+import React, { useCallback, useMemo } from 'react';
 import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 

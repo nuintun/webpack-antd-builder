@@ -2,11 +2,10 @@
  * @module useControllableValue
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
-
 import useIsMounted from './useIsMounted';
 import useLatestRef from './useLatestRef';
 import { isFunction } from '/js/utils/utils';
+import React, { useCallback, useEffect, useState } from 'react';
 
 export interface Props {
   [prop: string]: any;

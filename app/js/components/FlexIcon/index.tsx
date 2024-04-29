@@ -2,12 +2,11 @@
  * @module index
  */
 
-import React, { cloneElement, memo, useContext } from 'react';
-
 import classNames from 'classnames';
 import { ConfigProvider } from 'antd';
 import { Icon } from '/js/utils/router';
 import { isString } from '/js/utils/utils';
+import React, { cloneElement, memo, useContext } from 'react';
 
 export interface FlexIconProps {
   icon?: Icon;

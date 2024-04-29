@@ -2,9 +2,8 @@
  * @module createSharedState
  */
 
-import React, { useEffect, useState } from 'react';
-
 import { isFunction } from '/js/utils/utils';
+import React, { useEffect, useState } from 'react';
 
 type SetSharedState<S> = React.Dispatch<React.SetStateAction<S>>;
 

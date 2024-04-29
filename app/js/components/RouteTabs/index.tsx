@@ -2,15 +2,14 @@
  * @module index
  */
 
-import React, { memo, Suspense, useMemo } from 'react';
-
 import classNames from 'classnames';
 import Link from '/js/components/Link';
-import { Tabs, TabsProps } from 'antd';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
-import useStyle, { prefixUI } from './style';
+import useStyles, { prefixUI } from './style';
 import FlexIcon from '/js/components/FlexIcon';
+import React, { memo, Suspense, useMemo } from 'react';
+import { ConfigProvider, Tabs, TabsProps } from 'antd';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
@@ -40,8 +39,8 @@ export default memo(function RouteTabs({
   icon: showIcon = true,
   ...restProps
 }: RouteTabsProps): React.ReactElement {
-  const { render } = useStyle();
   const index = useMatchIndex();
+  const [scope, render] = useStyles();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
@@ -75,16 +74,26 @@ export default memo(function RouteTabs({
   }, [activeKey, match]);
 
   return render(
-    <Tabs
-      {...restProps}
-      items={items}
-      activeKey={activeKey}
-      destroyInactiveTabPane
-      tabPosition={tabPosition}
-      tabBarGutter={tabBarGutter}
-      className={classNames(prefixUI, className, {
-        [`${prefixUI}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
-      })}
-    />
+    <ConfigProvider
+      theme={{
+        components: {
+          Tabs: {
+            cardHeight: 64
+          }
+        }
+      }}
+    >
+      <Tabs
+        {...restProps}
+        items={items}
+        activeKey={activeKey}
+        destroyInactiveTabPane
+        tabPosition={tabPosition}
+        tabBarGutter={tabBarGutter}
+        className={classNames(scope, prefixUI, className, {
+          [`${prefixUI}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
+        })}
+      />
+    </ConfigProvider>
   );
 });

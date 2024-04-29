@@ -1,19 +1,14 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-paper';
 
-function getPaperStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'Paper', prefixUI], (token, { calc }) => {
   return {
     [`.${prefixUI}`]: {
       margin: token.marginXS,
-      padding: token.paddingXS * 2,
       borderRadius: token.borderRadius,
-      backgroundColor: token.colorBgContainer
+      backgroundColor: token.colorBgContainer,
+      padding: calc(token.paddingXS).mul(2).equal()
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'Paper', prefixUI], getPaperStyle);
-}
+});

@@ -3,7 +3,6 @@
  */
 
 import React, { memo } from 'react';
-
 import { Spin, SpinProps } from 'antd';
 
 export interface SuspenseFallBackProps extends Pick<SpinProps, 'delay'>, Pick<React.CSSProperties, 'width' | 'height'> {}

@@ -4,13 +4,11 @@
 
 import '/css/global.scss';
 
-import React, { lazy, memo, Suspense, useMemo } from 'react';
-
 import { parse } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import { Router } from 'react-nest-router';
 import { router } from '/js/config/router';
-import { StyleProvider } from '@ant-design/cssinjs';
+import React, { lazy, memo, Suspense, useMemo } from 'react';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { App, Button, ConfigProvider, Result, theme } from 'antd';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
@@ -85,16 +83,19 @@ export default memo(function App() {
   const [theme] = useTheme();
 
   return (
-    <StyleProvider autoClear>
-      <ConfigProvider
-        theme={{
-          cssVar: true,
-          hashed: false,
-          algorithm: theme === 'dark' ? darkAlgorithm : defaultAlgorithm
-        }}
-      >
-        <Page />
-      </ConfigProvider>
-    </StyleProvider>
+    <ConfigProvider
+      theme={{
+        components: {
+          Layout: {
+            colorBgContainer: '#f0f2f5'
+          }
+        },
+        cssVar: true,
+        hashed: false,
+        algorithm: theme === 'dark' ? darkAlgorithm : defaultAlgorithm
+      }}
+    >
+      <Page />
+    </ConfigProvider>
   );
 });

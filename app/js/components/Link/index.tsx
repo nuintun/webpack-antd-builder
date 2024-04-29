@@ -2,9 +2,8 @@
  * @module index
  */
 
-import React, { memo, useCallback, useMemo } from 'react';
-
 import useLatestRef from '/js/hooks/useLatestRef';
+import React, { memo, useCallback, useMemo } from 'react';
 import { To, useNavigate, useResolve } from 'react-nest-router';
 
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;

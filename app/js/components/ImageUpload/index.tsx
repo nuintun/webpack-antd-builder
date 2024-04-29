@@ -5,7 +5,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
-import useStyle, { prefixUI } from './style';
+import useStyles, { prefixUI } from './style';
 import { App, Image, Upload, UploadProps } from 'antd';
 import { useLocation, useNavigate } from 'react-nest-router';
 import useControllableValue from '/js/hooks/useControllableValue';
@@ -60,7 +60,7 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
   const { message } = useApp();
   const location = useLocation();
   const navigate = useNavigate();
-  const { hashId, render } = useStyle();
+  const [scope, render] = useStyles();
   const [value = [], setValue] = useControllableValue<string[]>(props);
   const [fileList, setFileList] = useState<FileList<T>>(() => getFileList(value));
 
@@ -131,7 +131,7 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
   }, [propsValue]);
 
   return render(
-    <div className={classNames(hashId, prefixUI)}>
+    <div className={classNames(scope, prefixUI)}>
       {showUploadList &&
         fileList.map(file => {
           const style = { width, height };

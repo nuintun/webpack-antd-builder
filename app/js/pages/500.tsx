@@ -1,7 +1,6 @@
-import React, { memo, useCallback } from 'react';
-
 import { Button, Result } from 'antd';
 import { useNavigate } from 'react-nest-router';
+import React, { memo, useCallback } from 'react';
 
 const style: React.CSSProperties = {
   display: 'flex',

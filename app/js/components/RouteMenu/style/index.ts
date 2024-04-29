@@ -1,9 +1,8 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-route-menu';
 
-function getRouteMenuStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'RouteMenu', prefixUI], (token, { calc, unit }) => {
   const { marginXXS, fontSizeLG } = token;
   const marginInline = token.Menu?.itemMarginInline ?? marginXXS;
 
@@ -44,13 +43,9 @@ function getRouteMenuStyle(token: Token): CSSInterpolation {
 
       [`&.${prefixUI}-collapsed`]: {
         '[role=menuitem]': {
-          paddingInline: `calc(50% - ${fontSizeLG / 2 + marginInline}px)`
+          paddingInline: `calc(50% - ${unit(calc(fontSizeLG).div(2).add(marginInline).equal())})`
         }
       }
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'RouteMenu', prefixUI], getRouteMenuStyle);
-}
+});

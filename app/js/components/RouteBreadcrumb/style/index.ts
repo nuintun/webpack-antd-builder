@@ -1,9 +1,8 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-route-breadcrumb';
 
-function getRouteBreadcrumbStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'RouteBreadcrumb', prefixUI], (token, { unit }) => {
   const { colorPrimary, fontSizeHeading2 } = token;
 
   return {
@@ -18,9 +17,9 @@ function getRouteBreadcrumbStyle(token: Token): CSSInterpolation {
       msScrollChaining: 'none',
       OverscrollBehavior: 'contain',
       WebkitOverflowScrolling: 'touch',
-      padding: `0 ${token.paddingXS}px`,
-      lineHeight: `${fontSizeHeading2}px`,
+      padding: `0 ${unit(token.paddingXS)}`,
       backgroundColor: token.colorBgContainer,
+      lineHeight: `${unit(fontSizeHeading2)}`,
 
       '&::-webkit-scrollbar': {
         display: 'none'
@@ -54,8 +53,4 @@ function getRouteBreadcrumbStyle(token: Token): CSSInterpolation {
       }
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'RouteBreadcrumb', prefixUI], getRouteBreadcrumbStyle);
-}
+});

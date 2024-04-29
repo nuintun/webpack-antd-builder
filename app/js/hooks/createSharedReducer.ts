@@ -2,9 +2,8 @@
  * @module createSharedReducer
  */
 
-import React, { useEffect, useState } from 'react';
-
 import { isFunction } from '/js/utils/utils';
+import React, { useEffect, useState } from 'react';
 
 /**
  * @function createSharedReducer

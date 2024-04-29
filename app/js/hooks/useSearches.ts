@@ -3,7 +3,6 @@
  */
 
 import { useCallback, useRef } from 'react';
-
 import { Query as Search } from '/js/utils/request';
 
 export type { Search };

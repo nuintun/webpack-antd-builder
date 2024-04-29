@@ -3,7 +3,6 @@
  */
 
 import { memo, useMemo } from 'react';
-
 import { Image, ImageProps } from 'antd';
 import { Alphanumeric, Byte, Encoder, EncoderOptions, Hanzi, Kanji, Numeric } from '@nuintun/qrcode';
 

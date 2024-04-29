@@ -1,9 +1,8 @@
-import { CSSInterpolation } from '@ant-design/cssinjs';
-import { Token, UseStyleSheets, useStyleSheets } from '/js/hooks/useStyleSheets';
+import { createStyles } from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-right-header';
 
-function getRightHeaderStyle(token: Token): CSSInterpolation {
+export default createStyles(['components', 'Layout', 'RightHeader', prefixUI], token => {
   return {
     [`.${prefixUI}`]: {
       display: 'flex',
@@ -23,8 +22,4 @@ function getRightHeaderStyle(token: Token): CSSInterpolation {
       }
     }
   };
-}
-
-export default function useStyle(): UseStyleSheets {
-  return useStyleSheets(['components', 'Layout', 'RightHeader', prefixUI], getRightHeaderStyle);
-}
+});

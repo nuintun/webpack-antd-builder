@@ -2,9 +2,8 @@
  * @module useLazyState
  */
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-
 import useLatestRef from './useLatestRef';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
  * @function useLazyState

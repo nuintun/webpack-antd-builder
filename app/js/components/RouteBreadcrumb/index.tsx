@@ -2,12 +2,11 @@
  * @module index
  */
 
-import React, { memo, useMemo } from 'react';
-
 import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { IRoute } from '/js/utils/router';
-import useStyle, { prefixUI } from './style';
+import React, { memo, useMemo } from 'react';
+import useStyles, { prefixUI } from './style';
 import FlexIcon from '/js/components/FlexIcon';
 import { useMatches } from 'react-nest-router';
 import { Breadcrumb, BreadcrumbProps } from 'antd';
@@ -67,9 +66,9 @@ export default memo(function RouteBreadcrumb({
   className,
   icon: showIcon = true
 }: RouteBreadcrumbProps): React.ReactElement {
-  const { render } = useStyle();
+  const [scope, render] = useStyles();
   const matches = useMatches() as IRoute[];
   const items = useMemo(() => getBreadcrumbItems(matches, showIcon), [matches, showIcon]);
 
-  return render(<Breadcrumb items={items} style={style} className={classNames(prefixUI, className)} />);
+  return render(<Breadcrumb items={items} style={style} className={classNames(scope, prefixUI, className)} />);
 });

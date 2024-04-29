@@ -3,7 +3,6 @@
  */
 
 import React, { memo } from 'react';
-
 import dayjs, { ConfigType } from 'dayjs';
 
 type HTMLSpanElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
