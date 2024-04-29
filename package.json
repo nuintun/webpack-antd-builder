@@ -28,7 +28,7 @@
     "antd": "^5.16.5",
     "classnames": "^2.5.1",
     "core-js": "^3.37.0",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.11",
     "memoize-one": "^6.0.0",
     "rc-virtual-list": "^3.11.5",
     "react": "^18.3.1",
