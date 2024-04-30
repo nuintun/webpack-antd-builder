@@ -117,7 +117,6 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         headerHeight={headerHeight}
         collapsedWidth={collapsedWidth}
         headerRender={leftHeaderRender}
-        rootClassName={`${prefixUI}-menu`}
       />
       <Layout>
         <Header style={headerStyle} className={`${prefixUI}-header`}>

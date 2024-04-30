@@ -1,4 +1,4 @@
-import { createStyles } from '/js/hooks/createStyles';
+import createStyles from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-image-upload';
 
