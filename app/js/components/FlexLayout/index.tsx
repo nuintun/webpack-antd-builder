@@ -97,7 +97,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
 
   return render(
-    <Layout className={classNames(scope, prefixUI, `${prefixUI}-${theme}`)}>
+    <Layout hasSider={!isMobile} className={classNames(scope, prefixUI, `${prefixUI}-${theme}`)}>
       <FlexMenu
         items={menus}
         theme={theme}
