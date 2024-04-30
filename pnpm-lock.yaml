@@ -1369,8 +1369,8 @@ packages:
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
 
-  globalthis@1.0.3:
-    resolution: {integrity: sha512-sFdI5LyBiNTHjRd7cGPWapiHWMOXKyuBNX/cWJ3NfzrZQVa8GI/8cofCl74AOVqq9W5kNmguTIzJ/1s2gyI9wA==}
+  globalthis@1.0.4:
+    resolution: {integrity: sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==}
     engines: {node: '>= 0.4'}
 
   globby@6.1.0:
@@ -2316,8 +2316,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  rc-table@7.45.4:
-    resolution: {integrity: sha512-6aSbGrnkN2GLSt3s1x+wa4f3j/VEgg1uKPpaLY5qHH1/nFyreS2V7DFJ0TfUb18allf2FQl7oVYEjTixlBXEyQ==}
+  rc-table@7.45.5:
+    resolution: {integrity: sha512-R5sOfToOk7CalSkebZpqM8lkKWOJR7uXPGEhjjTSoj5egyHBwMxaACoPj2oI+6qLSll9yZrG5K+8HTN57b2Ahg==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
@@ -3625,7 +3625,7 @@ snapshots:
       rc-slider: 10.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-steps: 6.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-switch: 4.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      rc-table: 7.45.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rc-table: 7.45.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-tabs: 14.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-textarea: 1.6.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-tooltip: 6.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4170,7 +4170,7 @@ snapshots:
       function.prototype.name: 1.1.6
       get-intrinsic: 1.2.4
       get-symbol-description: 1.0.2
-      globalthis: 1.0.3
+      globalthis: 1.0.4
       gopd: 1.0.1
       has-property-descriptors: 1.0.2
       has-proto: 1.0.3
@@ -4329,9 +4329,10 @@ snapshots:
       once: 1.4.0
       path-is-absolute: 1.0.1
 
-  globalthis@1.0.3:
+  globalthis@1.0.4:
     dependencies:
       define-properties: 1.2.1
+      gopd: 1.0.1
 
   globby@6.1.0:
     dependencies:
@@ -5303,7 +5304,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  rc-table@7.45.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  rc-table@7.45.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.5
       '@rc-component/context': 1.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
