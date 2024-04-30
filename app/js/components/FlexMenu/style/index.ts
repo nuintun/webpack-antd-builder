@@ -10,12 +10,13 @@ export default createStyles(
   (token, { unit }) => {
     const layout = token.Layout;
     const headerBg = layout?.headerBg;
+    const headerHeight = layout?.headerHeight ?? 64;
     const lineType = layout?.lineType ?? token.lineType;
     const lineWidth = layout?.lineWidth ?? token.lineWidth;
     const colorSplit = layout?.colorSplit ?? token.colorSplit;
 
     return {
-      [`.${prefixUI}-sider`]: {
+      [`.${prefixUI}`]: {
         height: '100%',
         overflow: 'hidden',
 
@@ -25,9 +26,14 @@ export default createStyles(
           placeItems: 'center',
           whiteSpace: 'nowrap',
           wordBreak: 'keep-all',
+          height: unit(headerHeight),
           color: token.colorPrimaryText,
           transition: `all ${token.motionDurationMid}`,
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
+        },
+
+        [`.${prefixUI}-body`]: {
+          height: `calc(100% - ${unit(headerHeight)})`
         },
 
         [`&.${prefixUI}-dark`]: {
@@ -39,6 +45,12 @@ export default createStyles(
         [`&.${prefixUI}-light`]: {
           [`.${prefixUI}-header`]: {
             backgroundColor: headerBg ?? headerBgLight
+          }
+        },
+
+        [`&.${prefixUI}-mobile`]: {
+          [`.${prefixUI}-header`]: {
+            borderInlineEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
           }
         }
       }

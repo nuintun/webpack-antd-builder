@@ -10,12 +10,12 @@ import { ConfigProvider, Layout } from 'antd';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
-import React, { memo, Suspense, useCallback, useMemo, useRef, useState } from 'react';
 
 const { Header, Content } = Layout;
 
-type PickProps = 'theme' | 'headerHeight' | 'collapsedWidth';
+type PickProps = 'theme' | 'collapsedWidth';
 
 export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
   siderWidth?: number;
@@ -34,7 +34,6 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
     theme = 'light',
     leftHeaderRender,
     siderWidth = 256,
-    headerHeight = 64,
     rightHeaderRender,
     collapsedWidth = 64,
     breakQuery = '(max-width: 992px)',
@@ -97,12 +96,6 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
 
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
 
-  const headerStyle = useMemo<React.CSSProperties>(() => {
-    return {
-      height: headerHeight
-    };
-  }, [headerHeight]);
-
   return render(
     <Layout hasSider={!isMobile} className={classNames(scope, prefixUI, `${prefixUI}-${theme}`)}>
       <FlexMenu
@@ -113,12 +106,11 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         collapsed={collapsed}
         onClick={onItemClick}
         onCollapse={onCollapse}
-        headerHeight={headerHeight}
         collapsedWidth={collapsedWidth}
         headerRender={leftHeaderRender}
       />
       <Layout>
-        <Header style={headerStyle} className={`${prefixUI}-header`}>
+        <Header className={`${prefixUI}-header`}>
           {isMobile &&
             leftHeaderRender &&
             leftHeaderRender({
@@ -126,8 +118,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
               isMobile,
               collapsedWidth,
               collapsed: true,
-              width: siderWidth,
-              height: headerHeight
+              width: siderWidth
             })}
           <div className={`${prefixUI}-header-right`}>
             {collapsed ? (
@@ -141,8 +132,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
                 isMobile,
                 collapsed,
                 collapsedWidth,
-                width: siderWidth,
-                height: headerHeight
+                width: siderWidth
               })}
           </div>
         </Header>

@@ -2,20 +2,66 @@
  * @module index
  */
 
-import { Drawer, DrawerProps } from 'antd';
+import classNames from 'classnames';
+import useStyles, { prefixUI } from './style';
 import useLatestRef from '/js/hooks/useLatestRef';
-import React, { memo, useCallback, useRef } from 'react';
-import SiderMenu, { HeaderRender, HeaderRenderProps, SiderMenuProps as FlexMenuProps } from './SiderMenu';
+import { Drawer, Layout, MenuTheme, SiderProps } from 'antd';
+import React, { memo, useCallback, useMemo, useRef } from 'react';
+import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
 
-export type { HeaderRender, HeaderRenderProps, FlexMenuProps };
+const { Sider } = Layout;
 
-const drawerStyles: DrawerProps['styles'] = { body: { padding: 0, overflow: 'hidden' } };
+export interface HeaderRenderProps {
+  readonly width: number;
+  readonly theme: MenuTheme;
+  readonly isMobile: boolean;
+  readonly collapsed: boolean;
+  readonly collapsedWidth: number;
+}
+
+export interface FlexMenuProps
+  extends Pick<SiderProps, 'trigger' | 'onCollapse'>,
+    Omit<RouteMenuProps, 'mode' | 'inlineCollapsed'> {
+  width?: number;
+  isMobile?: boolean;
+  collapsed?: boolean;
+  collapsedWidth?: number;
+  headerRender?: HeaderRender;
+}
+
+export type OnOpenChange = NonNullable<FlexMenuProps['onOpenChange']>;
+
+export type HeaderRender = (props: HeaderRenderProps) => React.ReactNode;
 
 export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement {
-  const { isMobile, collapsed, onCollapse, width = 256, onOpenChange, defaultOpenKeys = [], ...restProps } = props;
+  const {
+    className,
+    onCollapse,
+    width = 256,
+    headerRender,
+    onOpenChange,
+    trigger = null,
+    theme = 'light',
+    isMobile = false,
+    collapsed = false,
+    collapsedWidth = 64,
+    defaultOpenKeys = [],
+    ...restProps
+  } = props;
 
+  const [scope, render] = useStyles();
   const propsRef = useLatestRef(props);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys);
+
+  const drawerStyles = useMemo(() => {
+    return { body: { padding: 0, overflow: 'hidden' } };
+  }, []);
+
+  const rootClassName = useMemo(() => {
+    return classNames(scope, prefixUI, className, `${prefixUI}-${theme}`, {
+      [`${prefixUI}-mobile`]: isMobile
+    });
+  }, [scope, theme, isMobile, className]);
 
   const onClose = useCallback(() => {
     const { onCollapse } = propsRef.current;
@@ -23,7 +69,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
     onCollapse?.(true, 'clickTrigger');
   }, []);
 
-  const onOpenChangeHander = useCallback<NonNullable<FlexMenuProps['onOpenChange']>>((openKeys, cachedOpenKeys) => {
+  const onOpenChangeHander = useCallback<OnOpenChange>((openKeys, cachedOpenKeys) => {
     const { collapsed, onOpenChange } = propsRef.current;
 
     if (!collapsed) {
@@ -33,27 +79,55 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
     onOpenChange?.(openKeys, cachedOpenKeys);
   }, []);
 
-  return isMobile ? (
-    <Drawer width={width} closable={false} placement="left" onClose={onClose} open={!collapsed} styles={drawerStyles}>
-      <SiderMenu
+  const menu = (
+    <>
+      {headerRender && (
+        <div className={`${prefixUI}-header`}>
+          {headerRender({
+            theme,
+            width,
+            isMobile,
+            collapsed,
+            collapsedWidth
+          })}
+        </div>
+      )}
+      <RouteMenu
         {...restProps}
-        width={width}
-        collapsed={false}
-        isMobile={isMobile}
-        onCollapse={onCollapse}
+        mode="inline"
+        className={`${prefixUI}-body`}
         onOpenChange={onOpenChangeHander}
         defaultOpenKeys={cachedOpenKeysRef.current}
       />
-    </Drawer>
-  ) : (
-    <SiderMenu
-      {...restProps}
-      width={width}
-      isMobile={isMobile}
-      collapsed={collapsed}
-      onCollapse={onCollapse}
-      onOpenChange={onOpenChangeHander}
-      defaultOpenKeys={cachedOpenKeysRef.current}
-    />
+    </>
+  );
+
+  return render(
+    isMobile ? (
+      <Drawer
+        width={width}
+        closable={false}
+        placement="left"
+        onClose={onClose}
+        open={!collapsed}
+        styles={drawerStyles}
+        className={rootClassName}
+      >
+        {menu}
+      </Drawer>
+    ) : (
+      <Sider
+        collapsible
+        theme={theme}
+        width={width}
+        trigger={trigger}
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        className={rootClassName}
+        collapsedWidth={collapsedWidth}
+      >
+        {menu}
+      </Sider>
+    )
   );
 });
