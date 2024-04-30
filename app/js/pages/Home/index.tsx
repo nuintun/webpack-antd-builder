@@ -1,6 +1,8 @@
 import * as styles from '/css/pages/home/index.module.scss';
 
 import Paper from '/js/components/Paper';
+import QRCode from '/js/components/QRCode';
+import { Byte, Charset } from '@nuintun/qrcode';
 import { Line, LineConfig } from '@ant-design/plots';
 import { memo, useEffect, useMemo, useState } from 'react';
 
@@ -57,13 +59,16 @@ const LineChart = memo(() => {
 });
 
 export default memo(function Page() {
+  const now = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
+
   return (
     <Paper>
-      <div className={styles.main}>
-        <div className={styles.chart}>
-          <LineChart />
-        </div>
+      <div className={styles.chart}>
+        <LineChart />
       </div>
+      <QRCode className={styles.qrcode} level="H" moduleSize={4} segments={new Byte(now, Charset.UTF_8)} />
     </Paper>
   );
 });

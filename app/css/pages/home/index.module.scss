@@ -1,8 +1,9 @@
-.main {
-  overflow-x: hidden;
-  height: calc(100% - 62px);
+.chart {
+  height: 100%;
+  overflow: hidden;
+}
 
-  .chart {
-    height: 100%;
-  }
+.qrcode {
+  margin-top: 16px;
+  border: 1px dashed #d9d9d9;
 }
