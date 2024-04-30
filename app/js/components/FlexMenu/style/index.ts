@@ -7,8 +7,12 @@ export const headerBgLight = '#001529';
 
 export default createStyles(
   ['components', 'FlexMenu', prefixUI],
-  token => {
-    const headerBg = token.Layout?.headerBg;
+  (token, { unit }) => {
+    const layout = token.Layout;
+    const headerBg = layout?.headerBg;
+    const lineType = layout?.lineType ?? token.lineType;
+    const lineWidth = layout?.lineWidth ?? token.lineWidth;
+    const colorSplit = layout?.colorSplit ?? token.colorSplit;
 
     return {
       [`.${prefixUI}-sider`]: {
@@ -22,7 +26,8 @@ export default createStyles(
           whiteSpace: 'nowrap',
           wordBreak: 'keep-all',
           color: token.colorPrimaryText,
-          transition: `all ${token.motionDurationMid}`
+          transition: `all ${token.motionDurationMid}`,
+          borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
         },
 
         [`&.${prefixUI}-dark`]: {

@@ -6,7 +6,11 @@ export const prefixUI = 'ui-flex-layout';
 export default createStyles(
   ['components', 'FlexLayout', prefixUI],
   (token, { unit }) => {
-    const headerBg = token.Layout?.headerBg;
+    const layout = token.Layout;
+    const headerBg = layout?.headerBg;
+    const lineType = layout?.lineType ?? token.lineType;
+    const lineWidth = layout?.lineWidth ?? token.lineWidth;
+    const colorSplit = layout?.colorSplit ?? token.colorSplit;
 
     return {
       [`.${prefixUI}`]: {
@@ -21,6 +25,7 @@ export default createStyles(
           fontSize: token.fontSizeXL,
           justifyContent: 'space-between',
           transition: `all ${token.motionDurationMid}`,
+          borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`,
 
           [`.${prefixUI}-trigger`]: {
             flex: 0,

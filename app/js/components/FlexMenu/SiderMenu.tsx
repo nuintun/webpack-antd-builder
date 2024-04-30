@@ -51,8 +51,7 @@ export default memo(function SiderMenu({
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {
-      height: headerHeight,
-      lineHeight: `${headerHeight}px`
+      height: headerHeight
     };
   }, [headerHeight]);
 

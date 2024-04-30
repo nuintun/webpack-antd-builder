@@ -99,8 +99,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
 
   const headerStyle = useMemo<React.CSSProperties>(() => {
     return {
-      height: headerHeight,
-      lineHeight: `${headerHeight}px`
+      height: headerHeight
     };
   }, [headerHeight]);
 
