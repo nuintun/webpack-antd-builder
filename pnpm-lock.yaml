@@ -115,8 +115,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1
       memfs:
-        specifier: ^4.9.1
-        version: 4.9.1
+        specifier: ^4.9.2
+        version: 4.9.2
       mini-css-extract-plugin:
         specifier: ^2.9.0
         version: 2.9.0(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11)))
@@ -133,11 +133,11 @@ importers:
         specifier: ^3.2.5
         version: 3.2.5
       sass:
-        specifier: ^1.75.0
-        version: 1.75.0
+        specifier: ^1.76.0
+        version: 1.76.0
       sass-loader:
         specifier: ^14.2.1
-        version: 14.2.1(sass@1.75.0)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11)))
+        version: 14.2.1(sass@1.76.0)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11)))
       svgc-loader:
         specifier: ^0.2.5
         version: 0.2.5(react@18.3.1)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11)))
@@ -317,14 +317,14 @@ packages:
     peerDependencies:
       tslib: '2'
 
-  '@jsonjoy.com/json-pack@1.0.2':
-    resolution: {integrity: sha512-4KMApTgb1Hvjz9Ue7unziJ1xNy3k6d2erp0hz1iXryXsf6LEM3KwN6YrfbqT0vqkUO8Tu+CSnvMia9cWX6YGVw==}
+  '@jsonjoy.com/json-pack@1.0.3':
+    resolution: {integrity: sha512-Q0SPAdmK6s5Fe3e1kcNvwNyk6e2+CxM8XZdGbf4abZG7nUO05KSie3/iX29loTBuY+75uVP6RixDSPVpotfzmQ==}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
 
-  '@jsonjoy.com/util@1.1.0':
-    resolution: {integrity: sha512-Yz+xITJ3Y/w0DBISwPkBETP5/cITHXscjgQNZIkfrVz1V7/ahJY8vw+T+LZy/KtXgKuUWqu4GALAQ3bhGt9J8A==}
+  '@jsonjoy.com/util@1.1.2':
+    resolution: {integrity: sha512-HOGa9wtE6LEz2I5mMQ2pMSjth85PmD71kPbsecs02nEUq3/Kw0wRK3gmZn5BCEB8mFLXByqPxjHgApoMwIPMKQ==}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
@@ -1199,8 +1199,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.4.751:
-    resolution: {integrity: sha512-2DEPi++qa89SMGRhufWTiLmzqyuGmNF3SK4+PQetW1JKiZdEpF4XQonJXJCzyuYSA6mauiMhbyVhqYAP45Hvfw==}
+  electron-to-chromium@1.4.752:
+    resolution: {integrity: sha512-P3QJreYI/AUTcfBVrC4zy9KvnZWekViThgQMX/VpJ+IsOBbcX5JFpORM4qWapwWQ+agb2nYAOyn/4PMXOk0m2Q==}
 
   emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -1725,8 +1725,8 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
 
-  memfs@4.9.1:
-    resolution: {integrity: sha512-36cVYFMaa9HNEYyvkyKCwker8DBmOdjWLrfekE/cHEKJ806fCfKNVhOJNvoyV/CrGSZDtfQPbhn0Zid0gbH0Hw==}
+  memfs@4.9.2:
+    resolution: {integrity: sha512-f16coDZlTG1jskq3mxarwB+fGRrd0uXWt+o1WIhRfOwbXQZqUDsTVxQBFK9JjRQHblg8eAG2JSbprDXKjc7ijQ==}
     engines: {node: '>= 4.0.0'}
 
   memoize-one@6.0.0:
@@ -2491,8 +2491,8 @@ packages:
       webpack:
         optional: true
 
-  sass@1.75.0:
-    resolution: {integrity: sha512-ShMYi3WkrDWxExyxSZPst4/okE9ts46xZmJDSawJQrnte7M1V9fScVB+uNXOVKRBt0PggHOwoZcn8mYX4trnBw==}
+  sass@1.76.0:
+    resolution: {integrity: sha512-nc3LeqvF2FNW5xGF1zxZifdW3ffIz5aBb7I7tSvOoNu7z1RQ6pFt9MBuiPtjgaI62YWrM/txjWlOCFiGtf2xpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2544,8 +2544,8 @@ packages:
   size-sensor@1.0.2:
     resolution: {integrity: sha512-2NCmWxY7A9pYKGXNBfteo4hy14gWu47rg5692peVMst6lQLPKrVjhY+UTEsPI5ceFRJSl3gVgMYaUi/hKuaiKw==}
 
-  sonic-forest@1.0.0:
-    resolution: {integrity: sha512-yFO2N4uTUFtgKLw03WWFpN1iEwZySweMsa18XN3Kt0yYrlmVHunC2ZgM+437zDoKISAJHcH3Cg18U7d6tuSgSQ==}
+  sonic-forest@1.0.1:
+    resolution: {integrity: sha512-YWIS40U3Y7N2e5gxkQiz40eisSsi7s+plZpqU6CSOehjybSDGkhFIMXmr5dmM7GaqqE+VZDihfTrxxdb0of/wA==}
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
@@ -3136,17 +3136,16 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  '@jsonjoy.com/json-pack@1.0.2(tslib@2.6.2)':
+  '@jsonjoy.com/json-pack@1.0.3(tslib@2.6.2)':
     dependencies:
       '@jsonjoy.com/base64': 1.1.1(tslib@2.6.2)
-      '@jsonjoy.com/util': 1.1.0(tslib@2.6.2)
+      '@jsonjoy.com/util': 1.1.2(tslib@2.6.2)
       hyperdyperid: 1.2.0
       thingies: 1.21.0(tslib@2.6.2)
       tslib: 2.6.2
 
-  '@jsonjoy.com/util@1.1.0(tslib@2.6.2)':
+  '@jsonjoy.com/util@1.1.2(tslib@2.6.2)':
     dependencies:
-      hyperdyperid: 1.2.0
       tslib: 2.6.2
 
   '@ljharb/resumer@0.0.1':
@@ -3709,7 +3708,7 @@ snapshots:
   browserslist@4.23.0:
     dependencies:
       caniuse-lite: 1.0.30001614
-      electron-to-chromium: 1.4.751
+      electron-to-chromium: 1.4.752
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
 
@@ -4128,7 +4127,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.4.751: {}
+  electron-to-chromium@1.4.752: {}
 
   emojis-list@3.0.0: {}
 
@@ -4692,11 +4691,11 @@ snapshots:
 
   media-typer@0.3.0: {}
 
-  memfs@4.9.1:
+  memfs@4.9.2:
     dependencies:
-      '@jsonjoy.com/json-pack': 1.0.2(tslib@2.6.2)
-      '@jsonjoy.com/util': 1.1.0(tslib@2.6.2)
-      sonic-forest: 1.0.0(tslib@2.6.2)
+      '@jsonjoy.com/json-pack': 1.0.3(tslib@2.6.2)
+      '@jsonjoy.com/util': 1.1.2(tslib@2.6.2)
+      sonic-forest: 1.0.1(tslib@2.6.2)
       tslib: 2.6.2
 
   memoize-one@6.0.0: {}
@@ -5486,14 +5485,14 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
-  sass-loader@14.2.1(sass@1.75.0)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))):
+  sass-loader@14.2.1(sass@1.76.0)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.75.0
+      sass: 1.76.0
       webpack: 5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))
 
-  sass@1.75.0:
+  sass@1.76.0:
     dependencies:
       chokidar: 3.6.0
       immutable: 4.3.5
@@ -5565,7 +5564,7 @@ snapshots:
 
   size-sensor@1.0.2: {}
 
-  sonic-forest@1.0.0(tslib@2.6.2):
+  sonic-forest@1.0.1(tslib@2.6.2):
     dependencies:
       tslib: 2.6.2
 
@@ -5866,7 +5865,7 @@ snapshots:
       destroy: 1.2.0
       etag: 1.8.1
       koa: 2.15.3
-      memfs: 4.9.1
+      memfs: 4.9.2
       range-parser: 1.2.1
       schema-utils: 4.2.0
       supports-color: 9.4.0
