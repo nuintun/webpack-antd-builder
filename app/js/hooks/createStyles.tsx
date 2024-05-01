@@ -210,7 +210,7 @@ export default function createStyles<C extends Components = never>(path: string[
       return scopes.join(' ');
     }, [hashId, cssVar, scopeId, hasScoped]);
 
-    useStyleRegister({ path, theme, token, hashId }, () => {
+    const render = useStyleRegister({ path, theme, token, hashId }, () => {
       const type = cssVar ? 'css' : 'js';
       const { max, min } = createMaxMin(type);
 
@@ -232,7 +232,7 @@ export default function createStyles<C extends Components = never>(path: string[
                 cssVar={cssVar as CSSVar}
               />
             )}
-            {node}
+            {render(node)}
           </>
         );
       }
