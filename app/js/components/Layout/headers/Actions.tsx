@@ -1,14 +1,14 @@
 /**
- * @module RightHeader
+ * @module ActionsHeader
  */
 
 import classNames from 'classnames';
 import { memo, useCallback, useMemo } from 'react';
-import useStyles, { prefixUI } from './style/right';
 import useTheme, { Theme } from '/js/hooks/useTheme';
+import useStyles, { prefixUI } from './style/actions';
 import { App, Avatar, Dropdown, MenuProps } from 'antd';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
-import { HeaderRenderProps } from '/js/components/FlexMenu';
+import { RenderHeaderProps } from '/js/components/FlexMenu';
 
 import logo from '/images/logo.svg?url';
 
@@ -142,7 +142,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
   );
 });
 
-export default memo(function RightHeader({ isMobile }: HeaderRenderProps): React.ReactElement {
+export default memo(function ActionsHeader({ isMobile }: RenderHeaderProps): React.ReactElement {
   const [scope, render] = useStyles();
 
   return render(

@@ -14,8 +14,8 @@ const images = path.resolve('app/images');
  */
 export default {
   ports: 8000,
-  name: 'Antd',
   lang: 'zh-CN',
+  name: 'Ant Design',
   publicPath: '/public/',
   context: path.resolve('app'),
   outputPath: path.resolve('wwwroot/public'),

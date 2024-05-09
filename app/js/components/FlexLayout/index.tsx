@@ -11,20 +11,20 @@ import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
-import FlexMenu, { FlexMenuProps, HeaderRender } from '/js/components/FlexMenu';
+import FlexMenu, { FlexMenuProps, RenderHeader } from '/js/components/FlexMenu';
 
 const { Header, Content } = Layout;
 
 type PickProps = 'theme' | 'collapsedWidth';
 
 export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
-  siderWidth?: number;
   breakQuery?: string;
+  siderWidth?: number;
   mobileQuery?: string;
   children?: React.ReactNode;
   menus: FlexMenuProps['items'];
-  leftHeaderRender?: HeaderRender;
-  rightHeaderRender?: HeaderRender;
+  renderLogoHeader?: RenderHeader;
+  renderActionsHeader?: RenderHeader;
 }
 
 export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElement {
@@ -32,10 +32,10 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
     menus,
     children,
     theme = 'light',
-    leftHeaderRender,
+    renderLogoHeader,
     siderWidth = 256,
-    rightHeaderRender,
     collapsedWidth = 64,
+    renderActionsHeader,
     breakQuery = '(max-width: 992px)',
     mobileQuery = '(max-width: 576px)'
   } = props;
@@ -107,27 +107,29 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         onClick={onItemClick}
         onCollapse={onCollapse}
         collapsedWidth={collapsedWidth}
-        headerRender={leftHeaderRender}
+        renderHeader={renderLogoHeader}
       />
       <Layout>
         <Header className={`${prefixUI}-header`}>
-          {isMobile &&
-            leftHeaderRender &&
-            leftHeaderRender({
-              theme,
-              isMobile,
-              collapsedWidth,
-              collapsed: true,
-              width: siderWidth
-            })}
-          <div className={`${prefixUI}-header-right`}>
+          {isMobile && renderLogoHeader && (
+            <div className={`${prefixUI}-logo-header`}>
+              {renderLogoHeader({
+                theme,
+                isMobile,
+                collapsedWidth,
+                collapsed: true,
+                width: siderWidth
+              })}
+            </div>
+          )}
+          <div className={`${prefixUI}-actions-header`}>
             {collapsed ? (
               <MenuUnfoldOutlined onClick={onTriggerClick} className={`${prefixUI}-trigger`} />
             ) : (
               <MenuFoldOutlined onClick={onTriggerClick} className={`${prefixUI}-trigger`} />
             )}
-            {rightHeaderRender &&
-              rightHeaderRender({
+            {renderActionsHeader &&
+              renderActionsHeader({
                 theme,
                 isMobile,
                 collapsed,

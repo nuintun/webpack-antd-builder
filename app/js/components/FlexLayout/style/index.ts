@@ -23,7 +23,6 @@ export default createStyles(
           overflow: 'hidden',
           placeItems: 'center',
           fontSize: token.fontSizeXL,
-          justifyContent: 'space-between',
           transition: `all ${token.motionDurationMid}`,
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`,
 
@@ -35,12 +34,20 @@ export default createStyles(
             }
           },
 
-          [`.${prefixUI}-header-right`]: {
+          [`.${prefixUI}-logo-header`]: {
+            height: '100%',
+            display: 'flex',
+            overflow: 'hidden',
+            placeItems: 'center',
+            whiteSpace: 'nowrap',
+            wordBreak: 'keep-all'
+          },
+
+          [`.${prefixUI}-actions-header`]: {
             flex: 1,
             display: 'flex',
             gap: token.margin,
             placeItems: 'center',
-            justifyContent: 'space-between',
             padding: `0 ${unit(token.paddingXS)}`
           }
         },

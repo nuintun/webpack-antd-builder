@@ -2,19 +2,19 @@
  * @module index
  */
 
-import LeftHeader from './LeftHeader';
-import RightHeader from './RightHeader';
+import LogoHeader from './headers/Logo';
 import { Route } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import React, { memo, useMemo } from 'react';
+import ActionsHeader from './headers/Actions';
 import { Filter, parse } from '/js/utils/menus';
 import FlexLayout from '/js/components/FlexLayout';
 import { MenuType, Meta } from '/js/config/router';
-import { HeaderRender } from '/js/components/FlexMenu';
+import { RenderHeader } from '/js/components/FlexMenu';
 import { Outlet, useOutletContext } from 'react-nest-router';
 
-const leftHeaderRender: HeaderRender = props => <LeftHeader {...props} />;
-const rightHeaderRender: HeaderRender = props => <RightHeader {...props} />;
+const renderLogoHeader: RenderHeader = props => <LogoHeader {...props} />;
+const renderActionsHeader: RenderHeader = props => <ActionsHeader {...props} />;
 
 export default memo(function Layout(): React.ReactElement {
   const [theme] = useTheme();
@@ -58,8 +58,8 @@ export default memo(function Layout(): React.ReactElement {
       theme={theme}
       menus={menus}
       siderWidth={216}
-      leftHeaderRender={leftHeaderRender}
-      rightHeaderRender={rightHeaderRender}
+      renderLogoHeader={renderLogoHeader}
+      renderActionsHeader={renderActionsHeader}
     >
       <Outlet />
     </FlexLayout>

@@ -11,7 +11,7 @@ import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
 
 const { Sider } = Layout;
 
-export interface HeaderRenderProps {
+export interface RenderHeaderProps {
   readonly width: number;
   readonly theme: MenuTheme;
   readonly isMobile: boolean;
@@ -26,20 +26,20 @@ export interface FlexMenuProps
   isMobile?: boolean;
   collapsed?: boolean;
   collapsedWidth?: number;
-  headerRender?: HeaderRender;
+  renderHeader?: RenderHeader;
 }
 
 export type OnOpenChange = NonNullable<FlexMenuProps['onOpenChange']>;
 
-export type HeaderRender = (props: HeaderRenderProps) => React.ReactNode;
+export type RenderHeader = (props: RenderHeaderProps) => React.ReactNode;
 
 export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement {
   const {
     className,
     onCollapse,
     width = 256,
-    headerRender,
     onOpenChange,
+    renderHeader,
     trigger = null,
     theme = 'light',
     isMobile = false,
@@ -81,9 +81,9 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
 
   const menu = (
     <>
-      {headerRender && (
+      {renderHeader && (
         <div className={`${prefixUI}-header`}>
-          {headerRender({
+          {renderHeader({
             theme,
             width,
             isMobile,
