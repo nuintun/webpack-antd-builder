@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import createStyles from '/js/hooks/createStyles';
 import { headerBgDark, headerBgLight } from '/js/components/FlexMenu/style';
 

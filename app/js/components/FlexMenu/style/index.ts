@@ -1,9 +1,13 @@
-import createStyles from '/js/hooks/createStyles';
+/**
+ * @module index
+ */
 
-export const prefixUI = 'ui-flex-menu';
+import createStyles from '/js/hooks/createStyles';
 
 export const headerBgLight = '#fff';
 export const headerBgDark = '#141414';
+
+export const prefixUI = 'ui-flex-menu';
 
 export default createStyles(
   ['components', 'FlexMenu', prefixUI],

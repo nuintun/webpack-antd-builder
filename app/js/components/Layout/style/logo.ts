@@ -1,3 +1,7 @@
+/**
+ * @module logo
+ */
+
 import createStyles from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-header-logo';

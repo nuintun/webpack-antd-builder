@@ -1,5 +1,5 @@
 /**
- * @module LogoHeader
+ * @module Logo
  */
 
 import React, { memo } from 'react';

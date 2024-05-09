@@ -1,3 +1,7 @@
+/**
+ * @module actions
+ */
+
 import createStyles from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-header-actions';

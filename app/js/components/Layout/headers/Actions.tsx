@@ -1,5 +1,5 @@
 /**
- * @module ActionsHeader
+ * @module Actions
  */
 
 import classNames from 'classnames';

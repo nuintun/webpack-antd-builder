@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 import createStyles from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-paper';
