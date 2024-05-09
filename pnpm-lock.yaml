@@ -848,8 +848,8 @@ packages:
   caniuse-api@3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
 
-  caniuse-lite@1.0.30001616:
-    resolution: {integrity: sha512-RHVYKov7IcdNjVHJFNY/78RdG4oGVjbayxv8u5IO74Wv7Hlq4PnJE6mo/OjFijjVFNy5ijnCt6H3IIo4t+wfEw==}
+  caniuse-lite@1.0.30001617:
+    resolution: {integrity: sha512-mLyjzNI9I+Pix8zwcrpxEbGlfqOkF9kM3ptzmKNw5tizSyYwMe+nGLTqMK9cO+0E+Bh6TsBxNAaHWEM8xwSsmA==}
 
   case-sensitive-paths-webpack-plugin@2.4.0:
     resolution: {integrity: sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==}
@@ -1200,8 +1200,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.4.760:
-    resolution: {integrity: sha512-xF6AWMVM/QGQseTPgXjUewfNjCW2fgUcV/z5cSG0r+SiYcgtvcmRAL3oH/MSZwHBBD+fyKTXdQ4qGENJMSedEQ==}
+  electron-to-chromium@1.4.761:
+    resolution: {integrity: sha512-PIbxpiJGx6Bb8dQaonNc6CGTRlVntdLg/2nMa1YhnrwYOORY9a3ZgGN0UQYE6lAcj/lkyduJN7BPt/JiY+jAQQ==}
 
   emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -2286,8 +2286,8 @@ packages:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
 
-  rc-select@14.13.2:
-    resolution: {integrity: sha512-Xwt5ZcS5PKGR6bJL/dBRH6AFtC8FgVu2a+2T8NuyldhppKZlmZREK3nc5gONf+VlN+IbCxbr6vivgkbdPZJYng==}
+  rc-select@14.13.3:
+    resolution: {integrity: sha512-AMEfdE40RhlqahMGN3Q7OKVd1txNph0zIn2Xpvn0ZJiUYafCsqoGv+Rj6v1umgm8ZOEAJ3LefnkznAYNMMzACg==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '*'
@@ -2650,8 +2650,8 @@ packages:
       react-native-svg:
         optional: true
 
-  svgo@3.3.1:
-    resolution: {integrity: sha512-xQQTIGRl3gHTO2PFlZFLl+Xwofj+CMOPitfoByGBNAniQnY6SbGgd31u3C8RTqdlqZqYNl9Sb83VXbimVHcU6w==}
+  svgo@3.3.2:
+    resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -3166,7 +3166,7 @@ snapshots:
 
   '@nuintun/svgo-loader@0.2.6(webpack@5.91.0(@swc/core@1.5.5(@swc/helpers@0.5.11)))':
     dependencies:
-      svgo: 3.3.1
+      svgo: 3.3.2
       tslib: 2.6.2
       webpack: 5.91.0(@swc/core@1.5.5(@swc/helpers@0.5.11))
 
@@ -3624,7 +3624,7 @@ snapshots:
       rc-rate: 2.12.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-resize-observer: 1.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-segmented: 2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      rc-select: 14.13.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rc-select: 14.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-slider: 10.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-steps: 6.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-switch: 4.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3679,7 +3679,7 @@ snapshots:
   autoprefixer@10.4.19(postcss@8.4.38):
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001616
+      caniuse-lite: 1.0.30001617
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3709,8 +3709,8 @@ snapshots:
 
   browserslist@4.23.0:
     dependencies:
-      caniuse-lite: 1.0.30001616
-      electron-to-chromium: 1.4.760
+      caniuse-lite: 1.0.30001617
+      electron-to-chromium: 1.4.761
       node-releases: 2.0.14
       update-browserslist-db: 1.0.15(browserslist@4.23.0)
 
@@ -3747,11 +3747,11 @@ snapshots:
   caniuse-api@3.0.0:
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001616
+      caniuse-lite: 1.0.30001617
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
 
-  caniuse-lite@1.0.30001616: {}
+  caniuse-lite@1.0.30001617: {}
 
   case-sensitive-paths-webpack-plugin@2.4.0: {}
 
@@ -4129,7 +4129,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.4.760: {}
+  electron-to-chromium@1.4.761: {}
 
   emojis-list@3.0.0: {}
 
@@ -5031,7 +5031,7 @@ snapshots:
     dependencies:
       postcss: 8.4.38
       postcss-value-parser: 4.2.0
-      svgo: 3.3.1
+      svgo: 3.3.2
 
   postcss-unique-selectors@7.0.0(postcss@8.4.38):
     dependencies:
@@ -5072,7 +5072,7 @@ snapshots:
       '@babel/runtime': 7.24.5
       array-tree-filter: 2.1.0
       classnames: 2.5.1
-      rc-select: 14.13.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rc-select: 14.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-tree: 5.8.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-util: 5.39.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
@@ -5265,7 +5265,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  rc-select@14.13.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  rc-select@14.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.5
       '@rc-component/trigger': 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5346,7 +5346,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.5
       classnames: 2.5.1
-      rc-select: 14.13.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rc-select: 14.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-tree: 5.8.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-util: 5.39.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
@@ -5648,13 +5648,13 @@ snapshots:
   svgc-loader@0.2.6(react@18.3.1)(webpack@5.91.0(@swc/core@1.5.5(@swc/helpers@0.5.11))):
     dependencies:
       css-tree: 2.3.1
-      svgo: 3.3.1
+      svgo: 3.3.2
       tslib: 2.6.2
       webpack: 5.91.0(@swc/core@1.5.5(@swc/helpers@0.5.11))
     optionalDependencies:
       react: 18.3.1
 
-  svgo@3.3.1:
+  svgo@3.3.2:
     dependencies:
       '@trysound/sax': 0.2.0
       commander: 7.2.0
