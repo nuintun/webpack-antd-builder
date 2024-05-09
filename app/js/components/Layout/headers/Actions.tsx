@@ -136,7 +136,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
     <Dropdown placement="bottomRight" menu={menu}>
       <div className={`${prefixCls}-profile`}>
         <Avatar size={40} src={logo} alt="avatar" />
-        <span style={{ marginInlineStart: 4 }}>Antd</span>
+        <span style={{ marginInlineStart: 4 }}>Admin</span>
       </div>
     </Dropdown>
   );
