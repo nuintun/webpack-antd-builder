@@ -51,7 +51,7 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], rend
     const result: Item[] = [];
     const itemClassName = `${prefixCls}-item`;
     const submenuClassName = `${prefixCls}-submenu`;
-    const itemMapping: Record<string, Item[]> = {};
+    const itemsMapping: Record<string, Item[]> = {};
 
     for (const item of items) {
       const tree = new DFSTree(item, item => item.children);
@@ -67,7 +67,7 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], rend
             key,
             className: submenuClassName,
             popupClassName: submenuClassName,
-            children: (itemMapping[key] = []),
+            children: (itemsMapping[key] = []),
             label: renderLabel(current, selectedKeys, renderItem)
           };
         } else {
@@ -79,7 +79,7 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], rend
         }
 
         if (parent) {
-          itemMapping[parent.key].push(item);
+          itemsMapping[parent.key].push(item);
         } else {
           result.push(item);
         }
