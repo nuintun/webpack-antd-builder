@@ -13,7 +13,7 @@ export default createStyles(['components', 'Layout', 'ActionsHeader', prefixUI],
       justifyContent: 'flex-end',
 
       '> *:hover': {
-        color: token.colorPrimaryTextHover
+        color: token.colorPrimary
       },
 
       [`.${prefixUI}-profile`]: {

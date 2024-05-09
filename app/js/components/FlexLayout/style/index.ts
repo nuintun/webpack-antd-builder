@@ -31,7 +31,7 @@ export default createStyles(
             flex: 0,
 
             '&:hover': {
-              color: token.colorPrimaryHover
+              color: token.colorPrimary
             }
           },
 
@@ -67,14 +67,12 @@ export default createStyles(
 
         [`&.${prefixUI}-dark`]: {
           [`.${prefixUI}-header`]: {
-            color: token.colorTextLightSolid,
             backgroundColor: headerBg ?? headerBgDark
           }
         },
 
         [`&.${prefixUI}-light`]: {
           [`.${prefixUI}-header`]: {
-            color: token.colorTextLightSolid,
             backgroundColor: headerBg ?? headerBgLight
           }
         }

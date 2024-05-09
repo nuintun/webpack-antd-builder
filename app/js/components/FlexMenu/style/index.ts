@@ -2,8 +2,8 @@ import createStyles from '/js/hooks/createStyles';
 
 export const prefixUI = 'ui-flex-menu';
 
+export const headerBgLight = '#fff';
 export const headerBgDark = '#141414';
-export const headerBgLight = '#001529';
 
 export default createStyles(
   ['components', 'FlexMenu', prefixUI],

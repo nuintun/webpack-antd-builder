@@ -6,7 +6,6 @@ export default createStyles(
   ['components', 'Layout', 'LogoHeader', prefixUI],
   token => {
     const layout = token.Layout;
-    const headerHeight = layout?.headerHeight ?? 64;
 
     return {
       [`.${prefixUI}`]: {
@@ -16,12 +15,17 @@ export default createStyles(
         img: {
           padding: 8,
           aspectRatio: '1/1',
-          height: headerHeight
+          height: layout?.headerHeight ?? 64
         },
 
         span: {
           fontSize: 24,
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          color: layout?.headerColor ?? token.colorText,
+
+          '&:hover': {
+            color: token.colorPrimary
+          }
         }
       }
     };
