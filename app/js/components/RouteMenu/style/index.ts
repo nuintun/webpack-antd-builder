@@ -4,16 +4,16 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-route-menu';
+export const prefixCls = 'ui-route-menu';
 
 export default createStyles(
-  ['components', 'RouteMenu', prefixUI],
+  ['components', 'RouteMenu', prefixCls],
   (token, { calc, unit }) => {
     const { marginXXS, fontSizeLG } = token;
     const marginInline = token.Menu?.itemMarginInline ?? marginXXS;
 
     return {
-      [`.${prefixUI}`]: {
+      [`.${prefixCls}`]: {
         overflow: 'auto',
         userSelect: 'none',
         scrollbarWidth: 'none',
@@ -26,15 +26,15 @@ export default createStyles(
           display: 'none'
         },
 
-        [`.${prefixUI}-submenu, .${prefixUI}-item`]: {
-          [`.${prefixUI}-title`]: {
+        [`.${prefixCls}-submenu, .${prefixCls}-item`]: {
+          [`.${prefixCls}-title`]: {
             display: 'flex',
             overflow: 'hidden',
             alignItems: 'center',
             fontSize: fontSizeLG,
             textOverflow: 'ellipsis',
 
-            [`.${prefixUI}-icon`]: {
+            [`.${prefixCls}-icon`]: {
               lineHeight: 0,
               fontSize: fontSizeLG,
 
@@ -49,7 +49,7 @@ export default createStyles(
           }
         },
 
-        [`&.${prefixUI}-collapsed`]: {
+        [`&.${prefixCls}-collapsed`]: {
           '[role=menuitem]': {
             paddingInline: `calc(50% - ${unit(calc(fontSizeLG).div(2).add(marginInline).equal())})`
           }

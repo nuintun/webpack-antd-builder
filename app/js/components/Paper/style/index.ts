@@ -4,11 +4,11 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-paper';
+export const prefixCls = 'ui-paper';
 
-export default createStyles(['components', 'Paper', prefixUI], (token, { calc }) => {
+export default createStyles(['components', 'Paper', prefixCls], (token, { calc }) => {
   return {
-    [`.${prefixUI}`]: {
+    [`.${prefixCls}`]: {
       margin: token.marginXS,
       borderRadius: token.borderRadius,
       backgroundColor: token.colorBgContainer,

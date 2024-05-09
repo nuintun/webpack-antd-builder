@@ -4,11 +4,11 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-header-actions';
+export const prefixCls = 'ui-header-actions';
 
-export default createStyles(['components', 'Layout', 'ActionsHeader', prefixUI], token => {
+export default createStyles(['components', 'Layout', 'ActionsHeader', prefixCls], token => {
   return {
-    [`.${prefixUI}`]: {
+    [`.${prefixCls}`]: {
       flex: 1,
       display: 'flex',
       gap: token.margin,
@@ -20,7 +20,7 @@ export default createStyles(['components', 'Layout', 'ActionsHeader', prefixUI],
         color: token.colorPrimary
       },
 
-      [`.${prefixUI}-profile`]: {
+      [`.${prefixCls}-profile`]: {
         display: 'flex',
         cursor: 'default',
         placeItems: 'center',

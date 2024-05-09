@@ -3,7 +3,7 @@
  */
 
 import classNames from 'classnames';
-import useStyles, { prefixUI } from './style';
+import useStyles, { prefixCls } from './style';
 import useLatestRef from '/js/hooks/useLatestRef';
 import { Drawer, Layout, MenuTheme, SiderProps } from 'antd';
 import React, { memo, useCallback, useMemo, useRef } from 'react';
@@ -58,8 +58,8 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
   }, []);
 
   const rootClassName = useMemo(() => {
-    return classNames(scope, prefixUI, className, `${prefixUI}-${theme}`, {
-      [`${prefixUI}-mobile`]: isMobile
+    return classNames(scope, prefixCls, className, `${prefixCls}-${theme}`, {
+      [`${prefixCls}-mobile`]: isMobile
     });
   }, [scope, theme, isMobile, className]);
 
@@ -82,7 +82,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
   const menu = (
     <>
       {renderHeader && (
-        <div className={`${prefixUI}-header`}>
+        <div className={`${prefixCls}-header`}>
           {renderHeader({
             theme,
             width,
@@ -95,7 +95,7 @@ export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement 
       <RouteMenu
         {...restProps}
         mode="inline"
-        className={`${prefixUI}-body`}
+        className={`${prefixCls}-body`}
         onOpenChange={onOpenChangeHander}
         defaultOpenKeys={cachedOpenKeysRef.current}
       />

@@ -4,15 +4,15 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-header-logo';
+export const prefixCls = 'ui-header-logo';
 
 export default createStyles(
-  ['components', 'Layout', 'LogoHeader', prefixUI],
+  ['components', 'Layout', 'LogoHeader', prefixCls],
   token => {
     const layout = token.Layout;
 
     return {
-      [`.${prefixUI}`]: {
+      [`.${prefixCls}`]: {
         display: 'flex',
         placeItems: 'center',
 

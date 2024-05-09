@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
-import useStyles, { prefixUI } from './style';
 import FlexIcon from '/js/components/FlexIcon';
+import useStyles, { prefixCls } from './style';
 import React, { memo, Suspense, useMemo } from 'react';
 import { ConfigProvider, Tabs, TabsProps } from 'antd';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
@@ -61,11 +61,11 @@ export default memo(function RouteTabs({
           <Link
             href={link.href}
             target={link.target}
-            className={classNames(`${prefixUI}-nav`, {
-              [`${prefixUI}-active`]: active
+            className={classNames(`${prefixCls}-nav`, {
+              [`${prefixCls}-active`]: active
             })}
           >
-            {showIcon && <FlexIcon icon={meta.icon} className={`${prefixUI}-icon`} />}
+            {showIcon && <FlexIcon icon={meta.icon} className={`${prefixCls}-icon`} />}
             {meta.name}
           </Link>
         )
@@ -90,8 +90,8 @@ export default memo(function RouteTabs({
         destroyInactiveTabPane
         tabPosition={tabPosition}
         tabBarGutter={tabBarGutter}
-        className={classNames(scope, prefixUI, className, {
-          [`${prefixUI}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
+        className={classNames(scope, prefixCls, className, {
+          [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
         })}
       />
     </ConfigProvider>

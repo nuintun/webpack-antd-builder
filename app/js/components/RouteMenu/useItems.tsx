@@ -3,7 +3,7 @@
  */
 
 import { MenuProps } from 'antd';
-import { prefixUI } from './style';
+import { prefixCls } from './style';
 import Link from '/js/components/Link';
 import React, { useMemo } from 'react';
 import { DFSTree } from '/js/utils/tree';
@@ -22,7 +22,7 @@ function renderContent(item: MenuItem, renderItem?: RenderItem): React.ReactNode
 
   return (
     <>
-      <FlexIcon icon={icon} className={`${prefixUI}-icon`} />
+      <FlexIcon icon={icon} className={`${prefixCls}-icon`} />
       <span>{name}</span>
     </>
   );
@@ -32,14 +32,14 @@ function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: Render
   const { link, children } = item;
 
   if ((children && children.length > 0) || !link) {
-    return <span className={`${prefixUI}-title`}>{renderContent(item, renderItem)}</span>;
+    return <span className={`${prefixCls}-title`}>{renderContent(item, renderItem)}</span>;
   } else {
     const { key } = item;
     const { href, target } = link;
     const replace = selectedKeys.includes(key);
 
     return (
-      <Link href={href} className={`${prefixUI}-title`} replace={replace} target={target}>
+      <Link href={href} className={`${prefixCls}-title`} replace={replace} target={target}>
         {renderContent(item, renderItem)}
       </Link>
     );
@@ -49,8 +49,8 @@ function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: Render
 export default function useItems(items: MenuItem[], selectedKeys: string[], renderItem?: RenderItem): Item[] {
   return useMemo(() => {
     const result: Item[] = [];
-    const itemClassName = `${prefixUI}-item`;
-    const submenuClassName = `${prefixUI}-submenu`;
+    const itemClassName = `${prefixCls}-item`;
+    const submenuClassName = `${prefixCls}-submenu`;
     const itemMapping: Record<string, Item[]> = {};
 
     for (const item of items) {

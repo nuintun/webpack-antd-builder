@@ -5,7 +5,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
-import useStyles, { prefixUI } from './style';
+import useStyles, { prefixCls } from './style';
 import { App, Image, Upload, UploadProps } from 'antd';
 import { useLocation, useNavigate } from 'react-nest-router';
 import useControllableValue from '/js/hooks/useControllableValue';
@@ -131,11 +131,11 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
   }, [propsValue]);
 
   return render(
-    <div className={classNames(scope, prefixUI)}>
+    <div className={classNames(scope, prefixCls)}>
       {showUploadList &&
         fileList.map(file => {
           const style = { width, height };
-          const { response, uid, status, percent, thumbUrl } = file;
+          const { response, uid, status, thumbUrl, percent = 0 } = file;
 
           const remove = (event: React.MouseEvent) => {
             event.stopPropagation();
@@ -158,7 +158,7 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
 
           if (status === 'done') {
             return (
-              <div key={uid} className={`${prefixUI}-done`} style={style}>
+              <div key={uid} className={`${prefixCls}-done`} style={style}>
                 <Image
                   alt="thumb"
                   width={width}
@@ -167,9 +167,9 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
                   fallback={fallback}
                   preview={{
                     mask: (
-                      <div className={`${prefixUI}-mask`}>
+                      <div className={`${prefixCls}-mask`}>
                         <EyeOutlined title="预览" className="icon" />
-                        <DeleteOutlined title="删除" className={`${prefixUI}-icon ${prefixUI}-delete`} onClick={remove} />
+                        <DeleteOutlined title="删除" className={`${prefixCls}-icon ${prefixCls}-delete`} onClick={remove} />
                       </div>
                     )
                   }}
@@ -184,10 +184,10 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
                 key={uid}
                 style={style}
                 onClick={remove}
-                className={`${prefixUI}-error`}
+                className={`${prefixCls}-error`}
                 title={`${response?.msg || '上传错误'}，请单击删除此文件`}
               >
-                <WarningOutlined className={`${prefixUI}-icon`} />
+                <WarningOutlined className={`${prefixCls}-icon`} />
                 <span>
                   上传错误
                   <br />
@@ -198,9 +198,9 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
           }
 
           return (
-            <div key={uid} className={`${prefixUI}-loading`} style={style}>
-              <LoadingOutlined className={`${prefixUI}-icon`} />
-              <span>{percent}%</span>
+            <div key={uid} className={`${prefixCls}-loading`} style={style}>
+              <LoadingOutlined className={`${prefixCls}-icon`} />
+              <span>{percent | 0}%</span>
             </div>
           );
         })}
@@ -218,8 +218,8 @@ export default memo(function ImageUpload<T extends UploadResponse>(props: ImageU
         {(!showUploadList || fileList.length < maxCount) && (
           <div style={{ width, height }}>
             {children || (
-              <button type="button" className={`${prefixUI}-action`}>
-                <UploadOutlined className={`${prefixUI}-icon`} />
+              <button type="button" className={`${prefixCls}-action`}>
+                <UploadOutlined className={`${prefixCls}-icon`} />
                 <span>上传图片</span>
               </button>
             )}

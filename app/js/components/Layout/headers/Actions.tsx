@@ -8,7 +8,7 @@ import useTheme, { Theme } from '/js/hooks/useTheme';
 import { App, Avatar, Dropdown, MenuProps } from 'antd';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
 import { RenderHeaderProps } from '/js/components/FlexMenu';
-import useStyles, { prefixUI } from '/js/components/Layout/style/actions';
+import useStyles, { prefixCls } from '/js/components/Layout/style/actions';
 
 import logo from '/images/logo.svg?url';
 
@@ -134,7 +134,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
 
   return (
     <Dropdown placement="bottomRight" menu={menu}>
-      <div className={`${prefixUI}-profile`}>
+      <div className={`${prefixCls}-profile`}>
         <Avatar size={40} src={logo} alt="avatar" />
         <span style={{ marginInlineStart: 4 }}>Antd</span>
       </div>
@@ -146,7 +146,7 @@ export default memo(function ActionsHeader({ isMobile }: RenderHeaderProps): Rea
   const [scope, render] = useStyles();
 
   return render(
-    <div className={classNames(scope, prefixUI)}>
+    <div className={classNames(scope, prefixCls)}>
       {!isMobile && <ThemeAction />}
       <UserAction isMobile={isMobile} />
     </div>

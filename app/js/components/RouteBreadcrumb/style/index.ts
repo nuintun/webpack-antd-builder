@@ -4,13 +4,13 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-route-breadcrumb';
+export const prefixCls = 'ui-route-breadcrumb';
 
-export default createStyles(['components', 'RouteBreadcrumb', prefixUI], (token, { unit }) => {
+export default createStyles(['components', 'RouteBreadcrumb', prefixCls], (token, { unit }) => {
   const { colorPrimary, fontSizeHeading2 } = token;
 
   return {
-    [`.${prefixUI}`]: {
+    [`.${prefixCls}`]: {
       overflowY: 'hidden',
       whiteSpace: 'nowrap',
       color: token.colorText,
@@ -29,12 +29,12 @@ export default createStyles(['components', 'RouteBreadcrumb', prefixUI], (token,
         display: 'none'
       },
 
-      [`.${prefixUI}-link, .${prefixUI}-item`]: {
+      [`.${prefixCls}-link, .${prefixCls}-item`]: {
         display: 'flex',
         cursor: 'default',
         alignItems: 'center',
 
-        [`.${prefixUI}-icon`]: {
+        [`.${prefixCls}-icon`]: {
           marginInlineEnd: token.marginXXS,
 
           '> img': {
@@ -48,7 +48,7 @@ export default createStyles(['components', 'RouteBreadcrumb', prefixUI], (token,
         }
       },
 
-      [`.${prefixUI}-link`]: {
+      [`.${prefixCls}-link`]: {
         cursor: 'pointer',
 
         '&:hover': {

@@ -7,10 +7,10 @@ import createStyles from '/js/hooks/createStyles';
 export const headerBgLight = '#fff';
 export const headerBgDark = '#141414';
 
-export const prefixUI = 'ui-flex-menu';
+export const prefixCls = 'ui-flex-menu';
 
 export default createStyles(
-  ['components', 'FlexMenu', prefixUI],
+  ['components', 'FlexMenu', prefixCls],
   (token, { unit }) => {
     const layout = token.Layout;
     const headerBg = layout?.headerBg;
@@ -20,11 +20,11 @@ export default createStyles(
     const colorSplit = layout?.colorSplit ?? token.colorSplit;
 
     return {
-      [`.${prefixUI}`]: {
+      [`.${prefixCls}`]: {
         height: '100%',
         overflow: 'hidden',
 
-        [`.${prefixUI}-header`]: {
+        [`.${prefixCls}-header`]: {
           display: 'flex',
           overflow: 'hidden',
           placeItems: 'center',
@@ -36,24 +36,24 @@ export default createStyles(
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
         },
 
-        [`.${prefixUI}-body`]: {
+        [`.${prefixCls}-body`]: {
           height: `calc(100% - ${unit(headerHeight)})`
         },
 
-        [`&.${prefixUI}-dark`]: {
-          [`.${prefixUI}-header`]: {
+        [`&.${prefixCls}-dark`]: {
+          [`.${prefixCls}-header`]: {
             backgroundColor: headerBg ?? headerBgDark
           }
         },
 
-        [`&.${prefixUI}-light`]: {
-          [`.${prefixUI}-header`]: {
+        [`&.${prefixCls}-light`]: {
+          [`.${prefixCls}-header`]: {
             backgroundColor: headerBg ?? headerBgLight
           }
         },
 
-        [`&.${prefixUI}-mobile`]: {
-          [`.${prefixUI}-header`]: {
+        [`&.${prefixCls}-mobile`]: {
+          [`.${prefixCls}-header`]: {
             borderInlineEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
           }
         }

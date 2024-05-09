@@ -5,8 +5,8 @@
 import classNames from 'classnames';
 import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
-import useStyles, { prefixUI } from './style';
 import { ConfigProvider, Layout } from 'antd';
+import useStyles, { prefixCls } from './style';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import SuspenseFallBack from '/js/components/SuspenseFallBack';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -97,7 +97,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
 
   return render(
-    <Layout hasSider={!isMobile} className={classNames(scope, prefixUI, `${prefixUI}-${theme}`)}>
+    <Layout hasSider={!isMobile} className={classNames(scope, prefixCls, `${prefixCls}-${theme}`)}>
       <FlexMenu
         items={menus}
         theme={theme}
@@ -110,9 +110,9 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
         renderHeader={renderLogoHeader}
       />
       <Layout>
-        <Header className={`${prefixUI}-header`}>
+        <Header className={`${prefixCls}-header`}>
           {isMobile && renderLogoHeader && (
-            <div className={`${prefixUI}-logo-header`}>
+            <div className={`${prefixCls}-logo-header`}>
               {renderLogoHeader({
                 theme,
                 isMobile,
@@ -122,11 +122,11 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
               })}
             </div>
           )}
-          <div className={`${prefixUI}-actions-header`}>
+          <div className={`${prefixCls}-actions-header`}>
             {collapsed ? (
-              <MenuUnfoldOutlined onClick={onTriggerClick} className={`${prefixUI}-trigger`} />
+              <MenuUnfoldOutlined onClick={onTriggerClick} className={`${prefixCls}-trigger`} />
             ) : (
-              <MenuFoldOutlined onClick={onTriggerClick} className={`${prefixUI}-trigger`} />
+              <MenuFoldOutlined onClick={onTriggerClick} className={`${prefixCls}-trigger`} />
             )}
             {renderActionsHeader &&
               renderActionsHeader({
@@ -139,7 +139,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
           </div>
         </Header>
         <Content>
-          <div ref={contentRef} className={`${prefixUI}-content`}>
+          <div ref={contentRef} className={`${prefixCls}-content`}>
             <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
               <RouteBreadcrumb />
               <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>

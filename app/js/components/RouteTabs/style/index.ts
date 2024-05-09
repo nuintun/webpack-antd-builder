@@ -4,13 +4,13 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-route-tabs';
+export const prefixCls = 'ui-route-tabs';
 
-export default createStyles(['components', 'RouteTabs', prefixUI], (token, { calc, unit }) => {
+export default createStyles(['components', 'RouteTabs', prefixCls], (token, { calc, unit }) => {
   const { fontSizeLG } = token;
 
   return {
-    [`.${prefixUI}`]: {
+    [`.${prefixCls}`]: {
       marginBlockStart: -1,
       borderBlockStart: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
 
@@ -25,16 +25,16 @@ export default createStyles(['components', 'RouteTabs', prefixUI], (token, { cal
         }
       },
 
-      [`.${prefixUI}-nav`]: {
+      [`.${prefixCls}-nav`]: {
         color: 'inherit',
         fontSize: fontSizeLG,
         lineHeight: unit(fontSizeLG),
 
-        [`&:hover, &.${prefixUI}-active`]: {
+        [`&:hover, &.${prefixCls}-active`]: {
           color: 'inherit'
         },
 
-        [`.${prefixUI}-icon`]: {
+        [`.${prefixCls}-icon`]: {
           margin: 'unset',
           marginInlineEnd: token.marginXXS,
 
@@ -46,7 +46,7 @@ export default createStyles(['components', 'RouteTabs', prefixUI], (token, { cal
       }
     },
 
-    [`.${prefixUI}-vertical`]: {
+    [`.${prefixCls}-vertical`]: {
       '> [role=tablist]': {
         paddingInline: 0,
         borderBlockStart: 'none',

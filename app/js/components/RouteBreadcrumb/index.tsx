@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { IRoute } from '/js/utils/router';
 import React, { memo, useMemo } from 'react';
-import useStyles, { prefixUI } from './style';
 import FlexIcon from '/js/components/FlexIcon';
+import useStyles, { prefixCls } from './style';
 import { useMatches } from 'react-nest-router';
 import { Breadcrumb, BreadcrumbProps } from 'antd';
 
@@ -39,8 +39,8 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
       if (isLinkable) {
         items.push({
           title: (
-            <Link href={link.href} target={link.target} className={`${prefixUI}-link`}>
-              {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
+            <Link href={link.href} target={link.target} className={`${prefixCls}-link`}>
+              {showIcon && <FlexIcon icon={icon} className={`${prefixCls}-icon`} />}
               <span>{name}</span>
             </Link>
           )
@@ -48,8 +48,8 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
       } else {
         items.push({
           title: (
-            <span className={classNames(`${prefixUI}-item`, { active })}>
-              {showIcon && <FlexIcon icon={icon} className={`${prefixUI}-icon`} />}
+            <span className={classNames(`${prefixCls}-item`, { active })}>
+              {showIcon && <FlexIcon icon={icon} className={`${prefixCls}-icon`} />}
               <span>{name}</span>
             </span>
           )
@@ -70,5 +70,5 @@ export default memo(function RouteBreadcrumb({
   const matches = useMatches() as IRoute[];
   const items = useMemo(() => getBreadcrumbItems(matches, showIcon), [matches, showIcon]);
 
-  return render(<Breadcrumb items={items} style={style} className={classNames(scope, prefixUI, className)} />);
+  return render(<Breadcrumb items={items} style={style} className={classNames(scope, prefixCls, className)} />);
 });

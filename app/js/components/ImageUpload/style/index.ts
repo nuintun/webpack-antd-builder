@@ -4,21 +4,21 @@
 
 import createStyles from '/js/hooks/createStyles';
 
-export const prefixUI = 'ui-image-upload';
+export const prefixCls = 'ui-image-upload';
 
-export default createStyles(['components', 'ImageUpload', prefixUI], token => {
+export default createStyles(['components', 'ImageUpload', prefixCls], token => {
   return {
-    [`.${prefixUI}`]: {
+    [`.${prefixCls}`]: {
       gap: 8,
       alignItems: 'center',
       display: 'inline-flex',
       justifyContent: 'flex-start',
 
-      [`.${prefixUI}-icon`]: {
+      [`.${prefixCls}-icon`]: {
         fontSize: 18
       },
 
-      [`.${prefixUI}-done, .${prefixUI}-error, .${prefixUI}-action, .${prefixUI}-loading`]: {
+      [`.${prefixCls}-done, .${prefixCls}-error, .${prefixCls}-action, .${prefixCls}-loading`]: {
         gap: 8,
         width: '100%',
         height: '100%',
@@ -31,26 +31,26 @@ export default createStyles(['components', 'ImageUpload', prefixUI], token => {
         borderRadius: token.borderRadius
       },
 
-      [`.${prefixUI}-done`]: {
-        [`.${prefixUI}-mask`]: {
+      [`.${prefixCls}-done`]: {
+        [`.${prefixCls}-mask`]: {
           gap: 8,
           display: 'flex',
 
-          [`.${prefixUI}-delete`]: {
+          [`.${prefixCls}-delete`]: {
             color: token.colorError
           }
         }
       },
 
-      [`.${prefixUI}-action, .${prefixUI}-error`]: {
+      [`.${prefixCls}-action, .${prefixCls}-error`]: {
         transition: 'border-color 0.3s 0s ease'
       },
 
-      [`.${prefixUI}-action, .${prefixUI}-loading`]: {
+      [`.${prefixCls}-action, .${prefixCls}-loading`]: {
         border: `1px dashed ${token.colorBorder}`
       },
 
-      [`.${prefixUI}-error`]: {
+      [`.${prefixCls}-error`]: {
         textAlign: 'center',
         color: token.colorError,
         border: `1px dashed ${token.colorError}`,
@@ -60,7 +60,7 @@ export default createStyles(['components', 'ImageUpload', prefixUI], token => {
         }
       },
 
-      [`.${prefixUI}-action`]: {
+      [`.${prefixCls}-action`]: {
         '&:hover': {
           borderColor: token.colorPrimaryActive
         }

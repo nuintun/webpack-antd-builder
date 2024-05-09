@@ -5,10 +5,10 @@
 import createStyles from '/js/hooks/createStyles';
 import { headerBgDark, headerBgLight } from '/js/components/FlexMenu/style';
 
-export const prefixUI = 'ui-flex-layout';
+export const prefixCls = 'ui-flex-layout';
 
 export default createStyles(
-  ['components', 'FlexLayout', prefixUI],
+  ['components', 'FlexLayout', prefixCls],
   (token, { unit }) => {
     const layout = token.Layout;
     const headerBg = layout?.headerBg;
@@ -17,11 +17,11 @@ export default createStyles(
     const colorSplit = layout?.colorSplit ?? token.colorSplit;
 
     return {
-      [`.${prefixUI}`]: {
+      [`.${prefixCls}`]: {
         height: '100%',
         overflow: 'hidden',
 
-        [`.${prefixUI}-header`]: {
+        [`.${prefixCls}-header`]: {
           padding: 0,
           display: 'flex',
           overflow: 'hidden',
@@ -31,7 +31,7 @@ export default createStyles(
           color: layout?.headerColor ?? token.colorText,
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`,
 
-          [`.${prefixUI}-trigger`]: {
+          [`.${prefixCls}-trigger`]: {
             flex: 0,
 
             '&:hover': {
@@ -39,7 +39,7 @@ export default createStyles(
             }
           },
 
-          [`.${prefixUI}-logo-header`]: {
+          [`.${prefixCls}-logo-header`]: {
             height: '100%',
             display: 'flex',
             overflow: 'hidden',
@@ -48,7 +48,7 @@ export default createStyles(
             wordBreak: 'keep-all'
           },
 
-          [`.${prefixUI}-actions-header`]: {
+          [`.${prefixCls}-actions-header`]: {
             flex: 1,
             display: 'flex',
             gap: token.margin,
@@ -57,7 +57,7 @@ export default createStyles(
           }
         },
 
-        [`.${prefixUI}-content`]: {
+        [`.${prefixCls}-content`]: {
           height: '100%',
           overflow: 'auto',
           position: 'relative',
@@ -69,14 +69,14 @@ export default createStyles(
           transition: `all ${token.motionDurationMid}`
         },
 
-        [`&.${prefixUI}-dark`]: {
-          [`.${prefixUI}-header`]: {
+        [`&.${prefixCls}-dark`]: {
+          [`.${prefixCls}-header`]: {
             backgroundColor: headerBg ?? headerBgDark
           }
         },
 
-        [`&.${prefixUI}-light`]: {
-          [`.${prefixUI}-header`]: {
+        [`&.${prefixCls}-light`]: {
+          [`.${prefixCls}-header`]: {
             backgroundColor: headerBg ?? headerBgLight
           }
         }

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
-import useStyles, { prefixUI } from './style';
+import useStyles, { prefixCls } from './style';
 import { useMatches } from 'react-nest-router';
 import useItems, { RenderItem } from './useItems';
 import useLatestRef from '/js/hooks/useLatestRef';
@@ -92,8 +92,8 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
       items={useItems(items, selectedKeys, renderItem)}
-      rootClassName={classNames(scope, prefixUI, rootClassName)}
-      className={classNames(className, { [`${prefixUI}-collapsed`]: collapsed })}
+      rootClassName={classNames(scope, prefixCls, rootClassName)}
+      className={classNames(className, { [`${prefixCls}-collapsed`]: collapsed })}
     />
   );
 });
