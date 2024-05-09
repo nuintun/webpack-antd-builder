@@ -2,8 +2,8 @@
  * @module LogoHeader
  */
 
+import React, { memo } from 'react';
 import Link from '/js/components/Link';
-import React, { memo, useMemo } from 'react';
 import useStyles, { prefixUI } from './style/logo';
 import { RenderHeaderProps } from '/js/components/FlexMenu';
 
