@@ -48,10 +48,10 @@ function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: Render
 
 export default function useItems(items: MenuItem[], selectedKeys: string[], renderItem?: RenderItem): Item[] {
   return useMemo(() => {
-    const result: Item[] = [];
+    const menuItems: Item[] = [];
     const itemClassName = `${prefixCls}-item`;
     const submenuClassName = `${prefixCls}-submenu`;
-    const itemsMapping: Record<string, Item[]> = {};
+    const menuItemsMapping: Record<string, Item[]> = {};
 
     for (const item of items) {
       const tree = new DFSTree(item, item => item.children);
@@ -67,7 +67,7 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], rend
             key,
             className: submenuClassName,
             popupClassName: submenuClassName,
-            children: (itemsMapping[key] = []),
+            children: (menuItemsMapping[key] = []),
             label: renderLabel(current, selectedKeys, renderItem)
           };
         } else {
@@ -79,13 +79,13 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], rend
         }
 
         if (parent) {
-          itemsMapping[parent.key].push(item);
+          menuItemsMapping[parent.key].push(item);
         } else {
-          result.push(item);
+          menuItems.push(item);
         }
       }
     }
 
-    return result;
+    return menuItems;
   }, [selectedKeys, items, renderItem]);
 }
