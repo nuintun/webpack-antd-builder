@@ -27,8 +27,8 @@ export default createStyles(
           whiteSpace: 'nowrap',
           wordBreak: 'keep-all',
           height: unit(headerHeight),
-          color: token.colorPrimaryText,
           transition: `all ${token.motionDurationMid}`,
+          color: layout?.headerColor ?? token.colorText,
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
         },
 

@@ -8,7 +8,7 @@ import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
 import useStyles, { prefixUI } from './style';
 import { useMatches } from 'react-nest-router';
-import useItems, { ItemRender } from './useItems';
+import useItems, { RenderItem } from './useItems';
 import useLatestRef from '/js/hooks/useLatestRef';
 import { SiderContext } from 'antd/es/layout/Sider';
 import { flattenItems, getExpandKeys, mergeKeys } from './utils';
@@ -25,14 +25,14 @@ type OmitProps =
 
 export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
   items: MenuItem[];
-  itemRender?: ItemRender;
+  renderItem?: RenderItem;
   icon?: string | React.ReactElement;
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
 }
 
 export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
   const { inlineCollapsed } = props;
-  const { items, className, itemRender, defaultOpenKeys, ...restProps } = props;
+  const { items, className, renderItem, rootClassName, defaultOpenKeys, ...restProps } = props;
 
   const [scope, render] = useStyles();
   const matches = useMatches() as IRoute[];
@@ -91,10 +91,9 @@ export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElemen
       openKeys={openKeys}
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
-      items={useItems(items, selectedKeys, itemRender)}
-      className={classNames(scope, prefixUI, className, {
-        [`${prefixUI}-collapsed`]: collapsed
-      })}
+      items={useItems(items, selectedKeys, renderItem)}
+      rootClassName={classNames(scope, prefixUI, rootClassName)}
+      className={classNames(className, { [`${prefixUI}-collapsed`]: collapsed })}
     />
   );
 });

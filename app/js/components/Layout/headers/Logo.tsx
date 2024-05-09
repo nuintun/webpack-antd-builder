@@ -5,8 +5,8 @@
 import React, { memo } from 'react';
 import classNames from 'classnames';
 import Link from '/js/components/Link';
-import useStyles, { prefixUI } from './style/logo';
 import { RenderHeaderProps } from '/js/components/FlexMenu';
+import useStyles, { prefixUI } from '/js/components/Layout/style/logo';
 
 import logo from '/images/logo.svg?url';
 

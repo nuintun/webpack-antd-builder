@@ -24,6 +24,7 @@ export default createStyles(
           placeItems: 'center',
           fontSize: token.fontSizeXL,
           transition: `all ${token.motionDurationMid}`,
+          color: layout?.headerColor ?? token.colorText,
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`,
 
           [`.${prefixUI}-trigger`]: {

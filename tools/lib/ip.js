@@ -5,22 +5,34 @@
 
 import os from 'os';
 
-const IPV4_RE = /^\d{1,3}(?:\.\d{1,3}){3}$/;
+/**
+ * @function isLinkLocal
+ * @param {string} address
+ * @returns {boolean}
+ */
+function isLinkLocal(address) {
+  return /^fe80:/i.test(address);
+}
 
 /**
  * @function resolveIp
- * @param {boolean} ipv4
+ * @param {boolean} ipv6
  * @return {Promise<string>}
  */
-export default async (ipv4 = true) => {
+export default (ipv6 = false) => {
+  const expectFamily = ipv6 ? 'IPv6' : 'IPv4';
   const networkInterfaces = os.networkInterfaces();
   const interfaces = Object.keys(networkInterfaces);
 
   for (const face of interfaces) {
     const networkInterface = networkInterfaces[face];
 
-    for (const { address, internal } of networkInterface) {
-      if (!internal && ipv4 && IPV4_RE.test(address)) {
+    for (const { family, address, internal } of networkInterface) {
+      if (!internal && family === expectFamily) {
+        if (ipv6 && isLinkLocal(address)) {
+          continue;
+        }
+
         return address;
       }
     }

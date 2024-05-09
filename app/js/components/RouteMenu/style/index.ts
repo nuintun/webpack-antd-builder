@@ -22,23 +22,25 @@ export default createStyles(
           display: 'none'
         },
 
-        [`.${prefixUI}-title`]: {
-          display: 'flex',
-          overflow: 'hidden',
-          alignItems: 'center',
-          fontSize: fontSizeLG,
-          textOverflow: 'ellipsis',
-
-          [`.${prefixUI}-icon`]: {
-            lineHeight: 0,
+        [`.${prefixUI}-submenu, .${prefixUI}-item`]: {
+          [`.${prefixUI}-title`]: {
+            display: 'flex',
+            overflow: 'hidden',
+            alignItems: 'center',
             fontSize: fontSizeLG,
+            textOverflow: 'ellipsis',
 
-            '> img': {
-              height: fontSizeLG
-            },
+            [`.${prefixUI}-icon`]: {
+              lineHeight: 0,
+              fontSize: fontSizeLG,
 
-            '+ span': {
-              marginInlineStart: marginXXS
+              '> img': {
+                height: fontSizeLG
+              },
+
+              '+ span': {
+                marginInlineStart: marginXXS
+              }
             }
           }
         },

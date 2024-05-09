@@ -10,12 +10,12 @@ import { DFSTree } from '/js/utils/tree';
 import { MenuItem } from '/js/utils/menus';
 import FlexIcon from '/js/components/FlexIcon';
 
-export type ItemRender = (item: MenuItem) => React.ReactNode;
-export type Item = NonNullable<NonNullable<MenuProps['items']>[0]>;
+export type Item = NonNullable<MenuProps['items']>[0];
+export type RenderItem = (item: MenuItem) => React.ReactNode;
 
-function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
-  if (itemRender) {
-    return itemRender(item);
+function renderContent(item: MenuItem, renderItem?: RenderItem): React.ReactNode {
+  if (renderItem) {
+    return renderItem(item);
   }
 
   const { icon, name } = item;
@@ -28,11 +28,11 @@ function renderItem(item: MenuItem, itemRender?: ItemRender): React.ReactNode {
   );
 }
 
-function renderLabel(item: MenuItem, selectedKeys: string[], itemRender?: ItemRender): React.ReactElement {
+function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: RenderItem): React.ReactElement {
   const { link, children } = item;
 
   if ((children && children.length > 0) || !link) {
-    return <span className={`${prefixUI}-title`}>{renderItem(item, itemRender)}</span>;
+    return <span className={`${prefixUI}-title`}>{renderContent(item, renderItem)}</span>;
   } else {
     const { key } = item;
     const { href, target } = link;
@@ -40,15 +40,17 @@ function renderLabel(item: MenuItem, selectedKeys: string[], itemRender?: ItemRe
 
     return (
       <Link href={href} className={`${prefixUI}-title`} replace={replace} target={target}>
-        {renderItem(item, itemRender)}
+        {renderContent(item, renderItem)}
       </Link>
     );
   }
 }
 
-export default function useItems(items: MenuItem[], selectedKeys: string[], itemRender?: ItemRender): Item[] {
+export default function useItems(items: MenuItem[], selectedKeys: string[], renderItem?: RenderItem): Item[] {
   return useMemo(() => {
     const result: Item[] = [];
+    const itemClassName = `${prefixUI}-item`;
+    const submenuClassName = `${prefixUI}-submenu`;
     const itemMapping: Record<string, Item[]> = {};
 
     for (const item of items) {
@@ -63,13 +65,16 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
         if (hasChildren) {
           item = {
             key,
+            className: submenuClassName,
+            popupClassName: submenuClassName,
             children: (itemMapping[key] = []),
-            label: renderLabel(current, selectedKeys, itemRender)
+            label: renderLabel(current, selectedKeys, renderItem)
           };
         } else {
           item = {
             key,
-            label: renderLabel(current, selectedKeys, itemRender)
+            className: itemClassName,
+            label: renderLabel(current, selectedKeys, renderItem)
           };
         }
 
@@ -82,5 +87,5 @@ export default function useItems(items: MenuItem[], selectedKeys: string[], item
     }
 
     return result;
-  }, [selectedKeys, items, itemRender]);
+  }, [selectedKeys, items, renderItem]);
 }
