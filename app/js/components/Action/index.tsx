@@ -63,7 +63,6 @@ function Action<R>(props: ActionProps<R>): React.ReactElement {
       body: initBody,
       query: initQuery
     } = propsRef.current;
-    // @ts-ignore
     const body = isFunction(initBody) ? initBody() : initBody;
     const query = isFunction(initQuery) ? initQuery() : initQuery;
 
