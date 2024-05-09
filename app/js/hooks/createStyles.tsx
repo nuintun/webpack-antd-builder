@@ -9,7 +9,7 @@ import createMaxMin from 'antd/es/theme/util/maxmin';
 import { memo, ReactElement, useId, useMemo } from 'react';
 import AbstractCalculator from 'antd/es/theme/util/calc/calculator';
 import useToken, { ignore, unitless } from 'antd/es/theme/useToken';
-import { AliasToken, OverrideToken } from 'antd/es/theme/interface';
+import { AliasToken, GlobalToken, OverrideToken } from 'antd/es/theme/interface';
 import { CSSInterpolation, token2CSSVar, unit, useCSSVarRegister, useStyleRegister } from '@ant-design/cssinjs';
 
 interface CSSVar {
@@ -175,8 +175,7 @@ export default function createStyles<C extends Components = never>(path: string[
               }
 
               if (length > 0) {
-                // @ts-ignore
-                mergedToken[component] = componentTokens;
+                mergedToken[component] = componentTokens as GlobalToken[C];
               }
             }
           }
