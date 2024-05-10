@@ -17,6 +17,7 @@ export default memo(function FlexDrawer({
   children,
   height = 720,
   width = 1440,
+  keyboard = false,
   maskClosable = false,
   breakWidth = '100vw',
   breakHeight = '100vh',
@@ -40,6 +41,7 @@ export default memo(function FlexDrawer({
     <Drawer
       {...restProps}
       styles={styles}
+      keyboard={keyboard}
       maskClosable={maskClosable}
       width={isBreakWidth ? breakWidth : width}
       height={isBreakHeight ? breakHeight : height}
