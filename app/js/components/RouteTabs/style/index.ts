@@ -6,7 +6,7 @@ import createStyles from '/js/hooks/createStyles';
 
 export const prefixCls = 'ui-route-tabs';
 
-export default createStyles(['components', 'RouteTabs', prefixCls], (token, { calc, unit }) => {
+export default createStyles(['components', 'RouteTabs', prefixCls], (token, { unit }) => {
   const { fontSizeLG } = token;
 
   return {
@@ -17,8 +17,8 @@ export default createStyles(['components', 'RouteTabs', prefixCls], (token, { ca
       '> [role=tablist]': {
         margin: 0,
         paddingBlock: 0,
+        paddingInline: token.padding,
         backgroundColor: token.colorBgContainer,
-        paddingInline: calc(token.paddingXS).mul(2).equal(),
 
         '&::before': {
           display: 'none'
