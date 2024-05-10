@@ -15,12 +15,30 @@ function isLinkLocal(address) {
 }
 
 /**
+ * @function isIPv4
+ * @param {string} family
+ * @returns {boolean}
+ */
+function isIPv4(family) {
+  return family === 'IPv4' || family === 4;
+}
+
+/**
+ * @function isIPv6
+ * @param {string} family
+ * @returns {boolean}
+ */
+function isIPv6(family) {
+  return family === 'IPv6' || family === 6;
+}
+
+/**
  * @function resolveIp
  * @param {boolean} ipv6
  * @return {Promise<string>}
  */
 export default (ipv6 = false) => {
-  const expectFamily = ipv6 ? 'IPv6' : 'IPv4';
+  const isMatchFamily = ipv6 ? isIPv6 : isIPv4;
   const networkInterfaces = os.networkInterfaces();
   const interfaces = Object.keys(networkInterfaces);
 
@@ -28,7 +46,7 @@ export default (ipv6 = false) => {
     const networkInterface = networkInterfaces[face];
 
     for (const { family, address, internal } of networkInterface) {
-      if (!internal && family === expectFamily) {
+      if (!internal && isMatchFamily(family)) {
         if (ipv6 && isLinkLocal(address)) {
           continue;
         }
