@@ -31,9 +31,9 @@ export default createStyles(
           whiteSpace: 'nowrap',
           wordBreak: 'keep-all',
           height: unit(headerHeight),
-          transition: `all ${token.motionDurationMid}`,
           color: layout?.headerColor ?? token.colorText,
-          borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`
+          borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`,
+          transition: `all ${layout?.motionDurationMid ?? token.motionDurationMid}`
         },
 
         [`.${prefixCls}-body`]: {

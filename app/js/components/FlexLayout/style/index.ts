@@ -15,6 +15,7 @@ export default createStyles(
     const lineType = layout?.lineType ?? token.lineType;
     const lineWidth = layout?.lineWidth ?? token.lineWidth;
     const colorSplit = layout?.colorSplit ?? token.colorSplit;
+    const motionDurationMid = layout?.motionDurationMid ?? token.motionDurationMid;
 
     return {
       [`.${prefixCls}`]: {
@@ -26,16 +27,16 @@ export default createStyles(
           display: 'flex',
           overflow: 'hidden',
           placeItems: 'center',
-          fontSize: token.fontSizeXL,
-          transition: `all ${token.motionDurationMid}`,
+          transition: `all ${motionDurationMid}`,
           color: layout?.headerColor ?? token.colorText,
+          fontSize: layout?.fontSizeXL ?? token.fontSizeXL,
           borderBlockEnd: `${unit(lineWidth)} ${lineType} ${colorSplit}`,
 
           [`.${prefixCls}-trigger`]: {
             flex: 0,
 
             '&:hover': {
-              color: token.colorPrimary
+              color: layout?.colorPrimary ?? token.colorPrimary
             }
           },
 
@@ -51,9 +52,9 @@ export default createStyles(
           [`.${prefixCls}-actions-header`]: {
             flex: 1,
             display: 'flex',
-            gap: token.margin,
             placeItems: 'center',
-            padding: `0 ${unit(token.paddingXS)}`
+            gap: layout?.margin ?? token.margin,
+            padding: `0 ${unit(layout?.paddingXS ?? token.paddingXS)}`
           }
         },
 
@@ -61,12 +62,12 @@ export default createStyles(
           height: '100%',
           overflow: 'auto',
           position: 'relative',
-          color: token.colorText,
           msScrollChaining: 'none',
           scrollBehavior: 'smooth',
           OverscrollBehavior: 'contain',
           WebkitOverflowScrolling: 'touch',
-          transition: `all ${token.motionDurationMid}`
+          transition: `all ${motionDurationMid}`,
+          color: layout?.colorText ?? token.colorText
         },
 
         [`&.${prefixCls}-dark`]: {

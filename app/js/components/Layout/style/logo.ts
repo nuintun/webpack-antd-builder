@@ -28,7 +28,7 @@ export default createStyles(
           color: layout?.headerColor ?? token.colorText,
 
           '&:hover': {
-            color: token.colorPrimary
+            color: layout?.colorPrimary ?? token.colorPrimary
           }
         }
       }

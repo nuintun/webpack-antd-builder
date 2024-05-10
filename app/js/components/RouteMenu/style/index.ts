@@ -9,8 +9,10 @@ export const prefixCls = 'ui-route-menu';
 export default createStyles(
   ['components', 'RouteMenu', prefixCls],
   (token, { calc, unit }) => {
-    const { marginXXS, fontSizeLG } = token;
-    const marginInline = token.Menu?.itemMarginInline ?? marginXXS;
+    const menu = token.Menu;
+    const marginXXS = menu?.marginXXS ?? token.marginXXS;
+    const fontSizeLG = menu?.fontSizeLG ?? token.fontSizeLG;
+    const marginInline = menu?.itemMarginInline ?? marginXXS;
 
     return {
       [`.${prefixCls}`]: {
