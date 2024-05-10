@@ -18,6 +18,7 @@ export default memo(function FlexDrawer({
   height = 720,
   width = 1440,
   keyboard = false,
+  closeIcon = false,
   maskClosable = false,
   breakWidth = '100vw',
   breakHeight = '100vh',
@@ -42,6 +43,7 @@ export default memo(function FlexDrawer({
       {...restProps}
       styles={styles}
       keyboard={keyboard}
+      closeIcon={closeIcon}
       maskClosable={maskClosable}
       width={isBreakWidth ? breakWidth : width}
       height={isBreakHeight ? breakHeight : height}
