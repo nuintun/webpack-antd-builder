@@ -2,7 +2,6 @@
  * @module useList
  */
 
-import useLatestRef from './useLatestRef';
 import usePagingRequest, {
   hasQuery,
   Options as InitOptions,
@@ -12,16 +11,17 @@ import usePagingRequest, {
   Sorter,
   TransformOptions as InitTransformOptions
 } from './usePagingRequest';
+import useLatestRef from './useLatestRef';
 import { useCallback, useMemo } from 'react';
-import { ListProps, PaginationProps } from 'antd';
 import useSearches, { Search } from './useSearches';
+import { GetProp, ListProps, PaginationProps } from 'antd';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
 
 interface Refs<I, E> extends RequestRefs<I, E> {
   readonly sorter: Sorter | false;
 }
 
-type OnChange = NonNullable<PaginationProps['onChange']>;
+type OnChange = GetProp<PaginationProps, 'onChange'>;
 
 type Pagination = (UsePagingOptions & Partial<RequestPagination>) | false;
 

@@ -2,15 +2,15 @@
  * @module useItems
  */
 
-import { MenuProps } from 'antd';
 import { prefixCls } from './style';
 import Link from '/js/components/Link';
 import React, { useMemo } from 'react';
 import { DFSTree } from '/js/utils/tree';
+import { GetProp, MenuProps } from 'antd';
 import { MenuItem } from '/js/utils/menus';
 import FlexIcon from '/js/components/FlexIcon';
 
-export type Item = NonNullable<MenuProps['items']>[0];
+export type Item = GetProp<MenuProps, 'items'>[0];
 export type RenderItem = (item: MenuItem) => React.ReactNode;
 
 function renderContent(item: MenuItem, renderItem?: RenderItem): React.ReactNode {

@@ -2,8 +2,6 @@
  * @module useTable
  */
 
-import { TableProps } from 'antd';
-import useLatestRef from './useLatestRef';
 import usePagingRequest, {
   hasQuery,
   Options as InitOptions,
@@ -13,6 +11,8 @@ import usePagingRequest, {
   Sorter,
   TransformOptions as InitTransformOptions
 } from './usePagingRequest';
+import useLatestRef from './useLatestRef';
+import { GetProp, TableProps } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
@@ -24,7 +24,7 @@ interface Refs<I, E = {}> extends RequestRefs<I, E> {
   readonly sorter: Sorter | false;
 }
 
-type OnChange<I> = NonNullable<TableProps<I>['onChange']>;
+type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
 
 type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
 

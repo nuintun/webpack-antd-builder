@@ -2,13 +2,12 @@
  * @module index
  */
 
-import React, { memo, useCallback, useEffect, useState } from 'react';
-
 import classNames from 'classnames';
 import useStyles, { prefixCls } from './style';
-import { App, Image, Upload, UploadProps } from 'antd';
 import { useLocation, useNavigate } from 'react-nest-router';
+import { App, GetProp, Image, Upload, UploadProps } from 'antd';
 import useControllableValue from '/js/hooks/useControllableValue';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { DeleteOutlined, EyeOutlined, LoadingOutlined, UploadOutlined, WarningOutlined } from '@ant-design/icons';
 
 import fallback from './image/fallback.svg?url';
@@ -24,8 +23,8 @@ interface UploadResponse {
   };
 }
 
-type FileList<T> = NonNullable<UploadProps<T>['fileList']>;
-type OnChange<T> = NonNullable<UploadProps<T>['onChange']>;
+type FileList<T> = GetProp<UploadProps<T>, 'fileList'>;
+type OnChange<T> = GetProp<UploadProps<T>, 'onChange'>;
 
 export interface ImageUploadProps<T>
   extends Pick<React.CSSProperties, 'width' | 'height'>,

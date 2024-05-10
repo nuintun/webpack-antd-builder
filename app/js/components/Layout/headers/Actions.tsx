@@ -5,9 +5,9 @@
 import classNames from 'classnames';
 import { memo, useCallback, useMemo } from 'react';
 import useTheme, { Theme } from '/js/hooks/useTheme';
-import { App, Avatar, Dropdown, MenuProps } from 'antd';
 import Icon, { LogoutOutlined } from '@ant-design/icons';
 import { RenderHeaderProps } from '/js/components/FlexMenu';
+import { App, Avatar, Dropdown, GetProp, MenuProps } from 'antd';
 import useStyles, { prefixCls } from '/js/components/Layout/style/actions';
 
 import logo from '/images/logo.svg?url';
@@ -18,7 +18,7 @@ import ThemeLightIcon from '/images/theme-light.svg';
 
 const { useApp } = App;
 
-type MenuClickEventHandler = NonNullable<MenuProps['onClick']>;
+type MenuClickEventHandler = GetProp<MenuProps, 'onClick'>;
 
 function getDropdownActiveClassName(selected: boolean): string | undefined {
   if (selected) {

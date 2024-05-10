@@ -5,9 +5,9 @@
 import classNames from 'classnames';
 import useStyles, { prefixCls } from './style';
 import useLatestRef from '/js/hooks/useLatestRef';
-import { Drawer, Layout, MenuTheme, SiderProps } from 'antd';
 import React, { memo, useCallback, useMemo, useRef } from 'react';
 import RouteMenu, { RouteMenuProps } from '/js/components/RouteMenu';
+import { Drawer, GetProp, Layout, MenuTheme, SiderProps } from 'antd';
 
 const { Sider } = Layout;
 
@@ -29,7 +29,7 @@ export interface FlexMenuProps
   renderHeader?: RenderHeader;
 }
 
-export type OnOpenChange = NonNullable<FlexMenuProps['onOpenChange']>;
+export type OnOpenChange = GetProp<FlexMenuProps, 'onOpenChange'>;
 
 export type RenderHeader = (props: RenderHeaderProps) => React.ReactNode;
 
