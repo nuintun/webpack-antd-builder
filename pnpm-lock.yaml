@@ -51,8 +51,8 @@ importers:
         specifier: ^4.0.13
         version: 4.0.13(react@18.3.1)
       react-nest-router:
-        specifier: ^0.19.12
-        version: 0.19.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.19.13
+        version: 0.19.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       throttle-debounce:
         specifier: ^5.0.0
         version: 5.0.0
@@ -70,8 +70,8 @@ importers:
         specifier: ^1.5.5
         version: 1.5.5(@swc/helpers@0.5.11)
       '@types/react':
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^18.3.2
+        version: 18.3.2
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
@@ -594,8 +594,8 @@ packages:
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
-  '@types/react@18.3.1':
-    resolution: {integrity: sha512-V0kuGBX3+prX+DQ/7r2qsv1NsdfnCLnTgnRJ1pYnxykBhGMz+qj+box5lq7XsO5mtZsBqpjwwTu/7wszPfMBcw==}
+  '@types/react@18.3.2':
+    resolution: {integrity: sha512-Btgg89dAnqD4vV7R3hlwOxgqobUQKgx3MmrQRi0yYbs/P0ym8XozIAlkqVilPqHQwXs4e9Tf63rrCgl58BcO4w==}
 
   '@types/send@0.17.4':
     resolution: {integrity: sha512-x2EM6TJOybec7c52BX0ZspPodMsQUd5L6PRwOunVyVUhXiBSKf3AezDL8Dgvgt5o0UfKNfuA0eMLr2wLT4AiBA==}
@@ -2387,8 +2387,8 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-nest-router@0.19.12:
-    resolution: {integrity: sha512-+JFv5kFj2F32sNtz4uzl2vQpjv7/PvPxc4kJQGSv1ONdldHP1d5qV7ZcrrlV7/+LkrMebk/UsZPfKIyZwD9yRg==}
+  react-nest-router@0.19.13:
+    resolution: {integrity: sha512-duU62ox7nC37WyE7zbbpr8XFeIhrleZ42tOqoPI3NMTBBlcDB0k8yTpzeJfjY+QFYq/ZK5TGTWhSHR6TyYvhXQ==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -3409,9 +3409,9 @@ snapshots:
 
   '@types/react-dom@18.3.0':
     dependencies:
-      '@types/react': 18.3.1
+      '@types/react': 18.3.2
 
-  '@types/react@18.3.1':
+  '@types/react@18.3.2':
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -5400,7 +5400,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-nest-router@0.19.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-nest-router@0.19.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
