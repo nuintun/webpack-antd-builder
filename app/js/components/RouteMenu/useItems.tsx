@@ -5,7 +5,7 @@
 import { prefixCls } from './style';
 import Link from '/js/components/Link';
 import React, { useMemo } from 'react';
-import { DFSTree } from '/js/utils/tree';
+import { DFSTree } from '/js/utils/Tree';
 import { GetProp, MenuProps } from 'antd';
 import { MenuItem } from '/js/utils/menus';
 import FlexIcon from '/js/components/FlexIcon';

@@ -2,7 +2,7 @@
  * @module menus
  */
 
-import { DFSTree } from './tree';
+import { DFSTree } from './Tree';
 import { Icon, IRoute, Link, Route } from './router';
 
 export interface MenuItem {
@@ -14,10 +14,22 @@ export interface MenuItem {
 }
 
 export const enum Filter {
-  All, // 过滤当前节点和子节点
-  Self, // 仅过滤当前节点，子节点正常处理
-  Keep, // 强制保留当前节点，子节点正常处理
-  Auto // 缺省模式，若当前节点为布局节点且无子节点，将会被过滤
+  /**
+   * @description 过滤无子节点的节点
+   */
+  DEFAULT,
+  /**
+   * @description 过滤当自身点和子节点
+   */
+  REMOVE_ALL,
+  /**
+   * @description 仅过滤自身节点，子节点正常处理
+   */
+  REMOVE_SELF,
+  /**
+   * @description 强制保留自身节点，子节点正常处理
+   */
+  PRESERVE_SELF
 }
 
 /**
@@ -26,7 +38,7 @@ export const enum Filter {
  * @param state 节点过滤状态
  */
 function isIgnored(state: Filter): boolean {
-  return state === Filter.All || state === Filter.Self;
+  return state === Filter.REMOVE_ALL || state === Filter.REMOVE_SELF;
 }
 
 /**
@@ -43,22 +55,22 @@ function addOptional<T>(source: T, key: keyof T, value: T[typeof key]): void {
 }
 
 /**
- * @function removeOnlyLayoutMenus
+ * @function removeEmptyLayouts
  * @description 过滤只有布局的菜单
  * @param items 菜单配置
- * @param layouts 布局路由对应菜单映射
+ * @param removeable 可以进行删除的布局菜单
  */
-function removeOnlyLayoutMenus(items: MenuItem[], layouts: Record<string, boolean>): MenuItem[] {
+function removeEmptyLayouts(items: MenuItem[], removeable: Set<string>): MenuItem[] {
   return items.filter(item => {
     const { children } = item;
 
     if (children && children.length > 0) {
-      item.children = removeOnlyLayoutMenus(children, layouts);
+      item.children = removeEmptyLayouts(children, removeable);
 
       return item.children.length > 0;
     }
 
-    return !layouts[item.key];
+    return !removeable.has(item.key);
   });
 }
 
@@ -70,12 +82,12 @@ function removeOnlyLayoutMenus(items: MenuItem[], layouts: Record<string, boolea
  */
 export function parse<M = unknown>(
   routes: readonly Route<M>[],
-  filter: (route: IRoute<M>) => Filter = () => Filter.Auto,
+  filter: (route: IRoute<M>) => Filter = () => Filter.DEFAULT,
   transform: (menu: MenuItem, route: IRoute<M>) => MenuItem = menu => menu
 ): MenuItem[] {
   const menus: MenuItem[] = [];
   const guards: Record<string, Filter> = {};
-  const layouts: Record<string, boolean> = {};
+  const removeable: Set<string> = new Set();
 
   for (const route of routes) {
     const mapping: Record<string, MenuItem> = {};
@@ -85,7 +97,7 @@ export function parse<M = unknown>(
 
       guards[node.meta.key] = guard;
 
-      if (guard !== Filter.All) {
+      if (guard !== Filter.REMOVE_ALL) {
         return node.children;
       }
     });
@@ -112,8 +124,8 @@ export function parse<M = unknown>(
         if (hasChildren) {
           mapping[key] = menu;
 
-          if (guards[key] !== Filter.Keep) {
-            layouts[key] = true;
+          if (guards[key] !== Filter.PRESERVE_SELF) {
+            removeable.add(key);
           }
         }
 
@@ -132,5 +144,5 @@ export function parse<M = unknown>(
     }
   }
 
-  return removeOnlyLayoutMenus(menus, layouts);
+  return removeEmptyLayouts(menus, removeable);
 }

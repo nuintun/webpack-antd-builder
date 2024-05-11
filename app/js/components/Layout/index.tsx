@@ -25,16 +25,16 @@ export default memo(function Layout(): React.ReactElement {
       routes,
       ({ meta }) => {
         switch (meta.type) {
-          case MenuType.Tabs:
-            return Filter.Keep;
-          case MenuType.Hidden:
-            return Filter.Self;
+          case MenuType.TABS:
+            return Filter.PRESERVE_SELF;
+          case MenuType.HIDDEN:
+            return Filter.REMOVE_SELF;
           default:
-            return Filter.Auto;
+            return Filter.DEFAULT;
         }
       },
       (menu, { meta, children }) => {
-        if (meta.type === MenuType.Tabs) {
+        if (meta.type === MenuType.TABS) {
           const tab = children?.[0];
 
           if (tab) {

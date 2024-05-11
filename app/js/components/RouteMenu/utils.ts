@@ -2,7 +2,7 @@
  * @module utils
  */
 
-import { DFSTree } from '/js/utils/tree';
+import { DFSTree } from '/js/utils/Tree';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
 

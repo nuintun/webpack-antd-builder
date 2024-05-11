@@ -3,7 +3,7 @@
  */
 
 import { resolve } from './url';
-import { DFSTree } from './tree';
+import { DFSTree } from './Tree';
 import { assert } from './utils';
 import { IRoute as NIRoute, Route as NRoute } from 'react-nest-router';
 
