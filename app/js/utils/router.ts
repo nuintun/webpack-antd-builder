@@ -40,9 +40,9 @@ export interface IRoute<M = unknown, K extends string = string> extends NIRoute<
 export function parse<M = unknown, K extends string = string>(router: readonly Route<M, K>[]): Route<M, K>[] {
   let uid = 0;
 
-  const routes: Route<M, K>[] = [];
+  const getKey = () => `${uid++}`;
 
-  const getKey = () => (uid++).toString();
+  const routes: Route<M, K>[] = [];
 
   for (const route of router as IRoute<M, K>[]) {
     const key = getKey();
