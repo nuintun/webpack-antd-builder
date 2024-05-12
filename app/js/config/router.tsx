@@ -125,7 +125,7 @@ export const router: readonly Route<Meta>[] = [
                 path: 'tabs',
                 meta: {
                   name: '标签导航',
-                  type: MenuType.TABS,
+                  // type: MenuType.TABS,
                   icon: <Icon component={TabsIcon} />
                 },
                 element: lazy(() => import('/js/components/RouteTabs')),
@@ -137,7 +137,18 @@ export const router: readonly Route<Meta>[] = [
                       type: MenuType.HIDDEN,
                       icon: <Icon component={PageIcon} />
                     },
-                    element: lazy(() => import('/js/pages/System/Tabs/First'))
+                    element: lazy(() => import('/js/pages/System/Tabs/First')),
+                    children: [
+                      {
+                        path: 'first',
+                        meta: {
+                          name: '标签页一一',
+                          // type: MenuType.HIDDEN,
+                          icon: <Icon component={PageIcon} />
+                        },
+                        element: lazy(() => import('/js/pages/System/Tabs/First'))
+                      }
+                    ]
                   },
                   {
                     path: 'second',
@@ -146,7 +157,18 @@ export const router: readonly Route<Meta>[] = [
                       type: MenuType.HIDDEN,
                       icon: <Icon component={PageIcon} />
                     },
-                    element: lazy(() => import('/js/pages/System/Tabs/Second'))
+                    element: lazy(() => import('/js/pages/System/Tabs/Second')),
+                    children: [
+                      {
+                        path: 'second',
+                        meta: {
+                          name: '标签页二一',
+                          type: MenuType.HIDDEN,
+                          icon: <Icon component={PageIcon} />
+                        },
+                        element: lazy(() => import('/js/pages/System/Tabs/Second'))
+                      }
+                    ]
                   }
                 ]
               }
