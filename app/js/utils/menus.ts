@@ -93,6 +93,10 @@ export function nparse<M = unknown>(
       } else {
         const parentKey = parent ? parent.meta.key : null;
 
+        if (parentKey) {
+          removeable.delete(parentKey);
+        }
+
         if (icon == null) {
           mapping.set(key, [parentKey, transform({ key, name, link }, node)]);
         } else {
@@ -103,14 +107,8 @@ export function nparse<M = unknown>(
 
     console.group('菜单转换过滤');
 
-    for (const [, [parentKey]] of mapping) {
-      if (parentKey) {
-        removeable.delete(parentKey);
-      }
-    }
-
-    console.log('已删除的菜单', removeable);
-    console.log('过滤菜单长度', mapping.size);
+    console.log('可删除菜单', removeable);
+    console.log('映射菜单数', mapping.size);
 
     for (const [key, [parentKey, menu]] of mapping) {
       if (!removeable.has(key)) {

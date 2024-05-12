@@ -125,7 +125,7 @@ export const router: readonly Route<Meta>[] = [
                 path: 'tabs',
                 meta: {
                   name: '标签导航',
-                  // type: MenuType.TABS,
+                  type: MenuType.TABS,
                   icon: <Icon component={TabsIcon} />
                 },
                 element: lazy(() => import('/js/components/RouteTabs')),
@@ -143,7 +143,7 @@ export const router: readonly Route<Meta>[] = [
                         path: 'first',
                         meta: {
                           name: '标签页一一',
-                          // type: MenuType.HIDDEN,
+                          type: MenuType.HIDDEN,
                           icon: <Icon component={PageIcon} />
                         },
                         element: lazy(() => import('/js/pages/System/Tabs/First'))
