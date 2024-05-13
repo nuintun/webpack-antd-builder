@@ -34,8 +34,8 @@ export default memo(function Layout(): React.ReactElement {
         }
       },
       (menu, { meta, children }) => {
-        if (meta.type === MenuType.TABS) {
-          const tab = children?.[0];
+        if (children && meta.type === MenuType.TABS) {
+          const [tab] = children;
 
           if (tab) {
             return {
