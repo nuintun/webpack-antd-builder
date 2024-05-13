@@ -45,7 +45,9 @@ function removeEmptyLayouts(items: MenuItem[], removeable: Set<string>): MenuIte
     if (children && children.length > 0) {
       item.children = removeEmptyLayouts(children, removeable);
 
-      return item.children.length > 0;
+      if (item.children.length > 0) {
+        return true;
+      }
     }
 
     return !removeable.has(item.key);
