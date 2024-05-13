@@ -7,7 +7,7 @@ import { Route } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import React, { memo, useMemo } from 'react';
 import ActionsHeader from './headers/Actions';
-import { Filter, nparse } from '/js/utils/menus';
+import { Filter, parse } from '/js/utils/menus';
 import FlexLayout from '/js/components/FlexLayout';
 import { MenuType, Meta } from '/js/config/router';
 import { RenderHeader } from '/js/components/FlexMenu';
@@ -21,7 +21,7 @@ export default memo(function Layout(): React.ReactElement {
   const routes = useOutletContext<Route<Meta>[]>();
 
   const menus = useMemo(() => {
-    return nparse<Meta>(
+    return parse<Meta>(
       routes,
       ({ meta }) => {
         switch (meta.type) {

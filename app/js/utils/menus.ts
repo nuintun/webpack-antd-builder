@@ -33,96 +33,6 @@ export const enum Filter {
 }
 
 /**
- * @function isIgnored
- * @description 检查节点是否为忽略状态
- * @param state 节点过滤状态
- */
-function isIgnored(state?: Filter): boolean {
-  return state === Filter.REMOVE_ALL || state === Filter.REMOVE_SELF;
-}
-
-/**
- * @function parse
- * @description 根据路由解析出菜单
- * @param routes 路由
- * @param filter 过滤器
- */
-export function nparse<M = unknown>(
-  routes: readonly Route<M>[],
-  filter: (route: IRoute<M>) => Filter = () => Filter.DEFAULT,
-  transform: (menu: MenuItem, route: IRoute<M>) => MenuItem = menu => menu
-): MenuItem[] {
-  const menus: MenuItem[] = [];
-
-  for (const route of routes) {
-    const removeable = new Set<string>();
-    const guards = new Map<string, Filter>();
-    const tree = new DFSTree(route as IRoute<M>, node => {
-      const guard = filter(node);
-
-      guards.set(node.meta.key, guard);
-
-      if (guard !== Filter.REMOVE_ALL) {
-        return node.children;
-      }
-    });
-    const mapping: Map<string, [parentKey: string | null, menu: MenuItem]> = new Map();
-
-    // 遍历节点
-    for (const [node, parent] of tree) {
-      // 当前节点数据
-      const { meta, children } = node;
-      const { key, name, icon, link } = meta;
-
-      // 当前节点计算属性
-      const guard = guards.get(key);
-      const hasChildren = children ? children.length > 0 : false;
-
-      if (name && hasChildren && guard !== Filter.PRESERVE_SELF) {
-        removeable.add(key);
-      }
-
-      if (!name || isIgnored(guard)) {
-        if (parent && hasChildren) {
-          const value = mapping.get(parent.meta.key);
-
-          if (value && guard === Filter.REMOVE_SELF) {
-            mapping.set(key, value);
-          }
-        }
-      } else {
-        const parentKey = parent ? parent.meta.key : null;
-
-        if (parentKey) {
-          removeable.delete(parentKey);
-        }
-
-        if (icon == null) {
-          mapping.set(key, [parentKey, transform({ key, name, link }, node)]);
-        } else {
-          mapping.set(key, [parentKey, transform({ key, name, link, icon }, node)]);
-        }
-      }
-    }
-
-    console.group('菜单转换过滤');
-
-    console.log('可删除菜单', removeable);
-    console.log('映射菜单数', mapping.size);
-
-    for (const [key, [parentKey, menu]] of mapping) {
-      if (!removeable.has(key)) {
-        console.log(key !== menu.key ? '中转节点' : '菜单节点', key, parentKey, menu);
-      }
-    }
-
-    console.groupEnd();
-  }
-
-  return menus;
-}
-
-/**
  * @function removeEmptyLayouts
  * @description 过滤只有布局的菜单
  * @param items 菜单配置
@@ -156,56 +66,62 @@ export function parse<M = unknown>(
   const menus: MenuItem[] = [];
   const removeable = new Set<string>();
 
-  for (const route of routes) {
+  for (const route of routes as IRoute<M>[]) {
     const guards = new Map<string, Filter>();
     const mapping = new Map<string, MenuItem>();
 
-    const tree = new DFSTree(route as IRoute<M>, node => {
+    const execFilter = (node: IRoute<M>): Filter => {
       const guard = filter(node);
 
       guards.set(node.meta.key, guard);
 
-      if (guard !== Filter.REMOVE_ALL) {
-        return node.children;
-      }
-    });
+      return guard;
+    };
 
-    // 遍历节点
-    for (const [node, parent] of tree) {
-      // 当前节点数据
-      const { meta, children } = node;
-      const { key, name, icon, link } = meta;
+    if (execFilter(route) !== Filter.REMOVE_ALL) {
+      const tree = new DFSTree(route, node => {
+        return node.children?.filter(node => {
+          return execFilter(node) !== Filter.REMOVE_ALL;
+        });
+      });
 
-      // 当前节点计算属性
-      const guard = guards.get(key);
-      const hasChildren = children ? children.length > 0 : false;
-      const parentMenu = parent ? mapping.get(parent.meta.key) : null;
+      // 遍历节点
+      for (const [node, parent] of tree) {
+        // 节点数据
+        const { meta, children } = node;
+        const { key, name, icon, link } = meta;
 
-      if (!name || isIgnored(guard)) {
-        if (hasChildren && parentMenu && guard === Filter.REMOVE_SELF) {
-          mapping.set(key, parentMenu);
-        }
-      } else {
-        const menu = transform(icon ? { key, name, link, icon } : { key, name, link }, node);
+        // 计算属性
+        const guard = guards.get(key);
+        const hasChildren = children ? children.length > 0 : false;
+        const parentMenu = parent ? mapping.get(parent.meta.key) : null;
 
-        if (hasChildren) {
-          mapping.set(key, menu);
-
-          if (guard !== Filter.PRESERVE_SELF) {
-            removeable.add(key);
-          }
-        }
-
-        if (parentMenu) {
-          const { children } = parentMenu;
-
-          if (children) {
-            children.push(menu);
-          } else {
-            parentMenu.children = [menu];
+        if (!name || guard === Filter.REMOVE_SELF) {
+          if (hasChildren && parentMenu) {
+            mapping.set(key, parentMenu);
           }
         } else {
-          menus.push(menu);
+          const menu = transform(icon ? { key, name, link, icon } : { key, name, link }, node);
+
+          if (hasChildren) {
+            mapping.set(key, menu);
+
+            if (guard !== Filter.PRESERVE_SELF) {
+              removeable.add(key);
+            }
+          }
+
+          if (parentMenu) {
+            const { children } = parentMenu;
+
+            if (children) {
+              children.push(menu);
+            } else {
+              parentMenu.children = [menu];
+            }
+          } else {
+            menus.push(menu);
+          }
         }
       }
     }
