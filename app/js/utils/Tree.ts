@@ -12,7 +12,7 @@ type Resolve<T> = (node: T) => T[] | void;
 
 type IteratorValue<T> = [node: T, parent: T | undefined];
 
-type Waiting<T> = [iterator: Iterator<T, undefined>, parent?: T];
+type Waiting<T> = [iterator: Iterator<T, void>, parent?: T];
 
 /**
  * @class FIFO 队列
@@ -75,6 +75,7 @@ class Queue<T> {
  */
 export class DFSTree<T> {
   private root: T[];
+  private resolve: Resolve<T>;
 
   /**
    * @constructor
@@ -82,11 +83,9 @@ export class DFSTree<T> {
    * @param tree 要深度遍历的树
    * @param resolve 子节点获取方法
    */
-  constructor(
-    tree: T,
-    private resolve: Resolve<T>
-  ) {
+  constructor(tree: T, resolve: Resolve<T>) {
     this.root = [tree];
+    this.resolve = resolve;
   }
 
   /**
@@ -136,6 +135,7 @@ export class DFSTree<T> {
  */
 export class BFSTree<T> {
   private root: T[];
+  private resolve: Resolve<T>;
 
   /**
    * @constructor
@@ -143,11 +143,9 @@ export class BFSTree<T> {
    * @param tree 要广度遍历的树
    * @param resolve 子节点获取方法
    */
-  constructor(
-    tree: T,
-    private resolve: Resolve<T>
-  ) {
+  constructor(tree: T, resolve: Resolve<T>) {
     this.root = [tree];
+    this.resolve = resolve;
   }
 
   /**
