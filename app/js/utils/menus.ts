@@ -18,40 +18,21 @@ export const enum Filter {
    * @description 过滤无子节点的节点
    */
   DEFAULT,
+
   /**
    * @description 过滤当自身点和子节点
    */
   REMOVE_ALL,
+
   /**
    * @description 仅过滤自身节点，子节点正常处理
    */
   REMOVE_SELF,
+
   /**
    * @description 强制保留自身节点，子节点正常处理
    */
   PRESERVE_SELF
-}
-
-/**
- * @function removeEmptyLayouts
- * @description 过滤只有布局的菜单
- * @param items 菜单配置
- * @param removeable 可以进行删除的布局菜单
- */
-function removeEmptyLayouts(items: MenuItem[], removeable: Set<string>): MenuItem[] {
-  return items.filter(item => {
-    const { children } = item;
-
-    if (children && children.length > 0) {
-      item.children = removeEmptyLayouts(children, removeable);
-
-      if (item.children.length > 0) {
-        return true;
-      }
-    }
-
-    return !removeable.has(item.key);
-  });
 }
 
 /**
@@ -80,37 +61,67 @@ export function parse<M = unknown>(
       return guard;
     };
 
+    const isPreserveSelf = (key: string): boolean => {
+      return guards.get(key) !== Filter.PRESERVE_SELF;
+    };
+
     if (execFilter(route) !== Filter.REMOVE_ALL) {
-      const tree = new DFSTree(route, node => {
-        return node.children?.filter(node => {
-          return execFilter(node) !== Filter.REMOVE_ALL;
-        });
-      });
+      const tree = new DFSTree(
+        route,
+        node => {
+          return node.children?.filter(node => {
+            return execFilter(node) !== Filter.REMOVE_ALL;
+          });
+        },
+        node => {
+          const { key } = node.meta;
+          const menu = mapping.get(key);
+
+          if (menu) {
+            const { children } = menu;
+            const isAvailable = node.available === true;
+
+            if (children && children.length > 0) {
+              const subset = children.filter(({ key }) => {
+                return !removeable.has(key);
+              });
+
+              if (subset.length > 0) {
+                menu.children = subset;
+              } else {
+                delete menu.children;
+
+                if (isPreserveSelf(key)) {
+                  removeable.add(key);
+                }
+              }
+
+              menu.children = subset;
+            } else if (!isAvailable) {
+              if (isPreserveSelf(key)) {
+                removeable.add(key);
+              }
+            }
+          }
+        }
+      );
 
       // 遍历节点
       for (const [node, parent] of tree) {
-        // 节点数据
         const { meta, children } = node;
         const { key, name, icon, link } = meta;
-
-        // 计算属性
-        const guard = guards.get(key);
-        const hasChildren = children ? children.length > 0 : false;
+        const isLayout = children ? children.length > 0 : false;
         const parentMenu = parent ? mapping.get(parent.meta.key) : null;
 
-        if (!name || guard === Filter.REMOVE_SELF) {
-          if (hasChildren && parentMenu) {
+        if (!name || guards.get(key) === Filter.REMOVE_SELF) {
+          if (isLayout && parentMenu) {
             mapping.set(key, parentMenu);
           }
         } else {
           const menu = transform(icon ? { key, name, link, icon } : { key, name, link }, node);
 
-          if (hasChildren) {
+          if (isLayout) {
             mapping.set(key, menu);
-
-            if (guard !== Filter.PRESERVE_SELF) {
-              removeable.add(key);
-            }
           }
 
           if (parentMenu) {
@@ -129,5 +140,7 @@ export function parse<M = unknown>(
     }
   }
 
-  return removeEmptyLayouts(menus, removeable);
+  return menus.filter(({ key }) => {
+    return !removeable.has(key);
+  });
 }

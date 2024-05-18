@@ -69,7 +69,6 @@ export function parse<M = unknown, K extends string = string>(router: readonly R
     for (const [{ meta, children, ...rest }, parent] of tree) {
       // 当前节点数据
       const { key, name, link } = meta;
-      const hasChildren = children ? children.length > 0 : false;
 
       if (__DEV__) {
         assert(name !== '', `The meta.name of the route item "${link.href}" cannot be an empty string`);
@@ -77,9 +76,10 @@ export function parse<M = unknown, K extends string = string>(router: readonly R
 
       // 路由处理
       const route = { ...rest, meta } as IRoute<M, K>;
+      const isLayout = children ? children.length > 0 : false;
       const parentRoute = parent ? mapping.get(parent.meta.key) : parent;
 
-      if (hasChildren) {
+      if (isLayout) {
         mapping.set(key, route);
       }
 
