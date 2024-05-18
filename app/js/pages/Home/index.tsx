@@ -1,62 +1,58 @@
 import * as styles from '/css/pages/home/index.module.scss';
 
+import { memo, useMemo } from 'react';
 import Paper from '/js/components/Paper';
+import useTheme from '/js/hooks/useTheme';
 import QRCode from '/js/components/QRCode';
 import { Byte, Charset } from '@nuintun/qrcode';
 import { Line, LineConfig } from '@ant-design/plots';
-import { memo, useEffect, useMemo, useState } from 'react';
 
-interface LineItem {
-  year: string;
-  value: number;
-  category: string;
-}
-
-const LineChart = memo(() => {
-  const [data, setData] = useState<LineItem[]>([]);
+const LineChart = () => {
+  const [theme] = useTheme();
 
   const config = useMemo<LineConfig>(() => {
+    const data = [
+      { year: '1991', value: 3 },
+      { year: '1992', value: 4 },
+      { year: '1993', value: 3.5 },
+      { year: '1994', value: 5 },
+      { year: '1995', value: 4.9 },
+      { year: '1996', value: 6 },
+      { year: '1997', value: 7 },
+      { year: '1998', value: 9 },
+      { year: '1999', value: 13 }
+    ];
+
     return {
       data,
+      theme,
+      autoFit: true,
       xField: 'year',
       yField: 'value',
-      xAxis: { type: 'time' },
-      seriesField: 'category',
-      tooltip: {
-        // 数值格式化为千分位
-        formatter(data) {
-          const { category, value } = data as LineItem;
-
-          return {
-            name: category,
-            value: `${value}`.replace(/\d{1,3}(?=(\d{3})+$)/g, matched => `${matched},`)
-          };
+      style: {
+        lineWidth: 2
+      },
+      interaction: {
+        tooltip: {
+          marker: false
         }
       },
-      yAxis: {
-        label: {
-          // 数值格式化为千分位
-          formatter(value: string) {
-            return `${value}`.replace(/\d{1,3}(?=(\d{3})+$)/g, matched => `${matched},`);
-          }
+      animate: {
+        enter: {
+          type: 'pathIn'
+        },
+        update: {
+          type: 'morphing'
         }
+      },
+      point: {
+        sizeField: 4,
+        shapeField: 'square'
       }
     };
-  }, [data]);
-
-  useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-      .then(response => response.json())
-      .then((json: LineItem[]) => {
-        setData(json);
-      })
-      .catch((error: Error) => {
-        console.error('fetch data failed', error);
-      });
-  }, []);
-
+  }, [theme]);
   return <Line {...config} />;
-});
+};
 
 export default memo(function Page() {
   const now = useMemo(() => {
