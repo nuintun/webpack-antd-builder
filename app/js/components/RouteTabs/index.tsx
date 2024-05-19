@@ -10,7 +10,7 @@ import FlexIcon from '/js/components/FlexIcon';
 import useStyles, { prefixCls } from './style';
 import React, { memo, Suspense, useMemo } from 'react';
 import { ConfigProvider, Tabs, TabsProps } from 'antd';
-import SuspenseFallBack from '/js/components/SuspenseFallBack';
+import LoadingFallBack from '/js/components/FallBack/Loading';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
 
 type TabsPicked =
@@ -53,7 +53,7 @@ export default memo(function RouteTabs({
       return {
         key,
         children: active && (
-          <Suspense fallback={<SuspenseFallBack />}>
+          <Suspense fallback={<LoadingFallBack />}>
             <Outlet />
           </Suspense>
         ),

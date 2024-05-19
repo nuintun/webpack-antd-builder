@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-export interface DisplayDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
+export interface ViewDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
   onOpen?: () => void;
   onClose?: () => void;
   children?: React.ReactNode;
@@ -23,7 +23,7 @@ function defaultExtra(onClose: () => void): React.ReactNode {
   );
 }
 
-export default memo(function DisplayDrawer({
+export default memo(function ViewDrawer({
   footer,
   onOpen,
   trigger,
@@ -31,7 +31,7 @@ export default memo(function DisplayDrawer({
   children,
   extra = defaultExtra,
   ...restProps
-}: DisplayDrawerProps): React.ReactElement {
+}: ViewDrawerProps): React.ReactElement {
   const [open, setOpen] = useState(false);
 
   const onCloseHandler = useCallback(() => {

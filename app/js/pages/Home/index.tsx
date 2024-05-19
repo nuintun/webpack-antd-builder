@@ -2,14 +2,16 @@ import * as styles from '/css/pages/home/index.module.scss';
 
 import { memo, useMemo } from 'react';
 import Paper from '/js/components/Paper';
-import useTheme from '/js/hooks/useTheme';
 import QRCode from '/js/components/QRCode';
 import { Byte, Charset } from '@nuintun/qrcode';
+import useTheme, { Theme } from '/js/hooks/useTheme';
 import { Line, LineConfig } from '@ant-design/plots';
 
-const LineChart = () => {
-  const [theme] = useTheme();
+interface LineChartProps {
+  theme: Theme;
+}
 
+const LineChart = memo(({ theme }: LineChartProps) => {
   const config = useMemo<LineConfig>(() => {
     const data = [
       { year: '1991', value: 3 },
@@ -52,9 +54,11 @@ const LineChart = () => {
     };
   }, [theme]);
   return <Line {...config} />;
-};
+});
 
 export default memo(function Page() {
+  const [theme] = useTheme();
+
   const now = useMemo(() => {
     return new Date().toISOString();
   }, []);
@@ -62,9 +66,16 @@ export default memo(function Page() {
   return (
     <Paper>
       <div className={styles.chart}>
-        <LineChart />
+        <LineChart theme={theme} />
       </div>
-      <QRCode className={styles.qrcode} level="H" moduleSize={4} segments={new Byte(now, Charset.UTF_8)} />
+      <QRCode
+        level="H"
+        moduleSize={4}
+        className={styles.qrcode}
+        segments={new Byte(now, Charset.UTF_8)}
+        foreground={theme === 'light' ? '#000' : '#fff'}
+        background={theme === 'light' ? '#fff' : '#000'}
+      />
     </Paper>
   );
 });

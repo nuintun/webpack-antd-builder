@@ -8,7 +8,7 @@ import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
 import useStyles, { prefixCls } from './style';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
-import SuspenseFallBack from '/js/components/SuspenseFallBack';
+import LoadingFallBack from '/js/components/FallBack/Loading';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 import FlexMenu, { FlexMenuProps, RenderHeader } from '/js/components/FlexMenu';
@@ -142,7 +142,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
           <div ref={contentRef} className={`${prefixCls}-content`}>
             <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
               <RouteBreadcrumb />
-              <Suspense fallback={<SuspenseFallBack />}>{children}</Suspense>
+              <Suspense fallback={<LoadingFallBack />}>{children}</Suspense>
             </ConfigProvider>
           </div>
         </Content>
