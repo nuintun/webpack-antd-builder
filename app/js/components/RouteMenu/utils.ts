@@ -21,18 +21,18 @@ export interface FlattenItems {
  * @param keys 菜单标识
  */
 export function uniqueKeys(keys: string[]): string[] {
-  const result: string[] = [];
+  const output: string[] = [];
   const cached: Record<string, boolean> = {};
 
   for (const key of keys) {
     if (!cached[key]) {
-      result.push(key);
+      output.push(key);
 
       cached[key] = true;
     }
   }
 
-  return result;
+  return output;
 }
 
 /**

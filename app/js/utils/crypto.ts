@@ -53,7 +53,7 @@ export function encrypt(text: string): string {
   const seed = new Uint16Array(1);
   const [key] = crypto.getRandomValues(seed);
 
-  let result = '';
+  let output = '';
   let nextKey = key;
   let checkCode = 0;
   let encryptText = '';
@@ -75,11 +75,11 @@ export function encrypt(text: string): string {
 
   checkCode = toUint16(~checkCode + 1);
 
-  result += toByteString(key ^ encryptText.length);
-  result += toByteString(checkCode);
-  result += encryptText;
+  output += toByteString(key ^ encryptText.length);
+  output += toByteString(checkCode);
+  output += encryptText;
 
-  return window.btoa(result);
+  return window.btoa(output);
 }
 
 /**
@@ -99,7 +99,7 @@ export function decrypt(text: string): string {
   const encryptKey = readUint16(atobText, 0);
 
   let index = 0;
-  let result = '';
+  let output = '';
   let checkCode = readUint16(atobText, 2);
   let nextKey = encryptKey ^ (length - offset);
 
@@ -115,8 +115,8 @@ export function decrypt(text: string): string {
 
     nextKey ^= index++ ^ decryptCode;
 
-    result += fromCharCode(decryptCode);
+    output += fromCharCode(decryptCode);
   }
 
-  return checkCode !== 0 ? '' : result;
+  return checkCode !== 0 ? '' : output;
 }
