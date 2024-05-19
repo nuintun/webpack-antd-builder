@@ -111,7 +111,7 @@ export function parse<M = unknown>(
         const { meta, children } = node;
         const { key, name, icon, link } = meta;
         const isLayout = children ? children.length > 0 : false;
-        const parentMenu = parent ? mapping.get(parent.meta.key) : null;
+        const parentMenu = parent ? mapping.get(parent.meta.key) : parent;
 
         if (!name || guards.get(key) === Filter.REMOVE_SELF) {
           if (isLayout && parentMenu) {

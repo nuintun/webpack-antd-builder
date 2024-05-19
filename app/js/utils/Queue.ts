@@ -4,7 +4,6 @@
 
 interface Node<T> {
   value: T;
-  prev: Node<T> | null;
   next: Node<T> | null;
 }
 
@@ -17,17 +16,15 @@ export class Queue<T> {
 
   /**
    * @method enqueue
-   * @description 入列
+   * @description 入列O
    * @param value 要入列的值
    */
   enqueue(value: T): void {
     const self = this;
     const { tail } = self;
-
     const node: Node<T> = {
       value,
-      next: null,
-      prev: tail
+      next: null
     };
 
     if (tail) {
@@ -50,13 +47,11 @@ export class Queue<T> {
     if (head) {
       const { next } = head;
 
-      if (next) {
-        next.prev = null;
-      } else {
+      self.head = next;
+
+      if (!next) {
         self.tail = next;
       }
-
-      self.head = next;
 
       return head.value;
     }
