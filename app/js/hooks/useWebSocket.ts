@@ -156,8 +156,8 @@ export default function useWebSocket<M extends string | Blob | ArrayBuffer>(url:
 
       // 初始化 WebSocket 失败
       if (onError) {
-        onError(new Event('error'));
-      } else if (__DEV__) {
+        onError(new Event('Failed to connect'));
+      } else {
         console.error(error);
       }
     }
