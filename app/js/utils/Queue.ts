@@ -16,7 +16,7 @@ export class Queue<T> {
 
   /**
    * @method enqueue
-   * @description 入列O
+   * @description 入列
    * @param value 要入列的值
    */
   enqueue(value: T): void {
