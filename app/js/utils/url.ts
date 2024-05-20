@@ -4,6 +4,10 @@
 
 import { normalize } from 'react-nest-router';
 
+function normalizeImpl(path: string): string {
+  return path !== '' ? normalize(path) : '/';
+}
+
 /**
  * @function isURL
  * @description 判断路径是否为 URL
@@ -49,17 +53,17 @@ export function resolve(from: string, to?: string): string {
   if (!to) {
     const [origin, pathname, query] = parseURL(from);
 
-    return `${origin}${normalize(pathname)}${query}`;
+    return `${origin}${normalizeImpl(pathname)}${query}`;
   }
 
   if (isURL(to) || isAbsolute(to)) {
     const [origin, pathname, query] = parseURL(to);
 
-    return `${origin}${normalize(pathname)}${query}`;
+    return `${origin}${normalizeImpl(pathname)}${query}`;
   }
 
   const [origin, base] = parseURL(from);
   const [, pathname, query] = parseURL(to);
 
-  return `${origin}${normalize(base ? `${base}/${pathname}` : pathname)}${query}`;
+  return `${origin}${normalizeImpl(base ? `${base}/${pathname}` : pathname)}${query}`;
 }
