@@ -40,13 +40,9 @@ export default memo(function Layout(): React.ReactElement {
             const [tab] = children;
 
             if (tab) {
-              return {
-                ...menu,
-                link: {
-                  href: tab.meta.link.href,
-                  target: menu.link?.target
-                }
-              };
+              const { href, target } = tab.meta.link;
+
+              return { ...menu, link: { href, target } };
             }
           }
 
