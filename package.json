@@ -73,11 +73,9 @@
     "webpack-dev-service": "^0.11.3"
   },
   "overrides": {
-    "ws": "^8.0.0",
-    "glob": "^10.0.0"
+    "ws": "^8.0.0"
   },
   "resolutions": {
-    "ws": "^8.0.0",
-    "glob": "^10.0.0"
+    "ws": "^8.0.0"
   }
 }
