@@ -53,7 +53,7 @@ export interface Styles<C extends Components = Components> {
 export type Token<C extends Components = Components> = AliasToken & Pick<OverrideToken, C>;
 
 function createScopeId(id: string): string {
-  return `css-var-scope-${id.replace(/[^a-z\d]/gi, '')}`;
+  return `css-var-scope-${id.replace(/[^a-z_\d]/gi, '')}`;
 }
 
 function prefixToken(component: string, key: string): string {

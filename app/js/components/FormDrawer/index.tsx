@@ -5,7 +5,7 @@
 import useSubmit, { Options, Values } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
-import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { cloneElement, memo, useCallback, useEffect, useId, useMemo, useState } from 'react';
 
 const { useForm } = Form;
 
@@ -20,6 +20,10 @@ type DrawerPicked =
   | 'afterOpenChange';
 type FormOmitted = 'title' | 'onError';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
+
+function createFormId(id: string): string {
+  return `form_${id.replace(/[^a-z_\d]/gi, '')}`;
+}
 
 export interface FormDrawerProps<V extends Values, R>
   extends Omit<FormProps<V>, FormOmitted>,
@@ -50,6 +54,7 @@ function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: ()
 }
 
 function FormDrawer<V extends Values, R>({
+  name,
   form,
   query,
   title,
@@ -77,6 +82,7 @@ function FormDrawer<V extends Values, R>({
   extra = defaultExtra,
   ...restProps
 }: FormDrawerProps<V, R>): React.ReactElement {
+  const id = useId();
   const [wrapForm] = useForm<V>(form);
   const [open, setOpen] = useState(false);
 
@@ -138,7 +144,7 @@ function FormDrawer<V extends Values, R>({
         extra={extra(submitting, wrapForm, onCloseHandler)}
         footer={footer?.(submitting, wrapForm, onCloseHandler)}
       >
-        <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit}>
+        <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit} name={name || createFormId(id)}>
           {children}
         </Form>
       </FlexDrawer>
