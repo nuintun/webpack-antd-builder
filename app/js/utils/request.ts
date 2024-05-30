@@ -3,7 +3,6 @@
  * @description Ajax 请求封装
  */
 
-import 'whatwg-fetch';
 import { isObject, serialize } from './utils';
 
 export type Body = Query | BodyInit | null;
