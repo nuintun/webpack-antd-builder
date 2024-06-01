@@ -2,7 +2,7 @@
  * @module useLatestRef
  */
 
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 
 /**
  * @function useLatestRef
@@ -18,8 +18,7 @@ export default function useLatestRef<T>(value: T): React.MutableRefObject<T>;
 export default function useLatestRef<T = undefined>(value?: T): React.MutableRefObject<T | undefined> {
   const valueRef = useRef(value);
 
-  // https://github.com/alibaba/hooks/issues/728
-  valueRef.current = useMemo(() => value, [value]);
+  valueRef.current = value;
 
   return valueRef;
 }
