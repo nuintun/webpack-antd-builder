@@ -58,6 +58,7 @@ export default function useAction<V extends Values, R>(
       return (
         <Popconfirm
           icon={icon}
+          placement="topRight"
           {...props}
           open={open}
           trigger={[]}
