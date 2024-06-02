@@ -12,24 +12,25 @@ import useSubmit, { Options as UseSubmitOptions, Values } from '/js/hooks/useSub
 export interface Options<V extends Values, R> extends UseSubmitOptions<V, R> {
   delay?: number;
   disabled?: boolean;
-  confirm?: string | Omit<PopconfirmProps, 'open' | 'trigger' | 'disabled' | 'onConfirm' | 'onOpenChange'>;
+  confirm?: string | Omit<PopconfirmProps, 'open' | 'trigger' | 'disabled' | 'onCancel' | 'onConfirm'>;
 }
 
 export default function useAction<V extends Values, R>(
   action: string,
   options: Options<V, R> = {}
 ): [loading: boolean, onAction: (values: V) => void, render: (children: React.ReactElement) => React.ReactElement] {
+  const valuesRef = useRef<V>();
   const [open, setOpen] = useState(false);
-  const valuesRef = useRef<V | null>(null);
   const optionsRef = useLatestRef(options);
-  const [loading, onSubmit] = useSubmit(action);
+  const [loading, onSubmit] = useSubmit<V, R>(action, options);
+
+  const onCancel = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   const onConfirm = useCallback(() => {
-    if (optionsRef.current.confirm) {
-      setOpen(false);
-    }
-
-    onSubmit(valuesRef.current);
+    setOpen(false);
+    onSubmit(valuesRef.current!);
   }, []);
 
   const onAction = useCallback((values: V) => {
@@ -44,10 +45,6 @@ export default function useAction<V extends Values, R>(
         onSubmit(values);
       }
     }
-  }, []);
-
-  const onOpenChange = useCallback((open: boolean) => {
-    setOpen(open);
   }, []);
 
   const render = (children: React.ReactElement): React.ReactElement => {
@@ -65,8 +62,8 @@ export default function useAction<V extends Values, R>(
           open={open}
           trigger={[]}
           disabled={disabled}
+          onCancel={onCancel}
           onConfirm={onConfirm}
-          onOpenChange={onOpenChange}
         >
           {children}
         </Popconfirm>

@@ -4,7 +4,9 @@ import useAction from '/js/hooks/useAction';
 import { Button, ButtonProps, GetProp } from 'antd';
 
 export default memo(function Page() {
-  const [loading, onAction, render] = useAction('/api/analysis/user');
+  const [loading, onAction, render] = useAction('/api/analysis/user', {
+    confirm: '确认进行删除吗？'
+  });
 
   const onClick = useCallback<GetProp<ButtonProps, 'onClick'>>(e => {
     e.stopPropagation();
