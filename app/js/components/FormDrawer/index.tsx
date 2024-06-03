@@ -13,6 +13,7 @@ type DrawerPicked =
   | 'title'
   | 'width'
   | 'height'
+  | 'keyboard'
   | 'placement'
   | 'forceRender'
   | 'maskClosable'
@@ -75,11 +76,12 @@ function FormDrawer<V extends Values, R>({
   requestInit,
   width = 560,
   height = 560,
-  maskClosable,
   destroyOnClose,
   afterOpenChange,
+  keyboard = false,
   layout = 'vertical',
   extra = defaultExtra,
+  maskClosable = false,
   ...restProps
 }: FormDrawerProps<V, R>): React.ReactElement {
   const id = useId();
@@ -102,7 +104,7 @@ function FormDrawer<V extends Values, R>({
   });
 
   const onCloseHandler = useCallback(() => {
-    !submitting && setOpen(false);
+    setOpen(false);
   }, []);
 
   const triggerNode = useMemo(() => {
