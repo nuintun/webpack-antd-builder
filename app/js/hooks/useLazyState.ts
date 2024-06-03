@@ -6,6 +6,21 @@ import useLatestRef from './useLatestRef';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
+ * @function clearTimerRef
+ * @description 清理延时器
+ * @param timerRef 延时器引用
+ */
+function clearTimerRef(timerRef: React.MutableRefObject<Timeout | null>): void {
+  const { current: timer } = timerRef;
+
+  if (timer != null) {
+    clearTimeout(timer);
+
+    timerRef.current = null;
+  }
+}
+
+/**
  * @function useLazyState
  * @description [hook] 使用延时状态，在延迟时间后更新状态
  * @param initialState 默认状态
@@ -29,25 +44,29 @@ export default function useLazyState<S = undefined>(
   initialState?: S | (() => S),
   delay: number = 128
 ): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, delay?: number) => void] {
-  const timerRef = useRef<Timeout>();
   const delayRef = useLatestRef(delay);
+  const timerRef = useRef<Timeout | null>(null);
   const [state, setState] = useState(initialState);
 
   const setLazyState = useCallback((value: React.SetStateAction<S | undefined>, delay: number = delayRef.current): void => {
-    clearTimeout(timerRef.current);
+    clearTimerRef(timerRef);
 
     if (delay <= 0) {
       setState(value);
     } else {
       timerRef.current = setTimeout(() => {
-        setState(value);
+        if (timerRef.current != null) {
+          setState(value);
+
+          timerRef.current = null;
+        }
       }, delay);
     }
   }, []);
 
   useEffect(() => {
     return () => {
-      clearTimeout(timerRef.current);
+      clearTimerRef(timerRef);
     };
   }, []);
 
