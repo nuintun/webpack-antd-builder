@@ -5,8 +5,8 @@
 import useLatestRef from './useLatestRef';
 import { isObject } from '/js/utils/utils';
 import { Popconfirm, PopconfirmProps } from 'antd';
-import { useCallback, useRef, useState } from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useSubmit, { Options as UseSubmitOptions, Values } from '/js/hooks/useSubmit';
 
 export interface Options<V extends Values, R> extends UseSubmitOptions<V, R> {
@@ -41,11 +41,31 @@ export default function useAction<V extends Values, R>(
       if (options.confirm) {
         valuesRef.current = values;
 
-        setOpen(true);
+        requestAnimationFrame(() => {
+          setOpen(open => !open);
+        });
       } else {
         onSubmit(values);
       }
     }
+  }, []);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const { current: container } = containerRef;
+
+      if (!container?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener('mousedown', onClick, true);
+
+    return () => {
+      window.removeEventListener('mousedown', onClick, true);
+    };
   }, []);
 
   const render = (children: React.ReactElement): React.ReactElement => {
@@ -67,7 +87,9 @@ export default function useAction<V extends Values, R>(
           onCancel={onCancel}
           onConfirm={onConfirm}
         >
-          {children}
+          <div ref={containerRef} style={{ display: 'inline-flex', padding: 0, margin: 0 }}>
+            {children}
+          </div>
         </Popconfirm>
       );
     }
