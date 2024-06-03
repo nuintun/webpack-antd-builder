@@ -4,6 +4,7 @@
 
 import useLatestRef from './useLatestRef';
 import { isObject } from '/js/utils/utils';
+import { TooltipRef } from 'antd/es/tooltip';
 import { Popconfirm, PopconfirmProps } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -22,6 +23,7 @@ export default function useAction<V extends Values, R>(
   const valuesRef = useRef<V>();
   const [open, setOpen] = useState(false);
   const optionsRef = useLatestRef(options);
+  const popconfirmRef = useRef<TooltipRef>(null);
   const [loading, onSubmit] = useSubmit<V, R>(action, options);
 
   const onCancel = useCallback(() => {
@@ -50,14 +52,16 @@ export default function useAction<V extends Values, R>(
     }
   }, []);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
-      const { current: container } = containerRef;
+      const { current: popconfirm } = popconfirmRef;
 
-      if (!container?.contains(event.target as Node)) {
-        setOpen(false);
+      if (popconfirm) {
+        const { nativeElement } = popconfirm;
+
+        if (!nativeElement.contains(event.target as Node)) {
+          setOpen(false);
+        }
       }
     };
 
@@ -83,13 +87,12 @@ export default function useAction<V extends Values, R>(
           {...props}
           open={open}
           trigger={[]}
+          ref={popconfirmRef}
           disabled={disabled}
           onCancel={onCancel}
           onConfirm={onConfirm}
         >
-          <div ref={containerRef} style={{ display: 'inline-flex', padding: 0, margin: 0 }}>
-            {children}
-          </div>
+          {children}
         </Popconfirm>
       );
     }

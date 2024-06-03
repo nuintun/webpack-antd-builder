@@ -1,15 +1,19 @@
 import Paper from '/js/components/Paper';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import useAction from '/js/hooks/useAction';
 import { Button, ButtonProps, GetProp, Select, SelectProps, Space } from 'antd';
 
 export default memo(function Page() {
+  const [value, setValue] = useState(0);
   const [loading1, onAction1, render1] = useAction('/api/analysis/user', {
     confirm: '确认进行删除吗？'
   });
 
-  const [loading2, onAction2, render2] = useAction('/api/analysis/user', {
-    confirm: '确认进行删除吗？'
+  const [loading2, onAction2, render2] = useAction<{ gender: number }, null>('/api/analysis/user', {
+    confirm: '确认进行删除吗？',
+    onSuccess(_response, values) {
+      setValue(values.gender);
+    }
   });
 
   const onClick = useCallback<GetProp<ButtonProps, 'onClick'>>(() => {
@@ -35,14 +39,14 @@ export default memo(function Page() {
         )}
         {render2(
           <Select
-            defaultValue={0}
+            value={value}
+            loading={loading2}
+            onChange={onChange}
             options={[
               { label: '保密', value: 0 },
               { label: '男性', value: 1 },
               { label: '女性', value: 2 }
             ]}
-            loading={loading2}
-            onChange={onChange}
           />
         )}
       </Space>
