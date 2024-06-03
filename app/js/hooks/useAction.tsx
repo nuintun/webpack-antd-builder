@@ -30,6 +30,7 @@ export default function useAction<V extends Values, R>(
 
   const onConfirm = useCallback(() => {
     setOpen(false);
+
     onSubmit(valuesRef.current!);
   }, []);
 
