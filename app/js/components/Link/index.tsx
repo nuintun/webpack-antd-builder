@@ -2,6 +2,7 @@
  * @module index
  */
 
+import { isFunction } from '/js/utils/utils';
 import useLatestRef from '/js/hooks/useLatestRef';
 import React, { memo, useCallback, useMemo } from 'react';
 import { To, useNavigate, useResolve } from 'react-nest-router';
@@ -11,8 +12,8 @@ type ClickEvent = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
 
 export interface LinkProps<S> extends Omit<AnchorProps, 'href'> {
   href: To;
-  state?: S;
   replace?: boolean;
+  state?: S | (() => S);
 }
 
 function isModifiedEvent(e: ClickEvent) {
@@ -28,7 +29,10 @@ function Link<S>(props: LinkProps<S>): React.ReactElement {
   const href = useMemo(() => resolve(to), [to]);
 
   const onLinkClick = useCallback((e: ClickEvent) => {
-    const { href: to, state, target = '_self', replace, onClick } = propsRef.current;
+    const { current: props } = propsRef;
+    const { target = '_self', onClick } = props;
+
+    onClick?.(e);
 
     if (
       e.button === 0 && // 鼠标左键点击.
@@ -37,10 +41,10 @@ function Link<S>(props: LinkProps<S>): React.ReactElement {
     ) {
       e.preventDefault();
 
-      navigate(to, { state, replace });
-    }
+      const { href: to, state, replace } = props;
 
-    onClick?.(e);
+      navigate(to, { replace, state: isFunction(state) ? state() : state });
+    }
   }, []);
 
   return (
