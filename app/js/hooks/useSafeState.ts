@@ -21,6 +21,11 @@ export default function useSafeState<S = undefined>(): [
 export default function useSafeState<S>(
   initialState: S | (() => S)
 ): [state: S, setState: React.Dispatch<React.SetStateAction<S>>];
+/**
+ * @function useSafeState
+ * @description [hook] 使用安全状态
+ * @param initialState 初始状态
+ */
 export default function useSafeState<S = undefined>(
   initialState?: S | (() => S)
 ): [state: S | undefined, setState: React.Dispatch<React.SetStateAction<S | undefined>>] {

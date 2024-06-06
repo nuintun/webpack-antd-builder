@@ -41,8 +41,15 @@ export default function useResponse<R>(
 export default function useResponse<R, T>(
   url: string,
   request: Request,
-  options?: Options<R, T>
+  options: Options<R, T> & { transform: Transform<R, T> }
 ): [response: T | undefined, fetch: Fetch<R>];
+/**
+ * @function useResponse
+ * @description [hook]
+ * @param url 请求地址
+ * @param request 发送请求工厂函数
+ * @param options 发送请求请求配置
+ */
 export default function useResponse<R, T>(
   url: string,
   request: Request,

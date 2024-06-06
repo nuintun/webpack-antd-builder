@@ -74,6 +74,13 @@ export default function useTable<I, E, T>(
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<T>, fetch: Fetch, refs: Refs<I, E>];
+/**
+ * @function useTable
+ * @description [hook] 表格操作
+ * @param url 请求地址
+ * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
+ */
 export default function useTable<I, E, T>(
   url: string,
   options: Options<I, E, T> = {},

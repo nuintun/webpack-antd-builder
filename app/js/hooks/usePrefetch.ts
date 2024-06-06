@@ -23,21 +23,32 @@ export default function usePrefetch<R>(
   options?: Options<R, R>,
   initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, response: R | undefined, refetch: Refetch];
+/**
+ * @function usePrefetch
+ * @description [hook] 预加载
+ * @param url 请求地址
+ * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
+ */
 export default function usePrefetch<R, T>(
   url: string,
   options: Options<R, T> & { transform: Transform<R, T> },
   initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, response: T | undefined, refetch: Refetch];
+/**
+ * @function usePrefetch
+ * @description [hook] 预加载
+ * @param url 请求地址
+ * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
+ */
 export default function usePrefetch<R, T>(
   url: string,
   options: Options<R, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, response: R | T | undefined, refetch: Refetch] {
   const [loading, request] = useRequest(options, initialLoadingState);
-  const [response, refetch] = useResponse<R, T>(url, request, {
-    ...options,
-    prefetch: true
-  });
+  const [response, refetch] = useResponse(url, request, { ...options, prefetch: true } as Options<R, R>);
 
   return [loading, response, refetch];
 }

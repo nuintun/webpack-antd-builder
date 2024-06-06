@@ -40,6 +40,12 @@ export default function useLazyState<S = undefined>(
   initialState?: S | (() => S),
   delay?: number
 ): [state: S | undefined, setLazyState: (value: React.SetStateAction<S | undefined>, delay?: number) => void];
+/**
+ * @function useLazyState
+ * @description [hook] 使用延时状态，在延迟时间后更新状态
+ * @param initialState 默认状态
+ * @param delay 延迟时间
+ */
 export default function useLazyState<S = undefined>(
   initialState?: S | (() => S),
   delay: number = 128

@@ -36,6 +36,12 @@ export default function useStorage<V = null>(
   key: string,
   options?: Options<V>
 ): [set: (value: V) => void, get: () => V | null, remove: () => void];
+/**
+ * @function useStorage
+ * @description [hook] 使用本地缓存
+ * @param key 缓存名称
+ * @param options 缓存配置
+ */
 export default function useStorage<V = null>(
   key: string,
   options: Options<V> | DefaultValueOptions<V> = {}

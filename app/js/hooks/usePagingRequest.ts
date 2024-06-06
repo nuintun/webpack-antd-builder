@@ -88,6 +88,13 @@ export default function usePagingRequest<I, E, T>(
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: T[], fetch: Fetch, refs: Refs<I, E>];
+/**
+ * @function usePagingRequest
+ * @description [hook] 分页请求
+ * @param url 请求地址
+ * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
+ */
 export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options<I, E, T> = {},

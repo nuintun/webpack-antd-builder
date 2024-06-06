@@ -20,6 +20,11 @@ export default function createSharedState<S = undefined>(): UseSharedState<S | u
  * @param initialState 初始状态
  */
 export default function createSharedState<S>(initialState: S | (() => S)): UseSharedState<S>;
+/**
+ * @function createSharedState
+ * @description [hook] 生成共享状态
+ * @param initialState 初始状态
+ */
 export default function createSharedState<S = undefined>(initialState?: S | (() => S)): UseSharedState<S | undefined> {
   let initialized = false;
   let sharedState: S | undefined;

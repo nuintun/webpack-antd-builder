@@ -41,6 +41,12 @@ export default function createSharedReducer<S, A>(
   reducer: React.Reducer<S, A>,
   initialState: S | (() => S)
 ): () => [state: S, dispatch: React.Dispatch<A>];
+/**
+ * @function createSharedReducer
+ * @description [hook] 生成共享 Reducer
+ * @param reducer 状态生成器
+ * @param initialState 初始状态
+ */
 export default function createSharedReducer<S, A>(
   reducer: React.Reducer<S | undefined, A>,
   initialState?: S | (() => S)

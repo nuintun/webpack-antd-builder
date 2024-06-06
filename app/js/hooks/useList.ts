@@ -61,6 +61,13 @@ export default function useList<I, E, T>(
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultListProps<T>, fetch: Fetch, refs: Refs<I, E>];
+/**
+ * @function useList
+ * @description [hook] 列表操作
+ * @param url 请求地址
+ * @param options 请求配置
+ * @param initialLoadingState 初始加载状态
+ */
 export default function useList<I, E, T>(
   url: string,
   options: Options<I, E, T> = {},

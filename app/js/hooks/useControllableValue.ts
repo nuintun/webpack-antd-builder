@@ -95,6 +95,12 @@ export default function useControllableValue<V = undefined>(
   props: Props,
   options?: Omit<Options<V>, 'defaultValue'>
 ): [value: V | undefined, setValue: SetValueAction<V | undefined>];
+/**
+ * @function useControllableValue
+ * @description [hook] 生成同时支持受控和非受控状态的值
+ * @param props 组件 Props
+ * @param options 配置选项
+ */
 export default function useControllableValue<V = undefined>(
   props: Props,
   options: Options<V> = {}

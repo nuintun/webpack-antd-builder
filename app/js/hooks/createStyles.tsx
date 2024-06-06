@@ -2,10 +2,9 @@
  * @module createStyles
  */
 
-import { isString } from 'antd/es/button';
-import { isNumber } from '/js/utils/utils';
 import createCalc from 'antd/es/theme/util/calc';
 import createMaxMin from 'antd/es/theme/util/maxmin';
+import { isNumber, isString } from '/js/utils/utils';
 import { memo, ReactElement, useId, useMemo } from 'react';
 import AbstractCalculator from 'antd/es/theme/util/calc/calculator';
 import useToken, { ignore, unitless } from 'antd/es/theme/useToken';
