@@ -3,13 +3,14 @@
  */
 
 import usePagingRequest, {
+  Fetch,
   hasQuery,
   Options as InitOptions,
   Pagination as RequestPagination,
   Refs as RequestRefs,
   RequestOptions as RequestInit,
   Sorter,
-  TransformOptions as InitTransformOptions
+  Transform
 } from './usePagingRequest';
 import useLatestRef from './useLatestRef';
 import { GetProp, TableProps } from 'antd';
@@ -17,27 +18,7 @@ import React, { useCallback, useMemo } from 'react';
 import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
-type Filter = Search;
-
-interface Refs<I, E = {}> extends RequestRefs<I, E> {
-  readonly filter: Filter | false;
-  readonly sorter: Sorter | false;
-}
-
-type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
-
-type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
-
-/**
- * @function serializeField
- * @description 字段序列化
- * @param filed 字段
- */
-function serializeField(filed: React.Key | readonly React.Key[]): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : (filed as React.Key);
-}
-
-type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
+export type Filter = Search;
 
 export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
@@ -45,12 +26,28 @@ export interface RequestOptions extends RequestInit {
   pagination?: Pagination;
 }
 
-export interface Options<I, E> extends InitOptions<I, E> {
+export interface Refs<I, E = {}> extends RequestRefs<I, E> {
+  readonly filter: Filter | false;
+  readonly sorter: Sorter | false;
+}
+
+export interface Options<I, E, T> extends InitOptions<I, E, T> {
   pagination?: Pagination;
 }
 
-export interface TransformOptions<I, E, T> extends InitTransformOptions<I, E, T> {
-  pagination?: Pagination;
+export type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
+
+export type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
+
+export type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
+
+/**
+ * @function serializeField
+ * @description 字段序列化
+ * @param filed 字段
+ */
+export function serializeField(filed: React.Key | readonly React.Key[]): React.Key {
+  return Array.isArray(filed) ? filed.join('.') : (filed as React.Key);
 }
 
 /**
@@ -60,11 +57,11 @@ export interface TransformOptions<I, E, T> extends InitTransformOptions<I, E, T>
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useTable<I, E = {}>(
+export default function useTable<I, E>(
   url: string,
-  options?: Options<I, E>,
+  options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>];
+): [props: DefaultTableProps<I>, fetch: Fetch, refs: Refs<I, E>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -74,23 +71,18 @@ export default function useTable<I, E = {}>(
  */
 export default function useTable<I, E, T>(
   url: string,
-  options: TransformOptions<I, E, T>,
+  options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>];
+): [props: DefaultTableProps<T>, fetch: Fetch, refs: Refs<I, E>];
 export default function useTable<I, E, T>(
   url: string,
-  options: Options<I, E> | TransformOptions<I, E, T> = {},
+  options: Options<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I | T>, fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
+): [props: DefaultTableProps<I | T>, fetch: Fetch, refs: Refs<I, E>] {
   const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
   const [serialize, raw] = useSearches<[Search, Filter, Sorter]>([false, false, false]);
-
-  const [loading, dataSource, request, originRefs] = usePagingRequest<I, E, T>(
-    url,
-    options as TransformOptions<I, E, T>,
-    initialLoadingState
-  );
+  const [loading, dataSource, request, originRefs] = usePagingRequest(url, options as Options<I, E, I>, initialLoadingState);
 
   const fetch = useCallback((options: RequestOptions = {}): void => {
     const { search, filter, sorter } = options;

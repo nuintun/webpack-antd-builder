@@ -16,14 +16,14 @@ const { useApp } = App;
 
 export type Navigate = ReturnType<typeof useNavigate>;
 
-/**
- * @function onUnauthorizedHandler
- * @description 默认未授权操作
- * @param navigate 导航方法
- * @param location 导航信息
- */
-function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
-  navigate('/login', { state: location });
+export interface Request {
+  <R>(url: string, options?: RequestOptions<R>): void;
+}
+
+export interface RequestOptions<R> extends Omit<Options, 'delay'> {
+  onComplete?: () => void;
+  onSuccess?: (response: R) => void;
+  onError?: (error: RequestError<R>) => void;
 }
 
 export interface Options extends Omit<RequestInit, 'onMessage' | 'onUnauthorized'> {
@@ -32,10 +32,14 @@ export interface Options extends Omit<RequestInit, 'onMessage' | 'onUnauthorized
   onUnauthorized?: (navigate: Navigate, location: Location) => void;
 }
 
-export interface RequestOptions<R> extends Omit<Options, 'delay'> {
-  onComplete?: () => void;
-  onSuccess?: (response: R) => void;
-  onError?: (error: RequestError<R>) => void;
+/**
+ * @function onUnauthorizedHandler
+ * @description 默认未授权操作
+ * @param navigate 导航方法
+ * @param location 导航信息
+ */
+export function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
+  navigate('/login', { state: location });
 }
 
 /**
@@ -47,7 +51,7 @@ export interface RequestOptions<R> extends Omit<Options, 'delay'> {
 export default function useRequest(
   options: Options = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, request: <R>(url: string, options?: RequestOptions<R>) => void] {
+): [loading: boolean, request: Request] {
   const retainRef = useRef(0);
   const { message } = useApp();
   const location = useLocation();

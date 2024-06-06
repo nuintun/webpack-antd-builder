@@ -10,7 +10,7 @@ import useRequest, { Options as InitOptions, RequestOptions as RequestInit } fro
 
 const { useApp } = App;
 
-interface Page<I> {
+export interface Page<I> {
   // 数据项
   readonly items?: I[];
   // 数据总条数
@@ -20,6 +20,14 @@ interface Page<I> {
 export interface Pagination {
   page: number;
   pageSize: number;
+}
+
+export interface Transform<I, T> {
+  (items: I[]): T[];
+}
+
+export interface Fetch {
+  (options?: RequestOptions): void;
 }
 
 export interface Sorter {
@@ -35,13 +43,10 @@ export interface Refs<I, E> {
 
 export type Response<I, E> = Page<I> & Partial<Omit<E, keyof Page<I>>>;
 
-export interface Options<I, E> extends Omit<RequestInit<Response<I, E>>, 'body' | 'method'> {
+export interface Options<I, E, T> extends Omit<RequestInit<Response<I, E>>, 'body' | 'method'> {
   delay?: number;
+  transform?: Transform<I, T>;
   pagination?: Partial<Pagination> | false;
-}
-
-export interface TransformOptions<I, E, T> extends Options<I, E> {
-  transform: (items: I[]) => T[];
 }
 
 export interface RequestOptions extends Omit<InitOptions, 'body' | 'delay' | 'method' | 'onUnauthorized'> {
@@ -66,11 +71,11 @@ export const DEFAULT_PAGINATION: Pagination = { page: 1, pageSize: 20 };
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function usePagingRequest<I, E = {}>(
+export default function usePagingRequest<I, E>(
   url: string,
-  options?: Options<I, E>,
+  options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: I[], fetch: (options?: RequestOptions) => void, refs: Refs<I, E>];
+): [loading: boolean, dataSource: I[], fetch: Fetch, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -80,19 +85,19 @@ export default function usePagingRequest<I, E = {}>(
  */
 export default function usePagingRequest<I, E, T>(
   url: string,
-  options: TransformOptions<I, E, T>,
+  options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: T[], fetch: (options?: RequestOptions) => void, refs: Refs<I, E>];
+): [loading: boolean, dataSource: T[], fetch: Fetch, refs: Refs<I, E>];
 export default function usePagingRequest<I, E, T>(
   url: string,
-  options: Options<I, E> | TransformOptions<I, E, T> = {},
+  options: Options<I, E, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, dataSource: I[] | T[], fetch: (options?: RequestOptions) => void, refs: Refs<I, E>] {
+): [loading: boolean, dataSource: I[] | T[], fetch: Fetch, refs: Refs<I, E>] {
   const initPagination = useMemo(() => {
     const { pagination } = options;
 
     if (pagination === false) {
-      return pagination as false;
+      return pagination;
     }
 
     return { ...DEFAULT_PAGINATION, ...pagination };
@@ -111,7 +116,7 @@ export default function usePagingRequest<I, E, T>(
     const requestInit = {
       ...opitonsRef.current,
       ...options
-    } as TransformOptions<I, E, T>;
+    };
 
     const { query: initQuery } = requestInit;
     const hasPagination = hasQuery(paginationRef.current);

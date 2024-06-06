@@ -3,23 +3,20 @@
  */
 
 import useLatestRef from './useLatestRef';
-import { RequestOptions } from './useRequest';
+import { Request, RequestOptions } from './useRequest';
 import { useCallback, useEffect, useState } from 'react';
 
-interface Fetch<R> {
+export interface Transform<R, T> {
+  (response: R): T;
+}
+
+export interface Fetch<R> {
   (options?: RequestOptions<R>): void;
 }
 
-interface Request<R> {
-  (url: string, options?: RequestOptions<R>): void;
-}
-
-export interface Options<R> extends RequestOptions<R> {
+export interface Options<R, T> extends RequestOptions<R> {
   prefetch?: boolean;
-}
-
-export interface TransformOptions<R, T> extends Options<R> {
-  transform: (response: R) => T;
+  transform?: Transform<R, T>;
 }
 
 /**
@@ -31,8 +28,8 @@ export interface TransformOptions<R, T> extends Options<R> {
  */
 export default function useResponse<R>(
   url: string,
-  request: Request<R>,
-  options?: Options<R>
+  request: Request,
+  options?: Options<R, R>
 ): [response: R | undefined, fetch: Fetch<R>];
 /**
  * @function useResponse
@@ -43,23 +40,23 @@ export default function useResponse<R>(
  */
 export default function useResponse<R, T>(
   url: string,
-  request: Request<R>,
-  options: TransformOptions<R, T>
+  request: Request,
+  options?: Options<R, T>
 ): [response: T | undefined, fetch: Fetch<R>];
 export default function useResponse<R, T>(
   url: string,
-  request: Request<R>,
-  options: Options<R> | TransformOptions<R, T> = {}
+  request: Request,
+  options: Options<R, T> = {}
 ): [response: R | T | undefined, fetch: Fetch<R>] {
   const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const [response, setResponse] = useState<R | T>();
 
   const fetch = useCallback<Fetch<R>>(options => {
-    const requestInit = {
+    const requestInit: Options<R, T> = {
       ...opitonsRef.current,
       ...options
-    } as TransformOptions<R, T>;
+    };
 
     request(urlRef.current, {
       ...requestInit,
