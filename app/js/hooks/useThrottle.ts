@@ -27,11 +27,15 @@ export interface Callback {
  * @param options 节流模式配置
  */
 export default function useThrottle<C extends Callback>(callback: C, delay: number, options: Options = {}): throttle<C> {
-  const callbackRef = useLatestRef(callback);
   const { noLeading, noTrailing, debounceMode } = options;
 
-  return useMemo(
-    () => throttle<Callback>(delay, (...args) => callbackRef.current(...args), options),
-    [delay, noLeading, noTrailing, debounceMode]
-  );
+  const callbackRef = useLatestRef(callback);
+
+  return useMemo(() => {
+    const callback: Callback = (...args) => {
+      return callbackRef.current(...args);
+    };
+
+    return throttle(delay, callback, { noLeading, noTrailing, debounceMode });
+  }, [delay, noLeading, noTrailing, debounceMode]);
 }

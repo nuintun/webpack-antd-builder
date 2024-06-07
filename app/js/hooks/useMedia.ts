@@ -4,7 +4,7 @@
 
 import { canUseDOM } from '/js/utils/dom';
 import { useMemo, useState } from 'react';
-import useIsoLayoutEffect from './useIsoLayoutEffect';
+import useSafeLayoutEffect from './useSafeLayoutEffect';
 
 /**
  * @function useMedia
@@ -24,7 +24,7 @@ export default function useMedia(
 
   const [matched, setState] = useState(mql ? mql.matches : initialMatchState);
 
-  useIsoLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     if (mql) {
       const onMediaChange = () => {
         const matched = mql.matches;

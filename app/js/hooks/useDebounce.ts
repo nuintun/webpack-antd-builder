@@ -24,7 +24,14 @@ export interface Callback {
  */
 export default function useDebounce<C extends Callback>(callback: C, delay: number, options: Options = {}): debounce<C> {
   const { atBegin } = options;
+
   const callbackRef = useLatestRef(callback);
 
-  return useMemo(() => debounce<Callback>(delay, (...args) => callbackRef.current(...args), options), [delay, atBegin]);
+  return useMemo(() => {
+    const callback: Callback = (...args) => {
+      return callbackRef.current(...args);
+    };
+
+    return debounce(delay, callback, { atBegin });
+  }, [delay, atBegin]);
 }
