@@ -2,8 +2,8 @@
  * @module index
  */
 
-import useMedia from '/js/hooks/useMedia';
 import { isString } from '/js/utils/utils';
+import useMediaQuery from '/js/hooks/useMediaQuery';
 import React, { memo, useCallback, useRef } from 'react';
 import { ConfigProvider, Drawer, DrawerProps } from 'antd';
 
@@ -26,8 +26,8 @@ export default memo(function FlexDrawer({
   ...restProps
 }: FlexDrawerProps): React.ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isBreakWidth = useMedia(`(max-width: ${isString(width) ? width : `${width}px`})`);
-  const isBreakHeight = useMedia(`(max-height: ${isString(height) ? height : `${height}px`})`);
+  const isBreakWidth = useMediaQuery(`(max-width: ${isString(width) ? width : `${width}px`})`);
+  const isBreakHeight = useMediaQuery(`(max-height: ${isString(height) ? height : `${height}px`})`);
 
   const getPopupContainer = useCallback((triggerNode?: HTMLElement) => {
     const { body } = document;

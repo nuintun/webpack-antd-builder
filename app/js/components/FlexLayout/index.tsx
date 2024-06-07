@@ -3,10 +3,10 @@
  */
 
 import classNames from 'classnames';
-import useMedia from '/js/hooks/useMedia';
 import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
 import useStyles, { prefixCls } from './style';
+import useMediaQuery from '/js/hooks/useMediaQuery';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import LoadingFallBack from '/js/components/FallBack/Loading';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -52,8 +52,8 @@ export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElem
     isMobile && setCollapsed(isMobile);
   }, []);
 
-  const isBreak = useMedia(breakQuery, onBreakChange);
-  const isMobile = useMedia(mobileQuery, onMobileChange);
+  const isBreak = useMediaQuery(breakQuery, onBreakChange);
+  const isMobile = useMediaQuery(mobileQuery, onMobileChange);
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
   const [collapsed, setCollapsed] = useState(() => isBreak || isMobile || !!readCollapsed());
 
