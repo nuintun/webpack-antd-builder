@@ -3,7 +3,7 @@
  */
 
 import usePagingRequest, {
-  Fetch,
+  Dispatch,
   hasQuery,
   Options as InitOptions,
   Pagination as RequestPagination,
@@ -17,6 +17,10 @@ import { useCallback, useMemo } from 'react';
 import useSearches, { Search } from './useSearches';
 import { GetProp, ListProps, PaginationProps } from 'antd';
 import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
+
+export interface Fetch {
+  (options?: RequestOptions): void;
+}
 
 export interface RequestOptions extends RequestInit {
   sorter?: Sorter | false;
@@ -48,7 +52,7 @@ export default function useList<I, E>(
   url: string,
   options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultListProps<I>, fetch: Fetch, refs: Refs<I, E>];
+): [props: DefaultListProps<I>, fetch: Fetch, dispatch: Dispatch<I[]>, refs: Refs<I, E>];
 /**
  * @function useList
  * @description [hook] 列表操作
@@ -60,7 +64,7 @@ export default function useList<I, E, T>(
   url: string,
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultListProps<T>, fetch: Fetch, refs: Refs<I, E>];
+): [props: DefaultListProps<T>, fetch: Fetch, dispatch: Dispatch<T[]>, refs: Refs<I, E>];
 /**
  * @function useList
  * @description [hook] 列表操作
@@ -72,13 +76,18 @@ export default function useList<I, E, T>(
   url: string,
   options: Options<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultListProps<I | T>, fetch: Fetch, refs: Refs<I, E>] {
+): [props: DefaultListProps<I | T>, fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
   const [serialize, raw] = useSearches<[Search, Sorter]>([false, false]);
-  const [loading, dataSource, request, originRefs] = usePagingRequest(url, options as Options<I, E, I>, initialLoadingState);
 
-  const fetch = useCallback((options: RequestOptions = {}): void => {
+  const [loading, dataSource, request, dispatch, originRefs] = usePagingRequest(
+    url,
+    options as Options<I, E, I>,
+    initialLoadingState
+  );
+
+  const fetch: Fetch = useCallback((options = {}) => {
     const { search, sorter } = options;
     const query = serialize([search, sorter]);
 
@@ -130,5 +139,5 @@ export default function useList<I, E, T>(
     };
   }, []);
 
-  return [{ loading, dataSource, pagination }, fetch, refs];
+  return [{ loading, dataSource, pagination }, fetch, dispatch as Dispatch<I[] | T[]>, refs];
 }

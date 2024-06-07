@@ -41,6 +41,8 @@ export interface Refs<I, E> {
   readonly pagination: Pagination | false;
 }
 
+export type Dispatch<S> = React.Dispatch<React.SetStateAction<S>>;
+
 export type Response<I, E> = Page<I> & Partial<Omit<E, keyof Page<I>>>;
 
 export interface Options<I, E, T> extends Omit<RequestInit<Response<I, E>>, 'body' | 'method'> {
@@ -75,7 +77,7 @@ export default function usePagingRequest<I, E>(
   url: string,
   options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: I[], fetch: Fetch, refs: Refs<I, E>];
+): [loading: boolean, dataSource: I[], fetch: Fetch, dispatch: Dispatch<I[]>, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -87,7 +89,7 @@ export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
-): [loading: boolean, dataSource: T[], fetch: Fetch, refs: Refs<I, E>];
+): [loading: boolean, dataSource: T[], fetch: Fetch, dispatch: Dispatch<T[]>, refs: Refs<I, E>];
 /**
  * @function usePagingRequest
  * @description [hook] 分页请求
@@ -99,7 +101,7 @@ export default function usePagingRequest<I, E, T>(
   url: string,
   options: Options<I, E, T> = {},
   initialLoadingState: boolean | (() => boolean) = false
-): [loading: boolean, dataSource: I[] | T[], fetch: Fetch, refs: Refs<I, E>] {
+): [loading: boolean, dataSource: I[] | T[], fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const initPagination = useMemo(() => {
     const { pagination } = options;
 
@@ -119,7 +121,7 @@ export default function usePagingRequest<I, E, T>(
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const fetch = useCallback((options: RequestOptions = {}): void => {
+  const fetch = useCallback<Fetch>((options = {}) => {
     const requestInit = {
       ...opitonsRef.current,
       ...options
@@ -208,5 +210,5 @@ export default function usePagingRequest<I, E, T>(
     };
   }, []);
 
-  return [loading, dataSource, fetch, refs];
+  return [loading, dataSource, fetch, setDataSource, refs];
 }

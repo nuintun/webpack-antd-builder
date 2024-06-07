@@ -5,10 +5,18 @@
 import { isFunction } from '/js/utils/utils';
 import React, { useEffect, useState } from 'react';
 
-type SetSharedState<S> = React.Dispatch<React.SetStateAction<S>>;
+type State<S> = S | (() => S);
 
-type UseSharedState<S> = () => [state: S, setState: SetSharedState<S>];
+type Dispatch<S> = React.Dispatch<React.SetStateAction<S>>;
 
+type UseSharedState<S> = () => [state: S, setSharedState: Dispatch<S>];
+
+/**
+ * @function createSharedState
+ * @description [hook] 生成共享状态
+ * @param initialState 初始状态
+ */
+export default function createSharedState<S>(initialState: State<S>): UseSharedState<S>;
 /**
  * @function createSharedState
  * @description [hook] 生成共享状态
@@ -19,15 +27,11 @@ export default function createSharedState<S = undefined>(): UseSharedState<S | u
  * @description [hook] 生成共享状态
  * @param initialState 初始状态
  */
-export default function createSharedState<S>(initialState: S | (() => S)): UseSharedState<S>;
-/**
- * @function createSharedState
- * @description [hook] 生成共享状态
- * @param initialState 初始状态
- */
-export default function createSharedState<S = undefined>(initialState?: S | (() => S)): UseSharedState<S | undefined> {
+export default function createSharedState<S = undefined>(initialState?: State<S>): UseSharedState<S | undefined> {
   let initialized = false;
   let sharedState: S | undefined;
+
+  const dispatches = new Set<Dispatch<S | undefined>>();
 
   const getInitialState = (): S | undefined => {
     if (initialized) {
@@ -41,15 +45,13 @@ export default function createSharedState<S = undefined>(initialState?: S | (() 
     return sharedState;
   };
 
-  const dispatch = (value: React.SetStateAction<S | undefined>): void => {
+  const dispatch: Dispatch<S | undefined> = value => {
     sharedState = isFunction(value) ? value(sharedState) : value;
 
     for (const dispatch of dispatches) {
       dispatch(sharedState);
     }
   };
-
-  const dispatches = new Set<React.Dispatch<React.SetStateAction<S | undefined>>>();
 
   return () => {
     const [state, setState] = useState(getInitialState);

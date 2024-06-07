@@ -3,7 +3,7 @@
  */
 
 import usePagingRequest, {
-  Fetch,
+  Dispatch,
   hasQuery,
   Options as InitOptions,
   Pagination as RequestPagination,
@@ -19,6 +19,10 @@ import useSearches, { Search } from './useSearches';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 export type Filter = Search;
+
+export interface Fetch {
+  (options?: RequestOptions): void;
+}
 
 export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
@@ -61,7 +65,7 @@ export default function useTable<I, E>(
   url: string,
   options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I>, fetch: Fetch, refs: Refs<I, E>];
+): [props: DefaultTableProps<I>, fetch: Fetch, dispatch: Dispatch<I[]>, refs: Refs<I, E>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -73,7 +77,7 @@ export default function useTable<I, E, T>(
   url: string,
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<T>, fetch: Fetch, refs: Refs<I, E>];
+): [props: DefaultTableProps<T>, fetch: Fetch, dispatch: Dispatch<T[]>, refs: Refs<I, E>];
 /**
  * @function useTable
  * @description [hook] 表格操作
@@ -85,13 +89,18 @@ export default function useTable<I, E, T>(
   url: string,
   options: Options<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
-): [props: DefaultTableProps<I | T>, fetch: Fetch, refs: Refs<I, E>] {
+): [props: DefaultTableProps<I | T>, fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
   const [serialize, raw] = useSearches<[Search, Filter, Sorter]>([false, false, false]);
-  const [loading, dataSource, request, originRefs] = usePagingRequest(url, options as Options<I, E, I>, initialLoadingState);
 
-  const fetch = useCallback((options: RequestOptions = {}): void => {
+  const [loading, dataSource, request, dispatch, originRefs] = usePagingRequest(
+    url,
+    options as Options<I, E, I>,
+    initialLoadingState
+  );
+
+  const fetch: Fetch = useCallback((options = {}): void => {
     const { search, filter, sorter } = options;
     const query = serialize([search, filter, sorter]);
 
@@ -171,5 +180,13 @@ export default function useTable<I, E, T>(
     };
   }, []);
 
-  return [{ loading, onChange, dataSource, pagination, size: 'middle' }, fetch, refs];
+  const props: DefaultTableProps<I | T> = {
+    loading,
+    onChange,
+    dataSource,
+    pagination,
+    size: 'middle'
+  };
+
+  return [props, fetch, dispatch as Dispatch<I[] | T[]>, refs];
 }
