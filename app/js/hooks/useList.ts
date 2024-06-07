@@ -48,7 +48,7 @@ export type DefaultListProps<I> = Required<Pick<ListProps<I>, 'loading' | 'dataS
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useList<I, E>(
+export default function useList<I, E = unknown>(
   url: string,
   options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -60,7 +60,7 @@ export default function useList<I, E>(
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useList<I, E, T>(
+export default function useList<I, E = unknown, T = I>(
   url: string,
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
@@ -72,7 +72,7 @@ export default function useList<I, E, T>(
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useList<I, E, T>(
+export default function useList<I, E = unknown, T = I>(
   url: string,
   options: Options<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)

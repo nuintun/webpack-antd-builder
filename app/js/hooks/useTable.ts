@@ -61,7 +61,7 @@ export function serializeField(filed: React.Key | readonly React.Key[]): React.K
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useTable<I, E>(
+export default function useTable<I, E = unknown>(
   url: string,
   options?: Options<I, E, I>,
   initialLoadingState?: boolean | (() => boolean)
@@ -73,7 +73,7 @@ export default function useTable<I, E>(
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useTable<I, E, T>(
+export default function useTable<I, E = unknown, T = I>(
   url: string,
   options: Options<I, E, T> & { transform: Transform<I, T> },
   initialLoadingState?: boolean | (() => boolean)
@@ -85,7 +85,7 @@ export default function useTable<I, E, T>(
  * @param options 请求配置
  * @param initialLoadingState 初始加载状态
  */
-export default function useTable<I, E, T>(
+export default function useTable<I, E = unknown, T = I>(
   url: string,
   options: Options<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
