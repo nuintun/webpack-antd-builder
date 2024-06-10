@@ -103,8 +103,8 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
         return getState(value, nextContext, options, state.event);
       case ActionType.Transition:
         const { event } = action;
-        const current = options.states[value];
-        const nextState: Transition<C, S, E> | undefined = current?.on?.[event];
+        const { on } = options.states[value];
+        const nextState: Transition<C, S, E> | undefined = on?.[event];
 
         // If there is no defined next state, return early.
         if (!nextState) {
@@ -195,7 +195,7 @@ export default function useStateMachine<C = undefined, S extends string = string
   }, []);
 
   // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes.
-  useEffect(() => options.states[state.value]?.effect?.(send, update), [state.value]);
+  useEffect(() => options.states[state.value].effect?.(send, update), [state.value]);
 
   return [state, send, update];
 }
