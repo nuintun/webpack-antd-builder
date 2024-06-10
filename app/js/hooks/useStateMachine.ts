@@ -3,7 +3,7 @@
  * @see https://github.com/cassiozen/useStateMachine
  */
 
-import { isString } from '/js/utils/utils';
+import { isFunction, isString } from '/js/utils/utils';
 import { useCallback, useEffect, useMemo, useReducer } from 'react';
 
 const enum ActionType {
@@ -16,12 +16,12 @@ interface Updater<C> {
 }
 
 interface UpdateAction<C> {
-  updater: Updater<C>;
   type: ActionType.Update;
+  context: C | Updater<C>;
 }
 
 interface Update<C> {
-  (updater: Updater<C>): void;
+  (context: C | Updater<C>): void;
 }
 
 interface Send<E extends string> {
@@ -29,8 +29,8 @@ interface Send<E extends string> {
 }
 
 interface TransitionAction<E extends string> {
-  event: E;
   type: ActionType.Transition;
+  event: E;
 }
 
 interface State<C, S extends string, E extends string> {
@@ -83,18 +83,20 @@ function debug(message: string, ...data: any[]): void {
 
 function getReducer<C, S extends string, E extends string>(options: Options<C, S, E>): Reducer<C, S, E> {
   return function reducer(state: State<C, S, E>, action: Action<C, E>): State<C, S, E> {
+    const { verbose } = options;
     const { value, context } = state;
 
     switch (action.type) {
       case ActionType.Update:
+        const { context: update } = action;
         // Internal action to update context.
-        const nextContext = action.updater(context);
+        const nextContext = isFunction(update) ? update(context) : update;
 
-        if (options.verbose) {
+        if (verbose) {
           debug('Context update from %o to %o', context, nextContext);
         }
 
-        return { value, context: nextContext, nextEvents: state.nextEvents };
+        return getState(value, nextContext, options, state.event);
       case ActionType.Transition:
         const { event } = action;
         const current = options.states[value];
@@ -102,7 +104,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
 
         // If there is no defined next state, return early.
         if (!nextState) {
-          if (options.verbose) {
+          if (verbose) {
             debug(`Current state %o doesn't listen to event "${event}".`, state);
           }
 
@@ -120,7 +122,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
 
           // If there are guards, invoke them and return early if the transition is denied.
           if (guard && !guard(context)) {
-            if (options.verbose) {
+            if (verbose) {
               debug(`Transition from "${value}" to "${target}" denied by guard`);
             }
 
@@ -128,7 +130,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
           }
         }
 
-        if (options.verbose) {
+        if (verbose) {
           debug(`Transition from "${value}" to "${target}"`);
         }
 
@@ -184,8 +186,8 @@ export default function useStateMachine<C = undefined, S extends string = string
   }, []);
 
   // The updater function sends an internal event to the reducer to trigger the actual update.
-  const update = useCallback<Update<C | undefined>>(updater => {
-    return dispatch({ type: ActionType.Update, updater });
+  const update = useCallback<Update<C | undefined>>(context => {
+    return dispatch({ type: ActionType.Update, context });
   }, []);
 
   // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes.
