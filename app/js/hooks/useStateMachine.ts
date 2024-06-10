@@ -125,7 +125,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
           const { guard } = nextState;
 
           // If there are guards, invoke them and return early if the transition is denied.
-          if (isFunction(guard) && !guard(event, context)) {
+          if (guard && !guard(event, context)) {
             if (verbose) {
               debug(`Transition from "${value}" to "${target}" denied by guard`);
             }
