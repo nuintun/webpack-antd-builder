@@ -34,10 +34,10 @@ interface TransitionAction<E extends string> {
 }
 
 interface State<C, S extends string, E extends string> {
-  value: S;
-  event?: E;
-  context: C;
-  nextEvents: E[];
+  readonly value: S;
+  readonly event?: E;
+  readonly context: C;
+  readonly nextEvents: E[];
 }
 
 interface Options<C, S extends string, E extends string> {
