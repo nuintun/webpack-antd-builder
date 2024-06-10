@@ -11,20 +11,20 @@ const enum ActionType {
   Transition
 }
 
-interface Updater<C> {
+interface ContextUpdater<C> {
   (context: C): C;
 }
 
 interface UpdateAction<C> {
   type: ActionType.Update;
-  context: C | Updater<C>;
+  context: C | ContextUpdater<C>;
 }
 
-interface Update<C> {
-  (context: C | Updater<C>): void;
+export interface Update<C> {
+  (context: C | ContextUpdater<C>): void;
 }
 
-interface Send<E extends string> {
+export interface Send<E extends string> {
   (event: E): void;
 }
 
@@ -33,14 +33,14 @@ interface TransitionAction<E extends string> {
   event: E;
 }
 
-interface State<C, S extends string, E extends string> {
+export interface State<C, S extends string, E extends string> {
   readonly value: S;
   readonly event?: E;
   readonly context: C;
   readonly nextEvents: E[];
 }
 
-interface Options<C, S extends string, E extends string> {
+export interface Options<C, S extends string, E extends string> {
   initial: S;
   verbose?: boolean;
   states: {
@@ -52,7 +52,7 @@ interface Reducer<C, S extends string, E extends string> {
   (state: State<C, S, E>, action: Action<C, E>): State<C, S, E>;
 }
 
-interface StateOptions<C, S extends string, E extends string> {
+export interface StateOptions<C, S extends string, E extends string> {
   on?: {
     [key in E]?: Transition<C, S>;
   };
