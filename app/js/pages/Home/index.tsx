@@ -64,14 +64,16 @@ const LineChart = memo(({ theme }: LineChartProps) => {
   );
 });
 
+function pad(value: number): string {
+  return value.toString().padStart(2, '0');
+}
+
 function formatTime(time: number): string {
-  const mins = Math.floor(time / 600);
-  const secs = Math.floor(time / 10) % 60;
-  const ms = Math.floor(time % 10);
+  const secs = time % 60;
+  const mins = Math.floor(time / 60) % 60;
+  const hours = Math.floor(time / 3600);
 
-  if (secs < 10) return `${mins}:0${secs}.${ms}`;
-
-  return `${mins}:${secs}.${ms}`;
+  return `${pad(hours)}:${pad(mins)}:${pad(secs)}`;
 }
 
 function requestInterval(callback: (...args: any[]) => void, interval: number): () => void {
