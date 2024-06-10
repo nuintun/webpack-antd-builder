@@ -56,7 +56,12 @@ const LineChart = memo(({ theme }: LineChartProps) => {
       }
     };
   }, [theme]);
-  return <Line {...config} />;
+
+  return (
+    <div className={styles.chart}>
+      <Line {...config} />
+    </div>
+  );
 });
 
 function formatTime(time: number): string {
@@ -92,13 +97,7 @@ function requestInterval(callback: (...args: any[]) => void, interval: number): 
   };
 }
 
-export default memo(function Page() {
-  const [theme] = useTheme();
-
-  const now = useMemo(() => {
-    return new Date().toISOString();
-  }, []);
-
+const Time = memo(function Time() {
   const [machine, send] = useStateMachine(
     {
       initial: 'idle',
@@ -138,46 +137,56 @@ export default memo(function Page() {
   );
 
   return (
+    <div className={styles.machine}>
+      <div className={styles.display}>{formatTime(machine.context.time)}</div>
+      <div className={styles.controls}>
+        {machine.nextEvents.includes('start') && (
+          <Button
+            title="开始"
+            size="large"
+            shape="circle"
+            type="primary"
+            icon={<PlayCircleOutlined />}
+            onClick={() => send('start')}
+          />
+        )}
+        {machine.nextEvents.includes('pause') && (
+          <Button
+            title="暂停"
+            size="large"
+            shape="circle"
+            type="default"
+            icon={<PauseOutlined />}
+            onClick={() => send('pause')}
+          />
+        )}
+        {machine.nextEvents.includes('reset') && (
+          <Button
+            danger
+            title="重置"
+            size="large"
+            shape="circle"
+            type="default"
+            icon={<UndoOutlined />}
+            onClick={() => send('reset')}
+          />
+        )}
+      </div>
+    </div>
+  );
+});
+
+export default memo(function Page() {
+  const [theme] = useTheme();
+
+  const now = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
+
+  return (
     <Paper>
-      <div className={styles.chart}>
-        <LineChart theme={theme} />
-      </div>
-      <div className={styles.machine}>
-        <div className={styles.display}>{formatTime(machine.context.time)}</div>
-        <div className={styles.controls}>
-          {machine.nextEvents.includes('start') && (
-            <Button
-              title="开始"
-              size="large"
-              shape="circle"
-              type="primary"
-              icon={<PlayCircleOutlined />}
-              onClick={() => send('start')}
-            />
-          )}
-          {machine.nextEvents.includes('pause') && (
-            <Button
-              title="暂停"
-              size="large"
-              shape="circle"
-              type="default"
-              icon={<PauseOutlined />}
-              onClick={() => send('pause')}
-            />
-          )}
-          {machine.nextEvents.includes('reset') && (
-            <Button
-              danger
-              title="重置"
-              size="large"
-              shape="circle"
-              type="default"
-              icon={<UndoOutlined />}
-              onClick={() => send('reset')}
-            />
-          )}
-        </div>
-      </div>
+      <LineChart theme={theme} />
+      <Time />
       <QRCode
         level="H"
         moduleSize={4}
