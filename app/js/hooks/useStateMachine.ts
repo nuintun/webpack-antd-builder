@@ -82,7 +82,12 @@ function getState<C, S extends string, E extends string>(
 }
 
 function debug(message: string, ...data: any[]): void {
-  console.log(`%cuseStateMachine %c${message}`, 'color: #888;', 'color: default;', ...data);
+  console.log(
+    `%cuseStateMachine%c ${message}`,
+    'padding: 3px 6px; border-radius: 3px; border: 1px solid #67c23a; color: #67c23a;',
+    'background: inherit; color: inherit;',
+    ...data
+  );
 }
 
 function getReducer<C, S extends string, E extends string>(options: Options<C, S, E>): Reducer<C, S, E> {
