@@ -15,8 +15,8 @@
 }
 
 .machine {
-  width: 360px;
-  padding: 48px 64px;
+  width: 256px;
+  padding: 32px 64px;
 
   .display {
     font-size: 2em;
@@ -24,9 +24,11 @@
   }
 
   .controls {
+    gap: 1.5em;
     display: flex;
     margin-top: 1em;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
 
     .button {
       width: 5em;

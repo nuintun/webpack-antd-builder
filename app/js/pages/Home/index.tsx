@@ -1,5 +1,6 @@
 import * as styles from '/css/pages/home/index.module.scss';
 
+import { Button } from 'antd';
 import { memo, useMemo } from 'react';
 import Paper from '/js/components/Paper';
 import QRCode from '/js/components/QRCode';
@@ -7,6 +8,7 @@ import { Byte, Charset } from '@nuintun/qrcode';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import { Line, LineConfig } from '@ant-design/plots';
 import useStateMachine from '/js/hooks/useStateMachine';
+import { PauseOutlined, PlayCircleOutlined, UndoOutlined } from '@ant-design/icons';
 
 interface LineChartProps {
   theme: Theme;
@@ -100,7 +102,7 @@ export default memo(function Page() {
   const [machine, send] = useStateMachine(
     {
       initial: 'idle',
-      verbose: true,
+      verbose: __DEV__,
       states: {
         idle: {
           on: {
@@ -144,19 +146,35 @@ export default memo(function Page() {
         <div className={styles.display}>{formatTime(machine.context.time)}</div>
         <div className={styles.controls}>
           {machine.nextEvents.includes('start') && (
-            <button className={styles.button} onClick={() => send('start')}>
-              开始
-            </button>
+            <Button
+              title="开始"
+              size="large"
+              shape="circle"
+              type="primary"
+              icon={<PlayCircleOutlined />}
+              onClick={() => send('start')}
+            />
           )}
           {machine.nextEvents.includes('pause') && (
-            <button className={styles.button} onClick={() => send('pause')}>
-              暂停
-            </button>
+            <Button
+              title="暂停"
+              size="large"
+              shape="circle"
+              type="default"
+              icon={<PauseOutlined />}
+              onClick={() => send('pause')}
+            />
           )}
           {machine.nextEvents.includes('reset') && (
-            <button className={styles.button} onClick={() => send('reset')}>
-              重置
-            </button>
+            <Button
+              danger
+              title="重置"
+              size="large"
+              shape="circle"
+              type="default"
+              icon={<UndoOutlined />}
+              onClick={() => send('reset')}
+            />
           )}
         </div>
       </div>
