@@ -52,21 +52,21 @@ importers:
         specifier: ^4.0.13
         version: 4.0.13(react@18.3.1)
       react-nest-router:
-        specifier: ^0.19.15
-        version: 0.19.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.19.16
+        version: 0.19.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       throttle-debounce:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
       '@nuintun/svgo-loader':
-        specifier: ^0.2.7
-        version: 0.2.7(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        specifier: ^0.2.8
+        version: 0.2.8(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.15
-        version: 0.5.15(react-refresh@0.14.2)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 0.5.15(react-refresh@0.14.2)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       '@swc/core':
-        specifier: ^1.5.25
-        version: 1.5.25(@swc/helpers@0.5.11)
+        specifier: ^1.5.27
+        version: 1.5.27(@swc/helpers@0.5.11)
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -87,19 +87,19 @@ importers:
         version: 2.4.0
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 7.1.2(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       css-minimizer-webpack-plugin:
         specifier: 7.0.0
-        version: 7.0.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 7.0.0(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       css-modules-types-loader:
-        specifier: ^0.5.3
-        version: 0.5.3(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        specifier: ^0.5.4
+        version: 0.5.4(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       find-free-ports:
         specifier: ^3.1.1
         version: 3.1.1
       html-webpack-plugin:
         specifier: ^5.6.0
-        version: 5.6.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 5.6.0(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       koa:
         specifier: ^2.15.3
         version: 2.15.3
@@ -111,7 +111,7 @@ importers:
         version: 4.9.2
       mini-css-extract-plugin:
         specifier: ^2.9.0
-        version: 2.9.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 2.9.0(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       nodemon:
         specifier: ^3.1.3
         version: 3.1.3
@@ -120,7 +120,7 @@ importers:
         version: 8.4.38
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 8.1.1(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       prettier:
         specifier: ^3.3.1
         version: 3.3.1
@@ -129,16 +129,16 @@ importers:
         version: 1.77.4
       sass-loader:
         specifier: ^14.2.1
-        version: 14.2.1(sass@1.77.4)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 14.2.1(sass@1.77.4)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       svgc-loader:
-        specifier: ^0.2.7
-        version: 0.2.7(react@18.3.1)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        specifier: ^0.2.8
+        version: 0.2.8(react@18.3.1)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       swc-loader:
         specifier: ^0.2.6
-        version: 0.2.6(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 0.2.6(@swc/core@1.5.27(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       terser-webpack-plugin:
         specifier: ^5.3.10
-        version: 5.3.10(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        version: 5.3.10(@swc/core@1.5.27(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -147,13 +147,13 @@ importers:
         version: 6.0.4
       webpack:
         specifier: ^5.91.0
-        version: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+        version: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
       webpack-bundle-analyzer:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       webpack-dev-service:
-        specifier: ^0.11.3
-        version: 0.11.3(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+        specifier: ^0.11.4
+        version: 0.11.4(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
 
 packages:
 
@@ -352,14 +352,14 @@ packages:
     resolution: {integrity: sha512-/gKJun8NNiWGZJkGzI/Ragc53cOdcLNdzjLaIa+GEjguQs0ulsurx8WN0jijdK9yPqDvziX995sMRLyLt1uZMQ==}
     engines: {node: '>= 0.4'}
 
-  '@nuintun/ansi@0.0.3':
-    resolution: {integrity: sha512-yjVA6YNx8yQF8pN19UUh8U7HRGovCrXMvAVlu4IWuMnJVvWWmZRCq7gA4ZmoHRowFO8mHFr3Nc7wHWpMxObB2A==}
+  '@nuintun/ansi@0.0.4':
+    resolution: {integrity: sha512-RVNCVUAZHENopfYEpquh7m0jVtU/rfXU/7HWbzaQcnhDQ1SYfhxKdXi7WCj2EWev3cV1dTETeP0Ow6ZOF44fRA==}
 
   '@nuintun/qrcode@4.1.2':
     resolution: {integrity: sha512-WcvwViOcdWBoKYjNvAZEXo42b0oQJb4YUrawEnULyFRXH5m3XGCW7juNdweWz/J1+FU+fILgYY5ZUsOudZwO6A==}
 
-  '@nuintun/svgo-loader@0.2.7':
-    resolution: {integrity: sha512-we3kji/5smvJV2xM3YqEgXtVbEEvMpyCS56AJPBKDAGpMzJkWA0OIPzpF+563eZ+5jexLYCM3qHS2jd1wTwjrw==}
+  '@nuintun/svgo-loader@0.2.8':
+    resolution: {integrity: sha512-IelO3uJ/q3X9ecZ35z8zpBpWwZipOZFefFiU4gvV9E1lhAG4EybzltHXeuh4kUiuSCqakzZo0uZ1SP6vusBohw==}
     peerDependencies:
       webpack: ^5.0.0
 
@@ -447,68 +447,68 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@swc/core-darwin-arm64@1.5.25':
-    resolution: {integrity: sha512-YbD0SBgVJS2DM0vwJTU5m7+wOyCjHPBDMf3nCBJQzFZzOLzK11eRW7SzU2jhJHr9HI9sKcNFfN4lIC2Sj+4inA==}
+  '@swc/core-darwin-arm64@1.5.27':
+    resolution: {integrity: sha512-jyoygXBcUcwUya2BI7Uvl0jwcm4kd0RBDGGkWgcFAZmwucSuLT3EsbpWhOwlL3ACT4rpnRlvh+k8nJlq3+w2Aw==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@swc/core-darwin-x64@1.5.25':
-    resolution: {integrity: sha512-OhP4TROT6gQuozn+ah0Y4UidSdgDmxwtQq3lgCUIAxJYErJAQ82/Y0kve2UaNmkSGjOHU+/b4siHPrYTkXOk0Q==}
+  '@swc/core-darwin-x64@1.5.27':
+    resolution: {integrity: sha512-eOC583D6b3MS9oODCcZUvAV7ajunjENAPVQL7aZaW+piERW+o4koZAiPlzFdMAUMj7UeVg+UN9sBBbTbJgruIA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [darwin]
 
-  '@swc/core-linux-arm-gnueabihf@1.5.25':
-    resolution: {integrity: sha512-tNmUfrAHxN2gvYPyYNnHx2CYlPO7DGAUuK/bZrqawu++djcg+atAV3eI3XYJgmHId7/sYAlDQ9wjkrOLofFjVg==}
+  '@swc/core-linux-arm-gnueabihf@1.5.27':
+    resolution: {integrity: sha512-bMvX0yF7WYzn1K+s0JWJhvyA3OeZHVrdjka8eZ4LSeuLfC0ggJefo+klyeuN2szn/LYP6/3oByyrWNY8RSHB4w==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
 
-  '@swc/core-linux-arm64-gnu@1.5.25':
-    resolution: {integrity: sha512-stzpke+bRaNFM/HrZPRjX0aQZ86S/2DChVCwb8NAV1n5lu9mz1CS750y7WbbtX/KZjk92FsCeRy2qwkvjI0gWw==}
+  '@swc/core-linux-arm64-gnu@1.5.27':
+    resolution: {integrity: sha512-KlkOcSPxrCqZTm4XrT/LT1o9gmyM2T6bw/hL6IwTYRBJg+sej4rc9iSfVRFZBfNuG3EVkFQSXxik+0yVOXR93Q==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
 
-  '@swc/core-linux-arm64-musl@1.5.25':
-    resolution: {integrity: sha512-UckUfDYedish/bj2V1jgQDGgouLhyRpG7jgF3mp8jHir11V2K6JiTyjFoz99eOiclS3+hNdr4QLJ+ifrQMJNZw==}
+  '@swc/core-linux-arm64-musl@1.5.27':
+    resolution: {integrity: sha512-EwdTt5qykxFXJu7kS+0X0Mp/IlwO8KJ6LVNak2+N8bt1J1q/nCdg1tRDOYQ1Z/MVa1Tm+lJ664Qs1y2NY2SDTw==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
 
-  '@swc/core-linux-x64-gnu@1.5.25':
-    resolution: {integrity: sha512-LwbJEgNT3lXbvz4WFzVNXNvs8DvxpoXjMZk9K9Hig8tmZQJKHC2qZTGomcyK5EFzfj2HBuBXZnAEW8ZT9PcEaA==}
+  '@swc/core-linux-x64-gnu@1.5.27':
+    resolution: {integrity: sha512-RsBbxbiSNWLJ2jbAdITtv30J4eZw4O/JJ5zxYgWI54TdY7YrVsqIdzuX+ldximt+CYvO9irHm/mSr/IJY2YXrw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
 
-  '@swc/core-linux-x64-musl@1.5.25':
-    resolution: {integrity: sha512-rsepMTgml0EkswWkBpg3Wrjj5eqjwTzZN5omAn1klzXSZnClTrfeHvBuoIJYVr1yx+jmBkqySgME2p7+magUAw==}
+  '@swc/core-linux-x64-musl@1.5.27':
+    resolution: {integrity: sha512-XpRx0Kpy6JEi1WSMqUfR3k8hXLqNOkVqFcUfzvfQ4QNBX5Ek7ywh7WAxlPhCrFp+wAfNAqqUyRY1xZpLvRU51A==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
 
-  '@swc/core-win32-arm64-msvc@1.5.25':
-    resolution: {integrity: sha512-DJDsLBsRBV3uQBShRK2x6fqzABp9RLNVxDUpTTvUjc7qywJ8vS/yn+POK/zCyVEqLagf1z/8D5CEQ+RAIJq1NA==}
+  '@swc/core-win32-arm64-msvc@1.5.27':
+    resolution: {integrity: sha512-pwSTUIokyIp+Ha1pur34qdYjxqL1QzhP/HM8anzsFs4yvV2LSI7c3qc4GWPNv2eQ9WiFXyo29uCEIRN6qig7wg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [win32]
 
-  '@swc/core-win32-ia32-msvc@1.5.25':
-    resolution: {integrity: sha512-BARL1ulHol53MEKC1ZVWM3A3FP757UUgG5Q8v97za+4a1SaIgbwvAQyHDxMYWi9+ij+OapK8YnWjJcFa17g8dw==}
+  '@swc/core-win32-ia32-msvc@1.5.27':
+    resolution: {integrity: sha512-S0S6vqFscvmxPolwmpZvTRfTbYR+eGcyc0ge4x/+HcnBCm+m84rcGxmp3bBb1edNFaIV+X47BlGvvh85cJ4rkQ==}
     engines: {node: '>=10'}
     cpu: [ia32]
     os: [win32]
 
-  '@swc/core-win32-x64-msvc@1.5.25':
-    resolution: {integrity: sha512-o+MHUWrQI9iR6EusEV8eNU2Ezi3KtlhUR4gfptQN5MbVzlgjTvQbhiKpE1GYOxp+0BLBbKRwITKOcdhxfEJ2Uw==}
+  '@swc/core-win32-x64-msvc@1.5.27':
+    resolution: {integrity: sha512-aem+BcNW42JPbvV6L3Jl3LLj6G80aYADzYenToYisy0Aop0XZAxL/0FbhV+xWORNFtIUKynNtaa1CK7w0UxehQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
 
-  '@swc/core@1.5.25':
-    resolution: {integrity: sha512-qdGEIdLVoTjEQ7w72UyyQ0wLFY4XbHfZiidmPHKJQsvSXzdpHXxPdlTCea/mY4AhMqo/M+pvkJSXJAxZnFl7qw==}
+  '@swc/core@1.5.27':
+    resolution: {integrity: sha512-HmSSCBoUSRDFAd8aEB+WILkCofIp1c2OU6ZJWu1aCt6pijwQSkA4y51CTBcdvyy/+zX1W3cic7alfdhmQxxeEQ==}
     engines: {node: '>=10'}
     peerDependencies:
       '@swc/helpers': '*'
@@ -522,8 +522,8 @@ packages:
   '@swc/helpers@0.5.11':
     resolution: {integrity: sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==}
 
-  '@swc/types@0.1.7':
-    resolution: {integrity: sha512-scHWahbHF0eyj3JsxG9CFJgFdFNaVQCNAimBlT6PzS3n/HptxqREjsm4OH6AN3lYcffZYSPxXW8ua2BEHp0lJQ==}
+  '@swc/types@0.1.8':
+    resolution: {integrity: sha512-RNFA3+7OJFNYY78x0FYwi1Ow+iF1eF5WvmfY1nXPOEH4R2p/D4Cr1vzje7dNAI2aLFqpv8Wyz4oKSWqIZArpQA==}
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -820,8 +820,8 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  browserslist@4.23.0:
-    resolution: {integrity: sha512-QW8HiM1shhT2GuzkvklfjcKDiWFXHOeFCIA/huJPwHsslwcydgk7X+z2zXpEijP98UCY7HbubZt5J2Zgvf0CaQ==}
+  browserslist@4.23.1:
+    resolution: {integrity: sha512-TUfofFo/KsK/bWZ9TWQ5O26tsWW4Uhmt8IYklbnUa70udB6P2wA7w7o4PY4muaEPBQaAX+CEnmmIA41NVHtPVw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -858,8 +858,8 @@ packages:
   caniuse-api@3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
 
-  caniuse-lite@1.0.30001629:
-    resolution: {integrity: sha512-c3dl911slnQhmxUIT4HhYzT7wnBK/XYpGnYLOj4nJBaRiw52Ibe7YxlDaAeRECvA786zCuExhxIUJ2K7nHMrBw==}
+  caniuse-lite@1.0.30001632:
+    resolution: {integrity: sha512-udx3o7yHJfUxMLkGohMlVHCvFvWmirKh9JAH/d7WOLPetlH+LTL5cocMZ0t7oZx/mdlOWXti97xLZWc8uURRHg==}
 
   case-sensitive-paths-webpack-plugin@2.4.0:
     resolution: {integrity: sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==}
@@ -1027,8 +1027,8 @@ packages:
       lightningcss:
         optional: true
 
-  css-modules-types-loader@0.5.3:
-    resolution: {integrity: sha512-UUNiT5aKnGp83oCrn/0idCMZIyU5uIQWJ+d3VJkiNjNCU8Y7mQA1nAL7vlxHZBt/9CdjbTyTMANDU/urPu8dJQ==}
+  css-modules-types-loader@0.5.4:
+    resolution: {integrity: sha512-/cuJlbxDqDrhduPXaevjtM1fpCGlcGInrlS6XUI19rEqvL7aim2C8Qvbu3oohrgyyXgeK+U45QqI8yRVG2e8Hg==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       webpack: ^5.0.0
@@ -1247,8 +1247,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.4.795:
-    resolution: {integrity: sha512-hHo4lK/8wb4NUa+NJYSFyJ0xedNHiR6ylilDtb8NUW9d4dmBFmGiecYEKCEbti1wTNzbKXLfl4hPWEkAFbHYlw==}
+  electron-to-chromium@1.4.796:
+    resolution: {integrity: sha512-NglN/xprcM+SHD2XCli4oC6bWe6kHoytcyLKCWXmRL854F0qhPhaYgUswUsglnPxYaNQIg2uMY4BvaomIf3kLA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1740,8 +1740,8 @@ packages:
     resolution: {integrity: sha512-RE2g0b5VGZsOCFOCgP7omTRYFqydmZkBwl5oNnQ1lDYC57uyO9KqNnNVxT7COSHTxrRCWVcAVOcbjk+tvh/rgQ==}
     engines: {node: '>=0.10.0'}
 
-  lilconfig@3.1.1:
-    resolution: {integrity: sha512-O18pf7nyvHTckunPWCV1XUNXU1piu01y2b7ATJ0ppkUkk8ocqVWBrYjJBCwHDjD/ZWcfyrA0P4gKhzWGi5EINQ==}
+  lilconfig@3.1.2:
+    resolution: {integrity: sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==}
     engines: {node: '>=14'}
 
   lines-and-columns@1.2.4:
@@ -2438,8 +2438,8 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-nest-router@0.19.15:
-    resolution: {integrity: sha512-60nkrr91n0et/ES9H/21E2nwvqxOuuZIxHKRYFG6aaEyRAYzprZ9GnFFmJKR0pj5y19rYZTJoFz+9Z6lAGKiUg==}
+  react-nest-router@0.19.16:
+    resolution: {integrity: sha512-S81O6y6I3uSkep/hCMC2CWniEqWihtTWzOhT1S+BoLabOoSXMbolnqY5ArKY8/PqnBTYjvdur6ZyuWFhRKjzsQ==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -2709,8 +2709,8 @@ packages:
   svg-path-parser@1.1.0:
     resolution: {integrity: sha512-jGCUqcQyXpfe38R7RFfhrMyfXcBmpMNJI/B+4CE9/Unkh98UporAc461GTthv+TVDuZXsBx7/WiwJb1Oh4tt4A==}
 
-  svgc-loader@0.2.7:
-    resolution: {integrity: sha512-MuFz4ieQb61xXdnsjpTW+h4TBsyN5sXYKopZvYIKx+XoKeM82DdZE0ECsrNS4s6CPgdKE4zo6uDX3HYL8DFcQA==}
+  svgc-loader@0.2.8:
+    resolution: {integrity: sha512-8LI8YFFpZyoHE7RHk6j2N72R/wsz8+BOZnmf27a9EuXHergOX7FTw6f0xPKi3XC98SRmKoGDQSqwatcheUgoqA==}
     peerDependencies:
       preact: '*'
       react: '*'
@@ -2886,8 +2886,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.11.3:
-    resolution: {integrity: sha512-vqORuA3/Y42By6ZSRkyWbrlzQShn8Y1LonH9Neh15QpUffPEfLJvqZjRYrrnYzw0wlyOEnslPNq06G9+9mHQiw==}
+  webpack-dev-service@0.11.4:
+    resolution: {integrity: sha512-J1NXGe4xtOEBce8xifJyLir1xCfZg3VKrw8ihCr8DibTayWcm3A087VW++AZKRRajDZHppA4Up+hvhFHxRCnoA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -3277,7 +3277,7 @@ snapshots:
     dependencies:
       call-bind: 1.0.7
 
-  '@nuintun/ansi@0.0.3':
+  '@nuintun/ansi@0.0.4':
     dependencies:
       tslib: 2.6.3
 
@@ -3285,16 +3285,16 @@ snapshots:
     dependencies:
       tslib: 2.6.3
 
-  '@nuintun/svgo-loader@0.2.7(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))':
+  '@nuintun/svgo-loader@0.2.8(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))':
     dependencies:
       svgo: 3.3.2
       tslib: 2.6.3
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.15(react-refresh@0.14.2)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.15(react-refresh@0.14.2)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.37.1
@@ -3304,7 +3304,7 @@ snapshots:
       react-refresh: 0.14.2
       schema-utils: 4.2.0
       source-map: 0.7.4
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
   '@polka/url@1.0.0-next.25': {}
 
@@ -3371,51 +3371,51 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@swc/core-darwin-arm64@1.5.25':
+  '@swc/core-darwin-arm64@1.5.27':
     optional: true
 
-  '@swc/core-darwin-x64@1.5.25':
+  '@swc/core-darwin-x64@1.5.27':
     optional: true
 
-  '@swc/core-linux-arm-gnueabihf@1.5.25':
+  '@swc/core-linux-arm-gnueabihf@1.5.27':
     optional: true
 
-  '@swc/core-linux-arm64-gnu@1.5.25':
+  '@swc/core-linux-arm64-gnu@1.5.27':
     optional: true
 
-  '@swc/core-linux-arm64-musl@1.5.25':
+  '@swc/core-linux-arm64-musl@1.5.27':
     optional: true
 
-  '@swc/core-linux-x64-gnu@1.5.25':
+  '@swc/core-linux-x64-gnu@1.5.27':
     optional: true
 
-  '@swc/core-linux-x64-musl@1.5.25':
+  '@swc/core-linux-x64-musl@1.5.27':
     optional: true
 
-  '@swc/core-win32-arm64-msvc@1.5.25':
+  '@swc/core-win32-arm64-msvc@1.5.27':
     optional: true
 
-  '@swc/core-win32-ia32-msvc@1.5.25':
+  '@swc/core-win32-ia32-msvc@1.5.27':
     optional: true
 
-  '@swc/core-win32-x64-msvc@1.5.25':
+  '@swc/core-win32-x64-msvc@1.5.27':
     optional: true
 
-  '@swc/core@1.5.25(@swc/helpers@0.5.11)':
+  '@swc/core@1.5.27(@swc/helpers@0.5.11)':
     dependencies:
       '@swc/counter': 0.1.3
-      '@swc/types': 0.1.7
+      '@swc/types': 0.1.8
     optionalDependencies:
-      '@swc/core-darwin-arm64': 1.5.25
-      '@swc/core-darwin-x64': 1.5.25
-      '@swc/core-linux-arm-gnueabihf': 1.5.25
-      '@swc/core-linux-arm64-gnu': 1.5.25
-      '@swc/core-linux-arm64-musl': 1.5.25
-      '@swc/core-linux-x64-gnu': 1.5.25
-      '@swc/core-linux-x64-musl': 1.5.25
-      '@swc/core-win32-arm64-msvc': 1.5.25
-      '@swc/core-win32-ia32-msvc': 1.5.25
-      '@swc/core-win32-x64-msvc': 1.5.25
+      '@swc/core-darwin-arm64': 1.5.27
+      '@swc/core-darwin-x64': 1.5.27
+      '@swc/core-linux-arm-gnueabihf': 1.5.27
+      '@swc/core-linux-arm64-gnu': 1.5.27
+      '@swc/core-linux-arm64-musl': 1.5.27
+      '@swc/core-linux-x64-gnu': 1.5.27
+      '@swc/core-linux-x64-musl': 1.5.27
+      '@swc/core-win32-arm64-msvc': 1.5.27
+      '@swc/core-win32-ia32-msvc': 1.5.27
+      '@swc/core-win32-x64-msvc': 1.5.27
       '@swc/helpers': 0.5.11
 
   '@swc/counter@0.1.3': {}
@@ -3424,7 +3424,7 @@ snapshots:
     dependencies:
       tslib: 2.6.3
 
-  '@swc/types@0.1.7':
+  '@swc/types@0.1.8':
     dependencies:
       '@swc/counter': 0.1.3
 
@@ -3789,8 +3789,8 @@ snapshots:
 
   autoprefixer@10.4.19(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
-      caniuse-lite: 1.0.30001629
+      browserslist: 4.23.1
+      caniuse-lite: 1.0.30001632
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
@@ -3822,12 +3822,12 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  browserslist@4.23.0:
+  browserslist@4.23.1:
     dependencies:
-      caniuse-lite: 1.0.30001629
-      electron-to-chromium: 1.4.795
+      caniuse-lite: 1.0.30001632
+      electron-to-chromium: 1.4.796
       node-releases: 2.0.14
-      update-browserslist-db: 1.0.16(browserslist@4.23.0)
+      update-browserslist-db: 1.0.16(browserslist@4.23.1)
 
   buffer-from@1.1.2: {}
 
@@ -3861,12 +3861,12 @@ snapshots:
 
   caniuse-api@3.0.0:
     dependencies:
-      browserslist: 4.23.0
-      caniuse-lite: 1.0.30001629
+      browserslist: 4.23.1
+      caniuse-lite: 1.0.30001632
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
 
-  caniuse-lite@1.0.30001629: {}
+  caniuse-lite@1.0.30001632: {}
 
   case-sensitive-paths-webpack-plugin@2.4.0: {}
 
@@ -3997,7 +3997,7 @@ snapshots:
     dependencies:
       postcss: 8.4.38
 
-  css-loader@7.1.2(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  css-loader@7.1.2(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.38)
       postcss: 8.4.38
@@ -4008,9 +4008,9 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.6.2
     optionalDependencies:
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
-  css-minimizer-webpack-plugin@7.0.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  css-minimizer-webpack-plugin@7.0.0(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       cssnano: 7.0.2(postcss@8.4.38)
@@ -4018,15 +4018,15 @@ snapshots:
       postcss: 8.4.38
       schema-utils: 4.2.0
       serialize-javascript: 6.0.2
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
-  css-modules-types-loader@0.5.3(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  css-modules-types-loader@0.5.4(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       acorn: 8.11.3
       acorn-walk: 8.3.2
       threads: 1.7.0
       tslib: 2.6.3
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
     transitivePeerDependencies:
       - supports-color
 
@@ -4062,7 +4062,7 @@ snapshots:
 
   cssnano-preset-default@7.0.2(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       css-declaration-sorter: 7.2.0(postcss@8.4.38)
       cssnano-utils: 5.0.0(postcss@8.4.38)
       postcss: 8.4.38
@@ -4101,7 +4101,7 @@ snapshots:
   cssnano@7.0.2(postcss@8.4.38):
     dependencies:
       cssnano-preset-default: 7.0.2(postcss@8.4.38)
-      lilconfig: 3.1.1
+      lilconfig: 3.1.2
       postcss: 8.4.38
 
   csso@5.0.5:
@@ -4275,7 +4275,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.4.795: {}
+  electron-to-chromium@1.4.796: {}
 
   emoji-regex@8.0.0: {}
 
@@ -4545,7 +4545,7 @@ snapshots:
       relateurl: 0.2.7
       terser: 5.31.1
 
-  html-webpack-plugin@5.6.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  html-webpack-plugin@5.6.0(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -4553,7 +4553,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.2.1
     optionalDependencies:
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
   htmlparser2@6.1.0:
     dependencies:
@@ -4804,7 +4804,7 @@ snapshots:
 
   lazy-cache@1.0.4: {}
 
-  lilconfig@3.1.1: {}
+  lilconfig@3.1.2: {}
 
   lines-and-columns@1.2.4: {}
 
@@ -4859,11 +4859,11 @@ snapshots:
     dependencies:
       mime-db: 1.52.0
 
-  mini-css-extract-plugin@2.9.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  mini-css-extract-plugin@2.9.0(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       schema-utils: 4.2.0
       tapable: 2.2.1
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
   minimatch@3.1.2:
     dependencies:
@@ -5002,7 +5002,7 @@ snapshots:
 
   postcss-colormin@7.0.0(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       caniuse-api: 3.0.0
       colord: 2.9.3
       postcss: 8.4.38
@@ -5010,7 +5010,7 @@ snapshots:
 
   postcss-convert-values@7.0.0(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       postcss: 8.4.38
       postcss-value-parser: 4.2.0
 
@@ -5030,14 +5030,14 @@ snapshots:
     dependencies:
       postcss: 8.4.38
 
-  postcss-loader@8.1.1(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  postcss-loader@8.1.1(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.4.5)
       jiti: 1.21.3
       postcss: 8.4.38
       semver: 7.6.2
     optionalDependencies:
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
     transitivePeerDependencies:
       - typescript
 
@@ -5049,7 +5049,7 @@ snapshots:
 
   postcss-merge-rules@7.0.1(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       caniuse-api: 3.0.0
       cssnano-utils: 5.0.0(postcss@8.4.38)
       postcss: 8.4.38
@@ -5069,7 +5069,7 @@ snapshots:
 
   postcss-minify-params@7.0.0(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       cssnano-utils: 5.0.0(postcss@8.4.38)
       postcss: 8.4.38
       postcss-value-parser: 4.2.0
@@ -5131,7 +5131,7 @@ snapshots:
 
   postcss-normalize-unicode@7.0.0(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       postcss: 8.4.38
       postcss-value-parser: 4.2.0
 
@@ -5153,7 +5153,7 @@ snapshots:
 
   postcss-reduce-initial@7.0.0(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       caniuse-api: 3.0.0
       postcss: 8.4.38
 
@@ -5545,7 +5545,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-nest-router@0.19.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-nest-router@0.19.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -5623,12 +5623,12 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@14.2.1(sass@1.77.4)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  sass-loader@14.2.1(sass@1.77.4)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.77.4
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
   sass@1.77.4:
     dependencies:
@@ -5787,7 +5787,7 @@ snapshots:
 
   stylehacks@7.0.1(postcss@8.4.38):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       postcss: 8.4.38
       postcss-selector-parser: 6.1.0
 
@@ -5813,12 +5813,12 @@ snapshots:
 
   svg-path-parser@1.1.0: {}
 
-  svgc-loader@0.2.7(react@18.3.1)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  svgc-loader@0.2.8(react@18.3.1)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       css-tree: 2.3.1
       svgo: 3.3.2
       tslib: 2.6.3
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
     optionalDependencies:
       react: 18.3.1
 
@@ -5832,11 +5832,11 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.0.1
 
-  swc-loader@0.2.6(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  swc-loader@0.2.6(@swc/core@1.5.27(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
-      '@swc/core': 1.5.25(@swc/helpers@0.5.11)
+      '@swc/core': 1.5.27(@swc/helpers@0.5.11)
       '@swc/counter': 0.1.3
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
 
   tapable@2.2.1: {}
 
@@ -5859,16 +5859,16 @@ snapshots:
       resolve: 1.22.8
       string.prototype.trim: 1.2.9
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  terser-webpack-plugin@5.3.10(@swc/core@1.5.27(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.31.1
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
     optionalDependencies:
-      '@swc/core': 1.5.25(@swc/helpers@0.5.11)
+      '@swc/core': 1.5.27(@swc/helpers@0.5.11)
 
   terser@5.31.1:
     dependencies:
@@ -5979,9 +5979,9 @@ snapshots:
 
   undici-types@5.26.5: {}
 
-  update-browserslist-db@1.0.16(browserslist@4.23.0):
+  update-browserslist-db@1.0.16(browserslist@4.23.1):
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       escalade: 3.1.2
       picocolors: 1.0.1
 
@@ -6022,9 +6022,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.11.3(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))):
+  webpack-dev-service@0.11.4(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))):
     dependencies:
-      '@nuintun/ansi': 0.0.3
+      '@nuintun/ansi': 0.0.4
       '@types/koa': 2.15.0
       '@types/ws': 8.5.10
       destroy: 1.2.0
@@ -6035,7 +6035,7 @@ snapshots:
       schema-utils: 4.2.0
       supports-color: 9.4.0
       tslib: 2.6.3
-      webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))
+      webpack: 5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11))
       ws: 8.17.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
     transitivePeerDependencies:
       - bufferutil
@@ -6043,7 +6043,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)):
+  webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
@@ -6052,7 +6052,7 @@ snapshots:
       '@webassemblyjs/wasm-parser': 1.12.1
       acorn: 8.11.3
       acorn-import-assertions: 1.9.0(acorn@8.11.3)
-      browserslist: 4.23.0
+      browserslist: 4.23.1
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.17.0
       es-module-lexer: 1.5.3
@@ -6066,7 +6066,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11)))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.5.27(@swc/helpers@0.5.11))(webpack@5.91.0(@swc/core@1.5.27(@swc/helpers@0.5.11)))
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
