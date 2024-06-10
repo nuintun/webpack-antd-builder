@@ -6,6 +6,7 @@ import QRCode from '/js/components/QRCode';
 import { Byte, Charset } from '@nuintun/qrcode';
 import useTheme, { Theme } from '/js/hooks/useTheme';
 import { Line, LineConfig } from '@ant-design/plots';
+import useStateMachine from '/js/hooks/useStateMachine';
 
 interface LineChartProps {
   theme: Theme;
@@ -56,6 +57,39 @@ const LineChart = memo(({ theme }: LineChartProps) => {
   return <Line {...config} />;
 });
 
+function formatTime(time: number): string {
+  const mins = Math.floor(time / 600);
+  const secs = Math.floor(time / 10) % 60;
+  const ms = Math.floor(time % 10);
+
+  if (secs < 10) return `${mins}:0${secs}.${ms}`;
+
+  return `${mins}:${secs}.${ms}`;
+}
+
+function requestInterval(callback: (...args: any[]) => void, interval: number): () => void {
+  let timerId: number;
+  let start = Date.now();
+
+  const frame = () => {
+    const now = Date.now();
+    const elapsed = now - start;
+
+    if (elapsed >= interval) {
+      callback();
+      start = Date.now();
+    }
+
+    timerId = requestAnimationFrame(frame);
+  };
+
+  timerId = requestAnimationFrame(frame);
+
+  return () => {
+    cancelAnimationFrame(timerId);
+  };
+}
+
 export default memo(function Page() {
   const [theme] = useTheme();
 
@@ -63,10 +97,68 @@ export default memo(function Page() {
     return new Date().toISOString();
   }, []);
 
+  const [machine, send] = useStateMachine(
+    {
+      initial: 'idle',
+      verbose: true,
+      states: {
+        idle: {
+          on: {
+            start: {
+              target: 'running'
+            }
+          },
+          effect(_, update) {
+            update({ time: 0 });
+          }
+        },
+        running: {
+          on: {
+            pause: 'paused'
+          },
+          effect(_, update) {
+            return requestInterval(() => {
+              update(({ time }) => ({ time: time + 1 }));
+            }, 1000);
+          }
+        },
+        paused: {
+          on: {
+            reset: 'idle',
+            start: {
+              target: 'running'
+            }
+          }
+        }
+      }
+    },
+    { time: 0 }
+  );
+
   return (
     <Paper>
       <div className={styles.chart}>
         <LineChart theme={theme} />
+      </div>
+      <div className={styles.machine}>
+        <div className={styles.display}>{formatTime(machine.context.time)}</div>
+        <div className={styles.controls}>
+          {machine.nextEvents.includes('start') && (
+            <button className={styles.button} onClick={() => send('start')}>
+              开始
+            </button>
+          )}
+          {machine.nextEvents.includes('pause') && (
+            <button className={styles.button} onClick={() => send('pause')}>
+              暂停
+            </button>
+          )}
+          {machine.nextEvents.includes('reset') && (
+            <button className={styles.button} onClick={() => send('reset')}>
+              重置
+            </button>
+          )}
+        </div>
       </div>
       <QRCode
         level="H"

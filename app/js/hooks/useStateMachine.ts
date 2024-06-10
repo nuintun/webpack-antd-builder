@@ -34,9 +34,21 @@ interface TransitionAction<E extends string> {
 }
 
 export interface State<C, S extends string, E extends string> {
+  /**
+   * @description Returns the name of the current state.
+   */
   readonly value: S;
+  /**
+   * @description The name of the last sent event that led to this state.
+   */
   readonly event?: E;
+  /**
+   * @description The state machine context state.
+   */
   readonly context: C;
+  /**
+   * @description An array with the names of available events to trigger transitions from this state.
+   */
   readonly nextEvents: E[];
 }
 
@@ -73,10 +85,14 @@ function getState<C, S extends string, E extends string>(
   value: S,
   context: C,
   options: Options<C, S, E>,
-  event?: E
+  event?: E,
+  nextEvents?: E[]
 ): State<C, S, E> {
-  const { on } = options.states[value];
-  const nextEvents = (on ? Object.keys(on) : []) as E[];
+  if (!nextEvents) {
+    const { on } = options.states[value];
+
+    nextEvents = (on ? Object.keys(on) : []) as E[];
+  }
 
   return { value, event, context, nextEvents };
 }
@@ -105,7 +121,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
           debug('Context update from %o to %o', context, nextContext);
         }
 
-        return getState(value, nextContext, options, state.event);
+        return getState(value, nextContext, options, state.event, state.nextEvents);
       case ActionType.Transition:
         const { event } = action;
         const { on } = options.states[value];
