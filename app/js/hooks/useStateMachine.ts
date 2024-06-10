@@ -28,10 +28,6 @@ export interface Send<E extends string> {
   (event: E): void;
 }
 
-export interface Guard<C, E extends string> {
-  (event: E, context: C): boolean;
-}
-
 interface TransitionAction<E extends string> {
   type: ActionType.Transition;
   event: E;
@@ -44,11 +40,15 @@ export interface State<C, S extends string, E extends string> {
   readonly nextEvents: E[];
 }
 
+export interface Guard<C, S extends string, E extends string> {
+  (state: S, event: E, context: C): boolean;
+}
+
 export interface Options<C, S extends string, E extends string> {
   initial: S;
   verbose?: boolean;
   states: {
-    [key in S]: StateOptions<C, S, E>;
+    [K in S]: StateOptions<C, S, E>;
   };
 }
 
@@ -65,7 +65,7 @@ export interface StateOptions<C, S extends string, E extends string> {
 
 type Action<C, E extends string> = UpdateAction<C> | TransitionAction<E>;
 
-type Transition<C, S extends string, E extends string> = S | { target: S; guard?: Guard<C, E> };
+type Transition<C, S extends string, E extends string> = S | { target: S; guard?: Guard<C, S, E> };
 
 type UseStateMachine<C, S extends string, E extends string> = [state: State<C, S, E>, send: Send<E>, update: Update<C>];
 
@@ -125,7 +125,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
           const { guard } = nextState;
 
           // If there are guards, invoke them and return early if the transition is denied.
-          if (guard && !guard(event, context)) {
+          if (guard && !guard(value, event, context)) {
             if (verbose) {
               debug(`Transition from "${value}" to "${target}" denied by guard`);
             }
