@@ -109,7 +109,7 @@ function getReducer<C, S extends string, E extends string>(options: Options<C, S
         // If there is no defined next state, return early.
         if (!nextState) {
           if (verbose) {
-            debug(`Current state %o doesn't listen to event "${event}".`, state);
+            debug(`Current state %o doesn't listen to event "${event}"`, state);
           }
 
           return state;
