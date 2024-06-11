@@ -107,9 +107,7 @@ const Time = memo(function Time() {
       states: {
         idle: {
           on: {
-            start: {
-              target: 'running'
-            }
+            start: 'running'
           },
           effect(_, update) {
             update({ time: 0 });
@@ -128,9 +126,7 @@ const Time = memo(function Time() {
         paused: {
           on: {
             reset: 'idle',
-            start: {
-              target: 'running'
-            }
+            start: 'running'
           }
         }
       }
