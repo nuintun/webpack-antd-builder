@@ -72,8 +72,10 @@ export interface StateOptions<C, S extends string, E extends string> {
   on?: {
     [key in E]?: Transition<C, S, E>;
   };
-  effect?: (send: Send<E>, update: Update<C>) => void | (() => void);
+  effect?: (send: Send<E>, update: Update<C>) => Destructor;
 }
+
+type Destructor = void | (() => void) | Promise<void | (() => void)>;
 
 type Action<C, E extends string> = UpdateAction<C> | TransitionAction<E>;
 
@@ -216,7 +218,29 @@ export default function useStateMachine<C = undefined, S extends string = string
   }, []);
 
   // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes.
-  useEffect(() => options.states[state.value].effect?.(send, update), [state.value]);
+  useEffect(() => {
+    const returned = (async () => {
+      const { effect } = options.states[state.value];
+
+      try {
+        return await effect?.(send, update);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+
+    return () => {
+      returned.then(exit => {
+        if (isFunction(exit)) {
+          try {
+            exit();
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      });
+    };
+  }, [state.value]);
 
   return [state, send, update];
 }
