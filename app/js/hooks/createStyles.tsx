@@ -7,8 +7,8 @@ import createMaxMin from 'antd/es/theme/util/maxmin';
 import { isNumber, isString } from '/js/utils/utils';
 import { memo, ReactElement, useId, useMemo } from 'react';
 import AbstractCalculator from 'antd/es/theme/util/calc/calculator';
-import useToken, { ignore, unitless } from 'antd/es/theme/useToken';
 import { AliasToken, GlobalToken, OverrideToken } from 'antd/es/theme/interface';
+import useToken, { ignore, unitless as unitlessSeeds } from 'antd/es/theme/useToken';
 import { CSSInterpolation, token2CSSVar, unit, useCSSVarRegister, useStyleRegister } from '@ant-design/cssinjs';
 
 interface CSSVar {
@@ -21,8 +21,9 @@ interface CSSVarRegisterProps {
   scope: string;
   cssVar: CSSVar;
   path: string[];
-  shared: Components[];
+  shared?: Components[];
   children?: ReactElement;
+  unitless: Record<string, boolean>;
 }
 
 type Entries<T> = [keyof AliasToken, T][];
@@ -62,21 +63,7 @@ function prefixToken(component: string, key: string): string {
 }
 
 const CSSVarRegister = memo(function CSSVarRegister(props: CSSVarRegisterProps): null {
-  const { path, scope, token, shared, cssVar } = props;
-
-  const mergedUnitless = useMemo<Record<string, boolean>>(() => {
-    const mergedUnitless: Record<string, boolean> = { ...unitless };
-
-    for (const component of shared) {
-      mergedUnitless[prefixToken(component, 'zIndexPopup')] = true;
-
-      for (const key in mergedUnitless) {
-        mergedUnitless[prefixToken(component, key)] = true;
-      }
-    }
-
-    return mergedUnitless;
-  }, [shared]);
+  const { path, scope, token, shared, cssVar, unitless } = props;
 
   useCSSVarRegister(
     {
@@ -84,26 +71,27 @@ const CSSVarRegister = memo(function CSSVarRegister(props: CSSVarRegisterProps):
       scope,
       token,
       ignore,
+      unitless,
       key: cssVar.key,
-      prefix: cssVar.prefix,
-      unitless: mergedUnitless
+      prefix: cssVar.prefix
     },
     () => {
-      const realToken = token;
       const scopeToken: Record<string, string | number> = {};
 
-      for (const component of shared) {
-        const componentToken = token[component];
+      if (shared) {
+        for (const component of shared) {
+          const componentToken = token[component];
 
-        if (componentToken) {
-          const entries = Object.entries(componentToken) as Entries<string | number | boolean>;
+          if (componentToken) {
+            const entries = Object.entries(componentToken) as Entries<string | number | boolean>;
 
-          for (const [key, token] of entries) {
-            if (isString(token) || isNumber(token)) {
-              const globalToken = realToken[key];
+            for (const [key, realToken] of entries) {
+              if (isString(realToken) || isNumber(realToken)) {
+                const globalToken = token[key];
 
-              if (globalToken !== token) {
-                scopeToken[globalToken != null ? key : prefixToken(component, key)] = token;
+                if (globalToken !== realToken) {
+                  scopeToken[globalToken != null ? key : prefixToken(component, key)] = realToken;
+                }
               }
             }
           }
@@ -208,13 +196,29 @@ export default function createStyles<C extends Components = never>(path: string[
       return scopes.join(' ');
     }, [hashId, cssVar, scopeId, hasScoped]);
 
+    const unitless = useMemo<Record<string, boolean>>(() => {
+      const unitless: Record<string, boolean> = { ...unitlessSeeds };
+
+      if (shared) {
+        for (const component of shared) {
+          unitless[prefixToken(component, 'zIndexPopup')] = true;
+
+          for (const key in unitless) {
+            unitless[prefixToken(component, key)] = true;
+          }
+        }
+      }
+
+      return unitless;
+    }, [shared]);
+
     const utils = useMemo(() => {
       const type = cssVar ? 'css' : 'js';
-      const unitless = new Set<string>();
       const { max, min } = createMaxMin(type);
+      const unitlessCssVar = new Set(Object.keys(unitless));
 
-      return { min, max, unit, calc: createCalc(type, unitless) };
-    }, [cssVar]);
+      return { min, max, unit, calc: createCalc(type, unitlessCssVar) };
+    }, [cssVar, unitless]);
 
     const render = useStyleRegister({ path, theme, token, hashId }, () => {
       return styles(mergedToken, utils);
@@ -230,8 +234,9 @@ export default function createStyles<C extends Components = never>(path: string[
                 key={scope}
                 path={path}
                 scope={scopeId}
-                shared={shared!}
+                shared={shared}
                 token={realToken}
+                unitless={unitless}
                 cssVar={cssVar as CSSVar}
               />
             )}
