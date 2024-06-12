@@ -99,6 +99,15 @@ function getState<C, S extends string, E extends string>(
   return { value, event, context, nextEvents };
 }
 
+async function effect<C, S extends string, E extends string>(
+  send: Send<E>,
+  update: Update<C>,
+  state: State<C, S, E>,
+  options: Options<C, S, E>
+) {
+  return await options.states[state.value].effect?.(send, update);
+}
+
 function debug(message: string, ...data: any[]): void {
   console.log(
     `%cuseStateMachine%c ${message}`,
@@ -219,11 +228,7 @@ export default function useStateMachine<C = undefined, S extends string = string
 
   // We are bypassing the linter here because we deliberately want the effects to run on explicit machine state changes.
   useEffect(() => {
-    const returned = (async () => {
-      const { effect } = options.states[state.value];
-
-      return await effect?.(send, update);
-    })();
+    const returned = effect(send, update, state, options);
 
     return () => {
       returned.then(async exit => {
