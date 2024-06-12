@@ -12,7 +12,7 @@ const app = new Koa();
 const publicPath = 'wwwroot';
 const entryHTML = 'wwwroot/app.html';
 
-app.use(compress({ br: false }));
+app.use(compress());
 
 app.use(files(publicPath));
 
