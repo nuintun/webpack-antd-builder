@@ -208,11 +208,16 @@ export default function createStyles<C extends Components = never>(path: string[
       return scopes.join(' ');
     }, [hashId, cssVar, scopeId, hasScoped]);
 
-    const render = useStyleRegister({ path, theme, token, hashId }, () => {
+    const utils = useMemo(() => {
       const type = cssVar ? 'css' : 'js';
+      const unitless = new Set<string>();
       const { max, min } = createMaxMin(type);
 
-      return styles(mergedToken, { min, max, unit, calc: createCalc(type) });
+      return { min, max, unit, calc: createCalc(type, unitless) };
+    }, [cssVar]);
+
+    const render = useStyleRegister({ path, theme, token, hashId }, () => {
+      return styles(mergedToken, utils);
     });
 
     return [
