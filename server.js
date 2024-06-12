@@ -9,16 +9,14 @@ import compress from 'koa-compress';
 
 const port = 8000;
 const app = new Koa();
-const publicPath = 'wwwroot';
-const entryHTML = 'wwwroot/app.html';
 
 app.use(compress());
 
-app.use(files(publicPath));
+app.use(files('wwwroot'));
 
 app.use(async ctx => {
   ctx.type = 'text/html; charset=utf-8';
-  ctx.body = fs.createReadStream(entryHTML);
+  ctx.body = fs.createReadStream('wwwroot/app.html');
 });
 
 app.on('error', error => {
