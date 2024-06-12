@@ -153,7 +153,7 @@ const Time = memo(function Time() {
             title="暂停"
             size="large"
             shape="circle"
-            type="default"
+            type="primary"
             icon={<PauseOutlined />}
             onClick={() => send('pause')}
           />
@@ -164,7 +164,7 @@ const Time = memo(function Time() {
             title="重置"
             size="large"
             shape="circle"
-            type="default"
+            type="primary"
             icon={<UndoOutlined />}
             onClick={() => send('reset')}
           />
