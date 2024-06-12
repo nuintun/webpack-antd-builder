@@ -14,6 +14,7 @@
   "homepage": "https://github.com/nuintun/webpack-antd-builder",
   "scripts": {
     "lint": "tsc --noEmit",
+    "start": "node server.js",
     "prod": "node tools/bin/webpack.config.prod.js",
     "dev": "nodemon tools/bin/webpack.config.dev.js",
     "report": "node tools/bin/webpack.config.prod.js --report",
@@ -29,6 +30,7 @@
     "classnames": "^2.5.1",
     "core-js": "^3.37.1",
     "dayjs": "^1.11.11",
+    "koa-files": "^3.0.1",
     "memoize-one": "^6.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
