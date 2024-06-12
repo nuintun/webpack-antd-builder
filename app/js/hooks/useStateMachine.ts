@@ -72,10 +72,10 @@ export interface StateOptions<C, S extends string, E extends string> {
   on?: {
     [key in E]?: Transition<C, S, E>;
   };
-  effect?: (send: Send<E>, update: Update<C>) => Destructor;
+  effect?: (send: Send<E>, update: Update<C>) => EffectReturn;
 }
 
-type Destructor = void | (() => void) | Promise<void | (() => void)>;
+type EffectReturn = void | (() => void) | Promise<void | (() => void)>;
 
 type Action<C, E extends string> = UpdateAction<C> | TransitionAction<E>;
 
@@ -222,21 +222,13 @@ export default function useStateMachine<C = undefined, S extends string = string
     const returned = (async () => {
       const { effect } = options.states[state.value];
 
-      try {
-        return await effect?.(send, update);
-      } catch (error) {
-        console.error(error);
-      }
+      return await effect?.(send, update);
     })();
 
     return () => {
-      returned.then(exit => {
+      returned.then(async exit => {
         if (isFunction(exit)) {
-          try {
-            exit();
-          } catch (error) {
-            console.error(error);
-          }
+          await exit();
         }
       });
     };
