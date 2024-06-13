@@ -76,26 +76,25 @@ function formatTime(time: number): string {
   return `${pad(hours)}:${pad(mins)}:${pad(secs)}`;
 }
 
-function requestInterval(callback: (...args: any[]) => void, interval: number): () => void {
-  let timerId: number;
-  let start = Date.now();
+function requestTicktock(callback: (...args: any[]) => void): () => void {
+  let timerId: Timeout;
 
-  const frame = () => {
-    const now = Date.now();
-    const elapsed = now - start;
+  const getInterval = () => {
+    const now = new Date();
 
-    if (elapsed >= interval) {
-      callback();
-      start = Date.now();
-    }
-
-    timerId = requestAnimationFrame(frame);
+    return 1000 - now.getMilliseconds();
   };
 
-  timerId = requestAnimationFrame(frame);
+  const ticktock = () => {
+    callback();
+
+    timerId = setTimeout(ticktock, getInterval());
+  };
+
+  timerId = setTimeout(ticktock, getInterval());
 
   return () => {
-    cancelAnimationFrame(timerId);
+    clearTimeout(timerId);
   };
 }
 
@@ -118,9 +117,9 @@ const Time = memo(function Time() {
             pause: 'paused'
           },
           effect(_, update) {
-            return requestInterval(() => {
+            return requestTicktock(() => {
               update(({ time }) => ({ time: time + 1 }));
-            }, 1000);
+            });
           }
         },
         paused: {
