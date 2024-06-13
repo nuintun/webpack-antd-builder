@@ -187,6 +187,7 @@ export default memo(function Page() {
       <Time />
       <QRCode
         level="H"
+        alt="QRCode"
         moduleSize={4}
         className={styles.qrcode}
         segments={new Byte(now, Charset.UTF_8)}
