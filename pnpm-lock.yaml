@@ -39,9 +39,6 @@ importers:
       dayjs:
         specifier: ^1.11.11
         version: 1.11.11
-      koa-files:
-        specifier: ^3.0.1
-        version: 3.0.1(koa@2.15.3)
       memoize-one:
         specifier: ^6.0.0
         version: 6.0.0
@@ -109,6 +106,9 @@ importers:
       koa-compress:
         specifier: ^5.1.1
         version: 5.1.1
+      koa-files:
+        specifier: ^3.0.2
+        version: 3.0.2(koa@2.15.3)
       memfs:
         specifier: ^4.9.2
         version: 4.9.2
@@ -1732,8 +1732,8 @@ packages:
     resolution: {integrity: sha512-asOvN6bFlSnxewce2e/DK3p4tltyfC4VM7ZwuTuepI7dEQVcvpyFuBcEARu1+Hxg8DIwytce2n7jrZtRlPrARA==}
     engines: {node: '>= 10'}
 
-  koa-files@3.0.1:
-    resolution: {integrity: sha512-n9mOLJ3J2Q188KM9g6qOkl697Hlp5b0EvtvaqskhLaVnifO82o7sw7O1AgdN28YqKfd2I3cF1tp/S5sIS0z3bg==}
+  koa-files@3.0.2:
+    resolution: {integrity: sha512-KzTDVYHK2+Qj27q37WrGCAqNFgp96CoH/49UnPUVKaG+RjBYe6pMwIre+V34CMptiCBhZ1mU13ocladqEq7Img==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       koa: ^2.0.0
@@ -4781,7 +4781,7 @@ snapshots:
       co: 4.6.0
       koa-compose: 4.1.0
 
-  koa-files@3.0.1(koa@2.15.3):
+  koa-files@3.0.2(koa@2.15.3):
     dependencies:
       destroy: 1.2.0
       etag: 1.8.1
