@@ -5,9 +5,9 @@
 import LogoHeader from './headers/Logo';
 import { Route } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
+import { MenuType, Meta } from '/js/router';
 import ActionsHeader from './headers/Actions';
 import FlexLayout from '/js/components/FlexLayout';
-import { MenuType, Meta } from '/js/config/router';
 import { RenderHeader } from '/js/components/FlexMenu';
 import React, { memo, useEffect, useState } from 'react';
 import { Filter, MenuItem, parse } from '/js/utils/menus';

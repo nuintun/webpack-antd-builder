@@ -2,9 +2,9 @@
  * @module index
  */
 
+import { Meta } from '/js/router';
 import classNames from 'classnames';
 import Link from '/js/components/Link';
-import { Meta } from '/js/config/router';
 import { IRoute } from '/js/utils/router';
 import FlexIcon from '/js/components/FlexIcon';
 import useStyles, { prefixCls } from './style';

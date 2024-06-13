@@ -4,10 +4,10 @@
 
 import '/css/global.scss';
 
+import { router } from '/js/router';
 import { parse } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import { Router } from 'react-nest-router';
-import { router } from '/js/config/router';
 import { App, ConfigProvider, theme } from 'antd';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '/js/components/FallBack/Error';
