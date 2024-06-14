@@ -10,7 +10,7 @@ const style: React.CSSProperties = {
   placeContent: 'center'
 };
 
-export default memo(function Page(): React.ReactElement {
+export default memo(function Page() {
   useTitle('404');
 
   const navigate = useNavigate();

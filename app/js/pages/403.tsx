@@ -9,7 +9,7 @@ const style: React.CSSProperties = {
   placeContent: 'center'
 };
 
-export default memo(function Page(): React.ReactElement {
+export default memo(function Page() {
   const navigate = useNavigate();
 
   const onBackHome = useCallback(() => {
