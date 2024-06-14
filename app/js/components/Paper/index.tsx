@@ -11,7 +11,7 @@ export interface PaperProps {
   children?: React.ReactNode;
 }
 
-export default memo(function Paper({ className, children }: PaperProps): React.ReactElement {
+export default memo(function Paper({ className, children }: PaperProps) {
   const [scope, render] = useStyles();
 
   return render(<div className={classNames(scope, prefixCls, className)}>{children}</div>);

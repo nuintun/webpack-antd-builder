@@ -13,12 +13,7 @@ export type DateViewerProps = HTMLSpanElementProps & {
   placeholder?: React.ReactNode;
 };
 
-export default memo(function DateViewer({
-  value,
-  placeholder,
-  format = 'YYYY-MM-DD HH:mm:ss',
-  ...restProps
-}: DateViewerProps): React.ReactElement | null {
+export default memo(function DateViewer({ value, placeholder, format = 'YYYY-MM-DD HH:mm:ss', ...restProps }: DateViewerProps) {
   const date = dayjs(value);
 
   if (date.isValid()) {

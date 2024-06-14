@@ -7,16 +7,16 @@ import { Route } from '/js/utils/router';
 import useTheme from '/js/hooks/useTheme';
 import { MenuType, Meta } from '/js/router';
 import ActionsHeader from './headers/Actions';
+import { memo, useEffect, useState } from 'react';
 import FlexLayout from '/js/components/FlexLayout';
 import { RenderHeader } from '/js/components/FlexMenu';
-import React, { memo, useEffect, useState } from 'react';
 import { Filter, MenuItem, parse } from '/js/utils/menus';
 import { Outlet, useOutletContext } from 'react-nest-router';
 
 const renderLogoHeader: RenderHeader = props => <LogoHeader {...props} />;
 const renderActionsHeader: RenderHeader = props => <ActionsHeader {...props} />;
 
-export default memo(function Layout(): React.ReactElement {
+export default memo(function Layout() {
   const [theme] = useTheme();
   const routes = useOutletContext<Route<Meta>[]>();
   const [menus, setMenus] = useState<MenuItem[]>([]);

@@ -8,7 +8,7 @@ import Link from '/js/components/Link';
 import { IRoute } from '/js/utils/router';
 import FlexIcon from '/js/components/FlexIcon';
 import useStyles, { prefixCls } from './style';
-import React, { memo, Suspense, useMemo } from 'react';
+import { memo, Suspense, useMemo } from 'react';
 import { ConfigProvider, Tabs, TabsProps } from 'antd';
 import LoadingFallBack from '/js/components/FallBack/Loading';
 import { Outlet, useMatch, useMatches, useMatchIndex } from 'react-nest-router';
@@ -38,7 +38,7 @@ export default memo(function RouteTabs({
   tabBarGutter = 16,
   icon: showIcon = true,
   ...restProps
-}: RouteTabsProps): React.ReactElement {
+}: RouteTabsProps) {
   const index = useMatchIndex();
   const [scope, render] = useStyles();
   const match = useMatch() as IRoute<Meta>;

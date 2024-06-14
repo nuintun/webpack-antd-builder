@@ -10,8 +10,11 @@ import { GetProp, MenuProps } from 'antd';
 import { MenuItem } from '/js/utils/menus';
 import FlexIcon from '/js/components/FlexIcon';
 
+export interface RenderItem {
+  (item: MenuItem): React.ReactNode;
+}
+
 export type Item = GetProp<MenuProps, 'items'>[0];
-export type RenderItem = (item: MenuItem) => React.ReactNode;
 
 function renderContent(item: MenuItem, renderItem?: RenderItem): React.ReactNode {
   if (renderItem) {

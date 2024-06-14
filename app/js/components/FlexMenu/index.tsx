@@ -19,6 +19,10 @@ export interface RenderHeaderProps {
   readonly collapsedWidth: number;
 }
 
+export interface RenderHeader {
+  (props: RenderHeaderProps): React.ReactNode;
+}
+
 export interface FlexMenuProps
   extends Pick<SiderProps, 'trigger' | 'onCollapse'>,
     Omit<RouteMenuProps, 'mode' | 'inlineCollapsed'> {
@@ -31,9 +35,7 @@ export interface FlexMenuProps
 
 export type OnOpenChange = GetProp<FlexMenuProps, 'onOpenChange'>;
 
-export type RenderHeader = (props: RenderHeaderProps) => React.ReactNode;
-
-export default memo(function FlexMenu(props: FlexMenuProps): React.ReactElement {
+export default memo(function FlexMenu(props: FlexMenuProps) {
   const {
     className,
     onCollapse,

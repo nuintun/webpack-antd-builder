@@ -9,7 +9,6 @@ import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } 
 export interface ViewDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
   onOpen?: () => void;
   onClose?: () => void;
-  children?: React.ReactNode;
   extra?: (onClose: () => void) => React.ReactNode;
   footer?: (onClose: () => void) => React.ReactNode;
   trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
@@ -31,7 +30,7 @@ export default memo(function ViewDrawer({
   children,
   extra = defaultExtra,
   ...restProps
-}: ViewDrawerProps): React.ReactElement {
+}: ViewDrawerProps) {
   const [open, setOpen] = useState(false);
 
   const onCloseHandler = useCallback(() => {

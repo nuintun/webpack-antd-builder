@@ -53,7 +53,7 @@ function getThemeItems(theme: Theme, onThemeClick?: MenuClickEventHandler): Menu
   ];
 }
 
-const ThemeAction = memo(function ThemeAction(): React.ReactElement {
+const ThemeAction = memo(function ThemeAction() {
   const [theme, setTheme] = useTheme();
 
   const onThemeClick = useCallback<MenuClickEventHandler>(({ key }) => {
@@ -74,7 +74,7 @@ const ThemeAction = memo(function ThemeAction(): React.ReactElement {
   );
 });
 
-const LogoutAction = memo(function LogoutAction(): React.ReactElement {
+const LogoutAction = memo(function LogoutAction() {
   const { message } = useApp();
 
   const onClick = useCallback(() => {
@@ -93,7 +93,7 @@ interface UserActionProps {
   isMobile: boolean;
 }
 
-const UserAction = memo(function UserAction({ isMobile }: UserActionProps): React.ReactElement {
+const UserAction = memo(function UserAction({ isMobile }: UserActionProps) {
   const [theme, setTheme] = useTheme();
 
   const onThemeClick = useCallback<MenuClickEventHandler>(({ key }) => {
@@ -142,7 +142,7 @@ const UserAction = memo(function UserAction({ isMobile }: UserActionProps): Reac
   );
 });
 
-export default memo(function ActionsHeader({ isMobile }: RenderHeaderProps): React.ReactElement {
+export default memo(function ActionsHeader({ isMobile }: RenderHeaderProps) {
   const [scope, render] = useStyles();
 
   return render(

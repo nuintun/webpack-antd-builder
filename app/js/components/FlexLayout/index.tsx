@@ -9,8 +9,8 @@ import useStyles, { prefixCls } from './style';
 import useMediaQuery from '/js/hooks/useMediaQuery';
 import RouteBreadcrumb from '/js/components/RouteBreadcrumb';
 import LoadingFallBack from '/js/components/FallBack/Loading';
+import { memo, Suspense, useCallback, useRef, useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import React, { memo, Suspense, useCallback, useRef, useState } from 'react';
 import FlexMenu, { FlexMenuProps, RenderHeader } from '/js/components/FlexMenu';
 
 const { Header, Content } = Layout;
@@ -27,7 +27,7 @@ export interface FlexLayoutProps extends Pick<FlexMenuProps, PickProps> {
   renderActionsHeader?: RenderHeader;
 }
 
-export default memo(function FlexLayout(props: FlexLayoutProps): React.ReactElement {
+export default memo(function FlexLayout(props: FlexLayoutProps) {
   const {
     menus,
     children,

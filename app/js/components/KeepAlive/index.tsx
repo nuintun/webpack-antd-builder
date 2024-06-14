@@ -4,7 +4,7 @@
 
 import { createPortal } from 'react-dom';
 import { Outlet, useMatches, useMatchIndex } from 'react-nest-router';
-import { createContext, memo, useContext, useEffect, useMemo } from 'react';
+import React, { createContext, memo, useContext, useEffect, useMemo } from 'react';
 
 export interface KeepAliveProps {
   target: React.ReactNode;
@@ -23,7 +23,7 @@ export function useActiveChange(onChange: (active: boolean) => void): void {
   }, [active]);
 }
 
-export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps): React.ReactElement {
+export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps) {
   const matches = useMatches();
   const index = useMatchIndex();
 

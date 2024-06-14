@@ -30,7 +30,7 @@ export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
   onOpenChange?: (openKeys: string[], cachedOpenKeys: string[]) => void;
 }
 
-export default memo(function RouteMenu(props: RouteMenuProps): React.ReactElement {
+export default memo(function RouteMenu(props: RouteMenuProps) {
   const { inlineCollapsed } = props;
   const { items, className, renderItem, rootClassName, defaultOpenKeys, ...restProps } = props;
 

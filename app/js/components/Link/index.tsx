@@ -2,13 +2,13 @@
  * @module index
  */
 
+import { GetProp } from 'antd';
 import { isFunction } from '/js/utils/utils';
 import useLatestRef from '/js/hooks/useLatestRef';
 import React, { memo, useCallback, useMemo } from 'react';
 import { To, useNavigate, useResolve } from 'react-nest-router';
 
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
-type ClickEvent = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
 
 export interface LinkProps<S> extends Omit<AnchorProps, 'href'> {
   href: To;
@@ -16,11 +16,11 @@ export interface LinkProps<S> extends Omit<AnchorProps, 'href'> {
   state?: S | (() => S);
 }
 
-function isModifiedEvent(e: ClickEvent) {
+function isModifiedEvent(e: React.MouseEvent): boolean {
   return !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
 }
 
-function Link<S>(props: LinkProps<S>): React.ReactElement {
+function Link<S>(props: LinkProps<S>) {
   const { href: to, state, replace, children, onClick, ...restProps } = props;
 
   const resolve = useResolve();
@@ -28,7 +28,7 @@ function Link<S>(props: LinkProps<S>): React.ReactElement {
   const propsRef = useLatestRef(props);
   const href = useMemo(() => resolve(to), [to]);
 
-  const onLinkClick = useCallback((e: ClickEvent) => {
+  const onLinkClick = useCallback<GetProp<AnchorProps, 'onClick'>>(e => {
     const { current: props } = propsRef;
     const { target = '_self', onClick } = props;
 

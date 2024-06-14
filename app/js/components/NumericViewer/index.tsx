@@ -2,7 +2,7 @@
  * @module index
  */
 
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { formatThousands } from '/js/utils/utils';
 
 export interface NumericViewerProps {
@@ -10,6 +10,6 @@ export interface NumericViewerProps {
   value: string | number | undefined;
 }
 
-export default memo(function NumericViewer({ value, precision }: NumericViewerProps): React.ReactElement {
+export default memo(function NumericViewer({ value, precision }: NumericViewerProps) {
   return <>{formatThousands(value, precision)}</>;
 });

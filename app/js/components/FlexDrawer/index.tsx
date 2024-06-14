@@ -3,12 +3,11 @@
  */
 
 import { isString } from '/js/utils/utils';
+import { memo, useCallback, useRef } from 'react';
 import useMediaQuery from '/js/hooks/useMediaQuery';
-import React, { memo, useCallback, useRef } from 'react';
 import { ConfigProvider, Drawer, DrawerProps } from 'antd';
 
 export interface FlexDrawerProps extends DrawerProps {
-  children?: React.ReactNode;
   breakWidth?: string | number;
   breakHeight?: string | number;
 }
@@ -24,7 +23,7 @@ export default memo(function FlexDrawer({
   breakHeight = '100vh',
   styles = { body: { position: 'relative' } },
   ...restProps
-}: FlexDrawerProps): React.ReactElement {
+}: FlexDrawerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isBreakWidth = useMediaQuery(`(max-width: ${isString(width) ? width : `${width}px`})`);
   const isBreakHeight = useMediaQuery(`(max-height: ${isString(height) ? height : `${height}px`})`);

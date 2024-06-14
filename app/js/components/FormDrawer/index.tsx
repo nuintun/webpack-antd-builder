@@ -13,13 +13,14 @@ type DrawerPicked =
   | 'title'
   | 'width'
   | 'height'
+  | 'children'
   | 'keyboard'
   | 'placement'
   | 'forceRender'
   | 'maskClosable'
   | 'destroyOnClose'
   | 'afterOpenChange';
-type FormOmitted = 'title' | 'onError';
+type FormOmitted = 'title' | 'onError' | 'children';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
 
 function createFormId(id: string): string {
@@ -34,7 +35,6 @@ export interface FormDrawerProps<V extends Values, R>
   onOpen?: () => void;
   onClose?: () => void;
   form?: FormInstance<V>;
-  children?: React.ReactNode;
   requestInit?: Omit<Options<V, R>, SubmitPicked>;
   trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
   extra?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
@@ -83,7 +83,7 @@ function FormDrawer<V extends Values, R>({
   extra = defaultExtra,
   maskClosable = false,
   ...restProps
-}: FormDrawerProps<V, R>): React.ReactElement {
+}: FormDrawerProps<V, R>) {
   const id = useId();
   const [wrapForm] = useForm<V>(form);
   const [open, setOpen] = useState(false);

@@ -61,11 +61,7 @@ function getBreadcrumbItems(matches: IRoute[], showIcon: boolean): BreadcrumbIte
   return items;
 }
 
-export default memo(function RouteBreadcrumb({
-  style,
-  className,
-  icon: showIcon = true
-}: RouteBreadcrumbProps): React.ReactElement {
+export default memo(function RouteBreadcrumb({ style, className, icon: showIcon = true }: RouteBreadcrumbProps) {
   const [scope, render] = useStyles();
   const matches = useMatches() as IRoute[];
   const items = useMemo(() => getBreadcrumbItems(matches, showIcon), [matches, showIcon]);
