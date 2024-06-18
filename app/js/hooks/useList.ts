@@ -9,26 +9,29 @@ import usePagingRequest, {
   Pagination as RequestPagination,
   Refs as RequestRefs,
   RequestOptions as RequestInit,
-  Sorter,
   Transform
 } from './usePagingRequest';
 import useLatestRef from './useLatestRef';
 import { useCallback, useMemo } from 'react';
-import useSearches, { Search } from './useSearches';
 import { GetProp, ListProps, PaginationProps } from 'antd';
-import usePagingOptions, { Options as UsePagingOptions } from './usePagingOptions';
+import useSearchFilters, { Filter } from './useSearchFilters';
+import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 export interface Fetch {
   (options?: RequestOptions): void;
 }
 
-export interface RequestOptions extends RequestInit {
-  sorter?: Sorter | false;
-  pagination?: Pagination;
+export interface Sorter {
+  orderBy: React.Key[];
+  orderType: ('ascend' | 'descend')[];
 }
 
-export interface Refs<I, E> extends RequestRefs<I, E> {
-  readonly sorter: Sorter | false;
+type ListPropsPicked = 'dataSource' | 'pagination';
+
+export interface RequestOptions extends RequestInit {
+  filter?: Filter | false;
+  sorter?: Sorter | false;
+  pagination?: Pagination;
 }
 
 export type OnChange = GetProp<PaginationProps, 'onChange'>;
@@ -37,9 +40,15 @@ export interface Options<I, E, T> extends InitOptions<I, E, T> {
   pagination?: Pagination;
 }
 
-export type Pagination = (UsePagingOptions & Partial<RequestPagination>) | false;
+export interface Refs<I, E> extends RequestRefs<I, E> {
+  readonly filters: [filter: Filter | false, sorter: Sorter | false];
+}
 
-export type DefaultListProps<I> = Required<Pick<ListProps<I>, 'loading' | 'dataSource' | 'pagination'>>;
+export type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
+
+export interface DefaultListProps<I> extends Required<Pick<ListProps<I>, ListPropsPicked>> {
+  loading: boolean;
+}
 
 /**
  * @function useList
@@ -79,7 +88,7 @@ export default function useList<I, E = unknown, T = I>(
 ): [props: DefaultListProps<I | T>, fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
-  const [serialize, raw] = useSearches<[Search, Sorter]>([false, false]);
+  const [serialize, raw] = useSearchFilters<[Filter, Sorter]>([false, false]);
 
   const [loading, dataSource, request, dispatch, originRefs] = usePagingRequest(
     url,
@@ -88,10 +97,11 @@ export default function useList<I, E = unknown, T = I>(
   );
 
   const fetch: Fetch = useCallback((options = {}) => {
-    const { search, sorter } = options;
-    const query = serialize([search, sorter]);
+    const { filter, sorter } = options;
+    const { current: initOptions } = opitonsRef;
+    const query = { ...initOptions.query, ...serialize([filter, sorter]) };
 
-    request({ ...opitonsRef.current, ...options, search: query });
+    request({ ...opitonsRef.current, ...options, query });
   }, []);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
@@ -120,15 +130,8 @@ export default function useList<I, E = unknown, T = I>(
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {
-      get search() {
-        const [search] = raw();
-
-        return search;
-      },
-      get sorter() {
-        const [, sorter] = raw();
-
-        return sorter;
+      get filters() {
+        return raw();
       },
       get response() {
         return originRefs.response;
@@ -139,5 +142,11 @@ export default function useList<I, E = unknown, T = I>(
     };
   }, []);
 
-  return [{ loading, dataSource, pagination }, fetch, dispatch as Dispatch<I[] | T[]>, refs];
+  const props: DefaultListProps<I | T> = {
+    loading,
+    dataSource,
+    pagination
+  };
+
+  return [props, fetch, dispatch as Dispatch<I[] | T[]>, refs];
 }

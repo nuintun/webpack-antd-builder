@@ -4,7 +4,6 @@
 
 import { App } from 'antd';
 import useLatestRef from './useLatestRef';
-import useSearches, { Search } from './useSearches';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
 
@@ -30,13 +29,7 @@ export interface Fetch {
   (options?: RequestOptions): void;
 }
 
-export interface Sorter {
-  orderBy: React.Key[];
-  orderType: ('ascend' | 'descend')[];
-}
-
 export interface Refs<I, E> {
-  readonly search: Search | false;
   readonly response: Response<I, E>;
   readonly pagination: Pagination | false;
 }
@@ -52,7 +45,6 @@ export interface Options<I, E, T> extends Omit<RequestInit<Response<I, E>>, 'bod
 }
 
 export interface RequestOptions extends Omit<InitOptions, 'body' | 'delay' | 'method' | 'onUnauthorized'> {
-  search?: Search | false;
   pagination?: Partial<Pagination> | false;
 }
 
@@ -116,26 +108,21 @@ export default function usePagingRequest<I, E = unknown, T = I>(
   const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const responseRef = useRef<Response<I, E>>({});
-  const [serialize, raw] = useSearches<[Search]>([false]);
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
   const fetch = useCallback<Fetch>((options = {}) => {
-    const requestInit = {
-      ...opitonsRef.current,
-      ...options
-    };
-
-    const { query: initQuery } = requestInit;
-    const hasPagination = hasQuery(paginationRef.current);
-    const query: Search = { ...initQuery, ...serialize([options.search]) };
+    const requestInit = { ...opitonsRef.current, ...options };
+    const { current: pagination } = paginationRef;
+    const hasPagination = hasQuery(pagination);
+    const { query = {} } = requestInit;
 
     if (hasPagination) {
       const { page, pageSize }: Pagination = {
         ...DEFAULT_PAGINATION,
         ...initPagination,
-        ...paginationRef.current,
+        ...pagination,
         ...options.pagination
       };
 
@@ -196,11 +183,6 @@ export default function usePagingRequest<I, E = unknown, T = I>(
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {
-      get search() {
-        const [search] = raw();
-
-        return search;
-      },
       get response() {
         return responseRef.current;
       },

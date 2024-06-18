@@ -9,19 +9,21 @@ import usePagingRequest, {
   Pagination as RequestPagination,
   Refs as RequestRefs,
   RequestOptions as RequestInit,
-  Sorter,
   Transform
 } from './usePagingRequest';
 import useLatestRef from './useLatestRef';
 import { GetProp, TableProps } from 'antd';
 import React, { useCallback, useMemo } from 'react';
-import useSearches, { Search } from './useSearches';
+import useSearchFilters, { Filter } from './useSearchFilters';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
-
-export type Filter = Search;
 
 export interface Fetch {
   (options?: RequestOptions): void;
+}
+
+export interface Sorter {
+  orderBy: React.Key[];
+  orderType: ('ascend' | 'descend')[];
 }
 
 export interface RequestOptions extends RequestInit {
@@ -30,20 +32,23 @@ export interface RequestOptions extends RequestInit {
   pagination?: Pagination;
 }
 
-export interface Refs<I, E = {}> extends RequestRefs<I, E> {
-  readonly filter: Filter | false;
-  readonly sorter: Sorter | false;
-}
+export type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
 
 export interface Options<I, E, T> extends InitOptions<I, E, T> {
   pagination?: Pagination;
 }
 
-export type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
+export interface Refs<I, E = {}> extends RequestRefs<I, E> {
+  readonly filters: [filter: Filter | false, sorter: Sorter | false];
+}
+
+type TablePropsPicked = 'size' | 'onChange' | 'dataSource' | 'pagination';
 
 export type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
 
-export type DefaultTableProps<I> = Required<Pick<TableProps<I>, 'size' | 'loading' | 'onChange' | 'dataSource' | 'pagination'>>;
+export interface DefaultTableProps<I> extends Required<Pick<TableProps<I>, TablePropsPicked>> {
+  loading: boolean;
+}
 
 /**
  * @function serializeField
@@ -92,7 +97,7 @@ export default function useTable<I, E = unknown, T = I>(
 ): [props: DefaultTableProps<I | T>, fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
-  const [serialize, raw] = useSearches<[Search, Filter, Sorter]>([false, false, false]);
+  const [serialize, raw] = useSearchFilters<[Filter, Sorter]>([false, false]);
 
   const [loading, dataSource, request, dispatch, originRefs] = usePagingRequest(
     url,
@@ -101,10 +106,11 @@ export default function useTable<I, E = unknown, T = I>(
   );
 
   const fetch: Fetch = useCallback((options = {}): void => {
-    const { search, filter, sorter } = options;
-    const query = serialize([search, filter, sorter]);
+    const { filter, sorter } = options;
+    const { current: initOptions } = opitonsRef;
+    const query = { ...initOptions.query, ...serialize([filter, sorter]) };
 
-    request({ ...opitonsRef.current, ...options, search: query });
+    request({ ...opitonsRef.current, ...options, query });
   }, []);
 
   const onChange = useCallback<OnChange<I | T>>((pagination, filter, sorter, { action }) => {
@@ -156,20 +162,8 @@ export default function useTable<I, E = unknown, T = I>(
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {
-      get search() {
-        const [search] = raw();
-
-        return search;
-      },
-      get filter() {
-        const [, filter] = raw();
-
-        return filter;
-      },
-      get sorter() {
-        const [, , sorter] = raw();
-
-        return sorter;
+      get filters() {
+        return raw();
       },
       get response() {
         return originRefs.response;
