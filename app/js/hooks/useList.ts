@@ -117,7 +117,6 @@ export default function useList<I, E = unknown, T = I>(
 
       return {
         ...getPagingOptions(pageSize),
-        onShowSizeChange: onChange,
         current: page,
         pageSize,
         onChange,
