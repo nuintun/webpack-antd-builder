@@ -105,6 +105,12 @@ export default function useList<I, E = unknown, T = I>(
   }, []);
 
   const onChange = useCallback<OnChange>((page, pageSize) => {
+    const { pagination } = opitonsRef.current;
+
+    if (pagination) {
+      pagination.onChange?.(page, pageSize);
+    }
+
     fetch({ pagination: { page, pageSize } });
   }, []);
 
