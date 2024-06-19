@@ -101,8 +101,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11)))
       css-modules-types-loader:
-        specifier: ^0.5.4
-        version: 0.5.4(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11)))
+        specifier: ^0.5.5
+        version: 0.5.5(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11)))
       find-free-ports:
         specifier: ^3.1.1
         version: 3.1.1
@@ -155,8 +155,8 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       webpack-dev-service:
-        specifier: ^0.11.4
-        version: 0.11.4(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11)))
+        specifier: ^0.11.5
+        version: 0.11.5(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11)))
 
 packages:
 
@@ -355,8 +355,8 @@ packages:
     resolution: {integrity: sha512-/gKJun8NNiWGZJkGzI/Ragc53cOdcLNdzjLaIa+GEjguQs0ulsurx8WN0jijdK9yPqDvziX995sMRLyLt1uZMQ==}
     engines: {node: '>= 0.4'}
 
-  '@nuintun/ansi@0.0.4':
-    resolution: {integrity: sha512-RVNCVUAZHENopfYEpquh7m0jVtU/rfXU/7HWbzaQcnhDQ1SYfhxKdXi7WCj2EWev3cV1dTETeP0Ow6ZOF44fRA==}
+  '@nuintun/ansi@0.0.5':
+    resolution: {integrity: sha512-gizf4KSBIQd+62JnhGCRCxrNikxH24EsDrTFAZSkGIS4P+9V+uBob3t1D7Vi9HyyQWA4tSGtuzmnUXvRmoL9Uw==}
 
   '@nuintun/qrcode@4.1.3':
     resolution: {integrity: sha512-rmJ2ZSboAABR9kb3V7zJZTJBu+10zQPtxORIjP4DH5pMQDVDMuHbqminMVvxbLUsbKqvm5Q+Pto3bszcgPX6Rg==}
@@ -1030,8 +1030,8 @@ packages:
       lightningcss:
         optional: true
 
-  css-modules-types-loader@0.5.4:
-    resolution: {integrity: sha512-/cuJlbxDqDrhduPXaevjtM1fpCGlcGInrlS6XUI19rEqvL7aim2C8Qvbu3oohrgyyXgeK+U45QqI8yRVG2e8Hg==}
+  css-modules-types-loader@0.5.5:
+    resolution: {integrity: sha512-oIb9R1+UFA6U72DK+4m227vxHcNvyXZGQQ4m4W5YGg+XidKfiFCfeyuEhRK8mEiKDO2gdxcf1o6b9GO816KIOA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       webpack: ^5.0.0
@@ -2892,8 +2892,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.11.4:
-    resolution: {integrity: sha512-J1NXGe4xtOEBce8xifJyLir1xCfZg3VKrw8ihCr8DibTayWcm3A087VW++AZKRRajDZHppA4Up+hvhFHxRCnoA==}
+  webpack-dev-service@0.11.5:
+    resolution: {integrity: sha512-2EOY/VsXqBsvkho5+dcBs5awbtMifk150cy/uSsQIZ9BMp8dP0jrMp0TIqE8/AQ1zEE0JF3XRhFVd3mjknNa3A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -3283,7 +3283,7 @@ snapshots:
     dependencies:
       call-bind: 1.0.7
 
-  '@nuintun/ansi@0.0.4':
+  '@nuintun/ansi@0.0.5':
     dependencies:
       tslib: 2.6.3
 
@@ -4028,7 +4028,7 @@ snapshots:
       serialize-javascript: 6.0.2
       webpack: 5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11))
 
-  css-modules-types-loader@0.5.4(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11))):
+  css-modules-types-loader@0.5.5(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11))):
     dependencies:
       acorn: 8.12.0
       acorn-walk: 8.3.3
@@ -6038,9 +6038,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.11.4(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11))):
+  webpack-dev-service@0.11.5(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.4)(webpack@5.92.0(@swc/core@1.6.3(@swc/helpers@0.5.11))):
     dependencies:
-      '@nuintun/ansi': 0.0.4
+      '@nuintun/ansi': 0.0.5
       '@types/koa': 2.15.0
       '@types/ws': 8.5.10
       destroy: 1.2.0
