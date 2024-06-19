@@ -2,14 +2,20 @@
  * @module createStyles
  */
 
-import createCalc from 'antd/es/theme/util/calc';
-import createMaxMin from 'antd/es/theme/util/maxmin';
+import {
+  AbstractCalculator,
+  CSSInterpolation,
+  genCalc,
+  token2CSSVar,
+  unit,
+  useCSSVarRegister,
+  useStyleRegister
+} from '@ant-design/cssinjs';
+import genMaxMin from 'antd/es/theme/util/maxmin';
 import { isNumber, isString } from '/js/utils/utils';
 import { memo, ReactElement, useId, useMemo } from 'react';
-import AbstractCalculator from 'antd/es/theme/util/calc/calculator';
 import { AliasToken, GlobalToken, OverrideToken } from 'antd/es/theme/interface';
 import useToken, { ignore, unitless as unitlessSeeds } from 'antd/es/theme/useToken';
-import { CSSInterpolation, token2CSSVar, unit, useCSSVarRegister, useStyleRegister } from '@ant-design/cssinjs';
 
 interface CSSVar {
   key: string;
@@ -214,10 +220,10 @@ export default function createStyles<C extends Components = never>(path: string[
 
     const utils = useMemo(() => {
       const type = cssVar ? 'css' : 'js';
-      const { max, min } = createMaxMin(type);
+      const { max, min } = genMaxMin(type);
       const unitlessCssVar = new Set(Object.keys(unitless));
 
-      return { min, max, unit, calc: createCalc(type, unitlessCssVar) };
+      return { min, max, unit, calc: genCalc(type, unitlessCssVar) };
     }, [cssVar, unitless]);
 
     const render = useStyleRegister({ path, theme, token, hashId }, () => {

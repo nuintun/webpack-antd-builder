@@ -10,6 +10,8 @@ import compress from 'koa-compress';
 const port = 8000;
 const app = new Koa();
 
+app.proxy = true;
+
 app.use(compress());
 
 app.use(files('wwwroot'));
