@@ -4,11 +4,12 @@
 
 import fs from 'fs';
 import Koa from 'koa';
+import dayjs from 'dayjs';
 import files from 'koa-files';
 import compress from 'koa-compress';
 
-const port = 8000;
 const app = new Koa();
+const port = parseInt(process.env.PORT) || 8080;
 
 app.proxy = true;
 
@@ -16,15 +17,14 @@ app.use(compress());
 
 app.use(files('wwwroot'));
 
-app.use(async ctx => {
-  ctx.type = 'text/html; charset=utf-8';
-  ctx.body = fs.createReadStream('wwwroot/app.html');
-});
-
-app.on('error', error => {
-  !httpError(error) && console.error(error);
+app.use(async context => {
+  context.type = 'text/html; charset=utf-8';
+  context.body = fs.createReadStream('wwwroot/app.html');
 });
 
 app.listen(port, () => {
-  console.log(`server run at: \u001B[36mhttp://127.0.0.1:${port}\u001B[0m`);
+  const host = `http://127.0.0.1:${port}`;
+  const now = dayjs().format('YYYY-MM-DD hh:mm:ss');
+
+  console.log(`[${now}] server run at: \u001B[36m${host}\u001B[0m`);
 });
