@@ -9,7 +9,7 @@ import files from 'koa-files';
 import compress from 'koa-compress';
 
 const app = new Koa();
-const port = parseInt(process.env.PORT) || 8080;
+const port = parseInt(process.env.PORT) || 8000;
 
 app.proxy = true;
 
