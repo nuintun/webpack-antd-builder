@@ -9,14 +9,6 @@ export type Body = Query | BodyInit | null;
 
 export type Query = Record<string | number, any>;
 
-export interface Options extends Omit<RequestInit, 'body'> {
-  body?: Body;
-  query?: Query;
-  baseURL?: string;
-  onUnauthorized?: () => void;
-  onMessage?: (message: string) => void;
-}
-
 export interface RequestResult<R = unknown> {
   payload: R;
   msg: string;
@@ -26,6 +18,14 @@ export interface RequestResult<R = unknown> {
 export interface RequestError<R = unknown> extends Error {
   code: number;
   response?: R;
+}
+
+export interface Options extends Omit<RequestInit, 'body'> {
+  body?: Body;
+  query?: Query;
+  baseURL?: string;
+  onUnauthorized?: () => void;
+  onMessage?: (message: string) => void;
 }
 
 const STATUS_TEXT: Record<number, string> = {
