@@ -23,7 +23,9 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
   // 使用自定义 minimizer 工具
   configure.optimization.minimizer = [
-    new CssMinimizerPlugin(),
+    new CssMinimizerPlugin({
+      minify: CssMinimizerPlugin.lightningCssMinify
+    }),
     new TerserPlugin({
       minify: TerserPlugin.swcMinify,
       terserOptions: { format: { comments: false } }
