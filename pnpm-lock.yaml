@@ -22,8 +22,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(lodash-es@4.17.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nuintun/qrcode':
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.1.4
+        version: 4.1.4
       '@swc/helpers':
         specifier: ^0.5.11
         version: 0.5.11
@@ -358,8 +358,8 @@ packages:
   '@nuintun/ansi@0.0.6':
     resolution: {integrity: sha512-/HlWVnFwoHW2NQz1MNA6rJ/kWNHX+FLPDWnFXppmFreSfJR8pyRqNJWsH64aSEOINEvLbfPB7U7wRVsW1gKuqw==}
 
-  '@nuintun/qrcode@4.1.3':
-    resolution: {integrity: sha512-rmJ2ZSboAABR9kb3V7zJZTJBu+10zQPtxORIjP4DH5pMQDVDMuHbqminMVvxbLUsbKqvm5Q+Pto3bszcgPX6Rg==}
+  '@nuintun/qrcode@4.1.4':
+    resolution: {integrity: sha512-lFeO0m9WCBLICGCV0Y00JwaU2OS5m+kpFeYy0/Th/dqDiWHl4ODRJGEN88xe1MmQpEMXS0Y/WgC6ZN7FD0ayeg==}
 
   '@nuintun/svgo-loader@0.2.9':
     resolution: {integrity: sha512-vQARyhCmTrQalFUNFgCSGsbyRD0LlLCz2UhVrbk2Te8w1kvJZRQWBcjQy+l0NR04siFo9xE6+Oe4T6wGCFdUdQ==}
@@ -3289,7 +3289,7 @@ snapshots:
     dependencies:
       tslib: 2.6.3
 
-  '@nuintun/qrcode@4.1.3':
+  '@nuintun/qrcode@4.1.4':
     dependencies:
       tslib: 2.6.3
 
