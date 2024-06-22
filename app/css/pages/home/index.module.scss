@@ -33,31 +33,5 @@
     margin-top: 1em;
     align-items: center;
     justify-content: center;
-
-    .button {
-      width: 5em;
-      height: 5em;
-      color: #fff;
-      border: none;
-      outline: none;
-      position: relative;
-      border-radius: 100%;
-      background-color: #383b4c;
-
-      &:focus {
-        font-weight: bold;
-      }
-
-      &::after {
-        top: -5px;
-        left: -5px;
-        content: "";
-        right: -5px;
-        bottom: -5px;
-        position: absolute;
-        border-radius: 100%;
-        border: #383b4c 2px solid;
-      }
-    }
   }
 }
