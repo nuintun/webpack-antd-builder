@@ -88,6 +88,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
+      browserslist:
+        specifier: ^4.23.1
+        version: 4.23.1
       bufferutil:
         specifier: ^4.0.8
         version: 4.0.8
