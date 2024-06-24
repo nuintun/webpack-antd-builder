@@ -61,8 +61,8 @@ function httpError(error) {
 }
 
 (async () => {
+  const ip = resolveIp();
   const fs = createMemfs();
-  const ip = await resolveIp();
   const port = await resolvePort(ports);
   const devServerHost = `http://${ip}:${port}`;
   const configure = await resolveConfigure(mode);
@@ -84,7 +84,11 @@ function httpError(error) {
     }
   });
 
-  app.use(compress({ br: false }));
+  app.use(
+    compress({
+      br: false
+    })
+  );
 
   app.use(devService);
 
