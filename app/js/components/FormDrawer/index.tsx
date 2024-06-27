@@ -23,7 +23,7 @@ type DrawerPicked =
 type FormOmitted = 'title' | 'onError' | 'children';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
 
-function createFormId(id: string): string {
+function createFormName(id: string): string {
   return `form_${id.replace(/[^a-z_\d]/gi, '')}`;
 }
 
@@ -146,7 +146,7 @@ function FormDrawer<V extends Values, R>({
         extra={extra(submitting, wrapForm, onCloseHandler)}
         footer={footer?.(submitting, wrapForm, onCloseHandler)}
       >
-        <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit} name={name || createFormId(id)}>
+        <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit} name={name || createFormName(id)}>
           {children}
         </Form>
       </FlexDrawer>
