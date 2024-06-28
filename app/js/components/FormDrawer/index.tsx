@@ -13,6 +13,7 @@ type DrawerPicked =
   | 'title'
   | 'width'
   | 'height'
+  | 'loading'
   | 'children'
   | 'keyboard'
   | 'placement'
@@ -55,8 +56,8 @@ function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: ()
 }
 
 function FormDrawer<V extends Values, R>({
-  name,
   form,
+  name,
   query,
   title,
   action,
@@ -64,6 +65,7 @@ function FormDrawer<V extends Values, R>({
   method,
   notify,
   onOpen,
+  loading,
   onClose,
   onError,
   trigger,
@@ -137,6 +139,8 @@ function FormDrawer<V extends Values, R>({
         title={title}
         width={width}
         height={height}
+        loading={loading}
+        keyboard={keyboard}
         placement={placement}
         onClose={onCloseHandler}
         forceRender={forceRender}

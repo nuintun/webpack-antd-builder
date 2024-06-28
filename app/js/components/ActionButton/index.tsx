@@ -2,53 +2,91 @@
  * @module index
  */
 
-import React, { memo } from 'react';
-import { Button, ButtonProps } from 'antd';
-import Action, { ActionProps } from '/js/components/Action';
+import React, { memo, useCallback } from 'react';
+import { Button, ButtonProps, GetProp } from 'antd';
+import { RequestOptions } from '/js/hooks/useRequest';
+import useAction, { Options as ActionProps } from '/js/hooks/useAction';
+
+type ButtonPicked =
+  | 'id'
+  | 'icon'
+  | 'size'
+  | 'type'
+  | 'block'
+  | 'ghost'
+  | 'shape'
+  | 'style'
+  | 'danger'
+  | 'children'
+  | 'tabIndex'
+  | 'autoFocus'
+  | 'className'
+  | 'iconPosition'
+  | 'autoInsertSpace';
 
 export interface ActionButtonProps<R>
-  extends Omit<ActionProps<R>, 'children' | 'trigger'>,
-    Omit<ButtonProps, 'loading' | 'onClick' | 'onError'> {}
+  extends ActionProps<null, R>,
+    Pick<ButtonProps, ButtonPicked>,
+    Pick<RequestOptions<R>, 'query' | 'method' | 'notify'> {
+  action: string;
+  bubbles?: boolean;
+}
 
-function ActionButton<R>(props: ActionButtonProps<R>): React.ReactElement {
-  const {
-    body,
-    delay,
-    query,
-    action,
-    notify,
-    method,
-    onError,
-    disabled,
-    children,
-    onSuccess,
-    onComplete,
-    requestInit,
-    confirmIcon,
-    confirmInit,
-    confirmTitle,
-    ...restProps
-  } = props;
+function ActionButton<R>({
+  id,
+  icon,
+  size,
+  type,
+  block,
+  ghost,
+  shape,
+  style,
+  action,
+  danger,
+  bubbles,
+  children,
+  tabIndex,
+  autoFocus,
+  className,
+  iconPosition,
+  autoInsertSpace,
+  ...restProps
+}: ActionButtonProps<R>): React.ReactElement {
+  const [loading, onAction, render] = useAction(action, restProps);
 
-  return (
-    <Action
-      body={body}
-      delay={delay}
-      query={query}
-      action={action}
-      method={method}
-      notify={notify}
-      onError={onError}
-      disabled={disabled}
-      onSuccess={onSuccess}
-      onComplete={onComplete}
-      requestInit={requestInit}
-      confirmInit={confirmInit}
-      confirmIcon={confirmIcon}
-      confirmTitle={confirmTitle}
+  const onClick = useCallback<GetProp<ButtonProps, 'onClick'>>(
+    event => {
+      if (bubbles === false) {
+        event.stopPropagation();
+      }
+
+      onAction(null);
+    },
+    [bubbles]
+  );
+
+  return render(
+    <Button
+      id={id}
+      icon={icon}
+      size={size}
+      type={type}
+      block={block}
+      ghost={ghost}
+      shape={shape}
+      style={style}
+      danger={danger}
+      onClick={onClick}
+      tabIndex={tabIndex}
+      autoFocus={autoFocus}
+      className={className}
+      iconPosition={iconPosition}
+      disabled={restProps.disabled}
+      autoInsertSpace={autoInsertSpace}
+      loading={restProps.confirm ? false : loading}
     >
-      <Button {...restProps}>{children}</Button>
-    </Action>
+      {children}
+    </Button>
   );
 }
 

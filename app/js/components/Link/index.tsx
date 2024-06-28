@@ -16,8 +16,8 @@ export interface LinkProps<S> extends Omit<AnchorProps, 'href'> {
   state?: S | (() => S);
 }
 
-function isModifiedEvent(e: React.MouseEvent): boolean {
-  return !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
+function isModifiedEvent({ altKey, metaKey, ctrlKey, shiftKey }: React.MouseEvent): boolean {
+  return !!(altKey || metaKey || ctrlKey || shiftKey);
 }
 
 function Link<S>(props: LinkProps<S>) {
@@ -28,18 +28,18 @@ function Link<S>(props: LinkProps<S>) {
   const propsRef = useLatestRef(props);
   const href = useMemo(() => resolve(to), [to]);
 
-  const onLinkClick = useCallback<GetProp<AnchorProps, 'onClick'>>(e => {
+  const onLinkClick = useCallback<GetProp<AnchorProps, 'onClick'>>(event => {
     const { current: props } = propsRef;
     const { target = '_self', onClick } = props;
 
-    onClick?.(e);
+    onClick?.(event);
 
     if (
-      e.button === 0 && // 鼠标左键点击.
-      !isModifiedEvent(e) && // 没有组合按键.
-      /_self/i.test(target) // 当前窗口打开.
+      event.button === 0 && // 鼠标左键点击.
+      /_self/i.test(target) && // 当前窗口打开.
+      !isModifiedEvent(event) // 没有组合按键.
     ) {
-      e.preventDefault();
+      event.preventDefault();
 
       const { href: to, state, replace } = props;
 
