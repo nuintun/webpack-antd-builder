@@ -35,6 +35,7 @@ export default function useSubmit<V extends Values, R = unknown>(
   initialLoadingState: boolean | (() => boolean) = false
 ): [loading: boolean, onSubmit: (values: V) => void] {
   const { message } = useApp();
+  const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const [loading, request] = useRequest(options, initialLoadingState);
 
@@ -72,7 +73,7 @@ export default function useSubmit<V extends Values, R = unknown>(
       options.body = params as Body;
     }
 
-    request<R>(url, options);
+    request<R>(urlRef.current, options);
   }, []);
 
   return [loading, onSubmit];
