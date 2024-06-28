@@ -24,12 +24,8 @@ export default memo(function Page() {
     onAction2({ gender: value });
   }, []);
 
-  console.log('render', loading1, loading2);
-
   return (
     <Paper>
-      <p>用户分析</p>
-      <p>用户分析</p>
       <p>用户分析</p>
       <Space>
         {render1(

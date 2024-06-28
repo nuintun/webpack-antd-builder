@@ -5,13 +5,24 @@
 import useLatestRef from './useLatestRef';
 import { isObject } from '/js/utils/utils';
 import { TooltipRef } from 'antd/es/tooltip';
+import { useCallback, useRef, useState } from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { GetProp, Popconfirm, PopconfirmProps } from 'antd';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import useSubmit, { Options as UseSubmitOptions, Values } from '/js/hooks/useSubmit';
 
-function createConfirmId(id: string): string {
-  return `confirm_${id.replace(/[^a-z_\d]/gi, '')}`;
+type PopconfirmOmitted =
+  | 'ref'
+  | 'open'
+  | 'trigger'
+  | 'disabled'
+  | 'onCancel'
+  | 'onConfirm'
+  | 'hideAction'
+  | 'showAction'
+  | 'onOpenChange';
+
+interface ConfirmInit extends Omit<PopconfirmProps, PopconfirmOmitted> {
+  okButtonProps?: Omit<GetProp<PopconfirmProps, 'okButtonProps'>, 'loading'>;
 }
 
 export interface Options<V extends Values, R> extends UseSubmitOptions<V, R> {
@@ -20,17 +31,11 @@ export interface Options<V extends Values, R> extends UseSubmitOptions<V, R> {
   confirm?: string | ConfirmInit;
 }
 
-interface ConfirmInit extends Omit<PopconfirmProps, 'id' | 'open' | 'trigger' | 'disabled' | 'onCancel' | 'onConfirm'> {
-  okButtonProps?: Omit<GetProp<PopconfirmProps, 'okButtonProps'>, 'loading'>;
-}
-
 export default function useAction<V extends Values, R>(
   action: string,
   options: Options<V, R> = {}
 ): [loading: boolean, onAction: (values: V) => void, render: (children: React.ReactElement) => React.ReactElement] {
-  const id = useId();
   const valuesRef = useRef<V>();
-  const confirmId = createConfirmId(id);
   const [open, setOpen] = useState(false);
   const optionsRef = useLatestRef(options);
   const popconfirmRef = useRef<TooltipRef>(null);
@@ -62,32 +67,8 @@ export default function useAction<V extends Values, R>(
     }
   }, []);
 
-  useEffect(() => {
-    const onClick = ({ target }: MouseEvent) => {
-      const { current: popconfirm } = popconfirmRef;
-
-      if (popconfirm) {
-        const { nativeElement } = popconfirm;
-        const confirm = document.getElementById(confirmId);
-
-        if (
-          !(
-            confirm === target ||
-            nativeElement === target ||
-            confirm?.contains(target as Node) ||
-            nativeElement?.contains(target as Node)
-          )
-        ) {
-          setOpen(false);
-        }
-      }
-    };
-
-    window.addEventListener('mousedown', onClick, true);
-
-    return () => {
-      window.removeEventListener('mousedown', onClick, true);
-    };
+  const onOpenChange = useCallback((open: boolean) => {
+    setOpen(open);
   }, []);
 
   const render = (children: React.ReactElement): React.ReactElement => {
@@ -95,22 +76,25 @@ export default function useAction<V extends Values, R>(
 
     if (confirm) {
       const { disabled } = options;
-      const icon = <QuestionCircleOutlined style={{ color: '#f00' }} />;
       const props: PopconfirmProps = isObject(confirm) ? confirm : { title: '警告', description: confirm };
+      const { okButtonProps, placement = 'topRight', icon = <QuestionCircleOutlined style={{ color: '#f00' }} /> } = props;
 
       return (
         <Popconfirm
-          icon={icon}
-          placement="topRight"
           {...props}
+          icon={icon}
           open={open}
           trigger={[]}
-          id={confirmId}
+          // @ts-ignore
+          showAction={[]}
+          hideAction="click"
           disabled={disabled}
           onCancel={onCancel}
           ref={popconfirmRef}
           onConfirm={onConfirm}
-          okButtonProps={{ ...props.okButtonProps, loading }}
+          placement={placement}
+          onOpenChange={onOpenChange}
+          okButtonProps={{ ...okButtonProps, loading }}
         >
           {children}
         </Popconfirm>
