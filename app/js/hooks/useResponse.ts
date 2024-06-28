@@ -4,7 +4,7 @@
 
 import useLatestRef from './useLatestRef';
 import { Request, RequestOptions } from './useRequest';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 export interface Transform<R, T> {
   (response: R): T;
@@ -19,6 +19,8 @@ export interface Options<R, T> extends RequestOptions<R> {
   transform?: Transform<R, T>;
 }
 
+export type Dispatch<S> = React.Dispatch<React.SetStateAction<S>>;
+
 /**
  * @function useResponse
  * @description [hook]
@@ -30,7 +32,7 @@ export default function useResponse<R>(
   url: string,
   request: Request,
   options?: Options<R, R>
-): [response: R | undefined, fetch: Fetch<R>];
+): [response: R | undefined, fetch: Fetch<R>, dispatch: Dispatch<R | undefined>];
 /**
  * @function useResponse
  * @description [hook]
@@ -42,7 +44,7 @@ export default function useResponse<R, T>(
   url: string,
   request: Request,
   options: Options<R, T> & { transform: Transform<R, T> }
-): [response: T | undefined, fetch: Fetch<R>];
+): [response: T | undefined, fetch: Fetch<R>, dispatch: Dispatch<T | undefined>];
 /**
  * @function useResponse
  * @description [hook]
@@ -54,7 +56,7 @@ export default function useResponse<R, T>(
   url: string,
   request: Request,
   options: Options<R, T> = {}
-): [response: R | T | undefined, fetch: Fetch<R>] {
+): [response: R | T | undefined, fetch: Fetch<R>, dispatch: Dispatch<R | T | undefined>] {
   const urlRef = useLatestRef(url);
   const opitonsRef = useLatestRef(options);
   const [response, setResponse] = useState<R | T>();
@@ -83,5 +85,5 @@ export default function useResponse<R, T>(
     }
   }, []);
 
-  return [response, fetch];
+  return [response, fetch, setResponse];
 }
