@@ -33,7 +33,7 @@ export class StateStore<S> {
 
   /**
    * @method subscribe
-   * @description 订阅状态
+   * @description 订阅状态变化
    * @param callback 状态变化回调
    */
   public subscribe(callback: Callback): Callback {
