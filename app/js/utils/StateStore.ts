@@ -13,7 +13,7 @@ export interface Callback {
  */
 export class StateStore<S> {
   private state: S;
-  private dispatches = new Set<Callback>();
+  private callbacks = new Set<Callback>();
 
   /**
    * @constructor
@@ -37,12 +37,12 @@ export class StateStore<S> {
    * @param callback 状态变化回调
    */
   public subscribe(callback: Callback): Callback {
-    const { dispatches } = this;
+    const { callbacks } = this;
 
-    dispatches.add(callback);
+    callbacks.add(callback);
 
     return () => {
-      dispatches.delete(callback);
+      callbacks.delete(callback);
     };
   }
 
@@ -52,12 +52,12 @@ export class StateStore<S> {
    * @param state 新的状态
    */
   public dispatch(state: React.SetStateAction<S>): void {
-    const { state: prevState, dispatches } = this;
+    const { state: prevState, callbacks } = this;
 
     this.state = isFunction(state) ? state(prevState) : state;
 
-    for (const dispatch of dispatches) {
-      dispatch();
+    for (const callback of callbacks) {
+      callback();
     }
   }
 }
