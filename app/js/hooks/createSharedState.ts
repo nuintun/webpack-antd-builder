@@ -29,7 +29,7 @@ export default function createSharedState<S = undefined>(initialState?: S): UseS
   const store = new StateStore(initialState);
   const dispatch = store.dispatch.bind(store);
   const subscribe = store.subscribe.bind(store);
-  const getSnapshot = store.getSnapshot.bind(store);
+  const getSnapshot = store.getState.bind(store);
 
   return () => {
     return [useSyncExternalStore(subscribe, getSnapshot), dispatch];

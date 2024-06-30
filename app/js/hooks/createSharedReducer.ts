@@ -53,7 +53,7 @@ export default function createSharedReducer<S = undefined, A = unknown>(
 ): () => [state: S | undefined, dispatch: React.Dispatch<A> | React.DispatchWithoutAction] {
   const store = new StateStore(initialState);
   const subscribe = store.subscribe.bind(store);
-  const getSnapshot = store.getSnapshot.bind(store);
+  const getSnapshot = store.getState.bind(store);
 
   const dispatch: React.Dispatch<A> | React.DispatchWithoutAction = action => {
     store.dispatch(state => {

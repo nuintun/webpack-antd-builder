@@ -24,10 +24,10 @@ export class StateStore<S> {
   }
 
   /**
-   * @method getSnapshot
+   * @method getState
    * @description 获取当前状态
    */
-  public getSnapshot(): S {
+  public getState(): S {
     return this.state;
   }
 
@@ -49,7 +49,7 @@ export class StateStore<S> {
   /**
    * @method dispatch
    * @description 更新状态
-   * @param state 新状态
+   * @param state 新的状态
    */
   public dispatch(state: React.SetStateAction<S>): void {
     const { state: prevState, dispatches } = this;
