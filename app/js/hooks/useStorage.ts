@@ -7,7 +7,7 @@ import { useCallback, useMemo } from 'react';
 import createStorage from '/js/utils/storage';
 
 export interface Options<V> {
-  session?: boolean;
+  storage?: Storage;
   serializer?: (value: V) => string;
   deserializer?: (value: string) => V;
 }
@@ -46,11 +46,10 @@ export default function useStorage<V = null>(
   key: string,
   options: Options<V> | DefaultValueOptions<V> = {}
 ): [set: (value: V) => void, get: () => V | null, remove: () => void] {
-  const { session, serializer, deserializer, defaultValue } = options as DefaultValueOptions<V>;
+  const { defaultValue } = options as DefaultValueOptions<V>;
 
   const storage = useMemo(() => {
-    const { sessionStorage, localStorage } = window;
-    const storage = session ? sessionStorage : localStorage;
+    const { storage = window.localStorage, serializer, deserializer } = options;
 
     return createStorage<V>(storage, serializer, deserializer);
   }, []);
