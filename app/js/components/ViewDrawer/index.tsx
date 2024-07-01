@@ -15,11 +15,7 @@ export interface ViewDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' 
 }
 
 function defaultExtra(onClose: () => void): React.ReactNode {
-  return (
-    <Button htmlType="reset" onClick={onClose}>
-      取消
-    </Button>
-  );
+  return <Button onClick={onClose}>取消</Button>;
 }
 
 export default memo(function ViewDrawer({
