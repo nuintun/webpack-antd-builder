@@ -19,7 +19,7 @@ export default function useMediaQuery(
   initialMatchState: boolean | (() => boolean) = false
 ): boolean {
   const mql = useMemo(() => {
-    return canUseDOM ? window.matchMedia(query) : null;
+    return canUseDOM ? globalThis.matchMedia(query) : null;
   }, [query]);
 
   const [matched, setState] = useState(mql ? mql.matches : initialMatchState);

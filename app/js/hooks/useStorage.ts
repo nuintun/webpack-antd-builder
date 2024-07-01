@@ -49,7 +49,7 @@ export default function useStorage<V = null>(
   const { defaultValue } = options as DefaultValueOptions<V>;
 
   const storage = useMemo(() => {
-    const { storage = window.localStorage, serializer, deserializer } = options;
+    const { storage, serializer, deserializer } = options;
 
     return createStorage<V>(storage, serializer, deserializer);
   }, []);

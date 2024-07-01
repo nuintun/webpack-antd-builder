@@ -12,7 +12,7 @@ const { fromCharCode } = String;
 
 function safeAtob(text: string): string {
   try {
-    return window.atob(text);
+    return globalThis.atob(text);
   } catch {
     return '';
   }
@@ -79,7 +79,7 @@ export function encrypt(text: string): string {
   output += toByteString(checkCode);
   output += encryptText;
 
-  return window.btoa(output);
+  return globalThis.btoa(output);
 }
 
 /**

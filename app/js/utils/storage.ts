@@ -16,7 +16,7 @@ export interface IStorage<V> {
  * @param deserializer 反序列化函数
  */
 export default function createStorage<V>(
-  storage: Storage,
+  storage: Storage = globalThis.localStorage,
   serializer: (value: V) => string = JSON.stringify,
   deserializer: (value: string) => V = JSON.parse
 ): IStorage<V> {
