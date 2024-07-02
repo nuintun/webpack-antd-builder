@@ -32,9 +32,9 @@ interface CSSVarRegisterProps {
   unitless: Record<string, boolean>;
 }
 
-type Entries<T> = [keyof AliasToken, T][];
+type Components = keyof OverrideToken;
 
-export type Components = keyof OverrideToken;
+type Entries<T> = [keyof AliasToken, T][];
 
 export interface UseStyles {
   (): [
@@ -55,6 +55,8 @@ export interface CSSUtils {
 export interface Styles<C extends Components = Components> {
   (token: Token<C>, utils: CSSUtils): CSSInterpolation;
 }
+
+type ComponentTokens = { [key in keyof AliasToken]: string | number | boolean };
 
 export type Token<C extends Components = Components> = AliasToken & Pick<OverrideToken, C>;
 
@@ -136,7 +138,7 @@ export default function createStyles<C extends Components = never>(path: string[
 
           for (const component of shared) {
             const componentToken = realToken[component];
-            const componentTokens: Record<string, string | boolean> = {};
+            const componentTokens: Partial<ComponentTokens> = {};
 
             if (componentToken) {
               let length = 0;

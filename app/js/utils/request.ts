@@ -3,11 +3,12 @@
  * @description Ajax 请求封装
  */
 
-import { isObject, serialize } from './utils';
+import { isObject } from './utils';
+import { Fields, serialize, serializeBody } from './form';
 
-export type Body = Query | BodyInit | null;
+export type Query = Fields;
 
-export type Query = Record<string | number, any>;
+export type Body = Fields | BodyInit | null;
 
 export interface RequestResult<R = unknown> {
   payload: R;
@@ -82,15 +83,6 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   return response.text().then(payload => {
     return { code, msg: resloveMessage(code), payload } as RequestResult<R>;
   });
-}
-
-/**
- * @function serializeBody
- * @param body 消息体
- * @param json 是否使用 JSON 格式
- */
-function serializeBody(body: Record<string | number, any>, json?: boolean): FormData | string {
-  return json ? JSON.stringify(body) : serialize(body, new FormData());
 }
 
 /**

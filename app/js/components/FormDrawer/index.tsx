@@ -2,7 +2,8 @@
  * @module index
  */
 
-import useSubmit, { Options, Values } from '/js/hooks/useSubmit';
+import { Fields } from '/js/utils/form';
+import useSubmit, { Options } from '/js/hooks/useSubmit';
 import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 import React, { cloneElement, memo, useCallback, useEffect, useId, useMemo, useState } from 'react';
@@ -28,21 +29,21 @@ function createFormName(id: string): string {
   return `form_${id.replace(/[^a-z_\d]/gi, '')}`;
 }
 
-export interface FormDrawerProps<V extends Values, R>
-  extends Omit<FormProps<V>, FormOmitted>,
-    Pick<Options<V, R>, SubmitPicked>,
+export interface FormDrawerProps<F extends Fields, R>
+  extends Omit<FormProps<F>, FormOmitted>,
+    Pick<Options<F, R>, SubmitPicked>,
     Pick<FlexDrawerProps, DrawerPicked> {
   action: string;
   onOpen?: () => void;
   onClose?: () => void;
-  form?: FormInstance<V>;
-  requestInit?: Omit<Options<V, R>, SubmitPicked>;
+  form?: FormInstance<F>;
+  requestInit?: Omit<Options<F, R>, SubmitPicked>;
   trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
-  extra?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
-  footer?: (submitting: boolean, form: FormInstance<V>, onClose: () => void) => React.ReactNode;
+  extra?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
+  footer?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
 }
 
-function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: () => void): React.ReactNode {
+function defaultExtra<F>(submitting: boolean, form: FormInstance<F>, onClose: () => void): React.ReactNode {
   return (
     <Space>
       <Button htmlType="reset" onClick={onClose}>
@@ -55,7 +56,7 @@ function defaultExtra<V>(submitting: boolean, form: FormInstance<V>, onClose: ()
   );
 }
 
-function FormDrawer<V extends Values, R>({
+function FormDrawer<F extends Fields, R>({
   form,
   name,
   query,
@@ -85,12 +86,12 @@ function FormDrawer<V extends Values, R>({
   extra = defaultExtra,
   maskClosable = false,
   ...restProps
-}: FormDrawerProps<V, R>) {
+}: FormDrawerProps<F, R>) {
   const id = useId();
-  const [wrapForm] = useForm<V>(form);
+  const [wrapForm] = useForm<F>(form);
   const [open, setOpen] = useState(false);
 
-  const [submitting, onSubmit] = useSubmit<V, R>(action, {
+  const [submitting, onSubmit] = useSubmit<F, R>(action, {
     ...requestInit,
     query,
     method,
@@ -98,10 +99,10 @@ function FormDrawer<V extends Values, R>({
     onError,
     normalize,
     onComplete,
-    onSuccess(response: R, values: V) {
+    onSuccess(response: R, fields: F) {
       setOpen(false);
 
-      onSuccess?.(response, values);
+      onSuccess?.(response, fields);
     }
   });
 

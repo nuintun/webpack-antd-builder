@@ -51,30 +51,6 @@ export function isNumber(value: unknown): value is number {
 }
 
 /**
- * @function serialize
- * @description 序列化参数
- * @param values 需要序列化的参数
- * @param target 序列化的目标对象
- */
-export function serialize<T extends FormData | URLSearchParams>(values: Record<string | number, any>, target: T): T {
-  for (const [key, value] of Object.entries(values)) {
-    if (value != null) {
-      if (Array.isArray(value)) {
-        for (const item of value) {
-          if (item != null) {
-            target.append(key, item);
-          }
-        }
-      } else {
-        target.append(key, value);
-      }
-    }
-  }
-
-  return target;
-}
-
-/**
  * @function formatThousands
  * @description 格式化数字
  * @param number 需要格式话的数字
