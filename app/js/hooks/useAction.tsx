@@ -88,6 +88,7 @@ export default function useAction<F extends Fields | null, R>(
           trigger={[]}
           // @ts-ignore
           showAction={[]}
+          // @ts-ignore
           hideAction="click"
           disabled={disabled}
           onCancel={onCancel}
