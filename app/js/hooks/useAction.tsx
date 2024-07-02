@@ -5,7 +5,6 @@
 import { Fields } from '/js/utils/form';
 import useLatestRef from './useLatestRef';
 import { isObject } from '/js/utils/utils';
-import { TooltipRef } from 'antd/es/tooltip';
 import { useCallback, useRef, useState } from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { GetProp, Popconfirm, PopconfirmProps } from 'antd';
@@ -39,7 +38,6 @@ export default function useAction<F extends Fields | null, R>(
   const valuesRef = useRef<F>();
   const [open, setOpen] = useState(false);
   const optionsRef = useLatestRef(options);
-  const popconfirmRef = useRef<TooltipRef>(null);
   const [loading, onSubmit] = useSubmit<F, R>(action, options);
 
   const onCancel = useCallback(() => {
@@ -92,7 +90,6 @@ export default function useAction<F extends Fields | null, R>(
           hideAction="click"
           disabled={disabled}
           onCancel={onCancel}
-          ref={popconfirmRef}
           onConfirm={onConfirm}
           placement={placement}
           onOpenChange={onOpenChange}
