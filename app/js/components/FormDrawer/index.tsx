@@ -37,8 +37,11 @@ export interface FormDrawerProps<F extends Fields, R>
   onOpen?: () => void;
   onClose?: () => void;
   form?: FormInstance<F>;
+  trigger: React.ReactElement<{
+    disabled?: boolean;
+    onClick?: (...args: unknown[]) => void;
+  }>;
   requestInit?: Omit<Options<F, R>, SubmitPicked>;
-  trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
   extra?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
   footer?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
 }
@@ -113,11 +116,13 @@ function FormDrawer<F extends Fields, R>({
   const triggerNode = useMemo(() => {
     return cloneElement(trigger, {
       onClick(...args: unknown[]) {
-        const { onClick } = trigger.props;
+        const { disabled, onClick } = trigger.props;
 
-        setOpen(true);
+        if (!disabled) {
+          setOpen(true);
 
-        onClick?.(...args);
+          onClick?.(...args);
+        }
       }
     });
   }, [trigger]);

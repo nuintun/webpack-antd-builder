@@ -9,9 +9,12 @@ import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } 
 export interface ViewDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
   onOpen?: () => void;
   onClose?: () => void;
+  trigger: React.ReactElement<{
+    disabled?: boolean;
+    onClick?: (...args: unknown[]) => void;
+  }>;
   extra?: (onClose: () => void) => React.ReactNode;
   footer?: (onClose: () => void) => React.ReactNode;
-  trigger: React.ReactElement<{ onClick?: (...args: unknown[]) => void }>;
 }
 
 function defaultExtra(onClose: () => void): React.ReactNode {
@@ -36,11 +39,13 @@ export default memo(function ViewDrawer({
   const triggerNode = useMemo(() => {
     return cloneElement(trigger, {
       onClick(...args: unknown[]) {
-        const { onClick } = trigger.props;
+        const { disabled, onClick } = trigger.props;
 
-        setOpen(true);
+        if (!disabled) {
+          setOpen(true);
 
-        onClick?.(...args);
+          onClick?.(...args);
+        }
       }
     });
   }, [trigger]);
