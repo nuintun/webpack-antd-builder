@@ -18,17 +18,14 @@ export const enum Filter {
    * @description 过滤无子节点的节点
    */
   DEFAULT,
-
   /**
    * @description 过滤当自身点和子节点
    */
   REMOVE_ALL,
-
   /**
    * @description 仅过滤自身节点，子节点正常处理
    */
   REMOVE_SELF,
-
   /**
    * @description 强制保留自身节点，子节点正常处理
    */
