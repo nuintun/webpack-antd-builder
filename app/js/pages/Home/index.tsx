@@ -181,7 +181,7 @@ export default memo(function Page() {
   }, []);
 
   return (
-    <Paper>
+    <Paper className={styles.paper}>
       <LineChart theme={theme} />
       <Time />
       <QRCode
