@@ -84,9 +84,8 @@ export default function useAction<F extends Fields | null, R>(
           icon={icon}
           open={open}
           trigger={[]}
-          // @ts-ignore
+          // @ts-expect-error
           showAction={[]}
-          // @ts-ignore
           hideAction="click"
           disabled={disabled}
           onCancel={onCancel}
