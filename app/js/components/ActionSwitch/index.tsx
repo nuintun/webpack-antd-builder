@@ -79,6 +79,7 @@ function ActionSwitch<R>({
       autoFocus={autoFocus}
       className={className}
       onChange={onSwitchChange}
+      disabled={restProps.disabled}
       checkedChildren={checkedChildren}
       unCheckedChildren={unCheckedChildren}
       loading={restProps.confirm ? false : loading}

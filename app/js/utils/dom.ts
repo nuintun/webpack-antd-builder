@@ -15,12 +15,24 @@ export const canUseDOM =
 
 type TargetValue<T> = T | undefined | null;
 
-type TargetType = HTMLElement | Element | Window | Document;
+type TargetType = Element | Window | Document;
 
 export type Target<T extends TargetType = Element> =
   | TargetValue<T>
   | (() => TargetValue<T>)
   | React.MutableRefObject<TargetValue<T>>;
+
+export function isWindow(target: unknown): target is Window {
+  return canUseDOM && target instanceof Window;
+}
+
+export function isElement(target: unknown): target is Element {
+  return canUseDOM && target instanceof Element;
+}
+
+export function isDocument(target: unknown): target is Document {
+  return canUseDOM && target instanceof Document;
+}
 
 /**
  * @function getTargetElement
@@ -35,9 +47,9 @@ export function getTargetElement<T extends TargetType>(target: Target<T>): Targe
     return target();
   }
 
-  if ('current' in target) {
-    return target.current;
+  if (isWindow(target) || isDocument(target) || isElement(target)) {
+    return target;
   }
 
-  return target;
+  return target.current ?? null;
 }

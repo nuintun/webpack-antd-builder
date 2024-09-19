@@ -75,8 +75,8 @@ export default function useAction<F extends Fields | null, R>(
 
     if (confirm) {
       const { disabled } = options;
-      const props: PopconfirmProps = isObject(confirm) ? confirm : { title: '警告', description: confirm };
-      const { okButtonProps, placement = 'topRight', icon = <QuestionCircleOutlined style={{ color: '#f00' }} /> } = props;
+      const props = isObject(confirm) ? confirm : { title: '警告', description: confirm };
+      const { okButtonProps, placement = 'topRight', icon = <QuestionCircleOutlined /> } = props;
 
       return (
         <Popconfirm

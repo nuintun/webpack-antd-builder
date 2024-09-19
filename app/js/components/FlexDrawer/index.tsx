@@ -3,25 +3,34 @@
  */
 
 import { isString } from '/js/utils/utils';
-import { memo, useCallback, useRef } from 'react';
 import useMediaQuery from '/js/hooks/useMediaQuery';
-import { ConfigProvider, Drawer, DrawerProps } from 'antd';
+import React, { memo, useCallback, useRef } from 'react';
+import { ConfigProvider, Drawer, DrawerProps, GetProp } from 'antd';
 
 export interface FlexDrawerProps extends DrawerProps {
   breakWidth?: string | number;
   breakHeight?: string | number;
 }
 
+const containerStyle: React.CSSProperties = {
+  minWidth: 'fit-content'
+};
+
+const drawerStyles: GetProp<DrawerProps, 'styles'> = {
+  body: {
+    outline: 'none',
+    position: 'relative'
+  }
+};
+
 export default memo(function FlexDrawer({
   children,
   height = 720,
   width = 1440,
-  keyboard = false,
   closeIcon = false,
-  maskClosable = false,
   breakWidth = '100vw',
   breakHeight = '100vh',
-  styles = { body: { position: 'relative' } },
+  styles = drawerStyles,
   ...restProps
 }: FlexDrawerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,13 +50,11 @@ export default memo(function FlexDrawer({
     <Drawer
       {...restProps}
       styles={styles}
-      keyboard={keyboard}
       closeIcon={closeIcon}
-      maskClosable={maskClosable}
       width={isBreakWidth ? breakWidth : width}
       height={isBreakHeight ? breakHeight : height}
     >
-      <div ref={containerRef}>
+      <div ref={containerRef} style={containerStyle}>
         <ConfigProvider getPopupContainer={getPopupContainer} getTargetContainer={getTargetContainer}>
           {children}
         </ConfigProvider>

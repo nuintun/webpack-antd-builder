@@ -11,8 +11,6 @@ export default createStyles(['components', 'Paper', prefixCls], token => {
     [`.${prefixCls}`]: {
       margin: token.marginXS,
       padding: token.padding,
-      minWidth: 'fit-content',
-      minHeight: 'fit-content',
       borderRadius: token.borderRadius,
       backgroundColor: token.colorBgContainer
     }

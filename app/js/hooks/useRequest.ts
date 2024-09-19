@@ -23,23 +23,13 @@ export interface Request {
 export interface RequestOptions<R> extends Omit<Options, 'delay'> {
   onComplete?: () => void;
   onSuccess?: (response: R) => void;
-  onError?: (error: RequestError<R>) => void;
+  onError?: (error: RequestError) => void;
 }
 
 export interface Options extends Omit<RequestInit, 'onMessage' | 'onUnauthorized'> {
   delay?: number;
   notify?: boolean;
   onUnauthorized?: (navigate: Navigate, location: Location) => void;
-}
-
-/**
- * @function onUnauthorizedHandler
- * @description 默认未授权操作
- * @param navigate 导航方法
- * @param location 导航信息
- */
-export function onUnauthorizedHandler(navigate: Navigate, location: Location): void {
-  navigate('/login', { state: location });
 }
 
 /**
@@ -76,7 +66,7 @@ export default function useRequest(
         if (onUnauthorized) {
           onUnauthorized(navigate, location);
         } else {
-          onUnauthorizedHandler(navigate, location);
+          navigate('/login', { state: location });
         }
       };
 
@@ -90,8 +80,8 @@ export default function useRequest(
         }
       }
 
-      const onMessage = (msg: string) => {
-        notify && message.success(msg);
+      const onMessage = (content: string) => {
+        notify && message.success(content);
       };
 
       fetch<R>(url, { ...requestInit, headers, onMessage, onUnauthorized })
@@ -101,13 +91,13 @@ export default function useRequest(
               requestInit.onSuccess?.(response);
             }
           },
-          (error: RequestError<R>) => {
+          (error: RequestError) => {
             if (isMounted()) {
               const { onError } = requestInit;
 
               if (onError) {
                 onError(error);
-              } else {
+              } else if (error.code !== 401) {
                 message.error(error.message);
               }
             }

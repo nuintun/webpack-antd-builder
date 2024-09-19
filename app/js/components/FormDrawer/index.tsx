@@ -29,18 +29,20 @@ function createFormName(id: string): string {
   return `form_${id.replace(/[^a-z_\d]/gi, '')}`;
 }
 
+export type Trigger = React.ReactElement<{
+  disabled?: boolean;
+  onClick?: (...args: unknown[]) => void;
+}>;
+
 export interface FormDrawerProps<F extends Fields, R>
   extends Omit<FormProps<F>, FormOmitted>,
     Pick<Options<F, R>, SubmitPicked>,
     Pick<FlexDrawerProps, DrawerPicked> {
   action: string;
+  trigger: Trigger;
   onOpen?: () => void;
   onClose?: () => void;
   form?: FormInstance<F>;
-  trigger: React.ReactElement<{
-    disabled?: boolean;
-    onClick?: (...args: unknown[]) => void;
-  }>;
   requestInit?: Omit<Options<F, R>, SubmitPicked>;
   extra?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
   footer?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;

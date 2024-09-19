@@ -107,8 +107,8 @@ export function parse<M = unknown>(
       );
 
       // 遍历节点
-      for (const [current, parent] of tree) {
-        const { meta, children } = current;
+      for (const [node, parent] of tree) {
+        const { meta, children } = node;
         const { key, name, icon, link } = meta;
         const isLayout = children ? children.length > 0 : false;
         const parentMenu = parent ? mapping.get(parent.meta.key) : parent;
@@ -118,7 +118,7 @@ export function parse<M = unknown>(
             mapping.set(key, parentMenu);
           }
         } else {
-          const menu = transform(icon ? { key, name, link, icon } : { key, name, link }, current);
+          const menu = transform(icon ? { key, name, link, icon } : { key, name, link }, node);
 
           if (isLayout) {
             mapping.set(key, menu);

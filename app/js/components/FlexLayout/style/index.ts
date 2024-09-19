@@ -60,6 +60,7 @@ export default createStyles(
 
         [`.${prefixCls}-content`]: {
           height: '100%',
+          outline: 'none',
           overflow: 'auto',
           position: 'relative',
           msScrollChaining: 'none',

@@ -6,13 +6,15 @@ import { Button } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
 import React, { cloneElement, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
+export type Trigger = React.ReactElement<{
+  disabled?: boolean;
+  onClick?: (...args: unknown[]) => void;
+}>;
+
 export interface ViewDrawerProps extends Omit<FlexDrawerProps, 'open' | 'extra' | 'footer'> {
+  trigger: Trigger;
   onOpen?: () => void;
   onClose?: () => void;
-  trigger: React.ReactElement<{
-    disabled?: boolean;
-    onClick?: (...args: unknown[]) => void;
-  }>;
   extra?: (onClose: () => void) => React.ReactNode;
   footer?: (onClose: () => void) => React.ReactNode;
 }
@@ -27,6 +29,7 @@ export default memo(function ViewDrawer({
   trigger,
   onClose,
   children,
+  width = 768,
   extra = defaultExtra,
   ...restProps
 }: ViewDrawerProps) {
@@ -64,6 +67,7 @@ export default memo(function ViewDrawer({
       <FlexDrawer
         {...restProps}
         open={open}
+        width={width}
         onClose={onCloseHandler}
         extra={extra(onCloseHandler)}
         footer={footer?.(onCloseHandler)}

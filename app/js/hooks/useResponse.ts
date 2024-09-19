@@ -67,7 +67,7 @@ export default function useResponse<R, T>(
       ...options
     };
 
-    request(urlRef.current, {
+    request<R>(urlRef.current, {
       ...requestInit,
       onSuccess(response) {
         const { transform } = requestInit;

@@ -142,7 +142,7 @@ export default function useTable<I, E = unknown, T = I>(
     }
   }, []);
 
-  const pagination = useMemo(() => {
+  const pagination = useMemo<GetProp<TableProps<I>, 'pagination'>>(() => {
     const originRefsPagination = originRefs.pagination;
 
     if (hasQuery(originRefsPagination)) {

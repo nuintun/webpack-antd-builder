@@ -18,7 +18,7 @@ export interface Options<F extends Fields | null, R> extends Omit<RequestOptions
   onComplete?: (fields: F) => void;
   normalize?: (fields: F) => Fields;
   onSuccess?: (response: R, fields: F) => void;
-  onError?: (error: RequestError<R>, fields: F) => void;
+  onError?: (error: RequestError, fields: F) => void;
 }
 
 /**

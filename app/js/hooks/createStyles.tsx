@@ -5,13 +5,12 @@
 import {
   AbstractCalculator,
   CSSInterpolation,
-  genCalc,
   token2CSSVar,
   unit,
   useCSSVarRegister,
   useStyleRegister
 } from '@ant-design/cssinjs';
-import genMaxMin from 'antd/es/theme/util/maxmin';
+import { genCalc } from '@ant-design/cssinjs-utils';
 import { isNumber, isString } from '/js/utils/utils';
 import { memo, ReactElement, useId, useMemo } from 'react';
 import { AliasToken, GlobalToken, OverrideToken } from 'antd/es/theme/interface';
@@ -48,8 +47,6 @@ export interface UseStyles {
 export interface CSSUtils {
   unit(value: string | number): string;
   calc(value: number | string): AbstractCalculator;
-  max(...values: (number | string)[]): number | string;
-  min(...values: (number | string)[]): number | string;
 }
 
 export interface Styles<C extends Components = Components> {
@@ -222,10 +219,9 @@ export default function createStyles<C extends Components = never>(path: string[
 
     const utils = useMemo(() => {
       const type = cssVar ? 'css' : 'js';
-      const { max, min } = genMaxMin(type);
       const unitlessCssVar = new Set(Object.keys(unitless));
 
-      return { min, max, unit, calc: genCalc(type, unitlessCssVar) };
+      return { unit, calc: genCalc(type, unitlessCssVar) };
     }, [cssVar, unitless]);
 
     const render = useStyleRegister({ path, theme, token, hashId }, () => {

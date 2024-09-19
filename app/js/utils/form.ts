@@ -5,12 +5,24 @@
 export type Fields = Record<string | number, any>;
 
 /**
+ * @function stringify
+ * @param value 要序列化的数据
+ */
+function stringify(value: any): string {
+  return JSON.stringify(value, (_key, value) => {
+    if (value !== null) {
+      return value;
+    }
+  });
+}
+
+/**
  * @function serializeBody
  * @param body 消息体
  * @param json 是否使用 JSON 格式
  */
 export function serializeBody(fields: Fields, json?: boolean): FormData | string {
-  return json ? JSON.stringify(fields) : serialize(fields, new FormData());
+  return json ? stringify(fields) : serialize(fields, new FormData());
 }
 
 /**

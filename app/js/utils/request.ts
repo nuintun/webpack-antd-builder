@@ -12,13 +12,13 @@ export type Body = Fields | BodyInit | null;
 
 export interface RequestResult<R = unknown> {
   payload: R;
-  msg: string;
   code: number;
+  message: string;
 }
 
-export interface RequestError<R = unknown> extends Error {
-  code: number;
-  response?: R;
+export interface RequestErrorOptions extends ErrorOptions {
+  name?: string;
+  stack?: string;
 }
 
 export interface Options extends Omit<RequestInit, 'body'> {
@@ -41,6 +41,14 @@ const STATUS_TEXT: Record<number, string> = {
 };
 
 /**
+ * @function isStatusOk
+ * @param status HTTP 状态码
+ */
+function isStatusOk(status: number): boolean {
+  return status >= 200 && status < 300;
+}
+
+/**
  * @function resloveMessage
  * @param code HTTP 状态码
  */
@@ -59,21 +67,13 @@ function isJSONType(headers: Headers): boolean {
 }
 
 /**
- * @function isStatusOk
- * @param status HTTP 状态码
- */
-function isStatusOk(status: number): boolean {
-  return status >= 200 && status < 300;
-}
-
-/**
  * @function parseResponse
  * @param response 响应内容
  */
 function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   if (isJSONType(response.headers)) {
-    return response.json().then(({ code, msg, payload }: RequestResult<R>) => {
-      return { code, msg: msg || resloveMessage(code), payload };
+    return response.json().then(({ code, message, payload }: RequestResult<R>) => {
+      return { code, message: message || resloveMessage(code), payload };
     });
   }
 
@@ -81,8 +81,40 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   const code = isStatusOk(status) ? 200 : status;
 
   return response.text().then(payload => {
-    return { code, msg: resloveMessage(code), payload } as RequestResult<R>;
+    return { code, message: resloveMessage(code), payload } as RequestResult<R>;
   });
+}
+
+export class RequestError extends Error {
+  public code: number;
+
+  constructor(code: number, message: string, options?: RequestErrorOptions) {
+    super(message, options);
+
+    this.code = code;
+
+    if (options) {
+      const { name, stack } = options;
+
+      if (name) {
+        this.name = name;
+      }
+
+      if (stack) {
+        this.stack = stack;
+      }
+    }
+  }
+}
+
+function createErrorCatch(code: number): (error: Error | DOMException | string) => never {
+  return error => {
+    if (error instanceof Error) {
+      throw new RequestError(code, error.message, error);
+    }
+
+    throw new RequestError(code, JSON.stringify(error), { name: 'AbortError' });
+  };
 }
 
 /**
@@ -113,51 +145,24 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   }
 
   // 发送请求
-  return fetch(input.href, options as RequestInit).then(
-    (response: Response): Promise<R> => {
-      return parseResponse<R>(response).then(
-        ({ code, msg, payload }) => {
-          const { status } = response;
+  return fetch(input.href, options as RequestInit).then((response: Response): Promise<R> => {
+    return parseResponse<R>(response).then(({ code, message, payload }) => {
+      const { status } = response;
 
-          if (isStatusOk(status) && code === 200) {
-            onMessage?.(msg);
+      if (isStatusOk(status) && code === 200) {
+        onMessage?.(message);
 
-            // 操作成功
-            return payload;
-          }
-
-          if (status === 401 || code === 401) {
-            // 需要登录认证
-            onUnauthorized?.();
-          }
-
-          // 其它错误，403 等
-          const error = new Error(msg) as RequestError;
-
-          error.code = code;
-          error.response = payload;
-
-          throw error;
-        },
-        (error: RequestError): never => {
-          error.code = response.status;
-
-          if (!__DEV__) {
-            error.message = '解析响应失败';
-          }
-
-          throw error;
-        }
-      );
-    },
-    (error: RequestError): never => {
-      error.code = -1;
-
-      if (!__DEV__) {
-        error.message = '发送请求失败';
+        // 操作成功
+        return payload;
       }
 
-      throw error;
-    }
-  );
+      if (status === 401 || code === 401) {
+        // 需要登录认证
+        onUnauthorized?.();
+      }
+
+      // 其它错误，403 等
+      throw new RequestError(code, message);
+    }, createErrorCatch(response.status));
+  }, createErrorCatch(-1));
 }

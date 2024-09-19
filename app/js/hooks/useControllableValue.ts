@@ -119,9 +119,10 @@ export default function useControllableValue<V = undefined>(
 
   const valueRef = useLatestRef(value);
 
-  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: any[]): void => {
+  const setValue = useCallback((value: React.SetStateAction<V | undefined>, ...args: unknown[]): void => {
     if (isMounted()) {
-      const { current: prevState } = valueRef;
+      const { defaultValue } = optionsRef.current;
+      const { current: prevState = defaultValue } = valueRef;
       const state = isFunction(value) ? value(prevState) : value;
 
       if (state !== prevState) {

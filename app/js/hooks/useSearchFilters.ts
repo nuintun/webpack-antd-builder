@@ -8,7 +8,7 @@ import { Query as Filter } from '/js/utils/request';
 export type { Filter };
 
 export type SearchFilters<T extends Filter[]> = {
-  [K in keyof T]: T[K] | false;
+  [K in keyof T]: T[K] extends Filter ? T[K] | false : T[K];
 };
 
 /**

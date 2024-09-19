@@ -52,7 +52,6 @@ export default function usePagingOptions(opitons?: Options | false): UsePagingOp
         responsive: true,
         showSizeChanger: true,
         showQuickJumper: true,
-        hideOnSinglePage: true,
         ...opitons,
         pageSizeOptions: pageSizeOptions.map(item => item.toString())
       };

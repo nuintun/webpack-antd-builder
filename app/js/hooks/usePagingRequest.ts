@@ -174,7 +174,7 @@ export default function usePagingRequest<I, E = unknown, T = I>(
 
         if (onError) {
           onError(error);
-        } else {
+        } else if (error.code !== 401) {
           message.error(error.message);
         }
       }
