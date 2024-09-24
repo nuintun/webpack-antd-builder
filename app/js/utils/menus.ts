@@ -58,7 +58,7 @@ export function parse<M = unknown>(
       return guard;
     };
 
-    const isPreserveSelf = (key: string): boolean => {
+    const shouldRemoveSelf = (key: string): boolean => {
       return guards.get(key) !== Filter.PRESERVE_SELF;
     };
 
@@ -88,14 +88,12 @@ export function parse<M = unknown>(
               } else {
                 delete menu.children;
 
-                if (isPreserveSelf(key)) {
+                if (shouldRemoveSelf(key)) {
                   removeable.add(key);
                 }
               }
-
-              menu.children = subset;
             } else if (!isAvailable) {
-              if (isPreserveSelf(key)) {
+              if (shouldRemoveSelf(key)) {
                 removeable.add(key);
               }
             }
