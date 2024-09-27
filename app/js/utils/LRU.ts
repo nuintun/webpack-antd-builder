@@ -3,12 +3,12 @@
  */
 
 export default class LRU<K, V> {
-  #max: number;
   #cache: Map<K, V>;
+  #capacity: number;
 
-  public constructor(max: number) {
-    this.#max = max;
+  public constructor(capacity: number) {
     this.#cache = new Map();
+    this.#capacity = capacity;
   }
 
   public get size(): number {
@@ -18,14 +18,14 @@ export default class LRU<K, V> {
   public set(key: K, value: V): void {
     const cache = this.#cache;
 
-    if (this.has(key)) {
-      this.delete(key);
-    } else if (this.size === this.#max) {
+    if (cache.has(key)) {
+      cache.delete(key);
+    } else if (cache.size === this.#capacity) {
       const keys = cache.keys();
       const head = keys.next();
 
       if (!head.done) {
-        this.delete(head.value);
+        cache.delete(head.value);
       }
     }
 
@@ -34,15 +34,14 @@ export default class LRU<K, V> {
 
   public get(key: K): V | undefined {
     const cache = this.#cache;
-    const item = cache.get(key);
+    const value = cache.get(key);
 
-    if (item) {
-      this.delete(key);
-
-      cache.set(key, item);
-
-      return item;
+    if (cache.has(key)) {
+      cache.delete(key);
+      cache.set(key, value as V);
     }
+
+    return value;
   }
 
   public has(key: K): boolean {
