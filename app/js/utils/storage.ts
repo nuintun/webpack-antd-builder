@@ -18,7 +18,7 @@ export interface IStorage<V> {
 export default function createStorage<V>(
   storage: Storage = globalThis.localStorage,
   serializer: (value: V) => string = JSON.stringify,
-  deserializer: (value: string) => V = JSON.parse
+  deserializer: (value: string) => V | never = JSON.parse
 ): IStorage<V> {
   return {
     /**
