@@ -2,8 +2,8 @@
  * @module server
  */
 
-import fs from 'fs';
 import Koa from 'koa';
+import fs from 'node:fs';
 import dayjs from 'dayjs';
 import files from 'koa-files';
 import compress from 'koa-compress';
