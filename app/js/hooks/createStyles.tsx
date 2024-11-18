@@ -78,16 +78,16 @@ const CSSVarRegister = memo(function CSSVarRegister(props: CSSVarRegisterProps):
 
       if (shared) {
         for (const component of shared) {
-          const componentToken = token[component];
+          const sharedToken = token[component];
 
-          if (componentToken) {
-            const entries = Object.entries(componentToken) as Entries<string | number | boolean>;
+          if (sharedToken) {
+            const entries = Object.entries(sharedToken) as Entries<string | number | boolean>;
 
             for (const [key, realToken] of entries) {
               if (isString(realToken) || isNumber(realToken)) {
                 const globalToken = token[key];
 
-                if (globalToken !== realToken) {
+                if (realToken !== globalToken) {
                   scopeToken[globalToken != null ? key : prefixToken(component, key)] = realToken;
                 }
               }
