@@ -127,19 +127,19 @@ export default function createStyles<C extends Components = never>(path: string[
           const hasKey = !!cssVar.key;
 
           for (const component of shared) {
-            const componentToken = realToken[component];
-            const componentTokens: Partial<ComponentTokens> = {};
+            const sharedToken = realToken[component];
+            const componentToken: Partial<ComponentTokens> = {};
 
-            if (componentToken) {
+            if (sharedToken) {
               let length = 0;
 
-              const entries = Object.entries(componentToken) as Entries<string | number | boolean>;
+              const entries = Object.entries(sharedToken) as Entries<string | number | boolean>;
 
               for (const [key, token] of entries) {
                 if (isString(token) || isNumber(token)) {
                   const globalToken = realToken[key];
 
-                  if (globalToken !== token) {
+                  if (token !== globalToken) {
                     length++;
 
                     hasScoped = hasKey;
@@ -148,19 +148,19 @@ export default function createStyles<C extends Components = never>(path: string[
                     const suffix = globalToken != null ? '' : `-${component}`;
                     const prefix = cssVarPrefix ? `${cssVarPrefix}${suffix}` : component;
 
-                    componentTokens[key] = `var(${token2CSSVar(key, prefix)})`;
+                    componentToken[key] = `var(${token2CSSVar(key, prefix)})`;
                   }
                 } else if (key === 'motion' || key === 'wireframe') {
                   length++;
 
                   hasScoped = hasKey;
 
-                  componentTokens[key] = token;
+                  componentToken[key] = token;
                 }
               }
 
               if (length > 0) {
-                mergedToken[component] = componentTokens as GlobalToken[C];
+                mergedToken[component] = componentToken as GlobalToken[C];
               }
             }
           }
