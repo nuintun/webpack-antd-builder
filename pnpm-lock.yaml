@@ -31,8 +31,8 @@ importers:
         specifier: ^0.5.15
         version: 0.5.15
       antd:
-        specifier: ^5.22.1
-        version: 5.22.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^5.22.2
+        version: 5.22.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -971,8 +971,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  antd@5.22.1:
-    resolution: {integrity: sha512-itq8AZwe3IfawZH6SMM5XdbTz1xXGTTqA7sNN0qpEdxcoTpD5nRsCBAMIy+PhwcWFobgFc6ZlF8d7f8eicn0SQ==}
+  antd@5.22.2:
+    resolution: {integrity: sha512-vihhiJbm9VG3d6boUeD1q2MXMax+qBrXhgqCEC+45v8iGUF6m4Ct+lFiCW4oWaN3EABOsbVA6Svy3Rj/QkQFKw==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -2535,8 +2535,8 @@ packages:
       react: '>=16.11.0'
       react-dom: '>=16.11.0'
 
-  rc-field-form@2.5.0:
-    resolution: {integrity: sha512-trTezNK0ThFQkKTy3KmsP6tY1TPMm0O5H/YviB+QLyfpdcMFuYs/aPn1uDbpdQupBd6dE6X73bzITcPS97zhJQ==}
+  rc-field-form@2.5.1:
+    resolution: {integrity: sha512-33hunXwynQJyeae7LS3hMGTXNeRBjiPyPYgB0824EbmLHiXC1EBGyUwRh6xjLRy9c+en5WARYN0gJz5+JAqwig==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
@@ -4153,7 +4153,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd@5.22.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  antd@5.22.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@ant-design/colors': 7.1.0
       '@ant-design/cssinjs': 1.22.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4176,7 +4176,7 @@ snapshots:
       rc-dialog: 9.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-drawer: 7.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-dropdown: 4.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      rc-field-form: 2.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rc-field-form: 2.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-image: 7.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-input: 1.6.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-input-number: 9.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5794,7 +5794,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  rc-field-form@2.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  rc-field-form@2.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.26.0
       '@rc-component/async-validator': 5.0.4

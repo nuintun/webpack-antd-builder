@@ -27,7 +27,7 @@
     "@ant-design/plots": "^2.3.2",
     "@nuintun/qrcode": "^4.1.6",
     "@swc/helpers": "^0.5.15",
-    "antd": "^5.22.1",
+    "antd": "^5.22.2",
     "classnames": "^2.5.1",
     "core-js": "^3.39.0",
     "dayjs": "^1.11.13",
