@@ -73,7 +73,7 @@
     "utf-8-validate": "^6.0.5",
     "webpack": "^5.97.1",
     "webpack-bundle-analyzer": "^4.10.2",
-    "webpack-dev-service": "^0.14.0"
+    "webpack-dev-service": "^0.14.1"
   },
   "overrides": {
     "ws": "^8.0.0",

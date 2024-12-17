@@ -164,8 +164,8 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.5)
       webpack-dev-service:
-        specifier: ^0.14.0
-        version: 0.14.0(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.14.1
+        version: 0.14.1(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -3343,8 +3343,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.14.0:
-    resolution: {integrity: sha512-ENuTqROKmNmcj9qwaayB/E7HdPR7JGIJh4zP40YKsJnTRDFLaHIzTXZgVCpggOX0ptpW6LJ3pdmVvf/s3pcujQ==}
+  webpack-dev-service@0.14.1:
+    resolution: {integrity: sha512-ezHE6mYwFy6EghNeROz7LOZS9VifA1niFLNzTsLm98qo1JkvC2LHpF0IDWWI7IQuCS7Nrs1sBeEkbY4NA+en+A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -6818,7 +6818,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.14.0(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.1(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
     dependencies:
       '@nuintun/ansi': 0.1.1
       '@types/koa': 2.15.0
