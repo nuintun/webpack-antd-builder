@@ -4,8 +4,6 @@
  * @see https://github.com/facebook/create-react-app
  */
 
-'use strict';
-
 const mode = 'development';
 
 process.env.NODE_ENV = mode;
