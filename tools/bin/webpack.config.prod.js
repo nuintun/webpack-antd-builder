@@ -1,6 +1,6 @@
 /**
  * @module webpack.config.prod
- * @description 生产环境 Webpack 配置.
+ * @description 生产环境 Webpack 配置
  * @see https://github.com/facebook/create-react-app
  */
 
@@ -28,7 +28,7 @@ async function getLightningTargets() {
   configure.devtool = false;
   configure.cache.name = 'prod';
 
-  // 使用自定义 minimizer 工具.
+  // 使用自定义 minimizer 工具
   configure.optimization.minimizer = [
     new CssMinimizerPlugin({
       minimizerOptions: {
@@ -42,7 +42,7 @@ async function getLightningTargets() {
     })
   ];
 
-  // 开启 webpack-bundle-analyzer 分析工具.
+  // 开启 webpack-bundle-analyzer 分析工具
   if (process.argv[2] === '--report') {
     configure.plugins.push(new BundleAnalyzerPlugin({ analyzerPort: 'auto' }));
   }
