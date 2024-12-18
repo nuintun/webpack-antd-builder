@@ -29,8 +29,7 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "app/**/*",
     "global.d.ts"
   ],
   "exclude": [
