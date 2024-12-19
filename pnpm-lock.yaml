@@ -164,8 +164,8 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.5)
       webpack-dev-service:
-        specifier: ^0.14.2
-        version: 0.14.2(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.14.3
+        version: 0.14.3(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -3143,6 +3143,10 @@ packages:
   stylis@4.3.4:
     resolution: {integrity: sha512-osIBl6BGUmSfDkyH2mB7EFvCJntXDrLhKjHTRj/rK6xLH0yuPrHULDRQzKokSOD4VoorhtKpfcfW1GAntu8now==}
 
+  supports-color@10.0.0:
+    resolution: {integrity: sha512-HRVVSbCCMbj7/kdWF9Q+bbckjBHLtHMEoJWlkmYzzdwhYMkjkOwubLM6t7NbWKjgKamGDrWL1++KrjUO1t9oAQ==}
+    engines: {node: '>=18'}
+
   supports-color@2.0.0:
     resolution: {integrity: sha512-KKNVtd6pCYgPIKU4cp2733HWYCpplQhddZLBUryaAHou723x+FRzQ5Df824Fj+IyyuiQTRoub4SnIFfIcrp70g==}
     engines: {node: '>=0.8.0'}
@@ -3158,10 +3162,6 @@ packages:
   supports-color@8.1.1:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
-
-  supports-color@9.4.0:
-    resolution: {integrity: sha512-VL+lNrEoIXww1coLPOmiEmK/0sGigko5COxI09KzHc2VJXJsQ37UaQ+8quuxjDeA7+KnLGTWRyOXSLLR2Wb4jw==}
-    engines: {node: '>=12'}
 
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
@@ -3362,8 +3362,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.14.2:
-    resolution: {integrity: sha512-0e7lgoV1LksFq5cs/7NlvvxHvqqN97yIXdYi3L5zXnDxp4gME5Gj5/ESnHyHfaG/LXF6dnsA+SJN6h7cjdr1Lw==}
+  webpack-dev-service@0.14.3:
+    resolution: {integrity: sha512-W2PwUkWbs7kw7RGtSxh+tIRDKrT6K/MxRLgiv6eFa7QYnDmVjWKdyVKlhmEz+lthuphIBn70A3dkVTKi+mwCBg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -6616,6 +6616,8 @@ snapshots:
 
   stylis@4.3.4: {}
 
+  supports-color@10.0.0: {}
+
   supports-color@2.0.0: {}
 
   supports-color@5.5.0:
@@ -6629,8 +6631,6 @@ snapshots:
   supports-color@8.1.1:
     dependencies:
       has-flag: 4.0.0
-
-  supports-color@9.4.0: {}
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
@@ -6839,7 +6839,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.14.2(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.3(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
     dependencies:
       '@nuintun/ansi': 0.2.0
       '@types/koa': 2.15.0
@@ -6849,7 +6849,7 @@ snapshots:
       memfs: 4.15.0
       range-parser: 1.2.1
       schema-utils: 4.3.0
-      supports-color: 9.4.0
+      supports-color: 10.0.0
       tslib: 2.8.1
       uuid: 11.0.3
       webpack: 5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))
