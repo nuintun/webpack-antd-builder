@@ -25,8 +25,8 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nuintun/qrcode':
-        specifier: ^4.1.10
-        version: 4.1.10
+        specifier: ^4.1.12
+        version: 4.1.12
       '@swc/helpers':
         specifier: ^0.5.15
         version: 0.5.15
@@ -49,8 +49,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1
       koa-files:
-        specifier: ^4.0.0
-        version: 4.0.0(koa@2.15.3)
+        specifier: ^4.0.1
+        version: 4.0.1(koa@2.15.3)
       memoize-one:
         specifier: ^6.0.0
         version: 6.0.0
@@ -64,15 +64,15 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2(react@18.3.1)
       react-nest-router:
-        specifier: ^0.19.23
-        version: 0.19.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.19.25
+        version: 0.19.25(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       throttle-debounce:
         specifier: ^5.0.2
         version: 5.0.2
     devDependencies:
       '@nuintun/svgo-loader':
-        specifier: ^0.3.0
-        version: 0.3.0(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.3.3
+        version: 0.3.3(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.15
         version: 0.5.15(react-refresh@0.14.2)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
@@ -107,8 +107,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(lightningcss@1.28.2)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
       css-modules-types-loader:
-        specifier: ^0.6.0
-        version: 0.6.0(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.6.2
+        version: 0.6.2(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
       find-free-ports:
         specifier: ^3.1.1
         version: 3.1.1
@@ -143,8 +143,8 @@ importers:
         specifier: ^16.0.4
         version: 16.0.4(sass-embedded@1.83.0)(sass@1.81.0)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
       svgc-loader:
-        specifier: ^0.3.0
-        version: 0.3.0(react@18.3.1)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.3.3
+        version: 0.3.3(react@18.3.1)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
       swc-loader:
         specifier: ^0.2.6
         version: 0.2.6(@swc/core@1.10.1(@swc/helpers@0.5.15))(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
@@ -164,8 +164,8 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.5)
       webpack-dev-service:
-        specifier: ^0.14.3
-        version: 0.14.3(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.14.5
+        version: 0.14.5(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -480,14 +480,14 @@ packages:
     resolution: {integrity: sha512-zM0mVWSXE0a0h9aKACLwKmD6nHcRiKrPpCfvaKqG1CqDEyjEawId0ocXxVzPMCAm6kkWr2P025msfxXEnt8UGQ==}
     engines: {node: '>= 10'}
 
-  '@nuintun/ansi@0.2.0':
-    resolution: {integrity: sha512-GXZnD2bo8Kx6mH+TzTjcaStEvryq27zPTaHzPdTJaFrnKhSsmIEfjQ92wVc1WiMmIQETv5oA0pwYjpi2CQUKYA==}
+  '@nuintun/ansi@0.2.2':
+    resolution: {integrity: sha512-RsUtPo5L2TcZyhAJUhS5JoTnzkPjxj7njX+hDumcBQPFkg3/lJ2rL3m5ekhLW/SECDo2skWcW5HLctBtcNcCUw==}
 
-  '@nuintun/qrcode@4.1.10':
-    resolution: {integrity: sha512-JiIvUMWmKoCkIFbiiMKvnB3oED9Ob/MFyUkzBTWKaid3R2bwFdhXu6f2wUnC0OpfjcNcFvcOft1OY1fXGUUTxg==}
+  '@nuintun/qrcode@4.1.12':
+    resolution: {integrity: sha512-JyXpf0rsBokNQoFSDlyVc+YHTTOSzCTh30wt4tHMGyGZ//7mR0cCMTusVVV6uOBsLoUd8ZIha+6fZ3dtMpn85g==}
 
-  '@nuintun/svgo-loader@0.3.0':
-    resolution: {integrity: sha512-zK/5U/ewnttxICQDnE+6byFxFSC2RHL+ln48uvYyQUh6Y65J68ruZz0yiGg4y1DuyiQBqleJyNVhT59aZByhUQ==}
+  '@nuintun/svgo-loader@0.3.3':
+    resolution: {integrity: sha512-ZD8YYqMgbOtBJRqH+rdB1H+lEu6fNBXNlwkVYJsYIJFFFBI9rbSsWiqgN1wcg84aBltXzgSnsN2XycLhGNKgkA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@rspack/core': ^1.0.0
@@ -1260,8 +1260,8 @@ packages:
       lightningcss:
         optional: true
 
-  css-modules-types-loader@0.6.0:
-    resolution: {integrity: sha512-NXpMqhVIoF30ho24bFuE1P9VeDJL8iE+75jdKJiCrUZY3QI4FN+uHEvXEXzfD+jNm6CqaJWOveldsUh1tcawVQ==}
+  css-modules-types-loader@0.6.2:
+    resolution: {integrity: sha512-48gW/P1R7Wd4vMDguS+WE+aiMxcNZ9cCupwO83QH0CpoePRtJgLQ3t9FJB9XyxujvKYZwZ26exSjYvZctzxlmA==}
     peerDependencies:
       '@rspack/core': ^1.0.0
       webpack: ^5.0.0
@@ -1969,8 +1969,8 @@ packages:
     resolution: {integrity: sha512-asOvN6bFlSnxewce2e/DK3p4tltyfC4VM7ZwuTuepI7dEQVcvpyFuBcEARu1+Hxg8DIwytce2n7jrZtRlPrARA==}
     engines: {node: '>= 10'}
 
-  koa-files@4.0.0:
-    resolution: {integrity: sha512-nC7KoRDvnRTCSHBKd4pjTS/naKO0nsviyQ9dxDS+mNlQC1ini24Rjdu1tXFnUZ+fyEudLvivtEEHrTcVz3vtCA==}
+  koa-files@4.0.1:
+    resolution: {integrity: sha512-1W8HORil2YevdGslOBKXGSG1rL/IQfUGdfO4OD2PKcwIJaU8WIDYFd77qx5XbLkWY/M42gv80zl1QtdWylwY+g==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       koa: ^2.0.0
@@ -2769,8 +2769,8 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-nest-router@0.19.23:
-    resolution: {integrity: sha512-fk4iqdRxxcTSu9+dhR3WCRmMpMQ88SPsegfpwDyuOHCZeUbWmWHsdRYXTLNMuDBizus8DItv0rlXLNy4rw7L6A==}
+  react-nest-router@0.19.25:
+    resolution: {integrity: sha512-sa/AxX7rV2JjUMMnTjWe9+ycqimQcKDwXepPt4VS3wgGeIx55JXJR68mFLmKXh+Agf8mIIDjYsKH6+qVD3vLQg==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -3170,8 +3170,8 @@ packages:
   svg-path-parser@1.1.0:
     resolution: {integrity: sha512-jGCUqcQyXpfe38R7RFfhrMyfXcBmpMNJI/B+4CE9/Unkh98UporAc461GTthv+TVDuZXsBx7/WiwJb1Oh4tt4A==}
 
-  svgc-loader@0.3.0:
-    resolution: {integrity: sha512-LF3qD31RMj+g3iXUb2PseGE1c8FCZz4dXJL9ciXMRqbTMz9/8hiXZcM8L/hCdBlGDGa2fzeF2DJ1w5L6t81MCA==}
+  svgc-loader@0.3.3:
+    resolution: {integrity: sha512-Er87lAIsjM0N/yS+jeaEK65q41nT8KstwlRhWt9LDahAwgFrM90WnM8lbmXBqlensccmIW0kEAQjYYxEKjtivg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@rspack/core': ^1.0.0
@@ -3362,8 +3362,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.14.3:
-    resolution: {integrity: sha512-W2PwUkWbs7kw7RGtSxh+tIRDKrT6K/MxRLgiv6eFa7QYnDmVjWKdyVKlhmEz+lthuphIBn70A3dkVTKi+mwCBg==}
+  webpack-dev-service@0.14.5:
+    resolution: {integrity: sha512-Yftzjb8kdDO6CQrDlTWOXIZACZ7DaUh91iCGyU1Tbb4FnHxrQt+fRa+wLMdiNVgEGxiZ/XBGjet/3Vn4Y0OxDg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -3839,15 +3839,15 @@ snapshots:
       '@napi-rs/nice-win32-x64-msvc': 1.0.1
     optional: true
 
-  '@nuintun/ansi@0.2.0':
+  '@nuintun/ansi@0.2.2':
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/qrcode@4.1.10':
+  '@nuintun/qrcode@4.1.12':
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/svgo-loader@0.3.0(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))':
+  '@nuintun/svgo-loader@0.3.3(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))':
     dependencies:
       svgo: 3.3.2
       tslib: 2.8.1
@@ -4663,7 +4663,7 @@ snapshots:
     optionalDependencies:
       lightningcss: 1.28.2
 
-  css-modules-types-loader@0.6.0(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
+  css-modules-types-loader@0.6.2(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
     dependencies:
       acorn: 8.14.0
       acorn-walk: 8.3.4
@@ -5415,7 +5415,7 @@ snapshots:
       co: 4.6.0
       koa-compose: 4.1.0
 
-  koa-files@4.0.0(koa@2.15.3):
+  koa-files@4.0.1(koa@2.15.3):
     dependencies:
       etag: 1.8.1
       koa: 2.15.3
@@ -6263,7 +6263,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-nest-router@0.19.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-nest-router@0.19.25(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -6636,7 +6636,7 @@ snapshots:
 
   svg-path-parser@1.1.0: {}
 
-  svgc-loader@0.3.0(react@18.3.1)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
+  svgc-loader@0.3.3(react@18.3.1)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
     dependencies:
       css-tree: 3.1.0
       svgo: 3.3.2
@@ -6839,9 +6839,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.14.3(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.5(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
     dependencies:
-      '@nuintun/ansi': 0.2.0
+      '@nuintun/ansi': 0.2.2
       '@types/koa': 2.15.0
       '@types/ws': 8.5.13
       etag: 1.8.1
