@@ -61,8 +61,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-error-boundary:
-        specifier: ^4.1.2
-        version: 4.1.2(react@18.3.1)
+        specifier: ^5.0.0
+        version: 5.0.0(react@18.3.1)
       react-nest-router:
         specifier: ^0.19.25
         version: 0.19.25(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -119,8 +119,8 @@ importers:
         specifier: ^1.28.2
         version: 1.28.2
       memfs:
-        specifier: ^4.15.0
-        version: 4.15.0
+        specifier: ^4.15.1
+        version: 4.15.1
       mini-css-extract-plugin:
         specifier: ^2.9.2
         version: 2.9.2(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
@@ -164,8 +164,8 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.8)(utf-8-validate@6.0.5)
       webpack-dev-service:
-        specifier: ^0.14.5
-        version: 0.14.5(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
+        specifier: ^0.14.6
+        version: 0.14.6(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -294,10 +294,6 @@ packages:
 
   '@babel/highlight@7.24.7':
     resolution: {integrity: sha512-EStJpq4OuY8xYfhGVXngigBJRWxftKX9ksiGDnmlY3o7B/V7KIAc9X4oiK87uPJSc/vs5L869bem5fhZa8caZw==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/runtime@7.25.6':
-    resolution: {integrity: sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.26.0':
@@ -2105,8 +2101,8 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
 
-  memfs@4.15.0:
-    resolution: {integrity: sha512-q9MmZXd2rRWHS6GU3WEm3HyiXZyyoA1DqdOhEq0lxPBmKb5S7IAOwX0RgUCwJfqjelDCySa5h8ujOy24LqsWcw==}
+  memfs@4.15.1:
+    resolution: {integrity: sha512-ufCzgFwiVnR6R9cCYuvwznJdhdYXEvFl0hpnM4cCtVaVkHuqBR+6fo2sqt1SSMdp+uiHw9GyPZr3OMM5tqjSmQ==}
     engines: {node: '>= 4.0.0'}
 
   memoize-one@6.0.0:
@@ -2761,8 +2757,8 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
-  react-error-boundary@4.1.2:
-    resolution: {integrity: sha512-GQDxZ5Jd+Aq/qUxbCm1UtzmL/s++V7zKgE8yMktJiCQXCCFZnMZh9ng+6/Ne6PjNSXH0L9CjeOEREfRnq6Duag==}
+  react-error-boundary@5.0.0:
+    resolution: {integrity: sha512-tnjAxG+IkpLephNcePNA7v6F/QpWLH8He65+DmedchDwg162JZqx4NmbXj0mlAYVVEd81OW7aFhmbsScYfiAFQ==}
     peerDependencies:
       react: '>=16.13.1'
 
@@ -3362,8 +3358,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.14.5:
-    resolution: {integrity: sha512-Yftzjb8kdDO6CQrDlTWOXIZACZ7DaUh91iCGyU1Tbb4FnHxrQt+fRa+wLMdiNVgEGxiZ/XBGjet/3Vn4Y0OxDg==}
+  webpack-dev-service@0.14.6:
+    resolution: {integrity: sha512-aIXzV4GQjaQbi4b2ZglVmUm7hOB4NBJL48RTzXQyR4lMaIgpMS6vdAGQqgbWD2Tp1df73fssaMiOa+QbXuo93g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -3684,10 +3680,6 @@ snapshots:
       chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.1.0
-
-  '@babel/runtime@7.25.6':
-    dependencies:
-      regenerator-runtime: 0.14.1
 
   '@babel/runtime@7.26.0':
     dependencies:
@@ -5539,7 +5531,7 @@ snapshots:
 
   media-typer@0.3.0: {}
 
-  memfs@4.15.0:
+  memfs@4.15.1:
     dependencies:
       '@jsonjoy.com/json-pack': 1.0.4(tslib@2.8.1)
       '@jsonjoy.com/util': 1.3.0(tslib@2.8.1)
@@ -6256,9 +6248,9 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-error-boundary@4.1.2(react@18.3.1):
+  react-error-boundary@5.0.0(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.25.6
+      '@babel/runtime': 7.26.0
       react: 18.3.1
 
   react-is@18.3.1: {}
@@ -6839,14 +6831,14 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.14.5(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.6(bufferutil@4.0.8)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.1(@swc/helpers@0.5.15))):
     dependencies:
       '@nuintun/ansi': 0.2.2
       '@types/koa': 2.15.0
       '@types/ws': 8.5.13
       etag: 1.8.1
       koa: 2.15.3
-      memfs: 4.15.0
+      memfs: 4.15.1
       range-parser: 1.2.1
       schema-utils: 4.3.0
       supports-color: 10.0.0
