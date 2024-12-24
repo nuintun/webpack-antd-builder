@@ -154,6 +154,7 @@ export default async mode => {
           resolve('package.json'),
           resolve('.postcssrc.js'),
           resolve('app.config.js'),
+          resolve('svgo.config.js'),
           resolve('.browserslistrc')
         ],
         tools: await arrayFromAsync(getFiles('tools'))
