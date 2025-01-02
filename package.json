@@ -58,7 +58,7 @@
     "find-free-ports": "^3.1.1",
     "html-webpack-plugin": "^5.6.3",
     "lightningcss": "^1.28.2",
-    "memfs": "^4.15.2",
+    "memfs": "^4.15.3",
     "mini-css-extract-plugin": "^2.9.2",
     "nodemon": "^3.1.9",
     "postcss": "^8.4.49",
@@ -73,7 +73,7 @@
     "utf-8-validate": "^6.0.5",
     "webpack": "^5.97.1",
     "webpack-bundle-analyzer": "^4.10.2",
-    "webpack-dev-service": "^0.14.6"
+    "webpack-dev-service": "^0.14.7"
   },
   "overrides": {
     "ws": "^8.0.0",
