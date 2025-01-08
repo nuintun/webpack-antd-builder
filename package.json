@@ -29,7 +29,7 @@
     "@swc/helpers": "^0.5.15",
     "antd": "^5.23.0",
     "classnames": "^2.5.1",
-    "core-js": "^3.39.0",
+    "core-js": "^3.40.0",
     "dayjs": "^1.11.13",
     "koa": "^2.15.3",
     "koa-compress": "^5.1.1",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@nuintun/svgo-loader": "^0.3.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
-    "@swc/core": "^1.10.4",
+    "@swc/core": "^1.10.6",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "@types/throttle-debounce": "^5.0.2",
