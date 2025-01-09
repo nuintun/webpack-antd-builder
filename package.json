@@ -29,7 +29,6 @@
     "@swc/helpers": "^0.5.15",
     "antd": "^5.23.0",
     "classnames": "^2.5.1",
-    "core-js": "^3.40.0",
     "dayjs": "^1.11.13",
     "koa": "^2.15.3",
     "koa-compress": "^5.1.1",
@@ -87,7 +86,6 @@
     "onlyBuiltDependencies": [
       "@swc/core",
       "bufferutil",
-      "core-js",
       "core-js-pure",
       "utf-8-validate"
     ]

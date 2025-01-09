@@ -36,9 +36,6 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
-      core-js:
-        specifier: ^3.40.0
-        version: 3.40.0
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -1084,9 +1081,6 @@ packages:
 
   core-js-pure@3.40.0:
     resolution: {integrity: sha512-AtDzVIgRrmRKQai62yuSIN5vNiQjcJakJb4fbhVw3ehxx7Lohphvw9SGNWKhLFqSxC4ilD0g/L1huAYFQU3Q6A==}
-
-  core-js@3.40.0:
-    resolution: {integrity: sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ==}
 
   cosmiconfig@9.0.0:
     resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==}
@@ -4467,8 +4461,6 @@ snapshots:
       toggle-selection: 1.0.6
 
   core-js-pure@3.40.0: {}
-
-  core-js@3.40.0: {}
 
   cosmiconfig@9.0.0(typescript@5.7.3):
     dependencies:
