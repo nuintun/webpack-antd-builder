@@ -19,8 +19,8 @@ importers:
         specifier: ^1.1.3
         version: 1.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@ant-design/icons':
-        specifier: ^5.6.0
-        version: 5.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^5.6.1
+        version: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@ant-design/plots':
         specifier: ^2.3.3
         version: 2.3.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -161,8 +161,8 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(bufferutil@4.0.9)(utf-8-validate@6.0.5)
       webpack-dev-service:
-        specifier: ^0.14.10
-        version: 0.14.10(bufferutil@4.0.9)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.14(@swc/helpers@0.5.15)))
+        specifier: ^0.14.11
+        version: 0.14.11(bufferutil@4.0.9)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.14(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -194,8 +194,8 @@ packages:
   '@ant-design/icons-svg@4.4.2':
     resolution: {integrity: sha512-vHbT+zJEVzllwP+CM+ul7reTEfBR0vgxFe7+lREAsAA7YGsYpboiq2sQNeQeRvh09GfQgs/GyFEvZpJ9cLXpXA==}
 
-  '@ant-design/icons@5.6.0':
-    resolution: {integrity: sha512-Mb6QkQmPLZsmIHJ6oBsoyKrrT8/kAUdQ6+8q38e2bQSclROi69SiDlI4zZroaIPseae1w110RJH0zGrphAvlSQ==}
+  '@ant-design/icons@5.6.1':
+    resolution: {integrity: sha512-0/xS39c91WjPAZOWsvi1//zjx6kAp4kxWwctR6kuU6p133w8RU0D2dSCvZC19uQyharg/sAvYxGYWl01BbZZfg==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.0.0'
@@ -462,8 +462,8 @@ packages:
     resolution: {integrity: sha512-zM0mVWSXE0a0h9aKACLwKmD6nHcRiKrPpCfvaKqG1CqDEyjEawId0ocXxVzPMCAm6kkWr2P025msfxXEnt8UGQ==}
     engines: {node: '>= 10'}
 
-  '@nuintun/ansi@0.2.2':
-    resolution: {integrity: sha512-RsUtPo5L2TcZyhAJUhS5JoTnzkPjxj7njX+hDumcBQPFkg3/lJ2rL3m5ekhLW/SECDo2skWcW5HLctBtcNcCUw==}
+  '@nuintun/ansi@0.3.0':
+    resolution: {integrity: sha512-uxu++kArlqKS0wT677pR3iVz2Zs86M4kacHL6n6Dis4pzdA5QRY20HbddJ3u8P4Tw4hkdWKjCOdffdOX6wPCyA==}
 
   '@nuintun/qrcode@4.1.13':
     resolution: {integrity: sha512-xg9CeAG8pxohYTUeJ4Rodc2q8cuHY4ml2TTJGajC1BT8f2GiP2Nd6+mIszQqkeICBh/0hk5keg4WBPQCyhsaWw==}
@@ -3284,8 +3284,8 @@ packages:
     engines: {node: '>= 10.13.0'}
     hasBin: true
 
-  webpack-dev-service@0.14.10:
-    resolution: {integrity: sha512-lhD/+ScVaZ/Lw6yD5RjlIFA2jcFY/um2y72ILeMIgABoR07Mrcf0PpjdqGSCidSy7DIgZp7BjTduYI6lizXLZA==}
+  webpack-dev-service@0.14.11:
+    resolution: {integrity: sha512-EITm7EL2zZF8y4sOgAL+LV4jpTCfmLE3M+zoAYilV5ilENbeSrGEk1tC+24daoRm/SjhHJTvMQl8+kCO07UVig==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -3399,7 +3399,7 @@ snapshots:
 
   '@ant-design/icons-svg@4.4.2': {}
 
-  '@ant-design/icons@5.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@ant-design/icons@5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@ant-design/colors': 7.2.0
       '@ant-design/icons-svg': 4.4.2
@@ -3764,7 +3764,7 @@ snapshots:
       '@napi-rs/nice-win32-x64-msvc': 1.0.1
     optional: true
 
-  '@nuintun/ansi@0.2.2':
+  '@nuintun/ansi@0.3.0':
     dependencies:
       tslib: 2.8.1
 
@@ -4198,7 +4198,7 @@ snapshots:
       '@ant-design/cssinjs': 1.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@ant-design/cssinjs-utils': 1.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@ant-design/fast-color': 2.0.6
-      '@ant-design/icons': 5.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@ant-design/icons': 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@ant-design/react-slick': 1.1.2(react@18.3.1)
       '@babel/runtime': 7.26.0
       '@rc-component/color-picker': 2.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6768,9 +6768,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-dev-service@0.14.10(bufferutil@4.0.9)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.14(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.11(bufferutil@4.0.9)(koa@2.15.3)(utf-8-validate@6.0.5)(webpack@5.97.1(@swc/core@1.10.14(@swc/helpers@0.5.15))):
     dependencies:
-      '@nuintun/ansi': 0.2.2
+      '@nuintun/ansi': 0.3.0
       '@types/koa': 2.15.0
       '@types/ws': 8.5.14
       etag: 1.8.1
