@@ -58,6 +58,7 @@ export async function* getFiles(root) {
 }
 
 /**
+ * @template T
  * @function arrayFromAsync
  * @param {ArrayLike<T> | Iterable<T> | AsyncIterable<T>} iterator
  * @return {Promise<T[]>}
@@ -76,7 +77,7 @@ async function arrayFromAsync(iterator) {
  * @function resolveEnvironment
  * @param {string} mode
  * @param {object} env
- * @return {Promise<object>}
+ * @return {Promise<Record<string, string>>}
  */
 async function resolveEnvironment(mode, env) {
   if (typeof env === 'function') {

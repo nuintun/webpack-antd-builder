@@ -3,10 +3,10 @@
  * @description 类型定义
  */
 
-import { Configuration } from 'webpack';
-import { Options } from 'webpack-dev-service';
-import { Plugin, ProcessOptions } from 'postcss';
-import { Options as SvgoOptions } from '@nuintun/svgo-loader';
+import type { Configuration } from 'webpack';
+import type { Options } from 'webpack-dev-service';
+import type { Plugin, ProcessOptions } from 'postcss';
+import type { Options as SvgoOptions } from '@nuintun/svgo-loader';
 
 /**
  * @description Env 配置

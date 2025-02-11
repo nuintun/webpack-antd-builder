@@ -30,15 +30,19 @@ async function getLightningTargets() {
 
   // 使用自定义 minimizer 工具
   configure.optimization.minimizer = [
+    new TerserPlugin({
+      terserOptions: {
+        format: {
+          comments: false
+        }
+      },
+      minify: TerserPlugin.swcMinify
+    }),
     new CssMinimizerPlugin({
       minimizerOptions: {
         targets: await getLightningTargets()
       },
       minify: CssMinimizerPlugin.lightningCssMinify
-    }),
-    new TerserPlugin({
-      minify: TerserPlugin.swcMinify,
-      terserOptions: { format: { comments: false } }
     })
   ];
 
