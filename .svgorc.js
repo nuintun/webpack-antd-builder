@@ -10,8 +10,9 @@ import { createHash } from 'node:crypto';
  * @param {string} mode
  * @return {Promise<import('./tools/interface').SvgoConfig>}
  */
-export default async () => {
+export default async mode => {
   return {
+    multipass: mode === 'production',
     plugins: [
       'preset-default',
       {
