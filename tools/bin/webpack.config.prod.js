@@ -16,7 +16,6 @@ import TerserPlugin from 'terser-webpack-plugin';
 import { browserslistToTargets } from 'lightningcss';
 import resolveConfigure from './webpack.config.base.js';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 async function getLightningTargets() {
   return browserslistToTargets(browserslist(await targets()));
@@ -45,11 +44,6 @@ async function getLightningTargets() {
       minify: CssMinimizerPlugin.lightningCssMinify
     })
   ];
-
-  // 开启 webpack-bundle-analyzer 分析工具
-  if (process.argv[2] === '--report') {
-    configure.plugins.push(new BundleAnalyzerPlugin({ analyzerPort: 'auto' }));
-  }
 
   const compiler = webpack(configure);
 

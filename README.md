@@ -1,3 +1,3 @@
 # webpack-antd-builder
 
-> A webpack antd build configure tools.
+> A webpack-based antd build tool.

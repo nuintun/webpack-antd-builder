@@ -1,6 +1,6 @@
 {
   "name": "webpack-antd-build",
-  "description": "A webpack antd build tools.",
+  "description": "A webpack-based antd build tool.",
   "private": true,
   "type": "module",
   "engines": {
@@ -17,7 +17,6 @@
     "start": "node server.js",
     "prod": "node tools/bin/webpack.config.prod.js",
     "dev": "nodemon tools/bin/webpack.config.dev.js",
-    "report": "node tools/bin/webpack.config.prod.js --report",
     "format": "prettier --write . --ignore-path .prettierignore"
   },
   "dependencies": {
@@ -62,7 +61,7 @@
     "nodemon": "^3.1.9",
     "postcss": "^8.5.2",
     "postcss-loader": "^8.1.1",
-    "prettier": "^3.5.0",
+    "prettier": "^3.5.1",
     "sass-embedded": "^1.83.4",
     "sass-loader": "^16.0.4",
     "svgc-loader": "^0.4.0",
@@ -71,7 +70,6 @@
     "typescript": "^5.7.3",
     "utf-8-validate": "^6.0.5",
     "webpack": "^5.97.1",
-    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-dev-service": "^0.14.11"
   },
   "overrides": {
