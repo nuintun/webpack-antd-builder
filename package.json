@@ -1,5 +1,5 @@
 {
-  "name": "webpack-antd-build",
+  "name": "webpack-antd-builder",
   "description": "A webpack-based antd build tool.",
   "private": true,
   "type": "module",
