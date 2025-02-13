@@ -136,7 +136,6 @@ export default async mode => {
       assetModuleFilename: `[path][${isDevelopment ? 'name' : 'contenthash'}][ext]`
     },
     module: {
-      strictExportPresence: true,
       rules: await resolveRules(mode)
     },
     resolve: {
