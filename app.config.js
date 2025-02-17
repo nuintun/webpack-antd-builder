@@ -3,11 +3,11 @@
  * @description 应用配置
  */
 
-import path from 'node:path';
+import { resolve } from 'node:path';
 
-const js = path.resolve('app/js');
-const css = path.resolve('app/css');
-const images = path.resolve('app/images');
+const js = resolve('app/js');
+const css = resolve('app/css');
+const images = resolve('app/images');
 
 /**
  * @type {import('./tools/interface').AppConfig}
@@ -17,11 +17,11 @@ export default {
   lang: 'zh-CN',
   name: 'Ant Design',
   publicPath: '/public/',
-  context: path.resolve('app'),
-  outputPath: path.resolve('wwwroot/public'),
-  entryHTML: path.resolve('wwwroot/app.html'),
-  entry: path.resolve('app/js/pages/index.tsx'),
-  favicon: path.resolve('app/images/favicon.ico'),
+  context: resolve('app'),
+  outputPath: resolve('wwwroot/public'),
+  entryHTML: resolve('wwwroot/app.html'),
+  entry: resolve('app/js/pages/index.tsx'),
+  favicon: resolve('app/images/favicon.ico'),
   alias: { '/js': js, '/css': css, '/images': images },
   meta: { viewport: 'width=device-width,initial-scale=1.0' }
 };
