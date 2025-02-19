@@ -3,66 +3,11 @@ import * as styles from '/css/pages/home/index.module.scss';
 import { Button } from 'antd';
 import { memo, useMemo } from 'react';
 import Paper from '/js/components/Paper';
+import useTheme from '/js/hooks/useTheme';
 import QRCode from '/js/components/QRCode';
 import { Byte, Charset } from '@nuintun/qrcode';
-import useTheme, { Theme } from '/js/hooks/useTheme';
-import { Line, LineConfig } from '@ant-design/plots';
 import useStateMachine from '/js/hooks/useStateMachine';
 import { PauseOutlined, PlayCircleOutlined, UndoOutlined } from '@ant-design/icons';
-
-interface LineChartProps {
-  theme: Theme;
-}
-
-const LineChart = memo(({ theme }: LineChartProps) => {
-  const config = useMemo<LineConfig>(() => {
-    const data = [
-      { year: '1991', value: 3 },
-      { year: '1992', value: 4 },
-      { year: '1993', value: 3.5 },
-      { year: '1994', value: 5 },
-      { year: '1995', value: 4.9 },
-      { year: '1996', value: 6 },
-      { year: '1997', value: 7 },
-      { year: '1998', value: 9 },
-      { year: '1999', value: 13 }
-    ];
-
-    return {
-      data,
-      theme,
-      autoFit: true,
-      xField: 'year',
-      yField: 'value',
-      style: {
-        lineWidth: 2
-      },
-      interaction: {
-        tooltip: {
-          marker: false
-        }
-      },
-      animate: {
-        enter: {
-          type: 'pathIn'
-        },
-        update: {
-          type: 'morphing'
-        }
-      },
-      point: {
-        sizeField: 4,
-        shapeField: 'square'
-      }
-    };
-  }, [theme]);
-
-  return (
-    <div className={styles.chart}>
-      <Line {...config} />
-    </div>
-  );
-});
 
 function pad(value: number): string {
   return value.toString().padStart(2, '0');
@@ -182,8 +127,6 @@ export default memo(function Page() {
 
   return (
     <Paper className={styles.paper}>
-      <LineChart theme={theme} />
-      <Time />
       <QRCode
         level="H"
         alt="QRCode"
@@ -193,6 +136,7 @@ export default memo(function Page() {
         foreground={theme === 'light' ? '#000' : '#fff'}
         background={theme === 'light' ? '#fff' : '#000'}
       />
+      <Time />
     </Paper>
   );
 });

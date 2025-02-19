@@ -1,14 +1,6 @@
 .paper {
-  min-width: 288px;
+  min-width: fit-content;
 
-  .chart {
-    width: 100%;
-    height: 512px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .chart,
   .qrcode,
   .machine {
     border: 1px dashed #d9d9d9;
@@ -19,7 +11,7 @@
   }
 
   .machine {
-    margin-bottom: 16px;
+    margin-top: 16px;
   }
 
   .machine {
