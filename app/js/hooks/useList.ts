@@ -12,7 +12,7 @@ import usePagingRequest, {
   Transform
 } from './usePagingRequest';
 import useLatestRef from './useLatestRef';
-import { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { GetProp, ListProps, PaginationProps } from 'antd';
 import useSearchFilters, { Filter } from './useSearchFilters';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';

@@ -2,6 +2,7 @@
  * @module dom
  */
 
+import React from 'react';
 import { isFunction } from './utils';
 
 /**

@@ -10,8 +10,8 @@ import useTheme from '/js/hooks/useTheme';
 import { Router } from 'react-nest-router';
 import { App, ConfigProvider, theme } from 'antd';
 import { ErrorBoundary } from 'react-error-boundary';
+import { lazy, memo, Suspense, useMemo } from 'react';
 import ErrorFallback from '/js/components/FallBack/Error';
-import React, { lazy, memo, Suspense, useMemo } from 'react';
 import LoadingFallBack from '/js/components/FallBack/Loading';
 
 const NotFound = lazy(() => import('/js/pages/404'));

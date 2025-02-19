@@ -2,6 +2,7 @@
  * @module router
  */
 
+import React from 'react';
 import { resolve } from './url';
 import { DFSTree } from './Tree';
 import { assert } from './utils';

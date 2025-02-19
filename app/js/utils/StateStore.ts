@@ -2,6 +2,7 @@
  * @module StateStore
  */
 
+import React from 'react';
 import { isFunction } from './utils';
 
 export interface Callback {
