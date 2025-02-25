@@ -76,7 +76,6 @@ export function parse<M = unknown>(
 
           if (menu) {
             const { children } = menu;
-            const isAvailable = node.available === true;
 
             if (children && children.length > 0) {
               const subset = children.filter(({ key }) => {
@@ -92,7 +91,7 @@ export function parse<M = unknown>(
                   removeable.add(key);
                 }
               }
-            } else if (!isAvailable) {
+            } else if (!node.reachable) {
               if (shouldRemoveSelf(key)) {
                 removeable.add(key);
               }
