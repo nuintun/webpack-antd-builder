@@ -18,8 +18,8 @@ importers:
         specifier: ^5.6.1
         version: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nuintun/qrcode':
-        specifier: ^4.1.13
-        version: 4.1.13
+        specifier: ^4.1.14
+        version: 4.1.14
       '@swc/helpers':
         specifier: ^0.5.15
         version: 0.5.15
@@ -361,8 +361,8 @@ packages:
   '@nuintun/ansi@0.3.1':
     resolution: {integrity: sha512-VmBrGc9YF8pQW7Cep0EryivtDooXFCfVGs6uMsmdabpMW9G3+jm0jN2U6hm8bXgLQQ94OmB+dhi1eTPWJiRZuA==}
 
-  '@nuintun/qrcode@4.1.13':
-    resolution: {integrity: sha512-xg9CeAG8pxohYTUeJ4Rodc2q8cuHY4ml2TTJGajC1BT8f2GiP2Nd6+mIszQqkeICBh/0hk5keg4WBPQCyhsaWw==}
+  '@nuintun/qrcode@4.1.14':
+    resolution: {integrity: sha512-+Dztb5OakXOkqk+q7rVjBgeZyxeERdufIDRwNrKZE9oiwwcU4ZuZRCL+bINmGKvoF1AV29eRlgWeHIQQHuj5ug==}
 
   '@nuintun/svgo-loader@0.4.1':
     resolution: {integrity: sha512-ATcHqQvZZcv86AJJHlw+zTJn5ErUVPpvdCia4cilJWNoDTa+ZXmG3JwI2iicZsHrbD6ayIA+1dAQdWXOCkM5nw==}
@@ -2730,7 +2730,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/qrcode@4.1.13':
+  '@nuintun/qrcode@4.1.14':
     dependencies:
       tslib: 2.8.1
 
