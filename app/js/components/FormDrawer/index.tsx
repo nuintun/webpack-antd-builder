@@ -18,6 +18,8 @@ type DrawerPicked =
   | 'children'
   | 'keyboard'
   | 'placement'
+  | 'breakWidth'
+  | 'breakHeight'
   | 'forceRender'
   | 'maskClosable'
   | 'destroyOnClose'
@@ -34,7 +36,7 @@ export type Trigger = React.ReactElement<{
   onClick?: (...args: unknown[]) => void;
 }>;
 
-export interface FormDrawerProps<F extends Fields, R>
+export interface FormDrawerProps<F extends Fields, R = unknown>
   extends Omit<FormProps<F>, FormOmitted>,
     Pick<Options<F, R>, SubmitPicked>,
     Pick<FlexDrawerProps, DrawerPicked> {
@@ -79,7 +81,9 @@ function FormDrawer<F extends Fields, R>({
   normalize,
   onSuccess,
   placement,
+  breakWidth,
   onComplete,
+  breakHeight,
   forceRender,
   requestInit,
   width = 560,
@@ -150,7 +154,9 @@ function FormDrawer<F extends Fields, R>({
         loading={loading}
         keyboard={keyboard}
         placement={placement}
+        breakWidth={breakWidth}
         onClose={onCloseHandler}
+        breakHeight={breakHeight}
         forceRender={forceRender}
         maskClosable={maskClosable}
         destroyOnClose={destroyOnClose}

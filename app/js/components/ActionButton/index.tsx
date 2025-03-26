@@ -16,6 +16,7 @@ type ButtonPicked =
   | 'ghost'
   | 'shape'
   | 'style'
+  | 'title'
   | 'danger'
   | 'children'
   | 'tabIndex'
@@ -41,6 +42,7 @@ function ActionButton<R>({
   ghost,
   shape,
   style,
+  title,
   action,
   danger,
   bubbles,
@@ -75,6 +77,7 @@ function ActionButton<R>({
       ghost={ghost}
       shape={shape}
       style={style}
+      title={title}
       danger={danger}
       onClick={onClick}
       tabIndex={tabIndex}

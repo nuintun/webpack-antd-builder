@@ -29,13 +29,12 @@ export interface Sorter {
 export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
   sorter?: Sorter | false;
-  pagination?: Pagination;
 }
 
 export type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
 
 export interface Options<I, E, T> extends InitOptions<I, E, T> {
-  pagination?: Pagination;
+  pagination?: Pagination | false;
 }
 
 export interface Refs<I, E = {}> extends RequestRefs<I, E> {
@@ -44,11 +43,13 @@ export interface Refs<I, E = {}> extends RequestRefs<I, E> {
 
 type TablePropsPicked = 'size' | 'onChange' | 'dataSource' | 'pagination';
 
-export type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
+type TablePagination = Exclude<GetProp<TableProps<unknown>, 'pagination'>, false>;
 
 export interface DefaultTableProps<I> extends Required<Pick<TableProps<I>, TablePropsPicked>> {
   loading: boolean;
 }
+
+export type Pagination = Omit<PagingOptions & Partial<RequestPagination> & TablePagination, 'current'>;
 
 /**
  * @function serializeField
@@ -108,7 +109,7 @@ export default function useTable<I, E = unknown, T = I>(
   const fetch: Fetch = useCallback((options = {}): void => {
     const { filter, sorter } = options;
     const { current: initOptions } = opitonsRef;
-    const query = { ...initOptions.query, ...serialize([filter, sorter]) };
+    const query = { ...initOptions.query, ...options.query, ...serialize([filter, sorter]) };
 
     request({ ...opitonsRef.current, ...options, query });
   }, []);

@@ -31,7 +31,7 @@ function renderContent(item: MenuItem, renderItem?: RenderItem): React.ReactNode
   );
 }
 
-function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: RenderItem): React.ReactElement {
+function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: RenderItem): React.ReactNode {
   const { link, children } = item;
 
   if ((children && children.length > 0) || !link) {

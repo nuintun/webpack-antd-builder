@@ -3,8 +3,8 @@
  * @description Ajax 请求封装
  */
 
-import { isObject } from './utils';
-import { Fields, serialize, serializeBody } from './form';
+import { Fields, serialize } from './form';
+import { isBigInt, isObject } from './utils';
 
 export type Query = Fields;
 
@@ -57,12 +57,26 @@ function resloveMessage(code: number): string {
 }
 
 /**
- * @function isJSONType
- * @param headers 请求或返回 Headers
+ * @function stringify
+ * @param value 要序列化的数据
  */
-function isJSONType(headers: Headers): boolean {
-  const contentType = headers.get('Content-Type');
+function stringify(value: any): string {
+  return JSON.stringify(value, (_key, value) => {
+    if (isBigInt(value)) {
+      return value.toString();
+    }
 
+    if (value !== null) {
+      return value;
+    }
+  });
+}
+
+/**
+ * @function isJsonType
+ * @param contentType 内容类型
+ */
+function isJsonType(contentType: string | null): boolean {
   return !!contentType && /^application\/json(;|$)/i.test(contentType);
 }
 
@@ -71,7 +85,9 @@ function isJSONType(headers: Headers): boolean {
  * @param response 响应内容
  */
 function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
-  if (isJSONType(response.headers)) {
+  const contentType = response.headers.get('Content-Type');
+
+  if (isJsonType(contentType)) {
     return response.json().then(({ code, message, payload }: RequestResult<R>) => {
       return { code, message: message || resloveMessage(code), payload };
     });
@@ -113,7 +129,7 @@ function createErrorCatch(code: number): (error: Error | DOMException | string) 
       throw new RequestError(code, error.message, error);
     }
 
-    throw new RequestError(code, JSON.stringify(error), { name: 'AbortError' });
+    throw new RequestError(code, stringify(error), { name: 'AbortError' });
   };
 }
 
@@ -130,8 +146,11 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   options.headers = new Headers(options.headers || {});
   options.credentials = options.credentials || 'include';
 
-  const { body, headers } = options;
   const input = new URL(url, baseURL);
+  const { body, headers, method = 'GET' } = options;
+
+  // 请求方法，PATCH 非大写会跨域失败
+  options.method = method.toUpperCase();
 
   // 查询参数
   query && serialize(query, input.searchParams);
@@ -141,7 +160,13 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
 
   // 序列化 body
   if (isObject(body) || Array.isArray(body)) {
-    options.body = serializeBody(body, isJSONType(headers));
+    const contentType = headers.get('Content-Type');
+
+    if (isJsonType(contentType)) {
+      options.body = stringify(body);
+    } else {
+      options.body = serialize(body, new FormData());
+    }
   }
 
   // 发送请求

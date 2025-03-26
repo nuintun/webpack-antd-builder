@@ -11,8 +11,8 @@ import { Router } from 'react-nest-router';
 import { App, ConfigProvider, theme } from 'antd';
 import { ErrorBoundary } from 'react-error-boundary';
 import { lazy, memo, Suspense, useMemo } from 'react';
-import ErrorFallback from '/js/components/FallBack/Error';
-import LoadingFallBack from '/js/components/FallBack/Loading';
+import ErrorFallback from '/js/components/Fallback/Error';
+import LoadingFallback from '/js/components/Fallback/Loading';
 
 const NotFound = lazy(() => import('/js/pages/404'));
 
@@ -26,7 +26,7 @@ const Page = memo(function Page() {
   return (
     <App className="ui-app" style={{ backgroundColor: colorBgContainer }} message={{ maxCount: 3 }}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<LoadingFallBack />}>
+        <Suspense fallback={<LoadingFallback />}>
           <Router routes={routes} context={routes}>
             <NotFound />
           </Router>

@@ -38,22 +38,27 @@ export default function usePagingOptions(opitons?: Options | false): UsePagingOp
     const { current: opitons = {} } = opitonsRef;
 
     if (opitons !== false) {
-      const { pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS } = opitons;
+      const {
+        simple,
+        showQuickJumper = !simple,
+        showSizeChanger = !simple,
+        pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS
+      } = opitons;
 
       if (__DEV__) {
-        if (!pageSizeOptions.includes(pageSize)) {
+        if (showSizeChanger && !pageSizeOptions.includes(pageSize)) {
           console.error(new ReferenceError(`page size ${pageSize} not in options [${pageSizeOptions.join(', ')}]`));
         }
       }
 
       return {
         showTotal,
+        showQuickJumper,
+        showSizeChanger,
         size: 'default',
         responsive: true,
-        showSizeChanger: true,
-        showQuickJumper: true,
         ...opitons,
-        pageSizeOptions: pageSizeOptions.map(item => item.toString())
+        pageSizeOptions: showSizeChanger ? pageSizeOptions.map(item => item.toString()) : []
       };
     }
   }, []);

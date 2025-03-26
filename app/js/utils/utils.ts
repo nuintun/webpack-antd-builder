@@ -15,6 +15,15 @@ export function assert<T>(cond: T, message: string): asserts cond {
 }
 
 /**
+ * @function isBigInt
+ * @description 是否为大整数
+ * @param value 需要验证的值
+ */
+export function isBigInt(value: unknown): value is bigint {
+  return toString.call(value) === '[object BigInt]';
+}
+
+/**
  * @function isFunction
  * @description 是否为函数
  * @param value 需要验证的值

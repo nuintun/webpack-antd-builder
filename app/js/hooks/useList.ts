@@ -31,24 +31,25 @@ type ListPropsPicked = 'dataSource' | 'pagination';
 export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
   sorter?: Sorter | false;
-  pagination?: Pagination;
 }
 
 export type OnChange = GetProp<PaginationProps, 'onChange'>;
 
 export interface Options<I, E, T> extends InitOptions<I, E, T> {
-  pagination?: Pagination;
+  pagination?: Pagination | false;
 }
 
 export interface Refs<I, E> extends RequestRefs<I, E> {
   readonly filters: [filter: Filter | false, sorter: Sorter | false];
 }
 
-export type Pagination = (PagingOptions & Partial<RequestPagination>) | false;
+type ListPagination = Exclude<GetProp<ListProps<unknown>, 'pagination'>, false>;
 
 export interface DefaultListProps<I> extends Required<Pick<ListProps<I>, ListPropsPicked>> {
   loading: boolean;
 }
+
+export type Pagination = Omit<PagingOptions & Partial<RequestPagination> & ListPagination, 'current'>;
 
 /**
  * @function useList
@@ -99,7 +100,7 @@ export default function useList<I, E = unknown, T = I>(
   const fetch: Fetch = useCallback((options = {}) => {
     const { filter, sorter } = options;
     const { current: initOptions } = opitonsRef;
-    const query = { ...initOptions.query, ...serialize([filter, sorter]) };
+    const query = { ...initOptions.query, ...options.query, ...serialize([filter, sorter]) };
 
     request({ ...opitonsRef.current, ...options, query });
   }, []);

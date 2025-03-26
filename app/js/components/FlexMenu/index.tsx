@@ -23,17 +23,17 @@ export interface RenderHeader {
   (props: RenderHeaderProps): React.ReactNode;
 }
 
+export type OnOpenChange = GetProp<FlexMenuProps, 'onOpenChange'>;
+
 export interface FlexMenuProps
   extends Pick<SiderProps, 'trigger' | 'onCollapse'>,
-    Omit<RouteMenuProps, 'mode' | 'inlineCollapsed'> {
+    Omit<RouteMenuProps, 'mode' | 'inlineCollapsed' | 'rootClassName'> {
   width?: number;
   isMobile?: boolean;
   collapsed?: boolean;
   collapsedWidth?: number;
   renderHeader?: RenderHeader;
 }
-
-export type OnOpenChange = GetProp<FlexMenuProps, 'onOpenChange'>;
 
 export default memo(function FlexMenu(props: FlexMenuProps) {
   const {
