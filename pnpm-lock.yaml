@@ -18,8 +18,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nuintun/qrcode':
-        specifier: ^4.1.14
-        version: 4.1.14
+        specifier: ^4.1.16
+        version: 4.1.16
       '@swc/helpers':
         specifier: ^0.5.15
         version: 0.5.15
@@ -39,8 +39,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1
       koa-files:
-        specifier: ^4.0.2
-        version: 4.0.2(koa@2.16.0)
+        specifier: ^4.0.3
+        version: 4.0.3(koa@2.16.0)
       memoize-one:
         specifier: ^6.0.0
         version: 6.0.0
@@ -54,15 +54,15 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(react@18.3.1)
       react-nest-router:
-        specifier: ^0.20.2
-        version: 0.20.2(react@18.3.1)
+        specifier: ^0.20.3
+        version: 0.20.3(react@18.3.1)
       throttle-debounce:
         specifier: ^5.0.2
         version: 5.0.2
     devDependencies:
       '@nuintun/svgo-loader':
-        specifier: ^0.4.1
-        version: 0.4.1(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
+        specifier: ^0.4.3
+        version: 0.4.3(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.15
         version: 0.5.15(react-refresh@0.16.0)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
@@ -97,8 +97,8 @@ importers:
         specifier: 7.0.2
         version: 7.0.2(lightningcss@1.29.3)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
       css-modules-types-loader:
-        specifier: ^0.6.4
-        version: 0.6.4(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
+        specifier: ^0.6.5
+        version: 0.6.5(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
       find-free-ports:
         specifier: ^3.1.1
         version: 3.1.1
@@ -133,8 +133,8 @@ importers:
         specifier: ^16.0.5
         version: 16.0.5(sass-embedded@1.86.0)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
       svgc-loader:
-        specifier: ^0.4.1
-        version: 0.4.1(react@18.3.1)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
+        specifier: ^0.4.3
+        version: 0.4.3(react@18.3.1)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
       swc-loader:
         specifier: ^0.2.6
         version: 0.2.6(@swc/core@1.11.13(@swc/helpers@0.5.15))(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
@@ -151,8 +151,8 @@ importers:
         specifier: ^5.98.0
         version: 5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))
       webpack-dev-service:
-        specifier: ^0.14.16
-        version: 0.14.16(bufferutil@4.0.9)(koa@2.16.0)(utf-8-validate@6.0.5)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
+        specifier: ^0.14.17
+        version: 0.14.17(bufferutil@4.0.9)(koa@2.16.0)(utf-8-validate@6.0.5)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -372,14 +372,14 @@ packages:
     resolution: {integrity: sha512-zM0mVWSXE0a0h9aKACLwKmD6nHcRiKrPpCfvaKqG1CqDEyjEawId0ocXxVzPMCAm6kkWr2P025msfxXEnt8UGQ==}
     engines: {node: '>= 10'}
 
-  '@nuintun/ansi@0.3.1':
-    resolution: {integrity: sha512-VmBrGc9YF8pQW7Cep0EryivtDooXFCfVGs6uMsmdabpMW9G3+jm0jN2U6hm8bXgLQQ94OmB+dhi1eTPWJiRZuA==}
+  '@nuintun/ansi@0.3.2':
+    resolution: {integrity: sha512-B38Wi7Wqb2Hn2ulCkcqC4cWHhzBj2vvoN+FaT462vCaRe8Un5JqQs6dlDXYP83hOtSB1SNKsDkqO4sTllod/Ig==}
 
-  '@nuintun/qrcode@4.1.14':
-    resolution: {integrity: sha512-+Dztb5OakXOkqk+q7rVjBgeZyxeERdufIDRwNrKZE9oiwwcU4ZuZRCL+bINmGKvoF1AV29eRlgWeHIQQHuj5ug==}
+  '@nuintun/qrcode@4.1.16':
+    resolution: {integrity: sha512-e1pCINYzPgNOQuQsBAuHVDAMYNnwqfjUFVNln+cd2uERNRMAVWIyQkuqA3ZdN2q3lVac8/3wJE+bi5V4aGnr0g==}
 
-  '@nuintun/svgo-loader@0.4.1':
-    resolution: {integrity: sha512-ATcHqQvZZcv86AJJHlw+zTJn5ErUVPpvdCia4cilJWNoDTa+ZXmG3JwI2iicZsHrbD6ayIA+1dAQdWXOCkM5nw==}
+  '@nuintun/svgo-loader@0.4.3':
+    resolution: {integrity: sha512-V6QyuE29DPDkA2P7oE0HRHN4JqYJ5Le2JsLA4uFhxJs7U64A0uLrHad2JiiOkwmcwtx79uYd/wBgmmKuHco0nQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@rspack/core': ^1.0.0
@@ -625,8 +625,8 @@ packages:
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
 
-  '@types/node@22.13.13':
-    resolution: {integrity: sha512-ClsL5nMwKaBRwPcCvH8E7+nU4GxHVx1axNvMZTFHMEfNI7oahimt26P5zjVCRrjiIWj6YFXfE1v3dEp94wLcGQ==}
+  '@types/node@22.13.14':
+    resolution: {integrity: sha512-Zs/Ollc1SJ8nKUAgc7ivOEdIBM8JAKgrqqUYi2J997JuKO7/tpQC+WCetQ1sypiKCQWHdvdg9wBNpUPEWZae7w==}
 
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
@@ -975,8 +975,8 @@ packages:
       lightningcss:
         optional: true
 
-  css-modules-types-loader@0.6.4:
-    resolution: {integrity: sha512-OOlw9mEZfcIxfNx22WxOWWgq5XFPzMGiBTPSb3nQ9hhMy96EyZKouMfM7eMSwuhcqQXlnZCDDEcIvicq5+YPKg==}
+  css-modules-types-loader@0.6.5:
+    resolution: {integrity: sha512-0lCuz1Htcgea3P+aktoyGcqCRSL8B/wvrKUWWyrXuwxmsesv5CUIowsBFPPolcZB8IwwrjlBRLjYMHVS4VRqag==}
     peerDependencies:
       '@rspack/core': ^1.0.0
       webpack: ^5.0.0
@@ -1108,8 +1108,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.124:
-    resolution: {integrity: sha512-riELkpDUqBi00gqreV3RIGoowxGrfueEKBd6zPdOk/I8lvuFpBGNkYoHof3zUHbiTBsIU8oxdIIL/WNrAG1/7A==}
+  electron-to-chromium@1.5.128:
+    resolution: {integrity: sha512-bo1A4HH/NS522Ws0QNFIzyPcyUUNV/yyy70Ho1xqfGYzPUme2F/xr4tlEOuM6/A538U1vDA7a4XfCd1CKRegKQ==}
 
   emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -1393,8 +1393,8 @@ packages:
     resolution: {integrity: sha512-asOvN6bFlSnxewce2e/DK3p4tltyfC4VM7ZwuTuepI7dEQVcvpyFuBcEARu1+Hxg8DIwytce2n7jrZtRlPrARA==}
     engines: {node: '>= 10'}
 
-  koa-files@4.0.2:
-    resolution: {integrity: sha512-DA6DRcgBFXjLubePC2gYUd1i+LaSNIIIKTHEBEMrB3El3V4erHhXWONvchWmplizPzlIe52Lfrkr/LYqYD6pNg==}
+  koa-files@4.0.3:
+    resolution: {integrity: sha512-Hqrp1DxVKWJ+UKUuz0cYQL8RheYkHMjiaxgL97YX/tbjmgN0mcKWOboYwCAc5ajAM/SdRgi8MFBgyr/zUKdd6g==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       koa: ^2.0.0
@@ -2098,8 +2098,8 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-nest-router@0.20.2:
-    resolution: {integrity: sha512-6DjMEgAWUM1o2IdwFw8b6LBo/S7WHYyBWDA9y67Cbo3dr6kpUAVmnEluUMlytBdPhtwTpu3hZ6J00YtT4RCHFg==}
+  react-nest-router@0.20.3:
+    resolution: {integrity: sha512-oUa2IcsCSGwAKk0MWgPYsOhpV+/d5bDHMuP8YCMrpZY7XviakvDpIuSXKndQVPI2YPNKnwVJI2Jw21XvO/u2zQ==}
     peerDependencies:
       react: '>=17.0.0'
 
@@ -2371,8 +2371,8 @@ packages:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
 
-  svgc-loader@0.4.1:
-    resolution: {integrity: sha512-FDB+jRnUzwlUTmfGngvHf+ndaWIgRvxSyMNmaEp4n0lTjzwLmdczYyl5L7/HApZ9Wz+cWp6CvQtuv7H8x7cLGg==}
+  svgc-loader@0.4.3:
+    resolution: {integrity: sha512-KUDWDXYTLEMhJru5KVXhKwWd9+BLFpy43rE7DMgO+vtEJEgX4UWDzvFEk7xmD1QHn/rlEsh3S2qh9UH/IhxX/Q==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@rspack/core': ^1.0.0
@@ -2520,8 +2520,8 @@ packages:
     resolution: {integrity: sha512-TnbFSbcOCcDgjZ4piURLCbJ3nJhznVh9kw6F6iokjiFPl8ONxe9A6nMDVXDiNbrSfLILs6vB07F7wLBrwPYzJw==}
     engines: {node: '>=10.13.0'}
 
-  webpack-dev-service@0.14.16:
-    resolution: {integrity: sha512-xC+gUi0fO0c7X2/vEYUGVw3Yts71NTQKKXEYG3z6Ulp11z7GrXBYsLPXnNxelXb9h/RaI1Hi4UGcFFdL4uk0xQ==}
+  webpack-dev-service@0.14.17:
+    resolution: {integrity: sha512-vFOcKoIN+wdB8MMMQdYUBcM19a58hRhx5a/tMuaq+4EacVioPBFW5p9NgEjHX7gy96BRnJRmYyhaeBzZrwFt+w==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -2650,7 +2650,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -2760,15 +2760,15 @@ snapshots:
       '@napi-rs/nice-win32-x64-msvc': 1.0.1
     optional: true
 
-  '@nuintun/ansi@0.3.1':
+  '@nuintun/ansi@0.3.2':
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/qrcode@4.1.14':
+  '@nuintun/qrcode@4.1.16':
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/svgo-loader@0.4.1(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))':
+  '@nuintun/svgo-loader@0.4.3(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15)))':
     dependencies:
       svgo: 3.3.2
       tslib: 2.8.1
@@ -2925,16 +2925,16 @@ snapshots:
 
   '@types/accepts@1.3.7':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/content-disposition@0.5.8': {}
 
@@ -2943,7 +2943,7 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/express': 5.0.1
       '@types/keygrip': 1.0.6
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -2959,7 +2959,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.6':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -3003,11 +3003,11 @@ snapshots:
       '@types/http-errors': 2.0.4
       '@types/keygrip': 1.0.6
       '@types/koa-compose': 3.2.8
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/mime@1.3.5': {}
 
-  '@types/node@22.13.13':
+  '@types/node@22.13.14':
     dependencies:
       undici-types: 6.20.0
 
@@ -3029,19 +3029,19 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
       '@types/send': 0.17.4
 
   '@types/throttle-debounce@5.0.2': {}
 
   '@types/ws@8.18.0':
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -3259,7 +3259,7 @@ snapshots:
   browserslist@4.24.4:
     dependencies:
       caniuse-lite: 1.0.30001707
-      electron-to-chromium: 1.5.124
+      electron-to-chromium: 1.5.128
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -3414,7 +3414,7 @@ snapshots:
     optionalDependencies:
       lightningcss: 1.29.3
 
-  css-modules-types-loader@0.6.4(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))):
+  css-modules-types-loader@0.6.5(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))):
     dependencies:
       acorn: 8.14.1
       acorn-walk: 8.3.4
@@ -3579,7 +3579,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.124: {}
+  electron-to-chromium@1.5.128: {}
 
   emojis-list@3.0.0: {}
 
@@ -3788,7 +3788,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -3796,13 +3796,13 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.13.13
+      '@types/node': 22.13.14
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -3843,7 +3843,7 @@ snapshots:
       co: 4.6.0
       koa-compose: 4.1.0
 
-  koa-files@4.0.2(koa@2.16.0):
+  koa-files@4.0.3(koa@2.16.0):
     dependencies:
       etag: 1.8.1
       koa: 2.16.0
@@ -4611,7 +4611,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-nest-router@0.20.2(react@18.3.1):
+  react-nest-router@0.20.3(react@18.3.1):
     dependencies:
       react: 18.3.1
       tslib: 2.8.1
@@ -4825,7 +4825,7 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  svgc-loader@0.4.1(react@18.3.1)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))):
+  svgc-loader@0.4.3(react@18.3.1)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))):
     dependencies:
       css-tree: 3.1.0
       svgo: 3.3.2
@@ -4936,9 +4936,9 @@ snapshots:
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
 
-  webpack-dev-service@0.14.16(bufferutil@4.0.9)(koa@2.16.0)(utf-8-validate@6.0.5)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.17(bufferutil@4.0.9)(koa@2.16.0)(utf-8-validate@6.0.5)(webpack@5.98.0(@swc/core@1.11.13(@swc/helpers@0.5.15))):
     dependencies:
-      '@nuintun/ansi': 0.3.1
+      '@nuintun/ansi': 0.3.2
       '@types/koa': 2.15.0
       '@types/ws': 8.18.0
       etag: 1.8.1
