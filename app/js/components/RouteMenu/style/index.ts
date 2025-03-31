@@ -28,7 +28,8 @@ export default createStyles(
           display: 'none'
         },
 
-        [`.${prefixCls}-submenu, .${prefixCls}-item`]: {
+        [`.${prefixCls}-submenu,
+          .${prefixCls}-item`]: {
           [`.${prefixCls}-title`]: {
             display: 'flex',
             overflow: 'hidden',

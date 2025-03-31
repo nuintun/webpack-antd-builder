@@ -33,7 +33,8 @@ export default createStyles(
           display: 'none'
         },
 
-        [`.${prefixCls}-link, .${prefixCls}-item`]: {
+        [`.${prefixCls}-link,
+          .${prefixCls}-item`]: {
           display: 'flex',
           cursor: 'default',
           alignItems: 'center',

@@ -36,7 +36,8 @@ export default createStyles(
           fontSize: fontSizeLG,
           lineHeight: unit(fontSizeLG),
 
-          [`&:hover, &.${prefixCls}-active`]: {
+          [`&:hover,
+            &.${prefixCls}-active`]: {
             color: 'inherit'
           },
 
