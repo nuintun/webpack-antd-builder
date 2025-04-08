@@ -151,8 +151,8 @@ importers:
         specifier: ^5.99.1
         version: 5.99.1(@swc/core@1.11.18(@swc/helpers@0.5.15))
       webpack-dev-service:
-        specifier: ^0.14.20
-        version: 0.14.20(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.1(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        specifier: ^0.14.21
+        version: 0.14.21(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.1(@swc/core@1.11.18(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -2520,8 +2520,8 @@ packages:
     resolution: {integrity: sha512-TnbFSbcOCcDgjZ4piURLCbJ3nJhznVh9kw6F6iokjiFPl8ONxe9A6nMDVXDiNbrSfLILs6vB07F7wLBrwPYzJw==}
     engines: {node: '>=10.13.0'}
 
-  webpack-dev-service@0.14.20:
-    resolution: {integrity: sha512-g/jh0rAo7/FM67NB1W0bWXJweItWXy/Ewg5X+PEa8Ao1VgFC4hhUiPbKTEnx6mfSOKtHl+L4634KEOWF9mHWBw==}
+  webpack-dev-service@0.14.21:
+    resolution: {integrity: sha512-ftjnnfF4lplEaK5e7LZ3G8lpLa8z2RgNf64pGveabo6/c0t/Oi1VYZ8mehsyxEpR6a63WwTAHdFn/qPTD+ccXg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
@@ -4936,7 +4936,7 @@ snapshots:
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
 
-  webpack-dev-service@0.14.20(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.1(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.21(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.1(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       '@nuintun/ansi': 0.3.3
       '@types/koa': 2.15.0
