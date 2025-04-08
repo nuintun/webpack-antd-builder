@@ -68,15 +68,7 @@
     "terser-webpack-plugin": "^5.3.14",
     "typescript": "^5.8.3",
     "utf-8-validate": "^6.0.5",
-    "webpack": "^5.98.0",
-    "webpack-dev-service": "^0.14.19"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "bufferutil",
-      "core-js-pure",
-      "utf-8-validate"
-    ]
+    "webpack": "^5.99.1",
+    "webpack-dev-service": "^0.14.20"
   }
 }
