@@ -62,10 +62,10 @@ importers:
     devDependencies:
       '@nuintun/svgo-loader':
         specifier: ^0.4.4
-        version: 0.4.4(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 0.4.4(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.16
-        version: 0.5.16(react-refresh@0.17.0)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 0.5.16(react-refresh@0.17.0)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       '@swc/core':
         specifier: ^1.11.18
         version: 1.11.18(@swc/helpers@0.5.15)
@@ -92,19 +92,19 @@ importers:
         version: 2.4.0
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 7.1.2(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       css-minimizer-webpack-plugin:
         specifier: 7.0.2
-        version: 7.0.2(lightningcss@1.29.3)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 7.0.2(lightningcss@1.29.3)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       css-modules-types-loader:
         specifier: ^0.6.6
-        version: 0.6.6(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 0.6.6(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       find-free-ports:
         specifier: ^3.1.1
         version: 3.1.1
       html-webpack-plugin:
         specifier: ^5.6.3
-        version: 5.6.3(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 5.6.3(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       lightningcss:
         specifier: ^1.29.3
         version: 1.29.3
@@ -113,7 +113,7 @@ importers:
         version: 4.17.0
       mini-css-extract-plugin:
         specifier: ^2.9.2
-        version: 2.9.2(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 2.9.2(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       nodemon:
         specifier: ^3.1.9
         version: 3.1.9
@@ -122,7 +122,7 @@ importers:
         version: 8.5.3
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 8.1.1(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -131,16 +131,16 @@ importers:
         version: 1.86.3
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.86.3)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 16.0.5(sass-embedded@1.86.3)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       svgc-loader:
         specifier: ^0.4.4
-        version: 0.4.4(react@18.3.1)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 0.4.4(react@18.3.1)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       swc-loader:
         specifier: ^0.2.6
-        version: 0.2.6(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 0.2.6(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       terser-webpack-plugin:
         specifier: ^5.3.14
-        version: 5.3.14(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 5.3.14(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -148,11 +148,11 @@ importers:
         specifier: ^6.0.5
         version: 6.0.5
       webpack:
-        specifier: ^5.99.2
-        version: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+        specifier: ^5.99.5
+        version: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
       webpack-dev-service:
         specifier: ^0.14.21
-        version: 0.14.21(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+        version: 0.14.21(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
 
 packages:
 
@@ -1108,8 +1108,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.134:
-    resolution: {integrity: sha512-zSwzrLg3jNP3bwsLqWHmS5z2nIOQ5ngMnfMZOWWtXnqqQkPVyOipxK98w+1beLw1TB+EImPNcG8wVP/cLVs2Og==}
+  electron-to-chromium@1.5.135:
+    resolution: {integrity: sha512-8gXUdEmvb+WCaYUhA0Svr08uSeRjM2w3x5uHOc1QbaEVzJXB8rgm5eptieXzyKoVEtinLvW6MtTcurA65PeS1Q==}
 
   emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -2531,8 +2531,8 @@ packages:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
 
-  webpack@5.99.2:
-    resolution: {integrity: sha512-1LYyB3DIKS4k2JlBHKp+b63b1jp9Nn86wypihsZOeKove7kpRCAVqN8pIle0wbs6a0p4kxkMt01lbb6Y93CpRw==}
+  webpack@5.99.5:
+    resolution: {integrity: sha512-q+vHBa6H9qwBLUlHL4Y7L0L1/LlyBKZtS9FHNCQmtayxjI5RKC9yD8gpvLeqGv5lCQp1Re04yi0MF40pf30Pvg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -2768,14 +2768,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/svgo-loader@0.4.4(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))':
+  '@nuintun/svgo-loader@0.4.4(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))':
     dependencies:
       svgo: 3.3.2
       tslib: 2.8.1
     optionalDependencies:
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.17.0)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.17.0)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.41.0
@@ -2785,7 +2785,7 @@ snapshots:
       react-refresh: 0.17.0
       schema-utils: 4.3.0
       source-map: 0.7.4
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   '@rc-component/async-validator@5.0.4':
     dependencies:
@@ -3259,7 +3259,7 @@ snapshots:
   browserslist@4.24.4:
     dependencies:
       caniuse-lite: 1.0.30001712
-      electron-to-chromium: 1.5.134
+      electron-to-chromium: 1.5.135
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -3389,7 +3389,7 @@ snapshots:
     dependencies:
       postcss: 8.5.3
 
-  css-loader@7.1.2(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  css-loader@7.1.2(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.3)
       postcss: 8.5.3
@@ -3400,9 +3400,9 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.1
     optionalDependencies:
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
-  css-minimizer-webpack-plugin@7.0.2(lightningcss@1.29.3)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  css-minimizer-webpack-plugin@7.0.2(lightningcss@1.29.3)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       cssnano: 7.0.6(postcss@8.5.3)
@@ -3410,18 +3410,18 @@ snapshots:
       postcss: 8.5.3
       schema-utils: 4.3.0
       serialize-javascript: 6.0.2
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
     optionalDependencies:
       lightningcss: 1.29.3
 
-  css-modules-types-loader@0.6.6(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  css-modules-types-loader@0.6.6(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       acorn: 8.14.1
       acorn-walk: 8.3.4
       piscina: 4.9.2
       tslib: 2.8.1
     optionalDependencies:
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   css-select@4.3.0:
     dependencies:
@@ -3579,7 +3579,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.134: {}
+  electron-to-chromium@1.5.135: {}
 
   emojis-list@3.0.0: {}
 
@@ -3710,7 +3710,7 @@ snapshots:
       relateurl: 0.2.7
       terser: 5.39.0
 
-  html-webpack-plugin@5.6.3(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  html-webpack-plugin@5.6.3(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -3718,7 +3718,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.2.1
     optionalDependencies:
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   htmlparser2@6.1.0:
     dependencies:
@@ -3980,11 +3980,11 @@ snapshots:
     dependencies:
       mime-db: 1.52.0
 
-  mini-css-extract-plugin@2.9.2(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  mini-css-extract-plugin@2.9.2(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       schema-utils: 4.3.0
       tapable: 2.2.1
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   minimatch@3.1.2:
     dependencies:
@@ -4102,14 +4102,14 @@ snapshots:
     dependencies:
       postcss: 8.5.3
 
-  postcss-loader@8.1.1(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  postcss-loader@8.1.1(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.8.3)
       jiti: 1.21.7
       postcss: 8.5.3
       semver: 7.7.1
     optionalDependencies:
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
     transitivePeerDependencies:
       - typescript
 
@@ -4748,12 +4748,12 @@ snapshots:
       sass-embedded-win32-ia32: 1.86.3
       sass-embedded-win32-x64: 1.86.3
 
-  sass-loader@16.0.5(sass-embedded@1.86.3)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  sass-loader@16.0.5(sass-embedded@1.86.3)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass-embedded: 1.86.3
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   scheduler@0.23.2:
     dependencies:
@@ -4825,14 +4825,14 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  svgc-loader@0.4.4(react@18.3.1)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  svgc-loader@0.4.4(react@18.3.1)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       css-tree: 3.1.0
       svgo: 3.3.2
       tslib: 2.8.1
     optionalDependencies:
       react: 18.3.1
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   svgo@3.3.2:
     dependencies:
@@ -4844,11 +4844,11 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.1.1
 
-  swc-loader@0.2.6(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  swc-loader@0.2.6(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       '@swc/core': 1.11.18(@swc/helpers@0.5.15)
       '@swc/counter': 0.1.3
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
 
   sync-child-process@1.0.2:
     dependencies:
@@ -4858,14 +4858,14 @@ snapshots:
 
   tapable@2.2.1: {}
 
-  terser-webpack-plugin@5.3.14(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  terser-webpack-plugin@5.3.14(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 4.3.0
       serialize-javascript: 6.0.2
       terser: 5.39.0
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
     optionalDependencies:
       '@swc/core': 1.11.18(@swc/helpers@0.5.15)
 
@@ -4936,7 +4936,7 @@ snapshots:
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
 
-  webpack-dev-service@0.14.21(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))):
+  webpack-dev-service@0.14.21(bufferutil@4.0.9)(koa@2.16.1)(utf-8-validate@6.0.5)(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))):
     dependencies:
       '@nuintun/ansi': 0.3.3
       '@types/koa': 2.15.0
@@ -4949,7 +4949,7 @@ snapshots:
       supports-color: 10.0.0
       tslib: 2.8.1
       uuid: 11.1.0
-      webpack: 5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15))
+      webpack: 5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15))
       ws: 8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)
     transitivePeerDependencies:
       - bufferutil
@@ -4957,7 +4957,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)):
+  webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.7
@@ -4979,7 +4979,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.14(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.2(@swc/core@1.11.18(@swc/helpers@0.5.15)))
+      terser-webpack-plugin: 5.3.14(@swc/core@1.11.18(@swc/helpers@0.5.15))(webpack@5.99.5(@swc/core@1.11.18(@swc/helpers@0.5.15)))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
