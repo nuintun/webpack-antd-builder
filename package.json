@@ -25,7 +25,7 @@
     "@ant-design/icons": "^6.0.0",
     "@nuintun/qrcode": "^5.0.2",
     "@swc/helpers": "^0.5.17",
-    "antd": "^5.24.7",
+    "antd": "^5.24.8",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "koa": "^2.16.1",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@nuintun/svgo-loader": "^0.4.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.16",
-    "@swc/core": "^1.11.21",
+    "@swc/core": "^1.11.22",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "@types/throttle-debounce": "^5.0.2",
@@ -57,18 +57,18 @@
     "lightningcss": "^1.29.3",
     "memfs": "^4.17.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "nodemon": "^3.1.9",
+    "nodemon": "^3.1.10",
     "postcss": "^8.5.3",
     "postcss-loader": "^8.1.1",
     "prettier": "^3.5.3",
-    "sass-embedded": "^1.86.3",
+    "sass-embedded": "^1.87.0",
     "sass-loader": "^16.0.5",
     "svgc-loader": "^0.4.4",
     "swc-loader": "^0.2.6",
     "terser-webpack-plugin": "^5.3.14",
     "typescript": "^5.8.3",
     "utf-8-validate": "^6.0.5",
-    "webpack": "^5.99.5",
-    "webpack-dev-service": "^0.15.0"
+    "webpack": "^5.99.6",
+    "webpack-dev-service": "^0.15.1"
   }
 }
