@@ -41,7 +41,7 @@
   "devDependencies": {
     "@nuintun/svgo-loader": "^0.4.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
-    "@swc/core": "^1.11.22",
+    "@swc/core": "^1.11.21",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "@types/throttle-debounce": "^5.0.2",
