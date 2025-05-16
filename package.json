@@ -39,7 +39,7 @@
     "throttle-debounce": "^5.0.2"
   },
   "devDependencies": {
-    "@nuintun/svgo-loader": "^0.4.4",
+    "@nuintun/svgo-loader": "^0.4.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
     "@swc/core": "^1.11.24",
     "@types/react": "^18.3.21",
@@ -63,7 +63,7 @@
     "prettier": "^3.5.3",
     "sass-embedded": "^1.89.0",
     "sass-loader": "^16.0.5",
-    "svgc-loader": "^0.4.4",
+    "svgc-loader": "^0.4.5",
     "swc-loader": "^0.2.6",
     "terser-webpack-plugin": "^5.3.14",
     "typescript": "^5.8.3",
