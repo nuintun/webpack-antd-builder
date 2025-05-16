@@ -9,11 +9,9 @@ import React, { memo, useMemo } from 'react';
 import FlexIcon from '/js/components/FlexIcon';
 import useStyles, { prefixCls } from './style';
 import { useMatches } from 'react-nest-router';
-import { Breadcrumb, BreadcrumbProps } from 'antd';
+import { Breadcrumb, BreadcrumbProps, GetProp } from 'antd';
 
-interface BreadcrumbItem {
-  title: React.ReactNode;
-}
+type BreadcrumbItem = GetProp<BreadcrumbProps, 'items'>[0];
 
 type BreadcrumbPicked = 'style' | 'className' | 'separator';
 

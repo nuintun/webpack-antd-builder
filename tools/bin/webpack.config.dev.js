@@ -18,9 +18,8 @@ import appConfig from '../../app.config.js';
 import { findFreePorts } from 'find-free-ports';
 import { server as dev } from 'webpack-dev-service';
 import resolveConfigure from './webpack.config.base.js';
+import { codeInspectorPlugin } from 'code-inspector-plugin';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-
-const { ports } = appConfig;
 
 /**
  * @function createMemfs
@@ -61,6 +60,7 @@ function httpError(error) {
 (async () => {
   const ip = resolveIp();
   const fs = createMemfs();
+  const { ports } = appConfig;
   const port = await resolvePort(ports);
   const devServerHost = `http://${ip}:${port}`;
   const configure = await resolveConfigure(mode);
@@ -69,7 +69,12 @@ function httpError(error) {
   configure.devtool = 'eval-cheap-module-source-map';
   configure.watchOptions = { aggregateTimeout: 256 };
 
-  configure.plugins.push(new ReactRefreshPlugin({ overlay: false }));
+  configure.plugins.push(
+    // 局部刷新插件
+    new ReactRefreshPlugin({ overlay: false }),
+    // 代码定位插件
+    codeInspectorPlugin({ bundler: 'webpack' })
+  );
 
   const app = new Koa();
   const compiler = webpack(configure);
