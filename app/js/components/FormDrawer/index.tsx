@@ -18,11 +18,9 @@ type DrawerPicked =
   | 'children'
   | 'keyboard'
   | 'placement'
-  | 'breakWidth'
-  | 'breakHeight'
   | 'forceRender'
   | 'maskClosable'
-  | 'destroyOnClose'
+  | 'destroyOnHidden'
   | 'afterOpenChange';
 type FormOmitted = 'title' | 'onError' | 'children';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
@@ -63,7 +61,7 @@ function defaultExtra<F>(submitting: boolean, form: FormInstance<F>, onClose: ()
   );
 }
 
-function FormDrawer<F extends Fields, R>({
+function FormDrawer<F extends Fields, R = unknown>({
   form,
   name,
   query,
@@ -81,15 +79,13 @@ function FormDrawer<F extends Fields, R>({
   normalize,
   onSuccess,
   placement,
-  breakWidth,
   onComplete,
-  breakHeight,
   forceRender,
   requestInit,
   width = 560,
   height = 560,
-  destroyOnClose,
   afterOpenChange,
+  destroyOnHidden,
   keyboard = false,
   layout = 'vertical',
   extra = defaultExtra,
@@ -154,13 +150,11 @@ function FormDrawer<F extends Fields, R>({
         loading={loading}
         keyboard={keyboard}
         placement={placement}
-        breakWidth={breakWidth}
         onClose={onCloseHandler}
-        breakHeight={breakHeight}
         forceRender={forceRender}
         maskClosable={maskClosable}
-        destroyOnClose={destroyOnClose}
         afterOpenChange={afterOpenChange}
+        destroyOnHidden={destroyOnHidden}
         extra={extra(submitting, wrapForm, onCloseHandler)}
         footer={footer?.(submitting, wrapForm, onCloseHandler)}
       >

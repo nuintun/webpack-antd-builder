@@ -92,7 +92,7 @@ export default function usePagingRequest<I, E = unknown, T = I>(
 export default function usePagingRequest<I, E = unknown, T = I>(
   url: string,
   options: Options<I, E, T> = {},
-  initialLoadingState: boolean | (() => boolean) = false
+  initialLoadingState?: boolean | (() => boolean)
 ): [loading: boolean, dataSource: I[] | T[], fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const initPagination = useMemo(() => {
     const { pagination } = options;
