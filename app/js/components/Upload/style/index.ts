@@ -10,30 +10,25 @@ export default createStyles(['components', 'ImageUpload', prefixCls], token => {
   return {
     [`.${prefixCls}`]: {
       gap: 8,
+      display: 'flex',
       flexWrap: 'wrap',
       overflow: 'hidden',
       width: 'fit-content',
       height: 'fit-content',
-      display: 'inline-flex',
 
-      [`&.${prefixCls}-block`]: {
-        width: '100%',
-        display: 'flex',
+      [`.${prefixCls}-input`]: {
+        width: '100%'
+      },
 
-        [`.${prefixCls}-input`]: {
-          width: '100%'
-        },
-
-        [`.${prefixCls}-hidden`]: {
-          display: 'none'
-        }
+      [`.${prefixCls}-hidden`]: {
+        display: 'none'
       },
 
       [`.${prefixCls}-done,
         .${prefixCls}-error,
         .${prefixCls}-action,
         .${prefixCls}-loading`]: {
-        gap: 20,
+        gap: 8,
         width: '100%',
         height: '100%',
         alignItems: 'center',
@@ -94,7 +89,7 @@ export default createStyles(['components', 'ImageUpload', prefixCls], token => {
         },
 
         [`.${prefixCls}-mask`]: {
-          gap: 16,
+          gap: 12,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

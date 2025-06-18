@@ -30,7 +30,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import fallback from './images/fallback.png';
 import placeholder from './images/placeholder.png';
 
-export { fallback, placeholder };
+export { prefixCls, fallback, placeholder };
 
 const { useApp } = App;
 const { Dragger } = AntdUpload;
@@ -67,7 +67,6 @@ export interface UploadProps<T>
     Omit<AntdUploadProps<T>, 'onChange' | 'listType' | 'itemRender'> {
   action: string;
   accept?: string;
-  block?: boolean;
   value?: string[];
   defaultValue?: string[];
   renderFile?: RenderFile;
@@ -171,7 +170,6 @@ function getFileList<T>(value: string[], getThumbImage: GetThumbImage): FileList
 
 export default memo(function Upload<T extends UploadResponse>(props: UploadProps<T>) {
   const {
-    block,
     accept,
     action,
     height,
@@ -229,7 +227,7 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
         if (response) {
           const { code, payload } = response;
 
-          if (code >= 200 && code < 300) {
+          if (code === 200) {
             const urls: string[] = [];
             const { url, thumbUrl } = payload;
 
@@ -274,11 +272,7 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
   }, [propsValue]);
 
   return render(
-    <div
-      className={classNames(scope, prefixCls, rootClassName, {
-        [`${prefixCls}-block`]: block
-      })}
-    >
+    <div className={classNames(scope, prefixCls, rootClassName)}>
       {showUploadList &&
         fileList.map((file, index) => {
           const { uid } = file;
@@ -342,7 +336,7 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
           {children || (
             <div className={`${prefixCls}-action`}>
               <PlusOutlined className={`${prefixCls}-icon`} />
-              <span>点击或拖拽上传</span>
+              <span>上传文件</span>
             </div>
           )}
         </Dragger>
