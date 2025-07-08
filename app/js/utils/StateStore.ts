@@ -6,7 +6,7 @@ import React from 'react';
 import { isFunction } from './utils';
 
 export interface Callback {
-  (): void;
+  (this: unknown): void;
 }
 
 /**
@@ -57,8 +57,10 @@ export class StateStore<S> {
 
     this.state = isFunction(state) ? state(prevState) : state;
 
-    for (const callback of callbacks) {
-      callback();
+    if (this.state !== prevState) {
+      for (const callback of callbacks) {
+        callback();
+      }
     }
   }
 }

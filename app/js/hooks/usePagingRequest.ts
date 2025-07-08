@@ -3,8 +3,8 @@
  */
 
 import { App } from 'antd';
-import useLatestRef from './useLatestRef';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import useLatestCallback from './useLatestCallback';
+import React, { useMemo, useRef, useState } from 'react';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
 
 const { useApp } = App;
@@ -105,15 +105,13 @@ export default function usePagingRequest<I, E = unknown, T = I>(
   }, []);
 
   const { message } = useApp();
-  const urlRef = useLatestRef(url);
-  const opitonsRef = useLatestRef(options);
   const responseRef = useRef<Response<I, E>>({});
   const [dataSource, setDataSource] = useState<I[] | T[]>([]);
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const fetch = useCallback<Fetch>((options = {}) => {
-    const requestInit = { ...opitonsRef.current, ...options };
+  const fetch = useLatestCallback<Fetch>((fetchInit = {}) => {
+    const requestInit = { ...options, ...fetchInit };
     const { current: pagination } = paginationRef;
     const hasPagination = hasQuery(pagination);
     const { query = {} } = requestInit;
@@ -123,7 +121,7 @@ export default function usePagingRequest<I, E = unknown, T = I>(
         ...DEFAULT_PAGINATION,
         ...initPagination,
         ...pagination,
-        ...options.pagination
+        ...fetchInit.pagination
       };
 
       if (__DEV__) {
@@ -143,7 +141,7 @@ export default function usePagingRequest<I, E = unknown, T = I>(
       paginationRef.current = false;
     }
 
-    request<Response<I, E>>(urlRef.current, {
+    request<Response<I, E>>(url, {
       ...requestInit,
       query,
       onSuccess(response) {
@@ -179,7 +177,7 @@ export default function usePagingRequest<I, E = unknown, T = I>(
         }
       }
     });
-  }, []);
+  });
 
   const refs = useMemo<Refs<I, E>>(() => {
     return {

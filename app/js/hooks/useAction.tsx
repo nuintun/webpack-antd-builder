@@ -3,8 +3,8 @@
  */
 
 import { Fields } from '/js/utils/form';
-import useLatestRef from './useLatestRef';
 import { isObject } from '/js/utils/utils';
+import useLatestCallback from './useLatestCallback';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { GetProp, Popconfirm, PopconfirmProps } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
@@ -31,13 +31,18 @@ export interface Options<F extends Fields | null, R> extends UseSubmitOptions<F,
   confirm?: string | ConfirmInit;
 }
 
+/**
+ * @function useAction
+ * @description [hook] 请求动作
+ * @param action 请求地址
+ * @param options 配置参数
+ */
 export default function useAction<F extends Fields | null, R>(
   action: string,
   options: Options<F, R> = {}
 ): [loading: boolean, onAction: (fields: F) => void, render: (children: React.ReactElement) => React.ReactElement] {
   const valuesRef = useRef<F>();
   const [open, setOpen] = useState(false);
-  const optionsRef = useLatestRef(options);
   const [loading, onSubmit] = useSubmit<F, R>(action, options);
 
   const onCancel = useCallback(() => {
@@ -50,9 +55,7 @@ export default function useAction<F extends Fields | null, R>(
     onSubmit(valuesRef.current!);
   }, []);
 
-  const onAction = useCallback((fields: F) => {
-    const { current: options } = optionsRef;
-
+  const onAction = useLatestCallback((fields: F) => {
     if (!options.disabled) {
       if (options.confirm) {
         valuesRef.current = fields;
@@ -64,13 +67,13 @@ export default function useAction<F extends Fields | null, R>(
         onSubmit(fields);
       }
     }
-  }, []);
+  });
 
   const onOpenChange = useCallback((open: boolean) => {
     setOpen(open);
   }, []);
 
-  const render = (children: React.ReactElement): React.ReactElement => {
+  const render = useLatestCallback((children: React.ReactElement): React.ReactElement => {
     const { confirm } = options;
 
     if (confirm) {
@@ -100,7 +103,7 @@ export default function useAction<F extends Fields | null, R>(
     }
 
     return children;
-  };
+  });
 
   return [loading, onAction, render];
 }

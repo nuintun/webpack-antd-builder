@@ -3,12 +3,12 @@
  */
 
 import { App } from 'antd';
+import { useRef } from 'react';
 import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
-import useLatestRef from './useLatestRef';
 import useLazyState from './useLazyState';
 import { isObject } from '/js/utils/utils';
-import { useCallback, useRef } from 'react';
+import useLatestCallback from './useLatestCallback';
 import { Location, useLocation, useNavigate } from 'react-nest-router';
 import fetch, { Options as RequestInit, RequestError } from '/js/utils/request';
 
@@ -47,14 +47,13 @@ export default function useRequest(
   const location = useLocation();
   const navigate = useNavigate();
   const isMounted = useIsMounted();
-  const opitonsRef = useLatestRef(options);
   const [loading, setLoading] = useLazyState(initialLoadingState, options.delay);
 
-  const request = useCallback(<R>(url: string, options: RequestOptions<R> = {}): void => {
+  const request = useLatestCallback(<R>(url: string, requestInit: RequestOptions<R> = {}): void => {
     if (isMounted()) {
-      const requestInit = {
-        ...opitonsRef.current,
-        ...options
+      requestInit = {
+        ...options,
+        ...requestInit
       };
 
       const { body, notify } = requestInit;
@@ -113,7 +112,7 @@ export default function useRequest(
           }
         });
     }
-  }, []);
+  });
 
   return [loading, request];
 }

@@ -12,7 +12,7 @@ export interface Options {
 }
 
 export interface Callback {
-  (this: any, ...args: any[]): any;
+  (this: unknown, ...args: any[]): any;
 }
 
 /**
@@ -28,8 +28,8 @@ export default function useDebounce<C extends Callback>(callback: C, delay: numb
   const callbackRef = useLatestRef(callback);
 
   return useMemo(() => {
-    const callback: Callback = (...args) => {
-      return callbackRef.current(...args);
+    const callback: Callback = function (this, ...args) {
+      return callbackRef.current.apply(this, args);
     };
 
     return debounce(delay, callback, { atBegin });

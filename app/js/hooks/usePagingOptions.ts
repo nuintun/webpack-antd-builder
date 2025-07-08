@@ -2,9 +2,8 @@
  * @module usePagingOptions
  */
 
-import { useCallback } from 'react';
 import { PaginationProps } from 'antd';
-import useLatestRef from './useLatestRef';
+import useLatestCallback from './useLatestCallback';
 
 export interface UsePagingOptions {
   (pageSize: number): PagingOptions | undefined;
@@ -24,19 +23,15 @@ function showTotal(total: number): string {
   return `共 ${total} 条`;
 }
 
-const DEFAULT_PAGE_SIZE_OPTIONS = [20, 30, 50, 80];
+const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 
 /**
  * @function usePagingOptions
  * @description [hook] 分页处理
  * @param opitons 分页配置
  */
-export default function usePagingOptions(opitons?: Options | false): UsePagingOptions {
-  const opitonsRef = useLatestRef(opitons);
-
-  return useCallback<UsePagingOptions>(pageSize => {
-    const { current: opitons = {} } = opitonsRef;
-
+export default function usePagingOptions(opitons: Options | false = {}): UsePagingOptions {
+  return useLatestCallback<UsePagingOptions>(pageSize => {
     if (opitons !== false) {
       const {
         simple,
@@ -51,15 +46,20 @@ export default function usePagingOptions(opitons?: Options | false): UsePagingOp
         }
       }
 
-      return {
+      const pagingOptions: PagingOptions = {
         showTotal,
         showQuickJumper,
         showSizeChanger,
         size: 'default',
         responsive: true,
-        ...opitons,
-        pageSizeOptions: showSizeChanger ? pageSizeOptions.map(item => item.toString()) : []
+        ...opitons
       };
+
+      if (showSizeChanger) {
+        pagingOptions.pageSizeOptions = pageSizeOptions;
+      }
+
+      return pagingOptions;
     }
-  }, []);
+  });
 }

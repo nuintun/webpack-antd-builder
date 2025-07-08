@@ -11,9 +11,9 @@ import usePagingRequest, {
   RequestOptions as RequestInit,
   Transform
 } from './usePagingRequest';
-import useLatestRef from './useLatestRef';
 import { GetProp, TableProps } from 'antd';
 import React, { useCallback, useMemo } from 'react';
+import useLatestCallback from './useLatestCallback';
 import useSearchFilters, { Filter } from './useSearchFilters';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
@@ -96,7 +96,6 @@ export default function useTable<I, E = unknown, T = I>(
   options: Options<I, E, T> = {},
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I | T>, fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
-  const opitonsRef = useLatestRef(options);
   const getPagingOptions = usePagingOptions(options.pagination);
   const [serialize, raw] = useSearchFilters<[Filter, Sorter]>([false, false]);
 
@@ -106,20 +105,28 @@ export default function useTable<I, E = unknown, T = I>(
     initialLoadingState
   );
 
-  const fetch: Fetch = useCallback((options = {}): void => {
-    const { filter, sorter } = options;
-    const { current: initOptions } = opitonsRef;
-    const query = { ...initOptions.query, ...options.query, ...serialize([filter, sorter]) };
+  const fetch = useLatestCallback<Fetch>((fetchInit = {}) => {
+    const { filter, sorter } = fetchInit;
+    const query = {
+      ...options.query,
+      ...fetchInit.query,
+      ...serialize([filter, sorter])
+    };
 
-    request({ ...opitonsRef.current, ...options, query });
-  }, []);
+    request({ ...options, ...fetchInit, query });
+  });
 
   const onChange = useCallback<OnChange<I | T>>((pagination, filter, sorter, { action }) => {
     switch (action) {
       case 'filter':
         return fetch({ filter });
       case 'paginate':
-        return fetch({ pagination: { page: pagination.current, pageSize: pagination.pageSize } });
+        return fetch({
+          pagination: {
+            page: pagination.current,
+            pageSize: pagination.pageSize
+          }
+        });
       case 'sort':
         const orderBy: Sorter['orderBy'] = [];
         const orderType: Sorter['orderType'] = [];

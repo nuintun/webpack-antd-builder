@@ -97,10 +97,14 @@ export default function useList<I, E = unknown, T = I>(
     initialLoadingState
   );
 
-  const fetch: Fetch = useCallback((options = {}) => {
+  const fetch = useCallback<Fetch>((options = {}) => {
     const { filter, sorter } = options;
     const { current: initOptions } = opitonsRef;
-    const query = { ...initOptions.query, ...options.query, ...serialize([filter, sorter]) };
+    const query = {
+      ...initOptions.query,
+      ...options.query,
+      ...serialize([filter, sorter])
+    };
 
     request({ ...opitonsRef.current, ...options, query });
   }, []);
