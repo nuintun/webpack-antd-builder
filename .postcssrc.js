@@ -13,6 +13,14 @@ import targets from './tools/lib/targets.js';
 export default async mode => {
   return {
     sourceMap: mode !== 'production',
-    plugins: [['autoprefixer', { flexbox: 'no-2009', env: await targets() }]]
+    plugins: [
+      [
+        'autoprefixer',
+        {
+          flexbox: 'no-2009',
+          env: await targets()
+        }
+      ]
+    ]
   };
 };
