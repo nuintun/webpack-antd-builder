@@ -61,8 +61,8 @@ importers:
         version: 5.0.2
     devDependencies:
       '@nuintun/svgo-loader':
-        specifier: ^0.5.0
-        version: 0.5.0(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
+        specifier: ^0.5.1
+        version: 0.5.1(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.1
         version: 0.6.1(react-refresh@0.17.0)(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
@@ -133,8 +133,8 @@ importers:
         specifier: ^16.0.5
         version: 16.0.5(sass-embedded@1.89.2)(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
       svgc-loader:
-        specifier: ^0.5.0
-        version: 0.5.0(react@18.3.1)(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
+        specifier: ^0.5.1
+        version: 0.5.1(react@18.3.1)(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
       swc-loader:
         specifier: ^0.2.6
         version: 0.2.6(@swc/core@1.12.11(@swc/helpers@0.5.17))(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))
@@ -373,9 +373,9 @@ packages:
   '@nuintun/qrcode@5.0.2':
     resolution: {integrity: sha512-IkbIU+bgHmivthsdjwR5Cos0ZkFJKILY/PgwARiTOzYGQLP4vBa40LDXajlkH5HX/zRuPgg3Jyufp+81t67XLg==}
 
-  '@nuintun/svgo-loader@0.5.0':
-    resolution: {integrity: sha512-egd2UE9Az9XHW0Oiwy0u5v2UrjGRwTNKt9BY/06ByL/pGz9BDpFxiqQsWUqxkFt4DMpBn/oZ1BWqyfUkJAUH7Q==}
-    engines: {node: '>=14.0.0'}
+  '@nuintun/svgo-loader@0.5.1':
+    resolution: {integrity: sha512-lgQt0qTD6o28WlMbvmb4eXSnoSulzJGJQANQBBZHMMbWWdNXSIf/ycXxZtDjv+HjSCYnIpElnTEvDueJel0Kug==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
       '@rspack/core': ^1.0.0
       webpack: ^5.0.0
@@ -2263,9 +2263,9 @@ packages:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
 
-  svgc-loader@0.5.0:
-    resolution: {integrity: sha512-TU9zhFPFqc0jXIsRcnxGBLoxcnPKI+34c6lFZAcN6rXr2Q0OdW/TablBiPmIhZdyCwRaLTzXuO50JVNx9D9oZA==}
-    engines: {node: '>=14.0.0'}
+  svgc-loader@0.5.1:
+    resolution: {integrity: sha512-x4WRwBXbP/FSMmgCvePGtQG9JlwySE1pmD7g+zK69xmymMAE4yOI2XKjpY+mwj56dQqF0PVvh3GvtShyoya0Jw==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
       '@rspack/core': ^1.0.0
       preact: '*'
@@ -2660,7 +2660,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@nuintun/svgo-loader@0.5.0(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))':
+  '@nuintun/svgo-loader@0.5.1(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17)))':
     dependencies:
       svgo: 4.0.0
       tslib: 2.8.1
@@ -4610,7 +4610,7 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  svgc-loader@0.5.0(react@18.3.1)(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17))):
+  svgc-loader@0.5.1(react@18.3.1)(webpack@5.99.9(@swc/core@1.12.11(@swc/helpers@0.5.17))):
     dependencies:
       css-tree: 3.1.0
       svgo: 4.0.0
