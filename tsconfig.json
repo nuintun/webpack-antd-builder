@@ -17,11 +17,6 @@
     "noUnusedParameters": true,
     "moduleResolution": "bundler",
     "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "DOM",
-      "ESNext",
-      "WebWorker"
-    ],
     "paths": {
       "/js/*": [
         "app/js/*"
