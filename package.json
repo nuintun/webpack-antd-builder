@@ -55,7 +55,7 @@
     "find-free-ports": "^3.1.1",
     "html-webpack-plugin": "^5.6.3",
     "lightningcss": "^1.30.1",
-    "memfs": "^4.28.0",
+    "memfs": "^4.36.0",
     "mini-css-extract-plugin": "^2.9.2",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.6",
@@ -69,6 +69,6 @@
     "typescript": "^5.9.2",
     "utf-8-validate": "^6.0.5",
     "webpack": "^5.101.0",
-    "webpack-dev-service": "^0.15.10"
+    "webpack-dev-service": "^0.15.11"
   }
 }
