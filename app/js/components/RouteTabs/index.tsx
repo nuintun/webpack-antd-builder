@@ -86,8 +86,8 @@ export default memo(function RouteTabs({
       <Tabs
         {...restProps}
         items={items}
+        destroyOnHidden
         activeKey={activeKey}
-        destroyInactiveTabPane
         tabPosition={tabPosition}
         tabBarGutter={tabBarGutter}
         className={classNames(scope, prefixCls, className, {
