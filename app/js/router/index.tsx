@@ -24,13 +24,21 @@ export interface Meta {
 
 export const enum MenuType {
   /**
-   * @description RouteTabs 菜单路由
+   * @description 在导航菜单中强制保留当前路由
    */
-  TABS,
+  PRESERVE_SELF,
   /**
    * @description 在导航菜单中隐藏当前路由
    */
-  HIDDEN
+  HIDDEN_SELF,
+  /**
+   * @description 在导航菜单中隐藏所有路由
+   */
+  HIDDEN_ALL,
+  /**
+   * @description RouteTabs 菜单路由
+   */
+  TABS
 }
 
 export const router: readonly Route<Meta>[] = [
@@ -41,7 +49,7 @@ export const router: readonly Route<Meta>[] = [
         path: '/403',
         meta: {
           name: '403',
-          type: MenuType.HIDDEN
+          type: MenuType.HIDDEN_ALL
         },
         element: lazy(() => import('/js/pages/403'))
       },
@@ -49,7 +57,7 @@ export const router: readonly Route<Meta>[] = [
         path: '/404',
         meta: {
           name: '404',
-          type: MenuType.HIDDEN
+          type: MenuType.HIDDEN_ALL
         },
         element: lazy(() => import('/js/pages/404'))
       },
@@ -57,7 +65,7 @@ export const router: readonly Route<Meta>[] = [
         path: '/500',
         meta: {
           name: '500',
-          type: MenuType.HIDDEN
+          type: MenuType.HIDDEN_ALL
         },
         element: lazy(() => import('/js/pages/500'))
       },
@@ -134,7 +142,7 @@ export const router: readonly Route<Meta>[] = [
                     path: 'first',
                     meta: {
                       name: '标签页一',
-                      type: MenuType.HIDDEN,
+                      type: MenuType.HIDDEN_ALL,
                       icon: <Icon component={PageIcon} />
                     },
                     element: lazy(() => import('/js/pages/System/Tabs/First'))
@@ -143,7 +151,7 @@ export const router: readonly Route<Meta>[] = [
                     path: 'second',
                     meta: {
                       name: '标签页二',
-                      type: MenuType.HIDDEN,
+                      type: MenuType.HIDDEN_ALL,
                       icon: <Icon component={PageIcon} />
                     },
                     element: lazy(() => import('/js/pages/System/Tabs/Second'))
