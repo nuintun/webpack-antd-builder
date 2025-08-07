@@ -28,9 +28,12 @@ export default memo(function Layout() {
         ({ meta }) => {
           switch (meta.type) {
             case MenuType.TABS:
+            case MenuType.PRESERVE_SELF:
               return Filter.PRESERVE_SELF;
-            case MenuType.HIDDEN:
+            case MenuType.HIDDEN_SELF:
               return Filter.REMOVE_SELF;
+            case MenuType.HIDDEN_ALL:
+              return Filter.REMOVE_ALL;
             default:
               return Filter.DEFAULT;
           }
