@@ -24,21 +24,21 @@ export interface Meta {
 
 export const enum MenuType {
   /**
-   * @description 在导航菜单中强制保留当前路由
+   * @description RouteTabs 菜单路由
    */
-  PRESERVE_SELF,
-  /**
-   * @description 在导航菜单中隐藏当前路由
-   */
-  HIDDEN_SELF,
+  TABS,
   /**
    * @description 在导航菜单中隐藏所有路由
    */
   HIDDEN_ALL,
   /**
-   * @description RouteTabs 菜单路由
+   * @description 在导航菜单中隐藏当前路由
    */
-  TABS
+  HIDDEN_SELF,
+  /**
+   * @description 在导航菜单中强制保留当前路由
+   */
+  PRESERVE_SELF
 }
 
 export const router: readonly Route<Meta>[] = [
