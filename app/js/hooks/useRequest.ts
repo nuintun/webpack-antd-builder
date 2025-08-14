@@ -4,7 +4,6 @@
 
 import { App } from 'antd';
 import { useRef } from 'react';
-import * as mime from '/js/utils/mime';
 import useIsMounted from './useIsMounted';
 import useLazyState from './useLazyState';
 import { isObject } from '/js/utils/utils';
@@ -73,9 +72,13 @@ export default function useRequest(
         setLoading(true);
       }
 
+      if (!headers.has('Accept')) {
+        headers.set('Accept', 'application/x-msgpack');
+      }
+
       if (isObject(body) || Array.isArray(body)) {
         if (!headers.has('Content-Type')) {
-          headers.set('Content-Type', mime.json);
+          headers.set('Content-Type', 'application/x-msgpack');
         }
       }
 

@@ -12,23 +12,20 @@ import usePagingRequest, {
   Transform
 } from './usePagingRequest';
 import { GetProp, TableProps } from 'antd';
-import React, { useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import useSearchFilters from './useSearchFilters';
 import useLatestCallback from './useLatestCallback';
-import useSearchFilters, { Filter } from './useSearchFilters';
+import { Query as Filter } from '/js/utils/request';
+import { normalize, SortOrder } from '/js/utils/sorter';
 import usePagingOptions, { Options as PagingOptions } from './usePagingOptions';
 
 export interface Fetch {
   (options?: RequestOptions): void;
 }
 
-export interface Sorter {
-  orderBy: React.Key[];
-  orderType: ('ascend' | 'descend')[];
-}
-
 export interface RequestOptions extends RequestInit {
   filter?: Filter | false;
-  sorter?: Sorter | false;
+  sorter?: SortOrder[] | false;
 }
 
 export type OnChange<I> = GetProp<TableProps<I>, 'onChange'>;
@@ -38,8 +35,10 @@ export interface Options<I, E, T> extends InitOptions<I, E, T> {
 }
 
 export interface Refs<I, E = {}> extends RequestRefs<I, E> {
-  readonly filters: [filter: Filter | false, sorter: Sorter | false];
+  readonly filters: Filters;
 }
+
+type Filters = [filter: Filter | false, sorter: SortOrder[] | false];
 
 type TablePropsPicked = 'size' | 'onChange' | 'dataSource' | 'pagination';
 
@@ -50,15 +49,6 @@ export interface DefaultTableProps<I> extends Required<Pick<TableProps<I>, Table
 }
 
 export type Pagination = Omit<PagingOptions & Partial<RequestPagination> & TablePagination, 'current'>;
-
-/**
- * @function serializeField
- * @description 字段序列化
- * @param filed 字段
- */
-export function serializeField(filed: React.Key | readonly React.Key[]): React.Key {
-  return Array.isArray(filed) ? filed.join('.') : (filed as React.Key);
-}
 
 /**
  * @function useTable
@@ -97,7 +87,7 @@ export default function useTable<I, E = unknown, T = I>(
   initialLoadingState?: boolean | (() => boolean)
 ): [props: DefaultTableProps<I | T>, fetch: Fetch, dispatch: Dispatch<I[] | T[]>, refs: Refs<I, E>] {
   const getPagingOptions = usePagingOptions(options.pagination);
-  const [serialize, raw] = useSearchFilters<[Filter, Sorter]>([false, false]);
+  const [getFilters, updateFilters] = useSearchFilters<Filters>([false, false]);
 
   const [loading, dataSource, request, dispatch, originRefs] = usePagingRequest(
     url,
@@ -106,14 +96,20 @@ export default function useTable<I, E = unknown, T = I>(
   );
 
   const fetch = useLatestCallback<Fetch>((fetchInit = {}) => {
-    const { filter, sorter } = fetchInit;
-    const query = {
-      ...options.query,
-      ...fetchInit.query,
-      ...serialize([filter, sorter])
-    };
+    updateFilters([fetchInit.filter, fetchInit.sorter]);
 
-    request({ ...options, ...fetchInit, query });
+    const [filter, sorter] = getFilters();
+
+    request({
+      ...options,
+      ...fetchInit,
+      query: {
+        ...options.query,
+        ...fetchInit.query,
+        ...filter,
+        ...normalize(sorter)
+      }
+    });
   });
 
   const onChange = useCallback<OnChange<I | T>>((pagination, filter, sorter, { action }) => {
@@ -128,25 +124,28 @@ export default function useTable<I, E = unknown, T = I>(
           }
         });
       case 'sort':
-        const orderBy: Sorter['orderBy'] = [];
-        const orderType: Sorter['orderType'] = [];
+        const orders: SortOrder[] = [];
         const items = Array.isArray(sorter) ? sorter : [sorter];
 
         for (const { columnKey, field, order } of items) {
           if (order) {
-            if (columnKey) {
-              orderBy.push(columnKey);
-            } else if (field) {
-              orderBy.push(serializeField(field));
+            if (columnKey != null) {
+              orders.push({
+                orderBy: columnKey,
+                orderType: order
+              });
+            } else if (field != null) {
+              orders.push({
+                orderBy: field,
+                orderType: order
+              });
             } else {
               throw new Error('table column missing sort field');
             }
-
-            orderType.push(order);
           }
         }
 
-        return fetch({ sorter: { orderBy, orderType } });
+        return fetch({ sorter: orders.length > 0 ? orders : false });
     }
   }, []);
 
@@ -171,7 +170,7 @@ export default function useTable<I, E = unknown, T = I>(
   const refs = useMemo<Refs<I, E>>(() => {
     return {
       get filters() {
-        return raw();
+        return getFilters();
       },
       get response() {
         return originRefs.response;

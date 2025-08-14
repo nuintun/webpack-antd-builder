@@ -44,16 +44,12 @@ export default memo(function FlexLayout(props: FlexLayoutProps) {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const onBreakChange = useCallback((isBreak: boolean) => {
+  const isBreak = useMediaQuery(breakQuery, isBreak => {
     !readCollapsed() && setCollapsed(isBreak);
-  }, []);
-
-  const onMobileChange = useCallback((isMobile: boolean) => {
+  });
+  const isMobile = useMediaQuery(mobileQuery, isMobile => {
     isMobile && setCollapsed(isMobile);
-  }, []);
-
-  const isBreak = useMediaQuery(breakQuery, onBreakChange);
-  const isMobile = useMediaQuery(mobileQuery, onMobileChange);
+  });
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
   const [collapsed, setCollapsed] = useState(() => isBreak || isMobile || !!readCollapsed());
 

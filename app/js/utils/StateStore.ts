@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { isFunction } from './utils';
+import { shallowEqual } from 'fast-equals';
 
 export interface Callback {
   (this: unknown): void;
@@ -57,7 +58,7 @@ export class StateStore<S> {
 
     this.state = isFunction(state) ? state(prevState) : state;
 
-    if (this.state !== prevState) {
+    if (!shallowEqual(this.state, prevState)) {
       for (const callback of callbacks) {
         callback();
       }

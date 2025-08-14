@@ -15,6 +15,7 @@ import { flattenItems, getExpandKeys, mergeKeys } from './utils';
 import React, { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 type OmitProps =
+  | 'items'
   | 'multiple'
   | 'openKeys'
   | 'selectable'

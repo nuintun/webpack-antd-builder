@@ -3,6 +3,7 @@
  */
 
 import useIsMounted from './useIsMounted';
+import { shallowEqual } from 'fast-equals';
 import { isFunction } from '/js/utils/utils';
 import React, { useEffect, useState } from 'react';
 import useLatestCallback from './useLatestCallback';
@@ -120,7 +121,7 @@ export default function useControllableValue<V = undefined>(
       const state = currentState ?? options.defaultValue;
       const nextState = isFunction(value) ? value(state) : value;
 
-      if (nextState !== state) {
+      if (!shallowEqual(nextState, state)) {
         const { trigger = 'onChange' } = props;
 
         if (!isControlled(props, options)) {
@@ -138,7 +139,7 @@ export default function useControllableValue<V = undefined>(
     if (isControlled(props, options)) {
       const nextState = getState(props, options);
 
-      if (nextState !== currentState) {
+      if (!shallowEqual(nextState, currentState)) {
         setState(nextState);
       }
     }

@@ -1,20 +1,16 @@
-/**
- * @module 404
- */
-
 import { Button, Result } from 'antd';
 import useTitle from '/js/hooks/useTitle';
 import { useNavigate } from 'react-nest-router';
 import React, { memo, useCallback } from 'react';
 
 const style: React.CSSProperties = {
-  height: '100%',
   display: 'flex',
+  minHeight: '100vh',
   placeItems: 'center',
   placeContent: 'center'
 };
 
-export default memo(function Page(): React.ReactElement {
+export default memo(function Page() {
   useTitle('404');
 
   const navigate = useNavigate();

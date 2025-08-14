@@ -4,6 +4,7 @@
 
 import { canUseDOM } from '/js/utils/dom';
 import { useMemo, useState } from 'react';
+import useLatestCallback from './useLatestCallback';
 import useSafeLayoutEffect from './useSafeLayoutEffect';
 
 /**
@@ -22,6 +23,10 @@ export default function useMediaQuery(
     return canUseDOM ? globalThis.matchMedia(query) : null;
   }, [query]);
 
+  const useLatestChange = useLatestCallback((matched: boolean) => {
+    onChange?.(matched);
+  });
+
   const [matched, setState] = useState(mql ? mql.matches : initialMatchState);
 
   useSafeLayoutEffect(() => {
@@ -31,7 +36,7 @@ export default function useMediaQuery(
 
         setState(matched);
 
-        onChange?.(matched);
+        useLatestChange(matched);
       };
 
       mql.addEventListener('change', onMediaChange);
@@ -40,7 +45,7 @@ export default function useMediaQuery(
         mql.removeEventListener('change', onMediaChange);
       };
     }
-  }, [mql, onChange]);
+  }, [mql]);
 
   return matched;
 }

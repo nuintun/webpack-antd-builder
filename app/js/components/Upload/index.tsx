@@ -21,6 +21,7 @@ import {
   UploadFile,
   UploadProps as AntdUploadProps
 } from 'antd';
+import request from './request';
 import classNames from 'classnames';
 import useStyles, { prefixCls } from './style';
 import { useLocation, useNavigate } from 'react-nest-router';
@@ -76,7 +77,7 @@ export interface UploadProps<T>
 }
 
 const defaultGetThumbImage: GetThumbImage = (url, thumbUrl) => {
-  return thumbUrl ?? url;
+  return new URL(thumbUrl ?? url, self.location.href).href;
 };
 
 const defaultRenderFile: RenderFile = (file, { style, remove }) => {
@@ -327,6 +328,7 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
           maxCount={maxCount}
           onChange={onChange}
           showUploadList={false}
+          customRequest={request}
           height={height as number}
           withCredentials={withCredentials}
           rootClassName={classNames(`${prefixCls}-input`, {

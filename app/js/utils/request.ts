@@ -3,6 +3,7 @@
  * @description Ajax 请求封装
  */
 
+import * as msgpack from './msgpack';
 import { Fields, serialize } from './form';
 import { isBigInt, isObject } from './utils';
 
@@ -44,7 +45,7 @@ const STATUS_TEXT: Record<number, string> = {
  * @function isStatusOk
  * @param status HTTP 状态码
  */
-function isStatusOk(status: number): boolean {
+export function isStatusOk(status: number): boolean {
   return status >= 200 && status < 300;
 }
 
@@ -52,7 +53,7 @@ function isStatusOk(status: number): boolean {
  * @function resloveMessage
  * @param code HTTP 状态码
  */
-function resloveMessage(code: number): string {
+export function resloveMessage(code: number): string {
   return STATUS_TEXT[code] || `操作失败：${code}`;
 }
 
@@ -60,7 +61,7 @@ function resloveMessage(code: number): string {
  * @function stringify
  * @param value 要序列化的数据
  */
-function stringify(value: any): string {
+export function stringify(value: any): string {
   return JSON.stringify(value, (_key, value) => {
     if (isBigInt(value)) {
       return value.toString();
@@ -76,8 +77,16 @@ function stringify(value: any): string {
  * @function isJsonType
  * @param contentType 内容类型
  */
-function isJsonType(contentType: string | null): boolean {
+export function isJsonType(contentType: string | null): boolean {
   return !!contentType && /^application\/json(;|$)/i.test(contentType);
+}
+
+/**
+ * @function isMsgpackType
+ * @param contentType 内容类型
+ */
+export function isMsgpackType(contentType: string | null): boolean {
+  return !!contentType && /^application\/x-msgpack(;|$)/i.test(contentType);
 }
 
 /**
@@ -87,7 +96,13 @@ function isJsonType(contentType: string | null): boolean {
 function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   const contentType = response.headers.get('Content-Type');
 
-  if (isJsonType(contentType)) {
+  if (isMsgpackType(contentType)) {
+    const body = response.body || new ReadableStream();
+
+    return msgpack.decodeAsync<RequestResult<R>>(body).then(({ code, message, payload }) => {
+      return { code, message: message || resloveMessage(code), payload };
+    });
+  } else if (isJsonType(contentType)) {
     return response.json().then(({ code, message, payload }: RequestResult<R>) => {
       return { code, message: message || resloveMessage(code), payload };
     });
@@ -140,7 +155,7 @@ function createErrorCatch(code: number): (error: Error | DOMException | string) 
  * @param init 请求配置
  */
 export default function request<R>(url: string, init: Options = {}): Promise<R> {
-  const { query, onMessage, baseURL = location.href, onUnauthorized, ...options } = init;
+  const { query, onMessage, baseURL = self.location.href, onUnauthorized, ...options } = init;
 
   options.cache = options.cache || 'no-cache';
   options.headers = new Headers(options.headers || {});
@@ -162,7 +177,9 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   if (isObject(body) || Array.isArray(body)) {
     const contentType = headers.get('Content-Type');
 
-    if (isJsonType(contentType)) {
+    if (isMsgpackType(contentType)) {
+      options.body = msgpack.encode(body);
+    } else if (isJsonType(contentType)) {
       options.body = stringify(body);
     } else {
       options.body = serialize(body, new FormData());
