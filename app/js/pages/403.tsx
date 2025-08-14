@@ -1,15 +1,19 @@
+/**
+ * @module 403
+ */
+
 import { Button, Result } from 'antd';
 import { useNavigate } from 'react-nest-router';
 import React, { memo, useCallback } from 'react';
 
 const style: React.CSSProperties = {
+  height: '100%',
   display: 'flex',
-  minHeight: '100vh',
   placeItems: 'center',
   placeContent: 'center'
 };
 
-export default memo(function Page() {
+export default memo(function Page(): React.ReactElement {
   const navigate = useNavigate();
 
   const onBackHome = useCallback(() => {
