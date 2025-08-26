@@ -46,7 +46,7 @@ const decoder = new Decoder({
  * @description 同步编码数据
  * @param object 需要编码的数据
  */
-export const encode = encoder.encodeSharedRef.bind(encoder);
+export const encode = encoder.encode.bind(encoder);
 
 /**
  * @function decode
