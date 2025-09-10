@@ -63,7 +63,7 @@ export const decode = decoder.decode.bind(decoder);
 export type ReadableStreamLike<T> = AsyncIterable<T> | ReadableStream<T>;
 
 function isAsyncIterable<T>(stream: ReadableStreamLike<T>): stream is AsyncIterable<T> {
-  return (stream as any)[Symbol.asyncIterator] != null;
+  return stream[Symbol.asyncIterator] != null;
 }
 
 async function* asyncIterableFromStream<T>(stream: ReadableStream<T>): AsyncIterable<T> {
