@@ -29,7 +29,7 @@
     "antd": "^5.27.4",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.18",
-    "fast-equals": "^5.2.2",
+    "fast-equals": "^5.3.2",
     "koa": "^3.0.1",
     "koa-compress": "^5.1.1",
     "koa-files": "^4.1.3",
@@ -37,13 +37,13 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-error-boundary": "^6.0.0",
-    "react-nest-router": "^0.20.7",
+    "react-nest-router": "^0.20.8",
     "throttle-debounce": "^5.0.2"
   },
   "devDependencies": {
     "@nuintun/svgo-loader": "^0.5.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.1",
-    "@swc/core": "^1.13.5",
+    "@swc/core": "^1.13.19",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
     "@types/throttle-debounce": "^5.0.2",
@@ -57,13 +57,13 @@
     "find-free-ports": "^3.1.1",
     "html-webpack-plugin": "^5.6.4",
     "lightningcss": "^1.30.1",
-    "memfs": "^4.43.0",
+    "memfs": "^4.46.1",
     "mini-css-extract-plugin": "^2.9.4",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.6",
     "postcss-loader": "^8.2.0",
     "prettier": "^3.6.2",
-    "sass-embedded": "^1.93.0",
+    "sass-embedded": "^1.93.2",
     "sass-loader": "^16.0.5",
     "svgc-loader": "^0.5.5",
     "swc-loader": "^0.2.6",
@@ -71,6 +71,6 @@
     "typescript": "^5.9.2",
     "utf-8-validate": "^6.0.5",
     "webpack": "^5.101.3",
-    "webpack-dev-service": "^0.15.16"
+    "webpack-dev-service": "^0.16.0"
   }
 }
