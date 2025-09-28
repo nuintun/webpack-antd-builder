@@ -89,5 +89,5 @@ export default function useResponse<R, T>(
     }
   }, []);
 
-  return [response, fetch, setResponse];
+  return [response, fetch, dispatch];
 }

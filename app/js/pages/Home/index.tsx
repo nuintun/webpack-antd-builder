@@ -44,7 +44,14 @@ function requestTicktock(callback: (...args: any[]) => void): () => void {
 }
 
 const Time = memo(function Time() {
-  const [machine, send] = useStateMachine(
+  const [machine, send] = useStateMachine<
+    // Context
+    { time: number },
+    // State
+    'idle' | 'running' | 'paused',
+    // Event
+    'start' | 'pause' | 'reset'
+  >(
     {
       initial: 'idle',
       verbose: __DEV__,

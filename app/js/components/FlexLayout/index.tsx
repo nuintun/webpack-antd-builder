@@ -50,6 +50,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps) {
   const isMobile = useMediaQuery(mobileQuery, isMobile => {
     isMobile && setCollapsed(isMobile);
   });
+
   const [writeCollapsed, readCollapsed] = useStorage<boolean>('collapsed');
   const [collapsed, setCollapsed] = useState(() => isBreak || isMobile || !!readCollapsed());
 
