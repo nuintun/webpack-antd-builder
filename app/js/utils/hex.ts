@@ -22,7 +22,7 @@ for (let i = 0; i < 16; i++) {
 
 /**
  * @function encode
- * @description 将字节数组编码 Hex 字符串
+ * @description 将字节数组编码为 Hex 字符串
  * @param bytes 需要编码的字节数组
  */
 export function encode(bytes: Uint8Array): string {
