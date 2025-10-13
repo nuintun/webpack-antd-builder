@@ -60,8 +60,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react@18.3.1)
       react-nest-router:
-        specifier: ^0.20.9
-        version: 0.20.9(react@18.3.1)
+        specifier: ^0.21.0
+        version: 0.21.0(react@18.3.1)
       throttle-debounce:
         specifier: ^5.0.2
         version: 5.0.2
@@ -2158,8 +2158,8 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-nest-router@0.20.9:
-    resolution: {integrity: sha512-bdrWqnYjB+8dyjKcOibT2m7Rgpp7348O9YZsk+m6WQpPSUC6IxJpEzT3Bf1WhxeMTATboIWoZZPzRvPkXq4btA==}
+  react-nest-router@0.21.0:
+    resolution: {integrity: sha512-/fueQ4GyXwbHcq9ULNCglaTLkxi/pZGDpej79hPW7aD5x1L5XNwAdYfWB0195WeR71uSKmHDw7YUQr5lbNZf7A==}
     peerDependencies:
       react: '>=17.0.0'
 
@@ -4681,7 +4681,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-nest-router@0.20.9(react@18.3.1):
+  react-nest-router@0.21.0(react@18.3.1):
     dependencies:
       react: 18.3.1
       tslib: 2.8.1
