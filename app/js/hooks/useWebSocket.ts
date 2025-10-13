@@ -59,12 +59,23 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
   const reconnectTimesRef = useRef(0);
   // 使用 ref 保存最新的 options 配置
   const optionsRef = useLatestRef(options);
-  // WebSocket 实例的 ref
-  const websocketRef = useRef<WebSocket>();
   // 消息发送队列，用于在连接未建立时缓存消息
   const sendQueueRef = useRef<Message[]>([]);
+  // WebSocket 实例的 ref
+  const websocketRef = useRef<WebSocket | null>(null);
   // 重连定时器 ref
-  const reconnectTimerRef = useRef<Timeout>();
+  const reconnectTimerRef = useRef<Timeout | null>(null);
+
+  /**
+   * @description 清除重连定时器
+   */
+  const clearReconnectTimer = useCallback(() => {
+    const reconnectTimer = reconnectTimerRef.current;
+
+    if (reconnectTimer != null) {
+      clearTimeout(reconnectTimer);
+    }
+  }, []);
 
   /**
    * @description 建立 WebSocket 连接
@@ -76,7 +87,7 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
     // 如果当前状态不是 CONNECTING 或 OPEN，则创建新的 WebSocket 实例
     if (readyState !== WebSocket.CONNECTING && readyState !== WebSocket.OPEN) {
       // 清除之前的重连定时器
-      clearTimeout(reconnectTimerRef.current);
+      clearReconnectTimer();
 
       // 创建 WebSocket 连接
       const createWebSocket = () => {
@@ -135,6 +146,9 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
             // 清空消息队列
             sendQueueRef.current = [];
 
+            // 清除 WebSocket 实例引用
+            websocketRef.current = null;
+
             // 调用用户定义的 onClose 回调
             optionsRef.current.onClose?.(event);
 
@@ -172,7 +186,7 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
     const ws = websocketRef.current;
 
     // 如果连接已建立且处于 OPEN 状态，则直接发送消息
-    if (ws && ws.readyState === WebSocket.OPEN) {
+    if (ws?.readyState === WebSocket.OPEN) {
       ws.send(message);
     } else {
       // 否则将消息加入发送队列，等连接建立后再发送
@@ -186,10 +200,10 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
    * @param reason 关闭原因
    */
   const disconnect = useCallback((code: number = 1000, reason?: string): void => {
-    const { reconnectLimit = 3 } = optionsRef.current;
+    // 清除之前的重连定时器
+    clearReconnectTimer();
 
-    // 清除重连定时器
-    clearTimeout(reconnectTimerRef.current);
+    const { reconnectLimit = 3 } = optionsRef.current;
 
     // 设置重连次数达到上限，防止断开后自动重连
     reconnectTimesRef.current = reconnectLimit;
@@ -221,20 +235,27 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
     const { reconnectLimit = 3 } = options;
 
     // 如果重连次数未达到上限且当前连接不是 OPEN 状态，则尝试重连
-    if (reconnectTimesRef.current < reconnectLimit && websocketRef.current?.readyState !== WebSocket.OPEN) {
-      clearTimeout(reconnectTimerRef.current);
+    if (reconnectTimesRef.current < reconnectLimit) {
+      // 获取当前 WebSocket 状态
+      const readyState = websocketRef.current?.readyState;
 
-      const { reconnectInterval = 3000 } = options;
+      // 如果当前状态不是 CONNECTING 或 OPEN，则创建新的 WebSocket 实例
+      if (readyState !== WebSocket.CONNECTING && readyState !== WebSocket.OPEN) {
+        // 清除之前的重连定时器
+        clearReconnectTimer();
 
-      // 设置重连定时器
-      reconnectTimerRef.current = setTimeout(() => {
-        connect();
+        const { reconnectInterval = 3000 } = options;
 
-        // 更新重连次数并调用用户定义的 onReconnect 回调
-        const reconnectTimes = reconnectTimesRef.current++;
+        // 设置重连定时器
+        reconnectTimerRef.current = setTimeout(() => {
+          connect();
 
-        optionsRef.current.onReconnect?.(reconnectTimes, reconnectLimit);
-      }, reconnectInterval);
+          // 更新重连次数并调用用户定义的 onReconnect 回调
+          const reconnectTimes = reconnectTimesRef.current++;
+
+          optionsRef.current.onReconnect?.(reconnectTimes, reconnectLimit);
+        }, reconnectInterval);
+      }
     }
   }, []);
 
