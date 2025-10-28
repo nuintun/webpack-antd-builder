@@ -4,7 +4,7 @@
 
 import { serialize } from '/js/utils/form';
 import * as msgpack from '/js/utils/msgpack';
-import { isJsonType, isMsgpackType, isStatusOk, RequestResult, resloveMessage } from '/js/utils/request';
+import { isJsonType, isMsgpackType, isStatusOk, RequestResult, resolveMessage } from '/js/utils/request';
 
 interface RcFile extends File {
   uid: string;
@@ -52,19 +52,19 @@ function parseResponse<R>(xhr: XMLHttpRequest): RequestResult<R> {
     const body: ArrayBuffer = xhr.response;
     const { code, message, payload } = msgpack.decode(body) as RequestResult<R>;
 
-    return { code, message: message || resloveMessage(code), payload };
+    return { code, message: message || resolveMessage(code), payload };
   } else if (isJsonType(contentType)) {
     const body: string = xhr.response;
     const { code, message, payload } = JSON.parse(body) as RequestResult<R>;
 
-    return { code, message: message || resloveMessage(code), payload };
+    return { code, message: message || resolveMessage(code), payload };
   }
 
   const { status } = xhr;
   const payload = xhr.responseText;
   const code = isStatusOk(status) ? 200 : status;
 
-  return { code, message: resloveMessage(code), payload } as RequestResult<R>;
+  return { code, message: resolveMessage(code), payload } as RequestResult<R>;
 }
 
 function getError(option: UploadRequestOption, xhr: XMLHttpRequest): UploadRequestError {

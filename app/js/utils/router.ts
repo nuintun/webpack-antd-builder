@@ -24,7 +24,7 @@ export interface MetaWithKey extends Meta {
   readonly key: string;
 }
 
-export type Icon = string | React.ReactElement;
+export type Icon = string | React.ReactElement<{ className?: string }>;
 
 export type Route<M = unknown, K extends string = string> = NRoute<M & Meta, K>;
 

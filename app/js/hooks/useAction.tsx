@@ -41,7 +41,7 @@ export default function useAction<F extends Fields | null, R>(
   action: string,
   options: Options<F, R> = {}
 ): [loading: boolean, onAction: (fields: F) => void, render: (children: React.ReactElement) => React.ReactElement] {
-  const valuesRef = useRef<F>();
+  const valuesRef = useRef<F>(null);
   const [open, setOpen] = useState(false);
   const [loading, onSubmit] = useSubmit<F, R>(action, options);
 

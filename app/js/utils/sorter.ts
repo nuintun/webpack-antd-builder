@@ -22,7 +22,7 @@ export type OrderBy = Field | readonly Field[];
 
 /**
  * @function formatFields
- * @description 多字段序格式化
+ * @description 多字段排序格式化
  * @param fields 排序字段
  */
 function formatFields(fields: OrderBy): Field {

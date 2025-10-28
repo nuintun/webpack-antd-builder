@@ -19,9 +19,12 @@ type TargetValue<T> = T | undefined | null;
 type TargetType = Element | Window | Document;
 
 export type Target<T extends TargetType = Element> =
+  // 原始值
   | TargetValue<T>
+  // 函数值
   | (() => TargetValue<T>)
-  | React.MutableRefObject<TargetValue<T>>;
+  // React Ref 对象
+  | React.RefObject<TargetValue<T>>;
 
 export function isWindow(target: unknown): target is Window {
   return canUseDOM && target instanceof Window;

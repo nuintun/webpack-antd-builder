@@ -10,10 +10,10 @@ const utf8 = new TextEncoder();
 const MD5_T = new Int32Array(64);
 
 const G_INDEX = [
-  (i: number) => i,
-  (i: number) => (5 * i + 1) % 16,
-  (i: number) => (3 * i + 5) % 16,
-  (i: number) => (7 * i) % 16
+  (i: number): number => i,
+  (i: number): number => (5 * i + 1) % 16,
+  (i: number): number => (3 * i + 5) % 16,
+  (i: number): number => (7 * i) % 16
 ];
 
 // prettier-ignore
@@ -34,11 +34,11 @@ function leftRotate(x: number, c: number): number {
 
 export type DigestEncoding = 'base64' | 'hex' | 'binary';
 
-const F_TABLE: ((b: number, c: number, d: number) => number)[] = [
-  (b, c, d) => (b & c) | (~b & d),
-  (b, c, d) => (d & b) | (~d & c),
-  (b, c, d) => b ^ c ^ d,
-  (b, c, d) => c ^ (b | ~d)
+const F_TABLE = [
+  (b: number, c: number, d: number): number => (b & c) | (~b & d),
+  (b: number, c: number, d: number): number => (d & b) | (~d & c),
+  (b: number, c: number, d: number): number => b ^ c ^ d,
+  (b: number, c: number, d: number): number => c ^ (b | ~d)
 ];
 
 for (let i = 0; i < 64; i++) {

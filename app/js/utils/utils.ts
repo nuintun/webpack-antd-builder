@@ -94,7 +94,7 @@ export function isBoolean(value: unknown): value is boolean {
 /**
  * @function formatThousands
  * @description 格式化数字
- * @param number 需要格式话的数字
+ * @param number 需要格式化的数字
  * @param precision 小数位保留个数
  */
 export function formatThousands(number: number | string = 0, precision: number = 2): string {

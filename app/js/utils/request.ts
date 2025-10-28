@@ -50,10 +50,10 @@ export function isStatusOk(status: number): boolean {
 }
 
 /**
- * @function resloveMessage
+ * @function resolveMessage
  * @param code HTTP 状态码
  */
-export function resloveMessage(code: number): string {
+export function resolveMessage(code: number): string {
   return STATUS_TEXT[code] || `操作失败：${code}`;
 }
 
@@ -100,11 +100,11 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
     const body = response.body || new ReadableStream();
 
     return msgpack.decodeAsync<RequestResult<R>>(body).then(({ code, message, payload }) => {
-      return { code, message: message || resloveMessage(code), payload };
+      return { code, message: message || resolveMessage(code), payload };
     });
   } else if (isJsonType(contentType)) {
     return response.json().then(({ code, message, payload }: RequestResult<R>) => {
-      return { code, message: message || resloveMessage(code), payload };
+      return { code, message: message || resolveMessage(code), payload };
     });
   }
 
@@ -112,7 +112,7 @@ function parseResponse<R>(response: Response): Promise<RequestResult<R>> {
   const code = isStatusOk(status) ? 200 : status;
 
   return response.text().then(payload => {
-    return { code, message: resloveMessage(code), payload } as RequestResult<R>;
+    return { code, message: resolveMessage(code), payload } as RequestResult<R>;
   });
 }
 
@@ -144,7 +144,7 @@ function createErrorCatch(code: number): (error: Error | DOMException | string) 
       throw new RequestError(code, error.message, error);
     }
 
-    throw new RequestError(code, stringify(error), { name: 'AbortError' });
+    throw new RequestError(code, error, { name: 'AbortError' });
   };
 }
 

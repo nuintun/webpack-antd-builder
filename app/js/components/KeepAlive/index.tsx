@@ -2,28 +2,28 @@
  * @module index
  */
 
-import { createPortal } from 'react-dom';
 import { Outlet, useMatches, useMatchIndex } from 'react-nest-router';
 import React, { createContext, memo, useContext, useEffect, useMemo } from 'react';
 
-export interface KeepAliveProps {
-  target: React.ReactNode;
-  getOutletRoot?: () => HTMLElement;
+interface OnChange {
+  (active: boolean): void;
 }
 
-const context = createContext(false);
+export interface KeepAliveProps {
+  children: React.ReactNode;
+}
 
-const { Provider } = context;
+const KeepAliveContext = createContext(false);
 
-export function useActiveChange(onChange: (active: boolean) => void): void {
-  const active = useContext(context);
+export function useActiveChange(onChange: OnChange): void {
+  const active = useContext(KeepAliveContext);
 
   useEffect(() => {
     onChange(active);
   }, [active]);
 }
 
-export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps) {
+export default memo(function KeepAlive({ children }: KeepAliveProps) {
   const matches = useMatches();
   const index = useMatchIndex();
 
@@ -33,16 +33,10 @@ export default memo(function KeepAlive({ target, getOutletRoot }: KeepAliveProps
     return index + 1 === length;
   }, [index, length]);
 
-  const outlet = useMemo(() => {
-    const root = getOutletRoot?.();
-
-    return root ? createPortal(<Outlet />, root) : <Outlet />;
-  }, [getOutletRoot]);
-
   return (
-    <Provider value={active}>
-      <div hidden={!active}>{target}</div>
-      {outlet}
-    </Provider>
+    <KeepAliveContext.Provider value={active}>
+      <div hidden={!active}>{children}</div>
+      <Outlet />
+    </KeepAliveContext.Provider>
   );
 });
