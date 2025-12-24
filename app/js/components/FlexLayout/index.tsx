@@ -2,7 +2,7 @@
  * @module index
  */
 
-import classNames from 'classnames';
+import clsx from 'clsx';
 import useStorage from '/js/hooks/useStorage';
 import { ConfigProvider, Layout } from 'antd';
 import useStyles, { prefixCls } from './style';
@@ -40,8 +40,7 @@ export default memo(function FlexLayout(props: FlexLayoutProps) {
     mobileQuery = '(max-width: 576px)'
   } = props;
 
-  const [scope, render] = useStyles();
-
+  const scope = useStyles();
   const contentRef = useRef<HTMLDivElement>(null);
 
   const isBreak = useMediaQuery(breakQuery, isBreak => {
@@ -93,8 +92,12 @@ export default memo(function FlexLayout(props: FlexLayoutProps) {
 
   const getTargetContainer = useCallback(() => contentRef.current || document.body, []);
 
-  return render(
-    <Layout hasSider={!isMobile} className={classNames(scope, prefixCls, `${prefixCls}-${theme}`)}>
+  const Trigger = collapsed ? MenuUnfoldOutlined : MenuFoldOutlined;
+
+  const logo = isMobile && renderLogoHeader?.({ theme, isMobile, collapsedWidth, collapsed: true, width: siderWidth });
+
+  return (
+    <Layout hasSider={!isMobile} className={clsx(scope, prefixCls, `${prefixCls}-${theme}`)}>
       <FlexMenu
         items={menus}
         theme={theme}
@@ -108,31 +111,10 @@ export default memo(function FlexLayout(props: FlexLayoutProps) {
       />
       <Layout>
         <Header className={`${prefixCls}-header`}>
-          {isMobile && renderLogoHeader && (
-            <div className={`${prefixCls}-logo-header`}>
-              {renderLogoHeader({
-                theme,
-                isMobile,
-                collapsedWidth,
-                collapsed: true,
-                width: siderWidth
-              })}
-            </div>
-          )}
+          {logo && <div className={`${prefixCls}-logo-header`}>{logo}</div>}
           <div className={`${prefixCls}-actions-header`}>
-            {collapsed ? (
-              <MenuUnfoldOutlined onClick={onTriggerClick} className={`${prefixCls}-trigger`} />
-            ) : (
-              <MenuFoldOutlined onClick={onTriggerClick} className={`${prefixCls}-trigger`} />
-            )}
-            {renderActionsHeader &&
-              renderActionsHeader({
-                theme,
-                isMobile,
-                collapsed,
-                collapsedWidth,
-                width: siderWidth
-              })}
+            <Trigger onClick={onTriggerClick} className={`${prefixCls}-trigger`} />
+            {renderActionsHeader?.({ theme, isMobile, collapsed, collapsedWidth, width: siderWidth })}
           </div>
         </Header>
         <Content>

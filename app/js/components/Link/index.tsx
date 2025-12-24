@@ -3,15 +3,15 @@
  */
 
 import { GetProp } from 'antd';
+import React, { memo, useMemo } from 'react';
 import { isFunction } from '/js/utils/utils';
-import useLatestRef from '/js/hooks/useLatestRef';
-import React, { memo, useCallback, useMemo } from 'react';
+import useLatestCallback from '/js/hooks/useLatestCallback';
 import { To, useNavigate, useResolve } from 'react-nest-router';
 
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export interface LinkProps<S> extends Omit<AnchorProps, 'href'> {
-  href: To;
+  to: To;
   replace?: boolean;
   state?: S | (() => S);
 }
@@ -21,15 +21,13 @@ function isModifiedEvent({ altKey, metaKey, ctrlKey, shiftKey }: React.MouseEven
 }
 
 function Link<S>(props: LinkProps<S>) {
-  const { href: to, state, replace, children, onClick, ...restProps } = props;
+  const { to, state, replace, children, onClick, ...restProps } = props;
 
   const resolve = useResolve();
   const navigate = useNavigate();
-  const propsRef = useLatestRef(props);
   const href = useMemo(() => resolve(to), [to]);
 
-  const onLinkClick = useCallback<GetProp<AnchorProps, 'onClick'>>(event => {
-    const { current: props } = propsRef;
+  const onLinkClick = useLatestCallback<GetProp<AnchorProps, 'onClick'>>(event => {
     const { target = '_self', onClick } = props;
 
     onClick?.(event);
@@ -41,11 +39,9 @@ function Link<S>(props: LinkProps<S>) {
     ) {
       event.preventDefault();
 
-      const { href: to, state, replace } = props;
-
       navigate(to, { replace, state: isFunction(state) ? state() : state });
     }
-  }, []);
+  });
 
   return (
     <a rel="noopener" {...restProps} href={href} onClick={onLinkClick}>

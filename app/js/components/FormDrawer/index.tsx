@@ -4,16 +4,15 @@
 
 import { Fields } from '/js/utils/form';
 import useSubmit, { Options } from '/js/hooks/useSubmit';
-import { Button, Form, FormInstance, FormProps, Space } from 'antd';
 import FlexDrawer, { FlexDrawerProps } from '/js/components/FlexDrawer';
+import { Button, Form, FormInstance, FormProps, GetProp, Space } from 'antd';
 import React, { cloneElement, memo, useCallback, useEffect, useId, useMemo, useState } from 'react';
 
 const { useForm } = Form;
 
 type DrawerPicked =
+  | 'size'
   | 'title'
-  | 'width'
-  | 'height'
   | 'loading'
   | 'children'
   | 'keyboard'
@@ -22,7 +21,7 @@ type DrawerPicked =
   | 'maskClosable'
   | 'destroyOnHidden'
   | 'afterOpenChange';
-type FormOmitted = 'title' | 'onError' | 'children';
+type FormOmitted = 'size' | 'title' | 'onError' | 'children';
 type SubmitPicked = 'query' | 'method' | 'notify' | 'normalize' | 'onError' | 'onSuccess' | 'onComplete';
 
 function createFormName(id: string): string {
@@ -35,14 +34,13 @@ export type Trigger = React.ReactElement<{
 }>;
 
 export interface FormDrawerProps<F extends Fields, R = unknown>
-  extends Omit<FormProps<F>, FormOmitted>,
-    Pick<Options<F, R>, SubmitPicked>,
-    Pick<FlexDrawerProps, DrawerPicked> {
+  extends Omit<FormProps<F>, FormOmitted>, Pick<Options<F, R>, SubmitPicked>, Pick<FlexDrawerProps, DrawerPicked> {
   action: string;
   trigger: Trigger;
   onOpen?: () => void;
   onClose?: () => void;
   form?: FormInstance<F>;
+  formSize?: GetProp<FormProps, 'size'>;
   requestInit?: Omit<Options<F, R>, SubmitPicked>;
   extra?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
   footer?: (submitting: boolean, form: FormInstance<F>, onClose: () => void) => React.ReactNode;
@@ -69,21 +67,21 @@ function FormDrawer<F extends Fields, R = unknown>({
   action,
   footer,
   method,
-  notify,
   onOpen,
   loading,
   onClose,
   onError,
   trigger,
   children,
+  formSize,
   normalize,
   onSuccess,
   placement,
   onComplete,
+  size = 560,
   forceRender,
   requestInit,
-  width = 560,
-  height = 560,
+  notify = true,
   afterOpenChange,
   destroyOnHidden,
   keyboard = false,
@@ -144,9 +142,8 @@ function FormDrawer<F extends Fields, R = unknown>({
       {triggerNode}
       <FlexDrawer
         open={open}
+        size={size}
         title={title}
-        width={width}
-        height={height}
         loading={loading}
         keyboard={keyboard}
         placement={placement}
@@ -158,7 +155,14 @@ function FormDrawer<F extends Fields, R = unknown>({
         extra={extra(submitting, wrapForm, onCloseHandler)}
         footer={footer?.(submitting, wrapForm, onCloseHandler)}
       >
-        <Form {...restProps} layout={layout} form={wrapForm} onFinish={onSubmit} name={name || createFormName(id)}>
+        <Form
+          {...restProps}
+          form={wrapForm}
+          layout={layout}
+          size={formSize}
+          onFinish={onSubmit}
+          name={name || createFormName(id)}
+        >
           {children}
         </Form>
       </FlexDrawer>

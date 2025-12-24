@@ -13,22 +13,22 @@ type ButtonPicked =
   | 'size'
   | 'type'
   | 'block'
+  | 'color'
   | 'ghost'
   | 'shape'
   | 'style'
   | 'title'
   | 'danger'
+  | 'variant'
   | 'children'
   | 'tabIndex'
   | 'autoFocus'
   | 'className'
-  | 'iconPosition'
+  | 'iconPlacement'
   | 'autoInsertSpace';
 
 export interface ActionButtonProps<R>
-  extends ActionProps<null, R>,
-    Pick<ButtonProps, ButtonPicked>,
-    Pick<RequestOptions<R>, 'query' | 'method' | 'notify'> {
+  extends ActionProps<null, R>, Pick<ButtonProps, ButtonPicked>, Pick<RequestOptions<R>, 'query' | 'method' | 'notify'> {
   action: string;
   bubbles?: boolean;
 }
@@ -39,6 +39,7 @@ function ActionButton<R>({
   size,
   type,
   block,
+  color,
   ghost,
   shape,
   style,
@@ -46,11 +47,12 @@ function ActionButton<R>({
   action,
   danger,
   bubbles,
+  variant,
   children,
   tabIndex,
   autoFocus,
   className,
-  iconPosition,
+  iconPlacement,
   autoInsertSpace,
   ...restProps
 }: ActionButtonProps<R>): React.ReactElement {
@@ -74,19 +76,21 @@ function ActionButton<R>({
       size={size}
       type={type}
       block={block}
+      color={color}
       ghost={ghost}
       shape={shape}
       style={style}
       title={title}
       danger={danger}
+      loading={loading}
       onClick={onClick}
+      variant={variant}
       tabIndex={tabIndex}
       autoFocus={autoFocus}
       className={className}
-      iconPosition={iconPosition}
       disabled={restProps.disabled}
+      iconPlacement={iconPlacement}
       autoInsertSpace={autoInsertSpace}
-      loading={restProps.confirm ? false : loading}
     >
       {children}
     </Button>

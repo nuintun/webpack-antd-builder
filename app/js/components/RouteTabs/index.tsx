@@ -2,8 +2,8 @@
  * @module index
  */
 
+import clsx from 'clsx';
 import { Meta } from '/js/router';
-import classNames from 'classnames';
 import Link from '/js/components/Link';
 import { IRoute } from '/js/utils/router';
 import FlexIcon from '/js/components/FlexIcon';
@@ -21,7 +21,7 @@ type TabsPicked =
   | 'moreIcon'
   | 'className'
   | 'tabBarStyle'
-  | 'tabPosition'
+  | 'tabPlacement'
   | 'renderTabBar'
   | 'tabBarGutter'
   | 'popupClassName'
@@ -34,13 +34,13 @@ export interface RouteTabsProps extends Pick<TabsProps, TabsPicked> {
 
 export default memo(function RouteTabs({
   className,
-  tabPosition,
+  tabPlacement,
   tabBarGutter = 16,
   icon: showIcon = true,
   ...restProps
 }: RouteTabsProps) {
+  const scope = useStyles();
   const index = useMatchIndex();
-  const [scope, render] = useStyles();
   const match = useMatch() as IRoute<Meta>;
   const matches = useMatches() as IRoute<Meta>[];
   const activeKey = useMemo(() => matches[index + 1]?.meta.key, [matches, index]);
@@ -59,9 +59,9 @@ export default memo(function RouteTabs({
         ),
         label: (
           <Link
-            href={link.href}
+            to={link.href}
             target={link.target}
-            className={classNames(`${prefixCls}-nav`, {
+            className={clsx(`${prefixCls}-nav`, {
               [`${prefixCls}-active`]: active
             })}
           >
@@ -73,7 +73,7 @@ export default memo(function RouteTabs({
     });
   }, [activeKey, match]);
 
-  return render(
+  return (
     <ConfigProvider
       theme={{
         components: {
@@ -88,10 +88,10 @@ export default memo(function RouteTabs({
         items={items}
         destroyOnHidden
         activeKey={activeKey}
-        tabPosition={tabPosition}
+        tabPlacement={tabPlacement}
         tabBarGutter={tabBarGutter}
-        className={classNames(scope, prefixCls, className, {
-          [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right'
+        className={clsx(scope, prefixCls, className, {
+          [`${prefixCls}-vertical`]: tabPlacement === 'start' || tabPlacement === 'end'
         })}
       />
     </ConfigProvider>

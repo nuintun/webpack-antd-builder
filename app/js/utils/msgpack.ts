@@ -3,42 +3,24 @@
  */
 
 import dayjs from 'dayjs';
-import {
-  Decoder,
-  decodeTimestampExtension,
-  Encoder,
-  encodeTimestampExtension,
-  EXT_TIMESTAMP,
-  ExtensionCodec
-} from '@msgpack/msgpack';
+import * as msgpack from '@msgpack/msgpack';
 
 const useBigInt64 = true;
 
-const extensionCodec = new ExtensionCodec();
+const extensionCodec = new msgpack.ExtensionCodec();
 
 extensionCodec.register({
-  type: EXT_TIMESTAMP,
+  type: msgpack.EXT_TIMESTAMP,
   encode(value) {
     if (dayjs.isDayjs(value)) {
       value = value.toDate();
     }
 
-    return encodeTimestampExtension(value);
+    return msgpack.encodeTimestampExtension(value);
   },
   decode(data) {
-    return dayjs(decodeTimestampExtension(data));
+    return dayjs(msgpack.decodeTimestampExtension(data));
   }
-});
-
-const encoder = new Encoder({
-  useBigInt64,
-  extensionCodec,
-  ignoreUndefined: true
-});
-
-const decoder = new Decoder({
-  useBigInt64,
-  extensionCodec
 });
 
 /**
@@ -46,42 +28,25 @@ const decoder = new Decoder({
  * @description 同步编码数据
  * @param object 需要编码的数据
  */
-export const encode = encoder.encode.bind(encoder);
+export function encode<T = unknown>(object: T): Uint8Array {
+  return msgpack.encode(object, {
+    useBigInt64,
+    extensionCodec,
+    ignoreUndefined: true,
+    initialBufferSize: 8192
+  });
+}
 
 /**
  * @function decode
  * @description 同步解码数据
  * @param buffer 需要解码的数据
  */
-export const decode = decoder.decode.bind(decoder);
-
-// utility for whatwg streams
-// The living standard of whatwg streams says
-// ReadableStream is also AsyncIterable, but
-// as of June 2019, no browser implements it.
-// See https://streams.spec.whatwg.org/ for details
-export type ReadableStreamLike<T> = AsyncIterable<T> | ReadableStream<T>;
-
-function isAsyncIterable<T>(stream: ReadableStreamLike<T>): stream is AsyncIterable<T> {
-  return stream[Symbol.asyncIterator] != null;
-}
-
-async function* asyncIterableFromStream<T>(stream: ReadableStream<T>): AsyncIterable<T> {
-  const reader = stream.getReader();
-
-  try {
-    while (true) {
-      const result = await reader.read();
-
-      if (result.done) {
-        break;
-      }
-
-      yield result.value;
-    }
-  } finally {
-    reader.releaseLock();
-  }
+export function decode<T = unknown>(buffer: Parameters<typeof msgpack.decode>[0]): T {
+  return msgpack.decode(buffer, {
+    useBigInt64,
+    extensionCodec
+  }) as T;
 }
 
 /**
@@ -89,6 +54,9 @@ async function* asyncIterableFromStream<T>(stream: ReadableStream<T>): AsyncIter
  * @description 异步解码流数据
  * @param stream 需要解码的流数据
  */
-export function decodeAsync<T>(stream: ReadableStreamLike<ArrayLike<number> | BufferSource>): Promise<T> {
-  return decoder.decodeAsync(isAsyncIterable(stream) ? stream : asyncIterableFromStream(stream)) as Promise<T>;
+export function decodeAsync<T = unknown>(stream: Parameters<typeof msgpack.decodeAsync>[0]): Promise<T> {
+  return msgpack.decodeAsync(stream, {
+    useBigInt64,
+    extensionCodec
+  }) as Promise<T>;
 }

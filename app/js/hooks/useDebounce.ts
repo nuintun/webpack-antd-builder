@@ -12,7 +12,7 @@ export interface Options {
 }
 
 export interface Callback {
-  (this: unknown, ...args: any[]): any;
+  (this: unknown, ...args: any[]): unknown;
 }
 
 /**

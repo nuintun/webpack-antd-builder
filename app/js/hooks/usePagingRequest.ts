@@ -4,7 +4,7 @@
 
 import { App } from 'antd';
 import useLatestCallback from './useLatestCallback';
-import React, { startTransition, useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import useRequest, { Options as InitOptions, RequestOptions as RequestInit } from './useRequest';
 
 const { useApp } = App;
@@ -110,12 +110,6 @@ export default function usePagingRequest<I, E = unknown, T = I>(
   const paginationRef = useRef<Pagination | false>(initPagination);
   const [loading, request] = useRequest(options, initialLoadingState);
 
-  const dispatch = useCallback<Dispatch<I[] | T[]>>(state => {
-    startTransition(() => {
-      setDataSource(state);
-    });
-  }, []);
-
   const fetch = useLatestCallback<Fetch>((fetchInit = {}) => {
     const requestInit = { ...options, ...fetchInit };
     const { current: pagination } = paginationRef;
@@ -169,10 +163,10 @@ export default function usePagingRequest<I, E = unknown, T = I>(
           }
         }
 
-        dispatch(() => (transform ? transform(dataSource) : dataSource));
+        setDataSource(() => (transform ? transform(dataSource) : dataSource));
       },
       onError(error) {
-        dispatch([]);
+        setDataSource([]);
 
         const { onError } = requestInit;
 
@@ -196,5 +190,5 @@ export default function usePagingRequest<I, E = unknown, T = I>(
     };
   }, []);
 
-  return [loading, dataSource, fetch, dispatch, refs];
+  return [loading, dataSource, fetch, setDataSource, refs];
 }

@@ -62,7 +62,7 @@ export class DFSTree<T> {
         const node = item.value;
         const children = resolve(node);
 
-        if (children && children.length > 0) {
+        if (children != null) {
           waiting.push(current);
 
           current = [children.values(), node];

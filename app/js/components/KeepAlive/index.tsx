@@ -3,7 +3,7 @@
  */
 
 import { Outlet, useMatches, useMatchIndex } from 'react-nest-router';
-import React, { createContext, memo, useContext, useEffect, useMemo } from 'react';
+import React, { Activity, createContext, memo, use, useEffect, useMemo } from 'react';
 
 interface OnChange {
   (active: boolean): void;
@@ -16,7 +16,7 @@ export interface KeepAliveProps {
 const KeepAliveContext = createContext(false);
 
 export function useActiveChange(onChange: OnChange): void {
-  const active = useContext(KeepAliveContext);
+  const active = use(KeepAliveContext);
 
   useEffect(() => {
     onChange(active);
@@ -34,9 +34,11 @@ export default memo(function KeepAlive({ children }: KeepAliveProps) {
   }, [index, length]);
 
   return (
-    <KeepAliveContext.Provider value={active}>
-      <div hidden={!active}>{children}</div>
+    <>
+      <KeepAliveContext value={active}>
+        <Activity mode={active ? 'visible' : 'hidden'}>{children}</Activity>
+      </KeepAliveContext>
       <Outlet />
-    </KeepAliveContext.Provider>
+    </>
   );
 });

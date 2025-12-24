@@ -2,10 +2,12 @@
  * @module Loading
  */
 
+import { Spin } from 'antd';
 import React, { memo } from 'react';
-import { Spin, SpinProps } from 'antd';
 
-export interface LoadingFallbackProps extends Pick<SpinProps, 'delay'>, Pick<React.CSSProperties, 'width' | 'height'> {}
+export interface LoadingFallbackProps extends Pick<React.CSSProperties, 'width' | 'height'> {
+  delay?: number;
+}
 
 export default memo(function LoadingFallback({ delay = 128, width, height = 360 }: LoadingFallbackProps) {
   return (

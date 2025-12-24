@@ -2,106 +2,40 @@
  * @module createStyles
  */
 
+import { useMemo } from 'react';
 import { isNumber, isString } from '/js/utils/utils';
-import { memo, ReactElement, useId, useMemo } from 'react';
-import { AbstractCalculator, genCalc } from '@ant-design/cssinjs-utils';
+import useToken, { unitless as unitlessSeeds } from 'antd/es/theme/useToken';
 import { AliasToken, GlobalToken, OverrideToken } from 'antd/es/theme/interface';
-import useToken, { ignore, unitless as unitlessSeeds } from 'antd/es/theme/useToken';
-import { CSSInterpolation, token2CSSVar, unit, useCSSVarRegister, useStyleRegister } from '@ant-design/cssinjs';
+import { AbstractCalculator, CSSInterpolation, genCalc, token2CSSVar, unit, useStyleRegister } from '@ant-design/cssinjs';
 
-interface CSSVar {
-  key: string;
-  prefix?: string;
-}
-
-interface CSSVarRegisterProps {
-  token: Token;
-  scope: string;
-  cssVar: CSSVar;
-  path: string[];
-  shared?: Components[];
-  children?: ReactElement;
-  unitless: Record<string, boolean>;
+interface UseStyles {
+  (): string;
 }
 
 type Components = keyof OverrideToken;
 
 type Entries<T> = [keyof AliasToken, T][];
 
-export interface UseStyles {
-  (): [
-    // 样式作用域类型
-    scope: string,
-    // 注入样式渲染函数
-    render: (node: ReactElement) => ReactElement
-  ];
-}
-
-export interface CSSUtils {
+interface CSSUtils {
   unit(value: string | number): string;
   calc(value: number | string): AbstractCalculator;
 }
 
-export interface Styles<C extends Components = Components> {
+interface Styles<C extends Components> {
   (token: Token<C>, utils: CSSUtils): CSSInterpolation;
 }
 
-type ComponentTokens = { [key in keyof AliasToken]: string | number | boolean };
+type ComponentToken = {
+  [key in keyof AliasToken]: string | number | boolean;
+};
 
-export type Token<C extends Components = Components> = AliasToken & Pick<OverrideToken, C>;
-
-function createScopeId(id: string): string {
-  return `css-var-scope-${id.replace(/[^a-z_\d]/gi, '')}`;
-}
+type Token<C extends Components> = AliasToken & Pick<OverrideToken, C>;
 
 function prefixToken(component: string, key: string): string {
   return `${component}${key.replace(/^[a-z]/, match => {
     return match.toUpperCase();
   })}`;
 }
-
-const CSSVarRegister = memo(function CSSVarRegister(props: CSSVarRegisterProps): null {
-  const { path, scope, token, shared, cssVar, unitless } = props;
-
-  useCSSVarRegister(
-    {
-      path,
-      scope,
-      token,
-      ignore,
-      unitless,
-      key: cssVar.key,
-      prefix: cssVar.prefix
-    },
-    () => {
-      const scopeToken: Record<string, string | number> = {};
-
-      if (shared) {
-        for (const component of shared) {
-          const sharedToken = token[component];
-
-          if (sharedToken) {
-            const entries = Object.entries(sharedToken) as Entries<string | number | boolean>;
-
-            for (const [key, realToken] of entries) {
-              if (isString(realToken) || isNumber(realToken)) {
-                const globalToken = token[key];
-
-                if (realToken !== globalToken) {
-                  scopeToken[globalToken != null ? key : prefixToken(component, key)] = realToken;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      return scopeToken;
-    }
-  );
-
-  return null;
-});
 
 /**
  * @function createStyles
@@ -112,87 +46,55 @@ const CSSVarRegister = memo(function CSSVarRegister(props: CSSVarRegisterProps):
  */
 export default function createStyles<C extends Components = never>(path: string[], styles: Styles<C>, shared?: C[]): UseStyles {
   return () => {
-    const id = useId();
-    const scopeId = useMemo(() => createScopeId(id), [id]);
     const [theme, realToken, hashId, token, cssVar] = useToken();
 
-    const [mergedToken, hasScoped] = useMemo<[mergedToken: Token<C>, hasScoped: boolean]>(() => {
-      let hasScoped = false;
+    const mergedToken = useMemo<Token<C>>(() => {
+      const { motion, wireframe } = realToken;
+      const mergedToken = { ...token, motion, wireframe };
 
-      if (cssVar) {
-        const { motion, wireframe } = realToken;
-        const mergedToken = { ...token, motion, wireframe };
+      if (shared) {
+        for (const component of shared) {
+          const sharedToken = realToken[component];
+          const componentToken: Partial<ComponentToken> = {};
 
-        if (shared) {
-          const hasKey = !!cssVar.key;
+          if (sharedToken) {
+            let length = 0;
 
-          for (const component of shared) {
-            const sharedToken = realToken[component];
-            const componentToken: Partial<ComponentTokens> = {};
+            const entries = Object.entries(sharedToken) as Entries<string | number | boolean>;
 
-            if (sharedToken) {
-              let length = 0;
+            for (const [key, token] of entries) {
+              if (isString(token) || isNumber(token)) {
+                const globalToken = realToken[key];
 
-              const entries = Object.entries(sharedToken) as Entries<string | number | boolean>;
+                if (token !== globalToken) {
+                  length++;
 
-              for (const [key, token] of entries) {
-                if (isString(token) || isNumber(token)) {
-                  const globalToken = realToken[key];
-
-                  if (token !== globalToken) {
-                    length++;
-
-                    hasScoped = hasKey;
-
+                  if (cssVar) {
                     const cssVarPrefix = cssVar.prefix;
                     const suffix = globalToken != null ? '' : `-${component}`;
                     const prefix = cssVarPrefix ? `${cssVarPrefix}${suffix}` : component;
 
                     componentToken[key] = `var(${token2CSSVar(key, prefix)})`;
+                  } else {
+                    componentToken[key] = token;
                   }
-                } else if (key === 'motion' || key === 'wireframe') {
-                  length++;
-
-                  hasScoped = hasKey;
-
-                  componentToken[key] = token;
                 }
-              }
+              } else if (key === 'motion' || key === 'wireframe') {
+                length++;
 
-              if (length > 0) {
-                mergedToken[component] = componentToken as GlobalToken[C];
+                componentToken[key] = token;
               }
+            }
+
+            if (length > 0) {
+              mergedToken[component] = componentToken as GlobalToken[C];
             }
           }
         }
-
-        return [mergedToken, hasScoped];
       }
 
-      return [realToken, hasScoped];
+      return mergedToken;
     }, [token, realToken, cssVar]);
-
-    const scope = useMemo<string>(() => {
-      const scopes: string[] = [];
-
-      if (hashId) {
-        scopes.push(hashId);
-      }
-
-      if (cssVar) {
-        const { key } = cssVar;
-
-        if (key) {
-          scopes.push(key);
-        }
-      }
-
-      if (hasScoped) {
-        scopes.push(scopeId);
-      }
-
-      return scopes.join(' ');
-    }, [hashId, cssVar, scopeId, hasScoped]);
 
     const unitless = useMemo<Record<string, boolean>>(() => {
       const unitless: Record<string, boolean> = { ...unitlessSeeds };
@@ -217,30 +119,26 @@ export default function createStyles<C extends Components = never>(path: string[
       return { unit, calc: genCalc(type, unitlessCssVar) };
     }, [cssVar, unitless]);
 
-    const render = useStyleRegister({ path, theme, token, hashId }, () => {
+    useStyleRegister({ path, theme, token: mergedToken, hashId }, () => {
       return styles(mergedToken, utils);
     });
 
-    return [
-      scope,
-      node => {
-        return (
-          <>
-            {hasScoped && (
-              <CSSVarRegister
-                key={scope}
-                path={path}
-                scope={scopeId}
-                shared={shared}
-                token={realToken}
-                unitless={unitless}
-                cssVar={cssVar as CSSVar}
-              />
-            )}
-            {render(node)}
-          </>
-        );
+    return useMemo<string>(() => {
+      const scopes: string[] = [];
+
+      if (hashId) {
+        scopes.push(hashId);
       }
-    ];
+
+      if (cssVar) {
+        const { key } = cssVar;
+
+        if (key) {
+          scopes.push(key);
+        }
+      }
+
+      return scopes.join(' ');
+    }, [hashId, cssVar]);
   };
 }

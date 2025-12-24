@@ -2,9 +2,9 @@
  * @module useResponse
  */
 
+import React, { useEffect, useState } from 'react';
 import useLatestCallback from './useLatestCallback';
 import { Request, RequestOptions } from './useRequest';
-import React, { startTransition, useCallback, useEffect, useState } from 'react';
 
 export interface Transform<R, T> {
   (response: R): T;
@@ -59,12 +59,6 @@ export default function useResponse<R, T>(
 ): [response: R | T | undefined, fetch: Fetch<R>, dispatch: Dispatch<R | T | undefined>] {
   const [response, setResponse] = useState<R | T>();
 
-  const dispatch = useCallback<Dispatch<R | T | undefined>>(state => {
-    startTransition(() => {
-      setResponse(state);
-    });
-  }, []);
-
   const fetch = useLatestCallback<Fetch<R>>(fetchInit => {
     const requestInit: Options<R, T> = {
       ...options,
@@ -78,7 +72,7 @@ export default function useResponse<R, T>(
 
         requestInit.onSuccess?.(response);
 
-        dispatch(() => (transform ? transform(response) : response));
+        setResponse(() => (transform ? transform(response) : response));
       }
     });
   });
@@ -89,5 +83,5 @@ export default function useResponse<R, T>(
     }
   }, []);
 
-  return [response, fetch, dispatch];
+  return [response, fetch, setResponse];
 }

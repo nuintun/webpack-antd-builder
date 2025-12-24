@@ -2,26 +2,24 @@
  * @module index
  */
 
-import classNames from 'classnames';
-import { ConfigProvider } from 'antd';
+import clsx from 'clsx';
 import { Icon } from '/js/utils/router';
 import { isString } from '/js/utils/utils';
-import { cloneElement, memo, useContext } from 'react';
+import { cloneElement, memo, use } from 'react';
+import { ConfigContext } from 'antd/es/config-provider';
 
 export interface FlexIconProps {
   icon?: Icon;
   className?: string;
 }
 
-const { ConfigContext } = ConfigProvider;
-
 export default memo(function FlexIcon({ className, icon }: FlexIconProps) {
-  const { iconPrefixCls } = useContext(ConfigContext);
+  const { iconPrefixCls } = use(ConfigContext);
 
   if (icon) {
     if (isString(icon)) {
       return (
-        <span className={classNames(iconPrefixCls, className)}>
+        <span className={clsx(iconPrefixCls, className)}>
           <img src={icon} alt="icon" />
         </span>
       );

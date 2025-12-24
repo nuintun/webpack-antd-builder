@@ -2,8 +2,8 @@
  * @module index
  */
 
+import clsx from 'clsx';
 import React, { memo } from 'react';
-import classNames from 'classnames';
 import useStyles, { prefixCls } from './style';
 
 export interface PaperProps {
@@ -13,10 +13,10 @@ export interface PaperProps {
 }
 
 export default memo(function Paper({ style, className, children }: PaperProps) {
-  const [scope, render] = useStyles();
+  const scope = useStyles();
 
-  return render(
-    <div style={style} className={classNames(scope, prefixCls, className)}>
+  return (
+    <div style={style} className={clsx(scope, prefixCls, className)}>
       {children}
     </div>
   );

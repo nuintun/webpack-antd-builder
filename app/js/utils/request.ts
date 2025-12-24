@@ -170,9 +170,6 @@ export default function request<R>(url: string, init: Options = {}): Promise<R> 
   // 查询参数
   query && serialize(query, input.searchParams);
 
-  // 设置 XMLHttpRequest 头
-  headers.set('X-Requested-With', 'XMLHttpRequest');
-
   // 序列化 body
   if (isObject(body) || Array.isArray(body)) {
     const contentType = headers.get('Content-Type');

@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import useLatestRef from './useLatestRef';
 
 export interface Callback {
-  (this: unknown, ...args: any[]): any;
+  (this: unknown, ...args: any[]): unknown;
 }
 
 /**

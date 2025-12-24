@@ -28,33 +28,33 @@ export default createStyles(
           display: 'none'
         },
 
-        [`.${prefixCls}-submenu,
-          .${prefixCls}-item`]: {
-          [`.${prefixCls}-title`]: {
-            display: 'flex',
-            overflow: 'hidden',
-            alignItems: 'center',
-            fontSize: fontSizeLG,
-            textOverflow: 'ellipsis',
-
-            [`.${prefixCls}-icon`]: {
-              lineHeight: 0,
-              fontSize: fontSizeLG,
-
-              '> img': {
-                height: fontSizeLG
-              },
-
-              '+ span': {
-                marginInlineStart: marginXXS
-              }
-            }
-          }
-        },
-
         [`&.${prefixCls}-collapsed`]: {
           '[role=menuitem]': {
             paddingInline: `calc(50% - ${unit(calc(fontSizeLG).div(2).add(marginInline).equal())})`
+          }
+        }
+      },
+
+      [`.${prefixCls}-submenu,
+          .${prefixCls}-item`]: {
+        [`.${prefixCls}-title`]: {
+          display: 'flex',
+          overflow: 'hidden',
+          alignItems: 'center',
+          fontSize: fontSizeLG,
+          textOverflow: 'ellipsis',
+
+          [`.${prefixCls}-icon`]: {
+            lineHeight: 0,
+            fontSize: fontSizeLG,
+
+            '> img': {
+              height: fontSizeLG
+            },
+
+            '+ span': {
+              marginInlineStart: marginXXS
+            }
           }
         }
       }

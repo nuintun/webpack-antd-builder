@@ -24,11 +24,7 @@ export default createStyles(
           margin: 0,
           paddingBlock: 0,
           paddingInline: tabs?.padding ?? token.padding,
-          backgroundColor: tabs?.colorBgContainer ?? token.colorBgContainer,
-
-          '&::before': {
-            display: 'none'
-          }
+          backgroundColor: tabs?.colorBgContainer ?? token.colorBgContainer
         },
 
         [`.${prefixCls}-nav`]: {

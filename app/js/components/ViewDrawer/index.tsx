@@ -29,7 +29,7 @@ export default memo(function ViewDrawer({
   trigger,
   onClose,
   children,
-  width = 768,
+  size = 768,
   extra = defaultExtra,
   ...restProps
 }: ViewDrawerProps) {
@@ -66,8 +66,8 @@ export default memo(function ViewDrawer({
       {triggerNode}
       <FlexDrawer
         {...restProps}
+        size={size}
         open={open}
-        width={width}
         onClose={onCloseHandler}
         extra={extra(onCloseHandler)}
         footer={footer?.(onCloseHandler)}

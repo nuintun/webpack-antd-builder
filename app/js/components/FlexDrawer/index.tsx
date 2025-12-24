@@ -2,6 +2,7 @@
  * @module index
  */
 
+import { isFunction } from '/js/utils/utils';
 import { memo, useCallback, useRef } from 'react';
 import { ConfigProvider, Drawer, DrawerProps, GetProp } from 'antd';
 
@@ -16,8 +17,7 @@ export interface FlexDrawerProps extends DrawerProps {}
 
 export default memo(function FlexDrawer({
   children,
-  height = 720,
-  width = 1440,
+  size = 720,
   closeIcon = false,
   styles = drawerStyles,
   ...restProps
@@ -36,17 +36,20 @@ export default memo(function FlexDrawer({
   return (
     <Drawer
       {...restProps}
-      width={width}
-      height={height}
+      size={size}
       closeIcon={closeIcon}
-      styles={{
-        ...styles,
-        body: {
-          ...styles.body,
-          outline: 'none',
-          position: 'relative',
-          minWidth: 'fit-content'
-        }
+      styles={(...args) => {
+        const resolved = isFunction(styles) ? styles(...args) : styles;
+
+        return {
+          ...resolved,
+          body: {
+            ...resolved.body,
+            outline: 'none',
+            position: 'relative',
+            minWidth: 'fit-content'
+          }
+        };
       }}
     >
       <div ref={containerRef}>

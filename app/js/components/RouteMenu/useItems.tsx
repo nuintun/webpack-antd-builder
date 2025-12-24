@@ -42,7 +42,7 @@ function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: Render
     const replace = selectedKeys.includes(key);
 
     return (
-      <Link href={href} className={`${prefixCls}-title`} replace={replace} target={target}>
+      <Link to={href} className={`${prefixCls}-title`} replace={replace} target={target}>
         {renderContent(item, renderItem)}
       </Link>
     );

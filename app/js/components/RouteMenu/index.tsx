@@ -2,7 +2,7 @@
  * @module index
  */
 
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { Menu, MenuProps } from 'antd';
 import { IRoute } from '/js/utils/router';
 import { MenuItem } from '/js/utils/menus';
@@ -12,16 +12,16 @@ import useItems, { RenderItem } from './useItems';
 import useLatestRef from '/js/hooks/useLatestRef';
 import { SiderContext } from 'antd/es/layout/Sider';
 import { flattenItems, getExpandKeys, mergeKeys } from './utils';
-import React, { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type OmitProps =
   | 'items'
   | 'multiple'
   | 'openKeys'
-  | 'selectable'
   | 'onDeselect'
-  | 'selectedKeys'
+  | 'selectable'
   | 'onOpenChange'
+  | 'selectedKeys'
   | 'defaultSelectedKeys';
 
 export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
@@ -33,11 +33,11 @@ export interface RouteMenuProps extends Omit<MenuProps, OmitProps> {
 
 export default memo(function RouteMenu(props: RouteMenuProps) {
   const { inlineCollapsed } = props;
-  const { items, className, renderItem, rootClassName, defaultOpenKeys, ...restProps } = props;
+  const { items, renderItem, className, defaultOpenKeys, ...restProps } = props;
 
-  const [scope, render] = useStyles();
+  const scope = useStyles();
   const matches = useMatches() as IRoute[];
-  const { siderCollapsed } = useContext(SiderContext);
+  const { siderCollapsed } = use(SiderContext);
   const propsRef = useLatestRef<RouteMenuProps>(props);
   const flatItems = useMemo(() => flattenItems(items), [items]);
   const cachedOpenKeysRef = useRef<string[]>(defaultOpenKeys ?? []);
@@ -85,16 +85,17 @@ export default memo(function RouteMenu(props: RouteMenuProps) {
     setSelectedKeys(selectedKeys);
   }, [expandKeys, collapsed]);
 
-  return render(
+  return (
     <Menu
       {...restProps}
       multiple={false}
       openKeys={openKeys}
       selectedKeys={selectedKeys}
       onOpenChange={onOpenChangeHander}
+      className={clsx(scope, prefixCls, className, {
+        [`${prefixCls}-collapsed`]: collapsed
+      })}
       items={useItems(items, selectedKeys, renderItem)}
-      rootClassName={classNames(scope, prefixCls, rootClassName)}
-      className={classNames(className, { [`${prefixCls}-collapsed`]: collapsed })}
     />
   );
 });

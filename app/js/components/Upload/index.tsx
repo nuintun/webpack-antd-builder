@@ -21,8 +21,8 @@ import {
   UploadFile,
   UploadProps as AntdUploadProps
 } from 'antd';
+import clsx from 'clsx';
 import request from './request';
-import classNames from 'classnames';
 import useStyles, { prefixCls } from './style';
 import { useLocation, useNavigate } from 'react-nest-router';
 import useControllableValue from '/js/hooks/useControllableValue';
@@ -64,8 +64,9 @@ export interface RenderFile {
 }
 
 export interface UploadProps<T>
-  extends Pick<React.CSSProperties, 'width' | 'height' | 'aspectRatio'>,
-    Omit<AntdUploadProps<T>, 'onChange' | 'listType' | 'itemRender'> {
+  extends
+    Pick<React.CSSProperties, 'width' | 'height' | 'aspectRatio'>,
+    Omit<AntdUploadProps<T>, 'styles' | 'onChange' | 'listType' | 'itemRender' | 'classNames' | 'rootClassName'> {
   action: string;
   accept?: string;
   value?: string[];
@@ -171,12 +172,13 @@ function getFileList<T>(value: string[], getThumbImage: GetThumbImage): FileList
 
 export default memo(function Upload<T extends UploadResponse>(props: UploadProps<T>) {
   const {
+    style,
     accept,
     action,
     height,
     children,
+    className,
     maxCount = 1,
-    rootClassName,
     width = '100%',
     value: propsValue,
     showUploadList = true,
@@ -187,15 +189,15 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
     ...restProps
   } = props;
 
+  const scope = useStyles();
   const { message } = useApp();
   const location = useLocation();
   const navigate = useNavigate();
-  const [scope, render] = useStyles();
   const uploadURL = useMemo(() => new URL(action, self.location.href).href, [action]);
   const [value, setValue] = useControllableValue<string[]>(props, { defaultValue: [] });
   const [fileList, setFileList] = useState<FileList<T>>(() => getFileList(value, getThumbImage));
 
-  const style = useMemo(() => {
+  const itemStyle = useMemo(() => {
     return {
       width,
       height,
@@ -272,8 +274,8 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
     }
   }, [propsValue]);
 
-  return render(
-    <div className={classNames(scope, prefixCls, rootClassName)}>
+  return (
+    <div style={style} className={clsx(scope, prefixCls, className)}>
       {showUploadList &&
         fileList.map((file, index) => {
           const { uid } = file;
@@ -297,14 +299,14 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
 
           return renderFile(file, {
             index,
-            style,
             remove,
+            style: itemStyle,
             get node() {
               return defaultRenderFile(file, {
                 index,
-                style,
                 remove,
-                node: null
+                node: null,
+                style: itemStyle
               });
             }
           });
@@ -320,8 +322,8 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
       >
         <Dragger
           {...restProps}
-          style={style}
           accept={accept}
+          style={itemStyle}
           action={uploadURL}
           listType="picture"
           fileList={fileList}
@@ -331,7 +333,7 @@ export default memo(function Upload<T extends UploadResponse>(props: UploadProps
           customRequest={request}
           height={height as number}
           withCredentials={withCredentials}
-          rootClassName={classNames(`${prefixCls}-input`, {
+          className={clsx(`${prefixCls}-input`, {
             [`${prefixCls}-hidden`]: showUploadList && fileList.length >= maxCount
           })}
         >
