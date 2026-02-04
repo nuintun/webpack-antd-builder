@@ -6,11 +6,14 @@ import useIsMounted from './useIsMounted';
 import useLatestRef from './useLatestRef';
 import { useCallback, useEffect, useRef } from 'react';
 
+const DEFAULT_RECONNECT_LIMIT = 3;
+const DEFAULT_RECONNECT_INTERVAL = 3000;
+
 // 定义消息类型，与 WebSocket.send 方法参数类型一致
 type Message = Parameters<WebSocket['send']>[0];
 
 // 定义返回的 Socket 接口
-interface Socket {
+export interface Socket {
   connect: () => void;
   send: WebSocket['send'];
   disconnect: (code?: number, reason?: string) => void;
@@ -203,7 +206,7 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
     // 清除之前的重连定时器
     clearReconnectTimer();
 
-    const { reconnectLimit = 3 } = optionsRef.current;
+    const { reconnectLimit = DEFAULT_RECONNECT_LIMIT } = optionsRef.current;
 
     // 设置重连次数达到上限，防止断开后自动重连
     reconnectTimesRef.current = reconnectLimit;
@@ -232,7 +235,7 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
    */
   const reconnect = useCallback(() => {
     const { current: options } = optionsRef;
-    const { reconnectLimit = 3 } = options;
+    const { reconnectLimit = DEFAULT_RECONNECT_LIMIT } = options;
 
     // 如果重连次数未达到上限且当前连接不是 OPEN 状态，则尝试重连
     if (reconnectTimesRef.current < reconnectLimit) {
@@ -244,7 +247,7 @@ export default function useWebSocket<M extends Message>(url: string, options: Op
         // 清除之前的重连定时器
         clearReconnectTimer();
 
-        const { reconnectInterval = 3000 } = options;
+        const { reconnectInterval = DEFAULT_RECONNECT_INTERVAL } = options;
 
         // 设置重连定时器
         reconnectTimerRef.current = setTimeout(() => {
