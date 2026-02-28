@@ -124,10 +124,8 @@ export default function request(option: UploadRequestOption) {
   }
 
   if (!headers.has('Accept')) {
-    xhr.setRequestHeader('Accept', 'application/x-msgpack');
+    xhr.setRequestHeader('Accept', 'application/vnd.msgpack');
   }
-
-  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
   xhr.responseType = 'arraybuffer';
 

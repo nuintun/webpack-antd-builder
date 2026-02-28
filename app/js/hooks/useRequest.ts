@@ -73,12 +73,12 @@ export default function useRequest(
       }
 
       if (!headers.has('Accept')) {
-        headers.set('Accept', 'application/x-msgpack');
+        headers.set('Accept', 'application/vnd.msgpack');
       }
 
       if (isObject(body) || Array.isArray(body)) {
         if (!headers.has('Content-Type')) {
-          headers.set('Content-Type', 'application/x-msgpack');
+          headers.set('Content-Type', 'application/vnd.msgpack');
         }
       }
 

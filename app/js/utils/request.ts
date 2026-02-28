@@ -86,7 +86,7 @@ export function isJsonType(contentType: string | null): boolean {
  * @param contentType 内容类型
  */
 export function isMsgpackType(contentType: string | null): boolean {
-  return !!contentType && /^application\/x-msgpack(;|$)/i.test(contentType);
+  return !!contentType && /^application\/vnd\.msgpack(;|$)/i.test(contentType);
 }
 
 /**
