@@ -43,6 +43,7 @@
     "@nuintun/svgo-loader": "^0.6.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@swc/core": "^1.15.24",
+    "@types/koa": "^3.0.2",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
