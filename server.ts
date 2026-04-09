@@ -1,5 +1,6 @@
 /**
  * @module server
+ * @description 基于 Koa 和 Node.js Cluster 模块的生产环境静态文件服务器
  */
 
 import Koa from 'koa';
@@ -10,7 +11,12 @@ import cluster from 'node:cluster';
 import { server } from 'koa-files';
 import compress from 'koa-compress';
 
-function cyan(text) {
+/**
+ * @function cyan
+ * @description 将文本格式化为青色（用于终端输出）
+ * @param text 需要着色的文本或数字
+ */
+function cyan(text?: string | number) {
   if (text == null) {
     return '';
   }
@@ -18,7 +24,12 @@ function cyan(text) {
   return `\x1b[36m${text}\x1b[0m`;
 }
 
-function green(text) {
+/**
+ * @function green
+ * @description 将文本格式化为绿色（用于终端输出）
+ * @param text 需要着色的文本或数字
+ */
+function green(text?: string | number) {
   if (text == null) {
     return '';
   }
@@ -26,7 +37,12 @@ function green(text) {
   return `\x1b[32m${text}\x1b[0m`;
 }
 
-function yellow(text) {
+/**
+ * @function yellow
+ * @description 将文本格式化为黄色（用于终端输出）
+ * @param text 需要着色的文本或数字
+ */
+function yellow(text?: string | number) {
   if (text == null) {
     return '';
   }
@@ -34,7 +50,12 @@ function yellow(text) {
   return `\x1b[33m${text}\x1b[0m`;
 }
 
-function now(template) {
+/**
+ * @function now
+ * @description 获取当前时间的格式化字符串
+ * @param template 时间格式模板，默认为 dayjs 的默认格式
+ */
+function now(template?: string) {
   return dayjs().format(template);
 }
 
@@ -56,7 +77,7 @@ if (cluster.isPrimary) {
   });
 } else {
   const app = new Koa();
-  const port = parseInt(process.env.PORT) || 8080;
+  const port = parseInt(process.env.PORT ?? '8080');
   const HTTP_ERROR_RE = /^(EOF|EPIPE|ECANCELED|ECONNRESET|ECONNABORTED)$/i;
 
   app.proxy = true;

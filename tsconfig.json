@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "noEmit": true,
     "pretty": true,
     "strict": true,
     "newLine": "lf",
     "jsx": "preserve",
-    "module": "ESNext",
-    "target": "ESNext",
+    "module": "esnext",
+    "target": "esnext",
     "skipLibCheck": true,
     "importHelpers": true,
     "noUnusedLocals": true,
@@ -16,15 +14,20 @@
     "noImplicitOverride": true,
     "noUnusedParameters": true,
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": [
+      "node"
+    ],
     "paths": {
       "/js/*": [
-        "app/js/*"
+        "./app/js/*"
       ],
       "/css/*": [
-        "app/css/*"
+        "./app/css/*"
       ],
       "/images/*": [
-        "app/images/*"
+        "./app/images/*"
       ]
     }
   },

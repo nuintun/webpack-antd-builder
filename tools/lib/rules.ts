@@ -3,28 +3,39 @@
  * @description 配置 Webpack 规则
  */
 
-import swcrc from '../../.swcrc.js';
-import svgorc from '../../.svgorc.js';
-import postcssrc from '../../.postcssrc.js';
+import swcrc from '../../.swcrc.ts';
+import svgorc from '../../.svgorc.ts';
+import postcssrc from '../../.postcssrc.ts';
+import type { Configuration } from 'webpack';
+import type { GetProp, Mode } from '../index.ts';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
- * @function resolveRules
- * @param {string} mode
- * @return {Promise<NonNullable<import('webpack').Configuration['module']>['rules']>}
+ * @typedef Rules
+ * @description Webpack 模块规则类型，从 Configuration 中提取的 rules 属性类型
  */
-export default async mode => {
+type Rules = GetProp<GetProp<Configuration, 'module'>, 'rules'>;
+
+/**
+ * @function resolveRules
+ * @description 根据打包模式生成 Webpack 的模块处理规则配置
+ * @param mode 打包模式，'development' 或 'production'，影响 sourceMap 和类名生成策略
+ */
+export default async function (mode: Mode): Promise<Rules> {
   const isDevelopment = mode !== 'production';
   const swcOptions = { ...(await swcrc(mode)), swcrc: false };
+  const postcssOptions = {
+    sourceMap: isDevelopment,
+    postcssOptions: { ...(await postcssrc(mode)), config: false }
+  };
   const svgoOptions = { ...(await svgorc(mode)), configFile: false };
-  const postcssOptions = { postcssOptions: { ...(await postcssrc(mode)), config: false } };
 
   /**
    * @function getCssLoaderOptions
-   * @param {number} importLoaders
-   * @return {object}
+   * @description 生成 CSS Loader 的配置选项
+   * @param importLoaders 设置在 css-loader 之前应用的 loader 数量
    */
-  const getCssLoaderOptions = importLoaders => {
+  const getCssLoaderOptions = (importLoaders: number) => {
     return {
       importLoaders,
       esModule: true,
@@ -147,4 +158,4 @@ export default async mode => {
       ]
     }
   ];
-};
+}

@@ -2,11 +2,11 @@
   "quiet": true,
   "delay": "128ms",
   "watch": [
-    ".swcrc.js",
-    ".svgorc.js",
+    ".swcrc.ts",
+    ".svgorc.ts",
     "tools/**/*",
-    ".postcssrc.js",
-    "app.config.js",
+    ".postcssrc.ts",
+    "app.config.ts",
     ".browserslistrc"
   ]
 }

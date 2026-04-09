@@ -96,9 +96,6 @@ importers:
       bufferutil:
         specifier: ^4.1.0
         version: 4.1.0
-      case-sensitive-paths-webpack-plugin:
-        specifier: ^2.4.0
-        version: 2.4.0
       css-loader:
         specifier: ^7.1.4
         version: 7.1.4(webpack@5.106.0(@swc/core@1.15.24(@swc/helpers@0.5.21)))
@@ -1255,10 +1252,6 @@ packages:
 
   caniuse-lite@1.0.30001787:
     resolution: {integrity: sha512-mNcrMN9KeI68u7muanUpEejSLghOKlVhRqS/Za2IeyGllJ9I9otGpR9g3nsw7n4W378TE/LyIteA0+/FOZm4Kg==}
-
-  case-sensitive-paths-webpack-plugin@2.4.0:
-    resolution: {integrity: sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==}
-    engines: {node: '>=4'}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -3833,8 +3826,6 @@ snapshots:
       lodash.uniq: 4.5.0
 
   caniuse-lite@1.0.30001787: {}
-
-  case-sensitive-paths-webpack-plugin@2.4.0: {}
 
   chalk@4.1.2:
     dependencies:
