@@ -67,7 +67,7 @@ export default async function (mode: Mode): Promise<Configuration> {
     },
     resolve: {
       alias: appConfig.alias,
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.cjs', '.mjs']
     },
     plugins: [
       new webpack.ProgressPlugin(progress),
