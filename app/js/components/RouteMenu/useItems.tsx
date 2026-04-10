@@ -14,36 +14,35 @@ export interface RenderItem {
   (item: MenuItem): React.ReactNode;
 }
 
-export type Item = GetProp<MenuProps, 'items'>[0];
+export type Item = GetProp<MenuProps, 'items'>[number];
 
-function renderContent(item: MenuItem, renderItem?: RenderItem): React.ReactNode {
+function getInitialChildren({ children }: MenuItem): Item[] | undefined {
+  if (children && children.length > 0) {
+    return [];
+  }
+}
+
+function renderTitle(item: MenuItem, renderItem?: RenderItem): React.ReactNode {
   if (renderItem) {
     return renderItem(item);
   }
 
-  const { icon, name } = item;
-
-  return (
-    <>
-      <FlexIcon icon={icon} className={`${prefixCls}-icon`} />
-      <span>{name}</span>
-    </>
-  );
+  return item.name;
 }
 
 function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: RenderItem): React.ReactNode {
   const { link, children } = item;
 
   if ((children && children.length > 0) || !link) {
-    return <span className={`${prefixCls}-title`}>{renderContent(item, renderItem)}</span>;
+    return renderTitle(item, renderItem);
   } else {
     const { key } = item;
     const { href, target } = link;
     const replace = selectedKeys.includes(key);
 
     return (
-      <Link to={href} className={`${prefixCls}-title`} replace={replace} target={target}>
-        {renderContent(item, renderItem)}
+      <Link to={href} replace={replace} target={target}>
+        {renderTitle(item, renderItem)}
       </Link>
     );
   }
@@ -52,37 +51,32 @@ function renderLabel(item: MenuItem, selectedKeys: string[], renderItem?: Render
 export default function useItems(items: MenuItem[], selectedKeys: string[], renderItem?: RenderItem): Item[] {
   return useMemo(() => {
     const menuItems: Item[] = [];
-    const itemClassName = `${prefixCls}-item`;
-    const submenuClassName = `${prefixCls}-submenu`;
-    const menuItemsMapping: Record<string, Item[]> = {};
+    const className = `${prefixCls}-item`;
+    const popupClassName = `${prefixCls}-popup`;
+    const menuItemsMap: Map<string, Item[]> = new Map();
 
     for (const item of items) {
       const tree = new DFSTree(item, item => item.children);
 
       for (const [current, parent] of tree) {
-        let item: Item;
+        const { key, icon } = current;
+        const children = getInitialChildren(current);
 
-        const { key, children } = current;
-        const hasChildren = children && children.length > 0;
+        const item: Item = {
+          key,
+          children,
+          className,
+          popupClassName,
+          label: renderLabel(current, selectedKeys, renderItem),
+          icon: <FlexIcon icon={icon} className={`${prefixCls}-icon`} />
+        };
 
-        if (hasChildren) {
-          item = {
-            key,
-            className: submenuClassName,
-            popupClassName: submenuClassName,
-            children: (menuItemsMapping[key] = []),
-            label: renderLabel(current, selectedKeys, renderItem)
-          };
-        } else {
-          item = {
-            key,
-            className: itemClassName,
-            label: renderLabel(current, selectedKeys, renderItem)
-          };
+        if (children) {
+          menuItemsMap.set(key, children);
         }
 
         if (parent) {
-          menuItemsMapping[parent.key].push(item);
+          menuItemsMap.get(parent.key)?.push(item);
         } else {
           menuItems.push(item);
         }

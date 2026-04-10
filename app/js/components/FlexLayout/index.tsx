@@ -98,17 +98,30 @@ export default memo(function FlexLayout(props: FlexLayoutProps) {
 
   return (
     <Layout hasSider={!isMobile} className={clsx(scope, prefixCls, `${prefixCls}-${theme}`)}>
-      <FlexMenu
-        items={menus}
-        theme={theme}
-        width={siderWidth}
-        isMobile={isMobile}
-        collapsed={collapsed}
-        onClick={onItemClick}
-        onCollapse={onCollapse}
-        collapsedWidth={collapsedWidth}
-        renderHeader={renderLogoHeader}
-      />
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              fontSize: 16,
+              iconSize: 16,
+              collapsedIconSize: 16,
+              iconMarginInlineEnd: 4
+            }
+          }
+        }}
+      >
+        <FlexMenu
+          items={menus}
+          theme={theme}
+          width={siderWidth}
+          isMobile={isMobile}
+          collapsed={collapsed}
+          onClick={onItemClick}
+          onCollapse={onCollapse}
+          collapsedWidth={collapsedWidth}
+          renderHeader={renderLogoHeader}
+        />
+      </ConfigProvider>
       <Layout>
         <Header className={`${prefixCls}-header`}>
           {logo && <div className={`${prefixCls}-logo-header`}>{logo}</div>}

@@ -8,11 +8,11 @@ export const prefixCls = 'ui-route-menu';
 
 export default createStyles(
   ['components', 'RouteMenu', prefixCls],
-  (token, { calc, unit }) => {
+  token => {
     const menu = token.Menu;
-    const marginXXS = menu?.marginXXS ?? token.marginXXS;
-    const fontSizeLG = menu?.fontSizeLG ?? token.fontSizeLG;
-    const marginInline = menu?.itemMarginInline ?? marginXXS;
+    const { fontSize, fontSizeLG } = token;
+    const iconSize = menu?.iconSize ?? fontSize;
+    const collapsedIconSize = menu?.collapsedIconSize ?? fontSizeLG;
 
     return {
       [`.${prefixCls}`]: {
@@ -29,31 +29,20 @@ export default createStyles(
         },
 
         [`&.${prefixCls}-collapsed`]: {
-          '[role=menuitem]': {
-            paddingInline: `calc(50% - ${unit(calc(fontSizeLG).div(2).add(marginInline).equal())})`
+          [`.${prefixCls}-icon`]: {
+            '> img': {
+              height: collapsedIconSize
+            }
           }
         }
       },
 
-      [`.${prefixCls}-submenu,
-          .${prefixCls}-item`]: {
-        [`.${prefixCls}-title`]: {
-          display: 'flex',
-          overflow: 'hidden',
-          alignItems: 'center',
-          fontSize: fontSizeLG,
-          textOverflow: 'ellipsis',
-
+      [`.${prefixCls},
+        .${prefixCls}-popup`]: {
+        [`.${prefixCls}-item`]: {
           [`.${prefixCls}-icon`]: {
-            lineHeight: 0,
-            fontSize: fontSizeLG,
-
             '> img': {
-              height: fontSizeLG
-            },
-
-            '+ span': {
-              marginInlineStart: marginXXS
+              height: iconSize
             }
           }
         }
