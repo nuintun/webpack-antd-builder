@@ -1,6 +1,6 @@
 /**
  * @module pages
- * @description HTML 页面插件配置模块，根据 AppConfig 生成 HtmlRspackPlugin 实例
+ * @description HTML 页面插件配置模块，根据 AppConfig 生成 HtmlWebpackPlugin 实例
  */
 
 import { resolve } from 'node:path';
@@ -45,7 +45,7 @@ function resolveTemplateParameters(
 
 /**
  * @function resolveHtmlPlugins
- * @description 根据应用配置生成 HtmlRspackPlugin 实例数组，支持单页面和多页面模式
+ * @description 根据应用配置生成 HtmlWebpackPlugin 实例数组，支持单页面和多页面模式
  * @param mode 打包模式，影响模板压缩策略
  * @param appConfig 完整的应用配置对象
  */

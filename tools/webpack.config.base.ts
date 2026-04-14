@@ -17,7 +17,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
  * @function webpackrc
- * @description 生成 Rspack 配置
+ * @description 生成 Webpack 配置
  * @param mode 打包模式
  */
 export default async function (mode: Mode): Promise<[AppConfig, Configuration]> {

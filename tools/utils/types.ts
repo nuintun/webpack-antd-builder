@@ -37,11 +37,11 @@ export type GetProp<T, K extends keyof T> = NonNullable<T[K]>;
 
 /**
  * @interface AppConfig
- * @description 应用配置接口，定义了 rspack-antd-builder 的项目配置结构
+ * @description 应用配置接口，定义了 webpack-antd-builder 的项目配置结构
  */
 export interface AppConfig extends Pick<
   Configuration,
-  // 从 Rspack Configuration 中 pick 的属性键名集合
+  // 从 Webpack Configuration 中 pick 的属性键名集合
   'context' | 'plugins' | 'externals' | 'externalsType'
 > {
   /**
@@ -62,7 +62,7 @@ export interface AppConfig extends Pick<
   /**
    * @property entry
    * @description 应用入口配置，支持单入口字符串或多入口对象
-   * @see https://rspack.dev/config/entry
+   * @see https://webpack.js.org/configuration/entry-context/#entry
    */
   entry: GetProp<Configuration, 'entry'>;
   /**
@@ -73,7 +73,7 @@ export interface AppConfig extends Pick<
   /**
    * @property pages
    * @description  页面应用配置列表，支持单页面和多页面配置
-   * @see https://rspack.rs/plugins/rspack/html-rspack-plugin
+   * @see https://github.com/jantimon/html-webpack-plugin
    */
   pages: PageConfig | [PageConfig, ...PageConfig[]];
   /**
