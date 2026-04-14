@@ -4,7 +4,7 @@
  */
 
 import autoprefixer from 'autoprefixer';
-import targets from './tools/lib/targets.ts';
+import { targets } from './tools/index.ts';
 import type { Mode } from './tools/index.ts';
 import type { AcceptedPlugin, ProcessOptions } from 'postcss';
 

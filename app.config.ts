@@ -15,12 +15,21 @@ export default defineConfig({
   ports: 8000,
   lang: 'zh-CN',
   name: 'Ant Design',
+  alias: {
+    '/js': js,
+    '/css': css,
+    '/images': images
+  },
   publicPath: '/public/',
   context: resolve('app'),
   outputPath: resolve('wwwroot/public'),
-  entryHTML: resolve('wwwroot/app.html'),
   entry: resolve('app/js/pages/index.tsx'),
-  favicon: resolve('app/images/favicon.ico'),
-  alias: { '/js': js, '/css': css, '/images': images },
-  meta: { viewport: 'width=device-width,initial-scale=1.0' }
+  historyApiFallback: resolve('wwwroot/app.html'),
+  pages: {
+    filename: resolve('wwwroot/app.html'),
+    favicon: resolve('app/images/favicon.ico'),
+    meta: {
+      viewport: 'width=device-width,initial-scale=1.0'
+    }
+  }
 });

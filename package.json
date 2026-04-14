@@ -15,8 +15,8 @@
   "scripts": {
     "lint": "tsc --noEmit",
     "start": "node server.ts",
-    "prod": "node tools/bin/webpack.config.prod.ts",
-    "dev": "nodemon --exec node tools/bin/webpack.config.dev.ts",
+    "prod": "node tools/webpack.config.prod.ts",
+    "dev": "nodemon --exec node tools/webpack.config.dev.ts",
     "format": "prettier --write . --ignore-path .prettierignore"
   },
   "dependencies": {
