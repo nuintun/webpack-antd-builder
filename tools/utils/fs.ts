@@ -10,6 +10,10 @@ import type { Options } from 'webpack-dev-service';
 import { createFsFromVolume, Volume } from 'memfs';
 import { lstat, readdir, realpath } from 'node:fs/promises';
 
+/**
+ * @typedef FileSystem
+ * @description 文件系统类型，扩展自 webpack-dev-service 的 Options.fs，并添加 createReadStream 方法
+ */
 export type FileSystem = Options['fs'] & {
   createReadStream: IFs['createReadStream'];
 };

@@ -10,7 +10,7 @@ import type { AppConfig, AppConfigFactory, Mode } from './utils/types.ts';
 // 导出 targets 解析函数
 export { targets };
 
-// 导出 AppConfig 类型定义
+// 导出 AppConfig, Mode 类型定义
 export type { AppConfig, Mode };
 
 /**
