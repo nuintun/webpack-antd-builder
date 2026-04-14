@@ -48,9 +48,9 @@ export default function usePagingOptions(opitons: Options | false = {}): UsePagi
 
       const pagingOptions: PagingOptions = {
         showTotal,
+        size: 'medium',
         showQuickJumper,
         showSizeChanger,
-        size: 'default',
         responsive: true,
         ...opitons
       };
