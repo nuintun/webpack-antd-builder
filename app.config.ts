@@ -9,6 +9,7 @@ import { defineConfig } from './tools/index.ts';
 const js = resolve('app/js');
 const css = resolve('app/css');
 const images = resolve('app/images');
+const html = resolve('wwwroot/app.html');
 
 // 生成配置文件
 export default defineConfig({
@@ -22,11 +23,11 @@ export default defineConfig({
   },
   publicPath: '/public/',
   context: resolve('app'),
+  historyApiFallback: html,
   outputPath: resolve('wwwroot/public'),
   entry: resolve('app/js/pages/index.tsx'),
-  historyApiFallback: resolve('wwwroot/app.html'),
   pages: {
-    filename: resolve('wwwroot/app.html'),
+    filename: html,
     favicon: resolve('app/images/favicon.ico'),
     meta: {
       viewport: 'width=device-width,initial-scale=1.0'
