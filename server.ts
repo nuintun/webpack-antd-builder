@@ -94,7 +94,7 @@ if (cluster.isPrimary) {
 
   app.use(async context => {
     context.type = 'text/html; charset=utf-8';
-    context.body = fs.createReadStream('wwwroot/app.html');
+    context.body = fs.createReadStream('wwwroot/index.html');
   });
 
   app.on('error', error => {
