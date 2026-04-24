@@ -88,7 +88,7 @@ export interface AppConfig extends Pick<
   alias?: GetProp<GetProp<Configuration, 'resolve'>, 'alias'>;
   /**
    * @property roots
-   * @description 模块解析根目录配置，用于指定模块的搜索路径
+   * @description 模块解析根目录配置，用于指定模块搜索的起始目录
    */
   roots?: GetProp<GetProp<Configuration, 'resolve'>, 'roots'>;
   /**
