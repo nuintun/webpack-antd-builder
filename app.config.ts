@@ -6,6 +6,7 @@
 import { resolve } from 'node:path';
 import { defineConfig } from './tools/index.ts';
 
+const app = resolve('app');
 const js = resolve('app/js');
 const css = resolve('app/css');
 const images = resolve('app/images');
@@ -14,6 +15,8 @@ const html = resolve('wwwroot/index.html');
 // 生成配置文件
 export default defineConfig({
   ports: 8000,
+  context: app,
+  roots: [app],
   lang: 'zh-CN',
   name: 'Ant Design',
   alias: {
@@ -22,7 +25,6 @@ export default defineConfig({
     '/images': images
   },
   publicPath: '/public/',
-  context: resolve('app'),
   historyApiFallback: html,
   outputPath: resolve('wwwroot/public'),
   entry: resolve('app/js/pages/index.tsx'),

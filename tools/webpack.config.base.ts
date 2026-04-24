@@ -60,6 +60,7 @@ export default async function (mode: Mode): Promise<[AppConfig, Configuration]> 
       },
       resolve: {
         alias: appConfig.alias,
+        roots: appConfig.roots,
         extensions: ['.ts', '.tsx', '.js', '.jsx']
       },
       plugins: [
