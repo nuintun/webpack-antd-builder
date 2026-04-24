@@ -15,8 +15,8 @@ const html = resolve('wwwroot/index.html');
 // 生成配置文件
 export default defineConfig({
   ports: 8000,
-  context: app,
   roots: [app],
+  context: app,
   lang: 'zh-CN',
   name: 'Ant Design',
   alias: {
