@@ -18,7 +18,6 @@ import { resolvePort } from './utils/port.ts';
 import { isFunction } from './utils/typeof.ts';
 import { server as dev } from 'webpack-dev-service';
 import resolveConfigs from './webpack.config.base.ts';
-import resolveConfigure from './webpack.config.base.ts';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 /**

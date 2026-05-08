@@ -7,7 +7,7 @@ import swcrc from '../../.swcrc.ts';
 import svgorc from '../../.svgorc.ts';
 import postcssrc from '../../.postcssrc.ts';
 import type { Configuration } from 'webpack';
-import type { GetProp, Mode } from '../index.ts';
+import type { GetProp, Mode } from './types.ts';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**

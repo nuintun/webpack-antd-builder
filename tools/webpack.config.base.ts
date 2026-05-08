@@ -10,7 +10,6 @@ import resolveRules from './utils/rules.ts';
 import type { Configuration } from 'webpack';
 import resolveConfig from './../app.config.ts';
 import resolveHtmlPlugins from './utils/pages.ts';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { resolveEnvironment } from './utils/env.ts';
 import type { AppConfig, Mode } from './utils/types.ts';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
