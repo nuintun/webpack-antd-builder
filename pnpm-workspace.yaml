@@ -1,5 +1,5 @@
-onlyBuiltDependencies:
-  - '@swc/core'
-  - bufferutil
-  - core-js-pure
-  - utf-8-validate
+allowBuilds:
+  '@swc/core': true
+  bufferutil: true
+  core-js-pure: true
+  utf-8-validate: true
