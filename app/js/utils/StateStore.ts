@@ -14,23 +14,23 @@ export interface Callback {
  * @class StateStore
  */
 export class StateStore<S> {
-  private state: S;
-  private callbacks = new Set<Callback>();
+  #state: S;
+  #callbacks = new Set<Callback>();
 
   /**
    * @constructor
    * @param initialState 初始状态
    */
   constructor(initialState: S) {
-    this.state = initialState;
+    this.#state = initialState;
   }
 
   /**
    * @method getState
    * @description 获取当前状态
    */
-  public getState(): S {
-    return this.state;
+  getState(): S {
+    return this.#state;
   }
 
   /**
@@ -38,8 +38,8 @@ export class StateStore<S> {
    * @description 订阅状态变化
    * @param callback 状态变化回调
    */
-  public subscribe(callback: Callback): Callback {
-    const { callbacks } = this;
+  subscribe(callback: Callback): Callback {
+    const callbacks = this.#callbacks;
 
     callbacks.add(callback);
 
@@ -53,12 +53,13 @@ export class StateStore<S> {
    * @description 更新状态
    * @param state 新的状态
    */
-  public dispatch(state: React.SetStateAction<S>): void {
-    const { state: prevState, callbacks } = this;
+  dispatch(state: React.SetStateAction<S>): void {
+    const prevState = this.#state;
+    const callbacks = this.#callbacks;
 
-    this.state = isFunction(state) ? state(prevState) : state;
+    this.#state = isFunction(state) ? state(prevState) : state;
 
-    if (!shallowEqual(this.state, prevState)) {
+    if (!shallowEqual(this.#state, prevState)) {
       for (const callback of callbacks) {
         callback();
       }

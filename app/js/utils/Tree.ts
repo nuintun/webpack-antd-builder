@@ -21,9 +21,9 @@ type Waiting<T> = [iterator: Iterator<T, void>, parent?: T];
  * @description 深度遍历树
  */
 export class DFSTree<T> {
-  private roots: T[];
-  private resolve: Resolve<T>;
-  private onInternalDone?: OnInternalDone<T>;
+  #roots: T[];
+  #resolve: Resolve<T>;
+  #onInternalDone?: OnInternalDone<T>;
 
   /**
    * @constructor
@@ -33,9 +33,9 @@ export class DFSTree<T> {
    * @param onInternalDone 内部节点完成时的回调
    */
   constructor(tree: T, resolve: Resolve<T>, onInternalDone?: OnInternalDone<T>) {
-    this.roots = [tree];
-    this.resolve = resolve;
-    this.onInternalDone = onInternalDone;
+    this.#roots = [tree];
+    this.#resolve = resolve;
+    this.#onInternalDone = onInternalDone;
   }
 
   /**
@@ -43,8 +43,10 @@ export class DFSTree<T> {
    * @description 节点迭代器
    */
   *values(): Iterator<IteratorValue<T>, void> {
+    const roots = this.#roots;
+    const resolve = this.#resolve;
     const waiting: Waiting<T>[] = [];
-    const { roots, resolve, onInternalDone } = this;
+    const onInternalDone = this.#onInternalDone;
 
     let current: Waiting<T> | undefined = [roots.values()];
 
@@ -62,7 +64,7 @@ export class DFSTree<T> {
         const node = item.value;
         const children = resolve(node);
 
-        if (children != null) {
+        if (children) {
           waiting.push(current);
 
           current = [children.values(), node];
@@ -87,9 +89,9 @@ export class DFSTree<T> {
  * @description 广度遍历树
  */
 export class BFSTree<T> {
-  private roots: T[];
-  private resolve: Resolve<T>;
-  private onInternalDone?: OnInternalDone<T>;
+  #roots: T[];
+  #resolve: Resolve<T>;
+  #onInternalDone?: OnInternalDone<T>;
 
   /**
    * @constructor
@@ -98,9 +100,9 @@ export class BFSTree<T> {
    * @param resolve 子节点获取方法
    */
   constructor(tree: T, resolve: Resolve<T>, onInternalDone?: OnInternalDone<T>) {
-    this.roots = [tree];
-    this.resolve = resolve;
-    this.onInternalDone = onInternalDone;
+    this.#roots = [tree];
+    this.#resolve = resolve;
+    this.#onInternalDone = onInternalDone;
   }
 
   /**
@@ -108,8 +110,10 @@ export class BFSTree<T> {
    * @description 节点迭代器
    */
   *values(): Iterator<IteratorValue<T>, void> {
+    const roots = this.#roots;
+    const resolve = this.#resolve;
     const waiting = new Queue<Waiting<T>>();
-    const { roots, resolve, onInternalDone } = this;
+    const onInternalDone = this.#onInternalDone;
 
     let current: Waiting<T> | undefined = [roots.values()];
 

@@ -6,16 +6,16 @@ export default class LRU<K, V> {
   #cache: Map<K, V>;
   #capacity: number;
 
-  public constructor(capacity: number) {
+  constructor(capacity: number) {
     this.#cache = new Map();
     this.#capacity = capacity;
   }
 
-  public get size(): number {
+  get size(): number {
     return this.#cache.size;
   }
 
-  public set(key: K, value: V): void {
+  set(key: K, value: V): void {
     const cache = this.#cache;
 
     if (cache.has(key)) {
@@ -32,7 +32,7 @@ export default class LRU<K, V> {
     cache.set(key, value);
   }
 
-  public get(key: K): V | undefined {
+  get(key: K): V | undefined {
     const cache = this.#cache;
     const value = cache.get(key);
 
@@ -44,31 +44,31 @@ export default class LRU<K, V> {
     return value;
   }
 
-  public has(key: K): boolean {
+  has(key: K): boolean {
     return this.#cache.has(key);
   }
 
-  public delete(key: K): void {
+  delete(key: K): void {
     this.#cache.delete(key);
   }
 
-  public clear(): void {
+  clear(): void {
     this.#cache.clear();
   }
 
-  public keys(): IterableIterator<K> {
+  keys(): IterableIterator<K> {
     return this.#cache.keys();
   }
 
-  public values(): IterableIterator<V> {
+  values(): IterableIterator<V> {
     return this.#cache.values();
   }
 
-  public entries(): IterableIterator<[K, V]> {
+  entries(): IterableIterator<[K, V]> {
     return this.#cache.entries();
   }
 
-  public toJSON(): { key: K; value: V }[] {
+  toJSON(): { key: K; value: V }[] {
     const json: { key: K; value: V }[] = [];
 
     for (const [key, value] of this) {
@@ -78,7 +78,7 @@ export default class LRU<K, V> {
     return json;
   }
 
-  public toString(): string {
+  toString(): string {
     const strings: string[] = [];
 
     for (const [key, value] of this) {
@@ -88,7 +88,7 @@ export default class LRU<K, V> {
     return strings.join(' < ');
   }
 
-  public [Symbol.iterator](): IterableIterator<[K, V]> {
+  [Symbol.iterator](): IterableIterator<[K, V]> {
     return this.entries();
   }
 }

@@ -1,57 +1,62 @@
 /**
- * @class Queue
+ * @module Queue
  */
 
-interface Node<T> {
+/**
+ * @interface Node
+ * @description 队列节点
+ */
+export interface Node<T> {
   value: T;
   next: Node<T> | null;
 }
 
 /**
- * @class FIFO 队列
+ * @class Queue
+ * @description 高性能链表队列
  */
 export class Queue<T> {
-  private head: Node<T> | null = null;
-  private tail: Node<T> | null = null;
+  #head: Node<T> | null = null;
+  #tail: Node<T> | null = null;
 
   /**
    * @method enqueue
-   * @description 入列
-   * @param value 要入列的值
+   * @description 入队
+   * @param value 入队元素
    */
   enqueue(value: T): void {
-    const self = this;
-    const { tail } = self;
+    const tail = this.#tail;
     const node: Node<T> = {
       value,
       next: null
     };
 
-    if (tail) {
+    if (tail !== null) {
       tail.next = node;
     } else {
-      self.head = node;
+      this.#head = node;
     }
 
-    self.tail = node;
+    this.#tail = node;
   }
 
   /**
    * @method dequeue
-   * @description 出列
+   * @description 出队
    */
   dequeue(): T | undefined {
-    const self = this;
-    const { head } = self;
+    const head = this.#head;
 
-    if (head) {
-      const { next } = head;
+    if (head !== null) {
+      const next = head.next;
 
-      self.head = next;
+      this.#head = next;
 
-      if (!next) {
-        self.tail = next;
+      if (next === null) {
+        this.#tail = null;
       }
+
+      head.next = null;
 
       return head.value;
     }

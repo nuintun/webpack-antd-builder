@@ -9,35 +9,39 @@ export class BitMask {
     this.#mask = mask;
   }
 
-  public get mask(): number {
+  get mask(): number {
     return this.#mask;
   }
 
-  public add(flag: number): BitMask {
+  add(flag: number): BitMask {
     this.#mask |= flag;
 
     return this;
   }
 
-  public remove(flag: number): BitMask {
+  remove(flag: number): BitMask {
     this.#mask &= ~flag;
 
     return this;
   }
 
-  public has(flag: number): boolean {
+  has(flag: number): boolean {
     return (this.#mask & flag) === flag;
   }
 
-  public toJSON(): number {
+  toJSON(): number {
     return this.#mask;
   }
 
-  public valueOf(): number {
+  valueOf(): number {
     return this.#mask;
   }
 
-  public toString(): string {
+  [Symbol.toPrimitive]() {
+    return this.#mask;
+  }
+
+  toString(): string {
     return this.#mask.toString();
   }
 }
